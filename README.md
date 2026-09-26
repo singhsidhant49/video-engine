@@ -4,27 +4,9 @@ An enterprise-grade, high-performance programmatic video generation pipeline bui
 
 ---
 
-## 🏛️ System Architecture Blueprint
+## How it works
 
-```mermaid
-graph TD
-    A[User Prompt / Topic] --> B[AI Script Service]
-    B -->|DeepSeek / OpenAI API| C[Structured JSON Payload]
-    C --> D[Audio TTS Engine]
-    C --> E[Scene & Subtitle Analyzer]
-    D -->|Docker Kokoro TTS| F[Voiceover MP3 File]
-    F --> E
-    E -->|Timed Props & Frame Ranges| G[Remotion Bundler]
-    G -->|React Compositions & Tailwind| H[Remotion Renderer]
-    H -->|Chromium Frame Rendering| I[Final MP4 Output File]
-```
-
-### Key Components:
-1. **The Brain (`src/services/aiScriptService.js`)**: Converts topics into structured JSON containing narration scripts, code snippets, key metrics, and visual layout instructions using **DeepSeek API** (with fallback template support).
-2. **The Voice (`src/services/ttsService.js`)**: Connects to self-hosted **Kokoro TTS** running in Docker (`http://localhost:8880/v1/audio/speech`) to generate high-fidelity, natural human voiceovers at near $0 cost.
-3. **The Timing Engine (`src/services/audioAnalysisService.js`)**: Measures audio duration, computes sentence & word timings for Hormozi-style animated pop-in captions, and maps visual scenes to frame ranges.
-4. **The Visual Engine (`src/remotion/`)**: Programmatic React video templates supporting VS Code dark theme syntax typing, glowing audio waveforms, glassmorphism cards, and dynamic background gradients.
-5. **Orchestrator Pipeline (`src/pipeline/videoGeneratorPipeline.js`)**: Handles bundling and multi-threaded rendering via `@remotion/renderer`.
+An AI-directed editing engine: DeepSeek writes the narration and decides, sentence by sentence, what the viewer should see; a deterministic resolver turns that into an explicit timeline (frames, camera paths, reveals, captions, transitions, sound); Remotion renders it; QC checks the result. See [PIPELINE_ARCHITECTURE.md](PIPELINE_ARCHITECTURE.md) and [VISUAL_PIPELINE_AUDIT.md](VISUAL_PIPELINE_AUDIT.md).
 
 ---
 
@@ -63,18 +45,26 @@ npm start
 Then open [http://localhost:3000](http://localhost:3000) in your browser!
 
 ### Option B: CLI Generator
-Generate videos directly from your terminal:
 
 ```bash
-# Tech Explainer Short (9:16 Vertical)
-npm run generate -- --topic "How Uber Scaled Architecture" --niche tech-explainer --format shorts
+# 9:16 Short (the director picks a style)
+npm run generate -- --topic "How Uber scaled its architecture" --format shorts
 
-# Code Anti-Pattern Short
-npm run generate -- --topic "React Server Components vs Client Components" --niche code-snippet --format shorts
+# 16:9 long-form, planned chapter by chapter
+npm run generate -- --topic "The rise and fall of Blockbuster" --format landscape --duration 480
 
-# 16:9 Landscape Video for YouTube Long-form
-npm run generate -- --topic "Building Microservices with Node.js" --niche tech-explainer --format landscape
+# Use an existing narration file instead of TTS, force a style, or reuse a saved plan
+npm run generate -- --topic "..." --audio path/to/voice.wav --style cinematic_documentary
+npm run generate -- --topic "..." --plan renders/runs/<id>/plan.json --audio path/to/voice.wav
+
+npm run generate -- --help
+
+# Evaluate the real DeepSeek path across 10 kinds of brief, or compare every style on one plan
+node scripts/evalDirector.js --render
+node scripts/styleMatrix.js --plan renders/runs/<id>/plan.json --audio voice.wav
 ```
+
+Each run writes `plan.json`, `words.json`, `direction.json`, `assets.json`, `timeline.json` and `qc.json` to `renders/runs/<videoId>/`. Preview a run as a contact sheet with `node scripts/previewRun.js renders/runs/<videoId>`.
 
 ### Option C: Remotion Studio Preview
 Live preview and edit React video components in real-time:
@@ -87,4 +77,4 @@ npm run remotion:studio
 
 ## 📁 Output & Render Files
 - Rendered `.mp4` videos are saved in `./renders/`
-- Generated speech audio files are stored in `./public/audio/`
+- Per-run artifacts and assets are in `./renders/runs/<videoId>/`

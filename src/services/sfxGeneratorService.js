@@ -38,41 +38,79 @@ function createWavBuffer(samples, sampleRate = 44100) {
   return buffer;
 }
 
+// Seeded PRNG so every run produces byte-identical SFX (no churn in tracked files, reproducible renders).
+let seed = 1;
+const rand = () => {
+  seed = (seed * 1664525 + 1013904223) >>> 0;
+  return seed / 4294967296;
+};
+
+const SFX_BUILDERS = {
+  whoosh: generateOrganicWhoosh,
+  impact_boom: generateCinematicImpact,
+  sub_drop: generateSubDrop,
+  paper_slam: generateTactilePaperSlam,
+  click: generateSubtleClick,
+  cash_register: generateChime,
+};
+
+/**
+ * Ensure the SFX files exist and return their public paths (for staticFile()).
+ * Existing files are never overwritten, so a real sound designer's WAV dropped
+ * into public/audio/sfx/<name>.wav replaces the synthesized one.
+ */
 export async function ensureSoundEffects() {
   const sfxDir = path.join(config.publicDir, 'audio', 'sfx');
   await fs.mkdir(sfxDir, { recursive: true });
-
   const sampleRate = 44100;
-  const sfxFiles = {
-    'whoosh.wav': generateOrganicWhoosh(sampleRate),
-    'impact_boom.wav': generateCinematicImpact(sampleRate),
-    'sub_drop.wav': generateSubDrop(sampleRate),
-    'paper_slam.wav': generateTactilePaperSlam(sampleRate),
-    'click.wav': generateSubtleClick(sampleRate),
-    'cash_register.wav': generateChime(sampleRate),
-  };
-
   const results = {};
-
-  for (const [filename, samples] of Object.entries(sfxFiles)) {
-    const filePath = path.join(sfxDir, filename);
-    const wavBuffer = createWavBuffer(samples, sampleRate);
-    await fs.writeFile(filePath, wavBuffer);
-    results[filename.replace('.wav', '')] = `data:audio/wav;base64,${wavBuffer.toString('base64')}`;
+  for (const [name, build] of Object.entries(SFX_BUILDERS)) {
+    const filePath = path.join(sfxDir, `${name}.wav`);
+    try {
+      await fs.access(filePath);
+    } catch {
+      seed = name.length * 7919;
+      await fs.writeFile(filePath, createWavBuffer(build(sampleRate), sampleRate));
+    }
+    results[name] = `audio/sfx/${name}.wav`;
   }
-
   return results;
 }
 
-export async function ensureBackgroundMusic(style = 'dark-neon') {
+// Closest existing synthesized bed per directing style (used when no real track is supplied).
+const STYLE_BED = {
+  cinematic_documentary: 'history_documentary',
+  investigative: 'finance_markets',
+  editorial_explainer: 'business_editorial',
+  data_driven: 'finance_markets',
+  tech_editorial: 'technology_ui',
+  minimal_premium: 'business_editorial',
+  fast_educational: 'technology_ui',
+};
+
+/**
+ * Pick the music bed for a directing style. Resolution order:
+ *   public/audio/bgm/<style>.(mp3|m4a|wav)  ← drop licensed music here
+ *   public/audio/bgm/cinematic_ambient_<legacy>.wav
+ *   a generated ambient pad (last resort)
+ * @returns {Promise<{src: string, synthetic: boolean}>}
+ */
+export async function ensureBackgroundMusic(style = 'editorial_explainer') {
   const bgmDir = path.join(config.publicDir, 'audio', 'bgm');
   await fs.mkdir(bgmDir, { recursive: true });
-
-  const filePath = path.join(bgmDir, `cinematic_ambient_${style}.wav`);
+  for (const ext of ['mp3', 'm4a', 'wav']) {
+    try {
+      await fs.access(path.join(bgmDir, `${style}.${ext}`));
+      return { src: `audio/bgm/${style}.${ext}`, synthetic: false };
+    } catch { /* try next */ }
+  }
+  const legacy = `cinematic_ambient_${STYLE_BED[style] || 'business_editorial'}.wav`;
+  const filePath = path.join(bgmDir, legacy);
   try {
-    const existing = await fs.readFile(filePath);
-    return `data:audio/wav;base64,${existing.toString('base64')}`;
-  } catch (e) {
+    await fs.access(filePath);
+    return { src: `audio/bgm/${legacy}`, synthetic: true };
+  } catch { /* generate */ }
+  {
     // Generate 45-second rich, velvety ambient score
     const sampleRate = 22050;
     const duration = 45.0;
@@ -93,15 +131,13 @@ export async function ensureBackgroundMusic(style = 'dark-neon') {
         s += Math.sin(2 * Math.PI * microPitch * t) * (0.22 / (f + 1));
       }
 
-      // Smooth envelope with warm low-frequency breath
       const fadeIn = Math.min(1, t / 3.0);
       const fadeOut = Math.min(1, (duration - t) / 3.0);
       samples[i] = s * (lfo * 0.6 + subLfo * 0.4) * fadeIn * fadeOut * 0.38;
     }
 
-    const wavBuffer = createWavBuffer(samples, sampleRate);
-    await fs.writeFile(filePath, wavBuffer);
-    return `data:audio/wav;base64,${wavBuffer.toString('base64')}`;
+    await fs.writeFile(filePath, createWavBuffer(samples, sampleRate));
+    return { src: `audio/bgm/${legacy}`, synthetic: true };
   }
 }
 
@@ -121,7 +157,7 @@ function generateOrganicWhoosh(sampleRate) {
       : Math.cos(((t - 0.35) / 0.65) * (Math.PI / 2)) ** 2;
 
     // Pink noise filter algorithm (Paul Kellet method)
-    const white = Math.random() * 2 - 1;
+    const white = rand() * 2 - 1;
     b0 = 0.99886 * b0 + white * 0.0555179;
     b1 = 0.99332 * b1 + white * 0.0750759;
     b2 = 0.96900 * b2 + white * 0.1538520;
@@ -150,7 +186,7 @@ function generateCinematicImpact(sampleRate) {
     const env = Math.exp(-t * 6.5);
     const freq = 42 + 75 * Math.exp(-t * 22);
     const sub = Math.sin(2 * Math.PI * freq * t);
-    const airPuff = (i < 300 ? (Math.random() * 2 - 1) * Math.exp(-t * 80) : 0);
+    const airPuff = (i < 300 ? (rand() * 2 - 1) * Math.exp(-t * 80) : 0);
 
     samples[i] = (sub * 0.88 + airPuff * 0.2) * env;
   }
@@ -181,7 +217,7 @@ function generateTactilePaperSlam(sampleRate) {
   for (let i = 0; i < numSamples; i++) {
     const t = i / sampleRate;
     const env = Math.exp(-t * 18.0);
-    const noise = (Math.random() * 2 - 1) * Math.exp(-t * 45.0);
+    const noise = (rand() * 2 - 1) * Math.exp(-t * 45.0);
     const thud = Math.sin(2 * Math.PI * 65 * t) * env;
     samples[i] = (noise * 0.55 + thud * 0.45) * 0.8;
   }

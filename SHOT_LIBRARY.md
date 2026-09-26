@@ -1,3 +1,5 @@
+> **Superseded:** this describes the previous template system. The current contract lives in `src/shared/styles.js` (styles/tokens), `src/services/aiDirectorService.js` (director schema) and `PIPELINE_ARCHITECTURE.md`.
+
 # 🎥 SHOT_LIBRARY.MD — 12 PROFESSIONAL REMOTION SHOT PRIMITIVES
 
 Each shot primitive in our Remotion engine serves a specific narrative purpose.

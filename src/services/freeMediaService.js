@@ -1,278 +1,320 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import sharp from 'sharp';
 import { config } from '../config/index.js';
+import { runBinary } from './ffmpeg.js';
+import { licenseFromExtmeta } from '../shared/licensing.js';
 
 /**
- * Multi-Tier Free Public Web Media Engine.
- * 
- * Hierarchy:
- * Tier 1: Wikipedia Page Summary REST API (Official lead photo for real entities)
- * Tier 2: Wikimedia Commons MediaSearch API (Public domain archives)
- * Tier 3: Pexels API (if PEXELS_API_KEY set — 4M+ free commercial photos)
- * Tier 4: Pixabay API (no key needed — 4M+ free photos)
- * Tier 5: Pollinations AI Generation (Photorealistic 1080x1920)
- * Tier 6: Curated 50+ topic-categorized fallback library
+ * Media sources. Each returns candidates tagged with a quality TIER; the
+ * Asset Director (src/pipeline/assetDirector.js) decides which tiers a scene
+ * may use and in what order.
+ *
+ *   verified   the real subject: Wikipedia lead image of the entity, or a Commons file whose title names it
+ *   relevant   query-matched stock/archive: Commons, Pexels, Pixabay (photo and video)
+ *   generated  purpose-built image from a generator (IMAGE_GENERATOR, default pollinations)
+ *   generic    curated library by topic — last resort, never for a named subject
  */
-export async function fetchUniversalMedia(scene, index = 0) {
-  const mediaDir = path.join(config.publicDir, 'media');
-  await fs.mkdir(mediaDir, { recursive: true });
 
-  const query = scene.params?.assetQuery || scene.params?.wikiQuery || scene.params?.backgroundAssetQuery || '';
-  const imagePrompt = scene.params?.imagePrompt || scene.params?.backgroundAssetQuery || scene.voiceoverSentence || '';
-  const filename = `media_${index}_${Date.now()}.jpg`;
-  const localFilePath = path.join(mediaDir, filename);
+const UA = { 'User-Agent': 'FacelessVideoEngine/4.0 (asset resolver; contact: local)' };
+const CACHE_DIR = path.join(config.rootDir, '.cache', 'media');
+export const MIN_SHORT_SIDE = 640;
 
-  // Helper to download image buffer to disk
-  const saveBuffer = async (res) => {
-    const arrayBuffer = await res.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    if (buffer.length > 4000) {
-      await fs.writeFile(localFilePath, buffer);
-      return { url: `/media/${filename}`, localPath: localFilePath };
-    }
-    return null;
-  };
-
-  // ─── Tier 1: Wikipedia Page Summary REST API ───
-  if (query) {
-    try {
-      console.log(`🌐 Tier 1: Wikipedia "${query}"...`);
-      const wikiTitle = encodeURIComponent(query.trim().replace(/\s+/g, '_'));
-      const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`, {
-        headers: { 'User-Agent': 'FacelessVideoGenerator/3.0 (contact@videogenerator.local)' }
-      });
-      if (wikiRes.ok) {
-        const wikiData = await wikiRes.json();
-        const imgSource = wikiData.originalimage?.source || wikiData.thumbnail?.source;
-        if (imgSource) {
-          console.log(`✅ Tier 1: Wikipedia image found`);
-          const imgRes = await fetch(imgSource, {
-            headers: { 'User-Agent': 'FacelessVideoGenerator/3.0 (contact@videogenerator.local)' }
-          });
-          if (imgRes.ok) {
-            const saved = await saveBuffer(imgRes);
-            if (saved) return saved;
-          }
-        }
-      }
-    } catch (err) {
-      console.warn(`Wikipedia failed: ${err.message}`);
-    }
-  }
-
-  // ─── Tier 2: Wikimedia Commons MediaSearch API ───
-  if (query) {
-    try {
-      console.log(`🏛️ Tier 2: Wikimedia Commons "${query}"...`);
-      const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=3&prop=imageinfo&iiprop=url&format=json`;
-      const commonsRes = await fetch(commonsUrl, {
-        headers: { 'User-Agent': 'FacelessVideoGenerator/3.0 (contact@videogenerator.local)' }
-      });
-      if (commonsRes.ok) {
-        const commonsData = await commonsRes.json();
-        const pages = commonsData.query?.pages;
-        if (pages) {
-          const firstPage = Object.values(pages)[0];
-          const fileUrl = firstPage?.imageinfo?.[0]?.url;
-          if (fileUrl && /\.(jpg|jpeg|png|webp)$/i.test(fileUrl)) {
-            console.log(`✅ Tier 2: Wikimedia Commons asset found`);
-            const fileRes = await fetch(fileUrl, {
-              headers: { 'User-Agent': 'FacelessVideoGenerator/3.0 (contact@videogenerator.local)' }
-            });
-            if (fileRes.ok) {
-              const saved = await saveBuffer(fileRes);
-              if (saved) return saved;
-            }
-          }
-        }
-      }
-    } catch (err) {
-      console.warn(`Wikimedia Commons failed: ${err.message}`);
-    }
-  }
-
-  // ─── Tier 3: Pexels API (if key available) ───
-  const pexelsKey = process.env.PEXELS_API_KEY || '';
-  if (pexelsKey && query) {
-    try {
-      console.log(`📸 Tier 3: Pexels "${query}"...`);
-      const pexelsRes = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3&orientation=portrait`, {
-        headers: { Authorization: pexelsKey }
-      });
-      if (pexelsRes.ok) {
-        const pexelsData = await pexelsRes.json();
-        if (pexelsData.photos && pexelsData.photos.length > 0) {
-          // Pick a random photo from top 3 for variety
-          const pick = pexelsData.photos[Math.floor(Math.random() * Math.min(3, pexelsData.photos.length))];
-          const imgUrl = pick.src.large2x || pick.src.portrait || pick.src.large;
-          const imgRes = await fetch(imgUrl);
-          if (imgRes.ok) {
-            const saved = await saveBuffer(imgRes);
-            if (saved) {
-              console.log(`✅ Tier 3: Pexels photo cached`);
-              return saved;
-            }
-          }
-        }
-      }
-    } catch (err) {
-      console.warn(`Pexels failed: ${err.message}`);
-    }
-  }
-
-  // ─── Tier 4: Pixabay API (no key needed for limited use) ───
-  const pixabayKey = process.env.PIXABAY_API_KEY || '';
-  if (query) {
-    try {
-      console.log(`🖼️ Tier 4: Pixabay "${query}"...`);
-      const pixUrl = pixabayKey
-        ? `https://pixabay.com/api/?key=${pixabayKey}&q=${encodeURIComponent(query)}&image_type=photo&orientation=vertical&per_page=3&safesearch=true`
-        : null;
-      
-      if (pixUrl) {
-        const pixRes = await fetch(pixUrl);
-        if (pixRes.ok) {
-          const pixData = await pixRes.json();
-          if (pixData.hits && pixData.hits.length > 0) {
-            const pick = pixData.hits[Math.floor(Math.random() * Math.min(3, pixData.hits.length))];
-            const imgUrl = pick.largeImageURL || pick.webformatURL;
-            const imgRes = await fetch(imgUrl);
-            if (imgRes.ok) {
-              const saved = await saveBuffer(imgRes);
-              if (saved) {
-                console.log(`✅ Tier 4: Pixabay photo cached`);
-                return saved;
-              }
-            }
-          }
-        }
-      }
-    } catch (err) {
-      console.warn(`Pixabay failed: ${err.message}`);
-    }
-  }
-
-  // ─── Tier 5: Pollinations AI Generation ───
-  const promptToUse = imagePrompt || query || 'dramatic cinematic lighting documentary 8k';
+async function fetchWithTimeout(url, opts = {}, ms = 12000) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), ms);
   try {
-    console.log(`🎨 Tier 5: AI generating "${promptToUse.slice(0, 50)}..."...`);
-    const encodedPrompt = encodeURIComponent(`cinematic 8k documentary photography, ultra-realistic, dramatic lighting, high depth of field, ${promptToUse}`);
-    const aiUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1080&height=1920&nologo=true&seed=${Math.floor(Math.random() * 100000)}`;
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-    const aiRes = await fetch(aiUrl, { signal: controller.signal });
-    clearTimeout(timeoutId);
-
-    if (aiRes.ok) {
-      const saved = await saveBuffer(aiRes);
-      if (saved) {
-        console.log(`✅ Tier 5: AI-generated visual cached`);
-        return saved;
-      }
-    }
-  } catch (err) {
-    console.warn(`Tier 5 AI generation failed: ${err.message}`);
+    return await fetch(url, { ...opts, headers: { ...UA, ...(opts.headers || {}) }, signal: ctl.signal });
+  } finally {
+    clearTimeout(t);
   }
+}
 
-  // ─── Tier 6: Curated 50+ Topic-Categorized Fallback Library ───
-  const categorizedLibrary = {
-    finance: [
-      'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1642790106117-e829e14a795f?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1080&auto=format&fit=crop',
-    ],
-    technology: [
-      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1080&auto=format&fit=crop',
-    ],
-    history: [
-      'https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1599420186946-7a27d4917b10?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1508175688552-6655ba7bfb5e?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1575505586569-646b2ca898fc?q=80&w=1080&auto=format&fit=crop',
-    ],
-    science: [
-      'https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?q=80&w=1080&auto=format&fit=crop',
-    ],
-    business: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=1080&auto=format&fit=crop',
-    ],
-    crime: [
-      'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1453873531674-2151bcd01707?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1587825140708-dfaf18c4c235?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1578328819058-b69f3a3a11ea?q=80&w=1080&auto=format&fit=crop',
-    ],
-    nature: [
-      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=1080&auto=format&fit=crop',
-    ],
-    health: [
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1080&auto=format&fit=crop',
-    ],
-    travel: [
-      'https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1500835556837-99ac94a94552?q=80&w=1080&auto=format&fit=crop',
-    ],
-    food: [
-      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1080&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=1080&auto=format&fit=crop',
-    ],
-  };
+const SEARCH_CACHE = path.join(config.rootDir, '.cache', 'search');
+const SEARCH_TTL_MS = 7 * 24 * 3600 * 1000;
+/** Search failures (rate limits, outages) this process — so reports can tell "unreachable" from "nothing found". */
+export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
 
-  // Match query keywords to a category
-  const combined = `${query} ${imagePrompt}`.toLowerCase();
-  let category = 'technology'; // default
-  if (/finance|money|bank|stock|market|crisis|crash|debt|economy/.test(combined)) category = 'finance';
-  else if (/history|war|ancient|empire|century|revolution|archive/.test(combined)) category = 'history';
-  else if (/science|space|physics|biology|chemistry|lab|research/.test(combined)) category = 'science';
-  else if (/business|corporate|office|startup|founder|company|ceo/.test(combined)) category = 'business';
-  else if (/crime|fraud|murder|investigation|police|prison|court/.test(combined)) category = 'crime';
-  else if (/nature|forest|ocean|mountain|river|animal|wildlife/.test(combined)) category = 'nature';
-  else if (/health|medical|hospital|doctor|disease|brain|dna/.test(combined)) category = 'health';
-  else if (/travel|city|country|destination|tourism|flight|hotel/.test(combined)) category = 'travel';
-  else if (/food|restaurant|cooking|recipe|chef|meal|drink|coffee/.test(combined)) category = 'food';
-
-  const library = categorizedLibrary[category] || categorizedLibrary.technology;
-  const hash = Math.abs(query.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) + index) % library.length;
-  const fallbackUrl = library[hash];
-
+/**
+ * GET JSON with a disk cache and retry/backoff on 429/5xx. Wikimedia rate-limits
+ * bursts of searches; without this, repeated runs silently lose every candidate.
+ */
+async function getJson(url, opts, ms) {
+  const key = crypto.createHash('sha1').update(url).digest('hex');
+  const file = path.join(SEARCH_CACHE, `${key}.json`);
   try {
-    console.log(`📦 Tier 6: Using curated ${category} fallback image`);
-    const res = await fetch(fallbackUrl);
-    if (res.ok) {
-      const saved = await saveBuffer(res);
-      if (saved) return saved;
+    const st = await fs.stat(file);
+    if (Date.now() - st.mtimeMs < SEARCH_TTL_MS) { searchStats.cached++; return JSON.parse(await fs.readFile(file, 'utf8')); }
+  } catch { /* miss */ }
+  let lastErr = null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      const res = await fetchWithTimeout(url, opts, ms);
+      if (res.ok) {
+        const data = await res.json();
+        searchStats.ok++;
+        await fs.mkdir(SEARCH_CACHE, { recursive: true });
+        await fs.writeFile(file, JSON.stringify(data));
+        return data;
+      }
+      if (res.status === 404) return null; // a real "no such page"
+      lastErr = `HTTP ${res.status}`;
+      if (res.status !== 429 && res.status < 500) break;
+      const retryAfter = Number(res.headers.get('retry-after'));
+      await new Promise((r) => setTimeout(r, (Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 1500 * 2 ** attempt)));
+    } catch (err) {
+      lastErr = err.name === 'AbortError' ? 'timeout' : err.message;
+      await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
     }
-  } catch (e) {
-    // Offline — return URL directly
   }
+  searchStats.failed++;
+  searchStats.failures.push(`${new URL(url).host}: ${lastErr}`);
+  return null;
+}
 
-  return { url: fallbackUrl };
+const WEAK = new Set(['the', 'a', 'an', 'of', 'in', 'on', 'and', 'at', 'to', 'for', 'with', 'file', 'jpg', 'jpeg', 'png', 'photo', 'image', 'view', 'new']);
+export const keywords = (text) => String(text || '').toLowerCase().replace(/\.(jpe?g|png|webp)$/i, '').split(/[^a-z0-9]+/).filter((w) => w.length > 2 && !WEAK.has(w)).map((w) => w.replace(/s$/, ''));
+const namedPhrases = (text) => (String(text || '').match(/(?:[A-Z][\w'&.-]*\s?)+/g) || []).map((p) => keywords(p).join(' ')).filter(Boolean);
+const containsPhrase = (title, phrase) => ` ${keywords(title).join(' ')} `.includes(` ${phrase} `);
+
+// ─── Stills ────────────────────────────────────────────────────────────────
+
+export async function wikipediaLeadImage(title) {
+  const summary = async (t) => getJson(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(t.replace(/\s+/g, '_'))}`);
+  let page = await summary(title);
+  if (!page?.originalimage) {
+    const search = await getJson(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&format=json&srsearch=${encodeURIComponent(title)}`);
+    const hit = search?.query?.search?.[0]?.title;
+    if (hit) page = await summary(hit);
+  }
+  const img = page?.originalimage;
+  if (!img?.source || /\.svg($|\?)/i.test(img.source)) return [];
+  // Licence of the lead image: enwiki knows both Commons files and its own local (often non-free) uploads.
+  const m = /\/wikipedia\/(?:commons|en)\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/?]+)/.exec(img.source);
+  let license = null;
+  if (m) {
+    const fileTitle = `File:${decodeURIComponent(m[1])}`;
+    const info = await getJson(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=extmetadata|url&iiextmetadatafilter=LicenseShortName|Artist|AttributionRequired|LicenseUrl|NonFree&titles=${encodeURIComponent(fileTitle)}`);
+    const ii = Object.values(info?.query?.pages || {})[0]?.imageinfo?.[0];
+    if (ii) license = licenseFromExtmeta(ii.extmetadata, ii.descriptionurl);
+  }
+  return [{ type: 'image', url: img.source, width: img.width, height: img.height, source: 'wikipedia', tier: 'verified', weight: 3.2, label: page.title, license }];
+}
+
+const COMMONS_JUNK = /\b(logo|icon|flag|map|coat of arms|seal|diagram|chart|graph|signature|svg|locator|symbol)\b/i;
+
+/** Commons search, filtered for relevance. Hits whose title names `entityName` are tier "verified". */
+export async function commonsSearch(query, entityName) {
+  const url = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=12'
+    + `&gsrsearch=${encodeURIComponent(query)}&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=2400`
+    + '&iiextmetadatafilter=LicenseShortName|Artist|AttributionRequired|LicenseUrl|NonFree';
+  const data = await getJson(url);
+  const pages = Object.values(data?.query?.pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0));
+  const wantsJunk = COMMONS_JUNK.test(query);
+  const q = [...new Set(keywords(query))];
+  const need = Math.max(1, Math.ceil(q.length * 0.34));
+  // Capitalised runs are names ("Wall Street"): one must appear in the title as a contiguous phrase.
+  const phrases = namedPhrases(query);
+  const entityPhrase = entityName ? keywords(entityName).join(' ') : null;
+  return pages
+    .map((p) => ({ title: p.title || '', info: p.imageinfo?.[0] }))
+    .filter(({ title, info }) => info && /image\/(jpeg|png|webp)/.test(info.mime) && (wantsJunk || !COMMONS_JUNK.test(title)))
+    .filter(({ title }) => {
+      const t = new Set(keywords(title));
+      const namedOk = !phrases.length || phrases.some((p) => containsPhrase(title, p));
+      return namedOk && q.filter((w) => t.has(w)).length >= need;
+    })
+    .map(({ title, info }, rank) => ({
+      type: 'image',
+      url: info.thumburl || info.url,
+      width: info.thumbwidth || info.width,
+      height: info.thumbheight || info.height,
+      source: 'commons',
+      tier: entityPhrase && containsPhrase(title, entityPhrase) ? 'verified' : 'relevant',
+      weight: 2.4 - rank * 0.12,
+      label: title,
+      license: licenseFromExtmeta(info.extmetadata, info.descriptionurl),
+    }));
+}
+
+export async function pexelsSearch(query, orientation) {
+  const key = process.env.PEXELS_API_KEY;
+  if (!key) return [];
+  const data = await getJson(`https://api.pexels.com/v1/search?per_page=8&orientation=${orientation}&query=${encodeURIComponent(query)}`, { headers: { Authorization: key } });
+  return (data?.photos || []).map((p, rank) => ({ type: 'image', url: p.src.original, width: p.width, height: p.height, source: 'pexels', tier: 'relevant', weight: 2.6 - rank * 0.1, label: p.alt,
+    license: { name: 'Pexels License', url: 'https://www.pexels.com/license/', author: p.photographer, attributionRequired: false, nonFree: false, page: p.url } }));
+}
+
+export async function pixabaySearch(query, orientation) {
+  const key = process.env.PIXABAY_API_KEY;
+  if (!key) return [];
+  const o = orientation === 'portrait' ? 'vertical' : 'horizontal';
+  const data = await getJson(`https://pixabay.com/api/?key=${key}&image_type=photo&safesearch=true&per_page=8&orientation=${o}&q=${encodeURIComponent(query)}`);
+  return (data?.hits || []).map((h, rank) => ({ type: 'image', url: h.largeImageURL, width: h.imageWidth, height: h.imageHeight, source: 'pixabay', tier: 'relevant', weight: 2.2 - rank * 0.1, label: h.tags,
+    license: { name: 'Pixabay Content License', url: 'https://pixabay.com/service/license-summary/', author: h.user, attributionRequired: false, nonFree: false, page: h.pageURL } }));
+}
+
+/** Purpose-built image for the scene's visual concept. Swap providers via IMAGE_GENERATOR. */
+export function generatedCandidate(prompt, format, seed) {
+  const provider = (process.env.IMAGE_GENERATOR || 'pollinations').toLowerCase();
+  if (provider === 'none') return null;
+  const [w, h] = format === 'shorts' ? [1080, 1920] : [1920, 1080];
+  const p = encodeURIComponent(`documentary photograph, natural light, realistic, no text, ${prompt}`);
+  return { type: 'image', url: `https://image.pollinations.ai/prompt/${p}?width=${w}&height=${h}&nologo=true&seed=${seed}`, width: w, height: h, source: 'ai', tier: 'generated', weight: 1.0, timeout: 45000, retries: 1,
+    license: { name: `AI-generated (${provider})`, url: null, author: null, attributionRequired: false, nonFree: false, page: null, note: 'check the provider terms for commercial use' } };
+}
+
+const GENERIC_LIBRARY = {
+  finance: ['1590283603385-17ffb3a7f29f', '1611974789855-9c2a0a7236a3', '1642790106117-e829e14a795f', '1535320903710-d993d3d77d29', '1560520653-9e0e4c89eb11'],
+  technology: ['1558494949-ef010cbdcc31', '1526374965328-7f61d4dc18c5', '1550751827-4bd374c3f58b', '1518770660439-4636190af475', '1677442136019-21780ecad995'],
+  history: ['1461360370896-922624d12aa1', '1564769625905-50e93615e769', '1599420186946-7a27d4917b10', '1508175688552-6655ba7bfb5e', '1575505586569-646b2ca898fc'],
+  science: ['1507413245164-6160d8298b31', '1532187863486-abf9dbad1b69', '1576086213369-97a306d36557', '1451187580459-43490279c0fa', '1614935151651-0bea6508db6b'],
+  business: ['1486406146926-c627a92ad1ab', '1556761175-5973dc0f32e7', '1497366216548-37526070297c', '1573164713714-d95e436ab8d6', '1553028826-f4804a6dba3b'],
+  crime: ['1589391886645-d51941baf7fb', '1453873531674-2151bcd01707', '1587825140708-dfaf18c4c235', '1578328819058-b69f3a3a11ea'],
+  nature: ['1470071459604-3b5ec3a7fe05', '1441974231531-c6227db76b6e', '1501854140801-50d01698950b', '1433086966358-54859d0ed716'],
+  health: ['1576091160399-112ba8d25d1d', '1559757175-5700dde675bc', '1530026405186-ed1f139313f8', '1579684385127-1ef15d508118'],
+  travel: ['1488085061387-422e29b40080', '1502920917128-1aa500764cbd', '1476514525535-07fb3b4ae5f1', '1500835556837-99ac94a94552'],
+};
+
+function topicCategory(text) {
+  const t = ` ${text} `.toLowerCase();
+  const rules = [
+    ['finance', /\b(finance|financial|money|bank|stock|market|crisis|crash|debt|economy|wall street|trillion|billion)\b/],
+    ['crime', /\b(crime|fraud|murder|investigation|police|prison|court|scam)\b/],
+    ['history', /\b(history|ancient|empire|century|revolution|archive|medieval|war)\b/],
+    ['science', /\b(science|space|physics|biology|chemistry|lab|research|quantum)\b/],
+    ['health', /\b(health|medical|hospital|doctor|disease|brain|dna)\b/],
+    ['technology', /\b(tech|software|code|ai|computer|chip|internet|data)\b/],
+    ['travel', /\b(travel|city|country|destination|tourism|flight|hotel)\b/],
+    ['nature', /\b(nature|forest|ocean|mountain|river|animal|wildlife|climate)\b/],
+  ];
+  return (rules.find(([, re]) => re.test(t)) || ['business'])[0];
+}
+
+export function genericCandidates(topicText, sceneIndex) {
+  const lib = GENERIC_LIBRARY[topicCategory(topicText)];
+  return lib.map((id, k) => ({
+    type: 'image',
+    url: `https://images.unsplash.com/photo-${id}?q=85&w=2000&auto=format&fit=crop`,
+    source: 'generic', tier: 'generic', generic: true, weight: 0.3 - ((k + sceneIndex) % lib.length) * 0.01,
+    license: { name: 'Unsplash License', url: 'https://unsplash.com/license', author: null, attributionRequired: false, nonFree: false, page: `https://unsplash.com/photos/${id}` },
+  }));
+}
+
+// ─── Motion footage ────────────────────────────────────────────────────────
+
+/** Pexels video search: clips at least `minSeconds` long, file closest to 1080–2560 on its short/long side. */
+export async function pexelsVideoSearch(query, orientation, minSeconds = 4) {
+  const key = process.env.PEXELS_API_KEY;
+  if (!key) return [];
+  const data = await getJson(`https://api.pexels.com/videos/search?per_page=8&orientation=${orientation}&query=${encodeURIComponent(query)}`, { headers: { Authorization: key } });
+  const out = [];
+  (data?.videos || []).forEach((v, rank) => {
+    if (!v.duration || v.duration < Math.min(minSeconds, 8)) return;
+    const files = (v.video_files || []).filter((f) => f.file_type === 'video/mp4' && f.width && f.height && Math.max(f.width, f.height) <= 2600);
+    files.sort((a, b) => Math.abs(Math.min(a.width, a.height) - 1080) - Math.abs(Math.min(b.width, b.height) - 1080));
+    const f = files[0];
+    if (!f || Math.min(f.width, f.height) < 720) return;
+    out.push({ type: 'video', url: f.link, width: f.width, height: f.height, duration: v.duration, source: 'pexels-video', tier: 'relevant', weight: 2.7 - rank * 0.1, label: v.url,
+      license: { name: 'Pexels License', url: 'https://www.pexels.com/license/', author: v.user?.name, attributionRequired: false, nonFree: false, page: v.url } });
+  });
+  return out;
+}
+
+// ─── Download, validate, normalise ─────────────────────────────────────────
+
+/**
+ * Circuit breaker per download host: after two consecutive failures a host is
+ * skipped for the rest of the process, so one dead source (e.g. an image
+ * generator timing out at 45 s) cannot stall a long video for an hour.
+ */
+const hostFailures = new Map();
+export const breakerOpen = (url) => (hostFailures.get(new URL(url).host) || 0) >= 2;
+
+async function downloadCached(url, timeout, retries = 0) {
+  const key = crypto.createHash('sha1').update(url).digest('hex');
+  const file = path.join(CACHE_DIR, `${key}.bin`);
+  try {
+    await fs.access(file);
+    return file;
+  } catch { /* not cached */ }
+  const host = new URL(url).host;
+  if (breakerOpen(url)) throw new Error(`${host} skipped (failing this run)`);
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetchWithTimeout(url, {}, timeout || 15000);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const buf = Buffer.from(await res.arrayBuffer());
+      await fs.mkdir(CACHE_DIR, { recursive: true });
+      await fs.writeFile(file, buf);
+      hostFailures.set(host, 0);
+      return file;
+    } catch (err) {
+      lastErr = err;
+      // 4xx is about this URL, not the host; timeouts and 5xx count against the host.
+      if (!/HTTP 4\d\d/.test(err.message)) hostFailures.set(host, (hostFailures.get(host) || 0) + 1);
+      if (breakerOpen(url)) { console.warn(`   ⚡ ${host} failing — skipped for the rest of this run`); break; }
+    }
+  }
+  throw lastErr;
+}
+
+/** Focal point via libvips' attention strategy (edges, saturation, skin tones). */
+async function focalPoint(buf) {
+  const small = await sharp(buf).rotate().resize(480, 480, { fit: 'inside' }).toBuffer({ resolveWithObject: true });
+  const { width, height } = small.info;
+  const box = Math.round(Math.min(width, height) * 0.45);
+  const { info } = await sharp(small.data).resize(box, box, { fit: 'cover', position: sharp.strategy.attention }).toBuffer({ resolveWithObject: true });
+  const scale = Math.max(box / width, box / height);
+  const sw = width * scale, sh = height * scale;
+  const cx = Number.isFinite(info.attentionX) ? info.attentionX / sw : (Math.abs(info.cropOffsetLeft || 0) + box / 2) / sw;
+  const cy = Number.isFinite(info.attentionY) ? info.attentionY / sh : (Math.abs(info.cropOffsetTop || 0) + box / 2) / sh;
+  const clamp = (v) => Math.min(0.8, Math.max(0.2, Number.isFinite(v) ? v : 0.5));
+  return { x: +clamp(cx).toFixed(3), y: +clamp(cy).toFixed(3) };
+}
+
+/** 64-bit difference hash, for spotting the same photo under different URLs. */
+export async function dHash(buf) {
+  const px = await sharp(buf).greyscale().resize(9, 8, { fit: 'fill' }).raw().toBuffer();
+  let bits = '';
+  for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) bits += px[y * 9 + x] > px[y * 9 + x + 1] ? '1' : '0';
+  return bits;
+}
+export const hamming = (a, b) => [...a].reduce((n, c, i) => n + (c !== b[i]), 0);
+
+export async function materialiseImage(candidate, outFile) {
+  const buf = await fs.readFile(await downloadCached(candidate.url, candidate.timeout, candidate.retries));
+  const img = sharp(buf, { failOn: 'error' }).rotate();
+  const meta = await img.metadata();
+  const w = meta.autoOrient?.width || meta.width, h = meta.autoOrient?.height || meta.height;
+  if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
+  if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
+  const out = await img.resize(2600, 2600, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 88, mozjpeg: true }).toBuffer({ resolveWithObject: true });
+  await fs.writeFile(outFile, out.data);
+  return { type: 'image', width: out.info.width, height: out.info.height, focal: await focalPoint(out.data), hash: await dHash(out.data) };
+}
+
+export async function materialiseVideo(candidate, outFile) {
+  const cached = await downloadCached(candidate.url, 90000, 1);
+  const { stdout } = await runBinary('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', cached]);
+  const info = JSON.parse(stdout);
+  const width = info.streams?.[0]?.width, height = info.streams?.[0]?.height, duration = parseFloat(info.format?.duration);
+  if (!width || !height || !Number.isFinite(duration)) throw new Error('unreadable video');
+  if (Math.min(width, height) < 720) throw new Error(`video too small (${width}×${height})`);
+  await fs.copyFile(cached, outFile);
+  return { type: 'video', width, height, duration, focal: { x: 0.5, y: 0.45 }, hash: null };
+}
+
+export async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (next < items.length) {
+      const i = next++;
+      out[i] = await fn(items[i], i);
+    }
+  }));
+  return out;
 }

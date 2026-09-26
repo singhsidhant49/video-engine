@@ -1,8 +1,10 @@
+> **Superseded:** this describes the previous template system. The current contract lives in `src/shared/styles.js` (styles/tokens), `src/services/aiDirectorService.js` (director schema) and `PIPELINE_ARCHITECTURE.md`.
+
 # 🎬 PREMIUM SOCIAL VIDEO ENGINE — CREATIVE & PRODUCTION RULES
 **Standard:** Broadcast-Quality, High-Retention Social Video (YouTube Shorts, Reels, TikTok)  
 **Core Law:**  
 $$\text{NARRATION} \longrightarrow \text{MEANING} \longrightarrow \text{VISUAL IDEA} \longrightarrow \text{COMPOSITION} \longrightarrow \text{MOTION} \longrightarrow \text{TRANSITION}$$  
-*(Never: Narration $\rightarrow$ Generic Template $\rightarrow$ Insert Text)*
+*(Never: Narration $\rightarrow$ Generic Template $\rightarrow$ Insaert Text)*
 
 ---
 

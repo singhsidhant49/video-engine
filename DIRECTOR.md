@@ -1,3 +1,5 @@
+> **Superseded:** this describes the previous template system. The current contract lives in `src/shared/styles.js` (styles/tokens), `src/services/aiDirectorService.js` (director schema) and `PIPELINE_ARCHITECTURE.md`.
+
 # 🎬 DIRECTOR.MD — THE EDITORIAL DIRECTORIAL CONTRACT
 
 ## 1. Core Creative Philosophy

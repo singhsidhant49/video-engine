@@ -1,40 +1,49 @@
+import path from 'node:path';
 import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
+import { STYLE_IDS } from '../shared/styles.js';
 
-// Parse command line flags
 const args = process.argv.slice(2);
-const getArg = (flag, defaultVal) => {
-  const idx = args.indexOf(flag);
-  if (idx !== -1 && args[idx + 1]) {
-    return args[idx + 1];
-  }
-  return defaultVal;
+const getArg = (flag, fallback) => {
+  const i = args.indexOf(flag);
+  return i !== -1 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
 };
 
-const topic = getArg('--topic', 'React Server Components vs Client Components');
-const niche = getArg('--niche', 'tech-explainer');
-const format = getArg('--format', 'shorts');
-const voice = getArg('--voice', 'af_bella');
-const theme = getArg('--theme', 'dark-neon');
+if (args.includes('--help')) {
+  console.log(`Usage: npm run generate -- --topic "..." [options]
 
-async function runCli() {
-  console.log(`🎬 Running CLI Video Generation Pipeline...`);
-  try {
-    const result = await createFacelessVideo({
-      topic,
-      niche,
-      format,
-      voice,
-      theme,
-      onProgress: (info) => {
-        console.log(`[Step ${info.step}] ${info.message}`);
-      },
-    });
-
-    console.log(`SUCCESS! Video created at: ${result.outputPath}`);
-  } catch (error) {
-    console.error(`CLI Generation Failed:`, error);
-    process.exit(1);
-  }
+  --topic <text>       what the video is about
+  --niche <text>       optional category hint
+  --format <f>         shorts (9:16, default) | landscape (16:9)
+  --duration <sec>     target length (default 45 shorts / 120 landscape; >180 plans by chapter)
+  --style <id>         force a directing style: ${STYLE_IDS.join(', ')}
+  --voice <id>         Kokoro voice (default from .env)
+  --audio <file>       use an existing narration file instead of TTS
+  --plan <file>        reuse a saved plan.json (skip the LLM)
+  --tts <engine>       kokoro (default) | say (macOS dev narration)
+  --no-render          stop after timeline + QC
+`);
+  process.exit(0);
 }
 
-runCli();
+const resolve = (p) => (p ? path.resolve(p) : undefined);
+
+createFacelessVideo({
+  topic: getArg('--topic', 'How the 2008 financial crisis started'),
+  niche: getArg('--niche', ''),
+  format: getArg('--format', 'shorts'),
+  voice: getArg('--voice', undefined),
+  style: getArg('--style', undefined),
+  durationSec: getArg('--duration') ? Number(getArg('--duration')) : undefined,
+  audioFile: resolve(getArg('--audio')),
+  planFile: resolve(getArg('--plan')),
+  render: !args.includes('--no-render'),
+  tts: getArg('--tts', 'kokoro'),
+  onProgress: (info) => {
+    if (info.progress === undefined) console.log(`[${info.step}] ${info.message}`);
+  },
+})
+  .then((r) => console.log(`Done: ${r.outputPath || r.runDir}`))
+  .catch((err) => {
+    console.error('Generation failed:', err);
+    process.exit(1);
+  });

@@ -13,6 +13,7 @@
   "dependencies": {
     "@img/sharp-win32-x64": "^0.35.4",
     "@remotion/bundler": "^4.0.240",
+    "@remotion/google-fonts": "^4.0.529",
     "@remotion/media-utils": "^4.0.240",
     "@remotion/renderer": "^4.0.240",
     "@remotion/transitions": "^4.0.529",

@@ -26,3 +26,9 @@ public/media/*
 .DS_Store
 Thumbs.db
 *.log
+
+# Per-run pipeline artifacts (plan, words, timeline, qc, run assets) and media cache
+renders/runs/
+.cache/
+renders/evals/
+renders/matrix/
