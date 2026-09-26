@@ -1,0 +1,32 @@
+{
+  "name": "faceless-video-generator",
+  "version": "1.0.0",
+  "description": "Programmatic Faceless Video Generation Pipeline using Node.js, DeepSeek API, Kokoro TTS, and Remotion",
+  "main": "src/pipeline/videoGeneratorPipeline.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server/studioServer.js",
+    "generate": "node src/cli/generate.js",
+    "remotion:studio": "npx remotion preview src/remotion/Root.jsx",
+    "test:tts": "node src/services/ttsService.js"
+  },
+  "dependencies": {
+    "@img/sharp-win32-x64": "^0.35.4",
+    "@remotion/bundler": "^4.0.240",
+    "@remotion/media-utils": "^4.0.240",
+    "@remotion/renderer": "^4.0.240",
+    "@remotion/transitions": "^4.0.529",
+    "@xenova/transformers": "^2.17.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "music-metadata": "^10.8.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.240",
+    "sharp": "^0.33.5",
+    "wavefile": "^11.0.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.240"
+  }
+}

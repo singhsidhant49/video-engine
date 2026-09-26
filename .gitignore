@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.npm
+
+# Environment variables & API keys
+.env
+.env.local
+.env.*.local
+
+# Remotion bundler and build cache
+.remotion
+dist/
+build/
+
+# Video Renders and temporary media
+renders/*.mp4
+renders/*.png
+renders/stills/
+renders/template_tests/
+public/audio/*.mp3
+public/media/*
+!public/media/.gitkeep
+!public/audio/.gitkeep
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.log
