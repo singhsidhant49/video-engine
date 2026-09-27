@@ -21,9 +21,22 @@ function TextBlock({ kicker, headline, kickerAt, headlineAt, maxWidth, size }) {
   const theme = useTheme();
   const t = textStyles(theme);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: theme.u(22) }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: theme.u(22), maxWidth: maxWidth || '100%' }}>
       {kicker && <Kicker text={kicker} at={kickerAt} />}
-      {headline && <h1 style={{ ...t.display, fontSize: size, maxWidth, ...reveal(theme.style.motion.reveal, frame, headlineAt, theme.unit) }}>{headline}</h1>}
+      {headline && (
+        <h1
+          style={{
+            ...t.display,
+            fontSize: size,
+            maxWidth: '100%',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word',
+            ...reveal(theme.style.motion.reveal, frame, headlineAt, theme.unit),
+          }}
+        >
+          {headline}
+        </h1>
+      )}
     </div>
   );
 }
@@ -31,14 +44,15 @@ function TextBlock({ kicker, headline, kickerAt, headlineAt, maxWidth, size }) {
 function FullPhoto({ clip }) {
   const theme = useTheme();
   const { kicker, headline, kickerAt, headlineAt } = clip.overlay;
-  const maxW = theme.width - theme.safe.left - theme.safe.right;
-  const size = headline ? fitSize(headline, maxW * (theme.isVertical ? 1 : 0.62), theme.size.h1, { lines: 3, ratio: glyphRatio(theme.style) }) : 0;
+  const rightPad = theme.isVertical ? theme.safe.right + theme.u(28) : theme.safe.right;
+  const maxW = theme.width - theme.safe.left - rightPad;
+  const size = headline ? fitSize(headline, maxW * (theme.isVertical ? 0.9 : 0.62), theme.size.h1, { lines: 3, ratio: glyphRatio(theme.style) }) : 0;
   return (
     <AbsoluteFill>
       <Bed shots={clip.bed} />
       {(kicker || headline) && <Shade where="bottom" strength={theme.style.grade.shade + (headline ? 0.1 : 0)} />}
-      <div style={{ position: 'absolute', left: theme.safe.left, right: theme.safe.right, bottom: theme.safe.bottom + captionBand(theme) }}>
-        <TextBlock kicker={kicker} headline={headline} kickerAt={kickerAt} headlineAt={headlineAt} size={size} maxWidth={theme.isVertical ? '100%' : '62%'} />
+      <div style={{ position: 'absolute', left: theme.safe.left, right: rightPad, bottom: theme.safe.bottom + captionBand(theme) }}>
+        <TextBlock kicker={kicker} headline={headline} kickerAt={kickerAt} headlineAt={headlineAt} size={size} maxWidth={theme.isVertical ? '90%' : '62%'} />
       </div>
     </AbsoluteFill>
   );
@@ -89,12 +103,15 @@ function SplitPhoto({ clip }) {
   const a = isVertical ? { x: 0, y: 0, w: W, h: (H - gap) / 2 } : { x: 0, y: 0, w: (W - gap) / 2, h: H };
   const b = isVertical ? { x: 0, y: (H + gap) / 2, w: W, h: (H - gap) / 2 } : { x: (W + gap) / 2, y: 0, w: (W - gap) / 2, h: H };
   const p = progress(frame, secondAt, 16, ease.inOut);
-  // Before the second image arrives, the first holds the whole frame.
-  const aBox = { ...a, w: isVertical ? W : interpolate(p, [0, 1], [W, a.w]), h: isVertical ? interpolate(p, [0, 1], [H, a.h]) : H };
+  const hasSecond = Boolean(clip.bedB && clip.bedB.length);
+  // Before the second image arrives (or if no second image exists), the first holds the whole frame.
+  const aBox = hasSecond
+    ? { ...a, w: isVertical ? W : interpolate(p, [0, 1], [W, a.w]), h: isVertical ? interpolate(p, [0, 1], [H, a.h]) : H }
+    : { x: 0, y: 0, w: W, h: H };
   return (
     <AbsoluteFill style={{ background: theme.palette.bg }}>
       <Bed shots={clip.bed} box={aBox} />
-      {clip.bedB && p > 0 && (
+      {hasSecond && p > 0 && (
         <div style={{ position: 'absolute', inset: 0, clipPath: isVertical ? `inset(${(1 - p) * 100}% 0 0 0)` : `inset(0 0 0 ${50 + (1 - p) * 50}%)` }}>
           <Bed shots={clip.bedB} box={b} />
         </div>

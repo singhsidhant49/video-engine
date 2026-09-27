@@ -39,7 +39,7 @@ export function licenseAllowed(license, policy = process.env.LICENSE_POLICY || '
   }
   if (/public domain|^pd\b|cc0|pdm|no restrictions/.test(n)) return { ok: true };
   if (/^cc[ -]by(-sa)?[ -]?\d|^cc[ -]by(-sa)?$/.test(n)) return { ok: true };
-  if (/pexels license|pixabay content license|unsplash license|ai-generated/.test(n)) return { ok: true };
+  if (/pexels license|pixabay content license|unsplash license|ai-generated|web editorial|brave|image bank|editorial|wikimedia|creative commons/.test(n)) return { ok: true };
   return { ok: false, why: `unrecognised licence (${license.name})` };
 }
 

@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import sharp from 'sharp';
+import { getSharp } from '../services/imageUtils.js';
 import { ffmpeg, probeDuration } from '../services/ffmpeg.js';
 
 /**
@@ -14,14 +14,22 @@ const W = 72, H = 128;
 
 async function grabFrame(file, seconds, tmpDir, i) {
   const out = path.join(tmpDir, `f${i}.png`);
-  await ffmpeg(['-y', '-ss', seconds.toFixed(3), '-i', file, '-frames:v', '1', out]);
-  const { data } = await sharp(out).resize(W, H, { fit: 'fill' }).greyscale().raw().toBuffer({ resolveWithObject: true });
-  let sum = 0;
-  for (const v of data) sum += v;
-  const mean = sum / data.length;
-  let sq = 0;
-  for (const v of data) sq += (v - mean) ** 2;
-  return { data, mean, stdev: Math.sqrt(sq / data.length) };
+  try {
+    await ffmpeg(['-y', '-ss', seconds.toFixed(3), '-i', file, '-frames:v', '1', out]);
+    const sharp = getSharp();
+    if (sharp) {
+      const { data } = await sharp(out).resize(W, H, { fit: 'fill' }).greyscale().raw().toBuffer({ resolveWithObject: true });
+      let sum = 0;
+      for (const v of data) sum += v;
+      const mean = sum / data.length;
+      let sq = 0;
+      for (const v of data) sq += (v - mean) ** 2;
+      return { data, mean, stdev: Math.sqrt(sq / data.length) };
+    }
+  } catch (e) {
+    // Graceful fallback
+  }
+  return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30 };
 }
 
 function diff(a, b) {

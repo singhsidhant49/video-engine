@@ -58,6 +58,7 @@ Scene = {
   "focus": string | null,    // the single thing the eye should land on ("the Lehman sign", "the empty trading floor")
   "camera": "still" | "slow" | "push" | "drift" | "reveal" | "track",  // camera behaviour: push = move toward the subject, reveal = pull back to show context, track = travel across
   "continuity": "continue" | "new" | "contrast",   // relation to the previous scene: same subject/place, new beat, deliberate contrast
+  "template": "bubblePop" | "popScale" | "floatingChip" | "pulsing" | "typewriter" | "highlight" | "chars" | "bounce" | "editorial" | "cards" | "ledger" | "versus" | null, // optional specific Remotion motion template for this scene
   "treatment": "cinematic" | "graphic" | "typographic" | "quiet"      // cinematic = let imagery carry it; graphic = diagram/data; typographic = the words are the image; quiet = hold back, let narration breathe
 }
 

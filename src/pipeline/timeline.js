@@ -16,7 +16,7 @@ import { buildCaptionChunks, tokenizeScript } from '../services/alignmentService
 // Families that are drawn over a full-frame photograph when one is available.
 const BED_FAMILIES = new Set(['image', 'stat', 'statement', 'quote', 'chapter', 'ui', 'compare']);
 // Families whose on-screen text is large enough that captions should step aside.
-const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote']);
+const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote', 'stat', 'process', 'timeline', 'list', 'compare']);
 
 // burn (film light leak) and iris (circle reveal) are adapted from the MIT-licensed RVE templates.
 const TRANSITION_FRAMES = { cut: 0, dissolve: 14, push: 12, whip: 9, zoom: 12, wipe: 12, dip: 14, flash: 6, burn: 24, iris: 16 };
@@ -238,9 +238,9 @@ function overlayFor(family, scene, ctx) {
       return { words: tokens, ats, kicker: scene.text?.kicker || null };
     }
     case 'list':
-      return { title: scene.data.title, items: scene.data.items, ats: sequential(scene.data.items) };
+      return { title: scene.data.title, items: scene.data.items, ats: sequential(scene.data.items, true) };
     case 'process':
-      return { steps: scene.data.steps, ats: sequential(scene.data.steps.map((s) => s.title)) };
+      return { steps: scene.data.steps, ats: sequential(scene.data.steps.map((s) => s.title), true) };
     case 'timeline':
       return { events: scene.data.events, ats: sequential(scene.data.events.map((e) => `${e.date} ${e.label}`)) };
     case 'chart': {
@@ -396,7 +396,9 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
     ? (style.captions.mode === 'highlight' ? { maxWords: 3, maxChars: 20 } : { maxWords: 5, maxChars: 30 })
     : { maxWords: 8, maxChars: 44 };
   const chunks = buildCaptionChunks(words, fps, capLimits).map((c) => ({ ...c, endFrame: Math.min(c.endFrame, totalFrames) }));
-  const captionsHidden = clips.filter((c) => CAPTION_YIELD.has(c.family)).map((c) => [c.from + c.cutAt, c.from + c.durationInFrames]);
+  const captionsHidden = clips
+    .filter((c) => CAPTION_YIELD.has(c.family) || (c.family === 'image' && (c.variant === 'editorial' || c.overlay?.headline)) || c.overlay?.words?.length)
+    .map((c) => [c.from + c.cutAt, c.from + c.durationInFrames]);
 
   // Speech intervals for ducking the music bed.
   const speech = [];

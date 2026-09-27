@@ -97,15 +97,16 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
       else variant = scene.continuity === 'continue' && last && w[last] ? last : weightedPick(w, rng) || 'full';
       imageHistory.push(variant);
     } else if (family === 'stat') {
-      variant = weightedPick(style.variants?.stat || { hero: 1 }, rng) || 'hero';
+      variant = scene.template || weightedPick(style.variants?.stat || { hero: 1 }, rng) || 'hero';
       imageHistory.push(`stat-${variant}`);
     } else if (family === 'statement' || family === 'chapter') {
-      variant = weightedPick(style.variants?.[family] || { default: 1 }, rng) || 'default';
+      variant = scene.template || weightedPick(style.variants?.[family] || { highlight: 1, bubblePop: 1, floatingChip: 1, typewriter: 1, words: 1 }, rng) || 'highlight';
       imageHistory.push(`${family}-${variant}`);
     } else if (family === 'list' || family === 'compare') {
-      variant = weightedPick(style.variants?.[family] || { default: 1 }, rng) || 'default';
+      variant = scene.template || weightedPick(style.variants?.[family] || { default: 1 }, rng) || 'default';
       imageHistory.push(`${family}-${variant}`);
     } else {
+      if (scene.template) variant = scene.template;
       imageHistory.push(family);
     }
 
@@ -132,8 +133,8 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
       // Motion footage suits atmosphere; a named subject needs the verified still of *that* subject.
       allowVideo: role === 'mood' && family === 'image' && (style.assets?.video || 0) > 0 && treatment !== 'graphic',
       preferVideo: role === 'mood' && family === 'image' && (style.assets?.video || 0) >= 2,
-      allowGenerated: role === 'mood' ? Boolean(style.assets?.generatedMood) : role === 'subject' ? !scene.entity : false,
-      allowGeneric: role === 'mood' ? Boolean(style.assets?.genericMood) && family === 'image' : false,
+      allowGenerated: true,
+      allowGeneric: true,
       minSeconds: seconds,
     };
 
@@ -178,7 +179,7 @@ export function recast(spec, scene, assets, format) {
     return spec;
   }
   if (spec.family === 'image') {
-    if (spec.variant === 'split' && !(assets.alternates?.length)) { spec.variant = 'full'; note('split needs two images → full'); }
+    if (spec.variant === 'split' && (format === 'shorts' || !(assets.alternates?.length))) { spec.variant = 'full'; note('split in vertical shorts → full cinematic frame'); }
     if (spec.variant === 'annotated' && (!spec.label || primary.type === 'video' || !primary.focusBox)) { spec.variant = 'editorial'; note('annotation needs a grounded subject location → editorial'); }
     if (spec.variant === 'editorial' && primary.type === 'video') spec.variant = 'full';
     // A portrait photo in a 16:9 frame loses most of itself to a cover crop: present it with depth instead.

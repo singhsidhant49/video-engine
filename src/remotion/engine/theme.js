@@ -71,21 +71,27 @@ export function textStyles(theme) {
 
 /**
  * Deterministic "fit": pick the largest size ≤ max at which the longest line
- * fits the box, using an average glyph-width ratio for the display face.
- * Avoids DOM measurement (fonts may not be laid out yet during the first pass).
+ * and longest single word fits the box without clipping or mid-word breaking.
  */
-export function fitSize(text, boxWidth, maxSize, { lines = 2, ratio = 0.56, minSize = 24 } = {}) {
-  const words = String(text).split(/\s+/);
+export function fitSize(text, boxWidth, maxSize, { lines = 2, ratio = 0.65, minSize = 24 } = {}) {
+  const words = String(text || '').split(/\s+/).filter(Boolean);
+  if (!words.length) return minSize;
   const total = String(text).length;
-  // Longest line after a balanced split into `lines` lines.
   let longest = 0, current = 0;
-  const target = total / lines;
+  const target = total / Math.max(1, lines);
   for (const w of words) {
     if (current && current + w.length + 1 > target * 1.15) { longest = Math.max(longest, current); current = w.length; }
     else current += (current ? 1 : 0) + w.length;
   }
-  longest = Math.max(longest, current, ...words.map((w) => w.length));
-  return Math.max(minSize, Math.min(maxSize, Math.floor(boxWidth / (longest * ratio))));
+  longest = Math.max(longest, current);
+  const longestSingleWord = Math.max(...words.map((w) => w.length));
+  const sizeFromLines = boxWidth / (longest * ratio);
+  const sizeFromWord = boxWidth / (longestSingleWord * (ratio * 1.08));
+  const fitted = Math.min(sizeFromLines, sizeFromWord);
+  return Math.max(minSize, Math.min(maxSize, Math.floor(fitted)));
 }
 
-export const glyphRatio = (style) => (style.display.uppercase ? 0.6 : 0.52) * (style.fonts.display === 'Oswald' ? 0.78 : style.fonts.display === 'Instrument Serif' ? 0.86 : 1);
+export const glyphRatio = (style) =>
+  (style?.display?.uppercase ? 0.72 : 0.64) *
+  (style?.fonts?.display === 'Oswald' ? 0.76 : style?.fonts?.display === 'Instrument Serif' ? 0.82 : 1);
+

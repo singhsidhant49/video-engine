@@ -97,23 +97,65 @@ export function activeShot(shots, frame) {
   return shot ? { shot, local: frame - shot.from } : null;
 }
 
-/** Graphic-only ground: palette background, a slow light drift, optional faint photographic texture. */
+/** Graphic-only ground: palette background, ambient mesh gradients, slow light drift, dynamic glow, and optional faint photographic texture. */
 export function Ground({ texture, durationInFrames = 300 }) {
   const frame = useCurrentFrame();
-  const { palette, width: W, height: H, style } = useTheme();
+  const theme = useTheme();
+  const { palette, width: W, height: H, style } = theme;
   const drift = interpolate(frame, [0, durationInFrames], [0, 1], { extrapolateRight: 'clamp' });
+  const pulse = Math.sin(frame / 20) * 0.05;
+
   return (
-    <AbsoluteFill style={{ background: palette.bg }}>
+    <AbsoluteFill style={{ background: `linear-gradient(145deg, ${palette.bg} 0%, ${palette.bgRaised || palette.bg} 100%)`, overflow: 'hidden' }}>
       {texture && (
-        <AbsoluteFill style={{ opacity: 0.16, mixBlendMode: 'luminosity' }}>
+        <AbsoluteFill style={{ opacity: 0.28, mixBlendMode: 'screen', filter: 'blur(20px) contrast(1.15)' }}>
           <CameraImage
-            shot={{ ...texture, durationInFrames, move: { scale: [1.05, 1.12], focus: [[texture.focal?.x ?? 0.5, texture.focal?.y ?? 0.5], [texture.focal?.x ?? 0.5, (texture.focal?.y ?? 0.5) - 0.03]] } }}
-            filter={`grayscale(1) contrast(1.1) ${style.grade.image}`}
+            shot={{ ...texture, durationInFrames, move: { scale: [1.08, 1.18], focus: [[texture.focal?.x ?? 0.5, texture.focal?.y ?? 0.5], [texture.focal?.x ?? 0.5, (texture.focal?.y ?? 0.5) - 0.03]] } }}
+            filter={`contrast(1.1) ${style.grade.image}`}
           />
         </AbsoluteFill>
       )}
-      <AbsoluteFill style={{ background: `radial-gradient(ellipse ${W * 0.9}px ${H * 0.7}px at ${22 + drift * 10}% ${18 + drift * 6}%, ${palette.accentSoft}, transparent 70%)` }} />
-      <AbsoluteFill style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.35))' }} />
+      {/* Ambient glowing mesh orbs (adapted from RVE Background templates) */}
+      <div
+        style={{
+          position: 'absolute',
+          width: W * 1.1,
+          height: H * 0.75,
+          left: `${-15 + drift * 15}%`,
+          top: `${-15 + drift * 8}%`,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${palette.accentSoft || 'rgba(99, 102, 241, 0.22)'} 0%, transparent 70%)`,
+          filter: 'blur(55px)',
+          opacity: 0.85 + pulse,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          width: W * 0.85,
+          height: H * 0.65,
+          right: `${-10 - drift * 12}%`,
+          bottom: `${-10 - drift * 8}%`,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${palette.counter ? `color-mix(in srgb, ${palette.counter} 24%, transparent)` : 'rgba(59, 130, 246, 0.18)'} 0%, transparent 70%)`,
+          filter: 'blur(50px)',
+          opacity: 0.7,
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Subtle fine dot/grid pattern */}
+      <AbsoluteFill
+        style={{
+          backgroundImage: `radial-gradient(${palette.line || 'rgba(255,255,255,0.06)'} 1px, transparent 1px)`,
+          backgroundSize: `${theme.u ? theme.u(36) : 36}px ${theme.u ? theme.u(36) : 36}px`,
+          opacity: 0.2,
+          mixBlendMode: 'overlay',
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Vignette bottom scrim */}
+      <AbsoluteFill style={{ background: 'linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.45) 100%)', pointerEvents: 'none' }} />
     </AbsoluteFill>
   );
 }

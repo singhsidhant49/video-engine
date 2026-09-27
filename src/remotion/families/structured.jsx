@@ -258,6 +258,7 @@ function ShareChart({ clip }) {
         {title && <div style={{ marginBottom: theme.u(40) }}><Kicker text={title} at={Math.max(0, at - 12)} /></div>}
         <div style={{ display: 'flex', flexDirection: vertical ? 'column' : 'row', alignItems: 'center', gap: theme.u(vertical ? 60 : 110) }}>
           <div style={{ position: 'relative', width: size, height: size, flexShrink: 0 }}>
+            <div style={{ position: 'absolute', inset: '15%', borderRadius: '50%', background: `radial-gradient(circle, ${theme.palette.accent}22 0%, transparent 70%)`, filter: `blur(${theme.u(24)}px)`, pointerEvents: 'none' }} />
             <svg width={size} height={size}>
               <circle cx={size / 2} cy={size / 2} r={R} fill="none" stroke={theme.palette.line} strokeWidth={stroke} opacity={0.35} />
               {points.map((p, i) => {
@@ -268,8 +269,10 @@ function ShareChart({ clip }) {
                 return el;
               })}
             </svg>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: progress(frame, at + segFrames * 0.6, 14) }}>
-              <div style={{ ...t.display, fontSize: theme.size.display * 0.8, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{Math.round(lead.value)}{unit === '%' || !unit ? '%' : ` ${unit}`}</div>
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: progress(frame, at + segFrames * 0.4, 14) }}>
+              <div style={{ ...t.display, fontSize: theme.size.display * 0.8, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
+                {Math.round(lead.value * progress(frame, at, drawFrames, ease.out))}{unit === '%' || !unit ? '%' : ` ${unit}`}
+              </div>
               <div style={{ ...t.label, marginTop: theme.u(10) }}>{lead.label}</div>
             </div>
           </div>

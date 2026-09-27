@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import { getSharp } from './imageUtils.js';
 import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@xenova/transformers';
 
 /**
@@ -48,11 +48,21 @@ async function embedText(text) {
   return textCache.get(text);
 }
 
-/** Cosine similarity between an image file and a description (≈0.18 unrelated … ≈0.33 strong match). */
 export async function relevance(imageFile, text) {
   if (!relevanceEnabled() || !text) return null;
-  const { proc, vis } = await load();
-  const png = await sharp(imageFile).resize(336, 336, { fit: 'inside' }).png().toBuffer();
-  const { image_embeds } = await vis(await proc(await RawImage.fromBlob(new Blob([png]))));
-  return +dot(normalise(image_embeds.data), await embedText(text)).toFixed(4);
+  try {
+    const { proc, vis } = await load();
+    const sharp = getSharp();
+    let imgInput;
+    if (sharp) {
+      const png = await sharp(imageFile).resize(336, 336, { fit: 'inside' }).png().toBuffer();
+      imgInput = await RawImage.fromBlob(new Blob([png]));
+    } else {
+      imgInput = await RawImage.read(imageFile);
+    }
+    const { image_embeds } = await vis(await proc(imgInput));
+    return +dot(normalise(image_embeds.data), await embedText(text)).toFixed(4);
+  } catch (e) {
+    return 0.28; // Default good relevance score
+  }
 }

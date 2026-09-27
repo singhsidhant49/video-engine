@@ -60,7 +60,34 @@ export function StatShot({ clip }) {
       {split ? (
         <>
           <Ground texture={null} durationInFrames={clip.durationInFrames} />
-          <Bed shots={clip.bed} box={photoBox} />
+          <div style={{ position: 'absolute', left: photoBox.x, top: photoBox.y, width: photoBox.w, height: photoBox.h, overflow: 'hidden' }}>
+            <Bed shots={clip.bed} box={{ x: 0, y: 0, w: photoBox.w, h: photoBox.h }} />
+            {isVertical && (
+              <div
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: theme.u(120),
+                  background: `linear-gradient(to bottom, transparent, ${theme.palette.bg})`,
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+          </div>
+          {isVertical && (
+            <div
+              style={{
+                position: 'absolute',
+                left: theme.safe.left,
+                right: theme.safe.right,
+                top: photoBox.h,
+                height: 1,
+                background: `linear-gradient(90deg, transparent, ${color}66, transparent)`,
+              }}
+            />
+          )}
         </>
       ) : clip.bed ? <Bed shots={clip.bed} dim={0.35} /> : <Ground texture={clip.texture} durationInFrames={clip.durationInFrames} />}
       {!split && <Shade where="full" strength={0.62} />}
@@ -76,15 +103,37 @@ export function StatShot({ clip }) {
           gap: theme.u(18),
         }}
       >
-        {kicker && <Kicker text={kicker} at={Math.max(0, at - 10)} />}
-        <div style={{ ...reveal('fade', frame, at - 2, theme.unit, 6) }}>
-          <div style={{ ...t.display, fontFamily: theme.font.display, fontSize: size, lineHeight: 0.9, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.04em', textTransform: 'none', whiteSpace: 'nowrap' }}>
-            {prefix && <span style={{ fontSize: '0.62em', verticalAlign: '0.32em', marginRight: '0.04em', color }}>{prefix}</span>}
-            {formatCount(value, p)}
-            {inlineSuffix && <span style={{ fontSize: '0.5em', marginLeft: '0.06em', color }}>{inlineSuffix.trim()}</span>}
+        {kicker && <Kicker text={kicker} at={0} />}
+        {clip.overlay.variant === 'circularProgress' ? (
+          <div style={{ position: 'relative', width: theme.u(320), height: theme.u(320), display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+            <svg width={theme.u(320)} height={theme.u(320)} viewBox="0 0 200 200" style={{ position: 'absolute', transform: 'rotate(-90deg)' }}>
+              <circle cx="100" cy="100" r={78} fill="none" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="14" />
+              <circle
+                cx="100"
+                cy="100"
+                r={78}
+                fill="none"
+                stroke={color}
+                strokeWidth="14"
+                strokeDasharray={2 * Math.PI * 78}
+                strokeDashoffset={2 * Math.PI * 78 * (1 - Math.min(1, (parseFloat(value) || 100) / 100 * progress(frame, 0, countFrames, ease.out)))}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div style={{ ...t.display, fontSize: theme.size.display * 0.65, color: theme.palette.text, fontVariantNumeric: 'tabular-nums' }}>
+              {formatCount(value, progress(frame, 0, countFrames + (at || 0), ease.out))}{inlineSuffix || '%'}
+            </div>
           </div>
-          <div style={{ height: theme.u(8), width: `${settle * 100}%`, maxWidth: size * 2.4, background: color, marginTop: theme.u(18), marginLeft: align === 'center' ? 'auto' : 0, marginRight: align === 'center' ? 'auto' : 0 }} />
-        </div>
+        ) : (
+          <div style={{ ...reveal('fade', frame, 0, theme.unit, 6) }}>
+            <div style={{ ...t.display, fontFamily: theme.font.display, fontSize: size, lineHeight: 0.9, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.04em', textTransform: 'none', whiteSpace: 'nowrap' }}>
+              {prefix && <span style={{ fontSize: '0.62em', verticalAlign: '0.32em', marginRight: '0.04em', color }}>{prefix}</span>}
+              {formatCount(value, progress(frame, 0, countFrames + (at || 0), ease.out))}
+              {inlineSuffix && <span style={{ fontSize: '0.5em', marginLeft: '0.06em', color }}>{inlineSuffix.trim()}</span>}
+            </div>
+            <div style={{ height: theme.u(8), width: `${settle * 100}%`, maxWidth: size * 2.4, background: color, marginTop: theme.u(18), marginLeft: align === 'center' ? 'auto' : 0, marginRight: align === 'center' ? 'auto' : 0 }} />
+          </div>
+        )}
         {wordSuffix && (
           <div style={{ ...t.display, fontSize: theme.size.h1, color, ...reveal('rise', frame, at + countFrames * 0.5, theme.unit) }}>{wordSuffix}</div>
         )}
@@ -100,24 +149,29 @@ export function StatShot({ clip }) {
 
 // ─── Kinetic statement ─────────────────────────────────────────────────────
 
+// ─── Kinetic statement ─────────────────────────────────────────────────────
+
 export function StatementShot({ clip }) {
   const frame = useCurrentFrame();
   const theme = useTheme();
   const t = textStyles(theme);
-  const { words, ats, kicker } = clip.overlay;
+  const { words = [], ats = [], kicker } = clip.overlay || {};
   const text = words.join(' ');
-  const maxW = theme.width - theme.safe.left - theme.safe.right;
-  const size = fitSize(text, maxW, theme.size.display * (words.length <= 2 ? 1.35 : 1), { lines: Math.min(3, Math.max(1, Math.ceil(words.length / 2))), ratio: glyphRatio(theme.style) });
+  const rightPad = theme.isVertical ? theme.safe.right + theme.u(32) : theme.safe.right;
+  const maxW = theme.isVertical ? theme.width * 0.80 : theme.width - theme.safe.left - rightPad;
+  const size = fitSize(text, maxW, theme.size.display * (words.length <= 2 ? 1.3 : 0.95), { lines: Math.min(3, Math.max(1, Math.ceil(words.length / 2))), ratio: glyphRatio(theme.style) });
   const align = theme.style.layout.textAlign;
+  const variant = clip.variant || 'words';
+
   return (
     <AbsoluteFill>
-      {clip.bed ? <Bed shots={clip.bed} dim={0.4} /> : <Ground texture={clip.texture} durationInFrames={clip.durationInFrames} />}
+      {clip.bed ? <Bed shots={clip.bed} dim={0.42} /> : <Ground texture={clip.texture} durationInFrames={clip.durationInFrames} />}
       <Shade where={align === 'center' ? 'full' : 'left'} strength={0.6} />
       <div
         style={{
           position: 'absolute',
           left: theme.safe.left,
-          right: theme.safe.right,
+          right: rightPad,
           top: theme.safe.top,
           bottom: theme.safe.bottom + captionBand(theme) * 0.5,
           display: 'flex',
@@ -126,50 +180,179 @@ export function StatementShot({ clip }) {
           alignItems: align === 'center' ? 'center' : 'flex-start',
           textAlign: align,
           gap: theme.u(24),
+          maxWidth: '100%',
         }}
       >
         {kicker && <Kicker text={kicker} at={Math.max(0, (ats[0] ?? 8) - 8)} />}
-        <h1 style={{ ...t.display, fontSize: size }}>
-          {words.map((w, i) => {
-            const last = i === words.length - 1 && words.length > 1;
-            const at = ats[i] ?? 8;
-            if (clip.variant === 'highlight') {
-              // Text Highlight (adapted from the RVE template, MIT): a marker sweeps behind each word as it is spoken.
-              const sweep = progress(frame, at, 10, ease.inOut);
+        
+        {variant === 'floatingChip' ? (
+          /* Floating Text Chip (RVE template): Glassmorphic tag with subtle floating oscillation */
+          <div
+            style={{
+              display: 'inline-flex',
+              flexWrap: 'wrap',
+              gap: theme.u(12),
+              padding: `${theme.u(24)}px ${theme.u(36)}px`,
+              background: 'rgba(255, 255, 255, 0.08)',
+              backdropFilter: 'blur(20px)',
+              border: `1px solid ${theme.palette.line}`,
+              borderRadius: theme.u(24),
+              transform: `translateY(${Math.sin(frame / 16) * theme.u(8)}px)`,
+              boxShadow: `0 12px 32px rgba(0,0,0,0.35), 0 0 20px ${theme.palette.accentSoft || 'transparent'}`,
+            }}
+          >
+            <h1 style={{ ...t.display, fontSize: size * 0.9, wordBreak: 'keep-all', overflowWrap: 'break-word', hyphens: 'none' }}>
+              {words.map((w, i) => (
+                <span key={i} style={{ display: 'inline-block', whiteSpace: 'nowrap', wordBreak: 'keep-all', marginRight: '0.24em', color: i === words.length - 1 ? theme.palette.accent : theme.palette.text, ...reveal('pop', frame, ats[i] ?? 8, theme.unit, 12) }}>
+                  {w}
+                </span>
+              ))}
+            </h1>
+          </div>
+        ) : variant === 'typewriter' ? (
+          /* Typewriter Subtitle (RVE template): sequential character typing with blinking cursor */
+          <h1 style={{ ...t.display, fontSize: size, wordBreak: 'keep-all', overflowWrap: 'break-word', hyphens: 'none' }}>
+            {(() => {
+              const startAt = ats[0] ?? 6;
+              const elapsed = Math.max(0, frame - startAt);
+              const totalChars = text.length;
+              const revealedCount = Math.min(totalChars, Math.floor(elapsed * 1.8));
+              const currentText = text.slice(0, revealedCount);
+              const showCursor = Math.floor(frame / 8) % 2 === 0 && revealedCount < totalChars + 20;
               return (
-                <span key={i} style={{ position: 'relative', display: 'inline-block', marginRight: '0.24em', opacity: frame >= at - 2 ? 1 : 0.18 }}>
-                  <span style={{ position: 'absolute', left: '-0.08em', right: 'auto', top: '0.12em', bottom: '0.02em', width: sweep > 0 ? `calc(${sweep * 100}% + ${sweep * 0.16}em)` : 0, background: last ? theme.palette.accent : 'color-mix(in srgb, ' + theme.palette.accent + ' 34%, transparent)', zIndex: 0 }} />
-                  <span style={{ position: 'relative', zIndex: 1, color: last && sweep > 0.5 ? theme.palette.bg : theme.palette.text }}>{w}</span>
+                <span>
+                  <span style={{ color: theme.palette.text }}>{currentText}</span>
+                  {showCursor && <span style={{ color: theme.palette.accent, marginLeft: '0.08em', fontWeight: 300 }}>▌</span>}
                 </span>
               );
-            }
-            if (clip.variant === 'chars') {
-              // Animated Text (adapted from the RVE template, MIT): characters rise and settle in sequence.
-              return (
-                <span key={i} style={{ display: 'inline-block', marginRight: '0.24em', color: last ? theme.palette.accent : theme.palette.text, whiteSpace: 'nowrap' }}>
-                  {[...w].map((ch, k) => {
-                    const q = progress(frame, at + k * 1.4, 12, ease.out);
-                    return <span key={k} style={{ display: 'inline-block', opacity: q, transform: `translateY(${(1 - q) * 0.45}em) rotate(${(1 - q) * 8}deg)` }}>{ch}</span>;
-                  })}
-                </span>
-              );
-            }
-            return (
-              <span
-                key={i}
-                style={{
-                  display: 'inline-block',
-                  marginRight: '0.24em',
-                  color: last ? theme.palette.accent : theme.palette.text,
-                  fontStyle: theme.style.display.italicEmphasis && last ? 'italic' : 'normal',
-                  ...reveal(theme.style.motion.reveal, frame, at, theme.unit, 12),
-                }}
-              >
+            })()}
+          </h1>
+        ) : variant === 'glitch' ? (
+          /* Glitch Text (RVE template): Clean stylized chromatic reveal without jarring screen shake */
+          <h1
+            style={{
+              ...t.display,
+              fontSize: size,
+              wordBreak: 'keep-all',
+              overflowWrap: 'break-word',
+              hyphens: 'none',
+              textShadow: `0 0 ${theme.u(16)}px ${theme.palette.accentSoft || 'rgba(0,255,100,0.3)'}`,
+            }}
+          >
+            {words.map((w, i) => (
+              <span key={i} style={{ display: 'inline-block', whiteSpace: 'nowrap', wordBreak: 'keep-all', marginRight: '0.24em', color: i === words.length - 1 ? theme.palette.accent : theme.palette.text, ...reveal('mask', frame, ats[i] ?? 4, theme.unit, 10) }}>
                 {w}
               </span>
-            );
-          })}
-        </h1>
+            ))}
+          </h1>
+        ) : (
+          /* Standard and Staggered Word / Bubble / Bounce Animations */
+          <h1 style={{ ...t.display, fontSize: size, wordBreak: 'keep-all', overflowWrap: 'break-word', hyphens: 'none' }}>
+            {words.map((w, i) => {
+              const last = i === words.length - 1 && words.length > 1;
+              const at = ats[i] ?? 8;
+              if (variant === 'highlight') {
+                /* Text Highlight (RVE template): animated marker sweep */
+                const sweep = progress(frame, at, 10, ease.inOut);
+                return (
+                  <span key={i} style={{ position: 'relative', display: 'inline-block', whiteSpace: 'nowrap', wordBreak: 'keep-all', marginRight: '0.24em', opacity: frame >= at - 2 ? 1 : 0.18 }}>
+                    <span style={{ position: 'absolute', left: '-0.08em', right: 'auto', top: '0.12em', bottom: '0.02em', width: sweep > 0 ? `calc(${sweep * 100}% + ${sweep * 0.16}em)` : 0, background: last ? theme.palette.accent : 'color-mix(in srgb, ' + theme.palette.accent + ' 34%, transparent)', zIndex: 0 }} />
+                    <span style={{ position: 'relative', zIndex: 1, color: last && sweep > 0.5 ? theme.palette.bg : theme.palette.text }}>{w}</span>
+                  </span>
+                );
+              }
+              if (variant === 'chars') {
+                /* Animated Text (RVE template): spring characters */
+                return (
+                  <span key={i} style={{ display: 'inline-block', whiteSpace: 'nowrap', wordBreak: 'keep-all', marginRight: '0.24em', color: last ? theme.palette.accent : theme.palette.text }}>
+                    {[...w].map((ch, k) => {
+                      const q = progress(frame, at + k * 1.4, 12, ease.out);
+                      return <span key={k} style={{ display: 'inline-block', opacity: q, transform: `translateY(${(1 - q) * 0.45}em) rotate(${(1 - q) * 8}deg)` }}>{ch}</span>;
+                    })}
+                  </span>
+                );
+              }
+              if (variant === 'bubblePop' || variant === 'popScale') {
+                /* Bubble Pop / Popping Scale (RVE template): spring pop with scale overshoot */
+                const p = progress(frame, at, 14, ease.back);
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      display: 'inline-block',
+                      whiteSpace: 'nowrap',
+                      wordBreak: 'keep-all',
+                      marginRight: '0.24em',
+                      color: last ? theme.palette.accent : theme.palette.text,
+                      opacity: p > 0 ? 1 : 0,
+                      transform: `scale(${0.6 + 0.4 * p})`,
+                    }}
+                  >
+                    {w}
+                  </span>
+                );
+              }
+              if (variant === 'bounce') {
+                /* Bounce Text (RVE template): spring overshoot drop from above */
+                const bounceY = (1 - progress(frame, at, 16, ease.back)) * -theme.u(60);
+                const bounceP = progress(frame, at, 14, ease.out);
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      display: 'inline-block',
+                      whiteSpace: 'nowrap',
+                      wordBreak: 'keep-all',
+                      marginRight: '0.24em',
+                      color: last ? theme.palette.accent : theme.palette.text,
+                      opacity: bounceP,
+                      transform: `translateY(${bounceY}px)`,
+                    }}
+                  >
+                    {w}
+                  </span>
+                );
+              }
+              if (variant === 'pulsing') {
+                /* Pulsing Text (RVE template): rhythmic emphasis pulse on active frame */
+                const isPulse = last && frame >= at;
+                const scale = isPulse ? 1 + 0.05 * Math.sin((frame - at) / 6) : 1;
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      display: 'inline-block',
+                      whiteSpace: 'nowrap',
+                      wordBreak: 'keep-all',
+                      marginRight: '0.24em',
+                      color: last ? theme.palette.accent : theme.palette.text,
+                      transform: `scale(${scale})`,
+                      ...reveal(theme.style.motion.reveal, frame, at, theme.unit, 12),
+                    }}
+                  >
+                    {w}
+                  </span>
+                );
+              }
+              return (
+                <span
+                  key={i}
+                  style={{
+                    display: 'inline-block',
+                    whiteSpace: 'nowrap',
+                    wordBreak: 'keep-all',
+                    marginRight: '0.24em',
+                    color: last ? theme.palette.accent : theme.palette.text,
+                    fontStyle: theme.style.display.italicEmphasis && last ? 'italic' : 'normal',
+                    ...reveal(theme.style.motion.reveal, frame, at, theme.unit, 12),
+                  }}
+                >
+                  {w}
+                </span>
+              );
+            })}
+          </h1>
+        )}
       </div>
     </AbsoluteFill>
   );
@@ -199,7 +382,7 @@ function ChapterClassic({ clip }) {
           {number ? `Chapter ${String(number).padStart(2, '0')}` : 'Chapter'}
         </div>
         <div style={{ width: theme.u(160) * line, height: theme.u(3), background: theme.palette.accent, margin: `${theme.u(26)}px 0` }} />
-        <h1 style={{ ...t.display, fontSize: size, ...reveal(theme.style.motion.reveal, frame, at + 8, theme.unit, 20) }}>{title}</h1>
+        <h1 style={{ ...t.display, fontSize: size, wordBreak: 'keep-all', overflowWrap: 'break-word', hyphens: 'none', maxWidth: maxW, ...reveal(theme.style.motion.reveal, frame, at + 8, theme.unit, 20) }}>{title}</h1>
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -229,7 +412,7 @@ function ChapterSplit({ clip }) {
           {number ? `Chapter ${String(number).padStart(2, '0')}` : 'Chapter'}
         </div>
         <div style={{ width: `${rule * 100}%`, maxWidth: maxW, height: theme.u(4), background: theme.palette.accent, margin: `${theme.u(22)}px 0`, boxShadow: `0 0 ${theme.u(24)}px ${theme.palette.accent}` }} />
-        <h1 style={{ ...t.display, fontSize: size, opacity: bottom, transform: `translateY(${(1 - bottom) * theme.u(60)}px)` }}>{title}</h1>
+        <h1 style={{ ...t.display, fontSize: size, wordBreak: 'keep-all', overflowWrap: 'break-word', hyphens: 'none', maxWidth: maxW, opacity: bottom, transform: `translateY(${(1 - bottom) * theme.u(60)}px)` }}>{title}</h1>
       </AbsoluteFill>
     </AbsoluteFill>
   );

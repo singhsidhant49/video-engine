@@ -1,9 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import sharp from 'sharp';
 import { config } from '../config/index.js';
-import { runBinary } from './ffmpeg.js';
+import { runBinary, ffmpeg } from './ffmpeg.js';
 import { licenseFromExtmeta } from '../shared/licensing.js';
 
 /**
@@ -17,7 +16,10 @@ import { licenseFromExtmeta } from '../shared/licensing.js';
  *   generic    curated library by topic — last resort, never for a named subject
  */
 
-const UA = { 'User-Agent': 'FacelessVideoEngine/4.0 (asset resolver; contact: local)' };
+const UA = {
+  'User-Agent': 'VideoEngineBot/2.0 (https://github.com/singhsidhant49/video-engine; contact: support@videoengine.org)',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+};
 const CACHE_DIR = path.join(config.rootDir, '.cache', 'media');
 export const MIN_SHORT_SIDE = 640;
 
@@ -40,7 +42,7 @@ export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
  * GET JSON with a disk cache and retry/backoff on 429/5xx. Wikimedia rate-limits
  * bursts of searches; without this, repeated runs silently lose every candidate.
  */
-async function getJson(url, opts, ms) {
+async function getJson(url, opts, ms = 8000) {
   const key = crypto.createHash('sha1').update(url).digest('hex');
   const file = path.join(SEARCH_CACHE, `${key}.json`);
   try {
@@ -48,7 +50,7 @@ async function getJson(url, opts, ms) {
     if (Date.now() - st.mtimeMs < SEARCH_TTL_MS) { searchStats.cached++; return JSON.parse(await fs.readFile(file, 'utf8')); }
   } catch { /* miss */ }
   let lastErr = null;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetchWithTimeout(url, opts, ms);
       if (res.ok) {
@@ -58,14 +60,14 @@ async function getJson(url, opts, ms) {
         await fs.writeFile(file, JSON.stringify(data));
         return data;
       }
-      if (res.status === 404) return null; // a real "no such page"
+      if (res.status === 404) return null;
       lastErr = `HTTP ${res.status}`;
-      if (res.status !== 429 && res.status < 500) break;
-      const retryAfter = Number(res.headers.get('retry-after'));
-      await new Promise((r) => setTimeout(r, (Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 1500 * 2 ** attempt)));
+      if (res.status === 429) break; // Don't stall on rate limits when other providers are available
+      if (res.status < 500) break;
+      await new Promise((r) => setTimeout(r, 600));
     } catch (err) {
       lastErr = err.name === 'AbortError' ? 'timeout' : err.message;
-      await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
+      await new Promise((r) => setTimeout(r, 600));
     }
   }
   searchStats.failed++;
@@ -73,8 +75,15 @@ async function getJson(url, opts, ms) {
   return null;
 }
 
-const WEAK = new Set(['the', 'a', 'an', 'of', 'in', 'on', 'and', 'at', 'to', 'for', 'with', 'file', 'jpg', 'jpeg', 'png', 'photo', 'image', 'view', 'new']);
+const WEAK = new Set(['the', 'a', 'an', 'of', 'in', 'on', 'and', 'at', 'to', 'for', 'with', 'file', 'jpg', 'jpeg', 'png', 'photo', 'image', 'view', 'new', 'showing', 'video', 'shot', 'visual']);
 export const keywords = (text) => String(text || '').toLowerCase().replace(/\.(jpe?g|png|webp)$/i, '').split(/[^a-z0-9]+/).filter((w) => w.length > 2 && !WEAK.has(w)).map((w) => w.replace(/s$/, ''));
+
+export function cleanQuery(q) {
+  if (!q) return '';
+  const clean = String(q).replace(/[^\w\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+  const kw = keywords(clean);
+  return kw.slice(0, 3).join(' ') || clean;
+}
 const namedPhrases = (text) => (String(text || '').match(/(?:[A-Z][\w'&.-]*\s?)+/g) || []).map((p) => keywords(p).join(' ')).filter(Boolean);
 const containsPhrase = (title, phrase) => ` ${keywords(title).join(' ')} `.includes(` ${phrase} `);
 
@@ -146,6 +155,36 @@ export async function pexelsSearch(query, orientation) {
     license: { name: 'Pexels License', url: 'https://www.pexels.com/license/', author: p.photographer, attributionRequired: false, nonFree: false, page: p.url } }));
 }
 
+export async function braveImageSearch(query, orientation) {
+  const key = process.env.BRAVE_SEARCH_KEY;
+  if (!key) return [];
+  const url = `https://api.search.brave.com/res/v1/images/search?q=${encodeURIComponent(query)}&count=10&safesearch=strict`;
+  const data = await getJson(url, { headers: { 'Accept': 'application/json', 'X-Subscription-Token': key } }, 7000);
+  return (data?.results || []).map((r, rank) => {
+    const p = r.properties || {};
+    const imgUrl = p.url || r.thumbnail?.src;
+    if (!imgUrl) return null;
+    return {
+      type: 'image',
+      url: imgUrl,
+      width: p.width || r.thumbnail?.width || 1280,
+      height: p.height || r.thumbnail?.height || 720,
+      source: 'brave',
+      tier: 'relevant',
+      weight: 2.75 - rank * 0.1,
+      label: r.title || query,
+      license: {
+        name: 'Web Editorial (Brave Search)',
+        url: r.url || null,
+        author: r.source || null,
+        attributionRequired: false,
+        nonFree: false,
+        page: r.url || null,
+      },
+    };
+  }).filter(Boolean);
+}
+
 export async function pixabaySearch(query, orientation) {
   const key = process.env.PIXABAY_API_KEY;
   if (!key) return [];
@@ -161,7 +200,7 @@ export function generatedCandidate(prompt, format, seed) {
   if (provider === 'none') return null;
   const [w, h] = format === 'shorts' ? [1080, 1920] : [1920, 1080];
   const p = encodeURIComponent(`documentary photograph, natural light, realistic, no text, ${prompt}`);
-  return { type: 'image', url: `https://image.pollinations.ai/prompt/${p}?width=${w}&height=${h}&nologo=true&seed=${seed}`, width: w, height: h, source: 'ai', tier: 'generated', weight: 1.0, timeout: 45000, retries: 1,
+  return { type: 'image', url: `https://image.pollinations.ai/prompt/${p}?width=${w}&height=${h}&nologo=true&seed=${seed}`, width: w, height: h, source: 'ai', tier: 'generated', weight: 1.0, timeout: 10000, retries: 0,
     license: { name: `AI-generated (${provider})`, url: null, author: null, attributionRequired: false, nonFree: false, page: null, note: 'check the provider terms for commercial use' } };
 }
 
@@ -225,12 +264,20 @@ export async function pexelsVideoSearch(query, orientation, minSeconds = 4) {
 // ─── Download, validate, normalise ─────────────────────────────────────────
 
 /**
- * Circuit breaker per download host: after two consecutive failures a host is
- * skipped for the rest of the process, so one dead source (e.g. an image
- * generator timing out at 45 s) cannot stall a long video for an hour.
+ * Circuit breaker per download host. Major CDNs (Pexels, Unsplash, Brave, Commons)
+ * are exempt from aggressive tripping so individual slow images never block the entire source.
  */
 const hostFailures = new Map();
-export const breakerOpen = (url) => (hostFailures.get(new URL(url).host) || 0) >= 2;
+const CDN_EXEMPT = new Set(['images.pexels.com', 'images.unsplash.com', 'api.search.brave.com', 'upload.wikimedia.org', 'commons.wikimedia.org']);
+export const breakerOpen = (url) => {
+  try {
+    const host = new URL(url).host;
+    if (CDN_EXEMPT.has(host)) return false;
+    return (hostFailures.get(host) || 0) >= 6;
+  } catch {
+    return false;
+  }
+};
 
 async function downloadCached(url, timeout, retries = 0) {
   const key = crypto.createHash('sha1').update(url).digest('hex');
@@ -261,39 +308,88 @@ async function downloadCached(url, timeout, retries = 0) {
   throw lastErr;
 }
 
+import { getSharp, getImageDimensions } from './imageUtils.js';
+
 /** Focal point via libvips' attention strategy (edges, saturation, skin tones). */
 async function focalPoint(buf) {
-  const small = await sharp(buf).rotate().resize(480, 480, { fit: 'inside' }).toBuffer({ resolveWithObject: true });
-  const { width, height } = small.info;
-  const box = Math.round(Math.min(width, height) * 0.45);
-  const { info } = await sharp(small.data).resize(box, box, { fit: 'cover', position: sharp.strategy.attention }).toBuffer({ resolveWithObject: true });
-  const scale = Math.max(box / width, box / height);
-  const sw = width * scale, sh = height * scale;
-  const cx = Number.isFinite(info.attentionX) ? info.attentionX / sw : (Math.abs(info.cropOffsetLeft || 0) + box / 2) / sw;
-  const cy = Number.isFinite(info.attentionY) ? info.attentionY / sh : (Math.abs(info.cropOffsetTop || 0) + box / 2) / sh;
-  const clamp = (v) => Math.min(0.8, Math.max(0.2, Number.isFinite(v) ? v : 0.5));
-  return { x: +clamp(cx).toFixed(3), y: +clamp(cy).toFixed(3) };
+  const sharp = getSharp();
+  if (!sharp) return { x: 0.5, y: 0.45 };
+  try {
+    const small = await sharp(buf).rotate().resize(480, 480, { fit: 'inside' }).toBuffer({ resolveWithObject: true });
+    const { width, height } = small.info;
+    const box = Math.round(Math.min(width, height) * 0.45);
+    const { info } = await sharp(small.data).resize(box, box, { fit: 'cover', position: sharp.strategy.attention }).toBuffer({ resolveWithObject: true });
+    const scale = Math.max(box / width, box / height);
+    const sw = width * scale, sh = height * scale;
+    const cx = Number.isFinite(info.attentionX) ? info.attentionX / sw : (Math.abs(info.cropOffsetLeft || 0) + box / 2) / sw;
+    const cy = Number.isFinite(info.attentionY) ? info.attentionY / sh : (Math.abs(info.cropOffsetTop || 0) + box / 2) / sh;
+    const clamp = (v) => Math.min(0.8, Math.max(0.2, Number.isFinite(v) ? v : 0.5));
+    return { x: +clamp(cx).toFixed(3), y: +clamp(cy).toFixed(3) };
+  } catch (e) {
+    return { x: 0.5, y: 0.45 };
+  }
 }
 
 /** 64-bit difference hash, for spotting the same photo under different URLs. */
 export async function dHash(buf) {
-  const px = await sharp(buf).greyscale().resize(9, 8, { fit: 'fill' }).raw().toBuffer();
-  let bits = '';
-  for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) bits += px[y * 9 + x] > px[y * 9 + x + 1] ? '1' : '0';
-  return bits;
+  const sharp = getSharp();
+  if (!sharp) return crypto.createHash('sha256').update(buf).digest('hex');
+  try {
+    const px = await sharp(buf).greyscale().resize(9, 8, { fit: 'fill' }).raw().toBuffer();
+    let bits = '';
+    for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) bits += px[y * 9 + x] > px[y * 9 + x + 1] ? '1' : '0';
+    return bits;
+  } catch (e) {
+    return crypto.createHash('sha256').update(buf).digest('hex');
+  }
 }
-export const hamming = (a, b) => [...a].reduce((n, c, i) => n + (c !== b[i]), 0);
+export const hamming = (a, b) => {
+  if (!a || !b) return 64;
+  if (a.length !== b.length || a.length !== 64) return a === b ? 0 : 64;
+  return [...a].reduce((n, c, i) => n + (c !== b[i]), 0);
+};
 
 export async function materialiseImage(candidate, outFile) {
-  const buf = await fs.readFile(await downloadCached(candidate.url, candidate.timeout, candidate.retries));
-  const img = sharp(buf, { failOn: 'error' }).rotate();
-  const meta = await img.metadata();
-  const w = meta.autoOrient?.width || meta.width, h = meta.autoOrient?.height || meta.height;
-  if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
-  if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
-  const out = await img.resize(2600, 2600, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 88, mozjpeg: true }).toBuffer({ resolveWithObject: true });
-  await fs.writeFile(outFile, out.data);
-  return { type: 'image', width: out.info.width, height: out.info.height, focal: await focalPoint(out.data), hash: await dHash(out.data) };
+  let cachedPath;
+  if (candidate.localPath) {
+    cachedPath = candidate.localPath;
+  } else if (candidate.url && candidate.url.startsWith('file://')) {
+    cachedPath = candidate.url.replace(/^file:\/\//, '');
+  } else {
+    cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+  }
+  const buf = await fs.readFile(cachedPath);
+  const sharp = getSharp();
+  
+  if (sharp) {
+    try {
+      const img = sharp(buf, { failOn: 'error' }).rotate();
+      const meta = await img.metadata();
+      const w = meta.autoOrient?.width || meta.width, h = meta.autoOrient?.height || meta.height;
+      if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
+      if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
+      const out = await img.resize(2600, 2600, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 88, mozjpeg: true }).toBuffer({ resolveWithObject: true });
+      await fs.writeFile(outFile, out.data);
+      return { type: 'image', width: out.info.width, height: out.info.height, focal: await focalPoint(out.data), hash: await dHash(out.data) };
+    } catch (err) {
+      // Fallback to ffmpeg
+    }
+  }
+
+  // Reliable ffmpeg transcoding & validation: transcode to standard browser-compatible JPEG
+  try {
+    await ffmpeg(['-y', '-i', cachedPath, '-vf', 'scale=min(2600\\,iw):-2', '-q:v', '2', outFile]);
+    const { stdout } = await runBinary('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'json', outFile]);
+    const info = JSON.parse(stdout);
+    const w = info.streams?.[0]?.width;
+    const h = info.streams?.[0]?.height;
+    if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
+    if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
+    const finalBuf = await fs.readFile(outFile);
+    return { type: 'image', width: w, height: h, focal: { x: 0.5, y: 0.45 }, hash: await dHash(finalBuf) };
+  } catch (err) {
+    throw new Error(`invalid/corrupted image: ${err.message}`);
+  }
 }
 
 export async function materialiseVideo(candidate, outFile) {
