@@ -1,0 +1,76 @@
+{
+  "id": "autonomous_vehicle_dashboard_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Passenger view inside autonomous vehicle in smart city",
+  "path": "images/technology/autonomous_vehicle_dashboard_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "autonomous vehicle",
+    "self-driving car",
+    "mobility",
+    "dashboard",
+    "smart city",
+    "transportation",
+    "ADAS"
+  ],
+  "concepts": [
+    "autonomous driving",
+    "future mobility",
+    "smart transportation",
+    "vehicle intelligence"
+  ],
+  "subjects": [
+    "car interior",
+    "road traffic",
+    "AR dashboard"
+  ],
+  "actions": [
+    "self-driving",
+    "navigating traffic"
+  ],
+  "mood": [
+    "futuristic",
+    "premium",
+    "calm",
+    "urban"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "autonomous vehicle video",
+    "future transport",
+    "smart city",
+    "mobility tech"
+  ],
+  "avoidFor": [
+    "biotech",
+    "remote work",
+    "factory automation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

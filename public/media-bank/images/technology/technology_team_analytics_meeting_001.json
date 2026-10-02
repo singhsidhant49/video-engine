@@ -1,0 +1,82 @@
+{
+  "id": "technology_team_analytics_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Technology team reviewing analytics dashboard",
+  "path": "images/technology/technology_team_analytics_meeting_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "team",
+    "analytics",
+    "dashboard",
+    "meeting",
+    "technology team",
+    "data",
+    "business intelligence",
+    "office"
+  ],
+  "concepts": [
+    "data analytics",
+    "team collaboration",
+    "business intelligence",
+    "product metrics",
+    "decision making"
+  ],
+  "subjects": [
+    "team",
+    "digital display",
+    "analytics dashboard",
+    "tablet"
+  ],
+  "actions": [
+    "presenting",
+    "analyzing",
+    "reviewing data",
+    "collaborating"
+  ],
+  "mood": [
+    "professional",
+    "collaborative",
+    "modern",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.7,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "analytics",
+    "startup team",
+    "business technology",
+    "product metrics",
+    "data-driven decision making"
+  ],
+  "avoidFor": [
+    "solo developer coding",
+    "cyber attack",
+    "hardware macro"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

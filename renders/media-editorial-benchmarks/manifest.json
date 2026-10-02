@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-10-01T06:54:01.564Z",
+  "outputs": [
+    {
+      "format": "landscape",
+      "video": "landscape.mp4",
+      "contactSheet": "landscape-contact-sheet.png",
+      "durationSeconds": 60,
+      "shotCount": 12,
+      "bytes": 32281056,
+      "renderMs": 123860,
+      "sampleFrames": [
+        "mid-00075.png",
+        "mid-00225.png",
+        "mid-00375.png",
+        "mid-00525.png",
+        "mid-00675.png",
+        "mid-00825.png",
+        "mid-00975.png",
+        "mid-01125.png",
+        "mid-01275.png",
+        "mid-01425.png",
+        "mid-01575.png",
+        "mid-01725.png"
+      ]
+    },
+    {
+      "format": "shorts",
+      "video": "shorts.mp4",
+      "contactSheet": "shorts-contact-sheet.png",
+      "durationSeconds": 36,
+      "shotCount": 9,
+      "bytes": 15220316,
+      "renderMs": 74770,
+      "sampleFrames": [
+        "mid-00060.png",
+        "mid-00180.png",
+        "mid-00300.png",
+        "mid-00420.png",
+        "mid-00540.png",
+        "mid-00660.png",
+        "mid-00780.png",
+        "mid-00900.png",
+        "mid-01020.png"
+      ]
+    }
+  ]
+}

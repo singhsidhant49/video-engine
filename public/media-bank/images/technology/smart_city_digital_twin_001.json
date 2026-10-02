@@ -1,0 +1,78 @@
+{
+  "id": "smart_city_digital_twin_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Smart city digital twin with connected infrastructure overlay",
+  "path": "images/technology/smart_city_digital_twin_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "smart city",
+    "digital twin",
+    "urban tech",
+    "connected infrastructure",
+    "city analytics",
+    "IoT network",
+    "future city"
+  ],
+  "concepts": [
+    "urban intelligence",
+    "city connectivity",
+    "digital twin",
+    "smart infrastructure"
+  ],
+  "subjects": [
+    "city skyline",
+    "river",
+    "bridges",
+    "network overlay",
+    "dashboard panels"
+  ],
+  "actions": [
+    "connecting infrastructure",
+    "monitoring city systems"
+  ],
+  "mood": [
+    "epic",
+    "futuristic",
+    "urban",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "smart city video",
+    "urban innovation",
+    "digital twin explainer",
+    "future infrastructure"
+  ],
+  "avoidFor": [
+    "home office",
+    "medical workspace",
+    "small product ad"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

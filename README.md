@@ -78,3 +78,66 @@ npm run remotion:studio
 ## 📁 Output & Render Files
 - Rendered `.mp4` videos are saved in `./renders/`
 - Per-run artifacts and assets are in `./renders/runs/<videoId>/`
+media-bank/
+  video/
+    technology/
+    business/
+    finance/
+    psychology/
+    science/
+    history/
+    abstract/
+    backgrounds/
+    transitions/
+    textures/
+
+  images/
+    technology/
+    business/
+    finance/
+    psychology/
+    science/
+    history/
+    abstract/
+    backgrounds/
+
+  icons/
+    ui/
+    arrows/
+    devices/
+    finance/
+    science/
+    social/
+    generic/
+
+  overlays/
+    grids/
+    film-grain/
+    light-leaks/
+    paper-texture/
+    noise/
+    gradients/
+
+  documents/
+    generic-report/
+    spreadsheet/
+    code/
+    newspaper/
+    timeline/
+
+  audio/
+    whoosh/
+    click/
+    impact/
+    riser/
+    ambience/
+# Production visual mode
+
+Production generation defaults to `MEDIA_EDITORIAL`: real image/video media is composition-solved before Remotion renders it, while procedural chart/process/diagram/statement families are disabled. Use `--visual-mode LEGACY_PROCEDURAL` only for regression, debugging, or compatibility.
+
+Useful validation commands:
+
+```bash
+npm test
+npm run render:media-editorial
+```

@@ -1,4 +1,6 @@
 import { getStyle } from '../shared/styles.js';
+import { storyboardToExecutionPlan, storyboardSceneSeconds } from './storyboardCompatibility.js';
+import { classifyInformationType } from '../storyboard/visualCoveragePlan.js';
 
 /**
  * Visual Director — editorial intent → presentation decisions.
@@ -26,10 +28,10 @@ const GROUNDING = process.env.FOCUS_GROUNDING === '1';
 const FAMILY_BY_KIND = {
   atmosphere: 'image', subject: 'image', statistic: 'stat', statement: 'statement', quote: 'quote',
   document: 'document', chapter: 'chapter', comparison: 'compare', list: 'list', process: 'process',
-  timeline: 'timeline', chart: 'chart', ui: 'ui', code: 'code',
+  timeline: 'timeline', chart: 'chart', ui: 'ui', code: 'code', diagram: 'diagram', map: 'map',
 };
-const BED_FAMILIES = new Set(['image', 'stat', 'statement', 'quote', 'chapter', 'ui', 'compare']);
-const TEXTURE_FAMILIES = new Set(['list', 'process', 'timeline', 'chart', 'document']);
+const BED_FAMILIES = new Set(['image', 'stat', 'statement', 'quote', 'chapter', 'ui', 'compare', 'list', 'process', 'timeline', 'chart', 'document', 'code', 'diagram', 'map']);
+const TEXTURE_FAMILIES = new Set(['list', 'process', 'timeline', 'chart', 'document', 'code', 'ui', 'diagram', 'map']);
 
 const TONE_ENERGY = { tense: 1.15, urgent: 1.25, somber: 0.8, reflective: 0.7, curious: 1.0, neutral: 1.0, hopeful: 0.95, triumphant: 1.15, playful: 1.2 };
 const SHOT_SCALE = { wide: 1.0, medium: 1.05, close: 1.2, detail: 1.42 };
@@ -60,14 +62,29 @@ function labelFor(scene) {
  * @param {{ format: string, rng: () => number, sceneSeconds: number[] }} ctx
  * @returns {object[]} one spec per scene
  */
-export function directScenes(plan, { format, rng, sceneSeconds }) {
+export function directScenes(creativePlan, { format, rng, sceneSeconds } = {}) {
+  const isStoryboard = Boolean(creativePlan?.sections);
+  const strategy = isStoryboard ? creativePlan.visualStrategy : null;
+  const plan = isStoryboard ? storyboardToExecutionPlan(null, creativePlan) : creativePlan;
+  sceneSeconds = sceneSeconds || (isStoryboard ? storyboardSceneSeconds(creativePlan) : []);
   const style = getStyle(plan.style);
   const specs = [];
   const imageHistory = []; // variants of recent photo-led clips
 
   plan.scenes.forEach((scene, i) => {
     const seconds = sceneSeconds[i] || 3;
-    let family = FAMILY_BY_KIND[scene.kind] || 'image';
+    const infoType = classifyInformationType(scene);
+    let family = FAMILY_BY_KIND[scene.kind] || FAMILY_BY_KIND[infoType] || 'image';
+
+    // If beat is software code/repo or diagram/map/process, prefer explanatory family over generic photo
+    if (['code', 'interface', 'process', 'relationship', 'location'].includes(infoType) && scene.kind !== 'subject') {
+      if (infoType === 'code') family = 'code';
+      else if (infoType === 'interface') family = 'ui';
+      else if (infoType === 'process') family = 'process';
+      else if (infoType === 'relationship') family = 'diagram';
+      else if (infoType === 'location') family = 'map';
+    }
+
     let treatment = scene.treatment;
     let variant = 'default';
     const label = labelFor(scene);
@@ -79,7 +96,8 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
     if (family === 'image') {
       const w = { ...(style.variants?.image || { full: 1 }) };
       // Photo stack (adapted from the RVE Photo Stack template): real prints dropping in — for sequences of artifacts.
-      if (style.variants?.stackWeight && (scene.imageQueries.length > 1 || scene.entity)) w.stack = style.variants.stackWeight;
+      const searchConceptCount = new Set(scene.storyboardShots?.flatMap((shot) => shot.searchConcepts || []) || []).size;
+      if (style.variants?.stackWeight && (searchConceptCount > 1 || scene.entity)) w.stack = style.variants.stackWeight;
       // Annotation points at a specific thing; without a grounding model that can locate it, don't pretend.
       if (!label || !GROUNDING) delete w.annotated;
       if (!hasText) delete w.editorial;
@@ -116,7 +134,7 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
     const quietFactor = treatment === 'quiet' ? 0.5 : 1;
     const camera = {
       moves: behaviour.moves,
-      magnitude: style.motion.camera * style.motion.energy * toneEnergy * intensityEnergy * behaviour.factor * quietFactor,
+      magnitude: style.motion.camera * style.motion.energy * toneEnergy * intensityEnergy * behaviour.factor * quietFactor * (strategy ? 0.65 + strategy.cameraMotionIntensity * 0.7 : 1),
       baseScale: SHOT_SCALE[scene.shot] || 1,
     };
 
@@ -125,15 +143,21 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
     if (family === 'image' || (family === 'statement' && scene.kind !== 'statement')) role = scene.entity || scene.kind === 'subject' ? 'subject' : 'mood';
     else if (BED_FAMILIES.has(family)) role = 'mood';
     else if (TEXTURE_FAMILIES.has(family)) role = 'texture';
-    const wantsImages = scene.imageQueries.length > 0 || scene.entity;
+    const authoredShots = scene.storyboardShots || [];
+    const mediaShots = authoredShots.filter((shot) => shot.mediaPreference !== 'procedural');
+    const wantsImages = authoredShots.length
+      ? mediaShots.length > 0
+      : scene.storyboardShots?.some((shot) => shot.searchConcepts?.length) || scene.entity;
     const long = seconds > style.pacing.maxHoldSec * 1.8;
     const need = {
       role: wantsImages ? role : 'none',
-      count: variant === 'split' ? 2 : variant === 'stack' ? 3 : long && treatment !== 'quiet' ? 3 : 2,
-      // Motion footage suits atmosphere; a named subject needs the verified still of *that* subject.
-      allowVideo: role === 'mood' && family === 'image' && (style.assets?.video || 0) > 0 && treatment !== 'graphic',
-      preferVideo: role === 'mood' && family === 'image' && (style.assets?.video || 0) >= 2,
-      allowGenerated: true,
+      count: authoredShots.length
+        ? Math.max(1, mediaShots.length)
+        : variant === 'split' ? 2 : variant === 'stack' ? 3 : long && treatment !== 'quiet' ? 3 : 2,
+      // Motion footage suits atmosphere & graphic card backdrops; a named subject needs verified still
+      allowVideo: role === 'mood' && (style.assets?.video || 0) > 0 && treatment !== 'quiet' && (!authoredShots.length || authoredShots.some((shot) => shot.mediaPreference !== 'procedural')),
+      preferVideo: role === 'mood' && (style.assets?.video || 0) >= 1 && (!authoredShots.length || authoredShots.some((shot) => shot.motionPreference === 'active')),
+      allowGenerated: false,
       allowGeneric: true,
       minSeconds: seconds,
     };
@@ -167,15 +191,63 @@ export function directScenes(plan, { format, rng, sceneSeconds }) {
  * @param {{primary: object|null, alternates: object[]}} assets
  * @param {string} format
  */
-export function recast(spec, scene, assets, format) {
+export function recast(spec, scene, assets, format, prevSpec = null) {
   const note = (why) => spec.recasts.push(why);
   const primary = assets?.primary;
 
   if (spec.family === 'image' && !primary) {
-    // GRAPHIC/TYPOGRAPHY rung: say the thing in type rather than show the wrong picture.
+    const infoType = classifyInformationType(scene);
     const text = scene.text?.headline || scene.entity?.name || scene.text?.kicker || scene.emphasis;
-    if (text) { spec.family = 'statement'; spec.variant = 'title'; note(`no acceptable ${spec.need.role} image → typographic title "${text}"`); }
-    else { spec.family = 'ground'; note('no acceptable image and no text → plain ground'); }
+    const kind = scene.kind || '';
+    const intent = scene.visualIntent || '';
+
+    if (infoType === 'code' || kind === 'code') {
+      spec.family = 'code';
+      note('no acceptable image → explanatory code & terminal visualizer');
+    } else if (infoType === 'interface' || kind === 'ui') {
+      spec.family = 'ui';
+      note('no acceptable image → explanatory repository / UI visualizer');
+    } else if (infoType === 'process' || intent === 'process' || kind === 'process') {
+      spec.family = 'process';
+      note('no acceptable image → semantic process flow');
+    } else if (infoType === 'comparison' || intent === 'compare' || kind === 'comparison') {
+      spec.family = 'compare';
+      note('no acceptable image → semantic comparison');
+    } else if (infoType === 'relationship' || kind === 'diagram') {
+      spec.family = 'diagram';
+      note('no acceptable image → explanatory node & relationship diagram');
+    } else if (infoType === 'location' || kind === 'map') {
+      spec.family = 'map';
+      note('no acceptable image → geopolitical dependency map');
+    } else if (infoType === 'timeline' || kind === 'timeline') {
+      spec.family = 'timeline';
+      note('no acceptable image → semantic timeline');
+    } else if (infoType === 'data' || intent === 'quantify' || kind === 'statistic' || kind === 'chart') {
+      spec.family = 'chart';
+      note('no acceptable image → quantitative data chart');
+    } else if (infoType === 'evidence' || kind === 'document' || intent === 'prove') {
+      spec.family = 'document';
+      note('no acceptable image → archival document / study evidence');
+    } else if (text) {
+      // Check for adjacent typographic run (Milestone 8, Step 23)
+      if (prevSpec && prevSpec.family === 'statement') {
+        if (scene.data?.items?.length) {
+          spec.family = 'list';
+          note('adjacent statement prevented → semantic list');
+        } else {
+          spec.family = 'statement';
+          spec.variant = 'words';
+          note(`adjacent statement repaired → staged typographic sequence "${text}"`);
+        }
+      } else {
+        spec.family = 'statement';
+        spec.variant = 'title';
+        note(`no acceptable ${spec.need.role} image → typographic title "${text}"`);
+      }
+    } else {
+      spec.family = 'ground';
+      note('no acceptable image and no text → plain ground');
+    }
     return spec;
   }
   if (spec.family === 'image') {

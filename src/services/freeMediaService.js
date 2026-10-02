@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import { config } from '../config/index.js';
 import { runBinary, ffmpeg } from './ffmpeg.js';
 import { licenseFromExtmeta } from '../shared/licensing.js';
+import { metrics, computePerceptualHash } from '../core/cache/cacheManager.js';
 
 /**
  * Media sources. Each returns candidates tagged with a quality TIER; the
@@ -224,7 +225,7 @@ function topicCategory(text) {
     ['history', /\b(history|ancient|empire|century|revolution|archive|medieval|war)\b/],
     ['science', /\b(science|space|physics|biology|chemistry|lab|research|quantum)\b/],
     ['health', /\b(health|medical|hospital|doctor|disease|brain|dna)\b/],
-    ['technology', /\b(tech|software|code|ai|computer|chip|internet|data)\b/],
+    ['technology', /\b(tech|software|code|html|dom|browser|website|web|ai|computer|chip|internet|data)\b/],
     ['travel', /\b(travel|city|country|destination|tourism|flight|hotel)\b/],
     ['nature', /\b(nature|forest|ocean|mountain|river|animal|wildlife|climate)\b/],
   ];
@@ -232,11 +233,24 @@ function topicCategory(text) {
 }
 
 export function genericCandidates(topicText, sceneIndex) {
-  const lib = GENERIC_LIBRARY[topicCategory(topicText)];
+  const category = topicCategory(topicText);
+  const lib = GENERIC_LIBRARY[category];
+  const descriptions = {
+    technology: 'Technology editorial image showing computers, software, code, web systems, digital screens, speed, and performance.',
+    finance: 'Finance editorial image showing money, markets, banking, and economic activity.',
+    business: 'Business editorial image showing professional work and commercial activity.',
+    history: 'Historical editorial image showing archival subjects and the past.',
+    science: 'Science editorial image showing research, laboratories, and technical discovery.',
+    crime: 'Crime editorial image showing investigation, law enforcement, and justice.',
+    nature: 'Nature editorial image showing landscapes, wildlife, and the environment.',
+    health: 'Health editorial image showing medicine, care, and biological science.',
+    travel: 'Travel editorial image showing destinations, transport, and tourism.',
+  };
   return lib.map((id, k) => ({
     type: 'image',
     url: `https://images.unsplash.com/photo-${id}?q=85&w=2000&auto=format&fit=crop`,
     source: 'generic', tier: 'generic', generic: true, weight: 0.3 - ((k + sceneIndex) % lib.length) * 0.01,
+    label: descriptions[category], description: descriptions[category], tags: [category, 'editorial'],
     license: { name: 'Unsplash License', url: 'https://unsplash.com/license', author: null, attributionRequired: false, nonFree: false, page: `https://unsplash.com/photos/${id}` },
   }));
 }
@@ -283,9 +297,15 @@ async function downloadCached(url, timeout, retries = 0) {
   const key = crypto.createHash('sha1').update(url).digest('hex');
   const file = path.join(CACHE_DIR, `${key}.bin`);
   try {
-    await fs.access(file);
-    return file;
+    const st = await fs.stat(file);
+    if (st.size > 0) {
+      metrics.assetDownloadHits++;
+      metrics.bytesReused += st.size;
+      metrics.estimatedTimeSavedMs += 2500;
+      return file;
+    }
   } catch { /* not cached */ }
+  metrics.assetDownloadMisses++;
   const host = new URL(url).host;
   if (breakerOpen(url)) throw new Error(`${host} skipped (failing this run)`);
   let lastErr;
@@ -297,6 +317,19 @@ async function downloadCached(url, timeout, retries = 0) {
       await fs.mkdir(CACHE_DIR, { recursive: true });
       await fs.writeFile(file, buf);
       hostFailures.set(host, 0);
+
+      // Write metadata sidecar preserving source and content hashes
+      const contentHash = crypto.createHash('sha256').update(buf).digest('hex');
+      const meta = {
+        key,
+        contentHash,
+        sourceUrl: url,
+        host,
+        retrievedAt: new Date().toISOString(),
+        size: buf.length,
+      };
+      await fs.writeFile(path.join(CACHE_DIR, `${key}.json`), JSON.stringify(meta, null, 2)).catch(() => {});
+
       return file;
     } catch (err) {
       lastErr = err;
@@ -350,6 +383,7 @@ export const hamming = (a, b) => {
 };
 
 export async function materialiseImage(candidate, outFile) {
+  const minimumShortSide = Number(candidate.minimumShortSide) || MIN_SHORT_SIDE;
   let cachedPath;
   if (candidate.localPath) {
     cachedPath = candidate.localPath;
@@ -366,7 +400,7 @@ export async function materialiseImage(candidate, outFile) {
       const img = sharp(buf, { failOn: 'error' }).rotate();
       const meta = await img.metadata();
       const w = meta.autoOrient?.width || meta.width, h = meta.autoOrient?.height || meta.height;
-      if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
+      if (!w || !h || Math.min(w, h) < minimumShortSide) throw new Error(`too small (${w}×${h})`);
       if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
       const out = await img.resize(2600, 2600, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 88, mozjpeg: true }).toBuffer({ resolveWithObject: true });
       await fs.writeFile(outFile, out.data);
@@ -383,11 +417,16 @@ export async function materialiseImage(candidate, outFile) {
     const info = JSON.parse(stdout);
     const w = info.streams?.[0]?.width;
     const h = info.streams?.[0]?.height;
-    if (!w || !h || Math.min(w, h) < MIN_SHORT_SIDE) throw new Error(`too small (${w}×${h})`);
+    if (!w || !h || Math.min(w, h) < minimumShortSide) throw new Error(`too small (${w}×${h})`);
     if (Math.max(w, h) / Math.min(w, h) > 3.2) throw new Error(`extreme aspect (${w}×${h})`);
     const finalBuf = await fs.readFile(outFile);
     return { type: 'image', width: w, height: h, focal: { x: 0.5, y: 0.45 }, hash: await dHash(finalBuf) };
   } catch (err) {
+    if (cachedPath && !candidate.localPath && !candidate.url?.startsWith('file://')) {
+      await fs.rm(cachedPath, { force: true }).catch(() => {});
+      const metaPath = cachedPath.replace(/\.bin$/, '.json');
+      if (metaPath !== cachedPath) await fs.rm(metaPath, { force: true }).catch(() => {});
+    }
     throw new Error(`invalid/corrupted image: ${err.message}`);
   }
 }

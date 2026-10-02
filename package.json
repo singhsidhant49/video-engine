@@ -8,7 +8,22 @@
     "start": "node src/server/studioServer.js",
     "generate": "node src/cli/generate.js",
     "remotion:studio": "npx remotion preview src/remotion/Root.jsx",
-    "test:tts": "node src/services/ttsService.js"
+    "test": "node --test tests/**/*.test.js",
+    "render:golden:m3": "node scripts/renderGoldenFixtures.js",
+    "render:golden:m14": "node scripts/renderProcessGoldens.js",
+    "render:golden:m15": "node scripts/renderMilestone15Goldens.js",
+    "benchmark:m15": "node scripts/benchmarkMilestone15.js",
+    "render:golden:m16": "node scripts/renderMilestone16Goldens.js",
+    "benchmark:m16": "node scripts/benchmarkMilestone16.js",
+    "render:media-editorial": "node scripts/renderMediaEditorialBenchmarks.js",
+    "sheets:m15": "node scripts/buildMilestone15RegressionSheets.js",
+    "render:timeline": "node scripts/renderTimelineRun.js",
+    "test:contracts": "node --test tests/contracts.test.js",
+    "test:tts": "node src/services/ttsService.js",
+    "run:inspect": "node src/cli/inspectRun.js",
+    "cache:stats": "node src/cli/cacheStats.js stats",
+    "cache:clean": "node src/cli/cacheStats.js clean",
+    "pipeline:stage": "node src/cli/runStage.js"
   },
   "dependencies": {
     "@img/sharp-win32-x64": "0.33.5",
@@ -25,7 +40,8 @@
     "react-dom": "^18.3.1",
     "remotion": "^4.0.240",
     "sharp": "0.33.5",
-    "wavefile": "^11.0.0"
+    "wavefile": "^11.0.0",
+    "zod": "4.5.4"
   },
   "devDependencies": {
     "@remotion/cli": "^4.0.240"

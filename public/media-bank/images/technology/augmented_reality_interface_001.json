@@ -1,0 +1,79 @@
+{
+  "id": "augmented_reality_interface_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Woman interacting with augmented reality interface",
+  "path": "images/technology/augmented_reality_interface_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "augmented reality",
+    "AR",
+    "mixed reality",
+    "headset",
+    "hologram",
+    "spatial computing",
+    "future tech"
+  ],
+  "concepts": [
+    "augmented reality",
+    "mixed reality",
+    "spatial computing",
+    "future interface",
+    "immersive technology"
+  ],
+  "subjects": [
+    "woman",
+    "AR headset",
+    "holographic interface"
+  ],
+  "actions": [
+    "gesturing",
+    "interacting with interface",
+    "pointing"
+  ],
+  "mood": [
+    "futuristic",
+    "premium",
+    "innovative",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.27,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "AR",
+    "mixed reality",
+    "future technology",
+    "spatial computing",
+    "innovation"
+  ],
+  "avoidFor": [
+    "traditional software coding",
+    "data center",
+    "cybersecurity"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-09-29T10:28:55.721Z",
+  "coldMediaSolveMs": 39.926,
+  "warmMediaSolveAverageMs": 0.584,
+  "cameraPreflightAverageMs": 0.316,
+  "iterations": 100,
+  "passed": true,
+  "publishable": true
+}

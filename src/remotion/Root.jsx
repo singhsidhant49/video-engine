@@ -1,6 +1,7 @@
 import React from 'react';
 import { Composition } from 'remotion';
 import { Video } from './engine/Video.jsx';
+import { ThumbnailComposition } from './Thumbnail.jsx';
 import { sampleTimeline } from './sampleTimeline.js';
 
 // Size and length come from the timeline itself, so Studio previews and renders always match it.
@@ -32,6 +33,15 @@ export const RemotionRoot = () => (
       height={1080}
       defaultProps={{ timeline: sampleTimeline('landscape') }}
       calculateMetadata={calculateMetadata}
+    />
+    <Composition
+      id="YouTubeThumbnail"
+      component={ThumbnailComposition}
+      durationInFrames={1}
+      fps={30}
+      width={1280}
+      height={720}
+      defaultProps={{ packageData: { title: 'Sample Title', thumbnails: [{ overlayText: 'THE HIDDEN COST', mainSubject: 'NVIDIA Chip' }] } }}
     />
   </>
 );

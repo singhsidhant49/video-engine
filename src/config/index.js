@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DEFAULT_VISUAL_POLICY } from './visualMode.js';
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ export const config = {
     widthLandscape: 1920,
     heightLandscape: 1080,
   },
+
+  visual: DEFAULT_VISUAL_POLICY,
 
   server: {
     port: parseInt(process.env.PORT || '3000', 10),

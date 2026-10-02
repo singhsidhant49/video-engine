@@ -1,28 +1,31 @@
 import React from 'react';
-import { AbsoluteFill, Img, Sequence, staticFile, useCurrentFrame, interpolate } from 'remotion';
+import { AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, interpolate } from 'remotion';
 import { useTheme, textStyles, fitSize, glyphRatio } from '../engine/theme.js';
 import { Bed, Ground, Shade, ShotMedia, activeShot, projectPoint } from '../engine/imagery.jsx';
 import { reveal, progress, ease } from '../engine/motion.js';
 import { captionBand, Kicker } from './editorial.jsx';
 
 /**
- * Photo family — one family, several compositions, so a run of photo scenes
- * does not read as a slideshow. The Visual Director picks the variant.
+ * Editorial Photo family — Media-first documentary composition.
  *
- *   full       cinematic full frame, type locked to the lower third
- *   editorial  asymmetric: photo panel + type panel on the ground
- *   split      two photographs side by side (stacked on vertical), second arrives mid-sentence
- *   depth      foreground print over its own blurred, darker background — for portrait photos in 16:9
- *   annotated  full frame with a drawn ring + leader line on a GROUNDED subject box (FOCUS_GROUNDING only)
+ * Variants:
+ *   full        Cinematic full bleed with optional clean lower-third
+ *   editorial   Asymmetric split: razor-sharp photo panel + typographic panel (no empty dead space)
+ *   split       Two media panels side-by-side (or top/bottom in 9:16)
+ *   detail      Close-up detail crop focused on subject
+ *   annotated   Clean documentary focus ring with leader line
+ *   depth       Clean editorial split for portrait media (never a tiny floating phone stamp)
  */
 
-function TextBlock({ kicker, headline, kickerAt, headlineAt, maxWidth, size }) {
+function TextBlock({ kicker, headline, kickerAt = 0, headlineAt = 0, maxWidth, size }) {
   const frame = useCurrentFrame();
   const theme = useTheme();
   const t = textStyles(theme);
+  const kAt = Number.isFinite(kickerAt) ? kickerAt : 0;
+  const hAt = Number.isFinite(headlineAt) ? headlineAt : 0;
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: theme.u(22), maxWidth: maxWidth || '100%' }}>
-      {kicker && <Kicker text={kicker} at={kickerAt} />}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: theme.u(18), maxWidth: maxWidth || '100%' }}>
+      {kicker && <Kicker text={kicker} at={kAt} />}
       {headline && (
         <h1
           style={{
@@ -31,7 +34,7 @@ function TextBlock({ kicker, headline, kickerAt, headlineAt, maxWidth, size }) {
             maxWidth: '100%',
             wordBreak: 'break-word',
             overflowWrap: 'break-word',
-            ...reveal(theme.style.motion.reveal, frame, headlineAt, theme.unit),
+            ...reveal(theme.style.motion.reveal, frame, hAt, theme.unit),
           }}
         >
           {headline}
@@ -41,54 +44,86 @@ function TextBlock({ kicker, headline, kickerAt, headlineAt, maxWidth, size }) {
   );
 }
 
+/** Full-frame media that lets imagery breathe. No obscuring boxes or cards. */
 function FullPhoto({ clip }) {
   const theme = useTheme();
-  const { kicker, headline, kickerAt, headlineAt } = clip.overlay;
+  const { kicker, headline, kickerAt, headlineAt } = clip.overlay || {};
+  const hasText = Boolean(kicker || headline);
   const rightPad = theme.isVertical ? theme.safe.right + theme.u(28) : theme.safe.right;
   const maxW = theme.width - theme.safe.left - rightPad;
   const size = headline ? fitSize(headline, maxW * (theme.isVertical ? 0.9 : 0.62), theme.size.h1, { lines: 3, ratio: glyphRatio(theme.style) }) : 0;
+
   return (
     <AbsoluteFill>
       <Bed shots={clip.bed} />
-      {(kicker || headline) && <Shade where="bottom" strength={theme.style.grade.shade + (headline ? 0.1 : 0)} />}
-      <div style={{ position: 'absolute', left: theme.safe.left, right: rightPad, bottom: theme.safe.bottom + captionBand(theme) }}>
-        <TextBlock kicker={kicker} headline={headline} kickerAt={kickerAt} headlineAt={headlineAt} size={size} maxWidth={theme.isVertical ? '90%' : '62%'} />
-      </div>
+      {hasText && <Shade where="bottom" strength={theme.style.grade.shade * 0.9} />}
+      {hasText && (
+        <div style={{ position: 'absolute', left: theme.safe.left, right: rightPad, bottom: theme.safe.bottom + captionBand(theme) * 0.7 }}>
+          <TextBlock kicker={kicker} headline={headline} kickerAt={kickerAt} headlineAt={headlineAt} size={size} maxWidth={theme.isVertical ? '90%' : '62%'} />
+        </div>
+      )}
     </AbsoluteFill>
   );
 }
 
+/**
+ * Editorial Split Photo:
+ * Asymmetric editorial presentation.
+ * If no text is assigned to this shot (e.g. secondary shot in a multi-shot sequence),
+ * it seamlessly displays full-bleed media rather than leaving an empty black hole!
+ */
 function EditorialPhoto({ clip }) {
   const frame = useCurrentFrame();
   const theme = useTheme();
-  const { kicker, headline, kickerAt, headlineAt, label } = clip.overlay;
+  const { kicker, headline, kickerAt, headlineAt, label } = clip.overlay || {};
   const { width: W, height: H, isVertical } = theme;
-  // Headline if the director wrote one; otherwise the subject's name carries the text panel.
-  const title = headline || (label && label !== kicker ? label : null) || kicker;
+
+  const title = headline || (label && label !== kicker ? label : null) || (kicker && !label ? kicker : null);
   const shownKicker = title === kicker ? null : kicker;
-  const box = isVertical ? { x: 0, y: 0, w: W, h: Math.round(H * 0.56) } : { x: Math.round(W * 0.44), y: 0, w: W - Math.round(W * 0.44), h: H };
-  const wipe = progress(frame, 0, 18, ease.inOut);
-  const panelW = isVertical ? W - theme.safe.left - theme.safe.right : box.x - theme.safe.left - theme.u(70);
-  const size = title ? fitSize(title, panelW, theme.size.h1 * (isVertical ? 1 : 1.1), { lines: 3, ratio: glyphRatio(theme.style) }) : 0;
+
+  // CRITICAL FIX: If no text exists for this shot, do not leave an empty black abyss on the left!
+  if (!title && !shownKicker) {
+    return <FullPhoto clip={clip} />;
+  }
+
+  const box = isVertical ? { x: 0, y: 0, w: W, h: Math.round(H * 0.54) } : { x: Math.round(W * 0.46), y: 0, w: W - Math.round(W * 0.46), h: H };
+  const wipe = progress(frame, 0, 16, ease.inOut);
+  const panelW = isVertical ? W - theme.safe.left - theme.safe.right : box.x - theme.safe.left - theme.u(60);
+  const size = title ? fitSize(title, panelW, theme.size.h1 * (isVertical ? 1 : 1.08), { lines: 3, ratio: glyphRatio(theme.style) }) : 0;
+
   return (
     <AbsoluteFill>
       <Ground texture={null} durationInFrames={clip.durationInFrames} />
-      <div style={{ position: 'absolute', inset: 0, clipPath: clip.enter.frames ? 'none' : isVertical ? `inset(0 0 ${(1 - wipe) * 100}% 0)` : `inset(0 0 0 ${(1 - wipe) * 100}%)` }}>
+      <div style={{ position: 'absolute', inset: 0, clipPath: clip.enter?.frames ? 'none' : isVertical ? `inset(0 0 ${(1 - wipe) * 100}% 0)` : `inset(0 0 0 ${(1 - wipe) * 100}%)` }}>
         <Bed shots={clip.bed} box={box} />
       </div>
-      <div style={{ position: 'absolute', background: theme.palette.accent, ...(isVertical ? { left: 0, top: box.h, height: theme.u(6), width: `${wipe * 100}%` } : { left: box.x, top: 0, width: theme.u(6), height: `${wipe * 100}%` }) }} />
+      {/* Precision vertical architectural divider rule */}
+      <div
+        style={{
+          position: 'absolute',
+          background: theme.palette.line,
+          ...(isVertical ? { left: 0, top: box.h, height: 1, width: `${wipe * 100}%` } : { left: box.x, top: 0, width: 1, height: `${wipe * 100}%` }),
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          background: theme.palette.accent,
+          ...(isVertical ? { left: theme.safe.left, top: box.h, height: theme.u(3), width: theme.u(80) * wipe } : { left: box.x, top: theme.safe.top, width: theme.u(3), height: theme.u(80) * wipe }),
+        }}
+      />
       <div
         style={{
           position: 'absolute',
           left: theme.safe.left,
           width: panelW,
-          ...(isVertical ? { top: box.h + theme.u(70), bottom: theme.safe.bottom + captionBand(theme) } : { top: theme.safe.top, bottom: theme.safe.bottom + captionBand(theme) * 0.6 }),
+          ...(isVertical ? { top: box.h + theme.u(60), bottom: theme.safe.bottom + captionBand(theme) } : { top: theme.safe.top, bottom: theme.safe.bottom + captionBand(theme) * 0.5 }),
           display: 'flex',
           flexDirection: 'column',
           justifyContent: isVertical ? 'flex-start' : 'center',
         }}
       >
-        <TextBlock kicker={shownKicker} headline={title} kickerAt={kickerAt} headlineAt={Math.min(headlineAt, kickerAt + 10)} size={size} maxWidth="100%" />
+        <TextBlock kicker={shownKicker} headline={title} kickerAt={kickerAt} headlineAt={Math.min(headlineAt || 0, (kickerAt || 0) + 8)} size={size} maxWidth="100%" />
       </div>
     </AbsoluteFill>
   );
@@ -97,17 +132,17 @@ function EditorialPhoto({ clip }) {
 function SplitPhoto({ clip }) {
   const frame = useCurrentFrame();
   const theme = useTheme();
-  const { kicker, kickerAt, secondAt } = clip.overlay;
+  const { kicker, kickerAt, secondAt } = clip.overlay || {};
   const { width: W, height: H, isVertical } = theme;
-  const gap = theme.u(10);
+  const gap = theme.u(4);
   const a = isVertical ? { x: 0, y: 0, w: W, h: (H - gap) / 2 } : { x: 0, y: 0, w: (W - gap) / 2, h: H };
   const b = isVertical ? { x: 0, y: (H + gap) / 2, w: W, h: (H - gap) / 2 } : { x: (W + gap) / 2, y: 0, w: (W - gap) / 2, h: H };
-  const p = progress(frame, secondAt, 16, ease.inOut);
+  const p = progress(frame, secondAt || 20, 16, ease.inOut);
   const hasSecond = Boolean(clip.bedB && clip.bedB.length);
-  // Before the second image arrives (or if no second image exists), the first holds the whole frame.
   const aBox = hasSecond
     ? { ...a, w: isVertical ? W : interpolate(p, [0, 1], [W, a.w]), h: isVertical ? interpolate(p, [0, 1], [H, a.h]) : H }
     : { x: 0, y: 0, w: W, h: H };
+
   return (
     <AbsoluteFill style={{ background: theme.palette.bg }}>
       <Bed shots={clip.bed} box={aBox} />
@@ -118,8 +153,8 @@ function SplitPhoto({ clip }) {
       )}
       {kicker && (
         <>
-          <Shade where="bottom" strength={0.45} />
-          <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) }}>
+          <Shade where="bottom" strength={0.4} />
+          <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) * 0.7 }}>
             <Kicker text={kicker} at={kickerAt} />
           </div>
         </>
@@ -128,41 +163,50 @@ function SplitPhoto({ clip }) {
   );
 }
 
-/** One depth shot: the same photograph as a sharp print over a blurred, darker copy, moving at different rates. */
-function DepthShot({ shot }) {
-  const frame = useCurrentFrame();
+/**
+ * Editorial portrait treatment:
+ * Replaces the tiny floating postage stamp with an elegant full-height documentary split.
+ * In 16:9, portrait media cleanly fills the right 48% height-to-edge, while the left
+ * displays refined metadata, title, and architectural rule.
+ */
+function PortraitSplitPhoto({ clip }) {
   const theme = useTheme();
-  const { width: W, height: H } = theme;
-  const t = interpolate(frame, [0, Math.max(1, shot.durationInFrames - 1)], [0, 1], { extrapolateRight: 'clamp', easing: ease.camera });
-  const printH = H * 0.8;
-  const printW = Math.min(W * 0.62, printH * (shot.width / shot.height));
-  const x = W * 0.56 - printW / 2 + interpolate(t, [0, 1], [theme.u(18), -theme.u(18)]);
-  const y = (H - printH) / 2 - theme.u(20);
+  const { kicker, headline, kickerAt, headlineAt, label } = clip.overlay || {};
+  const { width: W, height: H, isVertical } = theme;
+
+  if (isVertical) {
+    return <FullPhoto clip={clip} />;
+  }
+
+  const title = headline || label || kicker || 'ARCHIVAL RECORD';
+  const shownKicker = title === kicker ? null : kicker;
+  const boxW = Math.round(W * 0.48);
+  const box = { x: W - boxW, y: 0, w: boxW, h: H };
+  const panelW = box.x - theme.safe.left - theme.u(70);
+  const size = fitSize(title, panelW, theme.size.h1 * 0.95, { lines: 3, ratio: glyphRatio(theme.style) });
+
   return (
     <AbsoluteFill>
-      <ShotMedia shot={{ ...shot, move: { ...shot.move, scale: [1.18, 1.26] } }} filter={`blur(${theme.u(34)}px) brightness(0.45) saturate(0.8)`} />
-      <div style={{ position: 'absolute', left: x, top: y, width: printW, height: printH, boxShadow: `0 ${theme.u(40)}px ${theme.u(90)}px rgba(0,0,0,0.6)`, overflow: 'hidden', transform: `scale(${1 + t * 0.035})` }}>
-        <Img src={staticFile(shot.src)} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: theme.style.grade.image }} />
+      <Ground texture={null} durationInFrames={clip.durationInFrames} />
+      <div style={{ position: 'absolute', left: box.x, top: 0, width: box.w, height: box.h, overflow: 'hidden' }}>
+        <Bed shots={clip.bed} box={{ x: 0, y: 0, w: box.w, h: box.h }} />
       </div>
-    </AbsoluteFill>
-  );
-}
-
-function DepthPhoto({ clip }) {
-  const theme = useTheme();
-  const { kicker, kickerAt } = clip.overlay;
-  return (
-    <AbsoluteFill style={{ background: theme.palette.bg }}>
-      {clip.bed.map((shot, i) => (
-        <Sequence key={i} from={shot.from} durationInFrames={shot.durationInFrames} layout="none">
-          <DepthShot shot={shot} />
-        </Sequence>
-      ))}
-      {kicker && (
-        <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) }}>
-          <Kicker text={kicker} at={kickerAt} />
-        </div>
-      )}
+      {/* Precision dividing rule */}
+      <div style={{ position: 'absolute', left: box.x, top: 0, bottom: 0, width: 1, background: theme.palette.line }} />
+      <div
+        style={{
+          position: 'absolute',
+          left: theme.safe.left,
+          width: panelW,
+          top: theme.safe.top,
+          bottom: theme.safe.bottom + captionBand(theme) * 0.5,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <TextBlock kicker={shownKicker} headline={title} kickerAt={kickerAt} headlineAt={headlineAt} size={size} maxWidth="100%" />
+      </div>
     </AbsoluteFill>
   );
 }
@@ -171,13 +215,14 @@ function AnnotatedPhoto({ clip }) {
   const frame = useCurrentFrame();
   const theme = useTheme();
   const t = textStyles(theme);
-  const { kicker, kickerAt, label, annotateAt } = clip.overlay;
+  const { kicker, kickerAt, label, annotateAt } = clip.overlay || {};
   const { width: W, height: H } = theme;
   const cur = activeShot(clip.bed, frame);
-  const draw = progress(frame, annotateAt, 20, ease.inOut);
-  const labelIn = progress(frame, annotateAt + 12, 14);
+  const draw = progress(frame, annotateAt || 10, 18, ease.inOut);
+  const labelIn = progress(frame, (annotateAt || 10) + 10, 14);
   let ring = null;
-  const box = cur?.shot.focusBox; // grounded subject location in normalised image coords
+  const box = cur?.shot.focusBox;
+
   if (cur && cur.shot.type !== 'video' && box) {
     const c = projectPoint(cur.shot, cur.local, W, H, { x: (box.xmin + box.xmax) / 2, y: (box.ymin + box.ymax) / 2 });
     const corner = projectPoint(cur.shot, cur.local, W, H, { x: box.xmax, y: box.ymax });
@@ -190,73 +235,25 @@ function AnnotatedPhoto({ clip }) {
     ring = (
       <>
         <svg width={W} height={H} style={{ position: 'absolute', inset: 0 }}>
-          <circle cx={c.x} cy={c.y} r={r} fill="none" stroke={theme.palette.accent} strokeWidth={theme.u(5)} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - draw} transform={`rotate(-90 ${c.x} ${c.y})`} />
-          <polyline points={`${ex},${ey} ${hx},${ly + theme.u(22)}`} fill="none" stroke={theme.palette.accent} strokeWidth={theme.u(3)} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - labelIn} />
+          <circle cx={c.x} cy={c.y} r={r} fill="none" stroke={theme.palette.accent} strokeWidth={theme.u(4)} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - draw} transform={`rotate(-90 ${c.x} ${c.y})`} />
+          <polyline points={`${ex},${ey} ${hx},${ly + theme.u(20)}`} fill="none" stroke={theme.palette.accent} strokeWidth={theme.u(2.5)} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - labelIn} />
         </svg>
         {label && (
-          <div style={{ position: 'absolute', left: lx, top: ly, width: theme.u(340), textAlign: toLeft ? 'right' : 'left', ...t.label, fontSize: theme.size.label * 1.25, color: theme.palette.text, textShadow: '0 2px 12px rgba(0,0,0,0.85)', opacity: labelIn }}>
+          <div style={{ position: 'absolute', left: lx, top: ly, width: theme.u(340), textAlign: toLeft ? 'right' : 'left', ...t.label, fontSize: theme.size.label * 1.2, color: theme.palette.text, textShadow: '0 2px 12px rgba(0,0,0,0.9)', opacity: labelIn }}>
             {label}
           </div>
         )}
       </>
     );
   }
+
   return (
     <AbsoluteFill>
       <Bed shots={clip.bed} />
-      <Shade where="full" strength={0.28} />
+      <Shade where="full" strength={0.25} />
       {ring}
       {kicker && kicker !== label && (
-        <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) }}>
-          <Kicker text={kicker} at={kickerAt} />
-        </div>
-      )}
-    </AbsoluteFill>
-  );
-}
-
-/**
- * Photo stack (adapted from the RVE "Photo Stack" template, MIT): real prints
- * with white borders drop onto a blurred plate of the first image, one per
- * phrase, each slightly rotated — for a run of artifacts or places.
- */
-function StackPhoto({ clip }) {
-  const frame = useCurrentFrame();
-  const theme = useTheme();
-  const { kicker, kickerAt, stackAts = [8] } = clip.overlay;
-  const { width: W, height: H, isVertical } = theme;
-  const prints = (clip.stack || []).slice(0, 3);
-  const rot = [-4.5, 3, -1.5];
-  const off = isVertical ? [[-0.06, -0.08], [0.05, 0.02], [-0.02, 0.1]] : [[-0.16, -0.03], [0.12, 0.02], [0.0, 0.05]];
-  const drift = interpolate(frame, [0, clip.durationInFrames], [0, 1], { extrapolateRight: 'clamp' });
-  return (
-    <AbsoluteFill style={{ background: theme.palette.bg }}>
-      <Bed shots={clip.bed} filter={`blur(${theme.u(30)}px) brightness(0.42) saturate(0.8)`} />
-      {prints.map((p, i) => {
-        const at = stackAts[i] ?? 8 + i * 30;
-        const q = progress(frame, at, 18, ease.out);
-        if (q <= 0) return null;
-        const maxW = W * (isVertical ? 0.78 : 0.46), maxH = H * (isVertical ? 0.46 : 0.66);
-        const scale = Math.min(maxW / p.width, maxH / p.height);
-        const w = p.width * scale, h = p.height * scale;
-        const border = theme.u(14);
-        const x = W / 2 + off[i][0] * W - w / 2 + interpolate(drift, [0, 1], [0, theme.u(12) * (i % 2 ? 1 : -1)]);
-        const y = H / 2 + off[i][1] * H - h / 2 - theme.u(30);
-        return (
-          <div
-            key={i}
-            style={{
-              position: 'absolute', left: x - border, top: y - border, width: w + border * 2, height: h + border * 2,
-              background: '#f4f1ea', padding: border, boxShadow: `0 ${theme.u(30)}px ${theme.u(70)}px rgba(0,0,0,0.55)`,
-              opacity: q, transform: `translateY(${(1 - q) * -theme.u(40)}px) scale(${1.06 - 0.06 * q}) rotate(${rot[i]}deg)`,
-            }}
-          >
-            <Img src={staticFile(p.src)} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: theme.style.grade.image }} />
-          </div>
-        );
-      })}
-      {kicker && (
-        <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) }}>
+        <div style={{ position: 'absolute', left: theme.safe.left, bottom: theme.safe.bottom + captionBand(theme) * 0.7 }}>
           <Kicker text={kicker} at={kickerAt} />
         </div>
       )}
@@ -265,12 +262,21 @@ function StackPhoto({ clip }) {
 }
 
 export function PhotoShot({ clip }) {
-  switch (clip.variant) {
-    case 'editorial': return <EditorialPhoto clip={clip} />;
-    case 'split': return clip.bedB ? <SplitPhoto clip={clip} /> : <FullPhoto clip={clip} />;
-    case 'depth': return <DepthPhoto clip={clip} />;
-    case 'annotated': return <AnnotatedPhoto clip={clip} />;
-    case 'stack': return clip.stack?.length > 1 ? <StackPhoto clip={clip} /> : <FullPhoto clip={clip} />;
-    default: return <FullPhoto clip={clip} />;
+  const variant = clip.presentation?.variant || clip.variant;
+  switch (variant) {
+    case 'editorial':
+      return <EditorialPhoto clip={clip} />;
+    case 'split':
+      return clip.bedB ? <SplitPhoto clip={clip} /> : <EditorialPhoto clip={clip} />;
+    case 'depth':
+      return <PortraitSplitPhoto clip={clip} />;
+    case 'crop':
+    case 'editorial_crop':
+    case 'detail':
+      return <FullPhoto clip={clip} />;
+    case 'annotated':
+      return <AnnotatedPhoto clip={clip} />;
+    default:
+      return <FullPhoto clip={clip} />;
   }
 }

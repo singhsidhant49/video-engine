@@ -1,0 +1,806 @@
+{
+  "version": 3,
+  "videoId": "golden_psychology_explainer",
+  "title": "How The Framing Effect Controls Your Decisions",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 510,
+  "style": "editorial_explainer",
+  "palette": {
+    "hue": 35,
+    "bg": "hsl(35 22% 7%)",
+    "bgRaised": "hsl(35 22% 12%)",
+    "line": "hsl(35 28% 24%)",
+    "accent": "hsl(35 82% 60%)",
+    "accentSoft": "hsl(35 82% 60% / 0.18)",
+    "counter": "hsl(215 62% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#f7f7f5",
+    "muted": "#a8adb5",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "scene_001",
+      "kind": "statement",
+      "family": "statement",
+      "variant": "kinetic",
+      "intensity": 4,
+      "from": 0,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "words": [
+          "Context",
+          "Shapes",
+          "Perception"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "BEHAVIORAL ECONOMICS"
+      },
+      "shots": [
+        {
+          "id": "shot_01_01",
+          "storyboardShotId": "shot_01_01",
+          "sceneId": "scene_001",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 90,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "statement",
+          "variant": "kinetic",
+          "layout": "statement:kinetic",
+          "presentation": {
+            "family": "statement",
+            "variant": "kinetic",
+            "layout": "statement:kinetic",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "LOW",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "words": [
+              "Context",
+              "Shapes",
+              "Perception"
+            ],
+            "ats": [
+              4,
+              14,
+              24
+            ],
+            "kicker": "BEHAVIORAL ECONOMICS"
+          }
+        }
+      ],
+      "narration": "The way a choice is framed determines how your brain perceives risk."
+    },
+    {
+      "id": "c02",
+      "sceneId": "scene_002",
+      "kind": "quote",
+      "family": "quote",
+      "variant": "default",
+      "intensity": 4,
+      "from": 90,
+      "durationInFrames": 120,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "quote": "We are prone to overestimate how much we understand about the world and to underestimate the role of chance.",
+        "author": "Daniel Kahneman",
+        "role": "Nobel Laureate in Economic Sciences",
+        "at": 4,
+        "authorAt": 32
+      },
+      "shots": [
+        {
+          "id": "shot_02_01",
+          "storyboardShotId": "shot_02_01",
+          "sceneId": "scene_002",
+          "from": 0,
+          "startFrame": 90,
+          "endFrame": 210,
+          "durationInFrames": 120,
+          "role": "subject",
+          "family": "quote",
+          "variant": "default",
+          "layout": "quote:default",
+          "presentation": {
+            "family": "quote",
+            "variant": "default",
+            "layout": "quote:default",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "MEDIUM",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "quote": "We are prone to overestimate how much we understand about the world and to underestimate the role of chance.",
+            "author": "Daniel Kahneman",
+            "role": "Nobel Laureate in Economic Sciences",
+            "at": 4,
+            "authorAt": 32
+          }
+        }
+      ],
+      "narration": "As Daniel Kahneman observed: We are prone to overestimate how much we understand about the world."
+    },
+    {
+      "id": "c03",
+      "sceneId": "scene_003",
+      "kind": "compare",
+      "family": "compare",
+      "variant": "columns",
+      "intensity": 4,
+      "from": 210,
+      "durationInFrames": 110,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "left": {
+          "title": "SURVIVAL FRAME (GAINS)",
+          "items": [
+            "90% survival rate at 1 month",
+            "84% of patients choose surgery",
+            "Risk-averse framing"
+          ]
+        },
+        "right": {
+          "title": "MORTALITY FRAME (LOSSES)",
+          "items": [
+            "10% mortality rate at 1 month",
+            "Only 50% choose surgery",
+            "Loss-averse framing"
+          ]
+        },
+        "leftAt": 4,
+        "rightAt": 40
+      },
+      "shots": [
+        {
+          "id": "shot_03_01",
+          "storyboardShotId": "shot_03_01",
+          "sceneId": "scene_003",
+          "from": 0,
+          "startFrame": 210,
+          "endFrame": 320,
+          "durationInFrames": 110,
+          "role": "subject",
+          "family": "compare",
+          "variant": "columns",
+          "layout": "compare:columns",
+          "presentation": {
+            "family": "compare",
+            "variant": "columns",
+            "layout": "compare:columns",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "left": {
+              "title": "SURVIVAL FRAME (GAINS)",
+              "items": [
+                "90% survival rate at 1 month",
+                "84% of patients choose surgery",
+                "Risk-averse framing"
+              ]
+            },
+            "right": {
+              "title": "MORTALITY FRAME (LOSSES)",
+              "items": [
+                "10% mortality rate at 1 month",
+                "Only 50% choose surgery",
+                "Loss-averse framing"
+              ]
+            },
+            "leftAt": 4,
+            "rightAt": 40
+          }
+        }
+      ],
+      "narration": "Consider two medical treatments with identical statistical outcomes."
+    },
+    {
+      "id": "c04",
+      "sceneId": "scene_004",
+      "kind": "list",
+      "family": "list",
+      "variant": "ledger",
+      "intensity": 4,
+      "from": 320,
+      "durationInFrames": 100,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "title": "COGNITIVE HEURISTICS",
+        "items": [
+          "Availability Heuristic",
+          "Anchoring Bias",
+          "Loss Aversion"
+        ],
+        "ats": [
+          6,
+          36,
+          68
+        ]
+      },
+      "shots": [
+        {
+          "id": "shot_04_01",
+          "storyboardShotId": "shot_04_01",
+          "sceneId": "scene_004",
+          "from": 0,
+          "startFrame": 320,
+          "endFrame": 420,
+          "durationInFrames": 100,
+          "role": "subject",
+          "family": "list",
+          "variant": "ledger",
+          "layout": "list:ledger",
+          "presentation": {
+            "family": "list",
+            "variant": "ledger",
+            "layout": "list:ledger",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "title": "COGNITIVE HEURISTICS",
+            "items": [
+              "Availability Heuristic",
+              "Anchoring Bias",
+              "Loss Aversion"
+            ],
+            "ats": [
+              6,
+              36,
+              68
+            ]
+          }
+        }
+      ],
+      "narration": "Cognitive biases consistently override mathematical logic."
+    },
+    {
+      "id": "c05",
+      "sceneId": "scene_005",
+      "kind": "statement",
+      "family": "statement",
+      "variant": "highlight",
+      "intensity": 4,
+      "from": 420,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "words": [
+          "Question",
+          "The",
+          "Frame"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "THE TAKEAWAY"
+      },
+      "shots": [
+        {
+          "id": "shot_05_01",
+          "storyboardShotId": "shot_05_01",
+          "sceneId": "scene_005",
+          "from": 0,
+          "startFrame": 420,
+          "endFrame": 510,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "statement",
+          "variant": "highlight",
+          "layout": "statement:highlight",
+          "presentation": {
+            "family": "statement",
+            "variant": "highlight",
+            "layout": "statement:highlight",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "LOW",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "words": [
+              "Question",
+              "The",
+              "Frame"
+            ],
+            "ats": [
+              4,
+              14,
+              24
+            ],
+            "kicker": "THE TAKEAWAY"
+          }
+        }
+      ],
+      "narration": "Awareness of the frame is the first step toward rational judgment."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "shot_01_01",
+      "storyboardShotId": "shot_01_01",
+      "sceneId": "scene_001",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 90,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "statement",
+      "variant": "kinetic",
+      "layout": "statement:kinetic",
+      "presentation": {
+        "family": "statement",
+        "variant": "kinetic",
+        "layout": "statement:kinetic",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "LOW",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "words": [
+          "Context",
+          "Shapes",
+          "Perception"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "BEHAVIORAL ECONOMICS"
+      }
+    },
+    {
+      "id": "shot_02_01",
+      "storyboardShotId": "shot_02_01",
+      "sceneId": "scene_002",
+      "from": 0,
+      "startFrame": 90,
+      "endFrame": 210,
+      "durationInFrames": 120,
+      "role": "subject",
+      "family": "quote",
+      "variant": "default",
+      "layout": "quote:default",
+      "presentation": {
+        "family": "quote",
+        "variant": "default",
+        "layout": "quote:default",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "MEDIUM",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "quote": "We are prone to overestimate how much we understand about the world and to underestimate the role of chance.",
+        "author": "Daniel Kahneman",
+        "role": "Nobel Laureate in Economic Sciences",
+        "at": 4,
+        "authorAt": 32
+      }
+    },
+    {
+      "id": "shot_03_01",
+      "storyboardShotId": "shot_03_01",
+      "sceneId": "scene_003",
+      "from": 0,
+      "startFrame": 210,
+      "endFrame": 320,
+      "durationInFrames": 110,
+      "role": "subject",
+      "family": "compare",
+      "variant": "columns",
+      "layout": "compare:columns",
+      "presentation": {
+        "family": "compare",
+        "variant": "columns",
+        "layout": "compare:columns",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "left": {
+          "title": "SURVIVAL FRAME (GAINS)",
+          "items": [
+            "90% survival rate at 1 month",
+            "84% of patients choose surgery",
+            "Risk-averse framing"
+          ]
+        },
+        "right": {
+          "title": "MORTALITY FRAME (LOSSES)",
+          "items": [
+            "10% mortality rate at 1 month",
+            "Only 50% choose surgery",
+            "Loss-averse framing"
+          ]
+        },
+        "leftAt": 4,
+        "rightAt": 40
+      }
+    },
+    {
+      "id": "shot_04_01",
+      "storyboardShotId": "shot_04_01",
+      "sceneId": "scene_004",
+      "from": 0,
+      "startFrame": 320,
+      "endFrame": 420,
+      "durationInFrames": 100,
+      "role": "subject",
+      "family": "list",
+      "variant": "ledger",
+      "layout": "list:ledger",
+      "presentation": {
+        "family": "list",
+        "variant": "ledger",
+        "layout": "list:ledger",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "title": "COGNITIVE HEURISTICS",
+        "items": [
+          "Availability Heuristic",
+          "Anchoring Bias",
+          "Loss Aversion"
+        ],
+        "ats": [
+          6,
+          36,
+          68
+        ]
+      }
+    },
+    {
+      "id": "shot_05_01",
+      "storyboardShotId": "shot_05_01",
+      "sceneId": "scene_005",
+      "from": 0,
+      "startFrame": 420,
+      "endFrame": 510,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "statement",
+      "variant": "highlight",
+      "layout": "statement:highlight",
+      "presentation": {
+        "family": "statement",
+        "variant": "highlight",
+        "layout": "statement:highlight",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "LOW",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "words": [
+          "Question",
+          "The",
+          "Frame"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "THE TAKEAWAY"
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 510,
+      "frames": 16
+    }
+  ],
+  "captions": {
+    "mode": "phrase",
+    "hidden": [],
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 4,
+        "endFrame": 60,
+        "words": [
+          {
+            "index": 0,
+            "text": "The",
+            "startFrame": 4,
+            "endFrame": 12
+          },
+          {
+            "index": 0,
+            "text": "hidden",
+            "startFrame": 12,
+            "endFrame": 20
+          },
+          {
+            "index": 0,
+            "text": "monopoly.",
+            "startFrame": 22,
+            "endFrame": 30
+          }
+        ]
+      }
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": []
+  }
+}

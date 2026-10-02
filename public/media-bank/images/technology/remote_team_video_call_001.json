@@ -1,0 +1,78 @@
+{
+  "id": "remote_team_video_call_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Remote team video call on laptop",
+  "path": "images/technology/remote_team_video_call_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "remote work",
+    "video call",
+    "team meeting",
+    "laptop",
+    "collaboration",
+    "home office",
+    "virtual meeting"
+  ],
+  "concepts": [
+    "remote collaboration",
+    "distributed team",
+    "video conferencing",
+    "hybrid work"
+  ],
+  "subjects": [
+    "laptop",
+    "video conference participants",
+    "desk"
+  ],
+  "actions": [
+    "meeting",
+    "collaborating",
+    "video calling"
+  ],
+  "mood": [
+    "friendly",
+    "professional",
+    "warm",
+    "collaborative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "top",
+      "bottom-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "remote work video",
+    "team collaboration",
+    "saas communication",
+    "office culture"
+  ],
+  "avoidFor": [
+    "cybersecurity",
+    "hardware chip",
+    "factory"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "cybersecurity_operations_center_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cybersecurity workstation with shield and lock",
+  "path": "images/technology/cybersecurity_operations_center_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "cybersecurity",
+    "security",
+    "lock",
+    "shield",
+    "network security",
+    "SOC",
+    "monitoring",
+    "threat detection"
+  ],
+  "concepts": [
+    "cybersecurity",
+    "data protection",
+    "network security",
+    "security operations",
+    "threat monitoring"
+  ],
+  "subjects": [
+    "security analyst",
+    "monitors",
+    "lock hologram",
+    "world map"
+  ],
+  "actions": [
+    "monitoring",
+    "analyzing",
+    "typing"
+  ],
+  "mood": [
+    "serious",
+    "secure",
+    "cinematic",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.72,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "cybersecurity",
+    "data protection",
+    "security explainer",
+    "enterprise IT",
+    "threat detection"
+  ],
+  "avoidFor": [
+    "consumer mobile app",
+    "software coding tutorial",
+    "cloud storage"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

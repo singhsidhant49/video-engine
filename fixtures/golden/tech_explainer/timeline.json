@@ -1,0 +1,806 @@
+{
+  "version": 3,
+  "videoId": "golden_tech_explainer",
+  "title": "Why GPUs Beat CPUs at Deep Learning",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 510,
+  "style": "tech_editorial",
+  "palette": {
+    "hue": 160,
+    "bg": "hsl(160 28% 5%)",
+    "bgRaised": "hsl(160 28% 10%)",
+    "line": "hsl(160 30% 24%)",
+    "accent": "hsl(160 90% 62%)",
+    "accentSoft": "hsl(160 90% 62% / 0.18)",
+    "counter": "hsl(340 70% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#eef2f7",
+    "muted": "#8d97a8",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "scene_001",
+      "kind": "statement",
+      "family": "statement",
+      "variant": "kinetic",
+      "intensity": 4,
+      "from": 0,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "words": [
+          "Massive",
+          "Parallel",
+          "Compute"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "SILICON ARCHITECTURE"
+      },
+      "shots": [
+        {
+          "id": "shot_01_01",
+          "storyboardShotId": "shot_01_01",
+          "sceneId": "scene_001",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 90,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "statement",
+          "variant": "kinetic",
+          "layout": "statement:kinetic",
+          "presentation": {
+            "family": "statement",
+            "variant": "kinetic",
+            "layout": "statement:kinetic",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "LOW",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "words": [
+              "Massive",
+              "Parallel",
+              "Compute"
+            ],
+            "ats": [
+              4,
+              14,
+              24
+            ],
+            "kicker": "SILICON ARCHITECTURE"
+          }
+        }
+      ],
+      "narration": "Modern artificial intelligence runs on parallel silicon architecture."
+    },
+    {
+      "id": "c02",
+      "sceneId": "scene_002",
+      "kind": "compare",
+      "family": "compare",
+      "variant": "columns",
+      "intensity": 4,
+      "from": 90,
+      "durationInFrames": 120,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "left": {
+          "title": "CENTRAL PROCESSOR (CPU)",
+          "items": [
+            "Optimized for low latency",
+            "Few powerful compute cores",
+            "Complex branch prediction"
+          ]
+        },
+        "right": {
+          "title": "GRAPHICS PROCESSOR (GPU)",
+          "items": [
+            "Optimized for high throughput",
+            "Thousands of matrix ALUs",
+            "Massive memory bandwidth"
+          ]
+        },
+        "leftAt": 4,
+        "rightAt": 45
+      },
+      "shots": [
+        {
+          "id": "shot_02_01",
+          "storyboardShotId": "shot_02_01",
+          "sceneId": "scene_002",
+          "from": 0,
+          "startFrame": 90,
+          "endFrame": 210,
+          "durationInFrames": 120,
+          "role": "subject",
+          "family": "compare",
+          "variant": "columns",
+          "layout": "compare:columns",
+          "presentation": {
+            "family": "compare",
+            "variant": "columns",
+            "layout": "compare:columns",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "left": {
+              "title": "CENTRAL PROCESSOR (CPU)",
+              "items": [
+                "Optimized for low latency",
+                "Few powerful compute cores",
+                "Complex branch prediction"
+              ]
+            },
+            "right": {
+              "title": "GRAPHICS PROCESSOR (GPU)",
+              "items": [
+                "Optimized for high throughput",
+                "Thousands of matrix ALUs",
+                "Massive memory bandwidth"
+              ]
+            },
+            "leftAt": 4,
+            "rightAt": 45
+          }
+        }
+      ],
+      "narration": "While CPUs excel at sequential logic, GPUs execute millions of parallel calculations."
+    },
+    {
+      "id": "c03",
+      "sceneId": "scene_003",
+      "kind": "stat",
+      "family": "stat",
+      "variant": "hero",
+      "intensity": 4,
+      "from": 210,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "value": "35,000",
+        "prefix": "",
+        "suffix": " TFLOPS",
+        "label": "FP8 Matrix Tensor Performance",
+        "direction": "up",
+        "at": 6,
+        "countFrames": 24,
+        "kicker": "RAW COMPUTE"
+      },
+      "shots": [
+        {
+          "id": "shot_03_01",
+          "storyboardShotId": "shot_03_01",
+          "sceneId": "scene_003",
+          "from": 0,
+          "startFrame": 210,
+          "endFrame": 300,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "stat",
+          "variant": "hero",
+          "layout": "stat:hero",
+          "presentation": {
+            "family": "stat",
+            "variant": "hero",
+            "layout": "stat:hero",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "MEDIUM",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "value": "35,000",
+            "prefix": "",
+            "suffix": " TFLOPS",
+            "label": "FP8 Matrix Tensor Performance",
+            "direction": "up",
+            "at": 6,
+            "countFrames": 24,
+            "kicker": "RAW COMPUTE"
+          }
+        }
+      ],
+      "narration": "A single modern accelerator delivers over thirty-five thousand teraflops."
+    },
+    {
+      "id": "c04",
+      "sceneId": "scene_004",
+      "kind": "chart",
+      "family": "chart",
+      "variant": "default",
+      "intensity": 4,
+      "from": 300,
+      "durationInFrames": 110,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "title": "TRAINING COMPUTE DEMAND (FLOPs)",
+        "values": [
+          10,
+          45,
+          180,
+          850
+        ],
+        "labels": [
+          "2020",
+          "2022",
+          "2024",
+          "2026"
+        ],
+        "at": 6,
+        "drawFrames": 30
+      },
+      "shots": [
+        {
+          "id": "shot_04_01",
+          "storyboardShotId": "shot_04_01",
+          "sceneId": "scene_004",
+          "from": 0,
+          "startFrame": 300,
+          "endFrame": 410,
+          "durationInFrames": 110,
+          "role": "subject",
+          "family": "chart",
+          "variant": "default",
+          "layout": "chart:default",
+          "presentation": {
+            "family": "chart",
+            "variant": "default",
+            "layout": "chart:default",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "title": "TRAINING COMPUTE DEMAND (FLOPs)",
+            "values": [
+              10,
+              45,
+              180,
+              850
+            ],
+            "labels": [
+              "2020",
+              "2022",
+              "2024",
+              "2026"
+            ],
+            "at": 6,
+            "drawFrames": 30
+          }
+        }
+      ],
+      "narration": "Model parameters have outpaced traditional Moore's Law scaling."
+    },
+    {
+      "id": "c05",
+      "sceneId": "scene_005",
+      "kind": "code",
+      "family": "code",
+      "variant": "default",
+      "intensity": 4,
+      "from": 410,
+      "durationInFrames": 100,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "code": "import torch\n\n# Distributed Tensor Parallelism\nwith torch.cuda.device(device_id):\n    attn_out = flash_attention_2(q, k, v)\n    loss = cross_entropy(logits, targets)\n    loss.backward()",
+        "language": "python",
+        "from": 4,
+        "to": 65
+      },
+      "shots": [
+        {
+          "id": "shot_05_01",
+          "storyboardShotId": "shot_05_01",
+          "sceneId": "scene_005",
+          "from": 0,
+          "startFrame": 410,
+          "endFrame": 510,
+          "durationInFrames": 100,
+          "role": "subject",
+          "family": "code",
+          "variant": "default",
+          "layout": "code:default",
+          "presentation": {
+            "family": "code",
+            "variant": "default",
+            "layout": "code:default",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "MEDIUM",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "code": "import torch\n\n# Distributed Tensor Parallelism\nwith torch.cuda.device(device_id):\n    attn_out = flash_attention_2(q, k, v)\n    loss = cross_entropy(logits, targets)\n    loss.backward()",
+            "language": "python",
+            "from": 4,
+            "to": 65
+          }
+        }
+      ],
+      "narration": "With a few lines of matrix operations, neural weights update simultaneously."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "shot_01_01",
+      "storyboardShotId": "shot_01_01",
+      "sceneId": "scene_001",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 90,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "statement",
+      "variant": "kinetic",
+      "layout": "statement:kinetic",
+      "presentation": {
+        "family": "statement",
+        "variant": "kinetic",
+        "layout": "statement:kinetic",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "LOW",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "words": [
+          "Massive",
+          "Parallel",
+          "Compute"
+        ],
+        "ats": [
+          4,
+          14,
+          24
+        ],
+        "kicker": "SILICON ARCHITECTURE"
+      }
+    },
+    {
+      "id": "shot_02_01",
+      "storyboardShotId": "shot_02_01",
+      "sceneId": "scene_002",
+      "from": 0,
+      "startFrame": 90,
+      "endFrame": 210,
+      "durationInFrames": 120,
+      "role": "subject",
+      "family": "compare",
+      "variant": "columns",
+      "layout": "compare:columns",
+      "presentation": {
+        "family": "compare",
+        "variant": "columns",
+        "layout": "compare:columns",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "left": {
+          "title": "CENTRAL PROCESSOR (CPU)",
+          "items": [
+            "Optimized for low latency",
+            "Few powerful compute cores",
+            "Complex branch prediction"
+          ]
+        },
+        "right": {
+          "title": "GRAPHICS PROCESSOR (GPU)",
+          "items": [
+            "Optimized for high throughput",
+            "Thousands of matrix ALUs",
+            "Massive memory bandwidth"
+          ]
+        },
+        "leftAt": 4,
+        "rightAt": 45
+      }
+    },
+    {
+      "id": "shot_03_01",
+      "storyboardShotId": "shot_03_01",
+      "sceneId": "scene_003",
+      "from": 0,
+      "startFrame": 210,
+      "endFrame": 300,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "stat",
+      "variant": "hero",
+      "layout": "stat:hero",
+      "presentation": {
+        "family": "stat",
+        "variant": "hero",
+        "layout": "stat:hero",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "MEDIUM",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "value": "35,000",
+        "prefix": "",
+        "suffix": " TFLOPS",
+        "label": "FP8 Matrix Tensor Performance",
+        "direction": "up",
+        "at": 6,
+        "countFrames": 24,
+        "kicker": "RAW COMPUTE"
+      }
+    },
+    {
+      "id": "shot_04_01",
+      "storyboardShotId": "shot_04_01",
+      "sceneId": "scene_004",
+      "from": 0,
+      "startFrame": 300,
+      "endFrame": 410,
+      "durationInFrames": 110,
+      "role": "subject",
+      "family": "chart",
+      "variant": "default",
+      "layout": "chart:default",
+      "presentation": {
+        "family": "chart",
+        "variant": "default",
+        "layout": "chart:default",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "title": "TRAINING COMPUTE DEMAND (FLOPs)",
+        "values": [
+          10,
+          45,
+          180,
+          850
+        ],
+        "labels": [
+          "2020",
+          "2022",
+          "2024",
+          "2026"
+        ],
+        "at": 6,
+        "drawFrames": 30
+      }
+    },
+    {
+      "id": "shot_05_01",
+      "storyboardShotId": "shot_05_01",
+      "sceneId": "scene_005",
+      "from": 0,
+      "startFrame": 410,
+      "endFrame": 510,
+      "durationInFrames": 100,
+      "role": "subject",
+      "family": "code",
+      "variant": "default",
+      "layout": "code:default",
+      "presentation": {
+        "family": "code",
+        "variant": "default",
+        "layout": "code:default",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "MEDIUM",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "code": "import torch\n\n# Distributed Tensor Parallelism\nwith torch.cuda.device(device_id):\n    attn_out = flash_attention_2(q, k, v)\n    loss = cross_entropy(logits, targets)\n    loss.backward()",
+        "language": "python",
+        "from": 4,
+        "to": 65
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 510,
+      "frames": 16
+    }
+  ],
+  "captions": {
+    "mode": "phrase",
+    "hidden": [],
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 4,
+        "endFrame": 60,
+        "words": [
+          {
+            "index": 0,
+            "text": "The",
+            "startFrame": 4,
+            "endFrame": 12
+          },
+          {
+            "index": 0,
+            "text": "hidden",
+            "startFrame": 12,
+            "endFrame": 20
+          },
+          {
+            "index": 0,
+            "text": "monopoly.",
+            "startFrame": 22,
+            "endFrame": 30
+          }
+        ]
+      }
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": []
+  }
+}

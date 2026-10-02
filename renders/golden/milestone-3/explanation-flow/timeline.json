@@ -1,0 +1,862 @@
+{
+  "version": 3,
+  "videoId": "golden-explanation-flow",
+  "title": "explanation-flow",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 540,
+  "style": "editorial_explainer",
+  "palette": {
+    "hue": 218,
+    "bg": "hsl(218 22% 7%)",
+    "bgRaised": "hsl(218 22% 12%)",
+    "line": "hsl(218 28% 24%)",
+    "accent": "hsl(218 82% 60%)",
+    "accentSoft": "hsl(218 82% 60% / 0.18)",
+    "counter": "hsl(38 62% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#f7f7f5",
+    "muted": "#a8adb5",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "ef-1",
+      "sectionId": "ef-a",
+      "kind": "document",
+      "family": "document",
+      "variant": "default",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 2,
+      "from": 0,
+      "durationInFrames": 166,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "headline": "PRIMARY SOURCE",
+        "body": "Verified report / original filing",
+        "stamp": "REVIEWED",
+        "at": 0,
+        "highlightAt": 58
+      },
+      "shots": [
+        {
+          "id": "ef-1-a",
+          "storyboardShotId": "ef-1-a",
+          "sceneId": "ef-1",
+          "sectionId": "ef-a",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 166,
+          "durationInFrames": 166,
+          "role": "evidence",
+          "visualIntent": "Ground the explanation in evidence",
+          "visualConcept": "A full-frame editorial document crop",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "required",
+          "family": "document",
+          "variant": "default",
+          "layout": "document:default",
+          "presentation": {
+            "family": "document",
+            "variant": "default",
+            "layout": "document:default",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "MEDIUM"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "headline": "PRIMARY SOURCE",
+            "body": "Verified report / original filing",
+            "stamp": "REVIEWED",
+            "at": 0,
+            "highlightAt": 58
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "The system begins with one verified source document."
+    },
+    {
+      "id": "c02",
+      "sceneId": "ef-2",
+      "sectionId": "ef-a",
+      "kind": "process",
+      "family": "process",
+      "variant": "default",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 3,
+      "from": 166,
+      "durationInFrames": 203,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "steps": [
+          {
+            "title": "EVIDENCE"
+          },
+          {
+            "title": "CLAIM"
+          },
+          {
+            "title": "DECISION"
+          },
+          {
+            "title": "OUTCOME"
+          }
+        ],
+        "ats": [
+          1,
+          61,
+          108,
+          165
+        ]
+      },
+      "shots": [
+        {
+          "id": "ef-2-a",
+          "storyboardShotId": "ef-2-a",
+          "sceneId": "ef-2",
+          "sectionId": "ef-a",
+          "from": 0,
+          "startFrame": 166,
+          "endFrame": 369,
+          "durationInFrames": 203,
+          "role": "graphic",
+          "visualIntent": "Explain the causal chain clearly",
+          "visualConcept": "A four-stage causal flow",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "supporting",
+          "family": "process",
+          "variant": "default",
+          "layout": "process:default",
+          "presentation": {
+            "family": "process",
+            "variant": "default",
+            "layout": "process:default",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "HIGH"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "steps": [
+              {
+                "title": "EVIDENCE"
+              },
+              {
+                "title": "CLAIM"
+              },
+              {
+                "title": "DECISION"
+              },
+              {
+                "title": "OUTCOME"
+              }
+            ],
+            "ats": [
+              1,
+              61,
+              108,
+              165
+            ]
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "Evidence becomes a claim, then a decision, then an outcome."
+    },
+    {
+      "id": "c03",
+      "sceneId": "ef-3",
+      "sectionId": "ef-b",
+      "kind": "timeline",
+      "family": "timeline",
+      "variant": "default",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 3,
+      "from": 369,
+      "durationInFrames": 171,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "events": [
+          {
+            "date": "01",
+            "label": "Signal"
+          },
+          {
+            "date": "02",
+            "label": "Response"
+          },
+          {
+            "date": "03",
+            "label": "Result"
+          }
+        ],
+        "ats": [
+          11,
+          66,
+          120
+        ]
+      },
+      "shots": [
+        {
+          "id": "ef-3-a",
+          "storyboardShotId": "ef-3-a",
+          "sceneId": "ef-3",
+          "sectionId": "ef-b",
+          "from": 0,
+          "startFrame": 369,
+          "endFrame": 540,
+          "durationInFrames": 171,
+          "role": "graphic",
+          "visualIntent": "Show sequence as the key insight",
+          "visualConcept": "Three moments connected across time",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "supporting",
+          "family": "timeline",
+          "variant": "default",
+          "layout": "timeline:default",
+          "presentation": {
+            "family": "timeline",
+            "variant": "default",
+            "layout": "timeline:default",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "MEDIUM"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "events": [
+              {
+                "date": "01",
+                "label": "Signal"
+              },
+              {
+                "date": "02",
+                "label": "Response"
+              },
+              {
+                "date": "03",
+                "label": "Result"
+              }
+            ],
+            "ats": [
+              11,
+              66,
+              120
+            ]
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "The sequence matters more than any isolated moment."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "ef-1-a",
+      "storyboardShotId": "ef-1-a",
+      "sceneId": "ef-1",
+      "sectionId": "ef-a",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 166,
+      "durationInFrames": 166,
+      "role": "evidence",
+      "visualIntent": "Ground the explanation in evidence",
+      "visualConcept": "A full-frame editorial document crop",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "required",
+      "family": "document",
+      "variant": "default",
+      "layout": "document:default",
+      "presentation": {
+        "family": "document",
+        "variant": "default",
+        "layout": "document:default",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "MEDIUM"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "headline": "PRIMARY SOURCE",
+        "body": "Verified report / original filing",
+        "stamp": "REVIEWED",
+        "at": 0,
+        "highlightAt": 58
+      }
+    },
+    {
+      "id": "ef-2-a",
+      "storyboardShotId": "ef-2-a",
+      "sceneId": "ef-2",
+      "sectionId": "ef-a",
+      "from": 0,
+      "startFrame": 166,
+      "endFrame": 369,
+      "durationInFrames": 203,
+      "role": "graphic",
+      "visualIntent": "Explain the causal chain clearly",
+      "visualConcept": "A four-stage causal flow",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "supporting",
+      "family": "process",
+      "variant": "default",
+      "layout": "process:default",
+      "presentation": {
+        "family": "process",
+        "variant": "default",
+        "layout": "process:default",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "HIGH"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "steps": [
+          {
+            "title": "EVIDENCE"
+          },
+          {
+            "title": "CLAIM"
+          },
+          {
+            "title": "DECISION"
+          },
+          {
+            "title": "OUTCOME"
+          }
+        ],
+        "ats": [
+          1,
+          61,
+          108,
+          165
+        ]
+      }
+    },
+    {
+      "id": "ef-3-a",
+      "storyboardShotId": "ef-3-a",
+      "sceneId": "ef-3",
+      "sectionId": "ef-b",
+      "from": 0,
+      "startFrame": 369,
+      "endFrame": 540,
+      "durationInFrames": 171,
+      "role": "graphic",
+      "visualIntent": "Show sequence as the key insight",
+      "visualConcept": "Three moments connected across time",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "supporting",
+      "family": "timeline",
+      "variant": "default",
+      "layout": "timeline:default",
+      "presentation": {
+        "family": "timeline",
+        "variant": "default",
+        "layout": "timeline:default",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "MEDIUM"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "events": [
+          {
+            "date": "01",
+            "label": "Signal"
+          },
+          {
+            "date": "02",
+            "label": "Response"
+          },
+          {
+            "date": "03",
+            "label": "Result"
+          }
+        ],
+        "ats": [
+          11,
+          66,
+          120
+        ]
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 540,
+      "frames": 18
+    }
+  ],
+  "captions": {
+    "mode": "highlight",
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 0,
+        "endFrame": 170,
+        "words": [
+          {
+            "index": 0,
+            "text": "The",
+            "startFrame": 0,
+            "endFrame": 10
+          },
+          {
+            "index": 1,
+            "text": "system",
+            "startFrame": 12,
+            "endFrame": 29
+          },
+          {
+            "index": 2,
+            "text": "begins",
+            "startFrame": 33,
+            "endFrame": 50
+          },
+          {
+            "index": 3,
+            "text": "with",
+            "startFrame": 54,
+            "endFrame": 66
+          },
+          {
+            "index": 4,
+            "text": "one",
+            "startFrame": 69,
+            "endFrame": 78
+          },
+          {
+            "index": 5,
+            "text": "verified",
+            "startFrame": 81,
+            "endFrame": 102
+          },
+          {
+            "index": 6,
+            "text": "source",
+            "startFrame": 107,
+            "endFrame": 124
+          },
+          {
+            "index": 7,
+            "text": "document.",
+            "startFrame": 128,
+            "endFrame": 162
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "startFrame": 170,
+        "endFrame": 254,
+        "words": [
+          {
+            "index": 8,
+            "text": "Evidence",
+            "startFrame": 170,
+            "endFrame": 192
+          },
+          {
+            "index": 9,
+            "text": "becomes",
+            "startFrame": 197,
+            "endFrame": 216
+          },
+          {
+            "index": 10,
+            "text": "a",
+            "startFrame": 221,
+            "endFrame": 228
+          },
+          {
+            "index": 11,
+            "text": "claim,",
+            "startFrame": 230,
+            "endFrame": 249
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "startFrame": 254,
+        "endFrame": 310,
+        "words": [
+          {
+            "index": 12,
+            "text": "then",
+            "startFrame": 254,
+            "endFrame": 266
+          },
+          {
+            "index": 13,
+            "text": "a",
+            "startFrame": 269,
+            "endFrame": 276
+          },
+          {
+            "index": 14,
+            "text": "decision,",
+            "startFrame": 277,
+            "endFrame": 304
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "startFrame": 310,
+        "endFrame": 373,
+        "words": [
+          {
+            "index": 15,
+            "text": "then",
+            "startFrame": 310,
+            "endFrame": 322
+          },
+          {
+            "index": 16,
+            "text": "an",
+            "startFrame": 325,
+            "endFrame": 332
+          },
+          {
+            "index": 17,
+            "text": "outcome.",
+            "startFrame": 334,
+            "endFrame": 365
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "startFrame": 373,
+        "endFrame": 540,
+        "words": [
+          {
+            "index": 18,
+            "text": "The",
+            "startFrame": 373,
+            "endFrame": 382
+          },
+          {
+            "index": 19,
+            "text": "sequence",
+            "startFrame": 385,
+            "endFrame": 406
+          },
+          {
+            "index": 20,
+            "text": "matters",
+            "startFrame": 412,
+            "endFrame": 431
+          },
+          {
+            "index": 21,
+            "text": "more",
+            "startFrame": 436,
+            "endFrame": 448
+          },
+          {
+            "index": 22,
+            "text": "than",
+            "startFrame": 450,
+            "endFrame": 462
+          },
+          {
+            "index": 23,
+            "text": "any",
+            "startFrame": 465,
+            "endFrame": 475
+          },
+          {
+            "index": 24,
+            "text": "isolated",
+            "startFrame": 477,
+            "endFrame": 499
+          },
+          {
+            "index": 25,
+            "text": "moment.",
+            "startFrame": 504,
+            "endFrame": 533
+          }
+        ]
+      }
+    ],
+    "hidden": [
+      [
+        0,
+        166
+      ],
+      [
+        166,
+        369
+      ],
+      [
+        369,
+        540
+      ]
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": [
+      [
+        0,
+        533
+      ]
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "telemedicine_video_consultation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm telemedicine video consultation workspace",
+  "path": "images/technology/telemedicine_video_consultation_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "telemedicine",
+    "healthtech",
+    "video consultation",
+    "doctor",
+    "remote healthcare",
+    "digital health",
+    "patient portal"
+  ],
+  "concepts": [
+    "telehealth",
+    "remote care",
+    "digital medicine",
+    "virtual consultation"
+  ],
+  "subjects": [
+    "doctor on laptop",
+    "patient",
+    "medical devices",
+    "health icons"
+  ],
+  "actions": [
+    "consulting",
+    "video calling",
+    "monitoring health"
+  ],
+  "mood": [
+    "trustworthy",
+    "warm",
+    "professional",
+    "accessible"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.46,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "healthtech video",
+    "telemedicine explainer",
+    "digital healthcare",
+    "patient experience"
+  ],
+  "avoidFor": [
+    "industrial robotics",
+    "urban smart city",
+    "manufacturing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

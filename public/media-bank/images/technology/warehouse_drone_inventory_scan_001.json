@@ -1,0 +1,78 @@
+{
+  "id": "warehouse_drone_inventory_scan_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Autonomous drone inspecting warehouse inventory",
+  "path": "images/technology/warehouse_drone_inventory_scan_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "drone",
+    "warehouse",
+    "inventory",
+    "logistics",
+    "automation",
+    "inspection",
+    "supply chain",
+    "computer vision"
+  ],
+  "concepts": [
+    "warehouse automation",
+    "autonomous inspection",
+    "inventory management",
+    "supply chain tech"
+  ],
+  "subjects": [
+    "drone",
+    "warehouse racks",
+    "scan overlay"
+  ],
+  "actions": [
+    "scanning",
+    "inspecting inventory",
+    "flying"
+  ],
+  "mood": [
+    "technical",
+    "industrial",
+    "futuristic",
+    "efficient"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.39
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "logistics video",
+    "automation explainer",
+    "warehouse technology",
+    "computer vision"
+  ],
+  "avoidFor": [
+    "consumer app",
+    "healthcare",
+    "team meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

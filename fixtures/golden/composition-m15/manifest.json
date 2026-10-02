@@ -1,0 +1,1871 @@
+{
+  "generatedAt": "2026-09-29T09:10:46.382Z",
+  "states": [
+    "frame-0",
+    "state-25",
+    "state-50",
+    "state-75",
+    "final"
+  ],
+  "fixtures": [
+    {
+      "representation": "comparison",
+      "fixture": "reward",
+      "format": "landscape",
+      "topology": "spectrum",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_reward",
+        "solvedSceneId": "solved_shot_reward_landscape",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.187,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 756
+          },
+          "count": 9
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 47,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 28,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.667,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 48,
+            "endFrame": 55,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 52,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.547,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 56,
+            "endFrame": 103,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 80,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.667,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 104,
+            "endFrame": 124,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 114,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 124,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 152,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in immediate vs delayed reward"
+      },
+      "contactSheet": "comparison/reward/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "reward",
+      "format": "shorts",
+      "topology": "stacked-vertical",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_reward",
+        "solvedSceneId": "solved_shot_reward_shorts",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 9
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 47,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 28,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.674,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 48,
+            "endFrame": 55,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 52,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.593,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 56,
+            "endFrame": 103,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 80,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.686,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 104,
+            "endFrame": 124,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 114,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 124,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 152,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in immediate vs delayed reward"
+      },
+      "contactSheet": "comparison/reward/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "software-agent",
+      "format": "landscape",
+      "topology": "dual-field",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_software-agent",
+        "solvedSceneId": "solved_shot_software-agent_landscape",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.187,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 756
+          },
+          "count": 7
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 77,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 43,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.7,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 78,
+            "endFrame": 85,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 82,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.595,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 86,
+            "endFrame": 112,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 99,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.698,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 113,
+            "endFrame": 133,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 123,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 133,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 156,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in software vs ai agent"
+      },
+      "contactSheet": "comparison/software-agent/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "software-agent",
+      "format": "shorts",
+      "topology": "stacked-vertical",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_software-agent",
+        "solvedSceneId": "solved_shot_software-agent_shorts",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 7
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 77,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 43,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.674,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 78,
+            "endFrame": 85,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 82,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.593,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 86,
+            "endFrame": 112,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 99,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.686,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 113,
+            "endFrame": 133,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 123,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 133,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 156,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in software vs ai agent"
+      },
+      "contactSheet": "comparison/software-agent/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "fees",
+      "format": "landscape",
+      "topology": "delta-comparison",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_fees",
+        "solvedSceneId": "solved_shot_fees_landscape",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.187,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 756
+          },
+          "count": 9
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 56,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 32,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.7,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 57,
+            "endFrame": 64,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 61,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.595,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 65,
+            "endFrame": 105,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.7,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 106,
+            "endFrame": 126,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 116,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 126,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 153,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in high fee vs low fee"
+      },
+      "contactSheet": "comparison/fees/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "fees",
+      "format": "shorts",
+      "topology": "stacked-vertical",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_fees",
+        "solvedSceneId": "solved_shot_fees_shorts",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 9
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 56,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 32,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.674,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 57,
+            "endFrame": 64,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 61,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.593,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 65,
+            "endFrame": 105,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.686,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 106,
+            "endFrame": 126,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 116,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 126,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 153,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in high fee vs low fee"
+      },
+      "contactSheet": "comparison/fees/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "strategy",
+      "format": "landscape",
+      "topology": "before-after",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_strategy",
+        "solvedSceneId": "solved_shot_strategy_landscape",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.187,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 756
+          },
+          "count": 7
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 67,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 38,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.7,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 68,
+            "endFrame": 75,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 72,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.595,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 76,
+            "endFrame": 127,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 102,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.7,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 128,
+            "endFrame": 148,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 138,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 148,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 164,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.867,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in old vs new strategy"
+      },
+      "contactSheet": "comparison/strategy/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "comparison",
+      "fixture": "strategy",
+      "format": "shorts",
+      "topology": "stacked-vertical",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_strategy",
+        "solvedSceneId": "solved_shot_strategy_shorts",
+        "publishable": true,
+        "strength": "ACCEPTABLE",
+        "averageScore": 4.9,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 4.2,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 7
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 7,
+            "primaryFocalElementId": "comparison_root",
+            "minimumReadFrames": 8,
+            "frame": 4,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_A",
+            "startFrame": 8,
+            "endFrame": 67,
+            "primaryFocalElementId": "comparison_side_a",
+            "minimumReadFrames": 12,
+            "frame": 38,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.674,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "PIVOT",
+            "startFrame": 68,
+            "endFrame": 75,
+            "primaryFocalElementId": "comparison_divider",
+            "minimumReadFrames": 6,
+            "frame": 72,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.593,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN_B",
+            "startFrame": 76,
+            "endFrame": 127,
+            "primaryFocalElementId": "comparison_side_b",
+            "minimumReadFrames": 12,
+            "frame": 102,
+            "opacity": 1,
+            "emphasis": 1,
+            "visualWeight": 0.686,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 128,
+            "endFrame": 148,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 16,
+            "frame": 138,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 148,
+            "endFrame": 179,
+            "primaryFocalElementId": "comparison_difference",
+            "minimumReadFrames": 8,
+            "frame": 164,
+            "opacity": 1,
+            "emphasis": 0.45,
+            "visualWeight": 0.842,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [
+          {
+            "code": "decorative_dominance",
+            "severity": "editorial"
+          }
+        ],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Compare the meaningful difference in old vs new strategy"
+      },
+      "contactSheet": "comparison/strategy/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "reward-delay",
+      "format": "landscape",
+      "topology": "line",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_reward-delay",
+        "solvedSceneId": "solved_shot_reward-delay_landscape",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.074,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 684
+          },
+          "count": 12
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 95,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 48,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 96,
+            "endFrame": 96,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 96,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 96,
+            "endFrame": 96,
+            "primaryFocalElementId": "chart_series_0_point_3",
+            "minimumReadFrames": 12,
+            "frame": 96,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.72,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 96,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 138,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.895,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Perceived value falls sharply with delay"
+      },
+      "contactSheet": "chart/reward-delay/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "reward-delay",
+      "format": "shorts",
+      "topology": "line",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_reward-delay",
+        "solvedSceneId": "solved_shot_reward-delay_shorts",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.261,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 919,
+            "height": 1066
+          },
+          "count": 12
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 95,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 48,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 96,
+            "endFrame": 96,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 96,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 96,
+            "endFrame": 96,
+            "primaryFocalElementId": "chart_series_0_point_3",
+            "minimumReadFrames": 12,
+            "frame": 96,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.72,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 96,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 138,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.845,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Perceived value falls sharply with delay"
+      },
+      "contactSheet": "chart/reward-delay/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "revenue-segments",
+      "format": "landscape",
+      "topology": "bar-vertical",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_revenue-segments",
+        "solvedSceneId": "solved_shot_revenue-segments_landscape",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.074,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 684
+          },
+          "count": 11
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 77,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 39,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 78,
+            "endFrame": 78,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 78,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 78,
+            "endFrame": 78,
+            "primaryFocalElementId": "chart_series_0_point_2",
+            "minimumReadFrames": 12,
+            "frame": 78,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.79,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 78,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 129,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.895,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Enterprise is the largest revenue segment"
+      },
+      "contactSheet": "chart/revenue-segments/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "revenue-segments",
+      "format": "shorts",
+      "topology": "bar-horizontal",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_revenue-segments",
+        "solvedSceneId": "solved_shot_revenue-segments_shorts",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 11
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 77,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 39,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 78,
+            "endFrame": 78,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 78,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 78,
+            "endFrame": 78,
+            "primaryFocalElementId": "chart_series_0_point_2",
+            "minimumReadFrames": 12,
+            "frame": 78,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.777,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 78,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 129,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.845,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "Enterprise is the largest revenue segment"
+      },
+      "contactSheet": "chart/revenue-segments/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "fees-over-time",
+      "format": "landscape",
+      "topology": "line",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_fees-over-time",
+        "solvedSceneId": "solved_shot_fees-over-time_landscape",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.077,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 686
+          },
+          "count": 18
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 84,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 42,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 85,
+            "endFrame": 85,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 85,
+            "endFrame": 85,
+            "primaryFocalElementId": "chart_series_0_point_3",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.76,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 85,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 132,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.895,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "The fee gap widens as years compound"
+      },
+      "contactSheet": "chart/fees-over-time/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "fees-over-time",
+      "format": "shorts",
+      "topology": "line",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_fees-over-time",
+        "solvedSceneId": "solved_shot_fees-over-time_shorts",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 18
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 84,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 42,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 85,
+            "endFrame": 85,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 85,
+            "endFrame": 85,
+            "primaryFocalElementId": "chart_series_0_point_3",
+            "minimumReadFrames": 12,
+            "frame": 85,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.76,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 85,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 132,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.845,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "The fee gap widens as years compound"
+      },
+      "contactSheet": "chart/fees-over-time/shorts/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "performance",
+      "format": "landscape",
+      "topology": "dot",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_performance",
+        "solvedSceneId": "solved_shot_performance_landscape",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.074,
+          "bounds": {
+            "x": 134,
+            "y": 97,
+            "width": 1652,
+            "height": 684
+          },
+          "count": 11
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 72,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 36,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 73,
+            "endFrame": 73,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 73,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 73,
+            "endFrame": 73,
+            "primaryFocalElementId": "chart_series_0_point_2",
+            "minimumReadFrames": 12,
+            "frame": 73,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.76,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 73,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 126,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.895,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "The agent performs best on multi-step work"
+      },
+      "contactSheet": "chart/performance/landscape/lifecycle-contact-sheet.png"
+    },
+    {
+      "representation": "chart",
+      "fixture": "performance",
+      "format": "shorts",
+      "topology": "dot",
+      "frames": [
+        0,
+        45,
+        90,
+        134,
+        179
+      ],
+      "preflight": true,
+      "visualQuality": {
+        "version": 1,
+        "shotId": "shot_performance",
+        "solvedSceneId": "solved_shot_performance_shorts",
+        "publishable": true,
+        "strength": "STRONG",
+        "averageScore": 5,
+        "scores": {
+          "clarity": 5,
+          "hierarchy": 5,
+          "composition": 5,
+          "typography": 5,
+          "motion": 5,
+          "rhythm": 5,
+          "consistency": 5,
+          "mobileQuality": 5
+        },
+        "meaningfulOccupancy": {
+          "ratio": 1.192,
+          "bounds": {
+            "x": 81,
+            "y": 230,
+            "width": 869,
+            "height": 1066
+          },
+          "count": 11
+        },
+        "focalStates": [
+          {
+            "state": "ESTABLISH",
+            "startFrame": 0,
+            "endFrame": 72,
+            "primaryFocalElementId": "chart_root",
+            "minimumReadFrames": 8,
+            "frame": 36,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.3,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EXPLAIN",
+            "startFrame": 73,
+            "endFrame": 73,
+            "primaryFocalElementId": "chart_series_0",
+            "minimumReadFrames": 12,
+            "frame": 73,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.88,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "EMPHASIZE",
+            "startFrame": 73,
+            "endFrame": 73,
+            "primaryFocalElementId": "chart_series_0_point_2",
+            "minimumReadFrames": 12,
+            "frame": 73,
+            "opacity": 1,
+            "emphasis": 0.5,
+            "visualWeight": 0.76,
+            "occluded": false,
+            "sufficientWeight": true
+          },
+          {
+            "state": "SETTLE",
+            "startFrame": 73,
+            "endFrame": 179,
+            "primaryFocalElementId": "chart_takeaway",
+            "minimumReadFrames": 16,
+            "frame": 126,
+            "opacity": 1,
+            "emphasis": 0.6,
+            "visualWeight": 0.845,
+            "occluded": false,
+            "sufficientWeight": true
+          }
+        ],
+        "warnings": [],
+        "repairRequest": null,
+        "summary": "Editorial hierarchy, format adaptation, and semantic motion are publishable.",
+        "compositionObjective": "The agent performs best on multi-step work"
+      },
+      "contactSheet": "chart/performance/shorts/lifecycle-contact-sheet.png"
+    }
+  ]
+}

@@ -7,11 +7,16 @@ import { Captions } from './Captions.jsx';
 import { Letterbox, FilmBurn, irisClip } from './accents.jsx';
 import { StatShot, StatementShot, ChapterShot, QuoteShot, DocumentShot } from '../families/editorial.jsx';
 import { PhotoShot } from '../families/photo.jsx';
-import { ListShot, ProcessShot, TimelineShot, ChartShot, CompareShot, UiShot, CodeShot, GroundShot } from '../families/structured.jsx';
+import { ListShot, ProcessShot, TimelineShot, ChartShot, CompareShot, GroundShot } from '../families/structured.jsx';
+import { DiagramShot, MapShot, ModernCodeShot, ModernUiShot } from '../families/diagrams.jsx';
+import { DynamicMontage } from '../families/montage.jsx';
+import { GenericSceneRenderer } from './GenericSceneRenderer.jsx';
 
 const FAMILIES = {
   image: PhotoShot, stat: StatShot, statement: StatementShot, chapter: ChapterShot, quote: QuoteShot, document: DocumentShot,
-  list: ListShot, process: ProcessShot, timeline: TimelineShot, chart: ChartShot, compare: CompareShot, ui: UiShot, code: CodeShot, ground: GroundShot,
+  list: ListShot, process: ProcessShot, timeline: TimelineShot, chart: ChartShot, compare: CompareShot,
+  ui: ModernUiShot, code: ModernCodeShot, diagram: DiagramShot, map: MapShot, ground: GroundShot,
+  montage: DynamicMontage,
 };
 
 /**
@@ -106,14 +111,20 @@ function Finish() {
   );
 }
 
-/** Music ducks under speech using the aligned word timeline, with ramps rather than hard steps. */
-function useDuckedVolume(bgm, speech, total) {
+/** Music ducks under speech using precalculated envelope or falls back to speech intervals. */
+function useDuckedVolume(bgm, duckingEnvelope, speech, total) {
   return useMemo(() => {
     if (!bgm) return null;
+    if (Array.isArray(duckingEnvelope) && duckingEnvelope.length > 0) {
+      return (f) => {
+        const idx = Math.min(duckingEnvelope.length - 1, Math.max(0, Math.floor(f)));
+        return duckingEnvelope[idx] ?? bgm.ducked;
+      };
+    }
     const RAMP = 12;
     return (f) => {
       let dist = Infinity;
-      for (const [a, b] of speech) {
+      for (const [a, b] of (speech || [])) {
         if (f >= a && f <= b) { dist = 0; break; }
         dist = Math.min(dist, f < a ? a - f : f - b);
         if (a > f + RAMP) break;
@@ -123,11 +134,11 @@ function useDuckedVolume(bgm, speech, total) {
       const fade = Math.min(1, f / 30, (total - f) / 45);
       return Math.max(0, v * fade);
     };
-  }, [bgm, speech, total]);
+  }, [bgm, duckingEnvelope, speech, total]);
 }
 
 function Soundtrack({ audio, total }) {
-  const volume = useDuckedVolume(audio.bgm, audio.speech, total);
+  const volume = useDuckedVolume(audio.bgm, audio.duckingEnvelope, audio.speech, total);
   return (
     <>
       {audio.narration && <Audio src={staticFile(audio.narration)} />}
@@ -138,6 +149,52 @@ function Soundtrack({ audio, total }) {
         </Sequence>
       ))}
     </>
+  );
+}
+
+export function LegacyFamilyAdapter({ shot, clip }) {
+  const ShotFamily = FAMILIES[shot.family] || FAMILIES.image;
+  const assetRef = shot.asset || clip.asset || (clip.assets && clip.assets[0]);
+  const subClip = {
+    ...clip,
+    family: shot.family,
+    variant: shot.variant || clip.variant,
+    durationInFrames: shot.durationInFrames,
+    overlay: shot.overlay || {},
+    presentation: shot.presentation,
+    assets: shot.assets || [],
+    texture: shot.family === 'image' || shot.family === 'montage'
+      ? null
+      : (assetRef ? {
+        src: assetRef.src,
+        type: assetRef.type,
+        width: assetRef.width,
+        height: assetRef.height,
+        focal: assetRef.focal,
+      } : clip.texture),
+    bed: shot.asset ? [{ ...shot.asset, from: 0, durationInFrames: shot.durationInFrames, move: shot.move }] : null,
+  };
+  return <ShotFamily clip={subClip} />;
+}
+
+function MultiShotClip({ clip, timeline }) {
+  const mediaEditorial = timeline.visualMode === 'MEDIA_EDITORIAL';
+  return (
+    <AbsoluteFill>
+      {clip.shots.map((shot, idx) => {
+        const solvedScene = shot.renderMode === 'solved' ? timeline.solvedScenes?.[shot.solvedSceneId] : null;
+        const motionPlan = shot.renderMode === 'solved' ? timeline.motionPlans?.[shot.motionPlanId] : null;
+        return (
+          <Sequence key={shot.id || idx} from={shot.from} durationInFrames={shot.durationInFrames} name={shot.id}>
+            {solvedScene && motionPlan
+              ? <GenericSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} />
+              : mediaEditorial
+                ? <AbsoluteFill style={{ background: '#000', color: '#fff', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>MEDIA_EDITORIAL preflight failure: {shot.id}</AbsoluteFill>
+                : <LegacyFamilyAdapter shot={shot} clip={clip} />}
+          </Sequence>
+        );
+      })}
+    </AbsoluteFill>
   );
 }
 
@@ -154,7 +211,11 @@ export const Video = ({ timeline }) => {
           return (
             <Sequence key={clip.id} from={clip.from} durationInFrames={clip.durationInFrames} name={`${clip.id} ${clip.family}`}>
               <ClipFrame clip={clip}>
-                <Family clip={clip} />
+                {clip.shots?.length ? (
+                  <MultiShotClip clip={clip} timeline={timeline} />
+                ) : (
+                  <Family clip={clip} />
+                )}
               </ClipFrame>
             </Sequence>
           );

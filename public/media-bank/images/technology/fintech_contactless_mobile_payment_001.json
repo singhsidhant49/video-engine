@@ -1,0 +1,79 @@
+{
+  "id": "fintech_contactless_mobile_payment_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Contactless mobile payment with fintech analytics overlay",
+  "path": "images/technology/fintech_contactless_mobile_payment_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "fintech",
+    "mobile payment",
+    "contactless",
+    "NFC",
+    "smartphone",
+    "payment terminal",
+    "digital wallet",
+    "retail tech"
+  ],
+  "concepts": [
+    "digital payments",
+    "fintech",
+    "cashless commerce",
+    "mobile transactions"
+  ],
+  "subjects": [
+    "smartphone",
+    "payment terminal",
+    "analytics overlay",
+    "cafe counter"
+  ],
+  "actions": [
+    "paying",
+    "tapping phone",
+    "processing transaction"
+  ],
+  "mood": [
+    "modern",
+    "warm",
+    "commercial",
+    "tech-enabled"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.5
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fintech video",
+    "digital payment explainer",
+    "retail technology",
+    "cashless commerce"
+  ],
+  "avoidFor": [
+    "industrial automation",
+    "space tech",
+    "biotech"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

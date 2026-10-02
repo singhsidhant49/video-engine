@@ -1,0 +1,68 @@
+{
+  "shotCount": 5,
+  "familyRepetitionRate": 0,
+  "variantRepetitionRate": 0,
+  "layoutRepetitionRate": 0,
+  "cameraMoveRepetitionRate": 1,
+  "assetReuseRate": 0,
+  "consecutiveStructuredCount": 5,
+  "consecutivePhotoCount": 0,
+  "consecutiveFamilyRuns": {
+    "structured": 5,
+    "photo": 0
+  },
+  "consecutiveMotionRuns": 0,
+  "averageStaticHold": 1.75,
+  "longestStaticHold": 2.53,
+  "mediaVsProceduralDistribution": {
+    "procedural": 5
+  },
+  "proceduralVsMediaRatio": 1,
+  "visualDensityDistribution": {
+    "HIGH": 2,
+    "LOW": 2,
+    "MEDIUM": 1
+  },
+  "visualDensity": {
+    "HIGH": 2,
+    "LOW": 2,
+    "MEDIUM": 1
+  },
+  "movementStateDistribution": {
+    "STATIC": 5
+  },
+  "familyDistribution": {
+    "compare": 1,
+    "list": 1,
+    "quote": 1,
+    "statement": 2
+  },
+  "variantDistribution": {
+    "compare:columns": 1,
+    "list:ledger": 1,
+    "quote:default": 1,
+    "statement:highlight": 1,
+    "statement:kinetic": 1
+  },
+  "layoutDistribution": {
+    "compare:columns": 1,
+    "list:ledger": 1,
+    "quote:default": 1,
+    "statement:highlight": 1,
+    "statement:kinetic": 1
+  },
+  "cameraDistribution": {
+    "static": 5
+  },
+  "cameraMoveDistribution": {
+    "static": 5
+  },
+  "transitionDistribution": {
+    "cut": 5
+  },
+  "captionModes": [
+    "phrase"
+  ],
+  "longHolds": [],
+  "textHeavyShots": []
+}

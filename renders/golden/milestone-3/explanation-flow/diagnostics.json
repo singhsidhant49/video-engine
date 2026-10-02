@@ -1,0 +1,37 @@
+{
+  "shotCount": 3,
+  "familyRepetitionRate": 0,
+  "variantRepetitionRate": 0,
+  "layoutRepetitionRate": 0,
+  "cameraMoveRepetitionRate": 1,
+  "assetReuseRate": 0,
+  "consecutiveStructuredCount": 3,
+  "consecutivePhotoCount": 0,
+  "averageStaticHold": 6,
+  "longestStaticHold": 6.77,
+  "mediaVsProceduralDistribution": {
+    "procedural": 3
+  },
+  "visualDensityDistribution": {
+    "HIGH": 1,
+    "MEDIUM": 2
+  },
+  "familyDistribution": {
+    "document": 1,
+    "process": 1,
+    "timeline": 1
+  },
+  "variantDistribution": {
+    "document:default": 1,
+    "process:default": 1,
+    "timeline:default": 1
+  },
+  "layoutDistribution": {
+    "document:default": 1,
+    "process:default": 1,
+    "timeline:default": 1
+  },
+  "cameraMoveDistribution": {
+    "static": 3
+  }
+}

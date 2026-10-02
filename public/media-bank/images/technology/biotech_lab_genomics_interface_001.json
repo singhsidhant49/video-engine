@@ -1,0 +1,79 @@
+{
+  "id": "biotech_lab_genomics_interface_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist using holographic genomics interface in lab",
+  "path": "images/technology/biotech_lab_genomics_interface_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "biotech",
+    "laboratory",
+    "scientist",
+    "genomics",
+    "DNA",
+    "medical technology",
+    "research",
+    "diagnostics"
+  ],
+  "concepts": [
+    "biomedical research",
+    "genomics",
+    "lab automation",
+    "scientific computing"
+  ],
+  "subjects": [
+    "scientist",
+    "DNA interface",
+    "lab machine",
+    "test tubes"
+  ],
+  "actions": [
+    "analyzing samples",
+    "researching",
+    "interacting with interface"
+  ],
+  "mood": [
+    "clinical",
+    "advanced",
+    "focused",
+    "innovative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.41,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "biotech video",
+    "medical research",
+    "science explainer",
+    "health technology"
+  ],
+  "avoidFor": [
+    "consumer lifestyle",
+    "automotive",
+    "remote meetings"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

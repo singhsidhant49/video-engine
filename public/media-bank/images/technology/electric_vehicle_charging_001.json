@@ -1,0 +1,77 @@
+{
+  "id": "electric_vehicle_charging_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Electric vehicle charging in futuristic city plaza",
+  "path": "images/technology/electric_vehicle_charging_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "electric vehicle",
+    "EV",
+    "charging station",
+    "clean energy",
+    "sustainability",
+    "mobility",
+    "car",
+    "battery"
+  ],
+  "concepts": [
+    "electric mobility",
+    "EV infrastructure",
+    "clean transportation",
+    "energy transition"
+  ],
+  "subjects": [
+    "electric car",
+    "charging station",
+    "city skyline"
+  ],
+  "actions": [
+    "charging battery"
+  ],
+  "mood": [
+    "futuristic",
+    "clean",
+    "urban",
+    "premium"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.71,
+      "y": 0.52
+    },
+    "safeTextAreas": [
+      "left",
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "EV explainer",
+    "clean energy",
+    "mobility technology",
+    "sustainability intro"
+  ],
+  "avoidFor": [
+    "software coding",
+    "healthcare",
+    "team collaboration"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

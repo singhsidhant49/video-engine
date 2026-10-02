@@ -1,0 +1,76 @@
+{
+  "id": "metal_additive_manufacturing_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Industrial metal 3D printing process in action",
+  "path": "images/technology/metal_additive_manufacturing_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "3D printing",
+    "additive manufacturing",
+    "metal fabrication",
+    "industrial tech",
+    "prototype",
+    "advanced manufacturing"
+  ],
+  "concepts": [
+    "additive manufacturing",
+    "precision engineering",
+    "industrial innovation",
+    "rapid prototyping"
+  ],
+  "subjects": [
+    "3D printer",
+    "metal component",
+    "factory workspace"
+  ],
+  "actions": [
+    "printing",
+    "fabricating",
+    "prototyping"
+  ],
+  "mood": [
+    "industrial",
+    "precise",
+    "high-tech",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "manufacturing explainer",
+    "industrial technology",
+    "engineering innovation",
+    "factory b-roll"
+  ],
+  "avoidFor": [
+    "healthcare",
+    "remote collaboration",
+    "consumer lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

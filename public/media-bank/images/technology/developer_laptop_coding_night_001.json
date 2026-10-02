@@ -1,0 +1,82 @@
+{
+  "id": "developer_laptop_coding_night_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Developer coding on laptop at night",
+  "path": "images/technology/developer_laptop_coding_night_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "developer",
+    "coding",
+    "programming",
+    "laptop",
+    "software",
+    "workspace",
+    "night",
+    "code",
+    "remote work"
+  ],
+  "concepts": [
+    "software development",
+    "programming",
+    "developer workflow",
+    "deep work",
+    "technology"
+  ],
+  "subjects": [
+    "developer",
+    "laptop",
+    "desk",
+    "code editor"
+  ],
+  "actions": [
+    "typing",
+    "coding",
+    "working on laptop"
+  ],
+  "mood": [
+    "focused",
+    "cinematic",
+    "moody",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.79,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "software development",
+    "coding explainer",
+    "developer story",
+    "technology intro",
+    "section opener"
+  ],
+  "avoidFor": [
+    "cybersecurity attack",
+    "data center",
+    "mobile app"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

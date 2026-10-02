@@ -1,0 +1,901 @@
+{
+  "version": 3,
+  "videoId": "golden-evidence-rhythm",
+  "title": "evidence-rhythm",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 540,
+  "style": "editorial_explainer",
+  "palette": {
+    "hue": 218,
+    "bg": "hsl(218 22% 7%)",
+    "bgRaised": "hsl(218 22% 12%)",
+    "line": "hsl(218 28% 24%)",
+    "accent": "hsl(218 82% 60%)",
+    "accentSoft": "hsl(218 82% 60% / 0.18)",
+    "counter": "hsl(38 62% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#f7f7f5",
+    "muted": "#a8adb5",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "er-1",
+      "sectionId": "er-a",
+      "kind": "subject",
+      "family": "montage",
+      "variant": "dynamic",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 5,
+      "from": 0,
+      "durationInFrames": 157,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": {
+        "src": "assets/s01_d.jpg",
+        "type": "image",
+        "width": 1920,
+        "height": 1080,
+        "focal": {
+          "x": 0.42,
+          "y": 0.44
+        }
+      },
+      "overlay": {},
+      "shots": [
+        {
+          "id": "er-1-a",
+          "storyboardShotId": "er-1-a",
+          "sceneId": "er-1",
+          "sectionId": "er-a",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 157,
+          "durationInFrames": 157,
+          "role": "establishing",
+          "visualIntent": "Establish the real-world subject before the claim",
+          "visualConcept": "An escalating three-image industrial montage",
+          "mediaPreference": "real",
+          "evidenceRequirement": "supporting",
+          "family": "montage",
+          "variant": "dynamic",
+          "layout": "montage:dynamic",
+          "presentation": {
+            "family": "montage",
+            "variant": "dynamic",
+            "layout": "montage:dynamic",
+            "crop": "cover",
+            "focalPoint": {
+              "x": 0.42,
+              "y": 0.44
+            },
+            "overlayMode": "none",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "HIGH"
+          },
+          "asset": {
+            "src": "assets/s01_d.jpg",
+            "type": "image",
+            "width": 1920,
+            "height": 1080,
+            "focal": {
+              "x": 0.42,
+              "y": 0.44
+            },
+            "source": "local_fixture",
+            "license": "fixture"
+          },
+          "assets": [
+            {
+              "src": "assets/s01_d.jpg",
+              "type": "image",
+              "width": 1920,
+              "height": 1080,
+              "focal": {
+                "x": 0.42,
+                "y": 0.44
+              },
+              "source": "local_fixture",
+              "license": "fixture"
+            },
+            {
+              "src": "media/media_1_1790351072989.jpg",
+              "type": "image",
+              "width": 1920,
+              "height": 1080,
+              "focal": {
+                "x": 0.5,
+                "y": 0.44
+              },
+              "source": "local_fixture",
+              "license": "fixture"
+            },
+            {
+              "src": "media/media_1_1790351187106.jpg",
+              "type": "image",
+              "width": 1920,
+              "height": 1080,
+              "focal": {
+                "x": 0.58,
+                "y": 0.44
+              },
+              "source": "local_fixture",
+              "license": "fixture"
+            }
+          ],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.42,
+                0.44
+              ],
+              [
+                0.42,
+                0.44
+              ]
+            ]
+          },
+          "overlay": {}
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "A familiar company quietly captured the entire market."
+    },
+    {
+      "id": "c02",
+      "sceneId": "er-2",
+      "sectionId": "er-a",
+      "kind": "statistic",
+      "family": "stat",
+      "variant": "hero",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 4,
+      "from": 157,
+      "durationInFrames": 185,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "value": "98%",
+        "label": "MARKET SHARE",
+        "context": "Category control",
+        "variant": "hero",
+        "at": 48,
+        "countFrames": 27,
+        "kicker": null
+      },
+      "shots": [
+        {
+          "id": "er-2-a",
+          "storyboardShotId": "er-2-a",
+          "sceneId": "er-2",
+          "sectionId": "er-a",
+          "from": 0,
+          "startFrame": 157,
+          "endFrame": 342,
+          "durationInFrames": 185,
+          "role": "graphic",
+          "visualIntent": "Make the scale immediately legible",
+          "visualConcept": "A dominant ninety-eight-percent figure",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "required",
+          "family": "stat",
+          "variant": "hero",
+          "layout": "stat:hero",
+          "presentation": {
+            "family": "stat",
+            "variant": "hero",
+            "layout": "stat:hero",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "HIGH"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "value": "98%",
+            "label": "MARKET SHARE",
+            "context": "Category control",
+            "variant": "hero",
+            "at": 48,
+            "countFrames": 27,
+            "kicker": null
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "Its share reached ninety eight percent, leaving almost no room."
+    },
+    {
+      "id": "c03",
+      "sceneId": "er-3",
+      "sectionId": "er-b",
+      "kind": "statement",
+      "family": "statement",
+      "variant": "words",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 4,
+      "from": 342,
+      "durationInFrames": 198,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "words": [
+          "THE",
+          "LEAD",
+          "COMPOUNDS"
+        ],
+        "ats": [
+          11,
+          75,
+          84
+        ],
+        "kicker": "STRUCTURAL ADVANTAGE"
+      },
+      "shots": [
+        {
+          "id": "er-3-a",
+          "storyboardShotId": "er-3-a",
+          "sceneId": "er-3",
+          "sectionId": "er-b",
+          "from": 0,
+          "startFrame": 342,
+          "endFrame": 540,
+          "durationInFrames": 198,
+          "role": "payoff",
+          "visualIntent": "Land the strategic consequence",
+          "visualConcept": "The conclusion resolves in disciplined typography",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "supporting",
+          "family": "statement",
+          "variant": "words",
+          "layout": "statement:words",
+          "presentation": {
+            "family": "statement",
+            "variant": "words",
+            "layout": "statement:words",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "MEDIUM"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "words": [
+              "THE",
+              "LEAD",
+              "COMPOUNDS"
+            ],
+            "ats": [
+              11,
+              75,
+              84
+            ],
+            "kicker": "STRUCTURAL ADVANTAGE"
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "That advantage compounds because every competitor starts far behind."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "er-1-a",
+      "storyboardShotId": "er-1-a",
+      "sceneId": "er-1",
+      "sectionId": "er-a",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 157,
+      "durationInFrames": 157,
+      "role": "establishing",
+      "visualIntent": "Establish the real-world subject before the claim",
+      "visualConcept": "An escalating three-image industrial montage",
+      "mediaPreference": "real",
+      "evidenceRequirement": "supporting",
+      "family": "montage",
+      "variant": "dynamic",
+      "layout": "montage:dynamic",
+      "presentation": {
+        "family": "montage",
+        "variant": "dynamic",
+        "layout": "montage:dynamic",
+        "crop": "cover",
+        "focalPoint": {
+          "x": 0.42,
+          "y": 0.44
+        },
+        "overlayMode": "none",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "HIGH"
+      },
+      "asset": {
+        "src": "assets/s01_d.jpg",
+        "type": "image",
+        "width": 1920,
+        "height": 1080,
+        "focal": {
+          "x": 0.42,
+          "y": 0.44
+        },
+        "source": "local_fixture",
+        "license": "fixture"
+      },
+      "assets": [
+        {
+          "src": "assets/s01_d.jpg",
+          "type": "image",
+          "width": 1920,
+          "height": 1080,
+          "focal": {
+            "x": 0.42,
+            "y": 0.44
+          },
+          "source": "local_fixture",
+          "license": "fixture"
+        },
+        {
+          "src": "media/media_1_1790351072989.jpg",
+          "type": "image",
+          "width": 1920,
+          "height": 1080,
+          "focal": {
+            "x": 0.5,
+            "y": 0.44
+          },
+          "source": "local_fixture",
+          "license": "fixture"
+        },
+        {
+          "src": "media/media_1_1790351187106.jpg",
+          "type": "image",
+          "width": 1920,
+          "height": 1080,
+          "focal": {
+            "x": 0.58,
+            "y": 0.44
+          },
+          "source": "local_fixture",
+          "license": "fixture"
+        }
+      ],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.42,
+            0.44
+          ],
+          [
+            0.42,
+            0.44
+          ]
+        ]
+      },
+      "overlay": {}
+    },
+    {
+      "id": "er-2-a",
+      "storyboardShotId": "er-2-a",
+      "sceneId": "er-2",
+      "sectionId": "er-a",
+      "from": 0,
+      "startFrame": 157,
+      "endFrame": 342,
+      "durationInFrames": 185,
+      "role": "graphic",
+      "visualIntent": "Make the scale immediately legible",
+      "visualConcept": "A dominant ninety-eight-percent figure",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "required",
+      "family": "stat",
+      "variant": "hero",
+      "layout": "stat:hero",
+      "presentation": {
+        "family": "stat",
+        "variant": "hero",
+        "layout": "stat:hero",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "HIGH"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "value": "98%",
+        "label": "MARKET SHARE",
+        "context": "Category control",
+        "variant": "hero",
+        "at": 48,
+        "countFrames": 27,
+        "kicker": null
+      }
+    },
+    {
+      "id": "er-3-a",
+      "storyboardShotId": "er-3-a",
+      "sceneId": "er-3",
+      "sectionId": "er-b",
+      "from": 0,
+      "startFrame": 342,
+      "endFrame": 540,
+      "durationInFrames": 198,
+      "role": "payoff",
+      "visualIntent": "Land the strategic consequence",
+      "visualConcept": "The conclusion resolves in disciplined typography",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "supporting",
+      "family": "statement",
+      "variant": "words",
+      "layout": "statement:words",
+      "presentation": {
+        "family": "statement",
+        "variant": "words",
+        "layout": "statement:words",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "MEDIUM"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "words": [
+          "THE",
+          "LEAD",
+          "COMPOUNDS"
+        ],
+        "ats": [
+          11,
+          75,
+          84
+        ],
+        "kicker": "STRUCTURAL ADVANTAGE"
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 540,
+      "frames": 18
+    }
+  ],
+  "captions": {
+    "mode": "highlight",
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 0,
+        "endFrame": 128,
+        "words": [
+          {
+            "index": 0,
+            "text": "A",
+            "startFrame": 0,
+            "endFrame": 6
+          },
+          {
+            "index": 1,
+            "text": "familiar",
+            "startFrame": 8,
+            "endFrame": 27
+          },
+          {
+            "index": 2,
+            "text": "company",
+            "startFrame": 32,
+            "endFrame": 49
+          },
+          {
+            "index": 3,
+            "text": "quietly",
+            "startFrame": 53,
+            "endFrame": 71
+          },
+          {
+            "index": 4,
+            "text": "captured",
+            "startFrame": 75,
+            "endFrame": 94
+          },
+          {
+            "index": 5,
+            "text": "the",
+            "startFrame": 99,
+            "endFrame": 107
+          },
+          {
+            "index": 6,
+            "text": "entire",
+            "startFrame": 110,
+            "endFrame": 125
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "startFrame": 128,
+        "endFrame": 160,
+        "words": [
+          {
+            "index": 7,
+            "text": "market.",
+            "startFrame": 128,
+            "endFrame": 154
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "startFrame": 160,
+        "endFrame": 270,
+        "words": [
+          {
+            "index": 8,
+            "text": "Its",
+            "startFrame": 160,
+            "endFrame": 169
+          },
+          {
+            "index": 9,
+            "text": "share",
+            "startFrame": 171,
+            "endFrame": 184
+          },
+          {
+            "index": 10,
+            "text": "reached",
+            "startFrame": 187,
+            "endFrame": 204
+          },
+          {
+            "index": 11,
+            "text": "ninety",
+            "startFrame": 209,
+            "endFrame": 223
+          },
+          {
+            "index": 12,
+            "text": "eight",
+            "startFrame": 227,
+            "endFrame": 240
+          },
+          {
+            "index": 13,
+            "text": "percent,",
+            "startFrame": 243,
+            "endFrame": 265
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "startFrame": 270,
+        "endFrame": 345,
+        "words": [
+          {
+            "index": 14,
+            "text": "leaving",
+            "startFrame": 270,
+            "endFrame": 287
+          },
+          {
+            "index": 15,
+            "text": "almost",
+            "startFrame": 291,
+            "endFrame": 306
+          },
+          {
+            "index": 16,
+            "text": "no",
+            "startFrame": 310,
+            "endFrame": 317
+          },
+          {
+            "index": 17,
+            "text": "room.",
+            "startFrame": 318,
+            "endFrame": 340
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "startFrame": 345,
+        "endFrame": 479,
+        "words": [
+          {
+            "index": 18,
+            "text": "That",
+            "startFrame": 345,
+            "endFrame": 356
+          },
+          {
+            "index": 19,
+            "text": "advantage",
+            "startFrame": 358,
+            "endFrame": 380
+          },
+          {
+            "index": 20,
+            "text": "compounds",
+            "startFrame": 385,
+            "endFrame": 406
+          },
+          {
+            "index": 21,
+            "text": "because",
+            "startFrame": 412,
+            "endFrame": 429
+          },
+          {
+            "index": 22,
+            "text": "every",
+            "startFrame": 433,
+            "endFrame": 446
+          },
+          {
+            "index": 23,
+            "text": "competitor",
+            "startFrame": 449,
+            "endFrame": 473
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "startFrame": 479,
+        "endFrame": 540,
+        "words": [
+          {
+            "index": 24,
+            "text": "starts",
+            "startFrame": 479,
+            "endFrame": 493
+          },
+          {
+            "index": 25,
+            "text": "far",
+            "startFrame": 497,
+            "endFrame": 506
+          },
+          {
+            "index": 26,
+            "text": "behind.",
+            "startFrame": 508,
+            "endFrame": 534
+          }
+        ]
+      }
+    ],
+    "hidden": [
+      [
+        157,
+        342
+      ],
+      [
+        342,
+        540
+      ]
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": [
+      [
+        0,
+        534
+      ]
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "data_center_server_racks_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Symmetrical data center server corridor",
+  "path": "images/technology/data_center_server_racks_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "data center",
+    "servers",
+    "server racks",
+    "infrastructure",
+    "cloud",
+    "network",
+    "hosting",
+    "enterprise IT"
+  ],
+  "concepts": [
+    "cloud infrastructure",
+    "compute infrastructure",
+    "backend systems",
+    "hosting",
+    "enterprise technology"
+  ],
+  "subjects": [
+    "server racks",
+    "network cables",
+    "server room"
+  ],
+  "actions": [],
+  "mood": [
+    "futuristic",
+    "technical",
+    "clean",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "top"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "cloud computing",
+    "infrastructure",
+    "backend systems",
+    "enterprise technology",
+    "establishing shot"
+  ],
+  "avoidFor": [
+    "personal computing",
+    "mobile app",
+    "software coding"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

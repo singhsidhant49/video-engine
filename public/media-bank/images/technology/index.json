@@ -1,0 +1,2347 @@
+[
+  {
+    "id": "developer_laptop_coding_night_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Developer coding on laptop at night",
+    "path": "images/technology/developer_laptop_coding_night_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "developer",
+      "coding",
+      "programming",
+      "laptop",
+      "software",
+      "workspace",
+      "night",
+      "code",
+      "remote work"
+    ],
+    "concepts": [
+      "software development",
+      "programming",
+      "developer workflow",
+      "deep work",
+      "technology"
+    ],
+    "subjects": [
+      "developer",
+      "laptop",
+      "desk",
+      "code editor"
+    ],
+    "actions": [
+      "typing",
+      "coding",
+      "working on laptop"
+    ],
+    "mood": [
+      "focused",
+      "cinematic",
+      "moody",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.79,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "software development",
+      "coding explainer",
+      "developer story",
+      "technology intro",
+      "section opener"
+    ],
+    "avoidFor": [
+      "cybersecurity attack",
+      "data center",
+      "mobile app"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "developer_keyboard_typing_code_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Hands typing on mechanical keyboard with code monitor",
+    "path": "images/technology/developer_keyboard_typing_code_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "keyboard",
+      "typing",
+      "coding",
+      "developer",
+      "programming",
+      "code",
+      "mechanical keyboard",
+      "workspace"
+    ],
+    "concepts": [
+      "software development",
+      "coding activity",
+      "developer workflow",
+      "technical work"
+    ],
+    "subjects": [
+      "hands",
+      "keyboard",
+      "monitor",
+      "code editor"
+    ],
+    "actions": [
+      "typing",
+      "coding"
+    ],
+    "mood": [
+      "focused",
+      "cinematic",
+      "technical",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.73,
+        "y": 0.58
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "high",
+    "usage": [
+      "coding b-roll",
+      "developer workflow",
+      "software explainer",
+      "detail shot"
+    ],
+    "avoidFor": [
+      "cloud computing",
+      "cybersecurity",
+      "mobile technology"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "data_center_server_racks_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Symmetrical data center server corridor",
+    "path": "images/technology/data_center_server_racks_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "data center",
+      "servers",
+      "server racks",
+      "infrastructure",
+      "cloud",
+      "network",
+      "hosting",
+      "enterprise IT"
+    ],
+    "concepts": [
+      "cloud infrastructure",
+      "compute infrastructure",
+      "backend systems",
+      "hosting",
+      "enterprise technology"
+    ],
+    "subjects": [
+      "server racks",
+      "network cables",
+      "server room"
+    ],
+    "actions": [],
+    "mood": [
+      "futuristic",
+      "technical",
+      "clean",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "top"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "cloud computing",
+      "infrastructure",
+      "backend systems",
+      "enterprise technology",
+      "establishing shot"
+    ],
+    "avoidFor": [
+      "personal computing",
+      "mobile app",
+      "software coding"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "smartphone_app_workspace_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Smartphone with modern app interface on desk",
+    "path": "images/technology/smartphone_app_workspace_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "smartphone",
+      "mobile app",
+      "phone",
+      "app interface",
+      "earbuds",
+      "desk",
+      "consumer tech",
+      "device"
+    ],
+    "concepts": [
+      "mobile technology",
+      "consumer apps",
+      "digital product",
+      "app usage",
+      "personal technology"
+    ],
+    "subjects": [
+      "smartphone",
+      "earbuds",
+      "notebook",
+      "desk"
+    ],
+    "actions": [],
+    "mood": [
+      "clean",
+      "minimal",
+      "modern",
+      "bright"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.68,
+        "y": 0.55
+      },
+      "safeTextAreas": [
+        "left",
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "high",
+    "usage": [
+      "mobile app",
+      "consumer technology",
+      "productivity app",
+      "device explainer",
+      "app UI"
+    ],
+    "avoidFor": [
+      "data center",
+      "cybersecurity operations",
+      "programming"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "cloud_computing_laptop_hologram_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Laptop with cloud computing hologram",
+    "path": "images/technology/cloud_computing_laptop_hologram_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "cloud computing",
+      "cloud",
+      "laptop",
+      "network",
+      "storage",
+      "sync",
+      "server",
+      "SaaS"
+    ],
+    "concepts": [
+      "cloud infrastructure",
+      "cloud storage",
+      "data sync",
+      "SaaS",
+      "distributed systems"
+    ],
+    "subjects": [
+      "laptop",
+      "cloud hologram",
+      "network icons",
+      "desk"
+    ],
+    "actions": [
+      "data syncing",
+      "cloud connection"
+    ],
+    "mood": [
+      "futuristic",
+      "professional",
+      "cinematic",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.68,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "cloud computing",
+      "SaaS",
+      "data synchronization",
+      "network architecture",
+      "technology intro"
+    ],
+    "avoidFor": [
+      "hardware manufacturing",
+      "cyber attack",
+      "mobile app"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "cybersecurity_operations_center_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cybersecurity workstation with shield and lock",
+    "path": "images/technology/cybersecurity_operations_center_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "cybersecurity",
+      "security",
+      "lock",
+      "shield",
+      "network security",
+      "SOC",
+      "monitoring",
+      "threat detection"
+    ],
+    "concepts": [
+      "cybersecurity",
+      "data protection",
+      "network security",
+      "security operations",
+      "threat monitoring"
+    ],
+    "subjects": [
+      "security analyst",
+      "monitors",
+      "lock hologram",
+      "world map"
+    ],
+    "actions": [
+      "monitoring",
+      "analyzing",
+      "typing"
+    ],
+    "mood": [
+      "serious",
+      "secure",
+      "cinematic",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.72,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "cybersecurity",
+      "data protection",
+      "security explainer",
+      "enterprise IT",
+      "threat detection"
+    ],
+    "avoidFor": [
+      "consumer mobile app",
+      "software coding tutorial",
+      "cloud storage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "microchip_circuit_board_macro_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Macro computer microchip on circuit board",
+    "path": "images/technology/microchip_circuit_board_macro_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "microchip",
+      "processor",
+      "CPU",
+      "semiconductor",
+      "circuit board",
+      "hardware",
+      "electronics",
+      "chip"
+    ],
+    "concepts": [
+      "computing hardware",
+      "semiconductors",
+      "processing power",
+      "electronics",
+      "AI hardware"
+    ],
+    "subjects": [
+      "microchip",
+      "circuit board",
+      "electronic components"
+    ],
+    "actions": [],
+    "mood": [
+      "technical",
+      "premium",
+      "futuristic",
+      "detailed"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.67,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "hardware",
+      "AI chips",
+      "semiconductors",
+      "computing performance",
+      "technology background"
+    ],
+    "avoidFor": [
+      "software coding",
+      "team collaboration",
+      "mobile app"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "technology_team_analytics_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Technology team reviewing analytics dashboard",
+    "path": "images/technology/technology_team_analytics_meeting_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "team",
+      "analytics",
+      "dashboard",
+      "meeting",
+      "technology team",
+      "data",
+      "business intelligence",
+      "office"
+    ],
+    "concepts": [
+      "data analytics",
+      "team collaboration",
+      "business intelligence",
+      "product metrics",
+      "decision making"
+    ],
+    "subjects": [
+      "team",
+      "digital display",
+      "analytics dashboard",
+      "tablet"
+    ],
+    "actions": [
+      "presenting",
+      "analyzing",
+      "reviewing data",
+      "collaborating"
+    ],
+    "mood": [
+      "professional",
+      "collaborative",
+      "modern",
+      "focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.7,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "analytics",
+      "startup team",
+      "business technology",
+      "product metrics",
+      "data-driven decision making"
+    ],
+    "avoidFor": [
+      "solo developer coding",
+      "cyber attack",
+      "hardware macro"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "augmented_reality_interface_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Woman interacting with augmented reality interface",
+    "path": "images/technology/augmented_reality_interface_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "augmented reality",
+      "AR",
+      "mixed reality",
+      "headset",
+      "hologram",
+      "spatial computing",
+      "future tech"
+    ],
+    "concepts": [
+      "augmented reality",
+      "mixed reality",
+      "spatial computing",
+      "future interface",
+      "immersive technology"
+    ],
+    "subjects": [
+      "woman",
+      "AR headset",
+      "holographic interface"
+    ],
+    "actions": [
+      "gesturing",
+      "interacting with interface",
+      "pointing"
+    ],
+    "mood": [
+      "futuristic",
+      "premium",
+      "innovative",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.27,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "AR",
+      "mixed reality",
+      "future technology",
+      "spatial computing",
+      "innovation"
+    ],
+    "avoidFor": [
+      "traditional software coding",
+      "data center",
+      "cybersecurity"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "abstract_network_nodes_background_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Abstract glowing digital network background",
+    "path": "images/technology/abstract_network_nodes_background_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "abstract",
+      "network",
+      "nodes",
+      "data",
+      "connections",
+      "AI",
+      "technology background",
+      "digital mesh"
+    ],
+    "concepts": [
+      "data network",
+      "connectivity",
+      "AI systems",
+      "digital infrastructure",
+      "information flow"
+    ],
+    "subjects": [
+      "network nodes",
+      "connecting lines",
+      "digital mesh"
+    ],
+    "actions": [
+      "connecting",
+      "data flow"
+    ],
+    "mood": [
+      "futuristic",
+      "cinematic",
+      "abstract",
+      "calm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.62
+      },
+      "safeTextAreas": [
+        "top",
+        "center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "background",
+      "title card",
+      "AI explainer",
+      "network concept",
+      "section transition"
+    ],
+    "avoidFor": [
+      "human story",
+      "office scene",
+      "product demo"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "ai_assistant_workspace_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "AI assistant workspace with laptop hologram",
+    "path": "images/technology/ai_assistant_workspace_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "AI",
+      "assistant",
+      "laptop",
+      "workspace",
+      "dashboard",
+      "analytics",
+      "hologram",
+      "office",
+      "automation"
+    ],
+    "concepts": [
+      "AI assistant",
+      "workflow automation",
+      "digital workspace",
+      "AI productivity",
+      "analytics"
+    ],
+    "subjects": [
+      "laptop",
+      "AI avatar",
+      "desk",
+      "dashboard panels"
+    ],
+    "actions": [
+      "analyzing data",
+      "assisting workflow"
+    ],
+    "mood": [
+      "futuristic",
+      "clean",
+      "professional",
+      "premium"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.69,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "AI explainer",
+      "automation video",
+      "technology intro",
+      "software productivity",
+      "hero shot"
+    ],
+    "avoidFor": [
+      "medical research",
+      "hardware manufacturing",
+      "team meeting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "smart_home_control_panel_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Modern smart home control dashboard at dusk",
+    "path": "images/technology/smart_home_control_panel_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "smart home",
+      "IoT",
+      "home automation",
+      "control panel",
+      "living room",
+      "security",
+      "climate control",
+      "voice control"
+    ],
+    "concepts": [
+      "connected home",
+      "IoT devices",
+      "smart living",
+      "home automation",
+      "digital control"
+    ],
+    "subjects": [
+      "tablet control panel",
+      "living room",
+      "smart home icons"
+    ],
+    "actions": [
+      "controlling lights",
+      "managing temperature",
+      "home monitoring"
+    ],
+    "mood": [
+      "luxury",
+      "warm",
+      "modern",
+      "connected"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.76,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "smart home video",
+      "IoT explainer",
+      "consumer technology",
+      "connected devices"
+    ],
+    "avoidFor": [
+      "enterprise cloud",
+      "factory automation",
+      "space technology"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "electric_vehicle_charging_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Electric vehicle charging in futuristic city plaza",
+    "path": "images/technology/electric_vehicle_charging_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "electric vehicle",
+      "EV",
+      "charging station",
+      "clean energy",
+      "sustainability",
+      "mobility",
+      "car",
+      "battery"
+    ],
+    "concepts": [
+      "electric mobility",
+      "EV infrastructure",
+      "clean transportation",
+      "energy transition"
+    ],
+    "subjects": [
+      "electric car",
+      "charging station",
+      "city skyline"
+    ],
+    "actions": [
+      "charging battery"
+    ],
+    "mood": [
+      "futuristic",
+      "clean",
+      "urban",
+      "premium"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.71,
+        "y": 0.52
+      },
+      "safeTextAreas": [
+        "left",
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "EV explainer",
+      "clean energy",
+      "mobility technology",
+      "sustainability intro"
+    ],
+    "avoidFor": [
+      "software coding",
+      "healthcare",
+      "team collaboration"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "warehouse_drone_inventory_scan_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Autonomous drone inspecting warehouse inventory",
+    "path": "images/technology/warehouse_drone_inventory_scan_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "drone",
+      "warehouse",
+      "inventory",
+      "logistics",
+      "automation",
+      "inspection",
+      "supply chain",
+      "computer vision"
+    ],
+    "concepts": [
+      "warehouse automation",
+      "autonomous inspection",
+      "inventory management",
+      "supply chain tech"
+    ],
+    "subjects": [
+      "drone",
+      "warehouse racks",
+      "scan overlay"
+    ],
+    "actions": [
+      "scanning",
+      "inspecting inventory",
+      "flying"
+    ],
+    "mood": [
+      "technical",
+      "industrial",
+      "futuristic",
+      "efficient"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.39
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "logistics video",
+      "automation explainer",
+      "warehouse technology",
+      "computer vision"
+    ],
+    "avoidFor": [
+      "consumer app",
+      "healthcare",
+      "team meeting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "robotic_factory_manufacturing_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Precision robotics on smart manufacturing line",
+    "path": "images/technology/robotic_factory_manufacturing_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "robotics",
+      "factory",
+      "manufacturing",
+      "industrial automation",
+      "robot arm",
+      "industry 4.0",
+      "production",
+      "machining"
+    ],
+    "concepts": [
+      "smart manufacturing",
+      "industrial automation",
+      "precision engineering",
+      "industry 4.0"
+    ],
+    "subjects": [
+      "robot arm",
+      "metal component",
+      "factory line",
+      "engineering dashboard"
+    ],
+    "actions": [
+      "machining",
+      "assembling",
+      "welding"
+    ],
+    "mood": [
+      "industrial",
+      "precise",
+      "high-tech",
+      "premium"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "manufacturing explainer",
+      "robotics video",
+      "industry 4.0",
+      "engineering intro"
+    ],
+    "avoidFor": [
+      "consumer electronics",
+      "remote work",
+      "medical"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "smartwatch_health_tracking_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Smartwatch health dashboard on wrist",
+    "path": "images/technology/smartwatch_health_tracking_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "smartwatch",
+      "wearable",
+      "health tracking",
+      "fitness",
+      "heart rate",
+      "consumer technology",
+      "wellness"
+    ],
+    "concepts": [
+      "wearable technology",
+      "digital health",
+      "fitness tracking",
+      "personal wellness"
+    ],
+    "subjects": [
+      "smartwatch",
+      "wrist",
+      "health dashboard"
+    ],
+    "actions": [
+      "tracking health metrics"
+    ],
+    "mood": [
+      "clean",
+      "lifestyle",
+      "modern",
+      "minimal"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "high",
+    "usage": [
+      "wearable tech",
+      "health app",
+      "consumer electronics",
+      "fitness technology"
+    ],
+    "avoidFor": [
+      "industrial automation",
+      "space communication",
+      "team collaboration"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "remote_team_video_call_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Remote team video call on laptop",
+    "path": "images/technology/remote_team_video_call_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "remote work",
+      "video call",
+      "team meeting",
+      "laptop",
+      "collaboration",
+      "home office",
+      "virtual meeting"
+    ],
+    "concepts": [
+      "remote collaboration",
+      "distributed team",
+      "video conferencing",
+      "hybrid work"
+    ],
+    "subjects": [
+      "laptop",
+      "video conference participants",
+      "desk"
+    ],
+    "actions": [
+      "meeting",
+      "collaborating",
+      "video calling"
+    ],
+    "mood": [
+      "friendly",
+      "professional",
+      "warm",
+      "collaborative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "top",
+        "bottom-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "remote work video",
+      "team collaboration",
+      "saas communication",
+      "office culture"
+    ],
+    "avoidFor": [
+      "cybersecurity",
+      "hardware chip",
+      "factory"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "satellite_network_earth_orbit_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Global satellite network orbiting Earth",
+    "path": "images/technology/satellite_network_earth_orbit_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "satellite",
+      "space",
+      "earth",
+      "communications",
+      "network",
+      "orbit",
+      "global connectivity",
+      "telecom"
+    ],
+    "concepts": [
+      "satellite communications",
+      "global network",
+      "space technology",
+      "orbital infrastructure"
+    ],
+    "subjects": [
+      "satellites",
+      "earth",
+      "network arcs"
+    ],
+    "actions": [
+      "transmitting data",
+      "orbiting"
+    ],
+    "mood": [
+      "epic",
+      "futuristic",
+      "global",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "space tech",
+      "telecom explainer",
+      "global connectivity",
+      "satellite internet"
+    ],
+    "avoidFor": [
+      "consumer home office",
+      "wearables",
+      "factory interior"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "biotech_lab_genomics_interface_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist using holographic genomics interface in lab",
+    "path": "images/technology/biotech_lab_genomics_interface_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "biotech",
+      "laboratory",
+      "scientist",
+      "genomics",
+      "DNA",
+      "medical technology",
+      "research",
+      "diagnostics"
+    ],
+    "concepts": [
+      "biomedical research",
+      "genomics",
+      "lab automation",
+      "scientific computing"
+    ],
+    "subjects": [
+      "scientist",
+      "DNA interface",
+      "lab machine",
+      "test tubes"
+    ],
+    "actions": [
+      "analyzing samples",
+      "researching",
+      "interacting with interface"
+    ],
+    "mood": [
+      "clinical",
+      "advanced",
+      "focused",
+      "innovative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.41,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "biotech video",
+      "medical research",
+      "science explainer",
+      "health technology"
+    ],
+    "avoidFor": [
+      "consumer lifestyle",
+      "automotive",
+      "remote meetings"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "autonomous_vehicle_dashboard_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Passenger view inside autonomous vehicle in smart city",
+    "path": "images/technology/autonomous_vehicle_dashboard_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "autonomous vehicle",
+      "self-driving car",
+      "mobility",
+      "dashboard",
+      "smart city",
+      "transportation",
+      "ADAS"
+    ],
+    "concepts": [
+      "autonomous driving",
+      "future mobility",
+      "smart transportation",
+      "vehicle intelligence"
+    ],
+    "subjects": [
+      "car interior",
+      "road traffic",
+      "AR dashboard"
+    ],
+    "actions": [
+      "self-driving",
+      "navigating traffic"
+    ],
+    "mood": [
+      "futuristic",
+      "premium",
+      "calm",
+      "urban"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.58,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "autonomous vehicle video",
+      "future transport",
+      "smart city",
+      "mobility tech"
+    ],
+    "avoidFor": [
+      "biotech",
+      "remote work",
+      "factory automation"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "quantum_computing_research_lab_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Quantum computing research lab with scientist and cryostat",
+    "path": "images/technology/quantum_computing_research_lab_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "quantum computing",
+      "research lab",
+      "scientist",
+      "cryostat",
+      "advanced computing",
+      "holographic interface",
+      "physics"
+    ],
+    "concepts": [
+      "quantum computing",
+      "scientific research",
+      "advanced computation",
+      "future technology"
+    ],
+    "subjects": [
+      "quantum computer",
+      "scientist",
+      "holographic dashboard",
+      "laboratory"
+    ],
+    "actions": [
+      "analyzing data",
+      "monitoring experiment"
+    ],
+    "mood": [
+      "futuristic",
+      "clinical",
+      "advanced",
+      "innovative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "quantum computing explainer",
+      "future tech video",
+      "scientific innovation",
+      "advanced research"
+    ],
+    "avoidFor": [
+      "consumer app",
+      "remote meeting",
+      "home office"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "fintech_contactless_mobile_payment_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Contactless mobile payment with fintech analytics overlay",
+    "path": "images/technology/fintech_contactless_mobile_payment_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "fintech",
+      "mobile payment",
+      "contactless",
+      "NFC",
+      "smartphone",
+      "payment terminal",
+      "digital wallet",
+      "retail tech"
+    ],
+    "concepts": [
+      "digital payments",
+      "fintech",
+      "cashless commerce",
+      "mobile transactions"
+    ],
+    "subjects": [
+      "smartphone",
+      "payment terminal",
+      "analytics overlay",
+      "cafe counter"
+    ],
+    "actions": [
+      "paying",
+      "tapping phone",
+      "processing transaction"
+    ],
+    "mood": [
+      "modern",
+      "warm",
+      "commercial",
+      "tech-enabled"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.58,
+        "y": 0.5
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "fintech video",
+      "digital payment explainer",
+      "retail technology",
+      "cashless commerce"
+    ],
+    "avoidFor": [
+      "industrial automation",
+      "space tech",
+      "biotech"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "metal_additive_manufacturing_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Industrial metal 3D printing process in action",
+    "path": "images/technology/metal_additive_manufacturing_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "3D printing",
+      "additive manufacturing",
+      "metal fabrication",
+      "industrial tech",
+      "prototype",
+      "advanced manufacturing"
+    ],
+    "concepts": [
+      "additive manufacturing",
+      "precision engineering",
+      "industrial innovation",
+      "rapid prototyping"
+    ],
+    "subjects": [
+      "3D printer",
+      "metal component",
+      "factory workspace"
+    ],
+    "actions": [
+      "printing",
+      "fabricating",
+      "prototyping"
+    ],
+    "mood": [
+      "industrial",
+      "precise",
+      "high-tech",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "manufacturing explainer",
+      "industrial technology",
+      "engineering innovation",
+      "factory b-roll"
+    ],
+    "avoidFor": [
+      "healthcare",
+      "remote collaboration",
+      "consumer lifestyle"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "precision_agriculture_drone_monitoring_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Precision agriculture drone monitoring crop fields",
+    "path": "images/technology/precision_agriculture_drone_monitoring_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "agritech",
+      "drone",
+      "precision agriculture",
+      "crop monitoring",
+      "farm tech",
+      "field analytics",
+      "smart farming"
+    ],
+    "concepts": [
+      "agricultural technology",
+      "remote sensing",
+      "precision farming",
+      "crop analytics"
+    ],
+    "subjects": [
+      "drone",
+      "crop field",
+      "analytics overlays",
+      "sunset landscape"
+    ],
+    "actions": [
+      "scanning fields",
+      "monitoring crops"
+    ],
+    "mood": [
+      "optimistic",
+      "innovative",
+      "outdoor",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.36
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "agritech video",
+      "drone technology",
+      "smart farming",
+      "sustainability"
+    ],
+    "avoidFor": [
+      "urban fintech",
+      "quantum lab",
+      "office meeting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "edge_computing_industrial_factory_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Edge computing server rack in connected smart factory",
+    "path": "images/technology/edge_computing_industrial_factory_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "edge computing",
+      "server rack",
+      "smart factory",
+      "industry 4.0",
+      "industrial IoT",
+      "factory network",
+      "automation"
+    ],
+    "concepts": [
+      "edge infrastructure",
+      "industrial IoT",
+      "smart manufacturing",
+      "connected operations"
+    ],
+    "subjects": [
+      "server rack",
+      "robot arms",
+      "factory floor",
+      "network overlay"
+    ],
+    "actions": [
+      "processing data",
+      "connecting machines"
+    ],
+    "mood": [
+      "technical",
+      "industrial",
+      "connected",
+      "efficient"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.73,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "edge computing video",
+      "industry 4.0",
+      "industrial network",
+      "automation explainer"
+    ],
+    "avoidFor": [
+      "consumer electronics",
+      "healthcare",
+      "city lifestyle"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "mixed_reality_product_design_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mixed reality product design studio with holographic prototype",
+    "path": "images/technology/mixed_reality_product_design_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "mixed reality",
+      "XR",
+      "AR",
+      "product design",
+      "hologram",
+      "design studio",
+      "prototype",
+      "innovation"
+    ],
+    "concepts": [
+      "spatial computing",
+      "immersive collaboration",
+      "digital prototyping",
+      "future design workflow"
+    ],
+    "subjects": [
+      "designers",
+      "AR headsets",
+      "holographic product",
+      "studio table"
+    ],
+    "actions": [
+      "collaborating",
+      "designing",
+      "manipulating hologram"
+    ],
+    "mood": [
+      "creative",
+      "futuristic",
+      "premium",
+      "collaborative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "XR explainer",
+      "innovation video",
+      "design workflow",
+      "future interface"
+    ],
+    "avoidFor": [
+      "factory maintenance",
+      "medical consultation",
+      "agriculture"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "renewable_energy_grid_control_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Renewable energy control center monitoring solar wind and storage",
+    "path": "images/technology/renewable_energy_grid_control_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "renewable energy",
+      "control center",
+      "solar",
+      "wind",
+      "battery storage",
+      "grid analytics",
+      "energy tech"
+    ],
+    "concepts": [
+      "smart grid",
+      "clean energy monitoring",
+      "renewable operations",
+      "energy management"
+    ],
+    "subjects": [
+      "operator",
+      "dashboards",
+      "solar farm",
+      "wind turbines",
+      "battery systems"
+    ],
+    "actions": [
+      "monitoring grid",
+      "analyzing energy data"
+    ],
+    "mood": [
+      "professional",
+      "clean",
+      "optimistic",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "energy explainer",
+      "renewables video",
+      "grid technology",
+      "sustainability intro"
+    ],
+    "avoidFor": [
+      "fintech retail",
+      "telemedicine",
+      "consumer app"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "telemedicine_video_consultation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Warm telemedicine video consultation workspace",
+    "path": "images/technology/telemedicine_video_consultation_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "telemedicine",
+      "healthtech",
+      "video consultation",
+      "doctor",
+      "remote healthcare",
+      "digital health",
+      "patient portal"
+    ],
+    "concepts": [
+      "telehealth",
+      "remote care",
+      "digital medicine",
+      "virtual consultation"
+    ],
+    "subjects": [
+      "doctor on laptop",
+      "patient",
+      "medical devices",
+      "health icons"
+    ],
+    "actions": [
+      "consulting",
+      "video calling",
+      "monitoring health"
+    ],
+    "mood": [
+      "trustworthy",
+      "warm",
+      "professional",
+      "accessible"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "healthtech video",
+      "telemedicine explainer",
+      "digital healthcare",
+      "patient experience"
+    ],
+    "avoidFor": [
+      "industrial robotics",
+      "urban smart city",
+      "manufacturing"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "biometric_access_security_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Biometric palm-scan access control system",
+    "path": "images/technology/biometric_access_security_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "biometric security",
+      "palm scan",
+      "access control",
+      "cybersecurity",
+      "secure facility",
+      "identity verification"
+    ],
+    "concepts": [
+      "biometric authentication",
+      "physical security",
+      "secure access",
+      "identity technology"
+    ],
+    "subjects": [
+      "hand",
+      "scanner panel",
+      "door access system"
+    ],
+    "actions": [
+      "authenticating",
+      "unlocking access"
+    ],
+    "mood": [
+      "secure",
+      "sleek",
+      "futuristic",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "security explainer",
+      "biometric access",
+      "enterprise security",
+      "identity systems"
+    ],
+    "avoidFor": [
+      "medical consultation",
+      "green energy",
+      "consumer lifestyle"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "smart_city_digital_twin_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Smart city digital twin with connected infrastructure overlay",
+    "path": "images/technology/smart_city_digital_twin_001.png",
+    "category": "technology",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "smart city",
+      "digital twin",
+      "urban tech",
+      "connected infrastructure",
+      "city analytics",
+      "IoT network",
+      "future city"
+    ],
+    "concepts": [
+      "urban intelligence",
+      "city connectivity",
+      "digital twin",
+      "smart infrastructure"
+    ],
+    "subjects": [
+      "city skyline",
+      "river",
+      "bridges",
+      "network overlay",
+      "dashboard panels"
+    ],
+    "actions": [
+      "connecting infrastructure",
+      "monitoring city systems"
+    ],
+    "mood": [
+      "epic",
+      "futuristic",
+      "urban",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": false
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "smart city video",
+      "urban innovation",
+      "digital twin explainer",
+      "future infrastructure"
+    ],
+    "avoidFor": [
+      "home office",
+      "medical workspace",
+      "small product ad"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

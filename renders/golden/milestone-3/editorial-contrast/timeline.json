@@ -1,0 +1,880 @@
+{
+  "version": 3,
+  "videoId": "golden-editorial-contrast",
+  "title": "editorial-contrast",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 540,
+  "style": "editorial_explainer",
+  "palette": {
+    "hue": 218,
+    "bg": "hsl(218 22% 7%)",
+    "bgRaised": "hsl(218 22% 12%)",
+    "line": "hsl(218 28% 24%)",
+    "accent": "hsl(218 82% 60%)",
+    "accentSoft": "hsl(218 82% 60% / 0.18)",
+    "counter": "hsl(38 62% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#f7f7f5",
+    "muted": "#a8adb5",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "ec-1",
+      "sectionId": "ec-a",
+      "kind": "atmosphere",
+      "family": "image",
+      "variant": "editorial",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 4,
+      "from": 0,
+      "durationInFrames": 177,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": {
+        "src": "assets/s01_d.jpg",
+        "type": "image",
+        "width": 1920,
+        "height": 1080,
+        "focal": {
+          "x": 0.42,
+          "y": 0.44
+        }
+      },
+      "overlay": {},
+      "shots": [
+        {
+          "id": "ec-1-a",
+          "storyboardShotId": "ec-1-a",
+          "sceneId": "ec-1",
+          "sectionId": "ec-a",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 177,
+          "durationInFrames": 177,
+          "role": "detail",
+          "visualIntent": "Open with restrained photographic detail",
+          "visualConcept": "A quiet photographic detail with room to breathe",
+          "mediaPreference": "real",
+          "evidenceRequirement": "supporting",
+          "family": "image",
+          "variant": "editorial",
+          "layout": "image:editorial",
+          "presentation": {
+            "family": "image",
+            "variant": "editorial",
+            "layout": "image:editorial",
+            "crop": "cover",
+            "focalPoint": {
+              "x": 0.42,
+              "y": 0.44
+            },
+            "overlayMode": "none",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "MEDIUM"
+          },
+          "asset": {
+            "src": "assets/s01_d.jpg",
+            "type": "image",
+            "width": 1920,
+            "height": 1080,
+            "focal": {
+              "x": 0.42,
+              "y": 0.44
+            },
+            "source": "local_fixture",
+            "license": "fixture"
+          },
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.42,
+                0.44
+              ],
+              [
+                0.42,
+                0.44
+              ]
+            ]
+          },
+          "overlay": {}
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "Look closely and the surface tells only half the story."
+    },
+    {
+      "id": "c02",
+      "sceneId": "ec-2",
+      "sectionId": "ec-a",
+      "kind": "list",
+      "family": "list",
+      "variant": "ledger",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 3,
+      "from": 177,
+      "durationInFrames": 189,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "title": "UNDER THE SURFACE",
+        "items": [
+          "ACCESS",
+          "TIMING",
+          "TRUST"
+        ],
+        "ats": [
+          90,
+          117,
+          156
+        ]
+      },
+      "shots": [
+        {
+          "id": "ec-2-a",
+          "storyboardShotId": "ec-2-a",
+          "sceneId": "ec-2",
+          "sectionId": "ec-a",
+          "from": 0,
+          "startFrame": 177,
+          "endFrame": 366,
+          "durationInFrames": 189,
+          "role": "graphic",
+          "visualIntent": "Organize the hidden forces",
+          "visualConcept": "A sparse ledger of the three forces",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "supporting",
+          "family": "list",
+          "variant": "ledger",
+          "layout": "list:ledger",
+          "presentation": {
+            "family": "list",
+            "variant": "ledger",
+            "layout": "list:ledger",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "HIGH"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "title": "UNDER THE SURFACE",
+            "items": [
+              "ACCESS",
+              "TIMING",
+              "TRUST"
+            ],
+            "ats": [
+              90,
+              117,
+              156
+            ]
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "Three forces sit underneath: access, timing, and trust."
+    },
+    {
+      "id": "c03",
+      "sceneId": "ec-3",
+      "sectionId": "ec-b",
+      "kind": "quote",
+      "family": "quote",
+      "variant": "default",
+      "treatment": "editorial",
+      "recasts": [],
+      "accents": [],
+      "stack": null,
+      "intensity": 4,
+      "from": 366,
+      "durationInFrames": 174,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "bedB": null,
+      "texture": null,
+      "overlay": {
+        "quote": "A SMALL EDGE BECOMES DURABLE POWER",
+        "author": "EDITORIAL SYNTHESIS",
+        "at": 11,
+        "authorAt": 35,
+        "words": [
+          "A",
+          "SMALL",
+          "EDGE",
+          "BECOMES",
+          "DURABLE",
+          "POWER"
+        ],
+        "wordAts": [
+          66,
+          66,
+          84,
+          93,
+          114,
+          138
+        ]
+      },
+      "shots": [
+        {
+          "id": "ec-3-a",
+          "storyboardShotId": "ec-3-a",
+          "sceneId": "ec-3",
+          "sectionId": "ec-b",
+          "from": 0,
+          "startFrame": 366,
+          "endFrame": 540,
+          "durationInFrames": 174,
+          "role": "payoff",
+          "visualIntent": "Close with one memorable synthesis",
+          "visualConcept": "A single editorial quote resolves the argument",
+          "mediaPreference": "procedural",
+          "evidenceRequirement": "supporting",
+          "family": "quote",
+          "variant": "default",
+          "layout": "quote:default",
+          "presentation": {
+            "family": "quote",
+            "variant": "default",
+            "layout": "quote:default",
+            "crop": "cover",
+            "focalPoint": null,
+            "overlayMode": "primary",
+            "cameraMove": "static",
+            "transitionIn": "scene",
+            "transitionOut": "cut",
+            "treatment": "editorial",
+            "visualDensity": "MEDIUM"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.45
+              ],
+              [
+                0.5,
+                0.45
+              ]
+            ]
+          },
+          "overlay": {
+            "quote": "A SMALL EDGE BECOMES DURABLE POWER",
+            "author": "EDITORIAL SYNTHESIS",
+            "at": 11,
+            "authorAt": 35,
+            "words": [
+              "A",
+              "SMALL",
+              "EDGE",
+              "BECOMES",
+              "DURABLE",
+              "POWER"
+            ],
+            "wordAts": [
+              66,
+              66,
+              84,
+              93,
+              114,
+              138
+            ]
+          }
+        }
+      ],
+      "layoutConstraints": {
+        "caption": {
+          "allowedRegions": [
+            "bottom_left",
+            "bottom_center"
+          ],
+          "avoidRegions": [
+            "center_right"
+          ],
+          "maxWidth": 1500
+        },
+        "headline": {
+          "allowedRegions": [
+            "top_left",
+            "center_left"
+          ],
+          "maxLines": 2,
+          "maxCharactersPerLine": 28
+        }
+      },
+      "narration": "Together they turn a small edge into durable power."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "ec-1-a",
+      "storyboardShotId": "ec-1-a",
+      "sceneId": "ec-1",
+      "sectionId": "ec-a",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 177,
+      "durationInFrames": 177,
+      "role": "detail",
+      "visualIntent": "Open with restrained photographic detail",
+      "visualConcept": "A quiet photographic detail with room to breathe",
+      "mediaPreference": "real",
+      "evidenceRequirement": "supporting",
+      "family": "image",
+      "variant": "editorial",
+      "layout": "image:editorial",
+      "presentation": {
+        "family": "image",
+        "variant": "editorial",
+        "layout": "image:editorial",
+        "crop": "cover",
+        "focalPoint": {
+          "x": 0.42,
+          "y": 0.44
+        },
+        "overlayMode": "none",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "MEDIUM"
+      },
+      "asset": {
+        "src": "assets/s01_d.jpg",
+        "type": "image",
+        "width": 1920,
+        "height": 1080,
+        "focal": {
+          "x": 0.42,
+          "y": 0.44
+        },
+        "source": "local_fixture",
+        "license": "fixture"
+      },
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.42,
+            0.44
+          ],
+          [
+            0.42,
+            0.44
+          ]
+        ]
+      },
+      "overlay": {}
+    },
+    {
+      "id": "ec-2-a",
+      "storyboardShotId": "ec-2-a",
+      "sceneId": "ec-2",
+      "sectionId": "ec-a",
+      "from": 0,
+      "startFrame": 177,
+      "endFrame": 366,
+      "durationInFrames": 189,
+      "role": "graphic",
+      "visualIntent": "Organize the hidden forces",
+      "visualConcept": "A sparse ledger of the three forces",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "supporting",
+      "family": "list",
+      "variant": "ledger",
+      "layout": "list:ledger",
+      "presentation": {
+        "family": "list",
+        "variant": "ledger",
+        "layout": "list:ledger",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "HIGH"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "title": "UNDER THE SURFACE",
+        "items": [
+          "ACCESS",
+          "TIMING",
+          "TRUST"
+        ],
+        "ats": [
+          90,
+          117,
+          156
+        ]
+      }
+    },
+    {
+      "id": "ec-3-a",
+      "storyboardShotId": "ec-3-a",
+      "sceneId": "ec-3",
+      "sectionId": "ec-b",
+      "from": 0,
+      "startFrame": 366,
+      "endFrame": 540,
+      "durationInFrames": 174,
+      "role": "payoff",
+      "visualIntent": "Close with one memorable synthesis",
+      "visualConcept": "A single editorial quote resolves the argument",
+      "mediaPreference": "procedural",
+      "evidenceRequirement": "supporting",
+      "family": "quote",
+      "variant": "default",
+      "layout": "quote:default",
+      "presentation": {
+        "family": "quote",
+        "variant": "default",
+        "layout": "quote:default",
+        "crop": "cover",
+        "focalPoint": null,
+        "overlayMode": "primary",
+        "cameraMove": "static",
+        "transitionIn": "scene",
+        "transitionOut": "cut",
+        "treatment": "editorial",
+        "visualDensity": "MEDIUM"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.45
+          ],
+          [
+            0.5,
+            0.45
+          ]
+        ]
+      },
+      "overlay": {
+        "quote": "A SMALL EDGE BECOMES DURABLE POWER",
+        "author": "EDITORIAL SYNTHESIS",
+        "at": 11,
+        "authorAt": 35,
+        "words": [
+          "A",
+          "SMALL",
+          "EDGE",
+          "BECOMES",
+          "DURABLE",
+          "POWER"
+        ],
+        "wordAts": [
+          66,
+          66,
+          84,
+          93,
+          114,
+          138
+        ]
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 540,
+      "frames": 18
+    }
+  ],
+  "captions": {
+    "mode": "highlight",
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 0,
+        "endFrame": 135,
+        "words": [
+          {
+            "index": 0,
+            "text": "Look",
+            "startFrame": 0,
+            "endFrame": 12
+          },
+          {
+            "index": 1,
+            "text": "closely",
+            "startFrame": 15,
+            "endFrame": 34
+          },
+          {
+            "index": 2,
+            "text": "and",
+            "startFrame": 39,
+            "endFrame": 49
+          },
+          {
+            "index": 3,
+            "text": "the",
+            "startFrame": 51,
+            "endFrame": 61
+          },
+          {
+            "index": 4,
+            "text": "surface",
+            "startFrame": 63,
+            "endFrame": 82
+          },
+          {
+            "index": 5,
+            "text": "tells",
+            "startFrame": 87,
+            "endFrame": 101
+          },
+          {
+            "index": 6,
+            "text": "only",
+            "startFrame": 105,
+            "endFrame": 117
+          },
+          {
+            "index": 7,
+            "text": "half",
+            "startFrame": 120,
+            "endFrame": 132
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "startFrame": 135,
+        "endFrame": 180,
+        "words": [
+          {
+            "index": 8,
+            "text": "the",
+            "startFrame": 135,
+            "endFrame": 145
+          },
+          {
+            "index": 9,
+            "text": "story.",
+            "startFrame": 147,
+            "endFrame": 173
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "startFrame": 180,
+        "endFrame": 270,
+        "words": [
+          {
+            "index": 10,
+            "text": "Three",
+            "startFrame": 180,
+            "endFrame": 194
+          },
+          {
+            "index": 11,
+            "text": "forces",
+            "startFrame": 198,
+            "endFrame": 215
+          },
+          {
+            "index": 12,
+            "text": "sit",
+            "startFrame": 219,
+            "endFrame": 229
+          },
+          {
+            "index": 13,
+            "text": "underneath:",
+            "startFrame": 231,
+            "endFrame": 262
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "startFrame": 270,
+        "endFrame": 297,
+        "words": [
+          {
+            "index": 14,
+            "text": "access,",
+            "startFrame": 270,
+            "endFrame": 292
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "startFrame": 297,
+        "endFrame": 324,
+        "words": [
+          {
+            "index": 15,
+            "text": "timing,",
+            "startFrame": 297,
+            "endFrame": 319
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "startFrame": 324,
+        "endFrame": 369,
+        "words": [
+          {
+            "index": 16,
+            "text": "and",
+            "startFrame": 324,
+            "endFrame": 334
+          },
+          {
+            "index": 17,
+            "text": "trust.",
+            "startFrame": 336,
+            "endFrame": 362
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "startFrame": 369,
+        "endFrame": 507,
+        "words": [
+          {
+            "index": 18,
+            "text": "Together",
+            "startFrame": 369,
+            "endFrame": 391
+          },
+          {
+            "index": 19,
+            "text": "they",
+            "startFrame": 396,
+            "endFrame": 408
+          },
+          {
+            "index": 20,
+            "text": "turn",
+            "startFrame": 411,
+            "endFrame": 423
+          },
+          {
+            "index": 21,
+            "text": "a",
+            "startFrame": 426,
+            "endFrame": 433
+          },
+          {
+            "index": 22,
+            "text": "small",
+            "startFrame": 435,
+            "endFrame": 449
+          },
+          {
+            "index": 23,
+            "text": "edge",
+            "startFrame": 453,
+            "endFrame": 465
+          },
+          {
+            "index": 24,
+            "text": "into",
+            "startFrame": 468,
+            "endFrame": 480
+          },
+          {
+            "index": 25,
+            "text": "durable",
+            "startFrame": 483,
+            "endFrame": 502
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "startFrame": 507,
+        "endFrame": 540,
+        "words": [
+          {
+            "index": 26,
+            "text": "power.",
+            "startFrame": 507,
+            "endFrame": 533
+          }
+        ]
+      }
+    ],
+    "hidden": [
+      [
+        177,
+        366
+      ],
+      [
+        366,
+        540
+      ]
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": [
+      [
+        0,
+        533
+      ]
+    ]
+  }
+}

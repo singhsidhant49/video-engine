@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "id": "coverage",
+      "ok": true,
+      "severity": "error",
+      "detail": "0-540 covered"
+    },
+    {
+      "id": "shot-coverage",
+      "ok": true,
+      "severity": "error",
+      "detail": "3 canonical shots cover every clip without gaps"
+    },
+    {
+      "id": "shot-traceability",
+      "ok": true,
+      "severity": "error",
+      "detail": "3 unique storyboardShotId mappings"
+    },
+    {
+      "id": "min-shot-length",
+      "ok": true,
+      "severity": "warn",
+      "detail": "ok"
+    },
+    {
+      "id": "static-time",
+      "ok": false,
+      "severity": "warn",
+      "detail": "average 6.0s, longest 6.6s (guideline 5.1s)"
+    },
+    {
+      "id": "family-repetition",
+      "ok": true,
+      "severity": "warn",
+      "detail": "0% adjacent repetition; longest structured run 2"
+    },
+    {
+      "id": "layout-repetition",
+      "ok": true,
+      "severity": "warn",
+      "detail": "0% adjacent repetition"
+    },
+    {
+      "id": "variant-repetition",
+      "ok": true,
+      "severity": "warn",
+      "detail": "0% adjacent repetition"
+    },
+    {
+      "id": "motion-repetition",
+      "ok": false,
+      "severity": "warn",
+      "detail": "100% adjacent repetition"
+    },
+    {
+      "id": "asset-reuse",
+      "ok": true,
+      "severity": "warn",
+      "detail": "0% reuse among media shots"
+    },
+    {
+      "id": "slideshow",
+      "ok": true,
+      "severity": "warn",
+      "detail": "longest consecutive photo/montage run 1"
+    },
+    {
+      "id": "family-share",
+      "ok": true,
+      "severity": "warn",
+      "detail": "montage 29%, stat 34%, statement 37%"
+    },
+    {
+      "id": "transition-budget",
+      "ok": true,
+      "severity": "warn",
+      "detail": "0 designed transitions (budget 3)"
+    },
+    {
+      "id": "text-budget",
+      "ok": true,
+      "severity": "warn",
+      "detail": "ok"
+    },
+    {
+      "id": "caption-yield",
+      "ok": true,
+      "severity": "warn",
+      "detail": "primary graphics suppress captions for their full shot"
+    },
+    {
+      "id": "caption-order",
+      "ok": true,
+      "severity": "error",
+      "detail": "6 chunks"
+    }
+  ],
+  "diagnostics": {
+    "shotCount": 3,
+    "familyRepetitionRate": 0,
+    "variantRepetitionRate": 0,
+    "layoutRepetitionRate": 0,
+    "cameraMoveRepetitionRate": 1,
+    "assetReuseRate": 0,
+    "consecutiveStructuredCount": 2,
+    "consecutivePhotoCount": 1,
+    "averageStaticHold": 6,
+    "longestStaticHold": 6.6,
+    "mediaVsProceduralDistribution": {
+      "media": 1,
+      "procedural": 2
+    },
+    "visualDensityDistribution": {
+      "HIGH": 2,
+      "MEDIUM": 1
+    },
+    "familyDistribution": {
+      "montage": 1,
+      "stat": 1,
+      "statement": 1
+    },
+    "variantDistribution": {
+      "montage:dynamic": 1,
+      "stat:hero": 1,
+      "statement:words": 1
+    },
+    "layoutDistribution": {
+      "montage:dynamic": 1,
+      "stat:hero": 1,
+      "statement:words": 1
+    },
+    "cameraMoveDistribution": {
+      "static": 3
+    }
+  }
+}
