@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import wavefile from 'wavefile';
-import { pipeline } from '@xenova/transformers';
+import { pipeline } from '@huggingface/transformers';
 import { ffmpeg, probeDuration } from './ffmpeg.js';
 import { tokenizeScript, alignScriptToTranscript, estimateTiming } from './alignmentService.js';
 

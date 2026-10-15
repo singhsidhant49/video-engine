@@ -1,14 +1,120 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { ffmpeg } from '../services/ffmpeg.js';
-import { materialiseImage, materialiseVideo, mapLimit, hamming, searchStats } from '../services/freeMediaService.js';
+import { materialiseImage, materialiseVideo, mapLimit, hamming, searchStats, resetSearchStats } from '../services/freeMediaService.js';
 import { recordImageInBank, searchImageBank } from '../services/imageBank.js';
 import { licenseAllowed } from '../shared/licensing.js';
-import { relevance, relevanceEnabled } from '../services/relevance.js';
+import { contrastiveRelevance, relevanceEnabled } from '../services/relevance.js';
 import { defaultAssetProviders, searchAssetProviderStage } from '../assets/providerRegistry.js';
 import { analyzeAssetRequest } from '../assets/assetSearchContext.js';
 import { compareCandidateScores, scoreAssetCandidate } from '../assets/assetIntelligenceScorer.js';
 import { VideoAssetMemory } from '../assets/videoAssetMemory.js';
+import { inspectVisualCandidate } from '../assets/visualInspectionService.js';
+import { judgeAssetCandidate } from '../assets/visualEditorialJudge.js';
+import { selectVideoWindow } from '../assets/videoWindowSelector.js';
+
+async function computeFileSha256(filePath) {
+  try {
+    const buffer = await fs.readFile(filePath);
+    return crypto.createHash('sha256').update(buffer).digest('hex');
+  } catch {
+    return 'none';
+  }
+}
+
+async function evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords = {}, filePath = null, requirePixelInspection = false) {
+  if (item.editorialJudgment && item.inspectedFilePath === filePath) return item.editorialJudgment;
+  const visibleNeed = request.visibleNeed;
+  const inspection = await inspectVisualCandidate(item.candidate, { filePath });
+  item.visualInspection = inspection;
+  if (filePath && item.candidate.type !== 'video' && !item.contrastive) {
+    item.contrastive = await contrastiveRelevance(
+      filePath,
+      request.visualProposition?.positiveDescriptions || [request.concept],
+      request.visualProposition?.negativeConfusers || request.exclusions || [],
+    );
+  }
+  visualInspections[item.candidate.id] = inspection;
+  const judgment = judgeAssetCandidate({
+    candidate: item.candidate,
+    inspection,
+    visibleNeed,
+    targetFormat: format,
+    retrievalScore: item.score,
+    editorialMode: visibleNeed?.editorialMode,
+  });
+  if (filePath && item.candidate.type === 'video') {
+    item.videoWindowSelection = await selectVideoWindow({
+      videoPath: filePath,
+      requiredDurationSec: request.constraints?.durationHint || 3.5,
+      visibleNeed,
+      videoMetadata: item.candidate,
+    });
+    const semanticMargin = item.videoWindowSelection.semanticEvidence?.margin;
+    if (requirePixelInspection && (!item.videoWindowSelection.semanticEvidence?.available || semanticMargin <= 0)) {
+      judgment.accepted = false;
+      judgment.rejected = true;
+      judgment.finalEditorialScore = 0;
+      judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'video_window_semantic_evidence_failed'])];
+    }
+  }
+  if (requirePixelInspection && (!inspection.pixelInspected || !inspection.semanticPixelInspected)) {
+    judgment.accepted = false;
+    judgment.rejected = true;
+    judgment.finalEditorialScore = 0;
+    judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'semantic_pixel_inspection_required'])];
+    judgment.selectionReason = 'Rejected: production selection requires a semantic vision result from materialized pixels';
+  }
+  const directRequired = request.visualProposition?.literalness === 'DIRECT' || request.evidenceRequired;
+  if (directRequired && judgment.classification !== 'DIRECT') {
+    judgment.accepted = false;
+    judgment.rejected = true;
+    judgment.finalEditorialScore = 0;
+    judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'direct_representation_required'])];
+    judgment.selectionReason = `Rejected: ${judgment.classification} is insufficient for a DIRECT/evidence-required shot`;
+  }
+  if (directRequired && item.contrastive?.available && item.contrastive.margin <= 0) {
+    judgment.accepted = false;
+    judgment.rejected = true;
+    judgment.finalEditorialScore = 0;
+    judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'contrastive_semantic_margin_not_positive'])];
+    judgment.selectionReason = 'Rejected: visible pixels match a known confuser at least as strongly as the intended proposition';
+  }
+  const recordKey = `${request.storyboardShotId}:${item.candidate.id}`;
+  editorialAssetJudgments[recordKey] = judgment;
+  if (judgment.formatFitness) {
+    formatFitnessEvaluations[recordKey] = judgment.formatFitness;
+  }
+  if (judgment.editorialUsefulness) {
+    editorialUsefulnessRecords[recordKey] = {
+      assetId: item.candidate.id || item.candidate.sourceUrl || 'candidate',
+      assetHash: item.candidate.sha256ContentHash || item.hash || 'unhashed',
+      shotId: request.storyboardShotId,
+      matchClass: judgment.classification,
+      viewerGain: judgment.editorialUsefulness.viewerGain,
+      communicationValue: judgment.editorialUsefulness.communicationValue,
+      specificity: judgment.editorialUsefulness.specificity,
+      genericness: judgment.editorialUsefulness.genericness,
+      distractionRisk: judgment.editorialUsefulness.distractionRisk,
+      ambiguityRisk: judgment.editorialUsefulness.ambiguityRisk,
+      usefulnessVerdict: judgment.editorialUsefulness.verdict,
+      reasons: judgment.editorialUsefulness.reasons,
+    };
+  }
+  if (judgment.rejected || !judgment.accepted) {
+    item.score.resolutionStatus = 'unusable';
+    item.score.qualityRank = 0;
+    item.score.gates.push(...judgment.rejectReasons);
+  } else {
+    item.editorialJudgment = judgment;
+    item.inspectedFilePath = filePath;
+    if (judgment.finalEditorialScore > 0) {
+      item.score.finalScore = judgment.finalEditorialScore;
+    }
+  }
+  return judgment;
+}
 
 const acceptable = (item) => item.score.qualityRank >= 2 && item.score.resolutionStatus !== 'unusable';
 
@@ -97,7 +203,42 @@ export function buildMaterializationQueue(ranked, maxAttempts = 16) {
 async function materializeCandidate(item, request, dir, publicDir, sequence, usedHashes) {
   const candidate = item.candidate;
   const ext = candidate.type === 'video' ? 'mp4' : 'jpg';
-  const file = path.join(dir, `${request.storyboardShotId}_${String.fromCharCode(97 + sequence)}.${ext}`);
+  const suffix = sequence < 26 ? String.fromCharCode(97 + sequence) : `cand_${sequence}`;
+  const file = path.join(dir, `${request.storyboardShotId}_${suffix}.${ext}`);
+
+  if (candidate.isDeliberateReuse && candidate.localPath) {
+    try {
+      await fs.copyFile(candidate.localPath, file);
+      const sha256ContentHash = await computeFileSha256(file);
+      return {
+        file,
+        hash: candidate.hash || sha256ContentHash,
+        sha256ContentHash,
+        clipSimilarity: 0.85,
+        asset: {
+          width: candidate.width || 1920,
+          height: candidate.height || 1080,
+          sha256ContentHash,
+          src: path.relative(publicDir, file).split(path.sep).join('/'),
+          source: candidate.providerId || 'local-bank',
+          tier: 'verified',
+          generic: false,
+          label: candidate.label || null,
+          license: candidate.license || null,
+          relevance: 0.85,
+          assetRequestId: request.id,
+          storyboardShotId: request.storyboardShotId,
+          providerCandidateId: candidate.id,
+          sourceUrl: candidate.sourceUrl || candidate.url || candidate.license?.page || null,
+          query: candidate.query || null,
+          queryStage: candidate.queryStage || null,
+        },
+      };
+    } catch {
+      // fall through to materialise
+    }
+  }
+
   const sourceCandidate = { ...candidate, url: candidate.sourceUrl, duration: candidate.durationSeconds, source: candidate.providerId,
     minimumShortSide: request.assetIntent === 'data' ? 540 : undefined };
   try {
@@ -123,16 +264,25 @@ async function materializeCandidate(item, request, dir, publicDir, sequence, use
       await fs.rm(file, { force: true });
       return { rejected: 'clip_too_short' };
     }
-    const clipSimilarity = candidate.type === 'image' && relevanceEnabled()
-      ? await relevance(file, request.concept)
-      : null;
+    const contrastive = candidate.type === 'image' && relevanceEnabled()
+      ? await contrastiveRelevance(
+        file,
+        request.visualProposition?.positiveDescriptions || [request.concept],
+        request.visualProposition?.negativeConfusers || request.exclusions || [],
+      )
+      : { available: false, positiveScore: null, negativeScore: null, margin: null };
+    const clipSimilarity = contrastive.positiveScore;
     const { hash, ...media } = info;
+    const sha256ContentHash = await computeFileSha256(file);
     return {
       file,
       hash,
+      sha256ContentHash,
       clipSimilarity,
+      contrastive,
       asset: {
         ...media,
+        sha256ContentHash,
         src: path.relative(publicDir, file).split(path.sep).join('/'),
         source: candidate.providerId,
         tier: belowStandard ? 'fallback' : candidate.tier,
@@ -143,6 +293,7 @@ async function materializeCandidate(item, request, dir, publicDir, sequence, use
         assetRequestId: request.id,
         storyboardShotId: request.storyboardShotId,
         providerCandidateId: candidate.id,
+        sourceUrl: candidate.sourceUrl || candidate.url || candidate.license?.page || null,
         query: candidate.query || null,
         queryStage: candidate.queryStage || null,
       },
@@ -197,6 +348,7 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
     if (status === 'excellent') excellent++;
     else if (status === 'good') good++;
     else if (status === 'acceptable') acceptableCount++;
+    else if (status === 'media_reuse') acceptableCount++;
     else if (status === 'weak') weak++;
     else unresolved++;
 
@@ -259,18 +411,132 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
   };
 }
 
+/** Reuse approved media instead of introducing a procedural composition. */
+export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequests, sceneIds = [], format = 'landscape' }) {
+  const sceneIndex = new Map(sceneIds.map((id, index) => [id, index]));
+  const requestByShot = new Map(assetRequests.map((request) => [request.storyboardShotId, request]));
+  const approved = [];
+
+  for (const [sceneId, sceneAssets] of Object.entries(assets)) {
+    for (const [shotId, asset] of Object.entries(sceneAssets.byShot || {})) {
+      if (asset && !asset.unresolved && ['image', 'video'].includes(asset.type)) {
+        approved.push({ sceneId, shotId, asset, index: sceneIndex.get(sceneId) ?? Number.MAX_SAFE_INTEGER });
+      }
+    }
+  }
+  if (!approved.length) return {};
+
+  const fallbacks = {};
+  for (const report of requestReports) {
+    if (!['unresolved', 'weak'].includes(report.resolutionStatus)) continue;
+    const request = requestByShot.get(report.storyboardShotId);
+    const target = assets[report.sceneId];
+    if (!request || !target) continue;
+    const targetIndex = sceneIndex.get(report.sceneId) ?? Number.MAX_SAFE_INTEGER;
+    const evaluatedSources = approved.map((source) => {
+      const judgment = judgeAssetCandidate({
+        candidate: {
+          ...source.asset,
+          isDeliberateReuse: true,
+          id: source.asset.id || source.asset.providerCandidateId || source.asset.src,
+          label: source.asset.label || source.asset.visibleMeaning || '',
+          description: source.asset.visualInspection?.sceneSummary || '',
+        },
+        inspection: source.asset.visualInspection || {},
+        visibleNeed: request.visibleNeed,
+        targetFormat: format,
+        retrievalScore: { finalScore: source.asset.finalEditorialScore || 0.5 },
+        editorialMode: request.visibleNeed?.editorialMode,
+      });
+      const directRequired = request.visualProposition?.literalness === 'DIRECT' || request.evidenceRequired;
+      const valid = judgment.accepted
+        && !judgment.rejected
+        && !['WRONG', 'ACCIDENTAL'].includes(judgment.classification)
+        && (!directRequired || judgment.classification === 'DIRECT');
+      return { source, judgment, valid };
+    }).filter((item) => item.valid)
+      .sort((a, b) => (b.judgment.finalEditorialScore || 0) - (a.judgment.finalEditorialScore || 0)
+        || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex));
+    const evaluated = evaluatedSources[0];
+    if (!evaluated) continue;
+    const { source, judgment } = evaluated;
+
+    const reuseReason = `No new approved media was available; reused nearest approved ${source.asset.type} from ${source.sceneId}.`;
+    const reusedAsset = {
+      ...source.asset,
+      isDeliberateReuse: true,
+      storyboardShotId: report.storyboardShotId,
+      deliberateReuseReason: reuseReason,
+      reusedFromShotId: source.shotId,
+      visibleNeed: request.visibleNeed || null,
+      editorialJudgment: { ...judgment, selectionReason: reuseReason },
+      assetIdentityChain: source.asset.assetIdentityChain ? {
+        ...source.asset.assetIdentityChain,
+        solvedSceneAssetId: `${report.sceneId}:${report.storyboardShotId}`,
+        timelineAssetId: report.storyboardShotId,
+      } : undefined,
+    };
+    target.byShot[report.storyboardShotId] = reusedAsset;
+    if (!target.primary) target.primary = reusedAsset;
+    else if (!target.alternates.some((asset) => asset?.src === reusedAsset.src)) target.alternates.push(reusedAsset);
+
+    report.resolutionStatus = 'media_reuse';
+    report.editorialRetryReason = 'approved_media_reuse';
+    report.selectedCandidate = {
+      provider: reusedAsset.providerId || reusedAsset.provider || reusedAsset.source || 'approved-reuse',
+      sourceId: reusedAsset.id || reusedAsset.assetId || reusedAsset.src,
+      candidateId: `reuse:${source.shotId}`,
+      query: request.concept,
+      queryStage: 'APPROVED_MEDIA_REUSE',
+      label: reusedAsset.label,
+      mediaType: reusedAsset.type,
+      scores: { semantic: { overall: 0.5 }, presentation: { overall: 0.8 } },
+      selectionReasons: [reuseReason],
+    };
+    report.fallbackAuditTraces = [...(report.fallbackAuditTraces || []), {
+      fallbackType: 'approved_media_reuse',
+      whyTriggered: 'All new media candidates failed production gates',
+      candidateBefore: report.rejectedTopCandidates?.[0]?.candidateId || null,
+      candidateAfter: source.asset.id || source.asset.src,
+      representationAfter: 'media',
+    }];
+    fallbacks[report.storyboardShotId] = { fromShotId: source.shotId, assetSrc: reusedAsset.src, reason: reuseReason };
+  }
+  return fallbacks;
+}
+
 /** Resolve shot requests through staged providers, semantic gates, and video-level memory. */
-export async function directAssets(plan, specs, { publicDir, format, assetRequests, providers = defaultAssetProviders, allowGenerated = false }) {
+export async function directAssets(plan, specs, {
+  publicDir,
+  format,
+  assetRequests,
+  providers = defaultAssetProviders,
+  allowGenerated = false,
+  unresolvedMediaMode = 'FAIL_PRODUCTION_RENDER',
+  publishMode = 'PRODUCTION_RENDER',
+  offline = false,
+}) {
   if (allowGenerated) throw new Error('Generated media providers are disabled for V1');
   if (!assetRequests?.length) throw new Error('directAssets requires canonical-shot AssetRequest objects');
+  resetSearchStats();
   const dir = path.join(publicDir, 'assets');
   await fs.mkdir(dir, { recursive: true });
-  const pools = await mapLimit(assetRequests, 3, (request) => gather(request, providers));
+  const activeProviders = offline
+    ? providers.filter((provider) => ['local-bank', 'local-assets'].includes(provider.id))
+    : providers;
+  const pools = await mapLimit(assetRequests, 3, (request) => gather(request, activeProviders));
   const memory = new VideoAssetMemory();
   const usedIdentities = new Set();
   const usedHashes = [];
   const assets = Object.fromEntries(plan.scenes.map((scene) => [scene.id, { primary: null, alternates: [], byShot: {} }]));
   const requestReports = [];
+  const editorialAssetJudgments = {};
+  const editorialUsefulnessRecords = {};
+  const queryQualityFeedback = [];
+  const visualInspections = {};
+  const videoWindowSelections = {};
+  const formatFitnessEvaluations = {};
+  const representationFallbacks = {};
 
   for (const pool of pools) {
     const { request, context } = pool;
@@ -290,26 +556,51 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
       });
       continue;
     }
+    const fallbackAuditTraces = [];
     const ranked = scoredCandidates(pool, memory, usedIdentities);
+
+    // Search metadata ranks the download shortlist only. It is not semantic proof.
     const viable = buildMaterializationQueue(ranked);
     const materialized = [];
     const materializationRejects = [];
     for (let index = 0; index < viable.length; index++) {
-      const result = await materializeCandidate(viable[index], request, dir, publicDir, index, usedHashes);
-      if (result.asset) materialized.push({ ...viable[index], ...result });
-      else materializationRejects.push({ candidateId: viable[index].candidate.id, reason: result.rejected });
+      const item = viable[index];
+      const result = await materializeCandidate(item, request, dir, publicDir, index, usedHashes);
+      if (result.asset) {
+        const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+        if (judgment.accepted && !judgment.rejected) materialized.push({ ...item, ...result });
+        else {
+          await fs.rm(result.file, { force: true });
+          materializationRejects.push({ candidateId: item.candidate.id, reason: judgment.rejectReasons.join('; ') });
+        }
+      } else materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
       if (materialized.length >= 4) break;
     }
 
     if (!materialized.length) {
       const emergencyCandidates = ranked.filter((item) => !viable.includes(item) && item.score.qualityRank >= 1);
       for (let index = 0; index < emergencyCandidates.length; index++) {
-        const result = await materializeCandidate(emergencyCandidates[index], request, dir, publicDir, viable.length + index, usedHashes);
+        const item = emergencyCandidates[index];
+        const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index, usedHashes);
         if (result.asset) {
-          materialized.push({ ...emergencyCandidates[index], ...result });
+          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+          if (judgment.rejected || !judgment.accepted) {
+            await fs.rm(result.file, { force: true });
+            materializationRejects.push({ candidateId: item.candidate.id, reason: judgment.rejectReasons.join('; ') });
+            continue;
+          }
+          fallbackAuditTraces.push({
+            fallbackType: 'emergency_candidate',
+            whyTriggered: 'Top viable candidates failed materialization',
+            candidateBefore: viable[0]?.candidate?.id || null,
+            candidateAfter: item.candidate.id,
+            semanticClassBefore: viable[0]?.editorialJudgment?.classification || null,
+            semanticClassAfter: judgment.classification,
+          });
+          materialized.push({ ...item, ...result });
           break;
         } else {
-          materializationRejects.push({ candidateId: emergencyCandidates[index].candidate.id, reason: result.rejected });
+          materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
         }
       }
     }
@@ -329,9 +620,62 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
         const item = { candidate, score };
         const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index + 10, usedHashes);
         if (result.asset) {
+          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+          if (judgment.rejected || !judgment.accepted) {
+            await fs.rm(result.file, { force: true });
+            materializationRejects.push({ candidateId: candidate.id, reason: judgment.rejectReasons.join('; ') });
+            continue;
+          }
           result.asset.tier = 'fallback';
+          fallbackAuditTraces.push({
+            fallbackType: 'local_bank',
+            whyTriggered: 'Search candidates failed Gate 2 or materialization',
+            candidateBefore: ranked[0]?.candidate?.id || null,
+            candidateAfter: candidate.id,
+            semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+            semanticClassAfter: judgment.classification,
+          });
           materialized.push({ ...item, ...result });
           break;
+        }
+      }
+    }
+
+    // Step 6 of Unresolved Media Repair Ladder: Deliberate asset reuse with detail crop
+    if (!materialized.length && memory.selections?.length > 0) {
+      let matchingPrevious = memory.selections.find((sel) => {
+        const isSameEntity = context.primaryEntity && sel.concept?.toLowerCase().includes(context.primaryEntity.toLowerCase());
+        const isSameConcept = sel.concept?.toLowerCase() === request.concept?.toLowerCase();
+        return (isSameEntity || isSameConcept) && sel.usageCount < 2;
+      });
+      if (!matchingPrevious) {
+        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
+      }
+      if (matchingPrevious && matchingPrevious.candidate) {
+        const reusedCandidate = {
+          ...matchingPrevious.candidate,
+          isDeliberateReuse: true,
+          deliberateReuseReason: `Continuing narrative continuity: reusing verified visual for "${request.concept}" with detail crop`,
+        };
+        const score = scoreAssetCandidate(reusedCandidate, request, context, memory);
+        const item = { candidate: reusedCandidate, score };
+        const result = await materializeCandidate(item, request, dir, publicDir, 99, usedHashes);
+        if (result.asset) {
+          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+          if (judgment.classification !== 'ACCIDENTAL' && judgment.classification !== 'WRONG' && judgment.accepted && editorialUsefulnessRecords[`${request.storyboardShotId}:${reusedCandidate.id}`]?.distractionRisk < 0.60) {
+            result.asset.deliberateReuseReason = reusedCandidate.deliberateReuseReason;
+            fallbackAuditTraces.push({
+              fallbackType: 'deliberate_reuse',
+              whyTriggered: 'Search candidates exhausted or unapproved',
+              candidateBefore: ranked[0]?.candidate?.id || null,
+              candidateAfter: reusedCandidate.id,
+              semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+              semanticClassAfter: judgment.classification,
+            });
+            materialized.push({ ...item, ...result });
+          } else {
+            await fs.rm(result.file, { force: true });
+          }
         }
       }
     }
@@ -340,8 +684,53 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
     materialized.sort((a, b) => compareCandidateScores(a, b, request.constraints?.orientation)
       || (b.clipSimilarity ?? -1) - (a.clipSimilarity ?? -1));
 
-    const selected = materialized[0] || null;
-    for (const loser of materialized.slice(1)) await fs.rm(loser.file, { force: true });
+    // Enforce Gate 2: only select candidates that passed Gate 2!
+    const validApproved = materialized.filter((item) => item.editorialJudgment && item.editorialJudgment.accepted && !item.editorialJudgment.rejected);
+    let selected = validApproved[0] || null;
+
+    // Step 6 of Unresolved Media Repair Ladder: Deliberate asset reuse if search candidates were unapproved
+    if (!selected && memory.selections?.length > 0) {
+      let matchingPrevious = memory.selections.find((sel) => {
+        const isSameEntity = context.primaryEntity && sel.concept?.toLowerCase().includes(context.primaryEntity.toLowerCase());
+        const isSameConcept = sel.concept?.toLowerCase() === request.concept?.toLowerCase();
+        return (isSameEntity || isSameConcept) && sel.usageCount < 2;
+      });
+      if (!matchingPrevious) {
+        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
+      }
+      if (matchingPrevious && matchingPrevious.candidate) {
+        const prevAsset = assets[matchingPrevious.lastUsedScene]?.byShot[matchingPrevious.lastUsedShot] || assets[matchingPrevious.lastUsedScene]?.primary;
+        const prevLocalPath = prevAsset?.src ? path.join(publicDir, prevAsset.src) : (matchingPrevious.candidate.localPath || matchingPrevious.candidate.file);
+        const reusedCandidate = {
+          ...matchingPrevious.candidate,
+          localPath: prevLocalPath,
+          isDeliberateReuse: true,
+          deliberateReuseReason: `Continuing narrative continuity: reusing verified visual for "${request.concept}" with detail crop`,
+        };
+        const score = scoreAssetCandidate(reusedCandidate, request, context, memory);
+        const item = { candidate: reusedCandidate, score };
+        const result = await materializeCandidate(item, request, dir, publicDir, 99, usedHashes);
+        if (result.asset) {
+          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+          if (judgment.classification !== 'ACCIDENTAL' && judgment.classification !== 'WRONG' && judgment.accepted && editorialUsefulnessRecords[`${request.storyboardShotId}:${reusedCandidate.id}`]?.distractionRisk < 0.60) {
+            result.asset.deliberateReuseReason = reusedCandidate.deliberateReuseReason;
+            fallbackAuditTraces.push({
+              fallbackType: 'deliberate_reuse',
+              whyTriggered: 'Search candidates unapproved or failed Gate 2',
+              candidateBefore: ranked[0]?.candidate?.id || null,
+              candidateAfter: reusedCandidate.id,
+              semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+              semanticClassAfter: judgment.classification,
+            });
+            selected = { ...item, ...result };
+          } else {
+            await fs.rm(result.file, { force: true });
+          }
+        }
+      }
+    }
+
+    for (const loser of materialized.filter((item) => item !== selected)) await fs.rm(loser.file, { force: true });
 
     if (selected) {
       const ext = selected.candidate.type === 'video' ? 'mp4' : 'jpg';
@@ -353,6 +742,50 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
           selected.asset.src = path.relative(publicDir, canonicalFile).split(path.sep).join('/');
         } catch {}
       }
+
+      const finalSha256 = await computeFileSha256(selected.file);
+      selected.sha256ContentHash = finalSha256;
+      selected.asset.sha256ContentHash = finalSha256;
+      selected.asset.assetIdentityChain = {
+        candidateId: selected.candidate.id || selected.candidate.sourceUrl || selected.candidate.localPath || 'candidate',
+        materializedAssetId: path.basename(selected.file),
+        solvedSceneAssetId: `${request.sceneId}:${request.storyboardShotId}`,
+        timelineAssetId: request.storyboardShotId,
+        rendererAssetId: selected.asset.src,
+        sha256ContentHash: finalSha256,
+      };
+
+      // Attach selection explainability & editorial judgment (Requirement 16 & 59)
+      if (selected.editorialJudgment) {
+        selected.asset.editorialJudgment = selected.editorialJudgment;
+        selected.asset.selectionReason = selected.editorialJudgment.selectionReason;
+        selected.asset.visibleMeaning = selected.editorialJudgment.visibleMeaning;
+        selected.asset.whyItMatchesNarration = selected.editorialJudgment.whyItMatchesNarration;
+        selected.asset.finalEditorialScore = selected.editorialJudgment.finalEditorialScore;
+      }
+      selected.asset.visualInspection = selected.visualInspection || null;
+      selected.asset.contrastiveRelevance = selected.contrastive || null;
+      if (request.visibleNeed) {
+        selected.asset.visibleNeed = request.visibleNeed;
+      }
+
+      // Video window trim selection
+      if (selected.candidate.type === 'video') {
+        const windowResult = selected.videoWindowSelection || await selectVideoWindow({
+          videoPath: selected.file,
+          requiredDurationSec: request.constraints?.durationHint || 3.5,
+          visibleNeed: request.visibleNeed,
+          videoMetadata: selected.asset,
+        });
+        videoWindowSelections[request.storyboardShotId] = windowResult;
+        selected.asset.videoTrim = {
+          startTime: windowResult.selectedStartTime,
+          endTime: windowResult.selectedEndTime,
+          score: windowResult.windowScore,
+          reason: windowResult.selectionReason,
+        };
+      }
+
       const identity = selected.candidate.sourceUrl || selected.candidate.localPath || selected.candidate.id;
       usedIdentities.add(identity);
       if (selected.hash) usedHashes.push(selected.hash);
@@ -364,18 +797,19 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
       if (selected.asset.type === 'image') {
         recordImageInBank({
           filePath: path.join(publicDir, selected.asset.src),
-          description: request.concept,
+          description: selected.visualInspection?.sceneSummary || '',
           query: selected.candidate.query || request.concept,
           source: selected.asset.source,
           label: selected.asset.label || '',
           license: selected.asset.license,
           width: selected.asset.width || 1920,
           height: selected.asset.height || 1080,
+          inspection: selected.visualInspection,
         }).catch(() => {});
       }
-    } else {
-      // Milestone 17 Requirement 35: If asset providers cannot produce a strong replacement:
-      // mark shot UNRESOLVED_MEDIA. Do not silently use weak fallback stock.
+    } else if (publishMode !== 'PRODUCTION_RENDER' && unresolvedMediaMode === 'ALLOW_DEV_PLACEHOLDER') {
+      // Step 8: Unresolved media placeholder & audit tracking
+      // Let publishability quality gates (timelineQc.js / mediaVisualQualityGate.js) enforce production policy
       const unresolvedFile = path.join(dir, `${request.storyboardShotId}_unresolved.jpg`);
       try {
         await ffmpeg(['-y', '-f', 'lavfi', '-i', `color=c=0x111827:s=${request.constraints?.minWidth || 1920}x${request.constraints?.minHeight || 1080}`, '-frames:v', '1', unresolvedFile]);
@@ -383,6 +817,7 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
         const png1x1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64');
         await fs.writeFile(unresolvedFile, png1x1).catch(() => {});
       }
+      const unresolvedSha256 = await computeFileSha256(unresolvedFile);
       const unresolvedAsset = {
         type: 'image',
         src: path.relative(publicDir, unresolvedFile).split(path.sep).join('/'),
@@ -393,15 +828,79 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
         unresolved: true,
         generic: false,
         label: `[UNRESOLVED_MEDIA] ${request.concept || request.storyboardShotId}`,
-        license: null,
+        license: { name: 'Unresolved Media Placeholder', nonFree: false },
+        selectionReason: 'Unresolved media placeholder created under development mode',
+        visibleMeaning: 'Unresolved placeholder',
+        whyItMatchesNarration: 'Placeholder awaiting asset resolution',
+        sha256ContentHash: unresolvedSha256,
+        assetIdentityChain: {
+          candidateId: 'UNRESOLVED_MEDIA',
+          materializedAssetId: path.basename(unresolvedFile),
+          solvedSceneAssetId: `${request.sceneId}:${request.storyboardShotId}`,
+          timelineAssetId: request.storyboardShotId,
+          rendererAssetId: path.relative(publicDir, unresolvedFile).split(path.sep).join('/'),
+          sha256ContentHash: unresolvedSha256,
+        },
       };
       const sceneAssets = assets[request.sceneId];
       sceneAssets.byShot[request.storyboardShotId] = unresolvedAsset;
       if (!sceneAssets.primary) sceneAssets.primary = unresolvedAsset;
     }
 
+    if (!selected && publishMode === 'PRODUCTION_RENDER') {
+      const proceduralFallback = (request.representationDecision?.fallbackRepresentations || [])
+        .find((representation) => !['media', 'image', 'video'].includes(representation));
+      if (proceduralFallback) {
+        representationFallbacks[request.storyboardShotId] = {
+          from: request.representationDecision?.selectedRepresentation || 'media',
+          to: proceduralFallback,
+          reason: 'No licensed, pixel-inspected media candidate passed production semantic gates.',
+        };
+        fallbackAuditTraces.push({
+          fallbackType: 'representation_escalation',
+          whyTriggered: 'Media candidate set exhausted after materialization and semantic inspection',
+          candidateBefore: ranked[0]?.candidate?.id || null,
+          candidateAfter: null,
+          representationAfter: proceduralFallback,
+        });
+      }
+    }
     const top = ranked[0];
-    const resolutionStatus = selected?.score.resolutionStatus || (top?.score.qualityRank === 1 ? 'weak' : 'unresolved');
+    const resolutionStatus = selected?.score.resolutionStatus
+      || (representationFallbacks[request.storyboardShotId] ? 'procedural_fallback' : (top?.score.qualityRank === 1 ? 'weak' : 'unresolved'));
+
+    // Query Quality Feedback & Yield Tracking (Sections 32, 33)
+    const poolJudgments = pool.candidates.map((c) => editorialAssetJudgments[`${request.storyboardShotId}:${c.id}`]).filter(Boolean);
+    const candidateCount = pool.candidates.length;
+    const semanticValidCount = poolJudgments.filter((j) => j.accepted && j.classification !== 'ACCIDENTAL' && j.classification !== 'WRONG').length;
+    const editoriallyUsefulCount = poolJudgments.filter((j) => j.editorialUsefulness && j.editorialUsefulness.verdict !== 'WEAK' && j.editorialUsefulness.verdict !== 'DISTRACTING').length;
+    const queryEditorialYield = Number((editoriallyUsefulCount / Math.max(1, candidateCount)).toFixed(2));
+
+    let editorialRetryReason = null;
+    if (ranked[0] && (ranked[0].editorialJudgment?.rejected || !ranked[0].editorialJudgment?.accepted)) {
+      const rej = ranked[0].editorialJudgment?.rejectReasons || [];
+      if (rej.some((r) => r.includes('specificity'))) editorialRetryReason = 'low_specificity';
+      else if (rej.some((r) => r.includes('distraction'))) editorialRetryReason = 'high_distraction';
+      else if (rej.some((r) => r.includes('generic'))) editorialRetryReason = 'generic_stock';
+      else if (rej.some((r) => r.includes('foreign_entity') || r.includes('brand'))) editorialRetryReason = 'unrelated_brand';
+      else if (rej.some((r) => r.includes('unrelated_visible_text'))) editorialRetryReason = 'unrelated_visible_text';
+      else if (rej.some((r) => r.includes('metaphor'))) editorialRetryReason = 'metaphor_for_direct_role';
+      else if (rej.some((r) => r.includes('weak_search_hit') || r.includes('viewerGain'))) editorialRetryReason = 'weak_viewer_gain';
+      else editorialRetryReason = 'low_communication_value';
+    }
+
+    const queryFeedbackItem = {
+      shotId: request.storyboardShotId,
+      query: request.concept,
+      candidateCount,
+      semanticValidCount,
+      editoriallyUsefulCount,
+      selectedCount: selected ? 1 : 0,
+      queryEditorialYield,
+      editorialRetryReason,
+    };
+    queryQualityFeedback.push(queryFeedbackItem);
+
     requestReports.push({
       requestId: request.id,
       storyboardShotId: request.storyboardShotId,
@@ -419,6 +918,8 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
       queryLadder: context.queryLadder,
       requestQualityWarnings: context.requestQualityWarnings,
       resolutionStatus,
+      queryEditorialYield,
+      editorialRetryReason,
       providerCalls: pool.providerCalls,
       selectedCandidate: selected ? {
         provider: selected.candidate.providerId,
@@ -444,8 +945,19 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
         penalties: item.score.penalties,
       })),
       materializationRejects,
+      fallbackAuditTraces,
     });
   }
+
+  const mediaReuseFallbacks = publishMode === 'PRODUCTION_RENDER'
+    ? applyMediaOnlyReuseFallbacks({
+      assets,
+      requestReports,
+      assetRequests,
+      sceneIds: plan.scenes.map((scene) => scene.id),
+      format,
+    })
+    : {};
 
   const diagnostics = buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, memory });
 
@@ -471,6 +983,36 @@ export async function directAssets(plan, specs, { publicDir, format, assetReques
   report.requests = requestReports;
   report.memory = memory.selections;
   report.diagnostics = diagnostics;
+  report.queryQualityFeedback = queryQualityFeedback;
 
-  return { assets, report, diagnostics, requestReports, memory: memory.selections };
+  const unresolvedRequests = requestReports.filter((item) => item.resolutionStatus === 'unresolved' || item.resolutionStatus === 'weak');
+  if (publishMode === 'PRODUCTION_RENDER' && unresolvedRequests.length) {
+    const failure = {
+      code: 'UNRESOLVED_PRODUCTION_MEDIA',
+      message: 'Production rendering requires every media-routed shot to have an approved pixel-inspected asset.',
+      unresolvedRequests,
+      generatedAt: new Date().toISOString(),
+    };
+    await fs.writeFile(path.join(path.dirname(publicDir), 'asset-resolution-failure.json'), JSON.stringify(failure, null, 2)).catch(() => {});
+    const error = new Error(`${failure.message} Unresolved shots: ${unresolvedRequests.map((item) => item.storyboardShotId).join(', ')}`);
+    error.code = failure.code;
+    error.details = failure;
+    throw error;
+  }
+
+  return {
+    assets,
+    report,
+    diagnostics,
+    requestReports,
+    memory: memory.selections,
+    editorialAssetJudgments,
+    editorialUsefulnessRecords,
+    queryQualityFeedback,
+    visualInspections,
+    videoWindowSelections,
+    formatFitnessEvaluations,
+    representationFallbacks,
+    mediaReuseFallbacks,
+  };
 }

@@ -169,6 +169,7 @@ export function buildPacingDiagnostics(timeline, plan) {
   const shots = timeline.realizedShots || clips.flatMap((c) => c.shots || []);
   const totalFrames = timeline.durationInFrames || 1;
   const totalSeconds = totalFrames / fps;
+  const pacingPolicy = timeline.productionProfile?.pacing || null;
 
   const shotDurationsSec = shots.map((s) => (s.durationInFrames || 1) / fps);
   const sceneDurationsSec = clips.map((c) => (c.durationInFrames || 1) / fps);
@@ -217,7 +218,7 @@ export function buildPacingDiagnostics(timeline, plan) {
     const windowEnd = f + windowFrames;
     const windowShots = allShotsWithGlobalTime.filter((s) => s.globalStartFrame >= f && s.globalStartFrame < windowEnd);
     const cutsInWindow = windowShots.length;
-    if (cutsInWindow > 5) {
+    if (cutsInWindow > Number(pacingPolicy?.maximumCutsPer10Seconds || 5)) {
       rapidCutWindows.push({
         startSec: Number((f / fps).toFixed(1)),
         endSec: Number((windowEnd / fps).toFixed(1)),
@@ -333,6 +334,7 @@ export function buildPacingDiagnostics(timeline, plan) {
     },
     shotDurationDistribution: distribution,
     cutsPer10Seconds,
+    pacingProfile: pacingPolicy,
     rapidCutWindows,
     underactiveWindows,
     holdQualitySummary: {

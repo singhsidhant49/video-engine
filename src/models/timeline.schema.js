@@ -64,6 +64,16 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
   assets: z.array(z.unknown()).default([]),
   move: z.unknown().optional(),
   overlay: z.record(z.string(), z.unknown()).default({}),
+  editorialApproval: z.object({
+    classification: z.string(),
+    confidence: z.number(),
+    semanticDistance: z.number(),
+    judgeVersion: z.string(),
+    visibleNeedHash: z.string(),
+    assetHash: z.string(),
+    approved: z.boolean(),
+    selectionReason: z.string().optional(),
+  }).passthrough().optional(),
 }).strict().superRefine((shot, ctx) => {
   if (shot.renderMode === 'solved' && (!shot.solvedSceneId || !shot.motionPlanId)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Solved shots require solvedSceneId and motionPlanId' });

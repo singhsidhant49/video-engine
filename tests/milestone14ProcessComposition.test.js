@@ -56,6 +56,20 @@ test('phrase timing activates every AI process stage inside its expected phrase 
   });
 });
 
+test('late process phrase is compressed enough to preserve the required final hold', () => {
+  const words = [
+    { text: 'A', norm: ['a'], startFrame: 17, endFrame: 20, endsPhrase: false },
+    { text: 'locks', norm: ['locks'], startFrame: 21, endFrame: 25, endsPhrase: true },
+    { text: 'B', norm: ['b'], startFrame: 75, endFrame: 78, endsPhrase: false },
+    { text: 'locks', norm: ['locks'], startFrame: 79, endFrame: 82, endsPhrase: true },
+  ];
+  const fixture = { id: 'late-locks', title: 'LOCK ORDER', durationInFrames: 97, steps: [{ title: 'A locks' }, { title: 'B locks' }], alignedWords: words };
+  const result = compile(fixture);
+  assert.equal(result.preflight.hardFailures.some((issue) => issue.code === 'insufficient_final_hold'), false, JSON.stringify(result.preflight.hardFailures));
+  const settle = result.motionPlan.lifecycle.find((phase) => phase.phase === 'SETTLE');
+  assert.ok(settle.endFrame - settle.startFrame >= result.motionPlan.frameQuality.minimumFinalHold);
+});
+
 test('many stages are grouped instead of shrinking below the complexity limit', () => {
   const source = PROCESS_FIXTURES[0];
   const fixture = { ...source, id: 'many', steps: Array.from({ length: 9 }, (_, index) => ({ title: `STAGE ${index + 1}` })) };

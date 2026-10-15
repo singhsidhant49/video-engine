@@ -27,6 +27,8 @@ export function lifecycleFor(events, tracks, durationInFrames) {
 
 export function choreographProcessMotion({ solvedScene, composition, durationInFrames }) {
   const tracks = [];
+  const minimumFinalHold = 8;
+  const maximumTrackEnd = Math.max(1, durationInFrames - 1 - MOTION_DURATIONS.MICRO - minimumFinalHold);
   const frame0State = {};
   const events = [...composition.semanticEvents].sort((a, b) => a.frame - b.frame);
   for (const element of Object.values(solvedScene.elements)) {
@@ -34,8 +36,8 @@ export function choreographProcessMotion({ solvedScene, composition, durationInF
   }
   for (let index = 0; index < events.length; index++) {
     const event = events[index];
-    const startFrame = Math.max(0, Math.min(durationInFrames - 1, event.frame));
-    const endFrame = Math.min(durationInFrames - 1, startFrame + MOTION_DURATIONS.NORMAL);
+    const startFrame = Math.max(0, Math.min(maximumTrackEnd - 1, event.frame));
+    const endFrame = Math.max(startFrame + 1, Math.min(maximumTrackEnd, startFrame + MOTION_DURATIONS.NORMAL));
     tracks.push({
       id: `track_${event.targetId}_emphasis`, targetId: event.targetId, property: 'emphasis', from: 0.4, to: 1,
       startFrame, endFrame, easing: MOTION_EASINGS.emphasis, triggerPhraseId: event.phraseId,
@@ -44,14 +46,14 @@ export function choreographProcessMotion({ solvedScene, composition, durationInF
     if (connector) {
       tracks.push({
         id: `track_${connector.id}_draw`, targetId: connector.id, property: 'draw', from: 0.18, to: 1,
-        startFrame: Math.max(0, startFrame - MOTION_DURATIONS.FAST), endFrame, easing: MOTION_EASINGS.draw, triggerPhraseId: event.phraseId,
+        startFrame: Math.max(0, Math.min(endFrame - 1, startFrame - MOTION_DURATIONS.FAST)), endFrame, easing: MOTION_EASINGS.draw, triggerPhraseId: event.phraseId,
       });
     }
     if (index > 0) {
       const previous = events[index - 1];
       tracks.push({
         id: `track_${previous.targetId}_settle_${index}`, targetId: previous.targetId, property: 'emphasis', from: 1, to: 0.72,
-        startFrame, endFrame: Math.min(durationInFrames - 1, startFrame + MOTION_DURATIONS.FAST), easing: MOTION_EASINGS.move, triggerPhraseId: event.phraseId,
+        startFrame: Math.min(startFrame, maximumTrackEnd - 1), endFrame: Math.max(1, Math.min(maximumTrackEnd, startFrame + MOTION_DURATIONS.FAST)), easing: MOTION_EASINGS.move, triggerPhraseId: event.phraseId,
       });
     }
   }
@@ -78,7 +80,7 @@ export function choreographProcessMotion({ solvedScene, composition, durationInF
       firstMeaningfulFrame: 0,
       majorSemanticEvents: events.map((event) => ({ eventId: event.id, frame: event.frame, targetId: event.targetId })),
       finalStateFrame: Math.max(0, ...tracks.map((track) => track.endFrame)),
-      minimumFinalHold: 8,
+      minimumFinalHold,
     },
     focalStates,
     tracks,

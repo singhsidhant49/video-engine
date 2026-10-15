@@ -1,14 +1,16 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { renderContactSheet } from '../tools/preview.js';
+import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames } from '../tools/preview.js';
 import { bundle } from '@remotion/bundler';
 import { renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
-import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress } from '../services/aiDirectorService.js';
+import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
 import { analyzeNarration } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
-import { calculateDurationBudget, buildDurationDiagnostics } from '../storyboard/durationBudget.js';
+import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../storyboard/durationBudget.js';
+import { resolveNarrationProfile } from '../audio/narrationProfile.js';
+import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
 import { directScenes, recast } from './visualDirector.js';
 import { directAssets } from './assetDirector.js';
@@ -29,10 +31,11 @@ import { selectVideoVisualStrategy } from '../storyboard/visualStrategySelector.
 import { buildStoryboardDiagnostics, printStoryboardDiagnostics } from '../storyboard/storyboardDiagnostics.js';
 import { storyboardToExecutionPlan } from './storyboardCompatibility.js';
 import { buildVisualRealizationDiagnostics } from './visualRealizationDiagnostics.js';
-import { planAssetRequests } from './assetRequestPlanner.js';
+import { planAssetRequests, buildAssetQueryDiagnostics } from './assetRequestPlanner.js';
 import { AssetRequestListSchema } from '../models/assetRequest.schema.js';
 import { buildVisualCoveragePlan } from '../storyboard/visualCoveragePlan.js';
 import { VisualCoveragePlanSchema } from '../models/visualCoveragePlan.schema.js';
+import { evaluateVisualSequence } from '../storyboard/visualSequenceDirector.js';
 import { buildEditorialVisualPlan } from './editorialVisualPlanner.js';
 import { buildVisualCoverageDiagnostics } from '../qc/visualCoverageDiagnostics.js';
 import { runCreativeQaLoop, evaluateCreativeQa, applyCreativeRepairs } from '../qc/creativeQaDirector.js';
@@ -43,6 +46,20 @@ import { metrics } from '../core/cache/cacheManager.js';
 import { persistConfigSnapshot } from '../core/checkpoints/versionTracker.js';
 import { buildEditContinuityDiagnostics } from '../qc/editContinuityDiagnostics.js';
 import { resolveVisualPolicy } from '../config/visualMode.js';
+import { probeDuration } from '../services/ffmpeg.js';
+
+function buildClaimEvidenceDiagnostics(plan) {
+  const claims = plan?.claims || [];
+  const byStatus = {};
+  for (const claim of claims) byStatus[claim.status || 'unknown'] = (byStatus[claim.status || 'unknown'] || 0) + 1;
+  return {
+    totalClaims: claims.length,
+    byStatus,
+    productionBlockingClaims: claims.filter((claim) => claim.type === 'statistic' && claim.status === 'unverified'),
+    sourcedClaims: claims.filter((claim) => claim.source_url || claim.source?.url),
+    note: 'Recorded sources establish editorial provenance; final factual accuracy still requires human review.',
+  };
+}
 
 /**
  * Editorial Plan (LLM) → narration → alignment → Visual Director → Asset
@@ -73,19 +90,23 @@ import { resolveVisualPolicy } from '../config/visualMode.js';
  * @param {boolean} [o.noTts]        reuse narration audio without TTS re-synthesis
  * @param {boolean} [o.offline]      use cached/local media only
  * @param {'MEDIA_EDITORIAL'|'LEGACY_PROCEDURAL'} [o.visualMode] centralized visual routing mode
+ * @param {object} [o.brief] normalized prompt/data request for application integrations
+ * @param {object} [o.channelProfile] channel-level audience, tone and pacing defaults
  */
 export async function createFacelessVideo({
+  brief,
+  channelProfile,
   topic,
-  niche = '',
-  format = 'shorts',
-  voice = config.kokoro.defaultVoice,
+  niche,
+  format,
+  voice,
   style,
   durationSec,
   audioFile,
   planFile,
   render = true,
-  tts = 'kokoro',
-  channelId = 'default',
+  tts,
+  channelId,
   visualStrategy,
   resume = null,
   from = null,
@@ -95,21 +116,84 @@ export async function createFacelessVideo({
   noTts = false,
   offline = false,
   visualMode,
+  unresolvedMediaMode = 'FAIL_PRODUCTION_RENDER',
+  publishMode = 'PRODUCTION_RENDER',
+  renderScale = 1,
   onProgress = () => {},
 }) {
+  let normalizedBrief = null;
+  if (brief || !resume) {
+    normalizedBrief = normalizeVideoBrief({
+      ...(brief || {}),
+      prompt: topic || brief?.prompt || brief?.topic,
+      niche: niche ?? brief?.niche ?? '',
+      format: format || brief?.format || 'landscape',
+      durationSec: durationSec ?? brief?.durationSec,
+      style: style || brief?.style,
+      voice: voice || brief?.voice,
+      channel: channelProfile || brief?.channel || brief?.channelProfile || {},
+    });
+    topic = normalizedBrief.prompt;
+    niche = normalizedBrief.niche;
+    format = normalizedBrief.format;
+    durationSec = durationSec ?? normalizedBrief.durationSec;
+    style = style || normalizedBrief.style || normalizedBrief.channel.style;
+    voice = voice || normalizedBrief.voice || normalizedBrief.channel.voice;
+    channelProfile = normalizedBrief.channel;
+    channelId = channelId || normalizedBrief.channel.id;
+  }
+  channelId = channelId || 'default';
+  let sourceData = normalizedBrief?.sourceData;
   const visualPolicy = resolveVisualPolicy({ visualMode });
   const t0 = Date.now();
-  const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-').replace(/Z$/, '');
   const videoId = resume || `video-${stamp}`;
   const fps = config.video.fps;
   const runsDir = path.join(config.rendersDir, 'runs');
 
+  // For supplied narration, the audio is the duration source of truth unless
+  // the caller explicitly requests a different target.
+  if (audioFile && !durationSec && !resume) {
+    durationSec = Number((await probeDuration(audioFile)).toFixed(2));
+  }
+
   let job;
   const reusedStagesSet = new Set();
+  let productionProfile = resolveProductionProfile({ topic, niche, format: format || 'landscape', channelProfile });
+  let narrationProfile = resolveNarrationProfile({
+    topic,
+    niche,
+    baseSpeed: config.kokoro.speed,
+    meditationSpeed: config.kokoro.meditationSpeed,
+  });
 
   if (resume) {
     console.log(`\n🔄 Resuming run: ${resume}`);
     job = await JobContext.load({ id: resume, runsDir });
+    let savedRequest = {};
+    try {
+      savedRequest = JSON.parse(await fs.readFile(path.join(job.runDir, 'request.json'), 'utf8'));
+    } catch {}
+    topic = topic || savedRequest.topic || job.project.topic;
+    niche = niche ?? savedRequest.niche ?? '';
+    format = format || savedRequest.format || job.project.format || 'shorts';
+    voice = voice || savedRequest.voice || job.project.config?.voice || config.kokoro.defaultVoice;
+    tts = tts || savedRequest.tts || job.project.config?.tts || 'kokoro';
+    // The immutable project request is the fallback source of truth. Derived
+    // checkpoint loss must never silently turn a resumed 300-second job into
+    // the CLI's 75-second default and destructively compress its plan.
+    durationSec = durationSec || job.project.targetDuration || savedRequest.durationSec;
+    style = style || job.project.config?.style || savedRequest.style;
+    channelProfile = channelProfile || savedRequest.channelProfile || job.project.config?.channelProfile || {};
+    sourceData = sourceData ?? savedRequest.sourceData;
+    channelId = channelId || savedRequest.channelId || job.project.channelId || 'default';
+    productionProfile = resolveProductionProfile({ topic, niche, format, channelProfile });
+    narrationProfile = resolveNarrationProfile({
+      topic,
+      niche,
+      baseSpeed: config.kokoro.speed,
+      meditationSpeed: config.kokoro.meditationSpeed,
+    });
 
     const validity = await evaluateRunValidity({
       runDir: job.runDir,
@@ -120,9 +204,12 @@ export async function createFacelessVideo({
         format: format || job.project.format,
         style: style || job.project.config?.style,
         voice: voice || job.project.config?.voice,
-        speed: config.kokoro.speed,
+        speed: narrationProfile.speed,
+        durationSec,
         offline,
         visualMode: visualPolicy.visualMode,
+        productionProfile,
+        sourceData,
       },
       fromStage: from,
     });
@@ -150,13 +237,17 @@ export async function createFacelessVideo({
     }
     console.log(`==================================================\n`);
   } else {
+    niche = niche || '';
+    format = format || 'shorts';
+    voice = voice || config.kokoro.defaultVoice;
+    tts = tts || 'kokoro';
     job = await JobContext.create({
       id: videoId,
       topic,
       channelId,
       format,
       targetDuration: durationSec || null,
-      config: { voice, style: style || null, tts, render, visualMode: visualPolicy.visualMode, assetPolicy: { allowGenerated: false } },
+      config: { voice, style: style || null, tts, render, visualMode: visualPolicy.visualMode, narrationProfile, channelProfile, productionProfile, assetPolicy: { allowGenerated: false } },
       runsDir,
     });
   }
@@ -176,44 +267,93 @@ export async function createFacelessVideo({
     const reqData = JSON.parse(await fs.readFile(path.join(runDir, 'request.json'), 'utf8'));
     if (reqData.format) format = reqData.format;
     targetDuration = durationSec || reqData.durationSec || (format === 'shorts' ? 45 : 75);
-    const speechRateWps = tts === 'kokoro' && config.kokoro?.speed
-      ? Number((2.35 * (config.kokoro.speed / 1.0)).toFixed(2))
+    const speechRateWps = tts === 'kokoro'
+      ? narrationProfile.speechRateWps
       : undefined;
     durationBudget = calculateDurationBudget({ targetDurationSec: targetDuration, format, style: style || reqData.style, speechRateWps });
+    if (Number(reqData.durationSec) !== Number(targetDuration)) {
+      console.warn(`   Repairing stale request duration ${reqData.durationSec}s -> ${targetDuration}s from project source of truth.`);
+      await job.startStage('request');
+      await save('request.json', { ...reqData, topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || reqData.style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData });
+      await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
+      await job.completeStage('request', ['request.json', 'duration-budget.json']);
+    }
   } else {
     await job.startStage('request');
     targetDuration = durationSec || (format === 'shorts' ? 45 : 75);
-    const speechRateWps = tts === 'kokoro' && config.kokoro?.speed
-      ? Number((2.35 * (config.kokoro.speed / 1.0)).toFixed(2))
+    const speechRateWps = tts === 'kokoro'
+      ? narrationProfile.speechRateWps
       : undefined;
     durationBudget = calculateDurationBudget({ targetDurationSec: targetDuration, format, style, speechRateWps });
-    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || null, tts, render, visualMode: visualPolicy.visualMode });
+    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData });
     await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
     await job.completeStage('request', ['request.json', 'duration-budget.json']);
   }
 
   // 1. Editorial plan.
   let plan;
-  if (canReuse('plan')) {
-    plan = JSON.parse(await fs.readFile(path.join(runDir, 'plan.json'), 'utf8'));
+  const reusablePlanStage = canReuse('plan');
+  let recoveredFailedPlan = false;
+  let savedPlan = null;
+  if (!reusablePlanStage && resume && !from && !planFile) {
+    try {
+      const candidate = await repairIncompleteNarration(JSON.parse(await fs.readFile(path.join(runDir, 'plan.json'), 'utf8')), null);
+      const normalizedCandidate = normalizePlan(candidate, {
+        topic: topic || candidate.topic,
+        niche: niche || candidate.niche,
+        format: format || candidate.format,
+        style: style || candidate.style,
+      });
+      if (normalizedCandidate.contentQuality?.valid) {
+        savedPlan = candidate;
+        recoveredFailedPlan = true;
+      }
+    } catch { /* missing or invalid failed-stage artifact: regenerate normally */ }
+  }
+  if (reusablePlanStage || recoveredFailedPlan) {
+    savedPlan ||= JSON.parse(await fs.readFile(path.join(runDir, 'plan.json'), 'utf8'));
+    savedPlan = await repairIncompleteNarration(savedPlan, null);
+    // Apply current normalization and content-QC rules to resumed plans instead
+    // of preserving stale claims or validator decisions from a failed run.
+    plan = normalizePlan(savedPlan, {
+      topic: topic || savedPlan.topic,
+      niche: niche || savedPlan.niche,
+      format: format || savedPlan.format,
+      style: style || savedPlan.style,
+    });
+    plan.durationBudget = savedPlan.durationBudget || durationBudget;
+    plan.compressionPasses = savedPlan.compressionPasses || 0;
+    plan.expansionPasses = savedPlan.expansionPasses || 0;
+    await save('plan.json', plan);
+    await save('content-quality-diagnostics.json', plan.contentQuality);
+    await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
+    if (recoveredFailedPlan) {
+      await job.startStage('plan');
+      await job.completeStage('plan', ['plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json']);
+    }
     console.log(`   ✓ [Reused] plan.json ("${plan.title}" · style ${plan.style} · ${plan.scenes.length} scenes · ${plan.script.split(/\s+/).length} words)`);
   } else {
     await job.startStage('plan');
     onProgress({ step: 1, message: 'Directing: script and shot intent...' });
-    const speechRateWps = tts === 'kokoro' && config.kokoro?.speed
-      ? Number((2.35 * (config.kokoro.speed / 1.0)).toFixed(2))
+    const speechRateWps = tts === 'kokoro'
+      ? narrationProfile.speechRateWps
       : undefined;
     plan = planFile
       ? normalizePlan(JSON.parse(await fs.readFile(planFile, 'utf8')), { topic, niche, format, style })
-      : await generateDirectorPlan({ topic, niche, format, durationSec: targetDuration, style, speechRateWps });
+      : await generateDirectorPlan({ topic, niche, format, durationSec: targetDuration, style, speechRateWps, sourceData, productionProfile });
     plan.format = format;
     plan.durationBudget = plan.durationBudget || durationBudget;
     await save('plan.json', plan);
     if (plan.contentQuality) {
       await save('content-quality-diagnostics.json', plan.contentQuality);
+      await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
     }
-    await job.completeStage('plan', ['plan.json', ...(plan.contentQuality ? ['content-quality-diagnostics.json'] : [])]);
+    await job.completeStage('plan', ['plan.json', ...(plan.contentQuality ? ['content-quality-diagnostics.json', 'claim-evidence-diagnostics.json'] : [])]);
     console.log(`   "${plan.title}" · style ${plan.style} · ${plan.scenes.length} scenes · ${plan.script.split(/\s+/).length} words`);
+  }
+
+  if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
+    throw new Error(`Narration quality gate failed — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
   }
 
   // 2. Narration & 3. Alignment with duration check and repair loop
@@ -221,6 +361,8 @@ export async function createFacelessVideo({
   let narration;
   let narrationNorm = null;
   let compressionPasses = plan.compressionPasses || 0;
+  let expansionPasses = plan.expansionPasses || 0;
+  let synthesisSpeed = narrationProfile.speed;
 
   if ((canReuse('audio') || noTts) && canReuse('alignment')) {
     console.log(`   ✓ [Reused] narration.wav & words.json (no audio regeneration)`);
@@ -228,9 +370,9 @@ export async function createFacelessVideo({
     if (!narration.durationInSeconds && narration.duration) narration.durationInSeconds = narration.duration;
     if (!narration.totalFrames && narration.durationInSeconds) narration.totalFrames = Math.ceil(narration.durationInSeconds * fps);
   } else {
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 4; attempt++) {
       await job.startStage('audio');
-      onProgress({ step: 2, message: audioFile ? 'Using supplied narration audio...' : `Generating voiceover with Kokoro TTS${attempt > 0 ? ' (compressed re-synthesis)' : ''}...` });
+      onProgress({ step: 2, message: audioFile ? 'Using supplied narration audio...' : `Generating voiceover with Kokoro TTS${attempt > 0 ? ' (duration-adjusted re-synthesis)' : ''}...` });
       if (audioFile) {
         narrationFile = path.join(runPublic, `narration${path.extname(audioFile) || '.wav'}`);
         await fs.copyFile(audioFile, narrationFile);
@@ -239,7 +381,7 @@ export async function createFacelessVideo({
         await synthesizeWithSay(plan.script, narrationFile);
       } else {
         narrationFile = path.join(runPublic, 'narration.wav');
-        await generateSpeech({ text: plan.script, outputFile: narrationFile, voice, speed: config.kokoro.speed });
+        await generateSpeech({ text: plan.script, outputFile: narrationFile, voice, speed: synthesisSpeed });
       }
 
       // Milestone 9 Narration Normalization & Peak Limiting
@@ -271,6 +413,43 @@ export async function createFacelessVideo({
       const allowedMax = durationBudget.allowedMaxDuration;
       const hardMax = durationBudget.hardMaxDuration;
 
+      if (actualSec < durationBudget.allowedMinDuration && attempt < 3 && !audioFile) {
+        console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) is below target minimum (${durationBudget.allowedMinDuration.toFixed(1)}s).`);
+        if (attempt === 0) {
+          const currentWords = plan.script.split(/\s+/).filter(Boolean).length;
+          const measuredWps = currentWords / Math.max(1, actualSec);
+          const targetWords = Math.max(currentWords + 10, Math.round(durationBudget.targetNarrationSec * measuredWps));
+          const scriptBeforeExpansion = plan.script;
+          plan = await expandPlanScript(plan, targetWords, Math.round(targetWords * 0.96));
+          if (plan.script !== scriptBeforeExpansion) {
+            expansionPasses++;
+            plan.expansionPasses = expansionPasses;
+            await save('plan.json', plan);
+            continue;
+          }
+        }
+        if (tts === 'say') {
+          console.warn('   The development TTS engine cannot adjust speed automatically; duration QC will block the shortfall.');
+          break;
+        }
+        // Slow guided meditation legitimately needs a much calmer cadence.
+        // The measured-duration formula is still bounded to keep speech clear.
+        const minimumSpeed = narrationProfile.minimumRepairSpeed;
+        const adjustedSpeed = calculateNarrationRepairSpeed({
+          currentSpeed: synthesisSpeed,
+          actualDurationSec: actualSec,
+          budget: durationBudget,
+          minimumSpeed,
+        });
+        if (Math.abs(adjustedSpeed - synthesisSpeed) >= 0.005) {
+          synthesisSpeed = Number(adjustedSpeed.toFixed(3));
+          console.log(`   Adjusting narration speed to ${synthesisSpeed} for measured duration accuracy.`);
+          continue;
+        }
+        console.warn('   Script and voice-speed repair produced no material duration change; duration QC will block the shortfall.');
+        break;
+      }
+
       if (actualSec > allowedMax && attempt === 0 && !audioFile) {
         console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) exceeds target max (${allowedMax.toFixed(1)}s).`);
         console.log(`   Initiating post-TTS script compression and re-synthesis...`);
@@ -298,6 +477,24 @@ export async function createFacelessVideo({
     }
   }
 
+  // Expansion/compression can change prose after the initial plan gate. Never
+  // send incomplete sentences into storyboard, captions, or final rendering.
+  plan.contentQuality = validateContentQuality({ scenes: plan.scenes, claims: plan.claims });
+  plan.script = plan.scenes.map((sceneItem) => sceneItem.narration).join(' ');
+  await save('plan.json', plan);
+  await save('content-quality-diagnostics.json', plan.contentQuality);
+  await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
+  // Measured TTS duration can expand/compress the plan after the planning
+  // checkpoint completed. Keep that checkpoint's checksums aligned with the
+  // final script so timeline/render-only resumes reuse the corrected audio and
+  // assets instead of restarting the entire job.
+  await job.checkpoints.refreshArtifactChecksums('plan', [
+    'plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json',
+  ]);
+  if (publishMode === 'PRODUCTION_RENDER' && !plan.contentQuality.valid) {
+    throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
+  }
+
   // 4. Visual Storyboard & Visual Director.
   onProgress({ step: 4, message: 'Directing visuals and resolving imagery...' });
   const ranges = sceneWordRanges(plan.scenes);
@@ -306,7 +503,7 @@ export async function createFacelessVideo({
   let resolvedVisualStrategy;
   if (canReuse('visualStrategy')) {
     resolvedVisualStrategy = JSON.parse(await fs.readFile(path.join(runDir, 'visual-strategy.json'), 'utf8'));
-    console.log(`   ✓ [Reused] visual-strategy.json (${resolvedVisualStrategy.family})`);
+    console.log(`   ✓ [Reused] visual-strategy.json (${resolvedVisualStrategy.visualFlow || resolvedVisualStrategy.source || 'configured'})`);
   } else {
     await job.startStage('visualStrategy');
     resolvedVisualStrategy = selectVideoVisualStrategy({
@@ -314,6 +511,7 @@ export async function createFacelessVideo({
       plan,
       format,
       requestedStyle: style || plan.style,
+      channelDefaults: { pacing: productionProfile.pacing },
       overrides: { ...visualStrategy, useMediaEditorial: visualPolicy.useMediaEditorial, format },
     });
     await save('visual-strategy.json', resolvedVisualStrategy, { schema: VideoVisualStrategySchema });
@@ -325,7 +523,10 @@ export async function createFacelessVideo({
   if (canReuse('storyboard')) {
     storyboard = JSON.parse(await fs.readFile(path.join(runDir, 'storyboard.json'), 'utf8'));
     visualCoveragePlan = JSON.parse(await fs.readFile(path.join(runDir, 'visual-coverage-plan.json'), 'utf8'));
-    console.log(`   ✓ [Reused] storyboard.json & visual-coverage-plan.json (${storyboard.scenes?.length || 0} scenes)`);
+    const reusedSceneCount = Array.isArray(storyboard.sections)
+      ? storyboard.sections.reduce((count, section) => count + (section.scenes?.length || 0), 0)
+      : (storyboard.scenes?.length || 0);
+    console.log(`   ✓ [Reused] storyboard.json & visual-coverage-plan.json (${reusedSceneCount} scenes)`);
   } else {
     await job.startStage('storyboard');
     storyboard = buildStoryboard(plan, { format, sceneSeconds, videoId, visualStrategy: resolvedVisualStrategy, visualPolicy });
@@ -333,7 +534,7 @@ export async function createFacelessVideo({
     const storyboardDiagnostics = buildStoryboardDiagnostics(storyboard);
     printStoryboardDiagnostics(storyboardDiagnostics);
     await save('storyboard-diagnostics.json', storyboardDiagnostics);
-    visualCoveragePlan = buildVisualCoveragePlan(storyboard);
+    visualCoveragePlan = buildVisualCoveragePlan(storyboard, { visualPolicy });
     await save('visual-coverage-plan.json', visualCoveragePlan, { schema: VisualCoveragePlanSchema });
     await job.completeStage('storyboard', ['storyboard.json', 'storyboard-diagnostics.json', 'visual-coverage-plan.json']);
   }
@@ -345,6 +546,7 @@ export async function createFacelessVideo({
   let assetReport;
   let sfx;
   let bgm;
+  let dirResult;
 
   const copyIn = async (rel) => {
     await fs.mkdir(path.dirname(path.join(runPublic, rel)), { recursive: true });
@@ -366,6 +568,11 @@ export async function createFacelessVideo({
     sfx = Object.fromEntries(await Promise.all(Object.entries(sfxSources).map(async ([k, rel]) => [k, await copyIn(rel)])));
     bgm = { ...bgmSource, src: await copyIn(bgmSource.src) };
   } else {
+    // Coverage may have been mutated by an older resumed run that allowed a
+    // procedural production fallback. Rebuild it at the asset boundary so
+    // MEDIA_EDITORIAL remains strictly image/video-only.
+    visualCoveragePlan = buildVisualCoveragePlan(storyboard, { visualPolicy });
+    await save('visual-coverage-plan.json', visualCoveragePlan, { schema: VisualCoveragePlanSchema });
     const rawSpecs = directScenes(storyboard, { format, rng: rngFrom(`${videoId}:visual`) });
     const evalCont = evaluateContinuity(rawSpecs, { format, style: plan.style });
     continuityReport = evalCont.continuityReport;
@@ -374,17 +581,87 @@ export async function createFacelessVideo({
 
     // 5. Asset Director: tiered search under each scene's acceptability policy
     await job.startStage('assets');
-    const assetRequests = planAssetRequests(storyboard, { format, visualPolicy });
+    const assetEditorialMode = /meditat|sleep|relax|wellness/i.test(`${plan.niche} ${plan.topic}`)
+      ? 'MOTIVATIONAL'
+      : plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
+    const assetRequests = planAssetRequests(storyboard, { format, visualPolicy, coveragePlan: visualCoveragePlan, editorialMode: assetEditorialMode });
     await save('asset-requests.json', assetRequests, { schema: AssetRequestListSchema });
-    const dirResult = await directAssets(executionPlan, specs, {
-      publicDir: runPublic, format, assetRequests, allowGenerated: false, offline,
+    await save('visual-propositions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.visualProposition])));
+    await save('representation-decisions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.representationDecision])));
+
+    // Milestone Editorial Asset Intelligence: Visible Needs & Query Diagnostics
+    const visibleNeeds = Object.fromEntries(assetRequests.map((r) => [r.storyboardShotId, r.visibleNeed || null]));
+    await save('visible-needs.json', visibleNeeds);
+    const queryDiagnostics = buildAssetQueryDiagnostics(assetRequests);
+    await save('asset-query-diagnostics.json', queryDiagnostics);
+
+    dirResult = await directAssets(executionPlan, specs, {
+      publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode,
     });
     assets = dirResult.assets;
     assetReport = dirResult.report;
+    if (Object.keys(dirResult.representationFallbacks || {}).length) {
+      visualCoveragePlan = visualCoveragePlan.map((coverage) => {
+        const fallback = dirResult.representationFallbacks[coverage.shotId];
+        if (!fallback) return coverage;
+        return {
+          ...coverage,
+          primaryRepresentation: fallback.to,
+          coverageStatus: 'SUPPORTIVE',
+          rationale: `${coverage.rationale} Production fallback: ${fallback.reason}`,
+          representationDecision: {
+            ...coverage.representationDecision,
+            selectedRepresentation: fallback.to,
+            searchable: false,
+            preferredSource: 'procedural',
+            reason: fallback.reason,
+            fallbackApplied: true,
+          },
+        };
+      });
+      await save('visual-coverage-plan.json', visualCoveragePlan, { schema: VisualCoveragePlanSchema });
+      await save('representation-fallbacks.json', dirResult.representationFallbacks);
+    }
+    if (Object.keys(dirResult.mediaReuseFallbacks || {}).length) {
+      await save('media-reuse-fallbacks.json', dirResult.mediaReuseFallbacks);
+    }
+
+    // Milestone Editorial Asset Intelligence & Production Hardening artifacts
+    await save('visual-inspection.json', dirResult.visualInspections || {});
+    await save('visual-inspections.json', dirResult.visualInspections || {});
+    await save('editorial-asset-judgments.json', dirResult.editorialAssetJudgments || {});
+    await save('editorial-usefulness.json', dirResult.editorialUsefulnessRecords || {});
+    await save('format-fitness.json', dirResult.formatFitnessEvaluations || {});
+    await save('video-window-selection.json', dirResult.videoWindowSelections || {});
+    // Stable production-readiness artifact names. These are views over the same
+    // runtime records, not synthetic reports reconstructed after rendering.
+    await save('asset-shortlists.json', dirResult.requestReports || []);
+    await save('pixel-inspections.json', dirResult.visualInspections || {});
+    await save('semantic-judgments.json', dirResult.editorialAssetJudgments || {});
+    await save('video-window-semantics.json', dirResult.videoWindowSelections || {});
+    await save('query-performance.json', dirResult.queryQualityFeedback || {});
 
     if (visualPolicy.enableLegacyVisualFamilies) specs.forEach((spec, i) => recast(spec, executionPlan.scenes[i], assets[spec.sceneId], format, i > 0 ? specs[i - 1] : null));
     await save('direction.json', specs);
     await save('assets.json', { assets, scenes: assetReport, search: assetReport.search, diagnostics: assetReport.diagnostics });
+    const selectedAssets = Object.values(assets).flatMap((sceneAssets) => Object.entries(sceneAssets.byShot || {}).map(([shotId, asset]) => ({ shotId, asset })));
+    await save('provider-performance.json', assetReport.search || {});
+    await save('license-verification.json', Object.fromEntries(selectedAssets.map(({ shotId, asset }) => [shotId, {
+      assetId: asset?.id || asset?.assetId || null,
+      provider: asset?.providerId || asset?.provider || null,
+      license: asset?.license || null,
+      accepted: Boolean(asset) && !asset.unresolved,
+    }])));
+    await save('final-selection-audit.json', (dirResult.requestReports || []).map((requestReport) => ({
+      ...requestReport,
+      visualProposition: assetRequests.find((request) => request.storyboardShotId === requestReport.storyboardShotId)?.visualProposition || null,
+      representation: assetRequests.find((request) => request.storyboardShotId === requestReport.storyboardShotId)?.representationDecision || null,
+      pixelInspection: dirResult.visualInspections?.[requestReport.storyboardShotId] || null,
+      semanticJudgment: dirResult.editorialAssetJudgments?.[requestReport.storyboardShotId] || null,
+      editorialUsefulness: dirResult.editorialUsefulnessRecords?.[requestReport.storyboardShotId] || null,
+      formatFitness: dirResult.formatFitnessEvaluations?.[requestReport.storyboardShotId] || null,
+      videoWindow: dirResult.videoWindowSelections?.[requestReport.storyboardShotId] || null,
+    })));
     if (assetReport.diagnostics) {
       await save('asset-quality-diagnostics.json', assetReport.diagnostics);
     }
@@ -396,7 +673,31 @@ export async function createFacelessVideo({
     const [sfxSources, bgmSource] = await Promise.all([ensureSoundEffects(), ensureBackgroundMusic(plan.style)]);
     sfx = Object.fromEntries(await Promise.all(Object.entries(sfxSources).map(async ([k, rel]) => [k, await copyIn(rel)])));
     bgm = { ...bgmSource, src: await copyIn(bgmSource.src) };
-    await job.completeStage('assets', ['asset-requests.json', 'assets.json', 'asset-quality-diagnostics.json', 'direction.json', 'continuity.json', 'credits.txt']);
+    await job.completeStage('assets', [
+      'asset-requests.json',
+      'visible-needs.json',
+      'asset-query-diagnostics.json',
+      'visual-inspection.json',
+      'visual-inspections.json',
+      'editorial-asset-judgments.json',
+      'editorial-usefulness.json',
+      'format-fitness.json',
+      'video-window-selection.json',
+      'asset-shortlists.json',
+      'pixel-inspections.json',
+      'semantic-judgments.json',
+      'video-window-semantics.json',
+      'query-performance.json',
+      'provider-performance.json',
+      'license-verification.json',
+      'final-selection-audit.json',
+      ...(Object.keys(dirResult.mediaReuseFallbacks || {}).length ? ['media-reuse-fallbacks.json'] : []),
+      'assets.json',
+      'asset-quality-diagnostics.json',
+      'direction.json',
+      'continuity.json',
+      'credits.txt',
+    ]);
   }
 
   // 6. Timeline Director + Visual Critic & static QC.
@@ -411,6 +712,7 @@ export async function createFacelessVideo({
   let creativeQaResult;
   let editContinuityDiagnostics;
   let editorialVisualPlan;
+  let editorialMediaQc = null;
   let compositionArtifacts = { sceneCompositions: {}, comparisonSpecs: {}, chartSpecs: {}, mediaSceneSpecs: {}, editorialVisualBeats: {}, mediaShotPlans: {}, solvedScenes: {}, motionPlans: {}, visualQualityReviews: {}, frameStatePreflight: {}, compositionFallbacks: [], mediaCompositionDiagnostics: {} };
 
   if (canReuse('timeline')) {
@@ -454,7 +756,7 @@ export async function createFacelessVideo({
     onProgress({ step: 5, message: 'Building the edit...' });
     editorialVisualPlan = buildEditorialVisualPlan({ storyboard, coveragePlan: visualCoveragePlan, specs, assets, format, visualPolicy });
     await save('editorial-visual-plan.json', editorialVisualPlan);
-    timeline = buildTimeline({ plan: executionPlan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc: path.basename(narrationFile), coveragePlan: visualCoveragePlan, editorialVisualPlan, visualPolicy });
+    timeline = buildTimeline({ plan: executionPlan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc: path.basename(narrationFile), coveragePlan: visualCoveragePlan, editorialVisualPlan, visualPolicy, productionProfile });
     compositionArtifacts = timeline._compositionArtifacts || compositionArtifacts;
     await save('scene-compositions.json', compositionArtifacts.sceneCompositions);
     await save('comparison-specs.json', compositionArtifacts.comparisonSpecs);
@@ -470,10 +772,11 @@ export async function createFacelessVideo({
     await save('media-composition-diagnostics.json', compositionArtifacts.mediaCompositionDiagnostics);
 
     criticReview = reviewVisualPlan(timeline, { plan: executionPlan, storyboard, continuityReport, assets });
-    await save('visual_critic.json', criticReview);
     if (criticReview.sceneRepairs?.length) {
       timeline = applySceneRepairs(timeline, criticReview.sceneRepairs);
+      criticReview = reviewVisualPlan(timeline, { plan: executionPlan, storyboard, continuityReport, assets });
     }
+    await save('visual_critic.json', criticReview);
     pacingDiagnostics = buildPacingDiagnostics(timeline, executionPlan);
     durationDiagnostics = buildDurationDiagnostics({
       budget: durationBudget,
@@ -481,6 +784,7 @@ export async function createFacelessVideo({
       narration,
       timeline,
       compressionPasses,
+      expansionPasses,
     });
     audioDiagnostics = buildAudioDiagnostics({
       narrationLoudness: narrationNorm,
@@ -528,11 +832,48 @@ export async function createFacelessVideo({
     await save('visual-design-diagnostics.json', realizationDiagnostics);
     await save('pacing-diagnostics.json', pacingDiagnostics);
     await save('duration-budget.json', durationDiagnostics);
+    // duration-budget.json starts as the immutable request budget, then gains
+    // measured narration/timeline results here. Refresh the request-stage
+    // checksum so a later `--from render` resume does not mistake this
+    // intentional enrichment for a missing/corrupt upstream artifact.
+    await job.checkpoints.refreshArtifactChecksums('request', ['duration-budget.json']);
     await save('audio-diagnostics.json', audioDiagnostics);
     await save('visual-coverage-diagnostics.json', visualCoverageDiagnostics);
 
     diagramDiagnostics = buildDiagramQualityDiagnostics(timeline, { format });
     await save('diagram-quality-diagnostics.json', diagramDiagnostics);
+
+    // Milestone Whole-Video Visual Sequence Review & Editorial Media QC
+    let judgments = dirResult?.editorialAssetJudgments;
+    if (!judgments) {
+      try {
+        judgments = JSON.parse(await fs.readFile(path.join(runDir, 'editorial-asset-judgments.json'), 'utf8'));
+      } catch {
+        judgments = {};
+      }
+    }
+    const allRealizedShots = timeline.realizedShots || timeline.scenes?.flatMap((s) => s.shots || []) || [];
+    const visualSequenceReview = evaluateVisualSequence({
+      shots: allRealizedShots,
+      storyboard,
+      editorialJudgments: judgments,
+      editorialMode: plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL',
+      format,
+    });
+    await save('visual-sequence-review.json', visualSequenceReview);
+
+    editorialMediaQc = {
+      version: 1,
+      format,
+      editorialMode: plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL',
+      sequenceVerdict: visualSequenceReview.verdict,
+      sequenceMetrics: visualSequenceReview.metrics,
+      sequenceWarnings: visualSequenceReview.warnings,
+      shotQualityReviews: compositionArtifacts.visualQualityReviews || {},
+      summary: visualSequenceReview.summary,
+    };
+    await save('editorial-media-qc.json', editorialMediaQc);
+    await save('editorial-production-qc.json', editorialMediaQc);
 
     await job.completeStage('timeline', [
       'timeline.json',
@@ -556,6 +897,9 @@ export async function createFacelessVideo({
       'frame-state-preflight.json',
       'edit-continuity-diagnostics.json',
       'media-composition-diagnostics.json',
+      'visual-sequence-review.json',
+      'editorial-media-qc.json',
+      'editorial-production-qc.json',
     ]);
   }
 
@@ -572,18 +916,47 @@ export async function createFacelessVideo({
   }
 
   await job.startStage('preRenderQa');
-  const staticQc = runTimelineQc(timeline, { plan: executionPlan, narration, assetReport, realizationDiagnostics, pacingDiagnostics, durationDiagnostics, audioDiagnostics, visualCoverageDiagnostics, editContinuityDiagnostics });
+  const staticQc = runTimelineQc(timeline, { plan: executionPlan, narration, assetReport, realizationDiagnostics, pacingDiagnostics, durationDiagnostics, audioDiagnostics, visualCoverageDiagnostics, editContinuityDiagnostics, publishMode });
   await save('qc.json', staticQc);
   printQc('Timeline QC', staticQc);
   if (!staticQc.ok) throw new Error(`Timeline QC failed — see ${path.join(runDir, 'qc.json')}`);
+
+  if (publishMode === 'PRODUCTION_RENDER' && criticReview?.status === 'major_revision') {
+    throw new Error(`Production render blocked by visual critic (${criticReview.score}/10, major revision). See visual_critic.json`);
+  }
+  if (publishMode === 'PRODUCTION_RENDER' && criticReview?.issues?.some((issue) => issue.type === 'single_shot_hold')) {
+    throw new Error(`Production render blocked by unresolved long visual holds. See visual_critic.json`);
+  }
 
   // Creative QA Production Acceptance Gate: Hard failures or FAILED shots must block production render
   if (creativeQaResult?.creativeQaAfter?.qualitySummary?.hardFailureCount > 0 || creativeQaResult?.creativeQaAfter?.qualitySummary?.failedCount > 0) {
     throw new Error(`Creative QA hard failure blocking render: ${creativeQaResult.creativeQaAfter.qualitySummary.hardFailureCount} hard failure(s), ${creativeQaResult.creativeQaAfter.qualitySummary.failedCount} failed shot(s). See creative-qa-after.json`);
   }
 
+  // Production Publishability Gate (Section 86 & 87)
+  if (publishMode === 'PRODUCTION_RENDER') {
+    let qcReport = editorialMediaQc;
+    if (!qcReport) {
+      try {
+        qcReport = JSON.parse(await fs.readFile(path.join(runDir, 'editorial-production-qc.json'), 'utf8'));
+      } catch {}
+    }
+    const verdict = qcReport?.sequenceVerdict;
+    if (verdict === 'FAILED' || verdict === 'WEAK') {
+      throw new Error(`Production render blocked by publishability gate: Sequence verdict is ${verdict}. Must be ACCEPTABLE or STRONG.`);
+    }
+    const hardWarnings = (qcReport?.sequenceWarnings || []).filter((w) => w.severity === 'error');
+    if (hardWarnings.length > 0) {
+      throw new Error(`Production render blocked: Hard editorial asset failures (${hardWarnings.map((w) => w.code).join(', ')}).`);
+    }
+    if ((qcReport?.sequenceMetrics?.maxRoleRun || 0) > 8) {
+      throw new Error(`Production render blocked: flat visual-role progression (${qcReport.sequenceMetrics.maxRoleRun} consecutive shots).`);
+    }
+  }
+
   let preflightContactSheet = null;
   let preRepairContactSheet = null;
+  let renderedSemanticQa = null;
   if (render || contactSheetOnly) {
     onProgress({ step: 5, message: 'Rendering contact sheet preview...' });
     if (creativeQaResult?.repairsApplied?.length > 0) {
@@ -594,6 +967,16 @@ export async function createFacelessVideo({
       await fs.mkdir(path.join(runDir, 'preview'), { recursive: true });
       await fs.copyFile(preflightContactSheet, path.join(runDir, 'preview', 'contact.png')).catch(() => {});
     }
+    await generateContactSheetDiagnostics(runDir, {
+      timeline,
+      editorialAssetJudgments: dirResult?.editorialAssetJudgments,
+      editorialUsefulnessRecords: dirResult?.editorialUsefulnessRecords,
+      requestReports: dirResult?.requestReports,
+    }).catch(() => {});
+    renderedSemanticQa = await verifyRenderedContactFrames(runDir, {
+      timeline,
+      production: publishMode === 'PRODUCTION_RENDER',
+    });
   }
   const preflightRelative = preflightContactSheet
     ? path.relative(runDir, preflightContactSheet).split(path.sep).join('/')
@@ -608,11 +991,22 @@ export async function createFacelessVideo({
     preflightContactSheet: preflightRelative,
     preRepairContactSheet: preRepairRelative,
   });
+  await save('pre-render-semantic-review.json', {
+    version: 1,
+    publishMode,
+    renderedPixelReview: renderedSemanticQa,
+    editorialProductionQc: editorialMediaQc || null,
+    timelineQc: staticQc,
+    passed: Boolean(renderedSemanticQa?.passed ?? !(render || contactSheetOnly))
+      && !(staticQc?.checks || []).some((check) => check.severity === 'error' && !check.ok),
+  });
   await job.completeStage('preRenderQa', [
     'qc-pre.json',
+    'pre-render-semantic-review.json',
     'visual_critic.json',
     ...(preflightRelative ? [preflightRelative] : []),
     ...(preRepairRelative ? [preRepairRelative] : []),
+    ...(preflightRelative ? ['preview/rendered-semantic-qa.json'] : []),
   ]);
 
   // Persist exact config snapshot and cache diagnostics (Milestone 12)
@@ -722,6 +1116,7 @@ export async function createFacelessVideo({
     audioBitrate: '192k',
     outputLocation: outputPath,
     inputProps,
+    scale: renderScale,
     ...(frameRange ? { frameRange } : {}),
     onProgress: ({ progress: p }) => {
       const pct = Math.round(p * 100);
@@ -759,6 +1154,10 @@ export async function createFacelessVideo({
   const renderQc = await runRenderQc(outputPath, timeline);
   printQc('Visual QA', renderQc);
   result.qc.render = renderQc;
+  if (!renderQc.ok) {
+    await save('qc.json', result.qc);
+    throw new Error(`Post-render QC failed — see ${path.join(runDir, 'qc.json')}`);
+  }
 
   try {
     const renderedCritic = await reviewRenderedFrames(outputPath, timeline, runDir);

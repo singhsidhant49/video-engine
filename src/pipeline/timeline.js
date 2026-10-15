@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { getStyle, buildPalette } from '../shared/styles.js';
 import { buildCaptionChunks, tokenizeScript } from '../services/alignmentService.js';
 import { resolveShotTiming } from './shotTimingResolver.js';
@@ -15,6 +16,12 @@ import { continuityCompatibility } from '../qc/editorialVisualQualityGate.js';
 import { resolveVisualPolicy } from '../config/visualMode.js';
 import { createEditorialVisualBeat, createMediaShotPlan } from './mediaEditorialPlanner.js';
 import { analyzeSubtitleContrast } from '../composition/mediaSceneSpec.js';
+
+function computeHash(content) {
+  if (!content) return 'none';
+  const str = typeof content === 'string' ? content : JSON.stringify(content);
+  return crypto.createHash('sha256').update(str).digest('hex').slice(0, 16);
+}
 
 /**
  * Timeline Director: plan + Visual Director specs + timed words + assets →
@@ -36,6 +43,34 @@ const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote', 'stat', 'process
 const TRANSITION_FRAMES = { cut: 0, dissolve: 14, push: 12, whip: 9, zoom: 12, wipe: 12, dip: 14, flash: 6, burn: 24, iris: 16 };
 const OVERLAY_TRANSITIONS = new Set(['dip', 'flash', 'burn']);
 const STOPWORDS = new Set(['the', 'a', 'an', 'of', 'to', 'and', 'in', 'on', 'for', 'with', 'at', 'by', 'or', 'is', 'are', 'was', 'its', 'it', 'this', 'that']);
+const STRUCTURED_STOPWORDS = new Set([...STOPWORDS, 'source', 'process', 'result', 'phase', 'step', 'title', 'flow', 'system']);
+
+function groundingToken(token) {
+  return token
+    .replace(/ies$/, 'y')
+    .replace(/(ing|ers|ed|es|s)$/, '');
+}
+
+function structuredDataGrounded(data, narration = '') {
+  if (!data) return false;
+  const narrationTokens = new Set(String(narration).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((token) => token.length > 3 && !STRUCTURED_STOPWORDS.has(token)).map(groundingToken));
+  const dataTokens = String(JSON.stringify(data)).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((token) => token.length > 3 && !STRUCTURED_STOPWORDS.has(token)).map(groundingToken);
+  if (!narrationTokens.size || !dataTokens.length) return false;
+  return dataTokens.some((token) => narrationTokens.has(token));
+}
+
+function safeSceneData(scene, representation, shapeIsValid) {
+  const groundingContext = [scene.narration, scene.visual, scene.emphasis, scene.focus, scene.text?.headline, scene.text?.kicker]
+    .filter(Boolean)
+    .join(' ');
+  if (shapeIsValid(scene.data) && structuredDataGrounded(scene.data, groundingContext)) return scene.data;
+  // Preserve a compact authored title while discarding an incompatible data
+  // shape. A list-to-diagram production fallback needs to synthesize nodes,
+  // but its grounded list title is still valid and should not be replaced by
+  // a looser editorial headline.
+  const groundedTitle = typeof scene.data?.title === 'string' ? scene.data.title : null;
+  return synthesizeProceduralData({ ...scene, data: groundedTitle ? { title: groundedTitle } : {} }, representation);
+}
 
 const TRANSITION_REASON = Object.freeze({
   NEW_IDEA: 'newIdea', NEW_EVIDENCE: 'newEvidence', NEW_ENTITY: 'newEntity', COMPARISON_PIVOT: 'comparisonPivot',
@@ -105,8 +140,12 @@ const SOLVED_COMPILERS = Object.freeze({
   media: compileSolvedMediaShot,
 });
 
-function solvedRepresentationFor(presentation, editorialPlan) {
+function solvedRepresentationFor(presentation, editorialPlan, visualPolicy = null) {
   const selected = editorialPlan?.selectedRepresentation;
+  const isProductionFallback = editorialPlan?.coverage?.representationDecision?.fallbackApplied === true;
+  if ((visualPolicy?.enableProceduralGraphics === false || visualPolicy?.useMediaEditorial) && !isProductionFallback) {
+    return 'media';
+  }
   if (selected === 'comparison' || selected === 'compare') return 'comparison';
   if (selected === 'chart' || selected === 'process') return selected;
   if (presentation.family === 'compare') return 'comparison';
@@ -326,7 +365,7 @@ function overlayFor(family, scene, ctx) {
       return { title: data.title, items: data.items, ats: sequential(data.items, true) };
     }
     case 'process': {
-      const data = scene.data?.steps ? scene.data : { steps: [{ title: 'Analyze' }, { title: 'Execute' }, { title: 'Verify' }] };
+      const data = safeSceneData(scene, 'process', (value) => Array.isArray(value?.steps));
       return { steps: data.steps, ats: sequential(data.steps.map((s) => s.title), true) };
     }
     case 'timeline': {
@@ -334,13 +373,13 @@ function overlayFor(family, scene, ctx) {
       return { events: data.events, ats: sequential(data.events.map((e) => `${e.date} ${e.label}`)) };
     }
     case 'chart': {
-      const data = scene.data?.values ? scene.data : synthesizeProceduralData(scene, 'chart');
+      const data = safeSceneData(scene, 'chart', (value) => Array.isArray(value?.values));
       const arrive = emphasisAt ? rel(emphasisAt.frame) + 6 : Math.round(clipDur * 0.6);
       const drawFrames = Math.round(Math.max(fps * 1.2, Math.min(arrive - settle, clipDur * 0.75)));
       return { ...data, at: settle, drawFrames };
     }
     case 'compare': {
-      const data = scene.data?.left && scene.data?.right ? scene.data : synthesizeProceduralData(scene, 'comparison');
+      const data = safeSceneData(scene, 'comparison', (value) => Boolean(value?.left && value?.right));
       const rightAt = data.right?.title ? anchorFrame(words, data.right.title) : null;
       return { ...data, leftAt: 2, rightAt: rightAt ? Math.max(14, rel(rightAt.frame) - 3) : Math.round(clipDur * 0.4), withImage: Boolean(assets?.primary) };
     }
@@ -349,25 +388,25 @@ function overlayFor(family, scene, ctx) {
       return { ...scene.data, at: settle, authorAt: settle + Math.round(fps * 0.8), words: wordsArr, wordAts: sequential(wordsArr, true) };
     }
     case 'document': {
-      const data = scene.data?.headline ? scene.data : synthesizeProceduralData(scene, 'document');
+      const data = safeSceneData(scene, 'document', (value) => Boolean(value?.headline));
       return { ...data, at: 0, highlightAt: emphasisAt ? rel(emphasisAt.frame) : Math.round(clipDur * 0.35) };
     }
     case 'chapter':
       return { ...scene.data, at: settle };
     case 'ui': {
-      const data = scene.data?.fileTree ? scene.data : synthesizeProceduralData(scene, 'ui');
+      const data = safeSceneData(scene, 'ui', (value) => Array.isArray(value?.fileTree));
       return { ...data, at: settle };
     }
     case 'code': {
-      const data = scene.data?.code ? scene.data : synthesizeProceduralData(scene, 'code');
+      const data = safeSceneData(scene, 'code', (value) => Boolean(value?.code));
       return { ...data, at: settle, from: settle, to: Math.round(clipDur * 0.75) };
     }
     case 'diagram': {
-      const data = scene.data?.nodes ? scene.data : synthesizeProceduralData(scene, 'diagram');
+      const data = safeSceneData(scene, 'diagram', (value) => Array.isArray(value?.nodes));
       return { ...data, at: settle };
     }
     case 'map': {
-      const data = scene.data?.regions ? scene.data : synthesizeProceduralData(scene, 'map');
+      const data = safeSceneData(scene, 'map', (value) => Array.isArray(value?.regions));
       return { ...data, at: settle };
     }
     default:
@@ -417,7 +456,7 @@ function chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy) {
 
 // ─── Main ──────────────────────────────────────────────────────────────────
 
-export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc, coveragePlan = [], editorialVisualPlan = [], visualPolicy: suppliedVisualPolicy = null }) {
+export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc, coveragePlan = [], editorialVisualPlan = [], visualPolicy: suppliedVisualPolicy = null, productionProfile = null }) {
   const timelineStartedAt = performance.now();
   // Direct compiler callers retain the regression-compatible path; the production
   // pipeline always passes its centrally resolved (MEDIA_EDITORIAL by default) policy.
@@ -573,9 +612,12 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
         continuityCompatibility: null,
       };
       const editorialPlan = editorialByShot.get(realizedShot.storyboardShotId);
+      const requiresMediaAsset = editorialPlan?.selectedRepresentation === 'media'
+        || realizedShot.presentation?.representationDecision?.selectedRepresentation === 'media'
+        || (!editorialPlan && ['image', 'montage'].includes(presentation.family));
       const visualBeat = visualPolicy.useMediaEditorial ? createEditorialVisualBeat({ shot: { ...timelineShot, entities: authoredShots.find((item) => item.id === timelineShot.storyboardShotId)?.entities || [] }, scene, timing, alignedWords: shotWords, visualChangeReason: transitionReason }) : null;
       if (visualBeat) editorialVisualBeats[visualBeat.id] = visualBeat;
-      if (visualPolicy.useMediaEditorial && !asset) {
+      if (visualPolicy.useMediaEditorial && requiresMediaAsset && !asset) {
         timelineShot.unresolvedMedia = true;
         asset = {
           type: 'image',
@@ -589,14 +631,33 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
         };
         timelineShot.asset = asset;
       }
-      const solvedRepresentation = visualPolicy.useMediaEditorial ? 'media' : solvedRepresentationFor(presentation, editorialPlan);
+
+      // Assert assetIdentityChain and content hash consistency (Sections 45, 60)
+      if (asset?.assetIdentityChain) {
+        if (asset.assetIdentityChain.timelineAssetId && asset.assetIdentityChain.timelineAssetId !== timelineShot.storyboardShotId) {
+          throw new Error(`asset_identity_drift: Asset identity chain mismatch for shot ${timelineShot.storyboardShotId}. Expected timelineAssetId ${timelineShot.storyboardShotId}, found ${asset.assetIdentityChain.timelineAssetId}`);
+        }
+        if (asset.sha256ContentHash && asset.assetIdentityChain.sha256ContentHash && asset.sha256ContentHash !== asset.assetIdentityChain.sha256ContentHash) {
+          throw new Error(`asset_identity_drift: Asset content hash mismatch for shot ${timelineShot.storyboardShotId}. Expected ${asset.assetIdentityChain.sha256ContentHash}, found ${asset.sha256ContentHash}`);
+        }
+      }
+
+      const judgment = asset?.editorialJudgment;
+      const visibleNeed = asset?.visibleNeed || timelineShot.visibleNeed;
+      const editorialApproval = {
+        classification: judgment?.classification || (timelineShot.unresolvedMedia ? 'UNRESOLVED' : 'DIRECT'),
+        confidence: judgment?.confidence ?? (timelineShot.unresolvedMedia ? 0 : 0.85),
+        semanticDistance: judgment?.semanticDistance ?? (timelineShot.unresolvedMedia ? 1.0 : 0.15),
+        judgeVersion: '2.0.0-editorial-hardened',
+        visibleNeedHash: computeHash(visibleNeed),
+        assetHash: asset?.sha256ContentHash || asset?.hash || computeHash(asset?.src || 'none'),
+        approved: !timelineShot.unresolvedMedia && judgment?.accepted !== false && judgment?.classification !== 'WRONG' && judgment?.classification !== 'ACCIDENTAL',
+        selectionReason: judgment?.selectionReason || (timelineShot.unresolvedMedia ? 'Unresolved media' : 'Approved standard timeline asset'),
+      };
+      timelineShot.editorialApproval = editorialApproval;
+      const solvedRepresentation = solvedRepresentationFor(presentation, editorialPlan, visualPolicy);
       if (solvedRepresentation && solvedFamilyEnabled(solvedRepresentation) && (editorialPlan || solvedRepresentation === 'media')) {
         const compiler = SOLVED_COMPILERS[solvedRepresentation];
-        if (visualPolicy.useMediaEditorial && scene.kind === 'chapter') overlay.chapter = true;
-        if (visualPolicy.useMediaEditorial && scene.kind === 'statistic' && scene.data?.value != null) {
-          overlay.stat = String(scene.data.value);
-          overlay.label = scene.data.label || scene.data.units || null;
-        }
         let failureStage = `${solvedRepresentation}_compile`;
         try {
           const compiled = compiler({
@@ -654,8 +715,10 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             timelineShot.compositionFallback = fallback;
             compositionFallbacks.push(fallback);
             frameStatePreflight[compiled.preflight.shotId].legacyFallbackUsed = true;
-            if (visualPolicy.useMediaEditorial) {
-              timelineShot.unresolvedMedia = true;
+            if (visualPolicy.useMediaEditorial && requiresMediaAsset) {
+              if (!asset || asset.unresolved) {
+                timelineShot.unresolvedMedia = true;
+              }
               timelineShot.renderMode = 'solved';
               timelineShot.solvedSceneId = compiled.solvedScene.id;
               timelineShot.motionPlanId = compiled.motionPlan.id;
@@ -682,7 +745,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             legacyFallbackUsed: true,
             fallback,
           };
-          if (visualPolicy.useMediaEditorial) {
+          if (visualPolicy.useMediaEditorial && requiresMediaAsset && (!asset || asset.unresolved)) {
             timelineShot.unresolvedMedia = true;
           }
         }
@@ -756,9 +819,10 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
 
   // Captions.
   const captionMode = visualPolicy.useMediaEditorial ? 'phrase' : format === 'landscape' && style.captions.mode === 'highlight' ? 'phrase' : style.captions.mode;
+  const captionEmphasisMode = format === 'shorts' ? (style.captions?.emphasis || 'KEYWORD') : (style.captions?.emphasis || 'NONE');
   const capLimits = format === 'shorts'
-    ? (captionMode === 'highlight' ? { maxWords: 3, maxChars: 20 } : { maxWords: 5, maxChars: 30 })
-    : { maxWords: 8, maxChars: 44 };
+    ? (captionMode === 'highlight' || captionEmphasisMode === 'ACTIVE_WORD' ? { maxWords: 3, maxChars: 22 } : { maxWords: 4, maxChars: 26 })
+    : { maxWords: 7, maxChars: 42 };
   const chunks = buildCaptionChunks(words, fps, capLimits).map((c) => ({ ...c, endFrame: Math.min(c.endFrame, totalFrames) }));
   const captionPolicies = clips.flatMap((clip) => clip.shots.map((shot) => ({
     shotId: shot.storyboardShotId,
@@ -815,6 +879,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
     palette,
     visualMode: visualPolicy.visualMode,
     visualPolicy,
+    productionProfile,
     artDirection: {
       palette,
       typeSystem: { display: style.fonts.display, text: style.fonts.text, mono: style.fonts.mono, displayWeight: style.display.weight, labelWeight: style.label.weight },
@@ -843,7 +908,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
     editorialVisualBeats,
     mediaShotPlans,
     cutOverlays,
-    captions: { mode: captionMode, chunks, hidden: captionsHidden, policies: captionPolicies, geometry: formatLayout.captionRegion },
+    captions: { mode: captionMode, emphasisMode: captionEmphasisMode, chunks, hidden: captionsHidden, policies: captionPolicies, geometry: formatLayout.captionRegion },
     audio: {
       narration: audioSrc,
       bgm: bgmConfig,

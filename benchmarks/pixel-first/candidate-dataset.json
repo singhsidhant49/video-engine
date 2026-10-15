@@ -1,0 +1,4602 @@
+[
+  {
+    "id": "c0b85e65f1d72486",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c0b85e65f1d72486.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time travel cartoon animation",
+    "intrinsicVisibleLabel": "time travel cartoon animation",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 1
+    }
+  },
+  {
+    "id": "2693bff65f965820",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\2693bff65f965820.jpg",
+    "niche": "finance",
+    "requestConcept": "split screen animation",
+    "intrinsicVisibleLabel": "Close-up of a grandfather and grandson with noses touching, symbolizing a loving bond.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 2
+    }
+  },
+  {
+    "id": "43ca8f4150418057",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\43ca8f4150418057.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "family tree animation",
+    "intrinsicVisibleLabel": "Three young baboons sitting on a tree branch in a natural setting, captured in wildlife photography.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 3
+    }
+  },
+  {
+    "id": "20c1ede1f5c74601",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\20c1ede1f5c74601.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "branching timelines animation",
+    "intrinsicVisibleLabel": "A vibrant cosmic nebula with stars scattered across the night sky, depicting the universe's vast bea",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 4
+    }
+  },
+  {
+    "id": "710e81f62afdd30d",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\710e81f62afdd30d.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "split screen animation",
+    "intrinsicVisibleLabel": "edit single clip filmora split screen",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 5
+    }
+  },
+  {
+    "id": "e58379aac1936526",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e58379aac1936526.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "family tree animation",
+    "intrinsicVisibleLabel": "FOMIYES Canvas Family Generation Genealogy Poster Genealogy Diagram Family Tree Diagram Fillable Bla",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 6
+    }
+  },
+  {
+    "id": "71f208ec4e666050",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\71f208ec4e666050.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "glitch effect animation",
+    "intrinsicVisibleLabel": "Colorful abstract portrait of a man with overlay and glitch effects, creating a modern, artistic aes",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 7
+    }
+  },
+  {
+    "id": "ceddec7602238b76",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\ceddec7602238b76.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "branching timelines animation",
+    "intrinsicVisibleLabel": "Branch Timeline Chart For PPT Presentation",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 8
+    }
+  },
+  {
+    "id": "3d7f6ba7663a8251",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3d7f6ba7663a8251.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "no entry sign",
+    "intrinsicVisibleLabel": "Red circular no entry sign in front of a mesh fence, symbolizing prohibition and security.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 9
+    }
+  },
+  {
+    "id": "4b72c4956d6bcf59",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\4b72c4956d6bcf59.jpg",
+    "niche": "software development",
+    "requestConcept": "fading person silhouette",
+    "intrinsicVisibleLabel": "A silhouette of a person looking up at a dramatic cloud-filled sky during twilight.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 10
+    }
+  },
+  {
+    "id": "4b26fca6c8194990",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\4b26fca6c8194990.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "circular arrow loop",
+    "intrinsicVisibleLabel": "Close-up of a circular two-way traffic sign with arrows under a clear blue sky.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 11
+    }
+  },
+  {
+    "id": "8f867e6a83f296b7",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\8f867e6a83f296b7.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time machine cartoon",
+    "intrinsicVisibleLabel": "a mickey mouse cartoon is standing in front of a machine with the words time machine keep out on it",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 12
+    }
+  },
+  {
+    "id": "3c3843f36d5f118e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3c3843f36d5f118e.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "question mark neon",
+    "intrinsicVisibleLabel": "Photo of paper question marks with hands and a pen suggesting curiosity and inquiry.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 13
+    }
+  },
+  {
+    "id": "4afb851eae1a4a2f",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\4afb851eae1a4a2f.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person fading silhouette",
+    "intrinsicVisibleLabel": "A person wrapped in a blanket standing in a sunlit field during sunset.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 14
+    }
+  },
+  {
+    "id": "916c6a5135f9525e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\916c6a5135f9525e.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "family tree diagram",
+    "intrinsicVisibleLabel": "File:Family Tree of the Dahis and Ghabra leaders.jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 15
+    }
+  },
+  {
+    "id": "60bfd814478b989c",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\60bfd814478b989c.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "glitch text effect",
+    "intrinsicVisibleLabel": "Colorful abstract art featuring vibrant digital ripples and glitch effects.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 16
+    }
+  },
+  {
+    "id": "0417580542e6b1e4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\0417580542e6b1e4.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "neon sign grandfather paradox",
+    "intrinsicVisibleLabel": "Blurred neon sign in Amsterdam's Chinatown at night, featuring glowing Chinese characters.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 17
+    }
+  },
+  {
+    "id": "a8800b496e50f657",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\a8800b496e50f657.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "physicist chalkboard equations",
+    "intrinsicVisibleLabel": "Two students solving complex math and chemistry equations on a chalkboard.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 18
+    }
+  },
+  {
+    "id": "7a13ba93b3328249",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\7a13ba93b3328249.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universe split",
+    "intrinsicVisibleLabel": "Do parallel universes exist? Do we live in just one of many bubble universes?",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 19
+    }
+  },
+  {
+    "id": "66ecbb478df6449f",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\66ecbb478df6449f.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "circular arrow loop",
+    "intrinsicVisibleLabel": "3 steps arrow loop symbol. Circular arrow for closed loop process. vector",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 20
+    }
+  },
+  {
+    "id": "c2bcf0ef113ff2c9",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c2bcf0ef113ff2c9.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "neon sign grandfather paradox",
+    "intrinsicVisibleLabel": "JOSEBRU Neon Sign King Boo The Ghost Face LED Neon Light Mario Lamp Acrylic Sign for Game Room Decor",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 21
+    }
+  },
+  {
+    "id": "5ea08ee5133eff09",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\5ea08ee5133eff09.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "melting clock surreal",
+    "intrinsicVisibleLabel": "A person sits with a large wall clock covering their face, creating a surreal and artistic visual.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 22
+    }
+  },
+  {
+    "id": "45e73af74880f02d",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\45e73af74880f02d.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "scientist thinking cartoon",
+    "intrinsicVisibleLabel": "A female scientist wearing protective gear examines plant samples in a laboratory setting.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 23
+    }
+  },
+  {
+    "id": "7b9cff97d6d20421",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\7b9cff97d6d20421.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person fading silhouette",
+    "intrinsicVisibleLabel": "Artistic blurred silhouette in a dark tunnel setting, conveying mystery.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 24
+    }
+  },
+  {
+    "id": "14fc051da1c73990",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\14fc051da1c73990.jpg",
+    "niche": "software development",
+    "requestConcept": "physicist chalkboard equations",
+    "intrinsicVisibleLabel": "branching universes network data",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 25
+    }
+  },
+  {
+    "id": "0e0c80b50cdf4ee4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\0e0c80b50cdf4ee4.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universe split",
+    "intrinsicVisibleLabel": "3D illustration featuring two hands pointing on a dark background.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 26
+    }
+  },
+  {
+    "id": "fc38226a2fe01f47",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\fc38226a2fe01f47.jpg",
+    "niche": "psychology",
+    "requestConcept": "melting clock surreal",
+    "intrinsicVisibleLabel": "A human brain model placed on a blue plate, viewed from above against a pastel background.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 27
+    }
+  },
+  {
+    "id": "e7241f69f1721a44",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e7241f69f1721a44.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "fading person silhouette",
+    "intrinsicVisibleLabel": "File:Question Mark butterfly on Common milkweed - DPLA - 5220d13f9a2ef04e6ccb42fe70dbed06.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 28
+    }
+  },
+  {
+    "id": "7bbfeb3a0d06ef8f",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\7bbfeb3a0d06ef8f.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "family tree animation",
+    "intrinsicVisibleLabel": "genealogy diagram",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 29
+    }
+  },
+  {
+    "id": "19d228469ab4aefb",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\19d228469ab4aefb.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "no entry sign",
+    "intrinsicVisibleLabel": "Vibrant close-up of a no entry sign against a cityscape, emphasizing traffic regulations.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 30
+    }
+  },
+  {
+    "id": "15279c31a61eebaf",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\15279c31a61eebaf.jpg",
+    "niche": "software development",
+    "requestConcept": "data center server room night",
+    "intrinsicVisibleLabel": "Focused view of a modern data server rack with blinking lights in a blue-lit environment.",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 31
+    }
+  },
+  {
+    "id": "fdaeca3e642cc2b4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\fdaeca3e642cc2b4.jpg",
+    "niche": "software development",
+    "requestConcept": "server rack red warning light",
+    "intrinsicVisibleLabel": "A long hallway of black server racks with blinking lights in a data center, with overhead lighting r",
+    "labels": {
+      "subjectMatch": 0.2,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 32
+    }
+  },
+  {
+    "id": "6bbf73f667903e7d",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6bbf73f667903e7d.jpg",
+    "niche": "software development",
+    "requestConcept": "code editor screen close up",
+    "intrinsicVisibleLabel": "Close-up of vibrant JavaScript code featuring functions and syntax highlighting.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 33
+    }
+  },
+  {
+    "id": "e0cfc0108db025bf",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e0cfc0108db025bf.jpg",
+    "niche": "software development",
+    "requestConcept": "network diagram servers",
+    "intrinsicVisibleLabel": "File:Network cables in server room.jpg",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 34
+    }
+  },
+  {
+    "id": "a4eeedc09f3591a6",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\a4eeedc09f3591a6.jpg",
+    "niche": "software development",
+    "requestConcept": "garbage collection diagram",
+    "intrinsicVisibleLabel": "File:Traditional software architecture.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 35
+    }
+  },
+  {
+    "id": "53c1fda9418d6b56",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\53c1fda9418d6b56.jpg",
+    "niche": "software development",
+    "requestConcept": "memory usage graph monitor",
+    "intrinsicVisibleLabel": "Dashboard Monitoring All Server Overview screenshot 1",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 36
+    }
+  },
+  {
+    "id": "a1000e379f6eb6df",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\a1000e379f6eb6df.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "system monitor terminal screen",
+    "intrinsicVisibleLabel": "Command Line for Beginners – How to Use the Terminal Like a Pro [Full Handbook]",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 37
+    }
+  },
+  {
+    "id": "b9a5c86691ba4e01",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\b9a5c86691ba4e01.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "linux terminal command line",
+    "intrinsicVisibleLabel": "Linux Command Line Tutorial – How to Use Common Terminal Commands",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 38
+    }
+  },
+  {
+    "id": "09af83aac6e358db",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\09af83aac6e358db.jpg",
+    "niche": "software development",
+    "requestConcept": "global network outage map",
+    "intrinsicVisibleLabel": "global network outage map",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 39
+    }
+  },
+  {
+    "id": "3b4b93ee8ca0521c",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3b4b93ee8ca0521c.jpg",
+    "niche": "software development",
+    "requestConcept": "data center server lights",
+    "intrinsicVisibleLabel": "File:DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a modern data center. The sce",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 40
+    }
+  },
+  {
+    "id": "5699c237fbf1dd3a",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\5699c237fbf1dd3a.jpg",
+    "niche": "software development",
+    "requestConcept": "server room rows",
+    "intrinsicVisibleLabel": "Row of similar lockers with various optic fiber cables in modern data server room",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 41
+    }
+  },
+  {
+    "id": "6d4ac27aadf40373",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6d4ac27aadf40373.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time machine cockpit",
+    "intrinsicVisibleLabel": "20+ Vintage Photos of Grandparents Who Were Too Cool for Their Time",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 42
+    }
+  },
+  {
+    "id": "cb28351dd137ebdf",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\cb28351dd137ebdf.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "question mark neon",
+    "intrinsicVisibleLabel": "Close-up of three wooden arrows pointing in opposite directions on a beige surface.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 43
+    }
+  },
+  {
+    "id": "e8272d7dd595a040",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e8272d7dd595a040.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline snapping",
+    "intrinsicVisibleLabel": "right-click on the timeline and select enable timeline snapping",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 44
+    }
+  },
+  {
+    "id": "c237d5adb9c7b8dc",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c237d5adb9c7b8dc.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "straight arrow",
+    "intrinsicVisibleLabel": "File:Straight as an arrow - geograph.org.uk - 3075322.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 45
+    }
+  },
+  {
+    "id": "25804ff36656496e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\25804ff36656496e.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "cause and effect diagram",
+    "intrinsicVisibleLabel": "A close-up shot of a hand pushing dominoes, illustrating cause and effect.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 46
+    }
+  },
+  {
+    "id": "4bf76744a3145d76",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\4bf76744a3145d76.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person fading away",
+    "intrinsicVisibleLabel": "File:Psalm 6-2 “Be gracious to me, LORD, because I am fading away (51105998415).jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 47
+    }
+  },
+  {
+    "id": "f0bea3a448b45247",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\f0bea3a448b45247.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "red X mark",
+    "intrinsicVisibleLabel": "red cross mark, error symbol, rejection sign, negative indicator, Red X PNG",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 48
+    }
+  },
+  {
+    "id": "8bc97ea60383054f",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\8bc97ea60383054f.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "Marty McFly hand fading",
+    "intrinsicVisibleLabel": "File:DragonCon 2012 Parade - Marty McFly Cosplayer.jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 49
+    }
+  },
+  {
+    "id": "6e77ba0b453e160a",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6e77ba0b453e160a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "scientist scratching head",
+    "intrinsicVisibleLabel": "High-resolution dark chalkboard texture perfect for educational and design projects.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 50
+    }
+  },
+  {
+    "id": "28b5e0540df37ac6",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\28b5e0540df37ac6.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "branching timelines",
+    "intrinsicVisibleLabel": "File:The parallel microscopic Universe V.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 51
+    }
+  },
+  {
+    "id": "d378dbe713627adb",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\d378dbe713627adb.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universes",
+    "intrinsicVisibleLabel": "File:The parallel microscopic Universe IV.jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 52
+    }
+  },
+  {
+    "id": "8ee06f951747401c",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\8ee06f951747401c.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time traveler thumbs up",
+    "intrinsicVisibleLabel": "Transparent Happy Traveler With Thumbs Up and Backpack",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 53
+    }
+  },
+  {
+    "id": "c33013b555a4281e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c33013b555a4281e.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "retro time travel illustration",
+    "intrinsicVisibleLabel": "A collection of ornate vintage pocket watches hanging beautifully from chains.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 54
+    }
+  },
+  {
+    "id": "1e83130fa886680a",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\1e83130fa886680a.jpg",
+    "niche": "software development",
+    "requestConcept": "smartphone screen cloud storage icons",
+    "intrinsicVisibleLabel": "File:DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a modern data center. The sce",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 55
+    }
+  },
+  {
+    "id": "71779dfb1dda9604",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\71779dfb1dda9604.jpg",
+    "niche": "software development",
+    "requestConcept": "server farm data center interior",
+    "intrinsicVisibleLabel": "A hand holding a smartphone displaying a photo app with diverse media.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 56
+    }
+  },
+  {
+    "id": "8b5b26bcbce68908",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\8b5b26bcbce68908.jpg",
+    "niche": "software development",
+    "requestConcept": "globe network connections data lines",
+    "intrinsicVisibleLabel": "Earth as a globe with glowing digital lines connecting countries and continents, virtual data stream",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 57
+    }
+  },
+  {
+    "id": "bce847829350a2a3",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\bce847829350a2a3.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "world map glowing dots data centers",
+    "intrinsicVisibleLabel": "Hands holding a smartphone displaying a world map on a white background, emphasizing global connecti",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 58
+    }
+  },
+  {
+    "id": "79bdc04277606b06",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\79bdc04277606b06.jpg",
+    "niche": "software development",
+    "requestConcept": "file packets animation fiber optic",
+    "intrinsicVisibleLabel": "Row of similar lockers with various optic fiber cables in modern data server room",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 59
+    }
+  },
+  {
+    "id": "b0510c87d3ef3c85",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\b0510c87d3ef3c85.jpg",
+    "niche": "software development",
+    "requestConcept": "server rack data duplication",
+    "intrinsicVisibleLabel": "Rows of blue cables and wires plugged into server patch panel located in modern data center framewor",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 60
+    }
+  },
+  {
+    "id": "3ec6809593b6f439",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3ec6809593b6f439.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person using phone laptop tablet same photo",
+    "intrinsicVisibleLabel": "A digital device displaying data connected to a laptop in a tech-savvy setup.",
+    "labels": {
+      "subjectMatch": 0.167,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 61
+    }
+  },
+  {
+    "id": "d5c9650c50ba8c0e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\d5c9650c50ba8c0e.jpg",
+    "niche": "software development",
+    "requestConcept": "server racks multiplying animation",
+    "intrinsicVisibleLabel": "Plastic-wrapped globe illustrating global pollution and environmental awareness.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 62
+    }
+  },
+  {
+    "id": "3ce6488178b43469",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3ce6488178b43469.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "globe wrapped in data streams",
+    "intrinsicVisibleLabel": "Global Network Illuminated Earth Globe with Digital Data Streams and Connections png",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 63
+    }
+  },
+  {
+    "id": "3ccacb9c509d0da4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\3ccacb9c509d0da4.jpg",
+    "niche": "software development",
+    "requestConcept": "code editor screen close up",
+    "intrinsicVisibleLabel": "Close-up view of programming code in a text editor on a computer screen.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 64
+    }
+  },
+  {
+    "id": "b20fdd14a3e466e3",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\b20fdd14a3e466e3.jpg",
+    "niche": "software development",
+    "requestConcept": "network diagram servers",
+    "intrinsicVisibleLabel": "High-tech server rack in a secure data center with network cables and hardware components.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 65
+    }
+  },
+  {
+    "id": "6a173122c0d818bd",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6a173122c0d818bd.jpg",
+    "niche": "software development",
+    "requestConcept": "computer memory RAM close up",
+    "intrinsicVisibleLabel": "Free stock image of Computer Memory Close up",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 66
+    }
+  },
+  {
+    "id": "27fd08bc7bc6f6f9",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\27fd08bc7bc6f6f9.jpg",
+    "niche": "software development",
+    "requestConcept": "memory usage graph monitor",
+    "intrinsicVisibleLabel": "HardwareVisualizer dashboard showing CPU, memory, GPU, process, and sensor monitoring",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 67
+    }
+  },
+  {
+    "id": "c75b577b445d96e7",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c75b577b445d96e7.jpg",
+    "niche": "software development",
+    "requestConcept": "data center server lights",
+    "intrinsicVisibleLabel": "Detailed image of a server rack with glowing lights in a modern data center.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 68
+    }
+  },
+  {
+    "id": "29edd2fab4894592",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\29edd2fab4894592.jpg",
+    "niche": "software development",
+    "requestConcept": "server room rows",
+    "intrinsicVisibleLabel": "A server room with rows of servers in it",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 69
+    }
+  },
+  {
+    "id": "c6f5433278b2c6c4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c6f5433278b2c6c4.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time machine illustration",
+    "intrinsicVisibleLabel": "File:The Time Machine by Norman Saunders.jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 70
+    }
+  },
+  {
+    "id": "9b535223804dd5d9",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\9b535223804dd5d9.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "baby silhouette disappearing",
+    "intrinsicVisibleLabel": "a mickey mouse cartoon is standing in front of a machine with the words time machine keep out on it",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 71
+    }
+  },
+  {
+    "id": "deae1bc2435588f1",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\deae1bc2435588f1.jpg",
+    "niche": "science/history",
+    "requestConcept": "timeline animation",
+    "intrinsicVisibleLabel": "Dimly lit museum exhibit hall showcasing historical timelines and interactive displays.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 72
+    }
+  },
+  {
+    "id": "afd8ebe1be53f9af",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\afd8ebe1be53f9af.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "looping timeline animation",
+    "intrinsicVisibleLabel": "Close-up of a circular two-way traffic sign with arrows under a clear blue sky.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 73
+    }
+  },
+  {
+    "id": "c7082428e95f79e5",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c7082428e95f79e5.jpg",
+    "niche": "software development",
+    "requestConcept": "flickering person animation",
+    "intrinsicVisibleLabel": "Innovative portrait of a person with blonde hair and binary code overlay. Digital art effect with tr",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 74
+    }
+  },
+  {
+    "id": "e96ebb3d206e5bf1",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e96ebb3d206e5bf1.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "glitch effect",
+    "intrinsicVisibleLabel": "Abstract double exposure portrait with colorful glitch effect, creating a modern, artistic feel.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 75
+    }
+  },
+  {
+    "id": "cca883e4d93e5652",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\cca883e4d93e5652.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universes split screen",
+    "intrinsicVisibleLabel": "File:Travel Time System.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 76
+    }
+  },
+  {
+    "id": "9e27c21a5aaff317",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\9e27c21a5aaff317.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "no time travel sign",
+    "intrinsicVisibleLabel": "File:Travel times sign on SR-52 in Orem.jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 77
+    }
+  },
+  {
+    "id": "607fe5cbf407ffea",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\607fe5cbf407ffea.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "clock and stars",
+    "intrinsicVisibleLabel": "ALAZA Moon and Stars Black Round Wall Clock Non-Ticking Silent Battery Operated Decorative Clock for",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 78
+    }
+  },
+  {
+    "id": "60e2bcbad5b15538",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\60e2bcbad5b15538.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "vintage man wool coat flat cap portrait",
+    "intrinsicVisibleLabel": "Portrait of an older bearded man wearing a flat cap and vintage attire. Outdoors setting.",
+    "labels": {
+      "subjectMatch": 0.714,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 79
+    }
+  },
+  {
+    "id": "9e21c7ddf4310414",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\9e21c7ddf4310414.jpg",
+    "niche": "science/history",
+    "requestConcept": "chalkboard physics equations handwriting",
+    "intrinsicVisibleLabel": "Close-up of hand writing physics equations on a chalkboard indoors.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 80
+    }
+  },
+  {
+    "id": "f045ed4544572178",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\f045ed4544572178.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline loop animation glowing",
+    "intrinsicVisibleLabel": "Episode 16: Novikov Self-Consistency Principle",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 81
+    }
+  },
+  {
+    "id": "6fbf8b1bf6de8e74",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6fbf8b1bf6de8e74.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline loop animation glowing",
+    "intrinsicVisibleLabel": "Time Travel Secrets of the Past, Present, and Future",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 82
+    }
+  },
+  {
+    "id": "454b9f34183f39e0",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\454b9f34183f39e0.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "branching tree of light 3d render",
+    "intrinsicVisibleLabel": "Dynamic abstract design featuring 3D geometric shapes and striking neon lights creating a futuristic",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 83
+    }
+  },
+  {
+    "id": "db1f574c83f11dac",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\db1f574c83f11dac.jpg",
+    "niche": "software development",
+    "requestConcept": "parallel universe concept art",
+    "intrinsicVisibleLabel": "Modern digital spheres interconnected by glowing lines, showcasing a futuristic network concept.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 84
+    }
+  },
+  {
+    "id": "470029560fffc9a6",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\470029560fffc9a6.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "hands holding old family photograph",
+    "intrinsicVisibleLabel": "File:Unidentified soldier in Union uniform with four women, one holding photograph, and one man, pro",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 85
+    }
+  },
+  {
+    "id": "7a2b1c3df343c287",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\7a2b1c3df343c287.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "cosmic web large scale structure",
+    "intrinsicVisibleLabel": "File:The effects of the Universe’s large-scale structure on the light from distant galaxies (noirlab",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 86
+    }
+  },
+  {
+    "id": "0318991c64d81c84",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\0318991c64d81c84.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "silhouette standing at glowing fork path",
+    "intrinsicVisibleLabel": "A mysterious silhouette stands illuminated on a forest path at night.",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 87
+    }
+  },
+  {
+    "id": "a5377b2e0554d7f7",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\a5377b2e0554d7f7.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "vintage 1940s street fog night",
+    "intrinsicVisibleLabel": "Moody scene of a vintage car parked under foggy street lights at night.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 88
+    }
+  },
+  {
+    "id": "bed08aec743c7da1",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\bed08aec743c7da1.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "confused man portrait dramatic light",
+    "intrinsicVisibleLabel": "Close-up profile of a man in dramatic lighting, creating a moody atmosphere.",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 89
+    }
+  },
+  {
+    "id": "4e68f7566c7a740a",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\4e68f7566c7a740a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "circular arrows loop animation",
+    "intrinsicVisibleLabel": "File:Accidental Adversaries Causal Loop.jpg",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 90
+    }
+  },
+  {
+    "id": "50fc97ed4422ed4b",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\50fc97ed4422ed4b.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "tree branches splitting diagram",
+    "intrinsicVisibleLabel": "Lush green tree canopy with sprawling branches creating a peaceful outdoor atmosphere.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "ACCIDENTAL",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.9,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": true,
+      "ordinal": 91
+    }
+  },
+  {
+    "id": "942254980e28ebca",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\942254980e28ebca.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel timelines side by side",
+    "intrinsicVisibleLabel": "Earth as a globe with glowing digital lines connecting countries and continents, virtual data stream",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 92
+    }
+  },
+  {
+    "id": "c57b6cf5b78bf54c",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\c57b6cf5b78bf54c.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "stable glowing line",
+    "intrinsicVisibleLabel": "A detailed shot of cracked glass with radiating lines on a moody background.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 93
+    }
+  },
+  {
+    "id": "1954b4711c1886ec",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\1954b4711c1886ec.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "checkmark over timeline",
+    "intrinsicVisibleLabel": "A simple white paper checklist with one red checkmark, ideal for concepts like completion or approva",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 94
+    }
+  },
+  {
+    "id": "2bca52e07e2e1576",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\2bca52e07e2e1576.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "infinite mirror effect earth",
+    "intrinsicVisibleLabel": "Mirror reflecting unique rock formations in Cappadocia, creating a surreal visual effect.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 95
+    }
+  },
+  {
+    "id": "ce65c7881a9c05fd",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\ce65c7881a9c05fd.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person looking at starry sky",
+    "intrinsicVisibleLabel": "Silhouetted person gazes at a starry night sky with the Milky Way and shooting star.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 96
+    }
+  },
+  {
+    "id": "ec30b09cfeda1bf7",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\ec30b09cfeda1bf7.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "retro time machine cartoon",
+    "intrinsicVisibleLabel": "a mickey mouse cartoon is standing in front of a machine with the words time machine keep out on it",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 97
+    }
+  },
+  {
+    "id": "7abf7712adaaf2c2",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\7abf7712adaaf2c2.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "family tree animation",
+    "intrinsicVisibleLabel": "Elderly man walking by a bench in a park, framed by tree silhouettes at dusk.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 98
+    }
+  },
+  {
+    "id": "808c42146775dc5e",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\808c42146775dc5e.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "circular arrow loop animation",
+    "intrinsicVisibleLabel": "Green Clean Minimalist Fishbone Diagram Cause Effect Document A5",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 99
+    }
+  },
+  {
+    "id": "b4119d7d4d85c3d5",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\b4119d7d4d85c3d5.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "vintage train station night fog",
+    "intrinsicVisibleLabel": "Eerie night scene of a train arriving at a foggy Moscow station under dim lights.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 100
+    }
+  },
+  {
+    "id": "2b87f095d2cd1887",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\2b87f095d2cd1887.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "philosopher hands old book",
+    "intrinsicVisibleLabel": "Hand writing mathematical equations on a chalkboard in a classroom setting.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 101
+    }
+  },
+  {
+    "id": "00699a762309c683",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\00699a762309c683.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "physicist writing equations blackboard",
+    "intrinsicVisibleLabel": "From above of small chalks on shabby narrow shelf of aged blackboard hanging on wall in daylight",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 102
+    }
+  },
+  {
+    "id": "40d56cf43934bb81",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\40d56cf43934bb81.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline animation abstract",
+    "intrinsicVisibleLabel": "A creative digital render of blue geometric patterns with dynamic lines in an abstract style.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 103
+    }
+  },
+  {
+    "id": "536f501040a42735",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\536f501040a42735.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel lines glowing blue",
+    "intrinsicVisibleLabel": "A tranquil forest path with a fallen branch, surrounded by lush green trees.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 104
+    }
+  },
+  {
+    "id": "479beb3bf12e8b19",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\479beb3bf12e8b19.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "elderly man smiling garden",
+    "intrinsicVisibleLabel": "Elderly man smiles while tending to lush green garden, surrounded by tropical plants.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 105
+    }
+  },
+  {
+    "id": "2dc210a375189d10",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\2dc210a375189d10.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "two rivers aerial view",
+    "intrinsicVisibleLabel": "Aerial shot of Chattanooga, Tennessee, showcasing the city skyline and Tennessee River.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 106
+    }
+  },
+  {
+    "id": "fdb3eea7e1130f11",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\fdb3eea7e1130f11.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "Back to the Future",
+    "intrinsicVisibleLabel": "File:Alexey Parygin Posturbanism Back to the Future 2023 Art Exhibition SPb-4.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 107
+    }
+  },
+  {
+    "id": "780d86b3a2dd7817",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\780d86b3a2dd7817.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "hand holding photograph fading",
+    "intrinsicVisibleLabel": "File:Back To the Future Part III DeLorean.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 108
+    }
+  },
+  {
+    "id": "2df1335a6459e4b7",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\2df1335a6459e4b7.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "vintage study pocket watch",
+    "intrinsicVisibleLabel": "A timeless still life of a vintage pocket watch with Roman numerals on a rock in black and white.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 109
+    }
+  },
+  {
+    "id": "f95acea8bab3fb94",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\f95acea8bab3fb94.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "old family photo album",
+    "intrinsicVisibleLabel": "Explore vintage family photo albums filled with black and white photographs, capturing timeless memo",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 110
+    }
+  },
+  {
+    "id": "1972414455b6ebf4",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\1972414455b6ebf4.jpg",
+    "niche": "science/history",
+    "requestConcept": "deep space stars nebula",
+    "intrinsicVisibleLabel": "Beautiful green nebula in deep space with stars shining brightly.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 111
+    }
+  },
+  {
+    "id": "5addb1f243fd0c16",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\5addb1f243fd0c16.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline animation abstract",
+    "intrinsicVisibleLabel": "3D rendered abstract eco-system depicting nature and technology symbiosis.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 112
+    }
+  },
+  {
+    "id": "e59e39074e27a669",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e59e39074e27a669.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "1940s street at night silhouette",
+    "intrinsicVisibleLabel": "A dramatic silhouette of a man smoking in an outdoor, nighttime setting.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 113
+    }
+  },
+  {
+    "id": "d9ce07120c6c7bb0",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\d9ce07120c6c7bb0.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "young man facing older man dramatic",
+    "intrinsicVisibleLabel": "A contemplative young man sits in dim lighting, casting dramatic shadows.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 114
+    }
+  },
+  {
+    "id": "174eb11d1cea1b2a",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\174eb11d1cea1b2a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "abstract glowing timeline loop",
+    "intrinsicVisibleLabel": "Different artificial light figures representing circles and beams with tangled wavy lines glowing in",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 115
+    }
+  },
+  {
+    "id": "44bfee3b4a25aea0",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\44bfee3b4a25aea0.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "broken circle light dark background",
+    "intrinsicVisibleLabel": "Captivating abstract light painting featuring illuminated blue circles on a dark background.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 116
+    }
+  },
+  {
+    "id": "e91a80276f5a6298",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\e91a80276f5a6298.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "cosmic nebula abstract",
+    "intrinsicVisibleLabel": "Vivid abstract cosmic energy burst with pink nebula and stars.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 117
+    }
+  },
+  {
+    "id": "bbbcd43f4341bf98",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\bbbcd43f4341bf98.jpg",
+    "niche": "science/history",
+    "requestConcept": "silhouette walking on light path",
+    "intrinsicVisibleLabel": "A silhouette of a person walking towards the light at the end of a tunnel.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 118
+    }
+  },
+  {
+    "id": "fcb45ab47a22bcd0",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\fcb45ab47a22bcd0.jpg",
+    "niche": "science/history",
+    "requestConcept": "glowing line of light in space",
+    "intrinsicVisibleLabel": "A person standing on a hill at night, creating light trails under a vast starry sky.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 119
+    }
+  },
+  {
+    "id": "6dfa8d34947960c1",
+    "candidatePath": "D:\\projects\\videogenerator\\.cache\\image_bank\\6dfa8d34947960c1.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "David Deutsch physicist portrait",
+    "intrinsicVisibleLabel": "File:David Deutsch.jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 120
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "hand scrolling smartphone at night",
+    "intrinsicVisibleLabel": "Close-up of hands holding a smartphone displaying various app icons in a dimly lit room.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 121
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "world map with glowing connections",
+    "intrinsicVisibleLabel": "The glowing world map showcasing digital connections and global networks photo",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 122
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "science/history",
+    "requestConcept": "video call on laptop",
+    "intrinsicVisibleLabel": "A person is seated at a desk in front of a computer screen, engaged in a video call with another individual. The screen displays the other person in a well-lit, indoor setting. The room has a cozy atmosphere with warm lighting and indoor plants visible in the background. The logo \"mightydeals.\" is visible in the bottom right corner of the image.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 123
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "fiber optic cable cross section",
+    "intrinsicVisibleLabel": "armored submarine fiber optic cable cross-section - what does fiber optic cable look like",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 124
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "light pulses in fiber optic",
+    "intrinsicVisibleLabel": "Diagram comparing single-mode and multimode optical fibers, showing a narrow input pulse, guided light paths, and how pulse broadening from dispersion makes output pulses wider in multimode fiber.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 125
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "steel armored cable",
+    "intrinsicVisibleLabel": "HAC732-300: 7/32″ Stainless Steel Armored Cable",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 126
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_007_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_007_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "undersea cable ocean floor",
+    "intrinsicVisibleLabel": "fiber optic cable water surface",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 127
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_008_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_008_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "MAREA cable map",
+    "intrinsicVisibleLabel": "Map of Marea cable path across Atlantic Ocean",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 128
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_009_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_009_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "data center servers",
+    "intrinsicVisibleLabel": "File:DALL·E 2025-01-31 21.58.22 - A realistic image of the interior of a modern data center. The scene features long rows of tall, sleek server racks filled with blinking LED lights. T.webp",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 129
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-20-46-scene_010_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-20-46\\public\\assets\\scene_010_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "sunset over ocean",
+    "intrinsicVisibleLabel": "Peaceful sunset over the ocean, capturing a serene and tranquil atmosphere.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 130
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "globe earth oceans glowing network lines",
+    "intrinsicVisibleLabel": "Earth as a globe with glowing digital lines connecting countries and continents, virtual data streams and information loops flowing around the globe to illustrate global networking, people and devices from different parts of the world connected by visible, glowing links, iconic communication symbols like emails, social media, video conferences, and cloud services surrounding the globe, a network of satellites bringing digital signals from space to Earth, surrounding the Earth, the Earth",
+    "labels": {
+      "subjectMatch": 0.833,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 131
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "engineer looking blueprint control room",
+    "intrinsicVisibleLabel": "Row of similar lockers with various optic fiber cables in modern data server room",
+    "labels": {
+      "subjectMatch": 0.2,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 132
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "fiber optic cable cross section macro",
+    "intrinsicVisibleLabel": "armored submarine fiber optic cable cross-section - what does fiber optic cable look like",
+    "labels": {
+      "subjectMatch": 0.833,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 133
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_003_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_003_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "laser light pulse fiber optic",
+    "intrinsicVisibleLabel": "An artistic shot of fiber optic lights on a dark background creating a bokeh effect with vivid colors.",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 134
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "undersea cable repeater node",
+    "intrinsicVisibleLabel": "undersea cables",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 135
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "atlantic ocean map cable route",
+    "intrinsicVisibleLabel": "Map of Marea cable path across Atlantic Ocean",
+    "labels": {
+      "subjectMatch": 0.8,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 136
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_005_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_005_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "atlantic ocean map cable route",
+    "intrinsicVisibleLabel": "atlantic ocean map cable route",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 137
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person streaming video on smartphone",
+    "intrinsicVisibleLabel": "Close-up of a person's hand holding a smartphone with social media on screen outdoors.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 138
+    }
+  },
+  {
+    "id": "video-2026-10-02T09-47-34-scene_006_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T09-47-34\\public\\assets\\scene_006_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "underwater cables ocean floor glowing",
+    "intrinsicVisibleLabel": "Peaceful underwater view with sunlight streaming through clear water onto the sandy ocean floor.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 139
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "open ocean waves aerial dusk",
+    "intrinsicVisibleLabel": "Captivating aerial shot of ocean waves crashing, showcasing dynamic foam and blue waters.",
+    "labels": {
+      "subjectMatch": 0.6,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 140
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_001_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_001_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "underwater cable glowing",
+    "intrinsicVisibleLabel": "Stunning image of a glowing purple jellyfish drifting in the dark ocean waters.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 141
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "submarine cable cross section",
+    "intrinsicVisibleLabel": "File:HVDC Submarine Cable Cross Section - from New Zealand Inter-island scheme.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 142
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_002_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_002_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "fiber optic strands macro",
+    "intrinsicVisibleLabel": "Abstract image of ethereal fiber optic strands cascading with glowing blue lights.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 143
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "light pulses fiber optic",
+    "intrinsicVisibleLabel": "Diagram comparing single-mode and multimode optical fibers, showing a narrow input pulse, guided light paths, and how pulse broadening from dispersion makes output pulses wider in multimode fiber.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 144
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "submarine repeater station",
+    "intrinsicVisibleLabel": "File:Minister Tarana Halim Visits Submarine Cable Landing Station, Kuakata, Patuakhali, 2017-03-01.j",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 145
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "world map submarine cables",
+    "intrinsicVisibleLabel": "File:World map of submarine cables.png",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 146
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-04-17-scene_005_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-04-17\\public\\assets\\scene_005_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "people using phones",
+    "intrinsicVisibleLabel": "File:People using pay phones in Tokyo area Japan - March 28 2019 10-12 AM.jpeg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 147
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time traveler ray gun",
+    "intrinsicVisibleLabel": "Stylish woman in futuristic sci-fi attire posing with a ray gun in a vibrant studio setting.",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 148
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "fading person",
+    "intrinsicVisibleLabel": "concept of person fading away in the sand of an hourglass.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 149
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "question mark",
+    "intrinsicVisibleLabel": "White pills arranged into a question mark shape on a vibrant yellow background.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 150
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "Novikov self-consistency principle",
+    "intrinsicVisibleLabel": "Episode 16: Novikov Self-Consistency Principle",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 151
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "gun jam",
+    "intrinsicVisibleLabel": "Gun Jam review: This gun is definitely jammed",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 152
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_005_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_005_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "bird flying",
+    "intrinsicVisibleLabel": "File:076 Olive-bellied sunbird flying at Kibale National Park Photo by Giles Laurent.jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 153
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "timeline split",
+    "intrinsicVisibleLabel": "ChronoFlo's Vertical split timeline, showing events on the left and right of a central vertical time scale",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 154
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_007_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_007_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universe",
+    "intrinsicVisibleLabel": "File:Parallel Universe Self-Oscillating Fuzz.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 155
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_007_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_007_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universe",
+    "intrinsicVisibleLabel": "File:The parallel microscopic Universe IV.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 156
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_008_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_008_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "scientist chalkboard",
+    "intrinsicVisibleLabel": "A scientist examines mathematical and chemical formulas on a chalkboard.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 157
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_009_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_009_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "trench coat spy",
+    "intrinsicVisibleLabel": "Spy Trench Coat",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 158
+    }
+  },
+  {
+    "id": "video-2026-10-02T10-11-05-scene_010_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T10-11-05\\public\\assets\\scene_010_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "clocks gears",
+    "intrinsicVisibleLabel": "File:Clock gears in the St Maximus church in Magnac-Laval 03.jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 159
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "jet engine combustor close up",
+    "intrinsicVisibleLabel": "A jet engine combustor section",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 160
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_001_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_001_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "chamber glowing",
+    "intrinsicVisibleLabel": "A white-bearded wizard in a dark blue robe holds a glowing green orb in a dimly lit stone chamber with candles.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 161
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "molten metal dripping",
+    "intrinsicVisibleLabel": "extraordinary artistic Molten Metal Dripping Onto Ice Shard Transparent Background detailed png",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 162
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_002_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_002_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "jet engine running wing",
+    "intrinsicVisibleLabel": "Laptop showing ChatGPT interface on a marble surface, showcasing AI technology.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 163
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_003_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_003_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "jet engine blueprint",
+    "intrinsicVisibleLabel": "Artistic depiction of a neutron star surrounded by a glowing magnetic field.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 164
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "turbine blade thermal barrier coating",
+    "intrinsicVisibleLabel": "Benefits of Thermal Barrier Coatings for High-Temperature Alloys",
+    "labels": {
+      "subjectMatch": 0.4,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 165
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "turbine blade cooling holes",
+    "intrinsicVisibleLabel": "Quality Control of Cooling Holes in Aircraft Turbine Blades",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 166
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "finance",
+    "requestConcept": "thermal imaging turbine blade",
+    "intrinsicVisibleLabel": "Wind turbine blade thermal inspection for apid fault finding for structural cracks, delamination, and kissing bonds using themography",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 167
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_007_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_007_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "single crystal turbine blade",
+    "intrinsicVisibleLabel": "Detailed overhead view of industrial jet engine turbine blades showcasing intricate patterns.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 168
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_008_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_008_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "turbine blade test data",
+    "intrinsicVisibleLabel": "File:Jet Flap Stator Blade Test in the High Reaction Turbine Blade Cascade Tunnel (GRC-1970-C-00626).jpg",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 169
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_009_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_009_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "airplane cruising altitude",
+    "intrinsicVisibleLabel": "A festive crowd gathered outdoors in Paris, France at a rocket launch event under a clear blue sky.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 170
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-22-00-scene_009_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-22-00\\public\\assets\\scene_009_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "cooling holes",
+    "intrinsicVisibleLabel": "File:Mac Studio (2023) - detail of cooling airflow holes on rear side.jpg",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 171
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "smartphone screen glowing particles",
+    "intrinsicVisibleLabel": "A hand interacts with a glowing smartphone screen in a neon-lit setting, featuring vibrant gradient colors.",
+    "labels": {
+      "subjectMatch": 0.75,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 172
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_001_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_001_shot_02_a.jpg",
+    "niche": "science/history",
+    "requestConcept": "quantum particle abstract",
+    "intrinsicVisibleLabel": "Abstract black and white graphic featuring a multimodal model pattern with various shapes.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 173
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "electron passing through",
+    "intrinsicVisibleLabel": "Questions\n\nWhen an electron is passing through a magnetic field, then:",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 174
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "flash memory chip",
+    "intrinsicVisibleLabel": "File:Raspberry Pi 4 8GB Memory Chip (50120709591).jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 175
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "transistor animation electrons",
+    "intrinsicVisibleLabel": "Detailed black and white close-up of an electronic circuit board with capacitors and transistors.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 176
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_004_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_004_shot_02_a.jpg",
+    "niche": "software development",
+    "requestConcept": "transistors, tunneling lets active demonstration or relevant scene",
+    "intrinsicVisibleLabel": "Dynamic scene of colorful gas clouds and stars in a cosmic nebula.",
+    "labels": {
+      "subjectMatch": 0.143,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 177
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_005_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_005_shot_02_a.jpg",
+    "niche": "science/history",
+    "requestConcept": "transistor array microscope",
+    "intrinsicVisibleLabel": "Captivating deep space view of the Tarantula Nebula with intricate star clusters.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 178
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "health",
+    "requestConcept": "light particles sensor",
+    "intrinsicVisibleLabel": "Learn about a virtual slow-motion camera that can capture photons or light particles moving through space which may be useful in medical imaging, in industrial or scientific use or even in consumer photography",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 179
+    }
+  },
+  {
+    "id": "video-2026-10-02T11-30-49-scene_007_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T11-30-49\\public\\assets\\scene_007_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person scrolling phone night",
+    "intrinsicVisibleLabel": "Close-up of a person's hand holding a smartphone with social media on screen outdoors.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 180
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time machine glowing",
+    "intrinsicVisibleLabel": "Detailed close-up of a vintage pocket watch showcasing its intricate gold mechanical gears.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 181
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "grandfather paradox. If connecting or transmitting",
+    "intrinsicVisibleLabel": "grandfather paradox. If connecting or transmitting",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 182
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_002_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_002_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person fading transparent",
+    "intrinsicVisibleLabel": "concept of person fading away in the sand of an hourglass.",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 183
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "circular arrow diagram",
+    "intrinsicVisibleLabel": "Close-up of a blue directional arrow traffic sign against a neutral background.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 184
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "ouroboros snake symbol",
+    "intrinsicVisibleLabel": "File:Hammar Axis-Ouroboros Symbol 2010.jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 185
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "Novikov self-consistency principle",
+    "intrinsicVisibleLabel": "Episode 16: Novikov Self-Consistency Principle",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 186
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "cartoon gun jamming",
+    "intrinsicVisibleLabel": "Stylish woman in futuristic sci-fi attire posing with a ray gun in a vibrant studio setting.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 187
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_006_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_006_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "grandfather walking away",
+    "intrinsicVisibleLabel": "Person walking in a chroma key suit in a studio with green screen for video editing.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 188
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_007_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_007_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "branching timeline",
+    "intrinsicVisibleLabel": "Branch Timeline Chart For PPT Presentation",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 189
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_007_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_007_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "parallel universes",
+    "intrinsicVisibleLabel": "Parallel Universes Floating Spheres Wallpaper",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 190
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_008_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_008_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "So grandfather paradox active demonstration or relevant scene",
+    "intrinsicVisibleLabel": "Dynamic scene of colorful gas clouds and stars in a cosmic nebula.",
+    "labels": {
+      "subjectMatch": 0.167,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 191
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-17-18-scene_009_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-17-18\\public\\assets\\scene_009_shot_01_a.jpg",
+    "niche": "software development",
+    "requestConcept": "universe zoom out",
+    "intrinsicVisibleLabel": "Two developers engage in software programming on a laptop in a modern office setting.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 192
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_001_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_001_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "time machine illustration",
+    "intrinsicVisibleLabel": "File:Illustration 1919 Machine Boirault.jpg",
+    "labels": {
+      "subjectMatch": 0.667,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 193
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_002_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_002_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "grandfather clock",
+    "intrinsicVisibleLabel": "A serene vintage room featuring a classic grandfather clock, wooden furniture, and soft lighting.",
+    "labels": {
+      "subjectMatch": 1,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 194
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_003_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_003_shot_01_a.jpg",
+    "niche": "business",
+    "requestConcept": "grandparent meeting vintage",
+    "intrinsicVisibleLabel": "File:Nokia 3310 grey base.jpg",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 195
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_004_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_004_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "person vanishing puff",
+    "intrinsicVisibleLabel": "Person writing complex mathematical equations on a blackboard, focusing on education and learning.",
+    "labels": {
+      "subjectMatch": 0.333,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 196
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_005_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_005_shot_01_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "existence non-existence",
+    "intrinsicVisibleLabel": "File:Les Oblats de Marie Immaculée durant le premier siècle de leur existence (1914) (14596165690).jpg",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 197
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_005_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_005_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "existence non-existence",
+    "intrinsicVisibleLabel": "Free Ai Generated Existence illustration and picture",
+    "labels": {
+      "subjectMatch": 0.5,
+      "actionMatch": 0.2,
+      "evidenceValue": 0.8,
+      "semanticClass": "DIRECT",
+      "editorialUsefulness": "STRONG",
+      "distraction": 0.15,
+      "licenseValidity": false,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 198
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_006_shot_01",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_006_shot_01_a.jpg",
+    "niche": "science/history",
+    "requestConcept": "scientific laboratory connecting or transmitting",
+    "intrinsicVisibleLabel": "Detailed view of lab glassware with tubes and clamps in a laboratory setting.",
+    "labels": {
+      "subjectMatch": 0.25,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.5,
+      "semanticClass": "CONTEXTUAL",
+      "editorialUsefulness": "USEFUL",
+      "distraction": 0.15,
+      "licenseValidity": true,
+      "accept": true
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 199
+    }
+  },
+  {
+    "id": "video-2026-10-02T13-23-05-scene_006_shot_02",
+    "candidatePath": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-02T13-23-05\\public\\assets\\scene_006_shot_02_a.jpg",
+    "niche": "tech/AI",
+    "requestConcept": "scientist shrugging",
+    "intrinsicVisibleLabel": "Two scientists in protective gear analyzing data in a laboratory setting.",
+    "labels": {
+      "subjectMatch": 0,
+      "actionMatch": 0.7,
+      "evidenceValue": 0.1,
+      "semanticClass": "WRONG",
+      "editorialUsefulness": "WEAK",
+      "distraction": 0.7,
+      "licenseValidity": true,
+      "accept": false
+    },
+    "review": {
+      "method": "intrinsic-provider-label-versus-legacy-request audit",
+      "status": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+      "deterministicConfuserRule": false,
+      "ordinal": 200
+    }
+  }
+]

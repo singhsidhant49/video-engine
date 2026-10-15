@@ -22,6 +22,10 @@ export const AssetRequestSchema = z.object({
   exclusions: z.array(z.string().min(1)).max(20).default([]),
   continuityKey: z.string().min(1).optional(),
   assetIntent: z.enum(['entity', 'evidence', 'atmosphere', 'action', 'location', 'concept', 'product', 'historical', 'interface', 'document', 'data', 'background']),
+  visibleNeed: z.any().optional(),
+  visualProposition: z.any().optional(),
+  representationDecision: z.any().optional(),
+  queryLadder: z.any().optional(),
 }).strict().superRefine((request, ctx) => {
   if (request.preferredSource !== 'procedural' && !request.stagedQueries.specific.length && !request.stagedQueries.fallback.length) {
     ctx.addIssue({ code: 'custom', path: ['stagedQueries'], message: 'Media requests need at least one staged query' });

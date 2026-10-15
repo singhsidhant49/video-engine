@@ -40,7 +40,7 @@ await renderMedia({
 });
 const renderQc = await runRenderQc(outputPath, timeline);
 const renderedCritic = await reviewRenderedFrames(outputPath, timeline, runDir);
-const priorQc = JSON.parse(await fs.readFile(path.join(runDir, 'qc-pre.json'), 'utf8'));
+const priorQc = await fs.readFile(path.join(runDir, 'qc-pre.json'), 'utf8').then(JSON.parse).catch(() => fs.readFile(path.join(runDir, 'qc.json'), 'utf8').then(JSON.parse).catch(() => ({})));
 await fs.writeFile(path.join(runDir, 'qc.json'), JSON.stringify({
   ...priorQc,
   render: renderQc,

@@ -22,28 +22,28 @@ test('production visual policy defaults to media editorial and keeps legacy expl
   assert.equal(legacy.enableProceduralGraphics, true);
 });
 
-test('media editorial converts procedural preferences into real-media requests', () => {
+test('hybrid policy keeps explanatory data shots procedural', () => {
   const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'semiconductor factory floor', searchConcepts: ['chip factory'], mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'preferred', durationHint: 3 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
-  assert.notEqual(request.preferredSource, 'procedural');
+  assert.equal(request.preferredSource, 'procedural');
   assert.deepEqual([request.constraints.minWidth, request.constraints.minHeight], [1920, 1080]);
 });
 
-test('media editorial data requests route to real-media providers', () => {
+test('procedural data requests bypass real-media providers', () => {
   const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'fast website loading', searchConcepts: ['website loading'], mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 3 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
   const provider = createProvider({ id: 'pexels-image', supports: () => true, search: async () => [] });
   const routed = routeAssetProviders(request, analyzeAssetRequest(request), [provider]);
-  assert.deepEqual(routed.map((entry) => entry.provider.id), ['pexels-image']);
+  assert.deepEqual(routed.map((entry) => entry.provider.id), []);
 });
 
-test('interface requests retain stock and generic media fallbacks', () => {
+test('interface requests route to the UI family instead of generic stock fallbacks', () => {
   const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'browser address bar close up', searchConcepts: ['typing on laptop keyboard'], mediaPreference: 'procedural', assetIntent: 'interface', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 4 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
   const providers = ['pexels-image', 'generic-library'].map((id) => createProvider({ id, supports: () => true, search: async () => [] }));
   const context = analyzeAssetRequest(request);
   const routed = routeAssetProviders(request, context, providers, 'CONCEPTUAL_FALLBACK');
-  assert.deepEqual(routed.map((entry) => entry.provider.id), ['pexels-image', 'generic-library']);
+  assert.deepEqual(routed.map((entry) => entry.provider.id), []);
   assert.deepEqual(context.targetSubject, ['browser', 'address', 'bar']);
 });
 
@@ -77,10 +77,10 @@ test('static fallback-quality data media can use restrained editorial upscaling'
   assert.equal(result.preflight.issues.some((issue) => issue.code === 'camera_resolution_insufficient'), false);
 });
 
-test('media editorial realization never selects a procedural family and defaults stills to static', () => {
+test('hybrid editorial realization preserves a procedural family when it communicates the proposition better', () => {
   const scene = { id: 'scene', kind: 'process', purpose: 'evidence', intensity: 3, informationDensity: 3, visualIntent: 'Show manufacturing evidence', storyboardShots: [{ id: 'shot', role: 'graphic', visualConcept: 'factory process', mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'required' }] };
   const [shot] = realizeSceneShots({ scene, spec: { family: 'process', variant: 'flow', treatment: 'editorial', camera: { magnitude: .05, baseScale: 1 } }, sceneAssets: { primary: asset, alternates: [] }, timings: [{ startFrame: 0, endFrame: 90, durationInFrames: 90 }], sectionId: 'section', memory: createPresentationMemory(), visualPolicy: resolveVisualPolicy(), format: 'landscape' });
-  assert.equal(shot.presentation.family, 'image');
+  assert.equal(shot.presentation.family, 'process');
   assert.equal(shot.presentation.cameraMove, 'static');
 });
 

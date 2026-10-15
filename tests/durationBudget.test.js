@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics } from '../src/storyboard/durationBudget.js';
-import { compressPlanScript } from '../src/services/aiDirectorService.js';
+import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
+import { compressPlanScript, validateCompressionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('calculateDurationBudget derives balanced word and time constraints for 75s explainer', () => {
@@ -38,7 +38,22 @@ test('estimateScriptDuration computes word count and estimated speech seconds', 
   assert.ok(Math.abs(est.estimatedTotalSec - (17 / 2.6 + 0.5)) < 0.05);
 });
 
-test('compressPlanScript deterministically compresses overlong scripts while preserving hook and payoff', async () => {
+test('narration duration repair aims safely inside the accepted range', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 120, format: 'landscape' });
+  const speed = calculateNarrationRepairSpeed({
+    currentSpeed: 0.84,
+    actualDurationSec: 113.67,
+    budget,
+  });
+
+  assert.equal(budget.targetNarrationSec, 113.5);
+  assert.ok(budget.targetNarrationSec < budget.allowedMinDuration);
+  assert.ok(speed < 0.84, 'A narration just below the boundary must be slowed further');
+  const projectedDuration = 113.67 * (0.84 / speed);
+  assert.ok(projectedDuration >= budget.allowedMinDuration + 0.7);
+});
+
+test('offline compression preserves complete hook and payoff when safe shortening is unavailable', async () => {
   const overlongPlan = {
     title: 'Test Overlong Script',
     scenes: [
@@ -58,10 +73,35 @@ test('compressPlanScript deterministically compresses overlong scripts while pre
   const compressed = await compressPlanScript(overlongPlan, targetWords, targetWords + 5, null);
   const finalWords = compressed.scenes.map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
 
-  assert.ok(finalWords <= targetWords + 5, `Expected <= ${targetWords + 5} words, got ${finalWords}`);
+  assert.ok(finalWords <= initialWords, `Expected no script growth, got ${finalWords} words from ${initialWords}`);
   assert.equal(compressed.scenes.length, 6, 'Must preserve all scene IDs');
   assert.equal(compressed.scenes[0].purpose, 'hook');
   assert.equal(compressed.scenes[5].purpose, 'payoff');
+});
+
+test('compression rejects a structurally valid response that undershoots the duration budget', () => {
+  const plan = {
+    scenes: [
+      { id: 's1', narration: 'One two three four five six seven eight nine ten.' },
+      { id: 's2', narration: 'Eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty.' },
+    ],
+  };
+  const undersized = { scenes: [{ id: 's1', narration: 'Too short.' }, { id: 's2', narration: 'Still short.' }] };
+  assert.throws(
+    () => validateCompressionCandidate(plan, undersized, 20, 22),
+    /undershot the word budget/,
+  );
+  assert.equal(plan.scenes[0].narration, 'One two three four five six seven eight nine ten.');
+});
+
+test('compression validation assigns stable editing IDs before plan normalization', () => {
+  const plan = { scenes: [{ narration: 'One two three four five.' }, { narration: 'Six seven eight nine ten.' }] };
+  const candidate = { scenes: [
+    { id: '__scene_001', narration: 'One two three four five.' },
+    { id: '__scene_002', narration: 'Six seven eight nine ten.' },
+  ] };
+  const validated = validateCompressionCandidate(plan, candidate, 10, 11);
+  assert.equal(validated.wordCount, 10);
 });
 
 test('timeline QC enforces duration tolerance and reports hard failure outside 10%', () => {
@@ -88,4 +128,20 @@ test('timeline QC enforces duration tolerance and reports hard failure outside 1
   const durCheck = qcFail.checks.find((c) => c.id === 'duration-tolerance');
   assert.equal(durCheck.ok, false, 'Timeline exceeding hard limits must fail duration-tolerance check');
   assert.equal(durCheck.severity, 'error');
+});
+
+test('production timeline QC rejects duration outside the ideal range even inside hard limits', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 75 });
+  const timeline = {
+    fps: 30,
+    durationInFrames: 30 * 80,
+    clips: [{ id: 'c1', from: 0, durationInFrames: 30 * 80, enter: { type: 'cut' }, shots: [{ id: 'sh1', storyboardShotId: 'sh1', sceneId: 'c1', sectionId: 's1', presentation: { layout: 'full' }, durationInFrames: 30 * 80, from: 0 }] }],
+  };
+  const diagnostics = buildDurationDiagnostics({ budget, timeline });
+  const development = runTimelineQc(timeline, { durationDiagnostics: diagnostics });
+  const production = runTimelineQc(timeline, { durationDiagnostics: diagnostics, publishMode: 'PRODUCTION_RENDER' });
+
+  assert.equal(development.ok, true);
+  assert.equal(production.ok, false);
+  assert.equal(production.checks.find((check) => check.id === 'duration-tolerance')?.severity, 'error');
 });

@@ -1,7 +1,10 @@
 import { config } from '../config/index.js';
 import { STYLES, STYLE_IDS, DEFAULT_STYLE, hexToHue } from '../shared/styles.js';
 import { normalizeToken, tokenizeScript } from './alignmentService.js';
-import { calculateDurationBudget } from '../storyboard/durationBudget.js';
+import { calculateDurationBudget, DEFAULT_SPEECH_RATE_WPS } from '../storyboard/durationBudget.js';
+
+const wordBudget = (seconds) => Math.round(Number(seconds || 0) * (DEFAULT_SPEECH_RATE_WPS || 2.60));
+const editableSceneId = (scene, index) => scene?.id || `__scene_${String(index + 1).padStart(3, '0')}`;
 
 /**
  * Editorial Director.
@@ -60,6 +63,7 @@ Scene = {
   "visual": string,          // one concrete sentence: what fills the frame and where attention goes
   "imageQueries": [string],  // 1–3 stock/archive photo searches for what is literally shown. Concrete nouns, no adjectives like "cinematic" or "8k".
   "entity": { "name": string, "wikipedia": string } | null,  // a real person/org/place/event on screen; "wikipedia" = exact English Wikipedia article title
+  "source": { "url": string, "label": string } | null, // required for dates, numbers, quotations, "first/oldest/largest", and other checkable factual claims
   "text": { "kicker": string?, "headline": string? } | null,  // on-screen text, see rules
   "emphasis": string | null, // the exact word or short phrase from THIS narration that the visual should land on
   "data": object | null,     // required for data kinds, schema below
@@ -105,7 +109,7 @@ EDITORIAL & PACING RULES:
 5. CINEMATIC FOOTAGE FIRST: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. A great video is visual cinema, not a PowerPoint slide deck.
 6. USE GRAPHICS SPARINGLY: Use "chart", "process", "quote", "statement", or "comparison" ONLY for 1 or 2 high-impact anchor moments in the entire video. Never use graphic/data kinds in consecutive scenes or in more than 20% of total scenes.
 7. On-screen text supports, never transcribes. "kicker" = a label such as a place/date/name ("NEW YORK · 2008"). "headline" = ≤6 words, a claim or keyword that is NOT a paraphrase of the whole sentence. Most photo scenes need no text at all.
-8. Truth: every number, quote, name and document must come from the narration and be real. Never invent quotes, documents, sources or statistics. If unsure, use a photo scene instead.
+8. Truth: every number, date, quote, historical superlative, name and document must be real. For a checkable factual claim, provide a direct source URL in scene.source. Never invent a source; if you cannot cite it, rewrite the sentence without the unsupported exact claim.
 9. "emphasis" must be copied verbatim from that scene's narration.
 10. Write for the ear: short sentences, concrete nouns, a strong hook in the first sentence, a payoff at the end.
 11. Direct the feel, not just the content: vary shot scale (establish wide, then move closer), give the key revelations importance 4–5 and the connective sentences 1–2, and mark 1–2 moments per minute as "quiet".`;
@@ -180,7 +184,30 @@ async function callJson(llm, messages, { temperature = 0.6, retries = 2, timeout
   throw new Error(`${llm.name} failed: ${lastErr?.message}`);
 }
 
-/** Deterministic compression fallback */
+/** Deterministic, extractive compression fallback. */
+function finishTruncatedSentence(words) {
+  const kept = [...words];
+  // Prefer punctuation that already completed a sentence in the source.
+  // Appending a period to an arbitrary word prefix can manufacture fragments
+  // such as "This." or "Without logical.".
+  for (let index = kept.length - 1; index >= 0; index--) {
+    if (/[.!?]["')\]]*$/.test(kept[index])) {
+      const text = kept.slice(0, index + 1).join(' ').trim();
+      if (text.split(/\s+/).length >= 4) return text;
+    }
+  }
+
+  // A comma or semicolon can delimit a complete leading clause. Only use it
+  // when the result is substantive and does not end with a connector.
+  for (let index = kept.length - 1; index >= 3; index--) {
+    if (/[,;:]["')\]]*$/.test(kept[index])) {
+      const text = kept.slice(0, index + 1).join(' ').replace(/[,;:]+["')\]]*$/, '').trim();
+      if (text && !DANGLING_END_RE.test(`${text}.`)) return `${text}.`;
+    }
+  }
+  return '';
+}
+
 export function deterministicCompress(plan, targetWords) {
   let currentWords = (plan.scenes || []).map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
   if (currentWords <= targetWords) return plan;
@@ -196,8 +223,7 @@ export function deterministicCompress(plan, targetWords) {
     if (words.length > 5) {
       const trimCount = Math.min(excess, Math.max(1, Math.floor(words.length * 0.45)));
       const keep = Math.max(5, words.length - trimCount);
-      scene.narration = words.slice(0, keep).join(' ');
-      if (!/[.!?]$/.test(scene.narration)) scene.narration += '.';
+      scene.narration = finishTruncatedSentence(words.slice(0, keep)) || scene.narration;
       currentWords = plan.scenes.map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
     }
   }
@@ -210,8 +236,7 @@ export function deterministicCompress(plan, targetWords) {
       const excess = currentWords - targetWords;
       if (words.length > 4) {
         const keep = Math.max(4, words.length - excess);
-        scene.narration = words.slice(0, keep).join(' ');
-        if (!/[.!?]$/.test(scene.narration)) scene.narration += '.';
+        scene.narration = finishTruncatedSentence(words.slice(0, keep)) || scene.narration;
         currentWords = plan.scenes.map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
       }
     }
@@ -225,6 +250,23 @@ export function deterministicCompress(plan, targetWords) {
  * Compresses an overlong video plan script to meet a target word budget.
  * Preserves the hook, core mechanism, and final payoff.
  */
+export function validateCompressionCandidate(plan, compressed, targetWords, maxWords) {
+  if (!Array.isArray(compressed?.scenes) || compressed.scenes.length !== plan.scenes.length) {
+    throw new Error('compression response changed the scene count');
+  }
+  const compressedById = new Map(compressed.scenes.map((scene) => [scene?.id, scene]));
+  const hasEveryScene = compressedById.size === plan.scenes.length
+    && plan.scenes.every((scene, index) => compressedById.get(editableSceneId(scene, index))?.narration?.trim());
+  if (!hasEveryScene) throw new Error('compression response changed scene IDs or omitted narration');
+  const narrations = plan.scenes.map((scene, index) => compressedById.get(editableSceneId(scene, index)).narration.replace(/\s+/g, ' ').trim());
+  const wordCount = narrations.join(' ').split(/\s+/).filter(Boolean).length;
+  const minWords = Math.round(targetWords * 0.93);
+  if (wordCount < minWords) {
+    throw new Error(`compression response undershot the word budget (${wordCount} words; minimum ${minWords})`);
+  }
+  return { compressedById, narrations, wordCount, minWords, maxWords };
+}
+
 export async function compressPlanScript(plan, targetWords, maxWords = Math.round(targetWords * 1.05), llm = llmConfig()) {
   const currentWords = (plan.scenes || []).map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
   if (currentWords <= maxWords) return plan;
@@ -235,8 +277,8 @@ export async function compressPlanScript(plan, targetWords, maxWords = Math.roun
   }
 
   try {
-    const sceneList = plan.scenes.map((s) => ({
-      id: s.id,
+    const sceneList = plan.scenes.map((s, index) => ({
+      id: editableSceneId(s, index),
       purpose: s.purpose,
       importance: s.importance,
       narration: s.narration,
@@ -259,21 +301,25 @@ export async function compressPlanScript(plan, targetWords, maxWords = Math.roun
       },
     ]);
 
-    if (Array.isArray(compressed?.scenes) && compressed.scenes.length === plan.scenes.length) {
+    if (Array.isArray(compressed?.scenes)) {
+      // Validate the complete candidate before touching the working plan. An
+      // LLM can satisfy the JSON shape while badly undershooting the requested
+      // duration; accepting that response used to turn a 120s script into 85s.
+      const { compressedById, narrations: candidateNarrations, wordCount: wordsCount } = validateCompressionCandidate(
+        plan, compressed, targetWords, maxWords,
+      );
+
       for (let i = 0; i < plan.scenes.length; i++) {
-        const match = compressed.scenes.find((c) => c.id === plan.scenes[i].id) || compressed.scenes[i];
-        if (match?.narration) {
-          plan.scenes[i].narration = match.narration;
-          if (match.emphasis && match.narration.includes(match.emphasis)) {
-            plan.scenes[i].emphasis = match.emphasis;
-          } else {
-            const words = match.narration.split(/\s+/).filter((w) => w.length > 4);
-            plan.scenes[i].emphasis = words[0] || plan.scenes[i].emphasis;
-          }
+        const match = compressedById.get(editableSceneId(plan.scenes[i], i));
+        plan.scenes[i].narration = candidateNarrations[i];
+        if (match.emphasis && match.narration.includes(match.emphasis)) {
+          plan.scenes[i].emphasis = match.emphasis;
+        } else {
+          const words = match.narration.split(/\s+/).filter((w) => w.length > 4);
+          plan.scenes[i].emphasis = words[0] || plan.scenes[i].emphasis;
         }
       }
       plan.script = plan.scenes.map((s) => s.narration).join(' ');
-      const wordsCount = plan.script.split(/\s+/).filter(Boolean).length;
       if (wordsCount > maxWords) {
         console.log(`   ✂️ LLM compression returned ${wordsCount} words (exceeds max ${maxWords}). Trimming deterministically to ${targetWords}...`);
         return deterministicCompress(plan, targetWords);
@@ -287,10 +333,81 @@ export async function compressPlanScript(plan, targetWords, maxWords = Math.roun
   return deterministicCompress(plan, targetWords);
 }
 
+/** Expand an undersized script without changing its scene structure or adding
+ * unsupported exact claims. If no LLM is configured, leave the script intact
+ * so the duration gate can fail honestly instead of padding with filler. */
+export async function expandPlanScript(plan, targetWords, minWords = Math.round(targetWords * 0.93), llm = llmConfig(), correctionAttempt = 0) {
+  const currentWords = (plan.scenes || []).map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
+  if (currentWords >= minWords || !llm) return plan;
+
+  console.log(`   ↗️ Expanding script from ${currentWords} words to ~${targetWords} words (minimum ${minWords})...`);
+  const sceneList = (plan.scenes || []).map((scene, index) => ({
+    id: editableSceneId(scene, index),
+    purpose: scene.purpose,
+    narration: scene.narration,
+  }));
+  try {
+    const expanded = await callJson(llm, [
+      {
+        role: 'system',
+        content: 'You are a careful documentary script editor. Expand an undersized script with useful explanation, not filler. Preserve all scene IDs and factual meaning. Do not introduce new exact numbers, quotations, dates, people, organizations, accusations, or medical/financial claims. Reply with JSON only.',
+      },
+      {
+        role: 'user',
+        content: `Expand this ${currentWords}-word script to between ${minWords} and ${Math.round(targetWords * 1.04)} words. Keep exactly ${sceneList.length} scenes and the same IDs. Add definitions, causal explanation, concrete but non-numeric context, and transitions. Do not repeat sentences. Return {"scenes":[{"id":string,"narration":string,"emphasis":string|null}]} only.\n${JSON.stringify(sceneList)}`,
+      },
+    ], { temperature: 0.35, retries: 2, timeoutMs: 60000 });
+    if (!Array.isArray(expanded?.scenes) || expanded.scenes.length !== plan.scenes.length) {
+      if (correctionAttempt < 1) {
+        console.warn('   Expansion response changed the scene count; requesting one corrective expansion pass.');
+        return expandPlanScript(plan, targetWords, minWords, llm, correctionAttempt + 1);
+      }
+      console.warn('   ⚠️ Expansion response remained structurally invalid; measured-audio repair will enforce duration.');
+      return plan;
+    }
+    for (let sceneIndex = 0; sceneIndex < plan.scenes.length; sceneIndex++) {
+      const scene = plan.scenes[sceneIndex];
+      const stableId = editableSceneId(scene, sceneIndex);
+      const replacement = expanded.scenes.find((item) => item.id === stableId);
+      if (!replacement?.narration) {
+        if (correctionAttempt < 1) {
+          console.warn(`   Expansion response omitted ${stableId}; requesting one corrective expansion pass.`);
+          return expandPlanScript(plan, targetWords, minWords, llm, correctionAttempt + 1);
+        }
+        console.warn(`   ⚠️ Expansion response still omitted ${stableId}; measured-audio repair will enforce duration.`);
+        return plan;
+      }
+      scene.narration = replacement.narration.replace(/\s+/g, ' ').trim();
+      if (replacement.emphasis && scene.narration.includes(replacement.emphasis)) scene.emphasis = replacement.emphasis;
+    }
+    plan.script = plan.scenes.map((scene) => scene.narration).join(' ');
+    plan = await repairIncompleteNarration(plan, llm);
+    const expandedWords = plan.script.split(/\s+/).filter(Boolean).length;
+    const maxWords = Math.round(targetWords * 1.04);
+    if (expandedWords > maxWords) {
+      console.warn(`   Expansion returned ${expandedWords} words (maximum ${maxWords}); applying sentence-safe compression.`);
+      plan = await compressPlanScript(plan, targetWords, maxWords, llm);
+      plan = await repairIncompleteNarration(plan, llm);
+    }
+    const finalWords = plan.scenes.map((scene) => scene.narration).join(' ').split(/\s+/).filter(Boolean).length;
+    if (finalWords < minWords && correctionAttempt < 1) {
+      console.warn(`   Expansion returned only ${finalWords} words (minimum ${minWords}); requesting one corrective expansion pass.`);
+      return expandPlanScript(plan, targetWords, minWords, llm, correctionAttempt + 1);
+    }
+    if (finalWords < minWords) {
+      console.warn(`   ⚠️ Expansion remained below budget at ${finalWords} words (minimum ${minWords}); measured-audio repair will enforce duration.`);
+    }
+    return plan;
+  } catch (error) {
+    console.warn(`   ⚠️ LLM expansion failed (${error.message}). Duration QC will enforce the undersized result.`);
+    return plan;
+  }
+}
+
 /**
- * @param {{ topic: string, niche?: string, format?: 'shorts'|'landscape', durationSec?: number, style?: string, speechRateWps?: number }} brief
+ * @param {{ topic: string, niche?: string, format?: 'shorts'|'landscape', durationSec?: number, style?: string, speechRateWps?: number, sourceData?: unknown, productionProfile?: object }} brief
  */
-export async function generateDirectorPlan({ topic, niche = '', format = 'shorts', durationSec, style, speechRateWps }) {
+export async function generateDirectorPlan({ topic, niche = '', format = 'shorts', durationSec, style, speechRateWps, sourceData, productionProfile }) {
   const target = durationSec || (format === 'shorts' ? 45 : 75);
   const budget = calculateDurationBudget({ targetDurationSec: target, format, style, speechRateWps });
   const llm = llmConfig();
@@ -303,7 +420,16 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
 
   console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats`);
   const styleHint = style && STYLES[style] ? `\nThe directing style is fixed: "${style}".` : '';
-  const brief = `Topic: "${topic}"\nNiche: ${niche || 'general'}\nFormat: ${format === 'shorts' ? 'vertical 9:16 short' : 'horizontal 16:9 YouTube video'}${styleHint}`;
+  const serializedSource = sourceData == null
+    ? ''
+    : (typeof sourceData === 'string' ? sourceData : JSON.stringify(sourceData));
+  const sourceContext = serializedSource
+    ? `\nSupplied source data (treat as editorial input; do not invent details beyond it):\n${serializedSource.slice(0, 16000)}`
+    : '';
+  const channelContext = productionProfile
+    ? `\nContent type: ${productionProfile.contentType}\nAudience: ${productionProfile.audience}\nEditorial tone: ${productionProfile.tone}\nPacing: ${productionProfile.pacing?.mode || 'balanced'}`
+    : '';
+  const brief = `Topic: "${topic}"\nNiche: ${niche || 'general'}\nFormat: ${format === 'shorts' ? 'vertical 9:16 short' : 'horizontal 16:9 YouTube video'}${styleHint}${channelContext}${sourceContext}`;
 
   let plan;
   let compressionPasses = 0;
@@ -349,7 +475,7 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
     if (outline?.style && !plan.style) plan.style = outline.style;
     if (outline?.brandColor && !plan.brandColor) plan.brandColor = outline.brandColor;
   } else {
-    plan = await planLongForm(llm, brief, target);
+    plan = await planLongForm(llm, brief, target, budget);
   }
 
   // Pre-TTS Duration & Word Budget Validation
@@ -359,16 +485,24 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
     plan = await compressPlanScript(plan, budget.targetWords, budget.maxWords, llm);
     compressionPasses++;
   }
+  currentWords = (plan.scenes || []).map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
+  let expansionPasses = 0;
+  if (currentWords < budget.minWords) {
+    plan = await expandPlanScript(plan, budget.targetWords, budget.minWords, llm);
+    expansionPasses++;
+  }
 
+  plan = await repairIncompleteNarration(plan, llm);
   const normalized = normalizePlan(plan, { topic, niche, format, style });
   normalized.durationBudget = budget;
   normalized.compressionPasses = compressionPasses;
+  normalized.expansionPasses = expansionPasses;
   Object.defineProperty(normalized, 'raw', { value: plan, enumerable: false });
   return normalized;
 }
 
 /** Long-form: outline first, then each chapter with the running story as context. */
-async function planLongForm(llm, brief, target) {
+async function planLongForm(llm, brief, target, budget = null) {
   const outline = await callJson(llm, [
     { role: 'system', content: 'You outline premium documentary-style YouTube videos. Reply with JSON only.' },
     {
@@ -382,6 +516,7 @@ async function planLongForm(llm, brief, target) {
   for (let i = 0; i < chapters.length; i++) {
     const ch = chapters[i];
     const seconds = (target * (Number(ch.shareOfRuntime) || 1)) / totalShare;
+    const targetWords = budget?.speechRateWps ? Math.round(seconds * budget.speechRateWps) : wordBudget(seconds);
     const soFar = scenes.slice(-6).map((s) => s.narration).join(' ');
     console.log(`   📖 Chapter ${i + 1}/${chapters.length}: ${ch.title}`);
     const part = await callJson(llm, [
@@ -389,7 +524,7 @@ async function planLongForm(llm, brief, target) {
       {
         role: 'user',
         content: `${brief}\nVideo title: "${outline.title}". Style: "${outline.style}".\nWrite ONLY chapter ${i + 1} of ${chapters.length}: "${ch.title}" — ${ch.summary}\n` +
-          `Chapter length: ${wordBudget(seconds)} words. ${i > 0 ? `Start with a "chapter" scene (section: true). The story so far ended with: "${soFar}"` : 'This is the cold open: start with the hook.'}\n` +
+          `Chapter length: ${targetWords} words. ${i > 0 ? `Start with a "chapter" scene (section: true), but begin its narration naturally: never say "Chapter", a chapter number, or read the section title aloud. The story so far ended with: "${soFar}"` : 'This is the cold open: start with the hook.'}\n` +
           `Return {"scenes": [...]} only.`,
       },
     ]);
@@ -409,6 +544,101 @@ const str = (v, maxWords) => {
 };
 
 const tokensOf = (text) => tokenizeScript(text).flatMap((w) => w.norm);
+
+const NUMBER_WORD = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve';
+const SPOKEN_CHAPTER_RE = new RegExp(`^\\s*chapter\\s+(?:\\d+|${NUMBER_WORD})\\s*:\\s*`, 'i');
+const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|of|to|for|with|than|into|from|by|as|which|who|whose|represents|deposited|stretched|define|shape)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
+
+export function stripSpokenChapterLabel(text) {
+  return String(text || '').replace(SPOKEN_CHAPTER_RE, '').trim();
+}
+
+function spokenChapterMetadata(text) {
+  const match = String(text || '').match(new RegExp(`^\\s*chapter\\s+(\\d+|${NUMBER_WORD})\\s*:\\s*([^.!?]+)`, 'i'));
+  if (!match) return null;
+  const words = NUMBER_WORD.split('|');
+  const number = /^\d+$/.test(match[1]) ? Number(match[1]) : words.indexOf(match[1].toLowerCase()) + 1;
+  return { number: number || null, title: match[2].trim().split(/\s+/).slice(0, 6).join(' ') };
+}
+
+export function narrationCompletenessIssues(scenes = []) {
+  const issues = [];
+  for (let index = 0; index < scenes.length; index++) {
+    const narration = String(scenes[index]?.narration || scenes[index]?.script || '').trim();
+    const sentences = narration.split(/(?<=[.!?])\s+/).filter(Boolean);
+    const lastSentence = sentences.at(-1) || narration;
+    const lastWords = lastSentence.replace(/[.!?]+$/, '').trim().split(/\s+/).filter(Boolean);
+    const malformed = /[,;:]\s*[.!?]$/.test(narration);
+    const dangling = DANGLING_END_RE.test(narration);
+    const tinyFragment = (lastWords.length === 1 && /^(?:this|that|these|those|it)[.!?]?$/i.test(lastSentence.trim()))
+      || (lastWords.length === 2 && /^(?:their|our|his|her)\b/i.test(lastSentence));
+    if (!/[.!?]$/.test(narration) || malformed || dangling || tinyFragment) {
+      issues.push({
+        type: 'incomplete_narration',
+        severity: 'error',
+        sceneIndex: index,
+        sceneId: scenes[index]?.id || null,
+        message: `Scene ${index + 1} ends with an incomplete or malformed sentence: "${lastSentence.slice(-120)}"`,
+      });
+    }
+  }
+  return issues;
+}
+
+function removeTrailingFragment(text) {
+  const clean = String(text || '').replace(/,\s*\./g, '.').trim();
+  if (!narrationCompletenessIssues([{ narration: clean }]).length) return clean;
+  const sentences = clean.match(/[^.!?]+[.!?]+/g)?.map((part) => part.trim()).filter(Boolean) || [];
+  const complete = (/[.!?]$/.test(clean) ? sentences.slice(0, -1) : sentences).join(' ').trim();
+  return complete && complete.split(/\s+/).length >= 4 ? complete : clean;
+}
+
+export async function repairIncompleteNarration(plan, llm) {
+  let issues = narrationCompletenessIssues(plan?.scenes || []);
+  if (!issues.length) return plan;
+  for (let pass = 0; llm && pass < 2 && issues.length; pass++) {
+    const targets = issues.map((issue) => {
+      const scene = plan.scenes[issue.sceneIndex];
+      return { index: issue.sceneIndex, narration: scene?.narration || '', purpose: scene?.purpose || 'explain' };
+    });
+    try {
+      const repaired = await callJson(llm, [
+        {
+          role: 'system',
+          content: 'You repair unfinished documentary narration. Complete grammar and meaning using only facts already present in the supplied text. Do not add numbers, dates, names, quotations, superlatives, or new claims. Reply with JSON only.',
+        },
+        {
+          role: 'user',
+          content: `Repair each incomplete narration below. Return {"repairs":[{"index":number,"narration":string}]}. Preserve the intended meaning, make every entry end in a complete sentence, and do not include spoken chapter numbers.\n${JSON.stringify(targets)}`,
+        },
+      ], { temperature: 0.2, retries: 2, timeoutMs: 60000 });
+      for (const item of repaired?.repairs || []) {
+        const index = Number(item.index);
+        if (!Number.isInteger(index) || !plan.scenes[index] || !item.narration) continue;
+        plan.scenes[index].narration = stripSpokenChapterLabel(String(item.narration).replace(/\s+/g, ' ').trim());
+      }
+      issues = narrationCompletenessIssues(plan.scenes);
+    } catch (error) {
+      console.warn(`   Narration repair failed (${error.message}). Content QC will block incomplete prose.`);
+      break;
+    }
+  }
+  // Compression can leave a partial final sentence. If network repair is not
+  // available, retain all earlier complete sentences and drop only that
+  // mechanically introduced tail rather than publishing broken narration.
+  for (const issue of narrationCompletenessIssues(plan.scenes)) {
+    const scene = plan.scenes[issue.sceneIndex];
+    if (scene) {
+      const repaired = removeTrailingFragment(scene.narration);
+      const unrecoverableMicroFragment = repaired === scene.narration
+        && repaired.split(/\s+/).filter(Boolean).length <= 8;
+      scene.narration = unrecoverableMicroFragment ? '' : repaired;
+    }
+  }
+  plan.scenes = (plan.scenes || []).filter((scene) => String(scene.narration || '').trim());
+  plan.script = (plan.scenes || []).map((scene) => scene.narration).join(' ');
+  return plan;
+}
 
 /** Fraction of `needle` tokens that occur in `hay` tokens. */
 function coverage(needle, hay) {
@@ -518,12 +748,16 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
   const diagnostics = { rawScenes: Array.isArray(raw?.scenes) ? raw.scenes.length : 0, invalidEmphasis: 0, droppedHeadlines: 0, missingAttributes: {}, styleFromLlm: Boolean(STYLES[raw?.style]) };
 
   for (const s of Array.isArray(raw?.scenes) ? raw.scenes : []) {
-    const narration = str(s?.narration || s?.voiceoverSentence);
+    const rawNarration = str(s?.narration || s?.voiceoverSentence);
+    const spokenChapter = spokenChapterMetadata(rawNarration);
+    const narration = str(stripSpokenChapterLabel(rawNarration));
     if (!narration) continue;
     let kind = KINDS.includes(s.kind) ? s.kind : LEGACY_KIND[s.kind || s.type] || 'subject';
+    if (spokenChapter && (s.section || s.purpose === 'chapter')) kind = 'chapter';
     let data = null;
     if (!['atmosphere', 'subject', 'statement'].includes(kind)) {
-      data = validateData(kind, s.data || s.params, narration);
+      const rawData = s.data || (kind === 'chapter' && spokenChapter ? spokenChapter : s.params);
+      data = validateData(kind, rawData, narration);
       if (!data) { downgrades.push(`${kind}→subject: "${narration.slice(0, 50)}"`); kind = 'subject'; }
     }
     let kicker = str(s.text?.kicker, 6);
@@ -538,6 +772,16 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     const queries = [...(Array.isArray(s.imageQueries) ? s.imageQueries : []), s.params?.assetQuery, s.params?.backgroundAssetQuery]
       .map((q) => str(q, 12)).filter(Boolean);
     const entityName = str(s.entity?.name, 8);
+    let source = null;
+    try {
+      if (s.source?.url) {
+        const parsed = new URL(String(s.source.url));
+        if (['http:', 'https:'].includes(parsed.protocol)) source = { url: parsed.toString(), label: str(s.source.label, 12) || parsed.hostname };
+      }
+    } catch { /* invalid source remains unverified */ }
+    if (!source && entityName && s.entity?.wikipedia) {
+      source = { url: `https://en.wikipedia.org/wiki/${encodeURIComponent(s.entity.wikipedia)}`, label: `${entityName} reference` };
+    }
     const pick = (v, list, fallback) => (list.includes(v) ? v : fallback);
     const defaultTreatment = ['atmosphere', 'subject'].includes(kind) ? 'cinematic' : kind === 'statement' ? 'typographic' : 'graphic';
     scenes.push({
@@ -548,6 +792,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
       visual: str(s.visual) || '',
       imageQueries: [...new Set(queries)].slice(0, 3),
       entity: entityName ? { name: entityName, wikipedia: str(s.entity?.wikipedia, 10) || str(s.params?.wikiQuery, 10) || entityName } : null,
+      source,
       text: kicker || headline ? { kicker, headline } : null,
       emphasis: emphasis && coverage(emphasis, narration) >= 0.99 ? emphasis : null,
       data,
@@ -577,8 +822,12 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
 
   // Claim extraction only. These are asserted/planned claims, not externally fact-checked claims.
   const claims = [];
+  // Only claims with a genuinely checkable exact value or historical
+  // superlative need evidence. Absolute words used as creative language
+  // ("the only sound", "always waiting") are not factual statistics.
+  const exactClaimPattern = /(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b|\b(?:the|world(?:'s)?|history(?:'s)?)\s+(?:first(?!\s+(?:step|thing|move|way|place|time)\b)|earliest|oldest|largest|smallest)\b)/i;
   scenes.forEach((s, idx) => {
-    if (s.data?.value || s.kind === 'statistic') {
+    if (s.data?.value || s.kind === 'statistic' || exactClaimPattern.test(s.narration)) {
       claims.push({
         claim_id: `claim_${String(idx + 1).padStart(3, '0')}`,
         scene_id: s.id,
@@ -586,8 +835,10 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
         type: 'statistic',
         value: s.data?.value || null,
         unit: s.data?.suffix || s.data?.prefix || null,
-        confidence: 0.92,
-        status: 'asserted',
+        source_url: s.source?.url || null,
+        source_label: s.source?.label || null,
+        confidence: s.source?.url ? 0.7 : 0,
+        status: s.source?.url ? 'sourced_unverified' : 'unverified',
         qualification: /\b(around|nearly|approx|estimated|over|about)\b/i.test(s.narration) ? 'estimated' : 'exact',
       });
     } else if (s.entity?.wikipedia) {
@@ -605,7 +856,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     }
   });
 
-  const contentQuality = validateContentQuality({ scenes });
+  const contentQuality = validateContentQuality({ scenes, claims });
 
   return {
     title: str(raw?.title) || topic || 'Untitled',
@@ -623,8 +874,16 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
 }
 
 /** Validate narrative progression, hook curiosity, redundancy, and hook-to-payoff closure. */
-export function validateContentQuality({ scenes = [] } = {}) {
-  const issues = [];
+export function validateContentQuality({ scenes = [], claims = [] } = {}) {
+  const issues = [...narrationCompletenessIssues(scenes)];
+  for (const claim of claims.filter((item) => item.type === 'statistic' && item.status === 'unverified')) {
+    issues.push({
+      type: 'unverified_exact_claim',
+      severity: 'error',
+      sceneId: claim.scene_id,
+      message: `Exact factual claim has no recorded source: "${claim.text.slice(0, 140)}"`,
+    });
+  }
   const hookScene = scenes[0];
   const hookText = (hookScene?.narration || hookScene?.script || '').toLowerCase();
   const genericHookPhrases = [
@@ -670,11 +929,13 @@ export function validateContentQuality({ scenes = [] } = {}) {
     });
   }
 
-  if (scenes.length > 14) {
+  const totalNarrationWords = scenes.reduce((sum, scene) => sum + String(scene.narration || scene.script || '').split(/\s+/).filter(Boolean).length, 0);
+  const averageWordsPerScene = totalNarrationWords / Math.max(1, scenes.length);
+  if (scenes.length > 14 && averageWordsPerScene < 12) {
     issues.push({
       type: 'excessive_scene_fragmentation',
       severity: 'warn',
-      message: `Script contains ${scenes.length} fragmented scenes (target: 8–11 content beats for explainer).`,
+      message: `Script contains ${scenes.length} short scenes averaging ${averageWordsPerScene.toFixed(1)} words; consolidate adjacent fragments.`,
     });
   }
 

@@ -48,6 +48,9 @@ export function licenseAllowed(license, policy = process.env.LICENSE_POLICY || '
   if (!license?.name && !license?.license_name) return { ok: false, why: 'licence unknown' };
 
   const n = (license.license_name || license.name).toLowerCase();
+  if (license.verification_status === 'discovery_only' || license.commercial_use === 'unknown' || /brave search|search result/.test(n)) {
+    return { ok: false, why: 'discovery result has no verified asset licence' };
+  }
   if (license.nonFree) return { ok: false, why: `non-free (${license.name || license.license_name})` };
   if (/\bnc\b|non-?commercial/.test(n)) return { ok: false, why: `non-commercial (${license.name || license.license_name})` };
   if (/\bnd\b|no-?deriv/.test(n)) return { ok: false, why: `no-derivatives (${license.name || license.license_name})` };
@@ -66,9 +69,11 @@ export function licenseAllowed(license, policy = process.env.LICENSE_POLICY || '
   if (/pexels license|pixabay content license|unsplash license/.test(n)) {
     return { ok: true, status: 'verified', commercial: true };
   }
-  if (/web editorial|brave|image bank|editorial/.test(n)) {
-    // Web editorial: allowed under commercial editorial documentary policy
-    return { ok: true, status: 'editorial_only', commercial: true };
+  if (/image bank/.test(n) && license.verification_status === 'verified') {
+    return { ok: true, status: 'verified', commercial: license.commercial_use !== 'editorial_only' };
+  }
+  if (/editorial/.test(n) && license.verification_status === 'editorial_only' && policy === 'editorial') {
+    return { ok: true, status: 'editorial_only', commercial: false };
   }
 
   return { ok: false, why: `unrecognised licence (${license.name || license.license_name})` };
@@ -77,7 +82,14 @@ export function licenseAllowed(license, policy = process.env.LICENSE_POLICY || '
 /** Credits block for a video description. */
 export function formatCredits(title, used) {
   const lines = [`Credits & Provenance — ${title}`, ''];
-  const images = used.filter((a) => a.license);
+  const seen = new Set();
+  const images = used.filter((asset) => {
+    if (!asset?.license) return false;
+    const key = asset.sha256ContentHash || asset.license.page || asset.src || asset.label;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   if (!images.length) return lines.concat('No third-party imagery.').join('\n');
   lines.push('Visual Assets & Provenance:');
   for (const a of images) {
@@ -86,7 +98,8 @@ export function formatCredits(title, used) {
     const author = L.creator || L.author;
     const licName = L.license_name || L.name || 'Editorial / Stock';
     const licUrl = L.license_url || L.url;
-    lines.push(`• ${what}${author ? ` — by ${author}` : ''} · ${licName}${licUrl ? ` (${licUrl})` : ''} · [${L.verification_status || 'verified'}]`);
+    const sourcePage = L.page || a.sourceUrl || null;
+    lines.push(`• ${what}${author ? ` — by ${author}` : ''} · ${licName}${sourcePage ? ` · Source: ${sourcePage}` : ''}${licUrl ? ` · License: ${licUrl}` : ''} · [${L.verification_status || 'verified'}]`);
   }
   return `${lines.join('\n')}\n`;
 }

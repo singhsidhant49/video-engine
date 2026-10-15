@@ -6,7 +6,7 @@ An enterprise-grade, high-performance programmatic video generation pipeline bui
 
 ## How it works
 
-An AI-directed editing engine: DeepSeek writes the narration and decides, sentence by sentence, what the viewer should see; a deterministic resolver turns that into an explicit timeline (frames, camera paths, reveals, captions, transitions, sound); Remotion renders it; QC checks the result. See [PIPELINE_ARCHITECTURE.md](PIPELINE_ARCHITECTURE.md) and [VISUAL_PIPELINE_AUDIT.md](VISUAL_PIPELINE_AUDIT.md).
+An AI-directed editing engine: DeepSeek writes the narration and decides, sentence by sentence, what the viewer should see; a deterministic resolver turns that into an explicit timeline; Remotion is used only as the renderer. Production `MEDIA_EDITORIAL` videos contain approved images/video clips plus subtitles—not Remotion chart, diagram, statement-card, or explainer templates.
 
 ---
 
@@ -53,9 +53,20 @@ npm run generate -- --topic "How Uber scaled its architecture" --format shorts
 # 16:9 long-form, planned chapter by chapter
 npm run generate -- --topic "The rise and fall of Blockbuster" --format landscape --duration 480
 
-# Use an existing narration file instead of TTS, force a style, or reuse a saved plan
-npm run generate -- --topic "..." --audio path/to/voice.wav --style cinematic_documentary
+# Use an existing narration/audiobook recording with its matching saved plan
 npm run generate -- --topic "..." --plan renders/runs/<id>/plan.json --audio path/to/voice.wav
+
+# Audiobook/chapter generated with Kokoro (long narration is chunked automatically)
+npm run generate -- --topic "Chapter 1: The Beginning" --niche history --format landscape --duration 1200
+
+# Validate everything through the contact-sheet gate without rendering the final MP4
+npm run generate -- --topic "Chapter 1: The Beginning" --format landscape --duration 600 --contact-sheet-only
+
+# Rebuild this old undersized run from planning so the new duration gate can expand it
+npm run generate -- --resume video-2026-10-12T11-03-40 --from plan
+
+# For a normally interrupted run whose inputs already pass QC, resume its failed checkpoint
+npm run generate -- --resume <run-id>
 
 npm run generate -- --help
 
@@ -78,59 +89,48 @@ npm run remotion:studio
 ## 📁 Output & Render Files
 - Rendered `.mp4` videos are saved in `./renders/`
 - Per-run artifacts and assets are in `./renders/runs/<videoId>/`
-media-bank/
-  video/
-    technology/
-    business/
-    finance/
-    psychology/
-    science/
-    history/
-    abstract/
-    backgrounds/
-    transitions/
-    textures/
+mimages/
+  technology/
+  business/
+  finance/
+  psychology/
+  science/
+  history/
 
-  images/
-    technology/
-    business/
-    finance/
-    psychology/
-    science/
-    history/
-    abstract/
-    backgrounds/
+  health/
+  lifestyle/
+  people/
+  work/
+  education/
 
-  icons/
-    ui/
-    arrows/
-    devices/
-    finance/
-    science/
-    social/
-    generic/
+  nature/
+  environment/
+  cities/
+  travel/
 
-  overlays/
-    grids/
-    film-grain/
-    light-leaks/
-    paper-texture/
-    noise/
-    gradients/
+  infrastructure/
+  industry/
+  transportation/
+
+  computers/
+  software/
+  ai/
+
+  communication/
+  internet/
+  data/
+
+  space/
+  energy/
+  medicine/
+
+  abstract/
+  concepts/
+  backgrounds/
 
   documents/
-    generic-report/
-    spreadsheet/
-    code/
-    newspaper/
-    timeline/
-
-  audio/
-    whoosh/
-    click/
-    impact/
-    riser/
-    ambience/
+  devices/
+  objects/
 # Production visual mode
 
 Production generation defaults to `MEDIA_EDITORIAL`: real image/video media is composition-solved before Remotion renders it, while procedural chart/process/diagram/statement families are disabled. Use `--visual-mode LEGACY_PROCEDURAL` only for regression, debugging, or compatibility.

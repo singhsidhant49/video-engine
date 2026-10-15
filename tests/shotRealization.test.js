@@ -4,6 +4,7 @@ import test from 'node:test';
 import { resolveShotTiming } from '../src/pipeline/shotTimingResolver.js';
 import { createPresentationMemory, realizeSceneShots } from '../src/pipeline/visualRealizationDirector.js';
 import { buildVisualRealizationDiagnostics } from '../src/pipeline/visualRealizationDiagnostics.js';
+import { authorShots, isAbstractEventEntity } from '../src/storyboard/shotPlanner.js';
 
 test('shot timing preserves authored order with aligned, gap-free coverage', () => {
   const shots = [
@@ -92,4 +93,34 @@ test('moving footage keeps native motion without synthetic camera scaling', () =
   assert.equal(result[0].presentation.cameraMove, 'static');
   assert.equal(result[0].move.type, 'static');
   assert.deepEqual(result[0].move.scale, [1, 1]);
+});
+
+test('historical economic conditions route to archival subjects instead of literal entity locks', () => {
+  assert.equal(isAbstractEventEntity('1970s inflation'), true);
+  const scene = {
+    id: 'scene_008', narration: 'In the 1970s, inflation sharply reduced purchasing power.',
+    purpose: 'evidence', visualIntent: 'identify', durationHint: 6, preferredPresentation: 'subject',
+    evidenceRequirement: 'required', entities: ['1970s inflation'], energy: 3,
+    sourceScenes: [{
+      narration: 'In the 1970s, inflation sharply reduced purchasing power.',
+      imageQueries: ['1970s gas station line', 'vintage supermarket 1970s'],
+      entity: { name: '1970s inflation', wikipedia: '1970s energy crisis' },
+    }],
+  };
+  const [shot] = authorShots(scene, { useMediaEditorial: true, format: 'landscape', pacing: { minimumShotSeconds: 4.8, maximumStillSeconds: 8 } }, 'How inflation changes money');
+  assert.equal(shot.assetIntent, 'historical');
+  assert.deepEqual(shot.entities, []);
+  assert.equal(shot.visualConcept, '1970s energy crisis');
+  assert.ok(shot.searchConcepts.includes('1970s gas station line'));
+});
+
+test('single-shot scenes alternate restrained camera direction across the storyboard', () => {
+  const base = {
+    narration: 'A single complete visual thought.', purpose: 'context', visualIntent: 'identify',
+    durationHint: 6, preferredPresentation: 'subject', evidenceRequirement: 'preferred',
+    entities: [], energy: 3, sourceScenes: [{ narration: 'A single complete visual thought.', imageQueries: ['quiet room'] }],
+  };
+  const strategy = { useMediaEditorial: true, format: 'landscape', pacing: { minimumShotSeconds: 4.8, maximumStillSeconds: 8 } };
+  assert.equal(authorShots({ ...base, id: 'scene_001' }, strategy, 'Silence')[0].presentation.cameraMove, 'subtlePush');
+  assert.equal(authorShots({ ...base, id: 'scene_002' }, strategy, 'Silence')[0].presentation.cameraMove, 'subtlePull');
 });

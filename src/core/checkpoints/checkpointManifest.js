@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { CheckpointManifestSchema } from '../../models/checkpointManifest.schema.js';
 import { canonicalStageName } from './stageRegistry.js';
 
@@ -15,6 +16,7 @@ const emptyStage = () => ({
   durationMs: null,
   artifacts: [],
   outputFiles: [],
+  outputChecksums: {},
   inputHashes: {},
   schemaVersion: 1,
   codeVersion: null,
@@ -85,10 +87,44 @@ export class CheckpointStore {
       : 0;
     checkpoint.artifacts = [...new Set([...checkpoint.artifacts, ...artifacts])];
     checkpoint.outputFiles = [...new Set([...(checkpoint.outputFiles || []), ...artifacts])];
+    checkpoint.outputChecksums = checkpoint.outputChecksums || {};
+    for (const artifact of artifacts) {
+      const candidates = [path.resolve(this.runDir, artifact), path.resolve(this.runDir, 'public', artifact)];
+      for (const candidate of candidates) {
+        try {
+          const content = await fs.readFile(candidate);
+          checkpoint.outputChecksums[artifact] = crypto.createHash('sha256').update(content).digest('hex').slice(0, 16);
+          break;
+        } catch {}
+      }
+    }
     if (metadata.inputHashes) checkpoint.inputHashes = metadata.inputHashes;
     if (metadata.codeVersion) checkpoint.codeVersion = metadata.codeVersion;
     if (metadata.configHash) checkpoint.configHash = metadata.configHash;
     checkpoint.error = null;
+    await this.flush();
+  }
+
+  /** Refresh checksums when a stage intentionally enriches a shared artifact
+   * owned by an earlier stage (for example measured duration diagnostics).
+   * This preserves the original stage timing/status while keeping resume
+   * validation consistent with the bytes on disk. */
+  async refreshArtifactChecksums(stage, artifacts = []) {
+    const checkpoint = this.#stage(stage);
+    checkpoint.outputChecksums = checkpoint.outputChecksums || {};
+    for (const artifact of artifacts) {
+      const candidates = [path.resolve(this.runDir, artifact), path.resolve(this.runDir, 'public', artifact)];
+      let refreshed = false;
+      for (const candidate of candidates) {
+        try {
+          const content = await fs.readFile(candidate);
+          checkpoint.outputChecksums[artifact] = crypto.createHash('sha256').update(content).digest('hex').slice(0, 16);
+          refreshed = true;
+          break;
+        } catch {}
+      }
+      if (!refreshed) throw new Error(`Cannot refresh checksum for missing artifact: ${artifact}`);
+    }
     await this.flush();
   }
 

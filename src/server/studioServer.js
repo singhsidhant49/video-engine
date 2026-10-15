@@ -14,19 +14,25 @@ app.use('/renders', express.static(config.rendersDir));
 
 // Endpoint: Trigger Video Generation
 app.post('/api/generate', async (req, res) => {
-  const { topic, niche, format, voice, theme } = req.body;
+  const input = req.body?.brief || req.body || {};
+  const topic = input.prompt || input.topic;
 
   if (!topic) {
-    return res.status(400).json({ error: 'Topic parameter is required' });
+    return res.status(400).json({ error: 'A topic or brief.prompt is required' });
   }
 
   try {
     const result = await createFacelessVideo({
+      brief: req.body?.brief,
       topic,
-      niche,
-      format,
-      voice,
-      theme,
+      niche: input.niche,
+      format: input.format,
+      voice: input.voice,
+      style: input.style,
+      durationSec: input.durationSec,
+      channelId: input.channelId || input.channel?.id,
+      channelProfile: input.channel || input.channelProfile,
+      visualMode: input.visualMode,
       onProgress: (progress) => {
         // Simple console logging for progress
       },

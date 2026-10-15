@@ -146,7 +146,7 @@ export function evaluateCreativeQa({
   const allShots = clips.flatMap((c) => c.shots || []);
   const topicLower = topic.toLowerCase();
   const isPsychologyTopic = /\b(brain|gratification|psychology|impulse|behavior|dopamine|limbic|prefrontal)\b/i.test(topicLower);
-  const isTechTopic = /\b(code|coding|software|agent|developer|api|repo|terminal)\b/i.test(topicLower);
+  const isTechTopic = /\b(code|coding|software|agent|developer|api|repo|terminal|database|deadlock|transaction|concurrency|thread|mutex|sql)\b/i.test(topicLower);
   const recentDiagramBackgrounds = [];
 
   const shotEvaluations = [];
@@ -285,15 +285,24 @@ export function evaluateCreativeQa({
         else if (/compete|versus|different|human/i.test(sceneNarration)) altFamily = 'compare';
         else altFamily = 'diagram';
       } else if (shot.family === 'diagram') {
-        altFamily = 'compare';
+        // Variety must not invent a comparison that the narration never makes.
+        // A causal/mechanistic beat can safely become a process; otherwise keep
+        // the diagram and let layout/background repair provide variation.
+        if (/\b(then|causes?|leads? to|results? in|wait|request|retry|flow|step|cycle|process|happen)\b/i.test(sceneNarration)) {
+          altFamily = 'process';
+        } else {
+          altFamily = null;
+        }
       }
 
-      repairCandidates.push({
-        priority: REPAIR_PRIORITY.REPRESENTATION_FATIGUE,
-        action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-        targetFamily: altFamily,
-        reason: `Break repetitive run of 3+ consecutive "${shot.family}" shots with semantic "${altFamily}"`,
-      });
+      if (altFamily) {
+        repairCandidates.push({
+          priority: REPAIR_PRIORITY.REPRESENTATION_FATIGUE,
+          action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
+          targetFamily: altFamily,
+          reason: `Break repetitive run of 3+ consecutive "${shot.family}" shots with semantic "${altFamily}"`,
+        });
+      }
     }
 
     // Rule: Detect repetitive layout/variant inside same family (e.g. code:syntax -> code:syntax) if not already breaking family
@@ -600,10 +609,13 @@ export function applyCreativeRepairs(timeline, repairsNeeded = [], context = {})
             shot.presentation.layout = `image:${shot.variant}`;
             shot.presentation.overlayMode = 'secondary';
           }
+          // Never carry code/UI/diagram payload into an image renderer.
+          shot.overlay = {};
+          clip.overlay = {};
         } else {
           // Populate semantic procedural data so it renders immediately
           const synth = synthesizeProceduralData({ narration: clip.narration, data: clip.overlay }, targetFamily);
-          shot.overlay = { ...shot.overlay, ...synth, at: 4 };
+          shot.overlay = { ...synth, at: 4 };
           clip.overlay = shot.overlay;
 
           if (shot.presentation) {

@@ -158,31 +158,46 @@ export function generateDuckingEnvelope({
   const rawTarget = new Float32Array(totalFrames);
   rawTarget.fill(1.0);
 
+  // Precompute neighbouring speech boundaries once. The old implementation
+  // scanned every word (and every pause) for every frame, which becomes
+  // prohibitively expensive for long-form and audiobook timelines.
+  const previousSpeechEnd = new Int32Array(totalFrames);
+  const nextSpeechStart = new Int32Array(totalFrames);
+  const normalPauseMask = new Uint8Array(totalFrames);
+  let wordIndex = 0;
+  let previousEnd = -1_000_000_000;
+  for (let f = 0; f < totalFrames; f++) {
+    while (wordIndex < sortedWords.length && sortedWords[wordIndex].endFrame <= f) {
+      previousEnd = sortedWords[wordIndex].endFrame;
+      wordIndex++;
+    }
+    previousSpeechEnd[f] = previousEnd;
+  }
+  wordIndex = sortedWords.length - 1;
+  let nextStart = 1_000_000_000;
+  for (let f = totalFrames - 1; f >= 0; f--) {
+    while (wordIndex >= 0 && sortedWords[wordIndex].startFrame > f) {
+      nextStart = sortedWords[wordIndex].startFrame;
+      wordIndex--;
+    }
+    nextSpeechStart[f] = nextStart;
+  }
+  for (const pause of pauses) {
+    if (pause.type !== PAUSE_TYPES.NORMAL_PAUSE) continue;
+    const start = Math.max(0, pause.startFrame);
+    const end = Math.min(totalFrames - 1, pause.endFrame);
+    normalPauseMask.fill(1, start, end + 1);
+  }
+
   for (let f = 0; f < totalFrames; f++) {
     if (isSpeechActive[f]) {
       rawTarget[f] = 0.0;
     } else {
-      // Find distance to preceding speech end
-      let prevEnd = -Infinity;
-      for (const w of sortedWords) {
-        if (w.endFrame <= f) prevEnd = w.endFrame;
-        else break;
-      }
-
-      // Find distance to upcoming speech start
-      let nextStart = Infinity;
-      for (const w of sortedWords) {
-        if (w.startFrame > f) {
-          nextStart = w.startFrame;
-          break;
-        }
-      }
-
-      const framesSinceSpeech = f - prevEnd;
-      const framesToNextSpeech = nextStart - f;
+      const framesSinceSpeech = f - previousSpeechEnd[f];
+      const framesToNextSpeech = nextSpeechStart[f] - f;
 
       // Inside a normal pause: cap recovery to 45% of base
-      const inNormalPause = pauses.find((p) => p.type === PAUSE_TYPES.NORMAL_PAUSE && f >= p.startFrame && f <= p.endFrame);
+      const inNormalPause = normalPauseMask[f] === 1;
 
       if (framesSinceSpeech < HOLD_FRAMES) {
         // In hold window: remain fully ducked

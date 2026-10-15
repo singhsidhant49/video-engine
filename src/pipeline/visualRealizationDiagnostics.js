@@ -23,13 +23,20 @@ const distribution = (values) => Object.fromEntries([...new Set(values)].sort().
 export function buildVisualRealizationDiagnostics(timeline) {
   const clips = timeline.clips || timeline.scenes || [];
   const shots = timeline.realizedShots || clips.flatMap((clip) => clip.shots || []);
-  const families = shots.map((shot) => shot.family);
-  const variants = shots.map((shot) => `${shot.family}:${shot.variant}`);
-  const layouts = shots.map((shot) => shot.layout || shot.presentation?.layout || `${shot.family}:${shot.variant}`);
+  // Renderer families intentionally stay "image" in media-only mode even when
+  // the selected asset is moving footage. Diagnostics must describe what the
+  // viewer actually sees, not the internal component used to render it.
+  const visualFamily = (shot) => shot.asset?.type === 'video' ? 'video' : shot.family;
+  const families = shots.map(visualFamily);
+  const variants = shots.map((shot) => `${visualFamily(shot)}:${shot.variant}`);
+  const layouts = shots.map((shot) => {
+    const base = shot.layout || shot.presentation?.layout || `${shot.family}:${shot.variant}`;
+    return shot.asset?.type === 'video' ? base.replace(/^image/, 'video') : base;
+  });
   const moves = shots.map((shot) => shot.presentation?.cameraMove || shot.move?.type || 'static');
   const transitions = clips.map((clip) => clip.enter?.type || 'cut');
   const assetIds = shots.map((shot) => shot.asset?.src).filter(Boolean);
-  const staticShots = shots.filter((shot) => (shot.presentation?.cameraMove || shot.move?.type) === 'static');
+  const staticShots = shots.filter((shot) => shot.asset?.type !== 'video' && (shot.presentation?.cameraMove || shot.move?.type) === 'static');
   const staticSeconds = staticShots.map((shot) => {
     const overlay = shot.overlay || {};
     const revealFrames = [overlay.at, overlay.leftAt, overlay.rightAt, overlay.highlightAt, overlay.authorAt, overlay.to,
@@ -45,7 +52,7 @@ export function buildVisualRealizationDiagnostics(timeline) {
     .filter((shot) => (shot.durationInFrames / timeline.fps) >= 4.5)
     .map((shot) => ({
       shotId: shot.id || shot.storyboardShotId,
-      family: shot.family,
+      family: visualFamily(shot),
       durationSec: Number((shot.durationInFrames / timeline.fps).toFixed(2)),
       cameraMove: shot.presentation?.cameraMove || shot.move?.type,
       hasMedia: Boolean(shot.asset),

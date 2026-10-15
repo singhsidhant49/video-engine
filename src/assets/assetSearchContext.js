@@ -9,9 +9,20 @@ const STOP = new Set([
 const MODIFIERS = new Set([
   'euv', 'gpu', 'ai', 'historic', 'historical', 'modern', 'ancient', 'launch',
   'official', 'semiconductor', 'react', 'cleanroom', 'high-na', 'keynote', 'original', 'roman',
+  'overwhelmed', 'stressed', 'frustrated', 'confused', 'anxious', 'busy', 'crowded', 'clean', 'quiet',
+  'dark', 'bright', 'vintage', 'happy', 'sad', 'identical', 'subtle', 'rapid', 'faint', 'minimal',
+  'decision', 'making', 'thoughtful', 'contemplating', 'deliberating', 'choosing', 'hesitant', 'uncertain', 'choices',
+  'perfect', 'spotlight', 'ideal', 'glowing', 'flawless', 'luxury', 'showcase', 'abstract', 'texture', 'background',
+  'editorial', 'minimalist', 'dividing', 'lit', 'glow', 'tired', 'exhausted', 'fatigued', 'hovering', 'streaming', 'netflix',
+  'loneliness', 'epidemic', 'discarded', 'pile', 'piles', 'scrap', 'waste', 'toxic', 'electronic', 'electronics',
 ]);
 
 const STEM_MAP = {
+  smartphones: 'phone',
+  smartphone: 'phone',
+  phones: 'phone',
+  junkyard: 'scrapyard',
+  scrap: 'scrap',
   lithography: 'lithograph',
   lithographic: 'lithograph',
   photolithography: 'lithograph',
@@ -42,7 +53,7 @@ export const terms = (text) => String(text || '').toLowerCase()
   .map((term) => {
     if (STEM_MAP[term]) return STEM_MAP[term];
     if (term.length > 3 && term.endsWith('ies')) return `${term.slice(0, -3)}y`;
-    if (term.length > 3 && term.endsWith('s') && !term.endsWith('ss')) return term.slice(0, -1);
+    if (term.length > 3 && term.endsWith('s') && !term.endsWith('ss') && !term.endsWith('ous') && !term.endsWith('is') && !term.endsWith('us')) return term.slice(0, -1);
     return term;
   });
 

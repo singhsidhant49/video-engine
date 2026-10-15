@@ -67,6 +67,12 @@ export function selectVideoVisualStrategy({ topic = '', plan, format = 'landscap
   };
   strategy = mergeStrategy(strategy, channelDefaults);
   strategy = mergeStrategy(strategy, overrides);
+  if (overrides?.useMediaEditorial || channelDefaults?.useMediaEditorial || overrides?.visualMode === 'MEDIA_EDITORIAL') {
+    strategy.assetPreference = {
+      realMediaWeight: 1.0,
+      proceduralWeight: 0.0,
+    };
+  }
   if (overrides && Object.keys(overrides).length) strategy.source = 'video-override';
   else if (channelDefaults && Object.keys(channelDefaults).length) strategy.source = 'channel-default';
   return VideoVisualStrategySchema.parse(strategy);

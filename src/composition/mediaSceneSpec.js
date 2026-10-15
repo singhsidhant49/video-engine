@@ -35,7 +35,15 @@ export function normalizeMediaAnalysis(asset, format = 'landscape') {
     negativeSpaceRegions: (asset?.negativeSpaceRegions || []).map(rect).filter(Boolean), cropFitness: score == null ? null : clamp01(score),
     cropSlack: asset?.cropSlack ? { x: clamp01(asset.cropSlack.x), y: clamp01(asset.cropSlack.y) } : null,
     visualBusyness: asset?.visualBusyness == null ? null : clamp01(asset.visualBusyness), qualityTier,
-    motionPresent: asset?.motionPresent ?? (asset?.type === 'video' ? true : null), evidenceStrength: asset?.evidenceStrength == null ? null : clamp01(asset.evidenceStrength), unknownFields,
+    motionPresent: asset?.motionPresent ?? (asset?.type === 'video' ? true : null), evidenceStrength: asset?.evidenceStrength == null ? null : clamp01(asset.evidenceStrength),
+    videoTrim: asset?.videoTrim ? {
+      startTime: Number(asset.videoTrim.startTime) || 0,
+      endTime: Number(asset.videoTrim.endTime) || 0,
+      score: asset.videoTrim.score != null ? clamp01(asset.videoTrim.score) : undefined,
+      reason: asset.videoTrim.reason || undefined,
+    } : undefined,
+    editorialJudgment: asset?.editorialJudgment || undefined,
+    unknownFields,
   };
 }
 
@@ -161,6 +169,12 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     cameraIntent = 'STATIC';
   }
 
+  let cameraReason = 'STATIC_HOLD';
+  if (cameraIntent === 'DETAIL_CROP') cameraReason = 'MOVE_TO_DETAIL';
+  else if (cameraIntent === 'FOCAL_PAN') cameraReason = 'FOLLOW_SUBJECT';
+  else if (cameraIntent === 'SUBTLE_PUSH') cameraReason = 'INTENSIFY_FOCUS';
+  else if (cameraIntent === 'SUBTLE_PULL') cameraReason = 'REVEAL_CONTEXT';
+
   const captionPosition = solveStableCaptionPosition(primary, format, continuity.lastCaptionPosition);
 
   return MediaSceneSpecSchema.parse({ version: 1, shotId: shot.id || shot.storyboardShotId, mediaRole: role,
@@ -168,12 +182,15 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     primaryAssetId: primary.assetId, supportingAssetIds: assets.slice(1).map((a) => a.assetId), subjectIntent: shot.visualConcept || 'Preserve the primary subject',
     evidenceIntent: role === 'EVIDENCE' ? 'Preserve authentic source framing and attribution.' : 'Support the narrated claim without overstating evidence.',
     textNeed: need, annotationNeed: overlay?.annotation || overlay?.label && role === 'DETAIL' ? 'LABEL' : 'NONE', cameraIntent,
+    cameraReason,
     transitionIntent: { entry: 'CUT', exit: 'CUT', anchor: shot.transitionAnchor || null },
     durationIntent: { durationInFrames, rationale: ['narration_span', assets.length > 1 ? 'visual_novelty' : 'asset_complexity', need !== 'NONE' ? 'text_read_time' : 'clean_hold'] },
     imageChangeReason: role === 'MONTAGE' ? 'montageProgression' : ({ EVIDENCE: 'newEvidence', DETAIL: 'newDetail', CONTEXT: 'newLocation' })[role] || 'newIdea',
     strategy, captionPosition,
     assets, montage: role === 'MONTAGE' ? montageSpec(assets, durationInFrames) : null,
     alternateAssetRequest: incompatible ? { requested: true, reason: 'composition_incompatible', rejectedAssetId: primary.assetId, requirements: ['safe_subject_crop', format === 'shorts' ? 'portrait_compatible' : 'landscape_compatible', 'sufficient_resolution'] } : null,
+    editorialJudgment: shot?.editorialJudgment || primary.editorialJudgment || undefined,
+    visibleNeed: shot?.visibleNeed || undefined,
   });
 }
 

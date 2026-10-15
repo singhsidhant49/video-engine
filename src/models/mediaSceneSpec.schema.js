@@ -22,6 +22,13 @@ export const MediaAnalysisSchema = z.object({
   qualityTier: z.enum(['HERO', 'SUPPORT', 'FALLBACK', 'UNKNOWN']),
   motionPresent: z.boolean().nullable(),
   evidenceStrength: z.number().min(0).max(1).nullable(),
+  videoTrim: z.object({
+    startTime: z.number().nonnegative(),
+    endTime: z.number().nonnegative(),
+    score: z.number().min(0).max(1).optional(),
+    reason: z.string().optional(),
+  }).strict().optional(),
+  editorialJudgment: z.any().optional(),
   unknownFields: z.array(z.string()),
 }).strict();
 
@@ -48,6 +55,7 @@ export const MediaSceneSpecSchema = z.object({
   textNeed: z.enum(['NONE', 'HEADLINE', 'STAT', 'LABEL', 'SOURCE']),
   annotationNeed: z.enum(['NONE', 'POINTER', 'LABEL', 'BRACKET', 'OUTLINE', 'HIGHLIGHT_REGION']),
   cameraIntent: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'FOCAL_PAN', 'DETAIL_CROP', 'REFRAME', 'MATCH_MOVE']),
+  cameraReason: z.string().optional(),
   transitionIntent: z.object({ entry: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL']), exit: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL']), anchor: z.object({ type: z.string(), value: z.string() }).strict().nullable() }).strict(),
   durationIntent: z.object({ durationInFrames: z.number().int().positive(), rationale: z.array(z.string()).min(1) }).strict(),
   imageChangeReason: z.enum(['newEntity', 'newEvidence', 'newLocation', 'newDetail', 'newIdea', 'emotionalShift', 'montageProgression']),
@@ -56,4 +64,6 @@ export const MediaSceneSpecSchema = z.object({
   assets: z.array(MediaAnalysisSchema).min(1),
   montage: MontageSpecSchema.nullable(),
   alternateAssetRequest: z.object({ requested: z.boolean(), reason: z.literal('composition_incompatible'), rejectedAssetId: z.string(), requirements: z.array(z.string()) }).strict().nullable(),
+  editorialJudgment: z.any().optional(),
+  visibleNeed: z.any().optional(),
 }).strict();

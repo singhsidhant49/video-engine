@@ -261,7 +261,12 @@ export function buildCaptionChunks(words, fps, { maxWords = 4, maxChars = 28 } =
   let cur = [];
   const flush = () => { if (cur.length) chunks.push(cur); cur = []; };
   for (let i = 0; i < words.length; i++) {
-    const w = words[i];
+    const raw = words[i];
+    const w = {
+      ...raw,
+      text: raw.text || raw.word || '',
+      norm: raw.norm || [String(raw.text || raw.word || '').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '')],
+    };
     cur.push(w);
     const chars = cur.map((x) => x.text).join(' ').length;
     const next = words[i + 1];

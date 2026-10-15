@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { getSharp } from '../services/imageUtils.js';
-import { ffmpeg, probeDuration } from '../services/ffmpeg.js';
+import { ffmpeg, probeDuration, runBinary } from '../services/ffmpeg.js';
 
 /**
  * Post-render QC on the actual MP4: samples frames and flags blank frames,
@@ -47,6 +47,15 @@ export async function runRenderQc(videoFile, timeline) {
     const duration = await probeDuration(videoFile);
     const expected = timeline.durationInFrames / fps;
     add('duration', Math.abs(duration - expected) <= 2 / fps + 0.05, 'error', `${duration.toFixed(2)}s (timeline ${expected.toFixed(2)}s)`);
+    const { stdout: streamJson } = await runBinary('ffprobe', [
+      '-v', 'error', '-show_entries', 'stream=codec_type,duration:format=duration', '-of', 'json', videoFile,
+    ]);
+    const streamInfo = JSON.parse(streamJson);
+    const audioStream = (streamInfo.streams || []).find((stream) => stream.codec_type === 'audio');
+    const audioDuration = Number(audioStream?.duration || streamInfo.format?.duration);
+    add('audio-stream', Boolean(audioStream), 'error', audioStream ? 'audio stream present' : 'render has no audio stream');
+    add('audio-duration', Boolean(audioStream) && Number.isFinite(audioDuration) && Math.abs(audioDuration - duration) <= 0.25,
+      'error', Number.isFinite(audioDuration) ? `${audioDuration.toFixed(2)}s audio vs ${duration.toFixed(2)}s video` : 'audio duration unavailable');
 
     const blank = [], frozen = [], lumas = [];
     let k = 0;

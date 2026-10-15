@@ -121,6 +121,32 @@ export function estimateScriptDuration(text = '', pauseAfterTotalSec = 0, speech
 }
 
 /**
+ * Select a TTS speed for narration that landed below the publishable duration
+ * range. Aim slightly inside the accepted range instead of exactly at its
+ * lower boundary, since synthesis duration varies by a few tenths of a second.
+ */
+export function calculateNarrationRepairSpeed({
+  currentSpeed,
+  actualDurationSec,
+  budget,
+  minimumSpeed = 0.7,
+  maximumSpeed = 1.15,
+} = {}) {
+  const speed = Number(currentSpeed);
+  const actual = Number(actualDurationSec);
+  if (!Number.isFinite(speed) || speed <= 0 || !Number.isFinite(actual) || actual <= 0) return speed;
+
+  const safetyMarginSec = Math.max(0.75, Number(budget?.targetDurationSec || 0) * 0.005);
+  const repairTargetSec = Math.max(
+    Number(budget?.targetNarrationSec || 0),
+    Number(budget?.allowedMinDuration || 0) + safetyMarginSec,
+  );
+  if (!(repairTargetSec > 0)) return speed;
+
+  return Number(clamp(speed * actual / repairTargetSec, minimumSpeed, maximumSpeed).toFixed(3));
+}
+
+/**
  * Formats a duration diagnostic summary payload for persistence.
  */
 export function buildDurationDiagnostics({

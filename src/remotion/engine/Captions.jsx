@@ -34,6 +34,9 @@ export function Captions({ captions }) {
   const enter = afterSilence ? interpolate(frame, [chunk.startFrame, chunk.startFrame + 3], [0, 1], { extrapolateRight: 'clamp' }) : 1;
 
   const isHighlight = mode === 'highlight' || mode === 'word_highlight' || mode === 'WORD_HIGHLIGHT';
+  const emphasisMode = captions?.emphasisMode || policy?.emphasisMode || (
+    isHighlight ? (isVertical ? 'ACTIVE_WORD' : 'NONE') : 'NONE'
+  );
   const subtitleStyle = policy?.style || (policy?.mode === 'COMPACT' ? 'COMPACT_CAPSULE' : (policy?.mode === 'SOFT_SCRIM' ? 'SOFT_SCRIM' : 'CLEAN_TEXT'));
   const isCompact = subtitleStyle === 'COMPACT_CAPSULE';
   const isMinimal = mode === 'minimal' || mode === 'MINIMAL' || isCompact;
@@ -109,7 +112,7 @@ export function Captions({ captions }) {
           ...containerStyle,
         }}
       >
-        {isHighlight ? (
+        {emphasisMode === 'ACTIVE_WORD' ? (
           chunk.words.map((w, i) => {
             const spoken = frame >= w.startFrame;
             const active = spoken && (frame < w.endFrame || i === chunk.words.length - 1 || frame < chunk.words[i + 1]?.startFrame);
@@ -119,6 +122,17 @@ export function Captions({ captions }) {
               </span>
             );
           })
+        ) : emphasisMode === 'KEYWORD' ? (
+          (() => {
+            // Highlight the longest / most salient content word in the chunk
+            const clean = (t) => t.replace(/[^\w]/g, '');
+            const longest = chunk.words.reduce((max, w) => clean(w.text).length > clean(max.text).length ? w : max, chunk.words[0] || { text: '' });
+            return chunk.words.map((w, i) => (
+              <span key={i} style={{ color: w.index === longest.index && clean(w.text).length >= 4 ? palette.accent : palette.text }}>
+                {w.text}{i < chunk.words.length - 1 ? ' ' : ''}
+              </span>
+            ));
+          })()
         ) : (
           <span>{chunk.text || chunk.words.map((w) => w.text).join(' ')}</span>
         )}

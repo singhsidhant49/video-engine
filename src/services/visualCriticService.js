@@ -64,17 +64,35 @@ export function staticVisualCritic(timeline, { plan, storyboard, continuityRepor
       }
     }
 
-    // 3. Check for multi-shot distribution in long scenes (>5s)
+    // 3. Check for stale single-image holds using the same format-aware
+    // thresholds as the shot planner. A strong 6–8 second documentary still
+    // is intentional in landscape and should not automatically be a defect.
     const durationSec = clip.durationInFrames / (timeline.fps || 30);
-    if (durationSec > 5.5 && shots.length <= 1 && shots[0]?.family === 'image') {
+    const pacing = timeline.productionProfile?.pacing || {};
+    const staleThreshold = Number(pacing.maximumStillSeconds) || (timeline.format === 'shorts' ? 6.8 : 7.0);
+    const minimumSplitHold = Math.max(
+      Number(pacing.minimumShotSeconds || 0) * 0.72,
+      Number(pacing.targetAverageShotSeconds || 0) * 0.82,
+      2,
+    );
+    if (durationSec > staleThreshold && shots.length <= 1 && shots[0]?.family === 'image') {
+      const splitPreservesPacing = durationSec / 2 >= minimumSplitHold;
       issues.push({
         sceneId,
-        type: 'single_shot_hold',
+        type: splitPreservesPacing ? 'single_shot_hold' : 'paced_long_hold',
         severity: 'medium',
-        message: `Scene "${sceneId}" is ${durationSec.toFixed(1)}s long with only one visual shot.`,
+        message: splitPreservesPacing
+          ? `Scene "${sceneId}" is ${durationSec.toFixed(1)}s long with only one visual shot.`
+          : `Scene "${sceneId}" exceeds the ${staleThreshold.toFixed(1)}s still guideline, but splitting it would violate the ${minimumSplitHold.toFixed(1)}s pacing floor.`,
       });
-      recommendedActions.push(`Divide ${sceneId} into a two-shot context -> detail progression.`);
-      deduction += 0.4;
+      if (splitPreservesPacing) {
+        recommendedActions.push(`Divide ${sceneId} into a two-shot context -> detail progression or use relevant motion footage.`);
+        sceneRepairs.push({ sceneId, action: 'split_long_hold' });
+        deduction += 0.4;
+      } else {
+        recommendedActions.push(`Keep ${sceneId} as one paced shot; prefer native-motion footage or a restrained camera move when available.`);
+        deduction += 0.1;
+      }
     }
   });
 
@@ -109,7 +127,40 @@ export function applySceneRepairs(timeline, repairs = []) {
       if (!repaired.captions.hidden) repaired.captions.hidden = [];
       repaired.captions.hidden.push([clip.from, clip.from + clip.durationInFrames]);
     }
+    if (repair.action === 'split_long_hold' && (clip.shots || []).length === 1) {
+      const original = clip.shots[0];
+      const firstDuration = Math.floor(clip.durationInFrames / 2);
+      const secondDuration = clip.durationInFrames - firstDuration;
+      if (firstDuration > 0 && secondDuration > 0) {
+        original.durationInFrames = firstDuration;
+        const clone = JSON.parse(JSON.stringify(original));
+        clone.id = `${original.id || original.storyboardShotId}_repair_detail`;
+        clone.storyboardShotId = `${original.storyboardShotId}_repair_detail`;
+        if (clone.asset?.assetIdentityChain) {
+          clone.asset.assetIdentityChain.timelineAssetId = clone.storyboardShotId;
+          clone.asset.assetIdentityChain.rendererAssetId = clone.asset.src || clone.asset.assetIdentityChain.rendererAssetId;
+        }
+        clone.from = firstDuration;
+        clone.startFrame = firstDuration;
+        clone.endFrame = clip.durationInFrames;
+        clone.durationInFrames = secondDuration;
+        clone.role = 'detail';
+        clone.variant = 'detail';
+        clone.layout = `${clone.family}:detail`;
+        clone.presentation = {
+          ...(clone.presentation || {}),
+          variant: 'detail',
+          layout: `${clone.family}:detail`,
+          cameraMove: (original.presentation?.cameraMove === 'detailCrop') ? 'subtlePush' : 'detailCrop',
+          movementState: 'SUBTLE',
+          transitionIn: 'cut',
+        };
+        clip.shots.push(clone);
+      }
+    }
   }
+
+  repaired.realizedShots = (repaired.clips || repaired.scenes || []).flatMap((clip) => clip.shots || []);
 
   return repaired;
 }

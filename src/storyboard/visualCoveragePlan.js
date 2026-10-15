@@ -11,6 +11,8 @@
 
 import { VisualCoveragePlanSchema } from '../models/visualCoveragePlan.schema.js';
 import { flattenStoryboardScenes } from './storyboardDiagnostics.js';
+import { buildVisualProposition } from './visualProposition.js';
+import { routeRepresentation } from './representationRouter.js';
 
 export const INFORMATION_TYPES = {
   CODE: 'code',
@@ -69,7 +71,8 @@ export function classifyInformationType(scene) {
   }
 
   // 3. Interface / App / Workflow
-  if (/\b(interface|ui|window|search bar|context window|prompt|input|editor|file tree|database|query|queries|retrieve|retrieval|dashboard|feed|notification)\b/i.test(combined)
+  if (/\b(interface|ui|window|search bar|context window|prompt|input|editor|file tree|query|queries|retrieve|retrieval|dashboard|feed|notification)\b/i.test(combined)
+    || /\bdatabase\s+(console|dashboard|screen|interface|client)\b/i.test(combined)
     || scene.kind === 'ui') {
     return INFORMATION_TYPES.INTERFACE;
   }
@@ -134,7 +137,7 @@ export function classifyInformationType(scene) {
  * @param {Object} storyboard - Canonical storyboard
  * @returns {Array<Object>} List of VisualCoverageItem
  */
-export function buildVisualCoveragePlan(storyboard) {
+export function buildVisualCoveragePlan(storyboard, { visualPolicy = null } = {}) {
   const items = [];
   const canonical = Array.isArray(storyboard.sections);
   const scenes = canonical ? flattenStoryboardScenes(storyboard) : (storyboard.scenes || []);
@@ -142,74 +145,89 @@ export function buildVisualCoveragePlan(storyboard) {
     ? storyboard.sections.flatMap((section) => section.scenes.map((scene) => [scene.id, section.id]))
     : scenes.map((scene) => [scene.id, scene.sectionId || 'legacy']));
 
+  const allowProcedural = visualPolicy
+    ? (visualPolicy.enableProceduralGraphics === true && !visualPolicy.useMediaEditorial)
+    : true;
+
   for (const scene of scenes) {
     const shots = scene.shots || [scene];
 
     for (const shot of shots) {
       const infoType = classifyInformationType({ ...scene, ...shot, narration: scene.narration });
       let primary = REPRESENTATIONS.MEDIA;
-      let fallbacks = [];
+      let fallbacks = [REPRESENTATIONS.MEDIA];
 
-      switch (infoType) {
-        case INFORMATION_TYPES.CODE:
-          primary = REPRESENTATIONS.CODE;
-          fallbacks = [REPRESENTATIONS.UI, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.COMPARISON];
-          break;
-        case INFORMATION_TYPES.INTERFACE:
-          primary = REPRESENTATIONS.UI;
-          fallbacks = [REPRESENTATIONS.CODE, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.MEDIA];
-          break;
-        case INFORMATION_TYPES.PROCESS:
+      if (allowProcedural) {
+        switch (infoType) {
+          case INFORMATION_TYPES.CODE:
+            primary = REPRESENTATIONS.CODE;
+            fallbacks = [REPRESENTATIONS.UI, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.COMPARISON];
+            break;
+          case INFORMATION_TYPES.INTERFACE:
+            primary = REPRESENTATIONS.UI;
+            fallbacks = [REPRESENTATIONS.CODE, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.MEDIA];
+            break;
+          case INFORMATION_TYPES.PROCESS:
+            primary = REPRESENTATIONS.PROCESS;
+            fallbacks = [REPRESENTATIONS.TIMELINE, REPRESENTATIONS.COMPARISON, REPRESENTATIONS.MEDIA];
+            break;
+          case INFORMATION_TYPES.COMPARISON:
+            primary = REPRESENTATIONS.COMPARISON;
+            fallbacks = [REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.CHART, REPRESENTATIONS.TYPOGRAPHY];
+            break;
+          case INFORMATION_TYPES.RELATIONSHIP:
+            primary = REPRESENTATIONS.DIAGRAM;
+            fallbacks = [REPRESENTATIONS.COMPARISON, REPRESENTATIONS.PROCESS, REPRESENTATIONS.TYPOGRAPHY];
+            break;
+          case INFORMATION_TYPES.TIMELINE:
+            primary = REPRESENTATIONS.TIMELINE;
+            fallbacks = [REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.MEDIA, REPRESENTATIONS.DOCUMENT];
+            break;
+          case INFORMATION_TYPES.LOCATION:
+            primary = REPRESENTATIONS.MAP;
+            fallbacks = [REPRESENTATIONS.MEDIA, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.TIMELINE];
+            break;
+          case INFORMATION_TYPES.DATA:
+            primary = REPRESENTATIONS.CHART;
+            fallbacks = [REPRESENTATIONS.COMPARISON, REPRESENTATIONS.DOCUMENT, REPRESENTATIONS.TYPOGRAPHY];
+            break;
+          case INFORMATION_TYPES.EVIDENCE:
+            primary = REPRESENTATIONS.DOCUMENT;
+            fallbacks = [REPRESENTATIONS.MEDIA, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.TYPOGRAPHY];
+            break;
+          case INFORMATION_TYPES.ENTITY:
+          case INFORMATION_TYPES.ATMOSPHERE:
+          case INFORMATION_TYPES.EMOTION:
+            primary = REPRESENTATIONS.MEDIA;
+            fallbacks = [REPRESENTATIONS.DOCUMENT, REPRESENTATIONS.TYPOGRAPHY];
+            break;
+          case INFORMATION_TYPES.EMPHASIS:
+          default:
+            primary = REPRESENTATIONS.TYPOGRAPHY;
+            fallbacks = [REPRESENTATIONS.MEDIA];
+            break;
+        }
+
+        // A shot's authored media policy is more specific than scene classification.
+        if (shot.mediaPreference === 'real') {
+          primary = REPRESENTATIONS.MEDIA;
+        } else if (shot.mediaPreference === 'procedural' && infoType === INFORMATION_TYPES.PROCESS) {
           primary = REPRESENTATIONS.PROCESS;
-          fallbacks = [REPRESENTATIONS.TIMELINE, REPRESENTATIONS.COMPARISON, REPRESENTATIONS.MEDIA];
-          break;
-        case INFORMATION_TYPES.COMPARISON:
-          primary = REPRESENTATIONS.COMPARISON;
-          fallbacks = [REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.CHART, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.RELATIONSHIP:
-          primary = REPRESENTATIONS.DIAGRAM;
-          fallbacks = [REPRESENTATIONS.COMPARISON, REPRESENTATIONS.PROCESS, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.TIMELINE:
-          primary = REPRESENTATIONS.TIMELINE;
-          fallbacks = [REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.MEDIA, REPRESENTATIONS.DOCUMENT];
-          break;
-        case INFORMATION_TYPES.LOCATION:
-          primary = REPRESENTATIONS.MAP;
-          fallbacks = [REPRESENTATIONS.MEDIA, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.TIMELINE];
-          break;
-        case INFORMATION_TYPES.DATA:
-          primary = REPRESENTATIONS.CHART;
-          fallbacks = [REPRESENTATIONS.COMPARISON, REPRESENTATIONS.DOCUMENT, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.EVIDENCE:
-          primary = REPRESENTATIONS.DOCUMENT;
-          fallbacks = [REPRESENTATIONS.MEDIA, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.ENTITY:
-          primary = REPRESENTATIONS.MEDIA;
-          fallbacks = [REPRESENTATIONS.DOCUMENT, REPRESENTATIONS.DIAGRAM, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.ATMOSPHERE:
-        case INFORMATION_TYPES.EMOTION:
-          primary = REPRESENTATIONS.MEDIA;
-          fallbacks = [REPRESENTATIONS.DOCUMENT, REPRESENTATIONS.TYPOGRAPHY];
-          break;
-        case INFORMATION_TYPES.EMPHASIS:
-        default:
-          primary = REPRESENTATIONS.TYPOGRAPHY;
-          fallbacks = [REPRESENTATIONS.MEDIA];
-          break;
-      }
-
-      // A shot's authored media policy is more specific than scene classification.
-      if (shot.mediaPreference === 'real') {
+        }
+      } else {
         primary = REPRESENTATIONS.MEDIA;
-      } else if (shot.mediaPreference === 'procedural' && infoType === INFORMATION_TYPES.PROCESS) {
-        primary = REPRESENTATIONS.PROCESS;
+        fallbacks = [REPRESENTATIONS.MEDIA];
       }
 
+      const visualProposition = buildVisualProposition({
+        shot,
+        scene,
+        topic: storyboard.topic || storyboard.title || '',
+      });
+      const representationDecision = routeRepresentation(visualProposition, {
+        shotId: shot.id || `${scene.id}_shot_01`, primaryRepresentation: primary, fallbackRepresentations: fallbacks,
+      }, { visualPolicy });
+      primary = representationDecision.selectedRepresentation;
       items.push({
         sectionId: sectionByScene.get(scene.id) || 'legacy',
         sceneId: scene.id,
@@ -236,6 +254,8 @@ export function buildVisualCoveragePlan(storyboard) {
         confidence: 0.92,
         rationale: `Shot classified as "${infoType}"; preferred explanatory channel is "${primary}".`,
         coverageStatus: 'UNRESOLVED',
+        visualProposition,
+        representationDecision,
       });
     }
   }
@@ -255,6 +275,15 @@ export function synthesizeProceduralData(scene, representation) {
   switch (representation) {
     case REPRESENTATIONS.CODE: {
       if (scene.data?.code) return scene.data;
+      if (/deadlock|transaction|rollback|gridlock|victim.*retry|retry.*failure/i.test(text)) {
+        return {
+          filename: 'src/db/transfer.py',
+          language: 'python',
+          code: `for attempt in range(3):\n    try:\n        db.begin()\n        transfer(a, b, amount)\n        db.commit()\n        break\n    except DeadlockError:\n        db.rollback()\n        continue`,
+          highlightLines: [7, 8, 9],
+          terminal: 'DeadlockError: transaction selected as victim\nROLLBACK complete\nRetry 2/3 succeeded',
+        };
+      }
       if (/test|recover/i.test(text)) {
         return {
           filename: 'tests/agent.test.js',
@@ -285,6 +314,15 @@ export function synthesizeProceduralData(scene, representation) {
 
     case REPRESENTATIONS.UI: {
       if (scene.data?.fileTree) return scene.data;
+      if (/database|deadlock|transaction|quer(?:y|ies)|application.*(?:freeze|crash|gridlock)/i.test(text)) {
+        return {
+          title: 'Database Activity Monitor',
+          activeFile: 'blocked_queries.sql',
+          fileTree: ['Transaction A — waiting', 'Transaction B — waiting', 'Lock graph — cycle'],
+          searchQuery: 'blocked queries and lock waits',
+          status: 'DEADLOCK RISK: circular wait detected',
+        };
+      }
       return {
         title: 'Repository Workspace',
         activeFile: 'src/agent.js',
@@ -296,6 +334,24 @@ export function synthesizeProceduralData(scene, representation) {
 
     case REPRESENTATIONS.DIAGRAM: {
       if (scene.data?.nodes && scene.data?.grammar) return scene.data;
+      if (/deadlock|circular wait|transaction.*lock|lock.*transaction|banking app.*transfer/i.test(text)) {
+        return {
+          grammar: 'CYCLE',
+          title: /deadlock|database|cycle/i.test(text) ? 'DATABASE DEADLOCK CYCLE' : 'TRANSACTIONS WAIT FOR LOCKS',
+          nodes: [
+            { id: 'tx_a', label: 'Transfer A', role: 'Transaction', detail: 'Locks account A; waits for B' },
+            { id: 'tx_b', label: 'Transfer B', role: 'Transaction', detail: 'Locks account B; waits for A' },
+            { id: 'detect', label: 'Cycle Detected', role: 'Database', detail: 'Circular wait graph found' },
+            { id: 'rollback', label: 'Victim Rollback', role: 'Resolution', detail: 'Releases locks; other transfer finishes' },
+          ],
+          edges: [
+            { from: 'tx_a', to: 'tx_b', label: 'waits for' },
+            { from: 'tx_b', to: 'detect', label: 'closes cycle' },
+            { from: 'detect', to: 'rollback', label: 'selects victim' },
+            { from: 'rollback', to: 'tx_a', label: 'releases locks', direction: 'return_loop' },
+          ],
+        };
+      }
       if (/limbic|prefrontal|brain|urge|delay|gratification|neuro/i.test(text)) {
         if (/cycle|loop|dopamine|habit|craving|pleasure/i.test(text)) {
           return {
@@ -376,7 +432,7 @@ export function synthesizeProceduralData(scene, representation) {
           ],
         };
       }
-      if (/interbank|credit market|commercial paper|libor|liquidity freeze|freeze|spread/i.test(text)) {
+      if (/interbank|credit market|commercial paper|libor|liquidity freeze|credit freeze|credit spread/i.test(text)) {
         return {
           grammar: 'COMPARISON',
           title: 'CREDIT TRANSMISSION SHOCK',
@@ -389,7 +445,7 @@ export function synthesizeProceduralData(scene, representation) {
           ],
         };
       }
-      if (/connected world|interconnect|global market|across the globe|bring down/i.test(text)) {
+      if (/(connected world|interconnect|global market|across the globe)/i.test(text) && /(bank|finance|mortgage|credit|market)/i.test(text)) {
         return {
           grammar: 'NETWORK',
           title: 'GLOBAL INTERCONNECTED CONTAGION',
@@ -439,7 +495,11 @@ export function synthesizeProceduralData(scene, representation) {
       }
       return {
         grammar: 'FLOW',
-        title: scene.text?.headline || 'CAUSAL PROGRESSION',
+        // Structured source data is closer to the narrated payload than an
+        // editorial headline. This matters when a media shot is recast to a
+        // diagram during resume: the headline may be a semantic paraphrase
+        // with no spoken words, while data.title is narration-grounded.
+        title: scene.data?.title || scene.text?.headline || tokens.slice(0, 4).join(' ').toUpperCase() || 'CAUSAL PROGRESSION',
         nodes: [
           { id: 'n1', label: tokens.slice(0, 3).join(' ') || 'Initial Trigger', role: 'Source' },
           { id: 'n2', label: tokens.slice(3, 7).join(' ') || 'Mechanism', role: 'Process' },
@@ -518,11 +578,11 @@ export function synthesizeProceduralData(scene, representation) {
         };
       }
       return {
-        title: 'EXECUTION FLOW PIPELINE',
+        title: scene.text?.headline || tokens.slice(0, 3).join(' ').toUpperCase() || 'PROCESS',
         steps: [
-          { number: 1, label: 'Context Gathering', detail: 'Read codebase & test state' },
-          { number: 2, label: 'Patch Generation', detail: 'Synthesize verified edit' },
-          { number: 3, label: 'Test Execution', detail: 'Run validation suite' },
+          { number: 1, label: tokens.slice(0, 3).join(' ') || 'Initial state', detail: tokens.slice(3, 6).join(' ') },
+          { number: 2, label: tokens.slice(6, 9).join(' ') || 'Mechanism', detail: tokens.slice(9, 12).join(' ') },
+          { number: 3, label: tokens.slice(12, 15).join(' ') || 'Outcome', detail: tokens.slice(15, 18).join(' ') },
         ],
       };
     }
@@ -531,6 +591,16 @@ export function synthesizeProceduralData(scene, representation) {
     case 'comparison':
     case REPRESENTATIONS.COMPARISON: {
       if (scene.data?.left && scene.data?.right) return scene.data;
+      if (/\b(bank|banking|account|transfer|transaction|deadlock|lock)\b/i.test(text)) {
+        return {
+          grammar: 'COMPARISON',
+          title: /transfer/i.test(text) ? 'CROSSED TRANSFERS' : 'TRANSACTION LOCKS',
+          left: { title: 'Transfer A to B', desc: 'Locks account A', detail: 'Waits for account B' },
+          right: { title: 'Transfer B to A', desc: 'Locks account B', detail: 'Waits for account A' },
+          leftAt: 2,
+          rightAt: 14,
+        };
+      }
       if (/limbic|prefrontal|brain|urge|delay|gratification/i.test(text)) {
         return {
           grammar: 'COMPARISON',
@@ -563,9 +633,9 @@ export function synthesizeProceduralData(scene, representation) {
       }
       return {
         grammar: 'COMPARISON',
-        title: 'SYSTEM CONTRAST',
-        left: { title: tokens[0] || 'System A', desc: 'Direct baseline', detail: 'Established paradigm' },
-        right: { title: tokens[1] || 'System B', desc: 'Adaptive alternative', detail: 'High-leverage mechanism' },
+        title: (scene.text?.headline || tokens.slice(0, 3).join(' ') || 'COMPARISON').toUpperCase(),
+        left: { title: tokens.slice(0, 2).join(' ') || 'First state', desc: tokens.slice(2, 5).join(' ') || 'Initial condition', detail: tokens.slice(5, 8).join(' ') || 'First outcome' },
+        right: { title: tokens.slice(8, 10).join(' ') || 'Second state', desc: tokens.slice(10, 13).join(' ') || 'Changed condition', detail: tokens.slice(13, 16).join(' ') || 'Second outcome' },
         leftAt: 2,
         rightAt: 14,
       };
@@ -592,13 +662,21 @@ export function synthesizeProceduralData(scene, representation) {
 
     case REPRESENTATIONS.CHART: {
       if (scene.data?.values) return scene.data;
-      return {
-        title: 'VALUE DECAY OVER REWARD DELAY',
+      if (/heap|memory|ram|leak|allocat/i.test(text)) return {
+        title: 'HEAP MEMORY GROWTH',
         type: 'bar',
-        values: [100, 72, 45, 20],
-        labels: ['Immediate', '1 Hour', '1 Day', '1 Month'],
+        values: [20, 45, 72, 100],
+        labels: ['Baseline', 'Retained', 'Pressure', 'Exhausted'],
         highlightIndex: 3,
-        source: 'Hyperbolic Discounting Model',
+        source: 'Qualitative mechanism illustration',
+      };
+      return {
+        title: scene.text?.headline || 'NARRATED TREND',
+        type: 'bar',
+        values: [20, 45, 72, 100],
+        labels: ['Start', 'Developing', 'High', 'Outcome'],
+        highlightIndex: 3,
+        source: 'Qualitative narration; not measured data',
       };
     }
 

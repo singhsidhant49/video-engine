@@ -15,6 +15,11 @@ export const COVERAGE_STATUS = {
   UNRESOLVED: 'UNRESOLVED',   // Missing data, empty canvas, or plain ground
 };
 
+const groundingToken = (word) => String(word || '')
+  .toLowerCase()
+  .replace(/ies$/, 'y')
+  .replace(/(ing|ers|ed|es|s)$/, '');
+
 /**
  * Evaluates the visual coverage quality of every clip and shot in the timeline.
  * 
@@ -151,10 +156,20 @@ export function buildVisualCoverageDiagnostics(timeline, coveragePlan = []) {
     // Text grounding validation: check if on-screen text corresponds to scene narration (Requirement 23 & 24)
     const onScreenText = overlay.headline || (overlay.words || []).join(' ') || overlay.title || '';
     const narrationText = (clip.narration || coverageItem?.narration || '').toLowerCase();
-    if (onScreenText && narrationText) {
+    const isChapterOrSectionTitle = overlay.chapter === true
+      || Boolean(overlay.section)
+      || /chapter|part\s+\d+|section\b/i.test(overlay.kicker || '')
+      || clip.purpose === 'chapter'
+      || coverageItem?.purpose === 'chapter'
+      || clip.kind === 'chapter'
+      || clip.conceptSense === 'CHAPTER'
+      || clip.shots?.[0]?.visibleNeed?.visualProposition?.conceptSense === 'CHAPTER';
+
+    if (onScreenText && narrationText && !isChapterOrSectionTitle) {
       const textWords = onScreenText.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter((w) => w.length > 3);
       if (textWords.length > 0) {
-        const matches = textWords.filter((w) => narrationText.includes(w));
+        const narrationWords = new Set(narrationText.replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean).map(groundingToken));
+        const matches = textWords.filter((word) => narrationWords.has(groundingToken(word)));
         // If none of the substantial words match narration text, flag for review
         if (matches.length === 0 && !narrationText.includes(onScreenText.toLowerCase())) {
           textGroundingWarnings.push({

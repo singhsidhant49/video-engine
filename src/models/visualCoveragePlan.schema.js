@@ -36,7 +36,8 @@ export const VisualCoverageItemSchema = z.object({
   rationale: z.string().min(1),
   confidence: z.number().min(0).max(1),
   coverageStatus: z.enum(['UNRESOLVED', 'DIRECT', 'SUPPORTIVE', 'WEAK']).default('UNRESOLVED'),
+  visualProposition: z.any().optional(),
+  representationDecision: z.any().optional(),
 });
 
 export const VisualCoveragePlanSchema = z.array(VisualCoverageItemSchema);
-

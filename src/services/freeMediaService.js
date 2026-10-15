@@ -24,7 +24,7 @@ const UA = {
 const CACHE_DIR = path.join(config.rootDir, '.cache', 'media');
 export const MIN_SHORT_SIDE = 640;
 
-async function fetchWithTimeout(url, opts = {}, ms = 12000) {
+async function fetchWithTimeout(url, opts = {}, ms = 5000) {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), ms);
   try {
@@ -38,24 +38,67 @@ const SEARCH_CACHE = path.join(config.rootDir, '.cache', 'search');
 const SEARCH_TTL_MS = 7 * 24 * 3600 * 1000;
 /** Search failures (rate limits, outages) this process — so reports can tell "unreachable" from "nothing found". */
 export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
+const providerState = new Map();
+const HOST_INTERVAL_MS = {
+  'api.pexels.com': 350,
+  'en.wikipedia.org': 180,
+  'commons.wikimedia.org': 220,
+  'api.search.brave.com': 450,
+  'pixabay.com': 300,
+};
+
+const providerFor = (host) => {
+  if (!providerState.has(host)) providerState.set(host, { nextAt: 0, blockedUntil: 0, disabled: false, failures: 0 });
+  return providerState.get(host);
+};
+
+async function reserveProvider(host) {
+  const state = providerFor(host);
+  if (state.disabled || Date.now() < state.blockedUntil) return false;
+  const now = Date.now();
+  const reservedAt = Math.max(now, state.nextAt);
+  state.nextAt = reservedAt + (HOST_INTERVAL_MS[host] || 120);
+  const waitMs = reservedAt - now;
+  if (waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));
+  return !state.disabled && Date.now() >= state.blockedUntil;
+}
+
+function recordSearchFailure(host, detail) {
+  searchStats.failed++;
+  const message = `${host}: ${detail}`;
+  if (!searchStats.failures.includes(message)) searchStats.failures.push(message);
+}
+
+export function resetSearchStats() {
+  searchStats.ok = 0;
+  searchStats.cached = 0;
+  searchStats.failed = 0;
+  searchStats.failures = [];
+  providerState.clear();
+  hostFailures.clear();
+}
 
 /**
  * GET JSON with a disk cache and retry/backoff on 429/5xx. Wikimedia rate-limits
  * bursts of searches; without this, repeated runs silently lose every candidate.
  */
-async function getJson(url, opts, ms = 8000) {
+async function getJson(url, opts, ms = 5000) {
   const key = crypto.createHash('sha1').update(url).digest('hex');
   const file = path.join(SEARCH_CACHE, `${key}.json`);
   try {
     const st = await fs.stat(file);
     if (Date.now() - st.mtimeMs < SEARCH_TTL_MS) { searchStats.cached++; return JSON.parse(await fs.readFile(file, 'utf8')); }
   } catch { /* miss */ }
+  const host = new URL(url).host;
+  if (!(await reserveProvider(host))) return null;
   let lastErr = null;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetchWithTimeout(url, opts, ms);
       if (res.ok) {
         const data = await res.json();
+        const state = providerFor(host);
+        state.failures = 0;
         searchStats.ok++;
         await fs.mkdir(SEARCH_CACHE, { recursive: true });
         await fs.writeFile(file, JSON.stringify(data));
@@ -63,16 +106,27 @@ async function getJson(url, opts, ms = 8000) {
       }
       if (res.status === 404) return null;
       lastErr = `HTTP ${res.status}`;
-      if (res.status === 429) break; // Don't stall on rate limits when other providers are available
+      const state = providerFor(host);
+      if ([401, 402, 403].includes(res.status)) {
+        state.disabled = true;
+        break;
+      }
+      if (res.status === 429) {
+        const retryAfter = Number(res.headers.get('retry-after'));
+        state.blockedUntil = Date.now() + (Number.isFinite(retryAfter) ? Math.max(15, retryAfter) * 1000 : 45_000);
+        break;
+      }
       if (res.status < 500) break;
       await new Promise((r) => setTimeout(r, 600));
     } catch (err) {
       lastErr = err.name === 'AbortError' ? 'timeout' : err.message;
+      const state = providerFor(host);
+      state.failures++;
+      if (state.failures >= 4) state.blockedUntil = Date.now() + 30_000;
       await new Promise((r) => setTimeout(r, 600));
     }
   }
-  searchStats.failed++;
-  searchStats.failures.push(`${new URL(url).host}: ${lastErr}`);
+  recordSearchFailure(host, lastErr);
   return null;
 }
 
@@ -175,12 +229,14 @@ export async function braveImageSearch(query, orientation) {
       weight: 2.75 - rank * 0.1,
       label: r.title || query,
       license: {
-        name: 'Web Editorial (Brave Search)',
+        name: 'Brave Search discovery result',
         url: r.url || null,
         author: r.source || null,
         attributionRequired: false,
         nonFree: false,
         page: r.url || null,
+        commercial_use: 'unknown',
+        verification_status: 'discovery_only',
       },
     };
   }).filter(Boolean);
@@ -311,7 +367,7 @@ async function downloadCached(url, timeout, retries = 0) {
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetchWithTimeout(url, {}, timeout || 15000);
+      const res = await fetchWithTimeout(url, {}, timeout || 8000);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
       await fs.mkdir(CACHE_DIR, { recursive: true });

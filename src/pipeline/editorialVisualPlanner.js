@@ -36,7 +36,11 @@ export function buildEditorialVisualPlan({ storyboard, coveragePlan, specs = [],
     for (const shot of scene.shots) {
       const coverage = coverageByShot.get(shot.id);
       if (!coverage) throw new Error(`EditorialVisualPlan missing coverage for ${shot.id}`);
-      const selectedRepresentation = visualPolicy?.useMediaEditorial ? 'media' : coverage.primaryRepresentation;
+      const allowProcedural = visualPolicy?.enableProceduralGraphics === true && !visualPolicy?.useMediaEditorial;
+      const productionFallbackApplied = coverage.representationDecision?.fallbackApplied === true;
+      const selectedRepresentation = (allowProcedural || productionFallbackApplied)
+        ? (coverage.representationDecision?.selectedRepresentation || coverage.primaryRepresentation)
+        : 'media';
       const priorRepresentation = FAMILY_TO_REPRESENTATION[spec?.family] || selectedRepresentation;
       const override = priorRepresentation !== selectedRepresentation ? {
         originalRepresentation: priorRepresentation,

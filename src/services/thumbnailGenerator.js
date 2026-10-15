@@ -29,7 +29,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
     {
       conceptId: 'A_high_contrast_statement',
       style: 'bold_editorial',
-      overlayText: (plan.scenes[0]?.statement || title).split(/\s+/).slice(0, 4).join(' ').toUpperCase(),
+      overlayText: (plan.scenes[0]?.text?.headline || title).split(/\s+/).slice(0, 4).join(' ').toUpperCase(),
       mainSubject: plan.scenes[0]?.entity?.name || 'Central Hero Element',
       emotion: 'curiosity',
       palette: {
@@ -55,7 +55,9 @@ export function generateVideoPackage(plan, timeline, options = {}) {
     {
       conceptId: 'C_stat_proof',
       style: 'evidence_proof',
-      overlayText: plan.scenes.find((s) => s.stat)?.stat?.value ? `${plan.scenes.find((s) => s.stat)?.stat?.value} CHANGED THIS` : 'HOW IT HAPPENED',
+      overlayText: plan.scenes.find((s) => s.kind === 'statistic' && s.data?.value)?.data?.value
+        ? `${plan.scenes.find((s) => s.kind === 'statistic' && s.data?.value).data.value} CHANGED THIS`
+        : 'HOW IT HAPPENED',
       mainSubject: 'Data Graphic or Blueprint Mockup',
       emotion: 'urgency',
       palette: {
@@ -69,41 +71,49 @@ export function generateVideoPackage(plan, timeline, options = {}) {
 
   // 2. Generate Chapters from Timeline Scenes
   const fps = timeline.fps || 30;
-  let currentSec = 0;
   const chapters = [];
 
-  (timeline.scenes || []).forEach((scene, index) => {
-    const sceneStartSec = currentSec;
-    const sceneDurationSec = scene.durationInFrames / fps;
-
-    let chapterTitle = scene.purpose || `Scene ${index + 1}`;
+  const timelineScenes = timeline.clips || timeline.scenes || [];
+  const planScenes = plan.scenes || [];
+  let priorSectionId = null;
+  timelineScenes.forEach((scene, index) => {
+    const authored = planScenes.find((item) => item.id === scene.sceneId || item.id === scene.id) || planScenes[index] || {};
+    const sectionId = scene.sectionId || authored.sectionId || null;
+    const startsSection = index === 0
+      || authored.section === true
+      || authored.startsSection === true
+      || authored.kind === 'chapter'
+      || (sectionId != null && sectionId !== priorSectionId);
+    priorSectionId = sectionId;
+    if (!startsSection) return;
+    const sceneStartSec = Number.isFinite(scene.from) ? scene.from / fps : 0;
+    let chapterTitle = authored.data?.title || authored.text?.headline || authored.title || '';
     if (index === 0) chapterTitle = 'Hook & Introduction';
-    else if (scene.statement) chapterTitle = scene.statement.slice(0, 35);
-    else if (scene.entity?.name) chapterTitle = `The Role of ${scene.entity.name}`;
-    else if (scene.kind === 'statistic') chapterTitle = 'The Critical Numbers';
-    else if (scene.kind === 'process' || scene.kind === 'timeline') chapterTitle = 'How It Unfolds';
+    else if (!chapterTitle && authored.narration) chapterTitle = authored.narration.split(/[.!?]/)[0].split(/\s+/).slice(0, 7).join(' ');
+    if (!chapterTitle) chapterTitle = `Section ${chapters.length + 1}`;
 
     chapters.push({
       time: formatTimestamp(sceneStartSec),
       seconds: Number(sceneStartSec.toFixed(1)),
       title: chapterTitle.charAt(0).toUpperCase() + chapterTitle.slice(1),
     });
-
-    currentSec += sceneDurationSec;
   });
 
   // 3. Evidence Sources List
   const evidenceSources = (plan.scenes || [])
-    .filter((s) => s.entity?.wikipedia || s.stat || s.quote)
+    .filter((s) => s.source?.url || s.entity?.wikipedia || s.data?.source || (s.kind === 'quote' && s.data?.author))
     .map((s) => {
+      if (s.source?.url) {
+        return { type: 'reference', name: s.source.label || 'Source', reference: s.source.url };
+      }
       if (s.entity?.wikipedia) {
         return { type: 'entity', name: s.entity.name, reference: `https://en.wikipedia.org/wiki/${encodeURIComponent(s.entity.wikipedia)}` };
       }
-      if (s.stat) {
-        return { type: 'statistic', claim: `${s.stat.value} ${s.stat.label || ''}`, source: s.stat.source || 'Industry Report / Research' };
+      if (s.data?.source) {
+        return { type: 'evidence', claim: s.narration, source: s.data.source };
       }
-      if (s.quote) {
-        return { type: 'quote', speaker: s.quote.speaker, context: s.quote.text };
+      if (s.kind === 'quote' && s.data?.author) {
+        return { type: 'quote', speaker: s.data.author, context: s.data.quote };
       }
       return null;
     })
@@ -118,7 +128,8 @@ export function generateVideoPackage(plan, timeline, options = {}) {
     '\n🔍 SOURCES & EVIDENCE:',
     evidenceSources.length
       ? evidenceSources.map((e) => `- ${e.name || e.claim || e.speaker}: ${e.reference || e.source || ''}`).join('\n')
-      : '- Verified via open editorial and encyclopedic records.',
+      : '- No externally verified claim sources were recorded for this run.',
+    evidenceSources.length ? '\nSources are recorded for editorial review; automated citation presence is not a substitute for human fact-checking.' : '',
     '\n#technology #education #documentary #analysis',
   ].join('\n');
 

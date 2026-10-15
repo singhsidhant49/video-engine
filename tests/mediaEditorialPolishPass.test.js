@@ -21,6 +21,8 @@ test('semantic split vs duration split: 6-second single-thought scene stays 1 sh
   };
   const singleDemand = estimateShotDemand(singleThoughtScene, { useMediaEditorial: true, format: 'landscape' });
   assert.equal(singleDemand, 1, 'A 6s scene with no semantic shift should remain 1 strong shot');
+  const staleDemand = estimateShotDemand({ ...singleThoughtScene, durationHint: 7.2 }, { useMediaEditorial: true, format: 'landscape' });
+  assert.equal(staleDemand, 2, 'A landscape still longer than 7s should receive a visual change');
 
   // Scene with clear semantic sub-beats: request -> server -> response -> parse
   const multiBeatScene = {

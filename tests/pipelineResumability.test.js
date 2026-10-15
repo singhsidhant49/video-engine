@@ -170,6 +170,31 @@ test('Resume Safety: evaluates run validity and recovers from missing artifacts'
   }
 });
 
+test('render-only resume survives an intentional refresh of shared duration diagnostics', async () => {
+  const tmpDir = path.join(config.rootDir, '.cache', 'test-render-resume-' + Date.now());
+  await fs.mkdir(tmpDir, { recursive: true });
+  try {
+    const store = await CheckpointStore.create(tmpDir, 'test-render-resume');
+    await fs.writeFile(path.join(tmpDir, 'request.json'), JSON.stringify({ topic: 'Test' }));
+    await fs.writeFile(path.join(tmpDir, 'duration-budget.json'), JSON.stringify({ target: 120 }));
+    await store.complete('request', ['request.json', 'duration-budget.json']);
+    await fs.writeFile(path.join(tmpDir, 'duration-budget.json'), JSON.stringify({ target: 120, actual: 114.2 }));
+    await store.refreshArtifactChecksums('request', ['duration-budget.json']);
+
+    const validity = await evaluateRunValidity({
+      runDir: tmpDir,
+      manifest: store.manifest,
+      currentContext: { topic: 'Test' },
+      fromStage: 'render',
+    });
+    assert.ok(validity.reusedStages.some((stage) => stage.stage === 'request'));
+    assert.equal(validity.invalidatedStages.find((stage) => stage.stage === 'request'), undefined);
+    assert.equal(validity.invalidatedStages.find((stage) => stage.stage === 'render')?.reason, 'Forced restart from --from render');
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
+  }
+});
+
 test('Run Locking: prevents concurrent processes on same run directory', async () => {
   const tmpDir = path.join(config.rootDir, '.cache', 'test-lock-' + Date.now());
   await fs.mkdir(tmpDir, { recursive: true });

@@ -47,6 +47,7 @@ export async function acquireRunLock(runDir) {
 
     // Stale lock from dead process; take over
     console.warn(`   ⚠️ Releasing stale lock from dead process PID ${existing.pid}`);
+    await fs.unlink(lockPath).catch(() => {});
   } catch (err) {
     if (err.code !== 'ENOENT' && !err.message.includes('locked by active process')) {
       // JSON parse error or similar; safe to overwrite
@@ -61,7 +62,16 @@ export async function acquireRunLock(runDir) {
     lockedAt: new Date().toISOString(),
   };
 
-  await fs.writeFile(lockPath, JSON.stringify(payload, null, 2));
+  let handle;
+  try {
+    handle = await fs.open(lockPath, 'wx');
+    await handle.writeFile(JSON.stringify(payload, null, 2));
+  } catch (error) {
+    if (error.code === 'EEXIST') throw new Error('Run directory was locked by another process while acquiring the lock');
+    throw error;
+  } finally {
+    await handle?.close().catch(() => {});
+  }
 
   const release = () => releaseRunLock(runDir);
   return { lockPath, pid: process.pid, release };

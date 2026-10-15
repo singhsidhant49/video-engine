@@ -1,5 +1,5 @@
 import { getSharp } from './imageUtils.js';
-import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@xenova/transformers';
+import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@huggingface/transformers';
 
 /**
  * CLIP image↔text relevance.
@@ -63,6 +63,32 @@ export async function relevance(imageFile, text) {
     const { image_embeds } = await vis(await proc(imgInput));
     return +dot(normalise(image_embeds.data), await embedText(text)).toFixed(4);
   } catch (e) {
-    return 0.28; // Default good relevance score
+    // A failed model call is unknown evidence, never a synthetic positive.
+    return null;
   }
+}
+
+export async function contrastiveRelevance(imageFile, positiveDescriptions = [], negativeDescriptions = []) {
+  const positives = [...new Set(positiveDescriptions.filter(Boolean))].slice(0, 8);
+  const negatives = [...new Set(negativeDescriptions.filter(Boolean))].slice(0, 8);
+  if (!relevanceEnabled() || !positives.length) {
+    return { available: false, positiveScore: null, negativeScore: null, margin: null };
+  }
+  const positiveScores = await Promise.all(positives.map((description) => relevance(imageFile, description)));
+  const negativeScores = await Promise.all(negatives.map((description) => relevance(imageFile, description)));
+  const validPositive = positiveScores.filter(Number.isFinite);
+  const validNegative = negativeScores.filter(Number.isFinite);
+  if (!validPositive.length) {
+    return { available: false, positiveScore: null, negativeScore: null, margin: null };
+  }
+  const positiveScore = Math.max(...validPositive);
+  const negativeScore = validNegative.length ? Math.max(...validNegative) : 0;
+  return {
+    available: true,
+    positiveScore: Number(positiveScore.toFixed(4)),
+    negativeScore: Number(negativeScore.toFixed(4)),
+    margin: Number((positiveScore - negativeScore).toFixed(4)),
+    positiveDescriptions: positives,
+    negativeDescriptions: negatives,
+  };
 }

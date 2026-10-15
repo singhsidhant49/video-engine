@@ -35,6 +35,8 @@ export function storyboardToExecutionPlan(contentPlan, storyboard) {
       template: source.template || null,
       visualIntent: scene.visualIntent,
       informationDensity: scene.informationDensity,
+      minimumShotSeconds: scene.minimumShotSeconds,
+      maximumStillSeconds: scene.maximumStillSeconds,
       evidenceRequirement: scene.evidenceRequirement,
       storyboardShots: scene.shots,
       sourceSceneIds: scene.sourceSceneIds,

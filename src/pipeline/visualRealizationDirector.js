@@ -28,8 +28,8 @@ function remember(memory, key, value, limit = 8) {
 
 function assetPool(sceneAssets, shotId) {
   const shotAsset = sceneAssets?.byShot?.[shotId];
-  if (shotAsset) return [shotAsset, ...(sceneAssets?.alternates || [])].filter((asset, index, items) => asset && items.findIndex((item) => item?.src === asset.src) === index);
-  if (sceneAssets?.primary) return [sceneAssets.primary, ...(sceneAssets.alternates || [])];
+  if (shotAsset) return [shotAsset];
+  if (sceneAssets?.primary && (!sceneAssets.primary.storyboardShotId || sceneAssets.primary.storyboardShotId === shotId)) return [sceneAssets.primary];
   if (Array.isArray(sceneAssets)) return sceneAssets;
   return [];
 }
@@ -37,10 +37,10 @@ function assetPool(sceneAssets, shotId) {
 function compositionRejection(asset, format) {
   if (!asset) return 'composition_incompatible';
   const width = Number(asset.width) || 0, height = Number(asset.height) || 0;
-  if (width && height && (width < (format === 'shorts' ? 900 : 1200) || height < 640)) return 'low_resolution';
+  if (width && height && (Math.max(width, height) < 640 || Math.min(width, height) < 360)) return 'low_resolution';
   const aspect = width && height ? width / height : null;
   if (format === 'shorts' && aspect > 1.7 && !asset.focal && !asset.subjectBounds && !asset.focusBox) return 'no_mobile_safe_crop';
-  if (format === 'landscape' && aspect && aspect < .65 && !asset.focal && !asset.subjectBounds && !asset.focusBox) return 'bad_crop';
+  if (format === 'landscape' && aspect && aspect < .50 && !asset.focal && !asset.subjectBounds && !asset.focusBox) return 'bad_crop';
   if ((asset.cropFitness ?? asset.crop_fitness) != null && (asset.cropFitness ?? asset.crop_fitness) < .38) return 'bad_crop';
   return null;
 }
@@ -183,20 +183,23 @@ function chooseCameraMove(shot, family, asset, memory) {
     return 'static';
   }
 
-  let candidates;
+  // Milestone 21: Motion must be editorially motivated, not alternated blindly.
+  // STATIC is a professional, valid default.
+  if (shot.role === 'detail') {
+    return 'detailCrop';
+  }
   if (shot.role === 'establishing') {
-    candidates = ['subtlePull', 'static', 'pan', 'subtlePush'];
-  } else if (shot.role === 'detail') {
-    candidates = ['detailCrop', 'static', 'subtlePush'];
-  } else if (shot.role === 'context') {
-    candidates = asset && asset.width / asset.height > 1.5 ? ['pan', 'static', 'subtlePush'] : ['subtlePush', 'static', 'subtlePull'];
-  } else {
-    candidates = ['subtlePush', 'static', 'subtlePull', 'pan'];
+    return 'subtlePull';
+  }
+  if (shot.assetIntent === 'action' || shot.visualIntent === 'identify') {
+    return 'subtlePush';
+  }
+  if (shot.role === 'context' && asset && asset.width / Math.max(1, asset.height) > 1.6) {
+    return 'pan';
   }
 
-  // Prevent identical camera move > 2 consecutive shots
-  const valid = candidates.filter((m) => !(recentMoves.length >= 2 && recentMoves[0] === m && recentMoves[1] === m));
-  return valid.find((m) => m !== lastMove) || valid[0] || 'static';
+  // Without a specific editorial reason or on short holds, remain static.
+  return 'static';
 }
 
 function cameraPath(type, asset, magnitude = 0.05, base = 1) {
@@ -255,20 +258,34 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
   return scene.storyboardShots.map((shot, index) => {
     const pool = assetPool(sceneAssets, shot.id);
     const coverage = coverageByShot.get(shot.id) || null;
-    const mediaEditorial = visualPolicy?.useMediaEditorial === true;
+    const routedRepresentation = coverage?.representationDecision?.selectedRepresentation || coverage?.primaryRepresentation;
+    const mediaEditorial = visualPolicy?.useMediaEditorial === true
+      && shot.mediaPreference !== 'procedural'
+      && (!coverage || routedRepresentation === 'media');
     const familyChoice = mediaEditorial ? (pool.length > 2 && (scene.purpose === 'hook' || shot.role === 'montage') ? 'montage' : 'image') : chooseFamily(shot, scene, pool, memory, spec, coverage);
     const editorialSelection = mediaEditorial ? selectEditorialAsset(pool, format, memory) : null;
     const asset = ['image', 'montage'].includes(familyChoice) ? (editorialSelection?.asset || pickAsset(pool, index, memory)) : null;
     const variantChoice = mediaEditorial ? (familyChoice === 'montage' ? 'montage' : 'full') : chooseVariant(familyChoice, shot, scene, spec, asset, pool, memory);
     const family = variantChoice === 'montage' ? 'montage' : familyChoice;
     const variant = family === 'montage' ? 'dynamic' : variantChoice;
-    const overlayMode = mediaEditorial
-      ? (['chapter', 'statistic'].includes(scene.kind) || ['chapter', 'evidence'].includes(scene.purpose) ? 'minimal' : 'none')
-      : chooseOverlayMode(family, shot, index);
+    // MEDIA_EDITORIAL is intentionally just image/video plus subtitles. No
+    // chapter cards, statistic cards, diagram labels, or headline templates.
+    const overlayMode = mediaEditorial ? 'none' : chooseOverlayMode(family, shot, index);
     const timing = timings[index];
     let cameraMove = 'static';
     if (shot.presentation?.cameraMove) {
       cameraMove = shot.presentation.cameraMove;
+      // Persisted/LLM-authored storyboards can request the same zoom for every
+      // scene. Preserve the authored move unless it would become the third
+      // identical effect in a row, then let the editorial selector introduce
+      // a restrained counter-move or intentional hold.
+      const recentMoves = memory.recentCameraMoves.slice(-2);
+      if (cameraMove !== 'static' && recentMoves.length === 2 && recentMoves.every((move) => move === cameraMove)) {
+        cameraMove = chooseCameraMove({ ...shot, presentation: {} }, family, asset, memory);
+        if (cameraMove === shot.presentation.cameraMove) {
+          cameraMove = shot.presentation.cameraMove === 'subtlePush' ? 'subtlePull' : 'static';
+        }
+      }
     } else if (mediaEditorial) {
       const durationSec = timing.durationInFrames / 30;
       const isStillImage = asset && asset.type !== 'video';

@@ -5,6 +5,7 @@ import { planAssetRequests } from '../src/pipeline/assetRequestPlanner.js';
 import { AssetCandidateSchema, AssetRequestListSchema } from '../src/models/index.js';
 import { createProvider } from '../src/assets/providerAdapter.js';
 import { searchAssetProviders } from '../src/assets/providerRegistry.js';
+import { resolveVisualPolicy } from '../src/config/visualMode.js';
 
 const shot = (id, overrides = {}) => ({
   id, role: 'subject', durationHint: 3, visualConcept: 'EUV lithography machine',
@@ -48,6 +49,27 @@ test('entity-only visual labels promote the most specific object search concept'
   const [request] = planAssetRequests(entityStoryboard);
   assert.equal(request.concept, 'ASML lithography machine');
   assert.ok(request.exclusions.includes('corporate headquarters'));
+});
+
+test('resume-time planning removes stale procedural fallback decisions', () => {
+  const staleCoverage = [{
+    shotId: 'shot-1',
+    primaryRepresentation: 'media',
+    fallbackRepresentations: ['media'],
+    representationDecision: {
+      selectedRepresentation: 'media',
+      searchable: true,
+      preferredSource: 'image',
+      fallbackRepresentations: ['media'],
+    },
+  }];
+  const [request] = planAssetRequests(storyboard, {
+    visualPolicy: resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' }),
+    coveragePlan: staleCoverage,
+  });
+
+  assert.equal(request.representationDecision.selectedRepresentation, 'media');
+  assert.deepEqual(request.representationDecision.fallbackRepresentations, []);
 });
 
 test('provider adapter normalizes source-specific results into AssetCandidate', async () => {

@@ -60,6 +60,8 @@ export const STAGE_DEFINITIONS = {
         durationSec: context.durationSec,
         style: context.style,
         visualMode: context.visualMode || 'MEDIA_EDITORIAL',
+        productionProfile: context.productionProfile || null,
+        sourceData: context.sourceData || null,
       });
     },
   },
@@ -89,6 +91,7 @@ export const STAGE_DEFINITIONS = {
         format: context.format,
         style: context.style,
         planFileHash: context.planFileHash || null,
+        productionProfile: context.productionProfile || null,
       });
     },
   },

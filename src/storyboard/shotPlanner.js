@@ -24,10 +24,13 @@ const EMOTIONAL_TERMS = /\b(but\s+what|marvel|risk|danger|suddenly|shocking|actu
 
 function deriveSemanticBeatLabel(clause = '') {
   const c = clause.toLowerCase();
-  if (/url|typing|address\s+bar|enter\b/i.test(c)) return 'URL_ENTRY';
-  if (/webpage\s+appears|page\s+appears|page\s+load|appears?\s+in/i.test(c)) return 'PAGE_LOAD';
-  if (/sends?\s+(?:an?\s+)?(?:http\s+)?request|browser\s+requests?|http\s+request/i.test(c)) return 'REQUEST';
-  if (/responds?\s+with|returns?\s+html|server\s+responds|response\b/i.test(c)) return 'RESPONSE';
+  if (/typing\s+url|address\s+bar|browser\s+url/i.test(c)) return 'URL_ENTRY';
+  if (/webpage\s+appears|page\s+appears|fast\s+page\s+load/i.test(c)) return 'PAGE_LOAD';
+  if (/(?:browser|client|web)\s+requests?|sends?\s+(?:an?\s+)?(?:http\s+)?request|http\s+request/i.test(c)) return 'REQUEST';
+  if (/server\s+responds|responds?\s+with\s+html|returns?\s+html/i.test(c)) return 'RESPONSE';
+  if (/deadlock|circular\s+wait|lock\s+contention|thread\s+waiting|mutex\b/i.test(c)) return 'LOCK_CONTENTION';
+  if (/database|sql\b|postgres|mysql|sqlite|query\s+planner|acid\b/i.test(c)) return 'DB_QUERY';
+  if (/(?:database|sql|db)\s+(?:transaction|commit|rollback)|\b(acid\s+transaction|transaction\s+isolation)\b/i.test(c)) return 'DB_TRANSACTION';
   if (/datacenter|server\s+rack|modern\s+server|infrastructure|server\s+hardware|server\s+room/i.test(c)) return 'SERVER';
   if (/html\s+parse|parses?\s+html|dom\s+tree|parse\s+html/i.test(c)) return 'HTML_PARSE';
   if (/css\s+applied|css\s+parse|cssom|styles?\s+computed|css\b/i.test(c)) return 'CSS_PARSE';
@@ -37,7 +40,7 @@ function deriveSemanticBeatLabel(clause = '') {
   if (/composite|gpu\s+draws|gpu\b|60\s+frames|smooth\s+frames/i.test(c)) return 'COMPOSITING';
   if (/paint|fills?\s+in\s+pixels/i.test(c)) return 'PAINT';
   if (/dns\s+lookup|translates?\s+names|ip\s+address/i.test(c)) return 'DNS_LOOKUP';
-  if (/tcp\s+handshake|tls\s+setup|secure\s+connection/i.test(c)) return 'TCP_HANDSHAKE';
+  if (/\b(?:tcp\s+handshake|tls\s+handshake|three-way\s+handshake|network\s+handshake)\b/i.test(c)) return 'TCP_HANDSHAKE';
   return 'VISUAL_BEAT';
 }
 
@@ -51,16 +54,16 @@ export function segmentVisualBeats(narration = '', entities = []) {
   const text = narration.trim();
 
   // Split along clause boundaries, transitional conjunctions, or internal list/action clauses
-  const rawClauses = text.split(/(?<=[.?!;])\s+|(?<=\s[-–—]\s+)|\b(?:then|meanwhile|next|finally|first|while|but)\b\s*/i)
+  const rawClauses = text.split(/(?<=[.?!;])\s+|(?<=\s[-–—]\s+)|\b(?:then|meanwhile|next|finally|first)\b\s*/i)
     .flatMap((c) => {
-      const sub = c.split(/\s*,\s*(?:and|while)\s+/i);
+      const sub = c.split(/\s*,\s*and\s+/i);
       if (sub.length > 1 && sub.slice(1).some((p) => ACTION_VERBS.test(p))) {
         return sub;
       }
       return [c];
     })
     .map((c) => c.replace(/^[,;.\s]+|[,;.\s]+$/g, '').trim())
-    .filter((c) => c.length > 5);
+    .filter((c) => c.length > 6);
 
   if (rawClauses.length <= 1) {
     // Check if the single clause has an internal action shift via 'and' or comma
@@ -147,22 +150,34 @@ export function estimateShotDemand(scene, strategy) {
   } : null;
 
   if (isMediaEditorial) {
-    // If no semantic shift occurs in narration: ONE strong shot is valid even at 6 seconds!
+    const configuredMinHold = Number(strategy?.pacing?.minimumShotSeconds);
+    const configuredMaxHold = Number(strategy?.pacing?.maximumStillSeconds);
+    const profileMinHold = Number.isFinite(configuredMinHold) ? configuredMinHold : (isShorts ? 2.8 : 4.2);
+    const profileMaxHold = Number.isFinite(configuredMaxHold) ? configuredMaxHold : (isShorts ? 6.0 : 7.0);
+    // Hooks may cut slightly faster, but never collapse into micro-shot pacing.
+    const minHoldSec = scene.purpose === 'hook' && scene.energy >= 4
+      ? Math.max(isShorts ? 2.2 : 3.4, profileMinHold * 0.82)
+      : profileMinHold;
+
+    // A strong shot may hold through a short single thought, but landscape
+    // stills should change only when the selected channel profile calls for it.
     if (beats.length <= 1) {
       // In Shorts, high-energy/density scenes split at >= 5.0s to avoid static hold on mobile
-      if (isShorts && duration >= 5.0 && (scene.energy >= 4 || scene.informationDensity >= 4)) return 2;
-      if (isShorts && duration >= 6.8) return 2;
-      if (!isShorts && duration >= 8.5 && scene.energy >= 4) return 2;
+      const energeticSplitThreshold = Number.isFinite(configuredMinHold) ? Math.max(4.5, minHoldSec * 2) : 5.0;
+      if (isShorts && duration >= energeticSplitThreshold && (scene.energy >= 4 || scene.informationDensity >= 4)) return 2;
+      if (duration >= profileMaxHold) return clamp(Math.ceil(duration / profileMaxHold), 2, 6);
       return 1;
     }
 
-    // When semantic shifts occur (NEW_ACTION, NEW_ENTITY, etc.), check if duration allows comfortable holds (>= 2.2s each)
-    const maxSemShots = Math.floor(duration / (isShorts ? 2.2 : 2.6));
+    // Comfortable editorial pacing: semantic clauses do not each earn a cut.
+    // The production profile limits shot demand before assets are requested.
+    const maxSemShots = Math.floor(duration / minHoldSec);
     if (maxSemShots <= 1) return 1;
 
     // Filter beats to meaningful shifts
-    const meaningfulShots = Math.min(beats.length, maxSemShots);
-    return clamp(meaningfulShots, 1, 3);
+    const holdDrivenShots = Math.ceil(duration / profileMaxHold);
+    const meaningfulShots = Math.min(Math.max(beats.length, holdDrivenShots), maxSemShots);
+    return clamp(meaningfulShots, 1, 6);
   }
 
   // Legacy procedural path fallback
@@ -212,24 +227,88 @@ const INTENT_BY_KIND = {
 const clean = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 const normalized = (value) => clean(value).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
+// Plans occasionally put a historical period or economic condition into the
+// `entity` field. Those are searchable topics, not literal objects that can be
+// verified in pixels. Treating them as named entities makes valid archival
+// photos impossible to approve (for example, a gas line cannot literally
+// contain the entity "1970s inflation").
+export function isAbstractEventEntity(value = '') {
+  const text = clean(value);
+  if (!text) return false;
+  const eventOrCondition = /\b(inflation|deflation|recession|depression|economic\s+(?:boom|downturn|crisis)|cost\s+of\s+living|unemployment|energy\s+crisis|oil\s+crisis|financial\s+crisis|market\s+crash|pandemic|epidemic|war|revolution|era|period)\b/i.test(text);
+  const temporal = /\b(?:18|19|20)\d{2}s?\b|\b(?:nineteenth|twentieth|twenty-first)\s+century\b/i.test(text);
+  return eventOrCondition && (temporal || !/^[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+$/.test(text));
+}
+
 function sourceConcepts(scene, topic) {
   const narrationKey = normalized(scene.narration);
   const concepts = [];
-  for (const entity of scene.entities) concepts.push(entity);
+  const isTechnicalTopic = /database|software|code|tech|computer|concurrency|deadlock|backend/i.test(topic || '');
+  for (const entity of scene.entities) {
+    if (!isAbstractEventEntity(entity)) concepts.push(entity);
+  }
   for (const source of scene.sourceScenes) {
-    for (const query of source.imageQueries || []) if (normalized(query) && normalized(query) !== narrationKey) concepts.push(clean(query));
-    if (source.visual && normalized(source.visual) !== narrationKey) concepts.push(clean(source.visual));
+    if (source.entity?.wikipedia) concepts.push(clean(source.entity.wikipedia));
+    for (const query of source.imageQueries || []) {
+      if (normalized(query) && normalized(query) !== narrationKey) {
+        if (isTechnicalTopic && /chain\s+lock|padlock|chain\s+and\s+lock|shatter|broken\s+glass|tug\s+of\s+war|rewind\s+button|hand\s+holding\s+key|holding\s+key|keys?(\s+and|\s+or|\s+in)|\bkey\b|\bkeys\b|handcuff|jail|prison/i.test(query)) {
+          continue;
+        }
+        let cleaned = clean(query);
+        if (isTechnicalTopic) {
+          cleaned = cleaned
+            .replace(/\b(database\s+table\s+rows?\s+diagram|database\s+table\s+rows?|database\s+table)\b/gi, 'database query sql editor screen')
+            .replace(/\b(circular\s+arrow\s+diagram|database\s+lock\s+cycle|cycle\s+diagram)\b/gi, 'computer screen code terminal dark mode')
+            .replace(/\b(database\s+engine\s+diagram|graph\s+cycle\s+detection|server\s+algorithm\s+visualization)\b/gi, 'database server terminal screen')
+            .replace(/\b(diagram|flowchart|flow\s+chart|infographic|icons?|symbols?)\b/gi, 'screen monitor')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+        if (/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|title\s+card|chapter\s+card|editorial\s+title\s+card|clean\s+typography|neutral\s+background|stark\s+black\s+frame|black\s+frame|chapter\s+title|kinetic\s+type|serif\s+type|sans-serif\s+type|clean\s+type|single\s+sentence\s+appears|large,\s+clean\s+type|words?\s+appear|sentence\s+appears)\b/i.test(cleaned)) {
+          cleaned = scene.entities?.[0] ? `${scene.entities[0]} research desk` : 'open book on library wooden desk';
+        }
+        concepts.push(cleaned);
+      }
+    }
+    if (source.visual && normalized(source.visual) !== narrationKey) {
+      if (isTechnicalTopic && /chain\s+lock|padlock|chain\s+and\s+lock|shatter|broken\s+glass|tug\s+of\s+war|hand\s+holding\s+key|holding\s+key|keys?(\s+and|\s+or|\s+in)|\bkey\b|\bkeys\b|handcuff|jail|prison/i.test(source.visual)) {
+        continue;
+      }
+      let cleanedVis = clean(source.visual);
+      if (isTechnicalTopic) {
+        cleanedVis = cleanedVis
+          .replace(/\b(database\s+table\s+rows?\s+diagram|database\s+table\s+rows?|database\s+table)\b/gi, 'database query sql editor screen')
+          .replace(/\b(circular\s+arrow\s+diagram|database\s+lock\s+cycle|cycle\s+diagram)\b/gi, 'computer screen code terminal dark mode')
+          .replace(/\b(database\s+engine\s+diagram|graph\s+cycle\s+detection|server\s+algorithm\s+visualization)\b/gi, 'database server terminal screen')
+          .replace(/\b(diagram|flowchart|flow\s+chart|infographic|icons?|symbols?)\b/gi, 'screen monitor')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+      if (/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|title\s+card|chapter\s+card|editorial\s+title\s+card|clean\s+typography|neutral\s+background|stark\s+black\s+frame|black\s+frame|chapter\s+title|kinetic\s+type|serif\s+type|sans-serif\s+type|clean\s+type|single\s+sentence\s+appears|large,\s+clean\s+type|words?\s+appear|sentence\s+appears)\b/i.test(cleanedVis) || cleanedVis.includes('book desk')) {
+        cleanedVis = scene.entities?.[0] ? `${scene.entities[0]} research desk` : 'open book on library wooden desk';
+      }
+      concepts.push(cleanedVis);
+    }
     const years = String(source.narration || '').match(/\b(?:18|19|20)\d{2}\b/g) || [];
     for (const entity of scene.entities) for (const year of years) concepts.push(`${entity} ${year}`);
   }
-  if (!concepts.length) concepts.push(`${topic} ${scene.visualIntent}`);
+  if (!concepts.length) {
+    concepts.push(scene.preferredPresentation === 'chapter'
+      ? (scene.entities?.[0] ? `${scene.entities[0]} research desk` : 'open book on library wooden desk')
+      : `${(topic.split(':')[0] || topic).trim()} ${scene.visualIntent}`);
+  }
   return [...new Set(concepts)].slice(0, 10);
 }
 
 function durationWeights(count, scene) {
   if (count === 1) return [1];
   if (count === 2) return [0.55, 0.45];
-  return [0.4, 0.3, 0.3];
+  if (count === 3) return [0.4, 0.3, 0.3];
+  // Long scenes may need 4–6 media shots to respect the maximum still hold.
+  // Keep the establishing shot slightly longer and normalize exactly to 1.
+  const raw = Array.from({ length: count }, (_, index) => index === 0 ? 1.15 : 1);
+  const total = raw.reduce((sum, value) => sum + value, 0);
+  return raw.map((value) => value / total);
 }
 
 export function authorShots(scene, strategy, topic) {
@@ -240,17 +319,29 @@ export function authorShots(scene, strategy, topic) {
   const primaryKind = scene.preferredPresentation;
   const weights = durationWeights(count, scene);
   const narration = scene.narration || scene.sourceScenes?.[0]?.narration || '';
-  const beats = segmentVisualBeats(narration, scene.entities || []);
+  const searchableEntities = (scene.entities || []).filter((entity) => !isAbstractEventEntity(entity));
+  const hasAbstractHistoricalEntity = (scene.entities || []).some(isAbstractEventEntity);
+  const beats = segmentVisualBeats(narration, searchableEntities);
+  const sceneOrdinal = Number(String(scene.id || '').match(/(\d+)(?!.*\d)/)?.[1] || 1);
 
   return Array.from({ length: count }, (_, index) => {
     const role = roles[index] || roles[roles.length - 1];
     const procedural = !isMediaEditorial && (role === 'graphic' || ['statistic', 'comparison', 'list', 'process', 'timeline', 'chart', 'ui', 'code'].includes(primaryKind));
-    const assetIntent = role === 'evidence' && scene.evidenceRequirement !== 'conceptual_allowed'
-      ? primaryKind === 'document' ? 'document' : primaryKind === 'timeline' ? 'historical' : 'evidence'
-      : INTENT_BY_KIND[primaryKind] || (scene.entities.length ? 'entity' : 'concept');
-    
-    let visualConcept = concepts[Math.min(index, concepts.length - 1)];
     const beat = beats[index];
+    let visualConcept = concepts[Math.min(index, concepts.length - 1)];
+
+    // Assign shot-specific entities: only assign scene entities to this shot if the beat clause
+    // or the visual concept actually mentions the entity, preventing conceptual B-roll from false entity locks.
+    const isPhysicalObjectOrBroll = /mouse|keyboard|screen|hand\b|shelf|shelves|aisle|cart|food|cereal|jam|jars|book\s+desk|desk|document|tv|television|tablet|phone|smartphone|pile|waste|scrap|garbage|junkyard|recycl/i.test(visualConcept);
+    const shotEntities = (beat?.entities && beat.entities.length > 0 && !isPhysicalObjectOrBroll)
+      ? beat.entities
+      : searchableEntities.filter((e) => visualConcept.toLowerCase().includes(e.toLowerCase()) || (index === 0 && count === 1 && !isPhysicalObjectOrBroll && (primaryKind === 'subject' || role === 'subject' || role === 'establishing')));
+
+    const assetIntent = role === 'evidence' && scene.evidenceRequirement !== 'conceptual_allowed' && !/interface|screen|tv|app|website|software/i.test(visualConcept)
+      ? primaryKind === 'document' ? 'document' : primaryKind === 'timeline' ? 'historical' : 'evidence'
+      : (shotEntities.length ? 'entity' : (INTENT_BY_KIND[primaryKind] === 'entity'
+        ? (hasAbstractHistoricalEntity ? 'historical' : (index === 0 ? 'entity' : 'concept'))
+        : INTENT_BY_KIND[primaryKind])) || (/interface|screen|tv|app/i.test(visualConcept) ? 'interface' : 'concept');
     if (beat && beat.label && beat.label !== 'VISUAL_BEAT') {
       const labelMap = {
         URL_ENTRY: 'typing url in browser address bar',
@@ -258,6 +349,9 @@ export function authorShots(scene, strategy, topic) {
         REQUEST: 'browser devtools http network request',
         SERVER: 'modern datacenter server rack lights',
         RESPONSE: 'server response html css data packets',
+        LOCK_CONTENTION: 'computer screen code terminal dark mode',
+        DB_QUERY: 'database query sql editor screen',
+        DB_TRANSACTION: 'database server terminal screen',
         HTML_PARSE: 'browser html code parsing elements',
         CSS_PARSE: 'browser developer tools elements inspector',
         JAVASCRIPT: 'javascript code execution in browser',
@@ -293,10 +387,10 @@ export function authorShots(scene, strategy, topic) {
       if (shiftMap[beat.shift]) changeReason = shiftMap[beat.shift];
     }
 
-    // If scene has stale visual risk and count is 1: apply subtle camera move to maintain vitality without cutting
-    const cameraMove = (count === 1 && scene.staleVisualRisk)
-      ? 'subtlePush'
-      : (role === 'detail' ? 'detailCrop' : 'static');
+    // If scene has 1 shot: apply subtle camera move to maintain gentle visual vitality throughout the hold
+    const cameraMove = (count === 1)
+      ? (sceneOrdinal % 2 === 0 ? 'subtlePull' : 'subtlePush')
+      : (role === 'detail' ? 'detailCrop' : (index % 2 === 0 ? 'subtlePush' : 'static'));
 
     return {
       id: `${scene.id}_shot_${String(index + 1).padStart(2, '0')}`,
@@ -306,15 +400,16 @@ export function authorShots(scene, strategy, topic) {
       assetIntent,
       changeReason,
       mediaPreference: procedural ? 'procedural' : scene.evidenceRequirement === 'required' ? 'real' : 'auto',
-      searchConcepts: [...new Set([visualConcept, ...(scene.entities || []), ...concepts.slice(index, index + 2)])].slice(0, 6),
-      entities: scene.entities,
+      searchConcepts: [...new Set([visualConcept, ...shotEntities, ...concepts.slice(index, index + 2)])].slice(0, 6),
+      entities: shotEntities,
       motionPreference: primaryKind === 'quote' || primaryKind === 'statistic' ? 'stable' : scene.energy >= 4 ? 'active' : 'slow',
       textOverlay: index === 0 ? scene.sourceScenes.find((source) => source.text)?.text || null : null,
-      evidenceRequirement: scene.evidenceRequirement,
+      evidenceRequirement: (role === 'graphic' || role === 'atmosphere' || role === 'transition' || assetIntent === 'concept')
+        ? 'conceptual_allowed'
+        : scene.evidenceRequirement,
       presentation: { cameraMove },
       staleVisualRisk: scene.staleVisualRisk || null,
       semanticSubBeat: beat || null,
     };
   });
 }
-

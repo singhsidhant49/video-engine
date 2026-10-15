@@ -68,12 +68,17 @@ export async function evaluateRunValidity({
   const reusedStages = [];
   const invalidatedStages = [];
   const forcedInvalidation = new Set();
+  const fromInvalidation = new Set();
 
   if (fromStage) {
     const canonicalFrom = canonicalStageName(fromStage);
     forcedInvalidation.add(canonicalFrom);
+    fromInvalidation.add(canonicalFrom);
     const downstream = getTransitiveDownstreamStages(canonicalFrom);
-    for (const d of downstream) forcedInvalidation.add(d);
+    for (const d of downstream) {
+      forcedInvalidation.add(d);
+      fromInvalidation.add(d);
+    }
   }
 
   // Detect script changes vs previous plan
@@ -88,6 +93,31 @@ export async function evaluateRunValidity({
     }
   } catch {
     // Plan not present or unreadable
+  }
+
+  // Request changes must invalidate the stage that owns the changed input.
+  // Previously a resume could reuse an old plan/audio merely because the old
+  // files still existed.
+  try {
+    const oldReq = JSON.parse(await fs.readFile(path.join(runDir, 'request.json'), 'utf8'));
+    const requestChanged = ['topic', 'niche', 'format'].some((key) => currentContext[key] != null && currentContext[key] !== oldReq[key])
+      || (currentContext.durationSec != null && Number(currentContext.durationSec) !== Number(oldReq.durationSec))
+      || (currentContext.productionProfile != null && JSON.stringify(currentContext.productionProfile) !== JSON.stringify(oldReq.productionProfile || null))
+      || (currentContext.sourceData != null && JSON.stringify(currentContext.sourceData) !== JSON.stringify(oldReq.sourceData || null));
+    if (requestChanged) {
+      forcedInvalidation.add('request');
+      for (const stage of getTransitiveDownstreamStages('request')) forcedInvalidation.add(stage);
+    }
+    if (currentContext.voice && oldReq.voice && currentContext.voice !== oldReq.voice) {
+      forcedInvalidation.add('audio');
+      for (const stage of getTransitiveDownstreamStages('audio')) forcedInvalidation.add(stage);
+    }
+    if (currentContext.offline != null && oldReq.offline != null && Boolean(currentContext.offline) !== Boolean(oldReq.offline)) {
+      forcedInvalidation.add('assets');
+      for (const stage of getTransitiveDownstreamStages('assets')) forcedInvalidation.add(stage);
+    }
+  } catch {
+    // Request absence is handled by output validation below.
   }
 
   // Detect visual style changes vs previous run
@@ -127,7 +157,7 @@ export async function evaluateRunValidity({
     if (forcedInvalidation.has(stage)) {
       invalidatedStages.push({
         stage,
-        reason: fromStage && (stage === fromStage || forcedInvalidation.has(stage))
+        reason: fromStage && fromInvalidation.has(stage)
           ? `Forced restart from --from ${fromStage}`
           : scriptChanged
             ? 'Script content changed; downstream artifacts invalidated'
@@ -167,6 +197,11 @@ export async function evaluateRunValidity({
       for (const cand of candidates) {
         try {
           await fs.access(cand);
+          const expectedChecksum = manifestStage.outputChecksums?.[outFile];
+          if (expectedChecksum) {
+            const actualChecksum = await getFileChecksum(cand);
+            if (actualChecksum !== expectedChecksum) continue;
+          }
           exists = true;
           break;
         } catch {

@@ -4,7 +4,7 @@ import { terms } from './assetSearchContext.js';
 const PORTRAIT_PATTERN = /\b(portrait|headshot|ceo|chief executive|founder|executive|employee|staff|person|man|woman)\b/i;
 const LOGO_PATTERN = /\b(logo|logotype|brand mark|brandmark|wordmark|symbol|trademark|icon)\b/i;
 const BUILDING_PATTERN = /\b(headquarters|headquarter|campus|office building|corporate building|facade|exterior of the building|corporate office|offices)\b/i;
-const WATERMARK_PATTERN = /\b(watermark|alamy|shutterstock|getty images|dreamstime|stock photo|vector|preview)\b/i;
+const WATERMARK_PATTERN = /\b(watermark|alamy|shutterstock|getty images|dreamstime|stock photo|preview watermark)\b/i;
 const RUIN_OR_ABANDONED_PATTERN = /\b(abandoned|derelict|ruins?|damaged|chernobyl|duga-1|decay|demolished|graffiti|decrepit)\b/i;
 const MOCKUP_OR_GREENSCREEN_PATTERN = /\b(green screen|chroma key|mockup|blank screen|empty screen|isolated on white|placeholder)\b/i;
 const DIAGRAM_IMAGE_PATTERN = /\b(mindmap|mind map|infographic|flowchart|flow chart|block diagram|architecture diagram|protocol diagram|screen time)\b/i;
@@ -43,6 +43,80 @@ const DOMAIN_SYNONYMS = {
   network: ['networking', 'internet', 'web', 'connection', 'packet', 'server', 'data', 'traffic'],
   packet: ['packets', 'data', 'network', 'traffic', 'routing', 'tcp', 'ip', 'stream', 'networking'],
   server: ['datacenter', 'data center', 'rack', 'server room', 'cloud', 'hosting', 'network'],
+  scientist: ['researcher', 'professor', 'mathematician', 'physicist', 'chemist', 'scholar', 'expert', 'genius', 'lab', 'laboratory'],
+  thinking: ['pondering', 'thoughtful', 'contemplative', 'reflecting', 'idea', 'confused', 'wondering'],
+  clock: ['clocks', 'gears', 'mechanism', 'time', 'watch', 'dial', 'cogs', 'pendulum', 'steampunk'],
+  gear: ['gears', 'cogs', 'mechanism', 'clock', 'wheels'],
+  gears: ['gear', 'cogs', 'mechanism', 'clock', 'wheels'],
+  database: ['sql', 'query', 'server', 'code', 'data', 'terminal', 'backend', 'table', 'screen', 'monitor'],
+  sql: ['database', 'query', 'code', 'script', 'terminal', 'editor', 'syntax', 'programming'],
+  query: ['database', 'sql', 'search', 'terminal', 'code', 'editor', 'screen'],
+  editor: ['ide', 'code', 'coding', 'syntax', 'terminal', 'screen', 'software', 'programming', 'developer'],
+  screen: ['monitor', 'display', 'computer', 'laptop', 'terminal', 'dark'],
+  terminal: ['console', 'screen', 'command', 'prompt', 'code', 'shell', 'monitor', 'dark'],
+  deadlock: ['concurrency', 'mutex', 'lock', 'threads', 'thread', 'process', 'code', 'debugging', 'server'],
+  transaction: ['database', 'sql', 'commit', 'rollback', 'acid', 'operation', 'code', 'server'],
+  row: ['table', 'data', 'database', 'sql', 'record', 'query', 'code'],
+  rows: ['table', 'data', 'database', 'sql', 'record', 'query', 'code'],
+  concurrency: ['threads', 'thread', 'mutex', 'lock', 'parallel', 'process', 'deadlock', 'code'],
+  lock: ['mutex', 'threads', 'concurrency', 'deadlock', 'process', 'resource', 'code'],
+  locks: ['mutex', 'threads', 'concurrency', 'deadlock', 'process', 'resource', 'code'],
+  mobile: ['smartphone', 'phone', 'cellphone', 'app', 'screen', 'device', 'keyboard', 'laptop'],
+  banking: ['bank', 'account', 'financial', 'finance', 'payment', 'transfer', 'money', 'app', 'cash', 'transaction'],
+  transfer: ['transaction', 'payment', 'banking', 'send', 'money', 'exchange', 'app', 'account'],
+  phone: ['smartphone', 'mobile', 'device', 'screen', 'app', 'hand'],
+  app: ['application', 'software', 'screen', 'mobile', 'phone', 'interface'],
+  shopper: ['shopping', 'buyer', 'customer', 'consumer', 'supermarket', 'store', 'grocery', 'aisle', 'cart', 'retail', 'buying', 'market', 'shelf', 'shelves', 'woman', 'man'],
+  shopping: ['shopper', 'store', 'supermarket', 'aisle', 'grocery', 'cart', 'retail', 'market', 'shelf', 'shelves', 'buyer', 'buying', 'boutique'],
+  aisle: ['supermarket', 'grocery', 'store', 'shelf', 'shelves', 'market', 'retail', 'boutique', 'shopper', 'shopping'],
+  supermarket: ['grocery', 'store', 'market', 'aisle', 'shop', 'retail', 'shelves', 'produce', 'shopper', 'shopping'],
+  grocery: ['supermarket', 'store', 'aisle', 'market', 'produce', 'shelves', 'shopper'],
+  shelves: ['shelf', 'aisle', 'store', 'supermarket', 'products', 'goods', 'stock'],
+  shelf: ['shelves', 'aisle', 'store', 'supermarket', 'products', 'goods', 'display'],
+  overwhelmed: ['stressed', 'stress', 'frustrated', 'confused', 'browsing', 'looking', 'thinking', 'standing', 'staring', 'shopper', 'store', 'aisle', 'supermarket', 'buyer'],
+  stressed: ['overwhelmed', 'frustrated', 'anxious', 'head', 'tired', 'exhausted', 'thinking', 'stress', 'fatigue', 'pensive'],
+  stress: ['stressed', 'overwhelmed', 'anxiety', 'fatigue', 'tired', 'frustration', 'frustrated'],
+  person: ['man', 'woman', 'people', 'human', 'individual', 'shopper', 'worker', 'buyer', 'adult', 'female', 'male', 'customer'],
+  people: ['person', 'men', 'women', 'humans', 'individuals', 'shoppers', 'workers', 'crowd'],
+  comparing: ['comparison', 'choosing', 'selecting', 'deciding', 'looking', 'evaluating', 'examines', 'examining', 'analyzes', 'analyzing', 'products', 'options', 'shopping', 'holding'],
+  choosing: ['decision', 'deciding', 'selecting', 'choice', 'comparing', 'options', 'looking', 'buying', 'shopping', 'examining', 'examines', 'holding'],
+  products: ['product', 'goods', 'items', 'merchandise', 'shelf', 'shelves', 'store', 'boxes', 'bottles', 'skincare', 'cosmetics', 'clothing', 'clothes', 'options', 'display', 'packaging', 'palette', 'makeup', 'retail'],
+  product: ['products', 'goods', 'item', 'merchandise', 'shelf', 'shelves', 'store', 'box', 'bottle', 'skincare', 'cosmetics', 'display', 'packaging', 'palette', 'makeup', 'retail', 'spotlight'],
+  abstract: ['texture', 'background', 'gradient', 'dark', 'minimal', 'ambient', 'surface', 'pattern', 'design', 'backdrop'],
+  thumbnail: ['thumbnails', 'grid', 'images', 'previews', 'content', 'cards', 'collections'],
+  thumbnails: ['thumbnail', 'grid', 'images', 'previews', 'content', 'cards', 'collections'],
+  grid: ['thumbnails', 'layout', 'cards', 'tiles', 'interface', 'screen', 'collections'],
+  interface: ['screen', 'display', 'ui', 'app', 'software', 'tablet', 'grid', 'dashboard'],
+  retirement: ['savings', 'pension', 'finance', 'financial', 'investing', 'investment', 'money', 'elderly', 'senior', 'older', '401k', 'paperwork'],
+  savings: ['retirement', 'money', 'finance', 'financial', 'bank', 'investing', 'funds', 'pension', '401k', 'budgeting'],
+  saving: ['retirement', 'money', 'finance', 'financial', 'bank', 'investing', 'funds', 'pension', '401k', 'budgeting'],
+  paperwork: ['document', 'documents', 'form', 'forms', 'paper', 'papers', 'desk', 'contract', 'statement', 'questionnaire', 'signing', 'pen'],
+  form: ['paperwork', 'document', 'documents', 'paper', 'desk', 'application', 'questionnaire', 'signing', 'pen', 'agreement'],
+  worker: ['employee', 'person', 'man', 'woman', 'professional', 'senior', 'older', 'staff'],
+  older: ['senior', 'elderly', 'worker', 'adult', 'mature'],
+  senior: ['older', 'elderly', 'worker', 'adult', 'mature'],
+  cereal: ['breakfast', 'grocery', 'supermarket', 'aisle', 'shelf', 'shelves', 'boxes', 'food', 'store'],
+  dating: ['app', 'phone', 'smartphone', 'mobile', 'screen', 'swipe', 'profiles', 'people', 'couple'],
+  face: ['person', 'portrait', 'man', 'woman', 'head', 'expression', 'eyes', 'hands', 'face', 'facial', 'thoughtful', 'emotion', 'stressed', 'feeling', 'pensive'],
+  anxious: ['stressed', 'worried', 'frustrated', 'thoughtful', 'thinking', 'emotion', 'hands on face', 'covering face', 'overwhelmed', 'concern', 'contemplating'],
+  decision: ['choice', 'choices', 'choosing', 'options', 'thinking', 'thoughtful', 'deciding', 'dilemma', 'hesitant'],
+  making: ['decision', 'deciding', 'choosing', 'process', 'thinking'],
+  jam: ['jars', 'jar', 'preserves', 'marmalade', 'spread', 'tasting', 'booth', 'supermarket', 'gourmet', 'food', 'market'],
+  jars: ['jar', 'jam', 'preserves', 'bottles', 'cans', 'products', 'shelf', 'shelves', 'glass'],
+  jar: ['jars', 'jam', 'preserves', 'bottle', 'bottles', 'product', 'glass'],
+  handshake: ['hand', 'shaking', 'hands', 'greeting', 'agreement', 'meeting', 'interview', 'deal', 'partnership', 'office', 'colleagues'],
+  interview: ['handshake', 'meeting', 'job', 'office', 'career', 'candidate', 'recruitment', 'workplace', 'professional'],
+  businessman: ['worker', 'man', 'professional', 'office', 'employee', 'desk', 'entrepreneur', 'person'],
+  tidy: ['clean', 'organized', 'minimal', 'neat', 'simple', 'desk', 'workspace'],
+  desk: ['office', 'table', 'workspace', 'workplace', 'paperwork', 'documents', 'computer', 'laptop', 'tidy'],
+  tv: ['television', 'screen', 'remote', 'watching', 'living room', 'display', 'channels', 'streaming'],
+  television: ['tv', 'screen', 'remote', 'watching', 'living room', 'display', 'channels', 'streaming'],
+  streaming: ['netflix', 'tv', 'screen', 'video', 'tablet', 'browsing', 'interface', 'remote', 'movie', 'series'],
+  tablet: ['screen', 'browsing', 'ipad', 'device', 'relaxing', 'sofa', 'couch', 'holding', 'streaming', 'netflix'],
+  mouse: ['computer', 'laptop', 'hand', 'desk', 'workspace', 'clicking', 'hovering', 'office'],
+  glow: ['screen', 'light', 'dark', 'night', 'illuminated', 'monitor', 'laptop', 'face'],
+  lit: ['screen', 'light', 'dark', 'night', 'illuminated', 'glow'],
+  tired: ['exhausted', 'fatigue', 'weary', 'sleepy', 'face', 'working', 'late', 'night', 'screen', 'laptop'],
 };
 
 const AUTHORITY = {
@@ -175,7 +249,18 @@ function calculateSubjectMatch(subjectTerms, metadataTerms, candidateText, conte
   const metaSet = new Set(metadataTerms);
   const textLower = candidateText.toLowerCase();
 
-  const aliasMatch = (context.aliases || []).some((alias) => textLower.includes(alias.toLowerCase()));
+  const aliasMatch = (context.aliases || []).some((alias) => {
+    const aLower = alias.toLowerCase();
+    if (textLower.includes(aLower)) return true;
+    const aTokens = terms(aLower).filter((t) => !['animation', 'illustration', 'cartoon', 'photo', 'video', 'image', 'background', 'clipart'].includes(t));
+    if (!aTokens.length) return false;
+    const matched = aTokens.filter((t) => {
+      if (metaSet.has(t)) return true;
+      const syns = DOMAIN_SYNONYMS[t] || [];
+      return syns.some((s) => metaSet.has(s));
+    });
+    return (matched.length / aTokens.length) >= 0.5;
+  });
   if (aliasMatch) return 0.95;
 
   let matches = 0;
@@ -190,7 +275,9 @@ function calculateSubjectMatch(subjectTerms, metadataTerms, candidateText, conte
       continue;
     }
   }
-  const tokenRatio = matches / subjectTerms.length;
+  const tokenRatio = (subjectTerms.length >= 4 && matches >= 2)
+    ? Math.max(matches / subjectTerms.length, 0.5)
+    : matches / subjectTerms.length;
   return Number(Math.min(1, Math.max(0, tokenRatio)).toFixed(3));
 }
 
@@ -222,17 +309,18 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
 
   const conceptLower = String(request.concept || '').toLowerCase();
   const isProductOrMachine = ['PRODUCT', 'INTERFACE'].includes(context.requestClass)
-    || /machine|device|product|hardware|system|chip|gpu|equipment|scanner|stepper|vehicle|car|aircraft|computer/i.test(conceptLower);
+    || /\b(machine|device|product|hardware|system|chip|gpu|equipment|scanner|stepper|vehicle|car|aircraft|computer)\b/i.test(conceptLower);
 
-  const isPerson = context.requestClass === 'ENTITY'
-    && (PORTRAIT_PATTERN.test(conceptLower) || /founder|ceo|executive|president|leader|author|director|steve jobs|jensen huang/i.test(conceptLower));
+  const isPerson = (context.requestClass === 'ENTITY'
+    && (PORTRAIT_PATTERN.test(conceptLower) || /\b(founder|ceo|executive|president|leader|author|director|steve jobs|jensen huang)\b/i.test(conceptLower)))
+    || /\b(scientist|researcher|mathematician|physicist|chemist|professor|doctor|worker|character)\b/i.test(conceptLower);
 
   const isLocation = ['LOCATION'].includes(context.requestClass)
-    || /headquarters|building|campus|office|tower|monument|colosseum|pyramid|stadium|arena/i.test(conceptLower);
+    || /\b(headquarters|building|campus|office|tower|monument|colosseum|pyramid|stadium|arena)\b/i.test(conceptLower);
 
   const portraitFalseMatch = isProductOrMachine
     && PORTRAIT_PATTERN.test(text)
-    && !/portrait|person|people|founder|executive/i.test(conceptLower);
+    && !/\b(portrait|person|people|founder|executive|scientist|researcher|mathematician|physicist|chemist|professor|doctor|worker|character)\b/i.test(conceptLower);
 
   const logoFalseMatch = (isProductOrMachine || isPerson || isLocation)
     && LOGO_PATTERN.test(text)
@@ -442,6 +530,19 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
 }
 
 export function compareCandidateScores(a, b, orientation = null) {
+  const validA = a.editorialJudgment?.accepted === true && a.editorialJudgment?.rejected !== true;
+  const validB = b.editorialJudgment?.accepted === true && b.editorialJudgment?.rejected !== true;
+  if (validA !== validB) return validB ? 1 : -1;
+  if (validA && validB) {
+    const pixelA = a.visualInspection?.pixelInspected === true || Boolean(a.inspectedFilePath);
+    const pixelB = b.visualInspection?.pixelInspected === true || Boolean(b.inspectedFilePath);
+    if (pixelA !== pixelB) return pixelB ? 1 : -1;
+    const editorialDiff = (b.editorialJudgment.finalEditorialScore || 0) - (a.editorialJudgment.finalEditorialScore || 0);
+    if (editorialDiff) return editorialDiff;
+    const usefulnessDiff = (b.editorialJudgment.editorialUsefulness?.communicationValue || 0)
+      - (a.editorialJudgment.editorialUsefulness?.communicationValue || 0);
+    if (usefulnessDiff) return usefulnessDiff;
+  }
   if (b.score.qualityRank !== a.score.qualityRank) {
     return b.score.qualityRank - a.score.qualityRank;
   }

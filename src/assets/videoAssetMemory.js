@@ -30,12 +30,14 @@ export class VideoAssetMemory {
     this.concepts.set(penalty.conceptKey, (this.concepts.get(penalty.conceptKey) || 0) + 1);
     this.providers.set(candidate.providerId, (this.providers.get(candidate.providerId) || 0) + 1);
     this.selections.push({
+      candidate,
       providerAssetId: candidate.providerAssetId || null,
       url: candidate.sourceUrl || null,
       hash,
       semanticSubjectKey: penalty.conceptKey,
       entity: request.entities[0] || null,
       visualConcept: request.concept,
+      concept: request.concept,
       providerId: candidate.providerId,
       mediaType: candidate.type,
       usageCount: this.assetIds.get(penalty.assetKey),

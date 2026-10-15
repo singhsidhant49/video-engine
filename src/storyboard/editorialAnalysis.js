@@ -1,3 +1,4 @@
+
 import { tokenizeScript } from '../services/alignmentService.js';
 
 const PURPOSE_MAP = {

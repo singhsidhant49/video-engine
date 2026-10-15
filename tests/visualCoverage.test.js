@@ -60,6 +60,26 @@ test('classifyInformationType categorizes explanatory beats deterministically', 
     classifyInformationType({ narration: 'The famous Stanford marshmallow experiment study tested children facing instant treats.' }),
     INFORMATION_TYPES.EVIDENCE
   );
+
+  // Mentioning a database object is not proof that an interface should be shown.
+  assert.equal(
+    classifyInformationType({ narration: 'A database server icon settles on screen.', role: 'subject' }),
+    INFORMATION_TYPES.ENTITY
+  );
+  assert.equal(
+    classifyInformationType({ narration: 'The database dashboard shows blocked queries.' }),
+    INFORMATION_TYPES.INTERFACE
+  );
+});
+
+test('database comparison synthesis is narration-grounded, never generic system filler', () => {
+  const data = synthesizeProceduralData({
+    narration: 'In a banking app, transferring money between accounts can deadlock if two transfers cross.',
+    data: {},
+  }, 'comparison');
+  assert.equal(data.title, 'CROSSED TRANSFERS');
+  assert.match(JSON.stringify(data), /Transfer A to B/);
+  assert.doesNotMatch(JSON.stringify(data), /SYSTEM CONTRAST|Established paradigm/);
 });
 
 test('buildVisualCoveragePlan maps scenes to non-statement fallback chains', () => {
@@ -146,6 +166,13 @@ test('synthesizeProceduralData produces topic-grounded, authentic data structure
   assert.ok(diagramData.nodes.length >= 2);
   assert.ok(diagramData.nodes.some((n) => n.label.includes('Limbic')));
 
+  const fallbackList = synthesizeProceduralData({
+    narration: 'The first fix is consolidation. The second is packaging.',
+    data: { title: 'Three Fixes', items: ['Consolidation', 'Packaging'] },
+    text: { headline: 'The Solutions' },
+  }, REPRESENTATIONS.DIAGRAM);
+  assert.equal(fallbackList.title, 'Three Fixes');
+
   const mapData = synthesizeProceduralData({ narration: 'ASML ships to TSMC in Taiwan.' }, REPRESENTATIONS.MAP);
   assert.ok(mapData.regions.length >= 2);
   assert.ok(mapData.regions.some((r) => r.name.includes('Taiwan')));
@@ -184,6 +211,17 @@ test('buildVisualCoverageDiagnostics and timeline QC catch unresolved coverage a
   assert.equal(goodDiag.perceptuallyBlankFrames, 0);
   assert.equal(goodDiag.directCoverageCount, 3);
   assert.equal(goodDiag.isProductionReady, true);
+
+  const groundedFallback = buildVisualCoverageDiagnostics({
+    fps: 30,
+    clips: [{
+      sceneId: 'fallback', durationInFrames: 90, family: 'diagram',
+      narration: 'The first fix is consolidation.',
+      overlay: { title: 'Three Fixes', nodes: [{ id: 'a' }, { id: 'b' }] },
+      shots: [{ asset: null }],
+    }],
+  }, []);
+  assert.deepEqual(groundedFallback.textGroundingWarnings, []);
 
   // Unresolved empty canvas timeline
   const badTimeline = {

@@ -100,7 +100,7 @@ const ROUTES = {
   PRODUCT: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image'],
   HISTORICAL: ['local-bank', 'wikipedia', 'commons', 'brave-image'],
   LOCATION: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image'],
-  EVIDENCE: ['local-bank', 'commons', 'wikipedia', 'brave-image'],
+  EVIDENCE: ['local-bank', 'commons', 'wikipedia', 'pexels-image', 'pixabay-image', 'brave-image'],
   INTERFACE: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
   ACTION: ['local-bank', 'pexels-video', 'pexels-image', 'pixabay-image', 'brave-image'],
   CONCEPT: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
@@ -112,6 +112,7 @@ const ROUTES = {
 };
 
 export function routeAssetProviders(request, context, providers = defaultAssetProviders, queryStage = 'EXACT') {
+  if (request.preferredSource === 'procedural' || request.representationDecision?.searchable === false) return [];
   const route = ROUTES[context.requestClass] || ROUTES.CONCEPT;
   const eligible = providers.filter((provider) => provider.supports(request));
   return route

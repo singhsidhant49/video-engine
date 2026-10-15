@@ -279,3 +279,21 @@ test('Creative QA: strictly bounds repair loop to maximum 2 passes', () => {
   assert.ok(result.creativeQaAfter);
   assert.ok(Array.isArray(result.repairsApplied));
 });
+
+test('Creative QA: changing UI to media clears stale repository overlay data', () => {
+  const asset = { id: 'database', type: 'image', src: 'media/database.jpg', score: 0.9, tier: 'preferred' };
+  const timeline = {
+    fps: 30,
+    clips: [{
+      sceneId: 'sc1', from: 0, durationInFrames: 90, narration: 'A database retries the failed transfer.',
+      family: 'ui', asset,
+      overlay: { title: 'Repository Workspace', fileTree: ['src/agent.js'] },
+      shots: [{ id: 'sh1', sceneId: 'sc1', family: 'ui', variant: 'workspace', asset, overlay: { title: 'Repository Workspace', fileTree: ['src/agent.js'] }, durationInFrames: 90, presentation: {} }],
+    }],
+  };
+  const repairs = [{ shotId: 'sh1', sceneId: 'sc1', issues: ['inappropriate_domain_ui'], candidates: [{ action: REPAIR_ACTIONS.CHANGE_REPRESENTATION, targetFamily: 'image', targetAsset: asset, reason: 'Use approved media' }] }];
+  const { timeline: repaired } = applyCreativeRepairs(timeline, repairs);
+  assert.equal(repaired.clips[0].shots[0].family, 'image');
+  assert.deepEqual(repaired.clips[0].shots[0].overlay, {});
+  assert.deepEqual(repaired.clips[0].overlay, {});
+});

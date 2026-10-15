@@ -188,7 +188,7 @@ function MultiShotClip({ clip, timeline }) {
           <Sequence key={shot.id || idx} from={shot.from} durationInFrames={shot.durationInFrames} name={shot.id}>
             {solvedScene && motionPlan
               ? <GenericSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} />
-              : mediaEditorial
+              : mediaEditorial && ['image', 'montage'].includes(shot.family)
                 ? <AbsoluteFill style={{ background: '#000', color: '#fff', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>MEDIA_EDITORIAL preflight failure: {shot.id}</AbsoluteFill>
                 : <LegacyFamilyAdapter shot={shot} clip={clip} />}
           </Sequence>

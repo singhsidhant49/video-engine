@@ -32,9 +32,18 @@ async function saveIndex(idx) {
 }
 
 /**
+ * Derive search tokens strictly from intrinsic metadata (description and label).
+ * Dynamic search query strings from transient runs are never included.
+ */
+export function deriveBankTokens({ description = '', label = '' } = {}) {
+  const intrinsicText = `${description} ${label}`.toLowerCase();
+  return [...new Set(keywords(intrinsicText))];
+}
+
+/**
  * Save an image to the local Image Bank with metadata and searchable keywords.
  */
-export async function recordImageInBank({ filePath, description = '', query = '', source = 'unknown', label = '', license = null, width = 0, height = 0 }) {
+export async function recordImageInBank({ filePath, description = '', query = '', source = 'unknown', label = '', license = null, width = 0, height = 0, inspection = null }) {
   if (!filePath) return;
   try {
     const idx = await loadIndex();
@@ -50,20 +59,21 @@ export async function recordImageInBank({ filePath, description = '', query = ''
       await fs.writeFile(bankFile, buf);
     }
 
-    const allText = `${description} ${query} ${label}`.toLowerCase();
-    const tokens = [...new Set(keywords(allText))];
+    // CRITICAL: Tokens must ONLY be derived from the asset's intrinsic description and label,
+    // NEVER from transient query strings of arbitrary video runs (Smoking Gun #1).
+    const tokens = deriveBankTokens({ description, label });
+    const verificationStatus = inspection?.pixelInspected && inspection?.inspectionConfidence >= 0.45 ? 'verified' : 'quarantined';
 
     const existing = idx.images.find((img) => img.id === hash);
     if (existing) {
       existing.uses = (existing.uses || 1) + 1;
-      existing.tokens = [...new Set([...(existing.tokens || []), ...tokens])];
+      // Do NOT append unrelated query tokens from subsequent runs!
       existing.lastUsed = new Date().toISOString();
     } else {
       idx.images.push({
         id: hash,
         file: bankFile,
         description: description.slice(0, 200),
-        query: query.slice(0, 100),
         label: label.slice(0, 100),
         tokens,
         source,
@@ -73,6 +83,16 @@ export async function recordImageInBank({ filePath, description = '', query = ''
         savedAt: new Date().toISOString(),
         lastUsed: new Date().toISOString(),
         uses: 1,
+        verificationStatus,
+        inspectionVersion: 'visual-inspection-v3',
+        intrinsicObservations: inspection ? {
+          primarySubject: inspection.primarySubject,
+          visibleObjects: inspection.visibleObjects,
+          visibleAction: inspection.visibleAction,
+          environment: inspection.environment,
+          sceneSummary: inspection.sceneSummary,
+          confidence: inspection.inspectionConfidence,
+        } : null,
       });
     }
 
@@ -88,19 +108,44 @@ export async function recordImageInBank({ filePath, description = '', query = ''
 }
 
 /**
+ * Clean poisoned or contaminated tokens from the persistent bank index.
+ */
+export async function sanitizeBankIndex() {
+  try {
+    const idx = await loadIndex();
+    for (const img of idx.images) {
+      const intrinsicText = `${img.description || ''} ${img.label || ''}`.toLowerCase();
+      img.tokens = [...new Set(keywords(intrinsicText))];
+      if (!img.inspectionVersion || !img.intrinsicObservations) {
+        img.verificationStatus = 'quarantined';
+        img.quarantineReason = 'legacy entry lacks versioned pixel-grounded intrinsic observations';
+      }
+    }
+    await saveIndex(idx);
+    return {
+      total: idx.images.length,
+      verified: idx.images.filter((image) => image.verificationStatus === 'verified').length,
+      quarantined: idx.images.filter((image) => image.verificationStatus !== 'verified').length,
+    };
+  } catch {}
+}
+
+/**
  * Search the local Image Bank for previously saved images matching a query.
  */
-export async function searchImageBank(queryText, { minMatches = 1, limit = 4 } = {}) {
+export async function searchImageBank(queryText, { minMatches = 2, limit = 4 } = {}) {
   if (!queryText) return [];
   try {
     const idx = await loadIndex();
     const qTokens = keywords(queryText);
     if (!qTokens.length) return [];
 
+    const effectiveMinMatches = Math.min(minMatches, qTokens.length);
     const scored = [];
     for (const item of idx.images) {
-      const matchCount = qTokens.filter((tk) => item.tokens.includes(tk)).length;
-      if (matchCount >= minMatches) {
+      if (item.verificationStatus !== 'verified') continue;
+      const matchCount = qTokens.filter((tk) => (item.tokens || []).includes(tk)).length;
+      if (matchCount >= effectiveMinMatches) {
         const score = matchCount / Math.max(qTokens.length, 1);
         scored.push({ item, score, matchCount });
       }
@@ -114,15 +159,17 @@ export async function searchImageBank(queryText, { minMatches = 1, limit = 4 } =
         await fs.access(item.file);
         results.push({
           type: 'image',
+          id: `local-bank_${item.id}`,
+          contentHash: item.id,
           url: `file://${item.file.split(path.sep).join('/')}`,
           localPath: item.file,
           width: item.width || 1920,
           height: item.height || 1080,
           source: `bank:${item.source}`,
-          tier: 'relevant',
-          weight: 2.85, // High priority because it is zero-latency local
+          tier: 'fallback',
+          weight: 1.15, // Reasonable local tier weight; must not outrank high-confidence fresh search results
           label: item.label || item.description,
-          license: item.license || { name: 'Local Bank Asset', attributionRequired: false },
+          license: item.license || { name: 'Local Bank Asset', attributionRequired: false, verification_status: 'manual_review', commercial_use: 'unknown' },
         });
       } catch {
         // File no longer on disk

@@ -21,6 +21,8 @@ function toCanonicalScene(editorialScene, strategy, topic) {
     importance: editorialScene.importance,
     energy: editorialScene.energy,
     informationDensity: editorialScene.informationDensity,
+    minimumShotSeconds: strategy?.pacing?.minimumShotSeconds,
+    maximumStillSeconds: strategy?.pacing?.maximumStillSeconds,
     preferredPresentation: primary.kind || 'subject',
     evidenceRequirement: editorialScene.evidenceRequirement,
     entities: editorialScene.entities,
