@@ -78,7 +78,7 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const windowFrames = fps * 10;
   let maxCutsInWindow = 0;
   for (let f = 0; f <= total - windowFrames; f += Math.round(fps * 2)) {
-    const cuts = allShotsWithGlobalTime.filter((s) => s.globalStartFrame >= f && s.globalStartFrame < f + windowFrames).length;
+    const cuts = allShotsWithGlobalTime.filter((s) => s.globalStartFrame > 0 && s.globalStartFrame >= f && s.globalStartFrame < f + windowFrames).length;
     maxCutsInWindow = Math.max(maxCutsInWindow, cuts);
   }
   add('pacing-rapid-cuts', maxCutsInWindow <= cutLimit, productionPacing ? 'error' : 'warn', `maximum ${maxCutsInWindow} cuts in a 10s window (profile ${pacingProfileName}, limit: ≤ ${cutLimit})`);

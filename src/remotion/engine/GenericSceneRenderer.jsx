@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, Img, OffthreadVideo, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Img, Loop, OffthreadVideo, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { useTheme } from './theme.js';
 import { evaluateMotionValue } from '../../composition/motion/motionChoreographer.js';
 
@@ -159,16 +159,36 @@ function ConnectorPrimitive({ route, motionPlan, frame, palette, viewport }) {
 
 const mediaSrc = (src) => /^(https?:|data:|blob:)/.test(src) ? src : staticFile(String(src).replace(/^[/\\]+/, ''));
 
+const videoPlayback = (geometry, fps, fallbackDuration) => {
+  const start = Math.max(0, Number(geometry?.videoTrim?.startTime) || 0);
+  const end = Number(geometry?.videoTrim?.endTime);
+  const approvedWindow = Number.isFinite(end) && end > start ? Math.round((end - start) * fps) : 0;
+  return {
+    trimBefore: Math.round(start * fps),
+    // Remotion uses durationInFrames as the loop period. Keeping it finite
+    // prevents a scene hold from seeking past the approved/source window.
+    durationInFrames: Math.max(1, approvedWindow || Number(fallbackDuration) || 1),
+  };
+};
+
+const LoopedVideo = ({ playback, ...props }) => (
+  <Loop durationInFrames={playback.durationInFrames}>
+    <OffthreadVideo {...props} trimBefore={playback.trimBefore} durationInFrames={playback.durationInFrames} />
+  </Loop>
+);
+
 /** Paints persisted media/crop/camera geometry; it performs no focal or layout decisions. */
 export function MediaPrimitive({ element, geometry, motionPlan, frame }) {
+  const { fps } = useVideoConfig();
   if (!geometry || geometry.activeRange && (frame < geometry.activeRange.startFrame || frame > geometry.activeRange.endFrame)) return null;
   const scale = evaluateMotionValue(motionPlan, element.id, 'cameraScale', frame) || 1;
   const focusX = evaluateMotionValue(motionPlan, element.id, 'cameraFocusX', frame);
   const focusY = evaluateMotionValue(motionPlan, element.id, 'cameraFocusY', frame);
   const x = Number.isFinite(focusX) ? focusX : geometry.objectPosition.x, y = Number.isFinite(focusY) ? focusY : geometry.objectPosition.y;
+  const playback = videoPlayback(geometry, fps, motionPlan.durationInFrames);
   const common = { width: '100%', height: '100%', objectFit: 'cover', objectPosition: `${x * 100}% ${y * 100}%`, transform: `scale(${scale})`, transformOrigin: `${x * 100}% ${y * 100}%`, filter: `brightness(${geometry.treatment.brightness}) contrast(${geometry.treatment.contrast})` };
   return <div style={{ position: 'absolute', left: geometry.rect.x, top: geometry.rect.y, width: geometry.rect.width, height: geometry.rect.height, overflow: 'hidden', zIndex: element.zIndex }}>
-    {geometry.mediaType === 'video' ? <OffthreadVideo src={mediaSrc(geometry.src)} muted style={common} /> : <Img src={mediaSrc(geometry.src)} style={common} />}
+    {geometry.mediaType === 'video' ? <LoopedVideo src={mediaSrc(geometry.src)} muted playback={playback} style={common} /> : <Img src={mediaSrc(geometry.src)} style={common} />}
     {geometry.treatment.scrim !== 'none' ? <div style={{
       position: 'absolute', inset: 0,
       background: geometry.rect.height > geometry.rect.width
@@ -184,6 +204,7 @@ export function GroupPrimitive() { return null; }
 /** Pure solved-scene renderer: it consumes persisted pixels and line breaks and performs no layout. */
 export function GenericSceneRenderer({ solvedScene, motionPlan }) {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
   const { palette } = useTheme();
   const elements = Object.values(solvedScene.elements).sort((a, b) => a.zIndex - b.zIndex || a.id.localeCompare(b.id));
   const backgrounds = {
@@ -195,6 +216,7 @@ export function GenericSceneRenderer({ solvedScene, motionPlan }) {
     technicalGrid: `linear-gradient(${palette.line}18 1px, transparent 1px), linear-gradient(90deg, ${palette.line}18 1px, transparent 1px), ${palette.bg}`,
   };
   const primaryMedia = solvedScene.mediaGeometry?.media_primary;
+  const primaryPlayback = videoPlayback(primaryMedia, fps, motionPlan.durationInFrames);
   const isLayeredMedia = Boolean(primaryMedia && (
     solvedScene.topology === 'layered-media' ||
     primaryMedia.rect.width < solvedScene.viewport.width ||
@@ -205,7 +227,7 @@ export function GenericSceneRenderer({ solvedScene, motionPlan }) {
     {isLayeredMedia && (
       <div style={{ position: 'absolute', inset: -40, overflow: 'hidden', zIndex: 0 }}>
         {primaryMedia.mediaType === 'video'
-          ? <OffthreadVideo src={mediaSrc(primaryMedia.src)} muted style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(36px) brightness(0.38) saturate(1.2)' }} />
+          ? <LoopedVideo src={mediaSrc(primaryMedia.src)} muted playback={primaryPlayback} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(36px) brightness(0.38) saturate(1.2)' }} />
           : <Img src={mediaSrc(primaryMedia.src)} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(36px) brightness(0.38) saturate(1.2)' }} />
         }
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.40)' }} />

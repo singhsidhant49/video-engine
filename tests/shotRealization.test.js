@@ -114,6 +114,23 @@ test('historical economic conditions route to archival subjects instead of liter
   assert.ok(shot.searchConcepts.includes('1970s gas station line'));
 });
 
+test('an entity absent from narration does not force an unnecessary portrait lock', () => {
+  const scene = {
+    id: 'scene_007', narration: 'They improved one percent at a time, turning marginal gains into lasting advantage.',
+    durationHint: 6.5, visualIntent: 'identify', preferredPresentation: 'subject', evidenceRequirement: 'preferred',
+    entities: ['Dave Brailsford'], energy: 3, purpose: 'reveal', sourceScenes: [{
+      narration: 'They improved one percent at a time, turning marginal gains into lasting advantage.',
+      entity: { name: 'Dave Brailsford', wikipedia: 'Dave Brailsford' },
+      imageQueries: ['cycling coach clipboard training', 'coach explaining strategy athletes'],
+      visual: 'A cycling coach points at a training clipboard.',
+    }],
+  };
+  const [shot] = authorShots(scene, { useMediaEditorial: true, format: 'landscape', pacing: { minimumShotSeconds: 3.4, maximumStillSeconds: 6 } }, 'Why consistency matters');
+  assert.equal(shot.assetIntent, 'concept');
+  assert.deepEqual(shot.entities, []);
+  assert.equal(shot.visualConcept, 'cycling coach clipboard training');
+});
+
 test('single-shot scenes alternate restrained camera direction across the storyboard', () => {
   const base = {
     narration: 'A single complete visual thought.', purpose: 'context', visualIntent: 'identify',

@@ -4,7 +4,7 @@ import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedCont
 import { bundle } from '@remotion/bundler';
 import { renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
-import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration } from '../services/aiDirectorService.js';
+import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
 import { analyzeNarration } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
@@ -35,6 +35,7 @@ import { planAssetRequests, buildAssetQueryDiagnostics } from './assetRequestPla
 import { AssetRequestListSchema } from '../models/assetRequest.schema.js';
 import { buildVisualCoveragePlan } from '../storyboard/visualCoveragePlan.js';
 import { VisualCoveragePlanSchema } from '../models/visualCoveragePlan.schema.js';
+import { consolidatePlanForPacing } from '../storyboard/pacingConsolidation.js';
 import { evaluateVisualSequence } from '../storyboard/visualSequenceDirector.js';
 import { buildEditorialVisualPlan } from './editorialVisualPlanner.js';
 import { buildVisualCoverageDiagnostics } from '../qc/visualCoverageDiagnostics.js';
@@ -353,6 +354,14 @@ export async function createFacelessVideo({
   }
 
   if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
+    plan = await repairUnverifiedClaims(plan);
+    plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+    await save('plan.json', plan);
+    await save('content-quality-diagnostics.json', plan.contentQuality);
+    await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
+    await job.checkpoints.refreshArtifactChecksums('plan', ['plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json']);
+  }
+  if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
     throw new Error(`Narration quality gate failed — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
   }
 
@@ -479,6 +488,13 @@ export async function createFacelessVideo({
 
   // Expansion/compression can change prose after the initial plan gate. Never
   // send incomplete sentences into storyboard, captions, or final rendering.
+  plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+  const consolidation = consolidatePlanForPacing(plan, narration.words, productionProfile.pacing);
+  if (consolidation.merged.length) {
+    console.log(`   ↔ Consolidated ${consolidation.merged.length} short scene boundary/boundaries for ${productionProfile.pacing.mode} pacing.`);
+    plan = normalizePlan(consolidation.plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+    plan.pacingConsolidation = consolidation.plan.pacingConsolidation;
+  }
   plan.contentQuality = validateContentQuality({ scenes: plan.scenes, claims: plan.claims });
   plan.script = plan.scenes.map((sceneItem) => sceneItem.narration).join(' ');
   await save('plan.json', plan);
@@ -962,7 +978,7 @@ export async function createFacelessVideo({
     if (creativeQaResult?.repairsApplied?.length > 0) {
       preRepairContactSheet = await renderContactSheet(runDir, { timeline, outputFilename: 'contact-pre-repair.png', ats: [0.5] }).catch(() => null);
     }
-    preflightContactSheet = await renderContactSheet(runDir, { timeline, outputFilename: 'contact-post-repair.png', ats: [0.5] }).catch(() => null);
+    preflightContactSheet = await renderContactSheet(runDir, { timeline, outputFilename: 'contact-post-repair.png', ats: [0.18, 0.5, 0.82] }).catch(() => null);
     if (preflightContactSheet) {
       await fs.mkdir(path.join(runDir, 'preview'), { recursive: true });
       await fs.copyFile(preflightContactSheet, path.join(runDir, 'preview', 'contact.png')).catch(() => {});
@@ -1171,7 +1187,7 @@ export async function createFacelessVideo({
   await job.completeStage('postRenderQa', ['qc.json', ...(result.qc.renderedCritic?.contactSheet ? [result.qc.renderedCritic.contactSheet] : [])]);
   await job.finish();
 
-  console.log(`\n🎉 ${outputPath} (${((Date.now() - t0) / 1000).toFixed(0)}s)\n`);
+  console.log(`\n🎉 ${outputPath} (completed in ${((Date.now() - t0) / 1000).toFixed(0)}s)\n`);
   return { ...result, outputPath, outputFilename };
   } catch (error) {
     await job.fail(error);

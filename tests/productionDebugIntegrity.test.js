@@ -87,6 +87,24 @@ test('figurative first-step language is not treated as an unsourced historical s
   assert.equal(result.issues.some((issue) => issue.type === 'unverified_exact_claim'), false);
 });
 
+test('fictional first occurrence is not treated as a historical superlative', () => {
+  const plan = normalizePlan({ title: 'A seed', scenes: [{
+    id: 's1', kind: 'subject', purpose: 'payoff',
+    narration: 'Then one day, the first green shoot breaks through the soil.',
+    visual: 'A green seedling emerges from dark soil.',
+  }] }, { topic: 'A reflective story about patience', niche: 'narrated story', format: 'landscape' });
+  assert.equal(plan.claims.length, 0);
+});
+
+test('explicit hypothetical numbers are classified as illustrative, not unsupported facts', () => {
+  const plan = normalizePlan({ title: 'Weekly budget', scenes: [
+    { id: 's1', kind: 'statistic', purpose: 'explain', narration: 'For example, say you earn $700 a week and essentials cost $500.', visual: 'A sample weekly budget.' },
+    { id: 's2', kind: 'statistic', purpose: 'payoff', narration: 'By Friday, she has $100 left for the weekend.', visual: 'The example budget balance.' },
+  ] }, { topic: 'How to build a weekly budget', niche: 'finance tutorial', format: 'landscape' });
+  assert.ok(plan.claims.every((claim) => claim.status === 'illustrative'));
+  assert.equal(plan.contentQuality.valid, true);
+});
+
 test('unsupported dated and numeric factual claims still require evidence', () => {
   const plan = normalizePlan({
     title: 'History',

@@ -118,6 +118,46 @@ function imageBehaviorFor(shot, asset) {
   return 'STATIC';
 }
 
+const SOLVED_CAMERA_MOVE = Object.freeze({
+  STATIC: 'static',
+  SUBTLE_PUSH: 'subtlePush',
+  SUBTLE_PULL: 'subtlePull',
+  FOCAL_PAN: 'pan',
+  DETAIL_CROP: 'detailCrop',
+  REFRAME: 'reframe',
+  MATCH_MOVE: 'matchMove',
+});
+
+/**
+ * The directing pass records an intended camera move, but the media solver may
+ * safely downgrade it (for example when an asset is low quality). Persist the
+ * solved behavior as the renderer-facing truth so pacing/QC never reports
+ * motion that is absent from the encoded video.
+ */
+export function resolvedCameraPresentation(presentation = {}, compiled, asset) {
+  const path = compiled?.solvedScene?.cameraPaths?.media_primary;
+  if (!path) return presentation;
+  const authoredCameraMove = presentation.authoredCameraMove
+    || presentation.cameraMove
+    || 'static';
+  const nativeMotion = asset?.type === 'video' && compiled.mediaSceneSpec?.assets?.[0]?.motionPresent !== false;
+  const cameraMove = nativeMotion ? 'nativeMotion' : (SOLVED_CAMERA_MOVE[path.behavior] || 'static');
+  const movementState = nativeMotion ? 'ACTIVE'
+    : cameraMove === 'static' ? 'STATIC'
+      : ['subtlePush', 'subtlePull'].includes(cameraMove) ? 'SUBTLE' : 'ACTIVE';
+  return {
+    ...presentation,
+    authoredCameraMove,
+    cameraMove,
+    movementState,
+    cameraDowngraded: !nativeMotion && authoredCameraMove !== cameraMove,
+  };
+}
+
+function applySolvedCameraTruth(timelineShot, compiled, asset) {
+  timelineShot.presentation = resolvedCameraPresentation(timelineShot.presentation, compiled, asset);
+}
+
 function captionPolicyFor(shot, captionGeometry, viewport) {
   const integrated = shot.renderMode === 'solved' && shot.family === 'process';
   const lowerSubject = shot.family === 'image' && (shot.asset?.focal?.y ?? 0) > 0.6;
@@ -695,6 +735,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             timelineShot.motionPlanId = compiled.motionPlan.id;
             timelineShot.visualQualityReviewId = qualityId;
             timelineShot.mediaSceneSpecId = compiled.mediaSceneSpec?.shotId || null;
+            applySolvedCameraTruth(timelineShot, compiled, asset);
             if (visualBeat && compiled.mediaSceneSpec) {
               const mediaShotPlan = createMediaShotPlan({ beat: visualBeat, mediaSceneSpec: compiled.mediaSceneSpec, solvedScene: compiled.solvedScene, shot: timelineShot, rejectedAlternatives: realizedShot.rejectedAlternatives, visualQuality: compiled.visualQuality });
               mediaShotPlans[mediaShotPlan.shotId] = mediaShotPlan;
@@ -724,6 +765,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
               timelineShot.motionPlanId = compiled.motionPlan.id;
               timelineShot.visualQualityReviewId = qualityId;
               timelineShot.mediaSceneSpecId = compiled.mediaSceneSpec?.shotId || null;
+              applySolvedCameraTruth(timelineShot, compiled, asset);
             }
           }
         } catch (error) {

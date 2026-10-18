@@ -240,15 +240,25 @@ export function isAbstractEventEntity(value = '') {
   return eventOrCondition && (temporal || !/^[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+$/.test(text));
 }
 
+const entityMentioned = (narration, entity) => {
+  const spoken = normalized(narration);
+  const full = normalized(entity);
+  if (!full) return false;
+  if (spoken.includes(full)) return true;
+  const distinctive = full.split(' ').filter((token) => token.length >= 4);
+  return distinctive.some((token) => new RegExp(`\\b${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(spoken));
+};
+
 function sourceConcepts(scene, topic) {
   const narrationKey = normalized(scene.narration);
   const concepts = [];
   const isTechnicalTopic = /database|software|code|tech|computer|concurrency|deadlock|backend/i.test(topic || '');
+  const requiresEntityEvidence = scene.evidenceRequirement === 'required';
   for (const entity of scene.entities) {
-    if (!isAbstractEventEntity(entity)) concepts.push(entity);
+    if (!isAbstractEventEntity(entity) && (requiresEntityEvidence || entityMentioned(scene.narration, entity))) concepts.push(entity);
   }
   for (const source of scene.sourceScenes) {
-    if (source.entity?.wikipedia) concepts.push(clean(source.entity.wikipedia));
+    if (source.entity?.wikipedia && (requiresEntityEvidence || entityMentioned(scene.narration, source.entity.name || source.entity.wikipedia))) concepts.push(clean(source.entity.wikipedia));
     for (const query of source.imageQueries || []) {
       if (normalized(query) && normalized(query) !== narrationKey) {
         if (isTechnicalTopic && /chain\s+lock|padlock|chain\s+and\s+lock|shatter|broken\s+glass|tug\s+of\s+war|rewind\s+button|hand\s+holding\s+key|holding\s+key|keys?(\s+and|\s+or|\s+in)|\bkey\b|\bkeys\b|handcuff|jail|prison/i.test(query)) {
@@ -319,7 +329,11 @@ export function authorShots(scene, strategy, topic) {
   const primaryKind = scene.preferredPresentation;
   const weights = durationWeights(count, scene);
   const narration = scene.narration || scene.sourceScenes?.[0]?.narration || '';
-  const searchableEntities = (scene.entities || []).filter((entity) => !isAbstractEventEntity(entity));
+  // An LLM may attach a source entity as background context even when the
+  // narration never identifies it. Do not turn that metadata into a mandatory
+  // portrait/entity lock; use the grounded action/query concepts instead.
+  const searchableEntities = (scene.entities || []).filter((entity) =>
+    !isAbstractEventEntity(entity) && (scene.evidenceRequirement === 'required' || entityMentioned(narration, entity)));
   const hasAbstractHistoricalEntity = (scene.entities || []).some(isAbstractEventEntity);
   const beats = segmentVisualBeats(narration, searchableEntities);
   const sceneOrdinal = Number(String(scene.id || '').match(/(\d+)(?!.*\d)/)?.[1] || 1);
@@ -340,7 +354,7 @@ export function authorShots(scene, strategy, topic) {
     const assetIntent = role === 'evidence' && scene.evidenceRequirement !== 'conceptual_allowed' && !/interface|screen|tv|app|website|software/i.test(visualConcept)
       ? primaryKind === 'document' ? 'document' : primaryKind === 'timeline' ? 'historical' : 'evidence'
       : (shotEntities.length ? 'entity' : (INTENT_BY_KIND[primaryKind] === 'entity'
-        ? (hasAbstractHistoricalEntity ? 'historical' : (index === 0 ? 'entity' : 'concept'))
+        ? (hasAbstractHistoricalEntity ? 'historical' : 'concept')
         : INTENT_BY_KIND[primaryKind])) || (/interface|screen|tv|app/i.test(visualConcept) ? 'interface' : 'concept');
     if (beat && beat.label && beat.label !== 'VISUAL_BEAT') {
       const labelMap = {

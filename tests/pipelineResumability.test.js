@@ -10,6 +10,7 @@ import { acquireRunLock, releaseRunLock } from '../src/core/locks/runLock.js';
 import { cloneRun } from '../src/core/jobs/runCloner.js';
 import { CheckpointStore } from '../src/core/checkpoints/checkpointManifest.js';
 import { config } from '../src/config/index.js';
+import { materialiseImage } from '../src/services/freeMediaService.js';
 
 test('Stage Registry: canonical stage name and alias resolution', () => {
   assert.equal(canonicalStageName('topic-input'), 'request');
@@ -138,6 +139,34 @@ test('Media Download Cache & Perceptual Image Hash: stores license metadata and 
   const getRes = await mediaCache.get({ provider: 'pexels', id: 'photo-1234', url: 'https://pexels.com/photo-1234' });
   assert.equal(getRes.hit, true);
   assert.equal(getRes.meta.credit, 'Photographer Name');
+});
+
+test('corrupted remote image cache is evicted and fetched once more in the same run', async () => {
+  const sharp = (await import('sharp')).default;
+  const goodImage = await sharp({
+    create: { width: 800, height: 800, channels: 3, background: { r: 32, g: 64, b: 96 } },
+  }).jpeg().toBuffer();
+  const url = `https://test.invalid/cache-recovery-${Date.now()}.jpg`;
+  const cacheKey = crypto.createHash('sha1').update(url).digest('hex');
+  const cacheFile = path.join(config.rootDir, '.cache', 'media', `${cacheKey}.bin`);
+  const cacheMeta = path.join(config.rootDir, '.cache', 'media', `${cacheKey}.json`);
+  const tmpDir = path.join(config.rootDir, '.cache', `image-retry-test-${Date.now()}`);
+  const output = path.join(tmpDir, 'output.jpg');
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  await fs.mkdir(tmpDir, { recursive: true });
+  globalThis.fetch = async () => new Response(++calls === 1 ? Buffer.from('<html>temporary CDN error</html>') : goodImage, { status: 200 });
+  try {
+    const result = await materialiseImage({ url, timeout: 1000 }, output);
+    assert.equal(calls, 2);
+    assert.equal(result.width, 800);
+    assert.equal(result.height, 800);
+  } finally {
+    globalThis.fetch = originalFetch;
+    await fs.rm(tmpDir, { recursive: true, force: true });
+    await fs.rm(cacheFile, { force: true });
+    await fs.rm(cacheMeta, { force: true });
+  }
 });
 
 test('Resume Safety: evaluates run validity and recovers from missing artifacts', async () => {

@@ -990,6 +990,7 @@ export async function directAssets(plan, specs, {
     const failure = {
       code: 'UNRESOLVED_PRODUCTION_MEDIA',
       message: 'Production rendering requires every media-routed shot to have an approved pixel-inspected asset.',
+      runDir: path.dirname(publicDir),
       unresolvedRequests,
       generatedAt: new Date().toISOString(),
     };

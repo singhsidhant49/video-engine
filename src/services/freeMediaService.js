@@ -438,16 +438,7 @@ export const hamming = (a, b) => {
   return [...a].reduce((n, c, i) => n + (c !== b[i]), 0);
 };
 
-export async function materialiseImage(candidate, outFile) {
-  const minimumShortSide = Number(candidate.minimumShortSide) || MIN_SHORT_SIDE;
-  let cachedPath;
-  if (candidate.localPath) {
-    cachedPath = candidate.localPath;
-  } else if (candidate.url && candidate.url.startsWith('file://')) {
-    cachedPath = candidate.url.replace(/^file:\/\//, '');
-  } else {
-    cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
-  }
+async function transcodeImage(cachedPath, outFile, minimumShortSide) {
   const buf = await fs.readFile(cachedPath);
   const sharp = getSharp();
   
@@ -478,13 +469,34 @@ export async function materialiseImage(candidate, outFile) {
     const finalBuf = await fs.readFile(outFile);
     return { type: 'image', width: w, height: h, focal: { x: 0.5, y: 0.45 }, hash: await dHash(finalBuf) };
   } catch (err) {
-    if (cachedPath && !candidate.localPath && !candidate.url?.startsWith('file://')) {
-      await fs.rm(cachedPath, { force: true }).catch(() => {});
-      const metaPath = cachedPath.replace(/\.bin$/, '.json');
-      if (metaPath !== cachedPath) await fs.rm(metaPath, { force: true }).catch(() => {});
-    }
-    throw new Error(`invalid/corrupted image: ${err.message}`);
+    throw err;
   }
+}
+
+export async function materialiseImage(candidate, outFile) {
+  const minimumShortSide = Number(candidate.minimumShortSide) || MIN_SHORT_SIDE;
+  const remote = !candidate.localPath && candidate.url && !candidate.url.startsWith('file://');
+  let lastError;
+  // A cached CDN response can be an HTML error page or a truncated body. Evict
+  // it and fetch once more during the same run instead of losing the shot.
+  for (let attempt = 0; attempt < (remote ? 2 : 1); attempt++) {
+    let cachedPath;
+    try {
+      if (candidate.localPath) cachedPath = candidate.localPath;
+      else if (candidate.url?.startsWith('file://')) cachedPath = candidate.url.replace(/^file:\/\//, '');
+      else cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+      return await transcodeImage(cachedPath, outFile, minimumShortSide);
+    } catch (error) {
+      lastError = error;
+      await fs.rm(outFile, { force: true }).catch(() => {});
+      if (remote && cachedPath) {
+        await fs.rm(cachedPath, { force: true }).catch(() => {});
+        const metaPath = cachedPath.replace(/\.bin$/, '.json');
+        if (metaPath !== cachedPath) await fs.rm(metaPath, { force: true }).catch(() => {});
+      }
+    }
+  }
+  throw new Error(`invalid/corrupted image after cache refresh: ${lastError?.message || 'unknown image error'}`);
 }
 
 export async function materialiseVideo(candidate, outFile) {

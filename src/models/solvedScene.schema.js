@@ -97,7 +97,7 @@ export const SolvedSceneSchema = z.object({
     scale: z.number().positive(), transformOrigin: z.string(), subjectSafeRegion: z.object({ x: z.number(), y: z.number(), width: z.number().nonnegative(), height: z.number().nonnegative() }).strict().nullable(),
     treatment: z.object({ scrim: z.enum(['none', 'subtle-gradient', 'local-shade', 'localized-blur']), brightness: z.number(), contrast: z.number(), tintOpacity: z.number(), vignette: z.number() }).strict(),
     sourceDimensions: z.object({ width: z.number().positive().nullable(), height: z.number().positive().nullable() }).strict(),
-    nativeMotion: z.boolean(), activeRange: z.object({ startFrame: z.number().int().nonnegative(), endFrame: z.number().int().nonnegative() }).strict().nullable(),
+    nativeMotion: z.boolean(), videoTrim: z.object({ startTime: z.number().nonnegative(), endTime: z.number().nonnegative(), score: z.number().optional(), reason: z.string().optional() }).strict().nullable().default(null), activeRange: z.object({ startFrame: z.number().int().nonnegative(), endFrame: z.number().int().nonnegative() }).strict().nullable(),
   }).strict()).default({}),
   cameraPaths: z.record(z.string(), z.object({
     behavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'FOCAL_PAN', 'DETAIL_CROP', 'REFRAME', 'MATCH_MOVE']),

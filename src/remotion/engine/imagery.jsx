@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+import { AbsoluteFill, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { useTheme } from './theme.js';
 import { ease } from './motion.js';
 import { FocusPull } from './accents.jsx';
@@ -83,14 +83,22 @@ export function CameraVideo({ shot, filter, box }) {
   const moveType = shot.move?.type || 'static';
   const t = moveType === 'static' ? 0 : interpolate(frame, [0, Math.max(1, shot.durationInFrames - 1)], [0, 1], { extrapolateRight: 'clamp', easing: ease.camera });
   const s = moveType === 'static' ? 1 : lerp(shot.move?.scale?.[0] || 1, shot.move?.scale?.[1] || 1.025, t);
+  const selectedStart = Number(shot.asset?.videoTrim?.startTime ?? shot.clipStart) || 0;
+  const selectedEnd = Number(shot.asset?.videoTrim?.endTime);
+  const selectedWindowFrames = Number.isFinite(selectedEnd) && selectedEnd > selectedStart
+    ? Math.round((selectedEnd - selectedStart) * fps)
+    : 0;
   return (
     <div style={{ position: 'absolute', left: box?.x ?? 0, top: box?.y ?? 0, width: W, height: H, overflow: 'hidden' }}>
-      <OffthreadVideo
-        src={staticFile(normalizeStaticPath(shot.src))}
-        muted
-        startFrom={Math.round((shot.clipStart || 0) * fps)}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${s})`, filter }}
-      />
+      <Loop durationInFrames={Math.max(1, selectedWindowFrames || shot.durationInFrames || 1)}>
+        <OffthreadVideo
+          src={staticFile(normalizeStaticPath(shot.src))}
+          muted
+          trimBefore={Math.max(0, Math.round(selectedStart * fps))}
+          durationInFrames={Math.max(1, selectedWindowFrames || shot.durationInFrames || 1)}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${s})`, filter }}
+        />
+      </Loop>
     </div>
   );
 }

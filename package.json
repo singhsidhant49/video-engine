@@ -15,6 +15,7 @@
     "benchmark:m15": "node scripts/benchmarkMilestone15.js",
     "render:golden:m16": "node scripts/renderMilestone16Goldens.js",
     "benchmark:m16": "node scripts/benchmarkMilestone16.js",
+    "benchmark:production": "node scripts/runProductionBenchmark.js",
     "render:media-editorial": "node scripts/renderMediaEditorialBenchmarks.js",
     "sheets:m15": "node scripts/buildMilestone15RegressionSheets.js",
     "render:timeline": "node scripts/renderTimelineRun.js",

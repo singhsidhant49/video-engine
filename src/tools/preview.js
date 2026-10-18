@@ -4,6 +4,7 @@ import sharp from 'sharp';
 import { bundle } from '@remotion/bundler';
 import { renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
+import { classifyRenderedMotion, renderedMotionThreshold } from '../qc/renderQc.js';
 
 export const isBlankRenderedFrame = ({ mean, deviation }) => mean < 3 && deviation < 1.5;
 
@@ -18,12 +19,17 @@ export async function renderContactSheet(runDir, { scale = 0.4, ats = [0.2, 0.85
     await fs.rm(outDir, { recursive: true, force: true });
   }
   await fs.mkdir(outDir, { recursive: true });
+  const prefix = outputFilename.replace(/\.png$/, '');
+  for (const existing of await fs.readdir(outDir)) {
+    if (existing === outputFilename || (existing.startsWith(`${prefix}_`) && existing.endsWith('.png'))) {
+      await fs.rm(path.join(outDir, existing), { force: true });
+    }
+  }
   const serveUrl = await bundle({ entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'), publicDir: path.join(runDir, 'public'), ignoreRegisterRootWarning: true });
   const id = timeline.format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer';
   const composition = await selectComposition({ serveUrl, id, inputProps: { timeline } });
 
   const files = [];
-  const prefix = outputFilename.replace(/\.png$/, '');
   for (const c of timeline.clips) {
     const start = c.from + c.cutAt;
     const end = c.from + c.durationInFrames - (c.exit.frames || 0);
@@ -154,7 +160,8 @@ export async function verifyRenderedContactFrames(runDir, { timeline, prefix = '
   const frames = [];
   for (const name of names) {
     const file = path.join(outDir, name);
-    const stats = await sharp(file).stats();
+    const image = sharp(file);
+    const stats = await image.stats();
     const channels = stats.channels || [];
     const mean = channels.reduce((sum, channel) => sum + channel.mean, 0) / Math.max(1, channels.length);
     const deviation = channels.reduce((sum, channel) => sum + channel.stdev, 0) / Math.max(1, channels.length);
@@ -168,11 +175,48 @@ export async function verifyRenderedContactFrames(runDir, { timeline, prefix = '
     if (isBlankRenderedFrame({ mean, deviation })) failures.push('blank_or_near_blank_render');
     if (asset?.unresolved || asset?.source === 'unresolved') failures.push('unresolved_asset_reached_renderer');
     if (asset?.editorialJudgment?.accepted === false) failures.push('unapproved_asset_reached_renderer');
-    frames.push({ file: path.relative(runDir, file).split(path.sep).join('/'), clipId: clip?.id || null, meanLuminance: Number(mean.toFixed(2)), pixelDeviation: Number(deviation.toFixed(2)), failures });
+    const { data: motionPixels } = await sharp(file)
+      .resize(72, 128, { fit: 'fill' })
+      .extract({ left: 0, top: 0, width: 72, height: 96 })
+      .greyscale()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    frames.push({ file: path.relative(runDir, file).split(path.sep).join('/'), clipId: clip?.id || null, meanLuminance: Number(mean.toFixed(2)), pixelDeviation: Number(deviation.toFixed(2)), failures, motionPixels });
+  }
+  const pixelDiff = (a, b) => {
+    let total = 0;
+    for (let index = 0; index < a.length; index++) total += Math.abs(a[index] - b[index]);
+    return total / Math.max(1, a.length);
+  };
+  const motionReviews = [];
+  for (const clip of timeline.clips || []) {
+    const samples = frames.filter((frame) => frame.clipId === clip.id);
+    if (samples.length < 2) continue;
+    const differences = [];
+    for (let index = 1; index < samples.length; index++) differences.push(pixelDiff(samples[index - 1].motionPixels, samples[index].motionPixels));
+    differences.push(pixelDiff(samples[0].motionPixels, samples.at(-1).motionPixels));
+    const nativeMotion = (clip.shots || []).some((shot) => shot.asset?.type === 'video');
+    const motionPlans = (clip.shots || []).map((shot) => timeline.motionPlans?.[shot.motionPlanId]).filter(Boolean);
+    const expectedMotion = nativeMotion || motionPlans.some((plan) => {
+      return (plan?.tracks || []).some((track) =>
+        ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
+        && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
+    });
+    const darkestMean = Math.min(...samples.map((sample) => sample.meanLuminance));
+    const threshold = renderedMotionThreshold({
+      meanLuminance: darkestMean,
+      tracks: motionPlans.flatMap((plan) => plan.tracks || []),
+      durationInFrames: Math.max(0, ...motionPlans.map((plan) => plan.durationInFrames || 0)),
+      nativeMotion,
+    });
+    const review = { clipId: clip.id, ...classifyRenderedMotion({ differences, expectedMotion, nativeMotion, threshold }) };
+    motionReviews.push(review);
+    if (review.frozen) samples.forEach((sample) => sample.failures.push('planned_motion_not_visible'));
   }
   const failures = frames.flatMap((frame) => frame.failures.map((code) => ({ frame: frame.file, clipId: frame.clipId, code })));
   if (!frames.length) failures.push({ frame: null, clipId: null, code: 'no_rendered_contact_frames' });
-  const report = { version: 1, inspectedRenderedPixels: true, frameCount: frames.length, passed: failures.length === 0, failures, frames };
+  const serializableFrames = frames.map(({ motionPixels, ...frame }) => frame);
+  const report = { version: 2, inspectedRenderedPixels: true, frameCount: frames.length, passed: failures.length === 0, failures, motionReviews, frames: serializableFrames };
   await fs.writeFile(path.join(outDir, 'rendered-semantic-qa.json'), JSON.stringify(report, null, 2));
   if (production && !report.passed) throw new Error(`Rendered-frame semantic QA failed: ${failures.map((item) => item.code).join(', ')}`);
   return report;

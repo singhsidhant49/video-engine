@@ -18,6 +18,24 @@ Scope: reusable prompt/data-to-video engine for multiple YouTube channels. Curat
 10. CLI and HTTP entry points accept the same structured request shape.
 11. Resume safety invalidates stale stages when source data or the production profile changes.
 12. The contract advertises only currently supported language/caption behavior: English narration with subtitles.
+13. A repeatable production benchmark matrix now covers finance, technology, history, investigation, meditation, audiobook, tutorial, and motivational channel profiles.
+14. The benchmark has explicit release thresholds: 30 runs, at least 95% first-pass success, duration compliance, and zero hard QC, unresolved-media, wrong-asset, blank-frame, or frozen-motion failures.
+15. Renderer-facing camera metadata now records the solved camera behavior, including safe solver downgrades, instead of incorrectly reporting the authored movement.
+16. Pre-render contact sheets sample three points per clip and block production when planned/native motion is absent from the rendered pixels.
+17. Final MP4 QC samples every canonical shot and distinguishes valid intentional static holds from broken planned/native motion.
+18. Aligned narration now drives a cross-scene pacing repair that merges undersized visual beats while preserving every spoken word and section order.
+19. Rapid-cut QC counts actual edit boundaries and no longer treats frame zero as a cut.
+20. Unsupported exact claims receive one bounded rewrite pass; explicit hypothetical examples remain allowed, while invented names, amounts, dates, and superlatives still block production if repair fails.
+21. Approved native-video windows are persisted into solved geometry and rendered through a finite loop, preventing source-window overreads during longer holds.
+22. Production benchmark reports now separate generation success from duration compliance and group failures by actionable pipeline stage.
+
+Run the representative suite with:
+
+```powershell
+npm run benchmark:production -- --repeat 4 --duration 60 --render-scale 0.5
+```
+
+Use `--no-render` for pipeline-only exercises, `--offline` for cached-provider exercises, `--profile meditation` for one profile, or `--list` to show the matrix. Reports are written under `benchmarks/production/`.
 
 ## P0: required before unattended production
 
@@ -42,14 +60,13 @@ Scope: reusable prompt/data-to-video engine for multiple YouTube channels. Curat
 
 ### Visual pacing and continuity
 
-14. Add a cross-scene pacing repair pass. Current profile-aware planning prevents most fast cuts, but QC can only block—not yet merge—overactive adjacent scenes.
-15. Distinguish native-motion video holds from still-image holds in every pacing rule.
-16. Score whether each visual change introduces meaningful new information; suppress cuts that only swap to a similar image.
-17. Add section-level rhythm arcs: faster hook, stable explanation, deliberate reveal, and slower payoff.
-18. Detect subject-scale whiplash, color-temperature jumps, repeated compositions, and abrupt location changes.
-19. Validate the actual visible frame throughout a shot, not only selected contact-sheet frames.
-20. Add optical-flow/frozen-frame inspection for the final encoded video.
-21. Add face, logo, text, watermark, and unsafe-crop checks across the full shot duration.
+14. Distinguish native-motion video holds from still-image holds in every pacing rule.
+15. Score whether each visual change introduces meaningful new information; suppress cuts that only swap to a similar image.
+16. Add section-level rhythm arcs: faster hook, stable explanation, deliberate reveal, and slower payoff.
+17. Detect subject-scale whiplash, color-temperature jumps, repeated compositions, and abrupt location changes.
+18. Validate the actual visible frame throughout a shot, not only selected contact-sheet frames.
+19. Extend the implemented multi-sample pixel-motion gate to dense optical-flow inspection across the complete final encoded video.
+20. Add face, logo, text, watermark, and unsafe-crop checks across the full shot duration.
 
 ### Reliability and recovery
 
@@ -117,4 +134,3 @@ Scope: reusable prompt/data-to-video engine for multiple YouTube channels. Curat
 3. AI-generated image/video providers in production.
 4. Automatic publishing to YouTube.
 5. Fully asynchronous application-facing job orchestration.
-

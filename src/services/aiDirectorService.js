@@ -826,8 +826,19 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
   // superlative need evidence. Absolute words used as creative language
   // ("the only sound", "always waiting") are not factual statistics.
   const exactClaimPattern = /(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b|\b(?:the|world(?:'s)?|history(?:'s)?)\s+(?:first(?!\s+(?:step|thing|move|way|place|time)\b)|earliest|oldest|largest|smallest)\b)/i;
+  let illustrativeContext = false;
   scenes.forEach((s, idx) => {
-    if (s.data?.value || s.kind === 'statistic' || exactClaimPattern.test(s.narration)) {
+    // Only explicit hypothetical framing may bypass source evidence. Phrases
+    // such as "Meet Alex" or "A versus B" can still sound like factual case
+    // studies, so the repair pass must label those examples unambiguously.
+    const startsIllustration = /\b(?:example|for example|for instance|suppose|imagine|say you|let's say)\b/i.test(s.narration);
+    const continuesIllustration = illustrativeContext && /^(?:by\s+\w+|then|next|after|before)|\b(?:she|he|they)\b/i.test(s.narration);
+    illustrativeContext = startsIllustration || continuesIllustration;
+    const genericNarrativeFirst = /\bthe first\b/i.test(s.narration)
+      && !/\b(?:world(?:'s)?|history(?:'s)?)\s+first\b|\bthe first\s+(?:ever|known|recorded|modern|commercial)\b/i.test(s.narration)
+      && !/(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b)/i.test(s.narration);
+    if (s.data?.value || s.kind === 'statistic' || (exactClaimPattern.test(s.narration) && !genericNarrativeFirst)) {
+      const illustrative = !s.source?.url && illustrativeContext;
       claims.push({
         claim_id: `claim_${String(idx + 1).padStart(3, '0')}`,
         scene_id: s.id,
@@ -838,8 +849,8 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
         source_url: s.source?.url || null,
         source_label: s.source?.label || null,
         confidence: s.source?.url ? 0.7 : 0,
-        status: s.source?.url ? 'sourced_unverified' : 'unverified',
-        qualification: /\b(around|nearly|approx|estimated|over|about)\b/i.test(s.narration) ? 'estimated' : 'exact',
+        status: s.source?.url ? 'sourced_unverified' : illustrative ? 'illustrative' : 'unverified',
+        qualification: illustrative ? 'illustrative' : /\b(around|nearly|approx|estimated|over|about)\b/i.test(s.narration) ? 'estimated' : 'exact',
       });
     } else if (s.entity?.wikipedia) {
       claims.push({
@@ -949,6 +960,34 @@ export function validateContentQuality({ scenes = [], claims = [] } = {}) {
     warnings: issues.map((i) => i.message),
     issues,
   };
+}
+
+/** Repair unsupported exact claims once without weakening the source gate. */
+export async function repairUnverifiedClaims(plan, llm = llmConfig()) {
+  const targets = (plan?.claims || []).filter((claim) => claim.type === 'statistic' && claim.status === 'unverified');
+  if (!targets.length || !llm) return plan;
+  const sceneIds = new Set(targets.map((claim) => claim.scene_id));
+  const scenes = (plan.scenes || []).filter((scene) => sceneIds.has(scene.id)).map((scene) => ({ id: scene.id, narration: scene.narration }));
+  try {
+    const response = await callJson(llm, [
+      {
+        role: 'system',
+        content: 'You repair unsupported narration claims. Keep every scene ID. If an exact date, amount, statistic, named victim, quotation, or superlative has no supplied source, remove the invented precision and express only the general mechanism already present. Hypothetical examples must be explicitly introduced as examples. Do not add facts, names, dates, numbers, sources, or allegations. Reply with JSON only.',
+      },
+      {
+        role: 'user',
+        content: `Rewrite only these scenes. Preserve meaning, approximate word count, complete sentences, and return {"scenes":[{"id":string,"narration":string}]}:\n${JSON.stringify(scenes)}`,
+      },
+    ], { temperature: 0.15, retries: 2, timeoutMs: 60000 });
+    for (const repair of response?.scenes || []) {
+      const scene = plan.scenes.find((item) => item.id === repair.id);
+      if (scene && repair.narration) scene.narration = String(repair.narration).replace(/\s+/g, ' ').trim();
+    }
+    plan.script = plan.scenes.map((scene) => scene.narration).join(' ');
+  } catch (error) {
+    console.warn(`   Unsupported-claim repair failed (${error.message}). Content QC will block the claim.`);
+  }
+  return plan;
 }
 
 /** Stable, topic-derived hue when there is no brand colour. */
