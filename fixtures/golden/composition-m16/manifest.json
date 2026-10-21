@@ -1,0 +1,333 @@
+{
+  "generatedAt": "2026-09-29T10:37:44.407Z",
+  "fixtures": [
+    {
+      "fixture": "subject-right-text-left",
+      "format": "landscape",
+      "strategy": "MEDIA_DOMINANT_SPLIT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/subject-right-text-left/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "subject-right-text-left",
+      "format": "shorts",
+      "strategy": "MEDIA_DOMINANT_SPLIT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/subject-right-text-left/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "centered-no-text",
+      "format": "landscape",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/centered-no-text/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "centered-no-text",
+      "format": "shorts",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/centered-no-text/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "portrait-landscape",
+      "format": "landscape",
+      "strategy": "MEDIA_DOMINANT_SPLIT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/portrait-landscape/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "portrait-landscape",
+      "format": "shorts",
+      "strategy": "MEDIA_DOMINANT_SPLIT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/portrait-landscape/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "landscape-to-shorts",
+      "format": "landscape",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/landscape-to-shorts/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "landscape-to-shorts",
+      "format": "shorts",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/landscape-to-shorts/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "native-video",
+      "format": "landscape",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/native-video/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "native-video",
+      "format": "shorts",
+      "strategy": "FULL_BLEED",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/native-video/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "image-stat",
+      "format": "landscape",
+      "strategy": "IMAGE_PLUS_STAT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/image-stat/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "image-stat",
+      "format": "shorts",
+      "strategy": "IMAGE_PLUS_STAT",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/image-stat/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "image-annotation",
+      "format": "landscape",
+      "strategy": "DETAIL_FOCUS",
+      "camera": "DETAIL_CROP",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149,
+        19,
+        94
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/image-annotation/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "image-annotation",
+      "format": "shorts",
+      "strategy": "DETAIL_FOCUS",
+      "camera": "DETAIL_CROP",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149,
+        19,
+        94
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/image-annotation/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "two-media",
+      "format": "landscape",
+      "strategy": "TWO_MEDIA_COMPARE",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/two-media/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "two-media",
+      "format": "shorts",
+      "strategy": "TWO_MEDIA_COMPARE",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/two-media/shorts/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "three-image-montage",
+      "format": "landscape",
+      "strategy": "MONTAGE",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/three-image-montage/landscape/state-camera-contact-sheet.png"
+    },
+    {
+      "fixture": "three-image-montage",
+      "format": "shorts",
+      "strategy": "MONTAGE",
+      "camera": "STATIC",
+      "captionPosition": "RIGHT_SAFE",
+      "frames": [
+        0,
+        37,
+        75,
+        112,
+        149
+      ],
+      "preflight": true,
+      "publishable": true,
+      "strength": "STRONG",
+      "contactSheet": "media/three-image-montage/shorts/state-camera-contact-sheet.png"
+    }
+  ]
+}

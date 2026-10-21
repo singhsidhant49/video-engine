@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-05T14:56:41.697Z",
+  "candidateCount": 200,
+  "realPixelFiles": 200,
+  "niches": {
+    "tech/AI": 153,
+    "finance": 2,
+    "software development": 33,
+    "psychology": 1,
+    "science/history": 9,
+    "health": 1,
+    "business": 1
+  },
+  "semanticClasses": {
+    "DIRECT": 115,
+    "CONTEXTUAL": 42,
+    "ACCIDENTAL": 1,
+    "WRONG": 42
+  },
+  "licenseFailureRate": 0.315,
+  "accidentalAssetRate": 0.005,
+  "wrongAssetRate": 0.21,
+  "reviewStatus": "PROVISIONAL_REQUIRES_HUMAN_PIXEL_REVIEW",
+  "contactSheets": [
+    "candidate-contact-sheet-01.png",
+    "candidate-contact-sheet-02.png",
+    "candidate-contact-sheet-03.png",
+    "candidate-contact-sheet-04.png",
+    "candidate-contact-sheet-05.png",
+    "candidate-contact-sheet-06.png",
+    "candidate-contact-sheet-07.png",
+    "candidate-contact-sheet-08.png"
+  ]
+}

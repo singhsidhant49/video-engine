@@ -1,0 +1,80 @@
+{
+  "id": "abstract_network_nodes_background_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Abstract glowing digital network background",
+  "path": "images/technology/abstract_network_nodes_background_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "abstract",
+    "network",
+    "nodes",
+    "data",
+    "connections",
+    "AI",
+    "technology background",
+    "digital mesh"
+  ],
+  "concepts": [
+    "data network",
+    "connectivity",
+    "AI systems",
+    "digital infrastructure",
+    "information flow"
+  ],
+  "subjects": [
+    "network nodes",
+    "connecting lines",
+    "digital mesh"
+  ],
+  "actions": [
+    "connecting",
+    "data flow"
+  ],
+  "mood": [
+    "futuristic",
+    "cinematic",
+    "abstract",
+    "calm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.62
+    },
+    "safeTextAreas": [
+      "top",
+      "center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "background",
+    "title card",
+    "AI explainer",
+    "network concept",
+    "section transition"
+  ],
+  "avoidFor": [
+    "human story",
+    "office scene",
+    "product demo"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

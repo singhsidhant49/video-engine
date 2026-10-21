@@ -1,0 +1,5762 @@
+{
+  "generatedAt": "2026-10-15T10:30:25.069Z",
+  "render": true,
+  "offline": false,
+  "durationSec": 60,
+  "profiles": [
+    "finance",
+    "technology",
+    "history",
+    "investigation",
+    "meditation",
+    "audiobook",
+    "tutorial",
+    "motivation"
+  ],
+  "results": [
+    {
+      "profileId": "finance",
+      "repeat": 1,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 340741,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T08-29-31-651",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T08-29-31-651-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1730 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "10 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "10 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 5.77s (profile balanced, target: ≥ 4.67s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "balanced hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile balanced, limit: ≤ 4)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 6.1s, longest 7.7s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "22% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "10% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 10 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.7s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "98% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "30 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "15 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.69s (timeline 57.67s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.69s audio vs 57.69s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 48%"
+        }
+      ]
+    },
+    {
+      "profileId": "technology",
+      "repeat": 1,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 365922,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T08-35-12-389",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T08-35-12-389-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1726 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "13 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "13 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.43s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 4.3s, longest 5.7s (guideline 4.6s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "42% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 13 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.5s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "28 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "16 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.54s (timeline 57.53s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.54s audio vs 57.54s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "2 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 32%"
+        }
+      ]
+    },
+    {
+      "profileId": "history",
+      "repeat": 1,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 352472,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Compositor error: No frame found at position 40800 for source C:\\Users\\singh\\AppData\\Local\\Temp\\remotion-v4.0.535-assetsgjs7vm9jl2\\remotion-assets-dir\\08399022766388953.mp4 (original source = http://localhost:3000/public/assets/scene_001_shot_01_a.mp4). See https://remotion.dev/docs/troubleshooting/no-frame-found-at-position for troubleshooting help.\n   0: std::backtrace::Backtrace::force_capture\n   1: <remotion::errors::ErrorWithBacktrace as core::convert::From<std::io::error::Error>>::from\n   2: remotion::opened_video_manager::OpenedVideoManager::get_frame_id\n   3: remotion::thread::WorkerThread::run_on_thread\n   4: std::sys::backtrace::__rust_begin_short_backtrace\n   5: core::ops::function::FnOnce::call_once{{vtable.shim}}\n   6: std::sys::thread::windows::Thread::new::thread_start\n   7: <unknown>\n   8: <unknown>\n\n    at onMessage (file:///D:/projects/videogenerator/node_modules/@remotion/renderer/dist/esm/index.mjs:16878:37)\n    at processInput (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:137:5)\n    at onDataInner (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:183:12)\n    at Socket.onData (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:188:14)\n    at Socket.emit (node:events:509:28)\n    at addChunk (node:internal/streams/readable:563:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)\n    at Readable.push (node:internal/streams/readable:394:5)\n    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)\n    at onMessage (file:///D:/projects/videogenerator/node_modules/@remotion/renderer/dist/esm/index.mjs:16878:37)\n    at processInput (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:137:5)\n    at onDataInner (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:183:12)\n    at Socket.onData (file:///D:/projects/videogenerator/node_modules/@remotion/streaming/dist/esm/index.mjs:188:14)\n    at Socket.emit (node:events:509:28)\n    at addChunk (node:internal/streams/readable:563:12)\n    at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)\n    at Readable.push (node:internal/streams/readable:394:5)\n    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "investigation",
+      "repeat": 1,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 276243,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T08-47-10-783",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T08-47-10-783-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1764 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 7.35s (profile cinematic, target: ≥ 5.33s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "cinematic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 2 cuts in a 10s window (profile cinematic, limit: ≤ 3)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 6.8s, longest 6.8s (guideline 6.2s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 8 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.8s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "35 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "27 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.82s (timeline 58.80s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.82s audio vs 58.82s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 54%"
+        }
+      ]
+    },
+    {
+      "profileId": "meditation",
+      "repeat": 1,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 421591,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T08-51-47-026\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "audiobook",
+      "repeat": 1,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 242566,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T08-58-48-617\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "tutorial",
+      "repeat": 1,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 407665,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-02-51-182",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-02-51-182-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1745 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.15s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": true,
+          "severity": "warn",
+          "detail": "average 3.9s, longest 4.6s (guideline 4.6s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "8% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "14% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 12 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.2s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 92%, video 8%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "32 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "24 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.18s (timeline 58.17s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.18s audio vs 58.18s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "2 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 56%"
+        }
+      ]
+    },
+    {
+      "profileId": "motivation",
+      "repeat": 1,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 240906,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-09-38-847",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-09-38-847-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1834 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "15 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "15 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.08s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": true,
+          "severity": "warn",
+          "detail": "average 4.0s, longest 4.8s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "29% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "13% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 15 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 61.1s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "28 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "19 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "61.14s (timeline 61.13s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "61.14s audio vs 61.14s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 30%"
+        }
+      ]
+    },
+    {
+      "profileId": "finance",
+      "repeat": 2,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 282124,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-13-39-753",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-13-39-753-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1754 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 6.50s (profile balanced, target: ≥ 4.67s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "balanced hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 2 cuts in a 10s window (profile balanced, limit: ≤ 4)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 6.3s, longest 7.3s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "38% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 9 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.5s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "96% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "28 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "10 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.48s (timeline 58.47s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.48s audio vs 58.48s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "3 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 48%"
+        }
+      ]
+    },
+    {
+      "profileId": "technology",
+      "repeat": 2,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 373016,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Rendered-frame semantic QA failed: planned_motion_not_visible, planned_motion_not_visible, planned_motion_not_visible",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "history",
+      "repeat": 2,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 359460,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-24-34-894",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-24-34-894-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1805 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "11 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "11 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 5.47s (profile cinematic, target: ≥ 5.33s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "cinematic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile cinematic, limit: ≤ 3)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 5.3s, longest 7.4s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "10% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "9% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 10 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 60.2s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "video 12%, image 88%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "10 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "29 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "18 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "60.18s (timeline 60.17s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "60.18s audio vs 60.18s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 38%"
+        }
+      ]
+    },
+    {
+      "profileId": "investigation",
+      "repeat": 2,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 311266,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-30-34-354",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-30-34-354-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1737 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 7.24s (profile cinematic, target: ≥ 5.33s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "cinematic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 2 cuts in a 10s window (profile cinematic, limit: ≤ 3)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 7.5s, longest 9.3s (guideline 6.2s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "14% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 8 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.9s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "31 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "16 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.92s (timeline 57.90s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.92s audio vs 57.92s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "2 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 46%"
+        }
+      ]
+    },
+    {
+      "profileId": "meditation",
+      "repeat": 2,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 187891,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-35-45-619\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "audiobook",
+      "repeat": 2,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 217525,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-38-53-510\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "tutorial",
+      "repeat": 2,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 21760,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-42-31-035\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "motivation",
+      "repeat": 2,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 19746,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-42-52-795\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "finance",
+      "repeat": 3,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 229785,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-43-12-541",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-43-12-541-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1734 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 6.42s (profile balanced, target: ≥ 4.67s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "balanced hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 2 cuts in a 10s window (profile balanced, limit: ≤ 4)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 6.8s, longest 8.7s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "50% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 9 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.8s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "7 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "30 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "20 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.81s (timeline 57.80s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.81s audio vs 57.81s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "4 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 49%"
+        }
+      ]
+    },
+    {
+      "profileId": "technology",
+      "repeat": 3,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 246800,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-47-02-327",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-47-02-327-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1723 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.79s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 4.9s, longest 6.3s (guideline 4.6s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": false,
+          "severity": "warn",
+          "detail": "82% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 12 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.4s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "29 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.1 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "18 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.45s (timeline 57.43s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.45s audio vs 57.45s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 26%"
+        }
+      ]
+    },
+    {
+      "profileId": "history",
+      "repeat": 3,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 315911,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-51-09-127",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-51-09-127-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1756 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 6.50s (profile cinematic, target: ≥ 5.33s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "cinematic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 2 cuts in a 10s window (profile cinematic, limit: ≤ 3)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 6.8s, longest 7.3s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "11% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": true,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 8 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.5s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "video 9%, image 91%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "28 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "16 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.54s (timeline 58.53s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.54s audio vs 58.54s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 23%"
+        }
+      ]
+    },
+    {
+      "profileId": "investigation",
+      "repeat": 3,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 24865,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-56-25-039\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "meditation",
+      "repeat": 3,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 136410,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-56-49-902\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "audiobook",
+      "repeat": 3,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 14050,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-59-06-313\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "tutorial",
+      "repeat": 3,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 18829,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-59-20-362\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "motivation",
+      "repeat": 3,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 294000,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T09-59-39-192",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T09-59-39-192-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1732 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.12s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": true,
+          "severity": "warn",
+          "detail": "average 4.0s, longest 4.9s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "31% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "7% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 14 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 57.7s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "27 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "19 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.75s (timeline 57.73s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "57.75s audio vs 57.75s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "6 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 51%"
+        }
+      ]
+    },
+    {
+      "profileId": "finance",
+      "repeat": 4,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 296167,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-04-33-192",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T10-04-33-192-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1806 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 5.02s (profile balanced, target: ≥ 4.67s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "balanced hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile balanced, limit: ≤ 4)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 5.6s, longest 6.5s (guideline 5.9s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "8% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 12 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 60.2s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "11 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "29 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "15 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "60.20s (timeline 60.20s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "60.20s audio vs 60.20s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "3 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 49%"
+        }
+      ]
+    },
+    {
+      "profileId": "technology",
+      "repeat": 4,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 315047,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-09-29-360",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T10-09-29-360-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1752 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "14 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.17s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": false,
+          "severity": "warn",
+          "detail": "average 4.0s, longest 5.6s (guideline 4.6s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "31% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "7% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 14 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.4s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 4)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "8 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "100% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "27 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.1 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "20 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.41s (timeline 58.40s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.41s audio vs 58.41s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "1 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 47%"
+        }
+      ]
+    },
+    {
+      "profileId": "history",
+      "repeat": 4,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 23133,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-14-44-407\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "investigation",
+      "repeat": 4,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 274025,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-15-07-539\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "meditation",
+      "repeat": 4,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 169408,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-19-41-564\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "audiobook",
+      "repeat": 4,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 214911,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Timeline QC failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-22-30-972\\qc.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "tutorial",
+      "repeat": 4,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 16865,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration quality gate failed — see D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-26-05-883\\content-quality-diagnostics.json",
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    },
+    {
+      "profileId": "motivation",
+      "repeat": 4,
+      "success": true,
+      "attempts": 1,
+      "elapsedMs": 242320,
+      "runDir": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-15T10-26-22-748",
+      "outputPath": "D:\\projects\\videogenerator\\renders\\video-2026-10-15T10-26-22-748-landscape.mp4",
+      "error": null,
+      "durationCompliant": true,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": [
+        {
+          "id": "coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "0-1743 covered"
+        },
+        {
+          "id": "shot-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 canonical shots cover every clip without gaps"
+        },
+        {
+          "id": "shot-traceability",
+          "ok": true,
+          "severity": "error",
+          "detail": "12 unique storyboardShotId mappings"
+        },
+        {
+          "id": "min-shot-length",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-average-shot",
+          "ok": true,
+          "severity": "error",
+          "detail": "average shot duration 4.84s (profile energetic, target: ≥ 3.44s)"
+        },
+        {
+          "id": "pacing-profile-holds",
+          "ok": true,
+          "severity": "error",
+          "detail": "energetic hold distribution is within profile limits"
+        },
+        {
+          "id": "pacing-rapid-cuts",
+          "ok": true,
+          "severity": "error",
+          "detail": "maximum 3 cuts in a 10s window (profile energetic, limit: ≤ 5)"
+        },
+        {
+          "id": "pacing-graphic-hold",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-text-readability",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "static-time",
+          "ok": true,
+          "severity": "warn",
+          "detail": "average 4.5s, longest 6.3s (guideline 7.0s)"
+        },
+        {
+          "id": "family-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "layout-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "variant-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "media-only policy; variety is measured by footage, assets, and camera movement"
+        },
+        {
+          "id": "motion-repetition",
+          "ok": true,
+          "severity": "warn",
+          "detail": "9% adjacent repetition"
+        },
+        {
+          "id": "asset-reuse",
+          "ok": true,
+          "severity": "warn",
+          "detail": "33% reuse among media shots"
+        },
+        {
+          "id": "slideshow",
+          "ok": false,
+          "severity": "warn",
+          "detail": "longest consecutive photo/montage run 12 (limit: 10)"
+        },
+        {
+          "id": "duration-tolerance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "duration 58.1s (target 60s ±5%: 57-63s, hard limits: 54-66s)"
+        },
+        {
+          "id": "pacing-underactive-windows",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "pacing-typographic-runs",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "family-share",
+          "ok": false,
+          "severity": "warn",
+          "detail": "image 100%"
+        },
+        {
+          "id": "transition-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 designed transitions (budget 3)"
+        },
+        {
+          "id": "text-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "caption-composition-policy",
+          "ok": true,
+          "severity": "error",
+          "detail": "every shot has an explicit caption mode and solved geometry"
+        },
+        {
+          "id": "caption-renderer-fallback",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero renderer fallback captions"
+        },
+        {
+          "id": "caption-coverage",
+          "ok": true,
+          "severity": "error",
+          "detail": "100% of narrated frames have subtitles or equivalent integrated text"
+        },
+        {
+          "id": "simultaneous-motion-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 over-budget frame state(s)"
+        },
+        {
+          "id": "repeated-transition-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive designed-transition run(s)"
+        },
+        {
+          "id": "repeated-camera-effects",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 repetitive moving-camera run(s)"
+        },
+        {
+          "id": "professional-final-hold",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 insufficient solved final hold(s)"
+        },
+        {
+          "id": "caption-subject-clearance",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 caption/subject collision(s)"
+        },
+        {
+          "id": "perceptual-frame0",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 perceptually empty scene start(s)"
+        },
+        {
+          "id": "licensing",
+          "ok": true,
+          "severity": "error",
+          "detail": "9 used assets have recorded licences"
+        },
+        {
+          "id": "subject-coverage",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "plan-feel",
+          "ok": true,
+          "severity": "warn",
+          "detail": "ok"
+        },
+        {
+          "id": "alignment",
+          "ok": true,
+          "severity": "warn",
+          "detail": "99% script-word match (whisper)"
+        },
+        {
+          "id": "caption-order",
+          "ok": true,
+          "severity": "error",
+          "detail": "31 chunks"
+        },
+        {
+          "id": "audio-loudness-target",
+          "ok": true,
+          "severity": "warn",
+          "detail": "-16.0 LUFS (target: -14.0 to -18.0 LUFS)"
+        },
+        {
+          "id": "audio-pumping-risk",
+          "ok": true,
+          "severity": "warn",
+          "detail": "24 micro-pause(s) bridged without pumping"
+        },
+        {
+          "id": "audio-sfx-budget",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0 event(s), min gap 0s (budget: ≤6 events, min 5.0s gap)"
+        },
+        {
+          "id": "visual-coverage-unresolved",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved shots"
+        },
+        {
+          "id": "visual-coverage-blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "0 blank frames (0.00s, limit: ≤ 2.0s)"
+        },
+        {
+          "id": "visual-coverage-weak-ratio",
+          "ok": true,
+          "severity": "warn",
+          "detail": "0% weak coverage (target: ≤ 40%)"
+        },
+        {
+          "id": "visual-coverage-text-fitting",
+          "ok": true,
+          "severity": "warn",
+          "detail": "all headlines fit safe line limits"
+        },
+        {
+          "id": "visual-coverage-text-grounding",
+          "ok": true,
+          "severity": "error",
+          "detail": "all on-screen text grounded in beat narration"
+        },
+        {
+          "id": "editorial-wrong-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero wrong assets"
+        },
+        {
+          "id": "editorial-accidental-assets",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero accidental keyword collisions"
+        },
+        {
+          "id": "editorial-foreign-entity",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero foreign entity intrusions on important shots"
+        },
+        {
+          "id": "editorial-distracting-critical",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero distracting assets on critical shots"
+        },
+        {
+          "id": "editorial-weak-critical-shots",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero weak critical shots"
+        },
+        {
+          "id": "asset-identity-drift",
+          "ok": true,
+          "severity": "error",
+          "detail": "asset identity chain fully intact across all shots"
+        },
+        {
+          "id": "editorial-unresolved-media",
+          "ok": true,
+          "severity": "error",
+          "detail": "zero unresolved media shots"
+        },
+        {
+          "id": "duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.11s (timeline 58.10s)"
+        },
+        {
+          "id": "audio-stream",
+          "ok": true,
+          "severity": "error",
+          "detail": "audio stream present"
+        },
+        {
+          "id": "audio-duration",
+          "ok": true,
+          "severity": "error",
+          "detail": "58.11s audio vs 58.11s video"
+        },
+        {
+          "id": "blank-frames",
+          "ok": true,
+          "severity": "error",
+          "detail": "none"
+        },
+        {
+          "id": "frozen-motion",
+          "ok": true,
+          "severity": "error",
+          "detail": "all planned/native motion is visible"
+        },
+        {
+          "id": "intentional-static-holds",
+          "ok": true,
+          "severity": "warn",
+          "detail": "2 intentional static shot(s)"
+        },
+        {
+          "id": "brightness",
+          "ok": true,
+          "severity": "warn",
+          "detail": "photo clips median luma 54%"
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "version": 1,
+    "passed": false,
+    "metrics": {
+      "totalRuns": 32,
+      "successfulRuns": 15,
+      "firstPassRate": 0.4688,
+      "durationCompliance": 0.4688,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "blankFrames": 0,
+      "frozenMotion": 0
+    },
+    "thresholds": {
+      "minimumRuns": 30,
+      "minimumFirstPassRate": 0.95,
+      "minimumDurationCompliance": 0.98,
+      "maximumHardQcFailures": 0,
+      "maximumUnresolvedMedia": 0,
+      "maximumWrongAssets": 0,
+      "maximumBlankFrames": 0,
+      "maximumFrozenMotion": 0
+    },
+    "failures": [
+      "first-pass rate 0.4688 < 0.95",
+      "duration compliance 0.4688 < 0.98"
+    ]
+  }
+}

@@ -1,0 +1,3332 @@
+{
+  "generatedAt": "2026-10-05T17:16:05.471Z",
+  "audits": [
+    {
+      "runId": "video-2026-10-05T15-05-49",
+      "title": "The Grandfather Paradox: Time Travel's Deadliest Loop",
+      "format": "landscape",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T15-05-49-landscape.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:03.90",
+          "narration": "You go back in time and accidentally prevent your own birth.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "time travel / causality",
+            "conceptSense": "CAUSAL_TIMELINE",
+            "viewerNeedsToUnderstand": "The visible structure must communicate cause -> time travel intervention -> contradiction.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "cause -> time travel intervention -> contradiction"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "hook",
+              "emphasize"
+            ],
+            "negativeConfusers": [
+              "video editing timeline",
+              "project management roadmap",
+              "railway route map",
+              "fishbone defect diagram"
+            ],
+            "positiveDescriptions": [
+              "time travel cartoon animation",
+              "cause -> time travel intervention -> contradiction",
+              "retro diner 1950s"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: You go back -> in time and accidentally -> prevent your own birth.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:03.90-00:07.97",
+          "narration": "This is the grandfather paradox. If you erase your past, how can you exist to travel back?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "time travel / causality",
+            "conceptSense": "ANCESTRAL_CAUSALITY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate grandparents -> parent -> descendant.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "grandparents -> parent -> descendant"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "context",
+              "compare"
+            ],
+            "negativeConfusers": [
+              "botanical trees",
+              "man walking in a park",
+              "forest scenery",
+              "family lifestyle stock photo"
+            ],
+            "positiveDescriptions": [
+              "split screen animation",
+              "grandparents -> parent -> descendant",
+              "fading person silhouette"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Erase Past versus Travel Back",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_02",
+          "timestamp": "00:07.97-00:10.30",
+          "narration": "This is the grandfather paradox. If you erase your past, how can you exist to travel back?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "sceneId": "scene_002",
+            "domain": "time travel / causality",
+            "conceptSense": "ANCESTRAL_CAUSALITY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate grandparents -> parent -> descendant.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "grandparents -> parent -> descendant"
+            ],
+            "requiredVisibleActions": [
+              "If you erase your past, how can you exist to travel back?"
+            ],
+            "usefulContext": [
+              "time travel / causality",
+              "context",
+              "compare"
+            ],
+            "negativeConfusers": [
+              "botanical trees",
+              "man walking in a park",
+              "forest scenery",
+              "family lifestyle stock photo"
+            ],
+            "positiveDescriptions": [
+              "fading person silhouette",
+              "grandparents -> parent -> descendant",
+              "question mark neon"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Erase Past versus Travel Back",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:10.30-00:16.83",
+          "narration": "Logically, if you prevent your grandparents from meeting, one parent won't be born, so you won't be born.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "general",
+            "conceptSense": "PROCESS",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: family tree animation",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "family tree animation",
+              "genealogy diagram"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Grandparents meet -> Parent not born -> You not born",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:16.83-00:21.10",
+          "narration": "But if you're not born, you can't travel back to prevent their meeting.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: circular arrow loop",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "escalation",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "circular arrow loop",
+              "crossed out text animation"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "SELF-NEGATING CYCLE: But if you're -> not born, you can't -> travel back to prevent",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_01",
+          "timestamp": "00:21.10-00:26.33",
+          "narration": "So the event both happens and doesn't happen—a logical impossibility.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "sceneId": "scene_005",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: glitch effect animation",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "reveal",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "glitch effect animation",
+              "double exposure person"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: So the event -> both happens and doesn't -> happen—a logical impossibility.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "reveal",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_01",
+          "timestamp": "00:26.33-00:30.93",
+          "narration": "Physicists propose solutions: parallel universes or time travel is impossible. So, would you risk changing the past?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "sceneId": "scene_006",
+            "domain": "time travel / causality",
+            "conceptSense": "TIMELINE_BRANCHING",
+            "viewerNeedsToUnderstand": "The visible structure must communicate original timeline -> divergence -> alternate reality.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "original timeline -> divergence -> alternate reality"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "payoff",
+              "compare"
+            ],
+            "negativeConfusers": [
+              "botanical tree branches",
+              "video editing timeline",
+              "project roadmap",
+              "microscope cells",
+              "abstract glowing background"
+            ],
+            "positiveDescriptions": [
+              "branching timelines animation",
+              "original timeline -> divergence -> alternate reality",
+              "no entry sign"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Parallel Universes versus Time Travel Impossible",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_02",
+          "timestamp": "00:30.93-00:34.73",
+          "narration": "Physicists propose solutions: parallel universes or time travel is impossible. So, would you risk changing the past?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_02",
+            "sceneId": "scene_006",
+            "domain": "time travel / causality",
+            "conceptSense": "TIMELINE_BRANCHING",
+            "viewerNeedsToUnderstand": "The visible structure must communicate original timeline -> divergence -> alternate reality.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "original timeline -> divergence -> alternate reality"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "payoff",
+              "compare"
+            ],
+            "negativeConfusers": [
+              "botanical tree branches",
+              "video editing timeline",
+              "project roadmap",
+              "microscope cells",
+              "abstract glowing background"
+            ],
+            "positiveDescriptions": [
+              "no entry sign",
+              "original timeline -> divergence -> alternate reality",
+              "time machine cartoon"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_02",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Parallel Universes versus Time Travel Impossible",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-05-49\\contact-sheet.jpg"
+        }
+      ]
+    },
+    {
+      "runId": "video-2026-10-05T15-40-18",
+      "title": "The Grandfather Paradox: Time Travel's Ultimate Mind-Bender",
+      "format": "shorts",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T15-40-18-shorts.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:04.97",
+          "narration": "What if you could travel back in time and accidentally prevent your own existence?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: time machine cartoon",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "time machine cartoon",
+              "retro time travel illustration"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "time machine cartoon",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:04.97-00:09.10",
+          "narration": "This isn't just sci-fi—it challenges our understanding.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "general",
+            "conceptSense": "COMPARISON",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: scientist thinking cartoon",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "context",
+              "compare"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "scientist thinking cartoon",
+              "clock gears animation"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "SCI-FI TROPE versus REAL PHILOSOPHY",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:09.10-00:12.20",
+          "narration": "If you change the past, how can. Imagine you go back and accidentally cause your grandfather's.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: question mark neon",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "question mark neon",
+              "person fading silhouette"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: If you change -> the past, how can. -> Imagine you go back",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_02",
+          "timestamp": "00:12.20-00:15.83",
+          "narration": "If you change the past, how can. Imagine you go back and accidentally cause your grandfather's.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "sceneId": "scene_003",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: person fading silhouette",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "person fading silhouette",
+              "A glowing question mark pulses over a person who fades in and out of view."
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: If you change -> the past, how can. -> Imagine you go back",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:15.83-00:18.20",
+          "narration": "Then one of your parents would never be.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_MEMORY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate retained reference -> unreleased heap memory -> memory growth.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "retained reference -> unreleased heap memory -> memory growth"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "human memories",
+              "water pipe leak",
+              "municipal garbage collector",
+              "generic programmer portrait"
+            ],
+            "positiveDescriptions": [
+              "family tree diagram",
+              "retained reference -> unreleased heap memory -> memory growth",
+              "branches breaking animation"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Grandfather dies -> Parent never born -> You never exist",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_01",
+          "timestamp": "00:18.20-00:20.50",
+          "narration": "But if you were never born, you couldn't.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "sceneId": "scene_005",
+            "domain": "general",
+            "conceptSense": "PROCESS",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: circular arrow loop",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "escalation",
+              "explain"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "circular arrow loop",
+              "cause and effect cycle"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: You travel back -> You never exist -> Loop repeats",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_01",
+          "timestamp": "00:20.50-00:24.43",
+          "narration": "So the murder can't happen—yet it did. This is.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "sceneId": "scene_006",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: glitch text effect",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "reveal",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "glitch text effect",
+              "neon sign grandfather paradox"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: So the murder -> can't happen—yet it did. -> This is.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_007_shot_01",
+          "timestamp": "00:24.43-00:27.97",
+          "narration": "Physicists use this to argue time travel might be.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "sceneId": "scene_007",
+            "domain": "time travel / causality",
+            "conceptSense": "CAUSAL_TIMELINE",
+            "viewerNeedsToUnderstand": "The visible structure must communicate cause -> time travel intervention -> contradiction.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "cause -> time travel intervention -> contradiction"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "evidence",
+              "identify"
+            ],
+            "negativeConfusers": [
+              "video editing timeline",
+              "project management roadmap",
+              "railway route map",
+              "fishbone defect diagram"
+            ],
+            "positiveDescriptions": [
+              "physicist chalkboard equations",
+              "cause -> time travel intervention -> contradiction",
+              "branching universes diagram"
+            ],
+            "representationNeed": "TIMELINE",
+            "literalness": "DIRECT",
+            "evidenceStrength": "required",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "requestedRepresentation": "TIMELINE",
+            "selectedRepresentation": "timeline",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TIMELINE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "timeline: Phase 1 Initiation -> Phase 2 Scale",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newEvidence",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_008_shot_01",
+          "timestamp": "00:27.97-00:30.83",
+          "narration": "In one universe, you kill him; in.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_008_shot_01",
+            "sceneId": "scene_008",
+            "domain": "time travel / causality",
+            "conceptSense": "TIMELINE_BRANCHING",
+            "viewerNeedsToUnderstand": "The visible structure must communicate original timeline -> divergence -> alternate reality.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "original timeline -> divergence -> alternate reality"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "contrast",
+              "compare"
+            ],
+            "negativeConfusers": [
+              "botanical tree branches",
+              "video editing timeline",
+              "project roadmap",
+              "microscope cells",
+              "abstract glowing background"
+            ],
+            "positiveDescriptions": [
+              "parallel universe split",
+              "original timeline -> divergence -> alternate reality",
+              "two outcomes cartoon"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_008_shot_01",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "UNIVERSE A versus UNIVERSE B",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_009_shot_01",
+          "timestamp": "00:30.83-00:37.67",
+          "narration": "The grandfather paradox reminds us that time travel isn't just about technology—it's about logic.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_009_shot_01",
+            "sceneId": "scene_009",
+            "domain": "time travel / causality",
+            "conceptSense": "ANCESTRAL_CAUSALITY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate grandparents -> parent -> descendant.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "grandparents -> parent -> descendant"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "time travel / causality",
+              "payoff",
+              "identify"
+            ],
+            "negativeConfusers": [
+              "botanical trees",
+              "man walking in a park",
+              "forest scenery",
+              "family lifestyle stock photo"
+            ],
+            "positiveDescriptions": [
+              "melting clock surreal",
+              "grandparents -> parent -> descendant",
+              "brain glowing illustration"
+            ],
+            "representationNeed": "TIMELINE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_009_shot_01",
+            "requestedRepresentation": "TIMELINE",
+            "selectedRepresentation": "timeline",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TIMELINE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "timeline: Phase 1 Initiation -> Phase 2 Scale",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-40-18\\contact-sheet.jpg"
+        }
+      ]
+    },
+    {
+      "runId": "video-2026-10-05T16-49-25",
+      "title": "Why Memory Leaks Crash Production Systems",
+      "format": "landscape",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T16-49-25-landscape.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:04.00",
+          "narration": "At 3 AM, a production server flatlines. Memory climbs, then everything dies.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "ATMOSPHERE",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: data center server room night",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "establish"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "data center server room night",
+              "server rack red warning light"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: At 3 AM, -> flatlines. Memory climbs, -> Outcome",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_001_shot_02",
+          "timestamp": "00:04.00-00:06.57",
+          "narration": "At 3 AM, a production server flatlines. Memory climbs, then everything dies.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "ATMOSPHERE",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: server rack red warning light",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "establish"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "server rack red warning light",
+              "dark data center aisle"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: At 3 AM, -> flatlines. Memory climbs, -> Outcome",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:06.57-00:09.97",
+          "narration": "Why does a tiny leak bring down an entire service?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: code editor screen close up",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "context",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "code editor screen close up",
+              "programming code dark screen"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "ui",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "code",
+              "diagram",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "WHY DOES A TINY: Why does a -> tiny leak bring down -> an entire service?",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:09.97-00:15.90",
+          "narration": "It's not just slow—it's catastrophic, taking down databases and APIs.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_MEMORY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate retained reference -> unreleased heap memory -> memory growth.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "retained reference -> unreleased heap memory -> memory growth"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "escalation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "human memories",
+              "water pipe leak",
+              "municipal garbage collector",
+              "generic programmer portrait"
+            ],
+            "positiveDescriptions": [
+              "network diagram servers",
+              "retained reference -> unreleased heap memory -> memory growth",
+              "database server room"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Service degrades -> Database stalls -> APIs fail",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:15.90-00:20.17",
+          "narration": "Memory leaks happen when objects are allocated but never released.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_MEMORY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate retained reference -> unreleased heap memory -> memory growth.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "retained reference -> unreleased heap memory -> memory growth"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "identify"
+            ],
+            "negativeConfusers": [
+              "human memories",
+              "water pipe leak",
+              "municipal garbage collector",
+              "generic programmer portrait"
+            ],
+            "positiveDescriptions": [
+              "computer memory RAM close up",
+              "retained reference -> unreleased heap memory -> memory growth",
+              "circuit board macro"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "ALLOCATED, NEVER FREED: Memory leaks happen -> when objects are allocated -> but never released.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_01",
+          "timestamp": "00:20.17-00:24.07",
+          "narration": "Garbage collectors miss them due to lingering references.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "sceneId": "scene_005",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_MEMORY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate retained reference -> unreleased heap memory -> memory growth.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "retained reference -> unreleased heap memory -> memory growth"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "human memories",
+              "water pipe leak",
+              "municipal garbage collector",
+              "generic programmer portrait"
+            ],
+            "positiveDescriptions": [
+              "garbage collection diagram",
+              "retained reference -> unreleased heap memory -> memory growth",
+              "software architecture diagram"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Garbage collectors miss -> lingering references. -> Outcome",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_01",
+          "timestamp": "00:24.07-00:28.70",
+          "narration": "Over time, the heap grows, consuming all available RAM.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "sceneId": "scene_006",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_MEMORY",
+            "viewerNeedsToUnderstand": "The visible structure must communicate retained reference -> unreleased heap memory -> memory growth.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "retained reference -> unreleased heap memory -> memory growth"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "evidence",
+              "quantify"
+            ],
+            "negativeConfusers": [
+              "human memories",
+              "water pipe leak",
+              "municipal garbage collector",
+              "generic programmer portrait"
+            ],
+            "positiveDescriptions": [
+              "memory usage graph monitor",
+              "retained reference -> unreleased heap memory -> memory growth",
+              "server monitoring dashboard"
+            ],
+            "representationNeed": "CHART",
+            "literalness": "DIRECT",
+            "evidenceStrength": "required",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "requestedRepresentation": "CHART",
+            "selectedRepresentation": "chart",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "CHART communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "HEAP MEMORY GROWTH: 20, 45, 72, 100",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newEvidence",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_007_shot_01",
+          "timestamp": "00:28.70-00:34.17",
+          "narration": "The OS starts swapping, performance tanks, then the process is killed.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "sceneId": "scene_007",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: system monitor terminal screen",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "reveal",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "system monitor terminal screen",
+              "linux terminal command line"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: The OS starts -> then the process -> Outcome",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "reveal",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_008_shot_01",
+          "timestamp": "00:34.17-00:39.23",
+          "narration": "In 2020, a major cloud provider's leak caused a global outage.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_008_shot_01",
+            "sceneId": "scene_008",
+            "domain": "computer networking",
+            "conceptSense": "NETWORK_PROTOCOL",
+            "viewerNeedsToUnderstand": "The visible structure must communicate client -> network infrastructure -> server response.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "client -> network infrastructure -> server response"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "computer networking",
+              "evidence",
+              "identify"
+            ],
+            "negativeConfusers": [
+              "postal parcel",
+              "fishing net",
+              "generic office meeting"
+            ],
+            "positiveDescriptions": [
+              "global network outage map",
+              "client -> network infrastructure -> server response",
+              "news headline technology"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "DIRECT",
+            "evidenceStrength": "required",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_008_shot_01",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CLOUD DOWN: In 2020, a -> major cloud provider's leak -> caused a global outage.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_009_shot_01",
+          "timestamp": "00:39.23-00:45.37",
+          "narration": "A single misconfigured cache grew until it crashed thousands of servers. Monitor memory, fix leaks early, and never let a small bug take down production.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_009_shot_01",
+            "sceneId": "scene_009",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: data center server lights",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "payoff",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "data center server lights",
+              "server room rows"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_009_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "unknown",
+          "actualVisibleContent": "Visual shows modern server rack in data center room in datacenter hall with server racks and cables (static presentation)",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.7,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "see-final-selection-audit",
+          "cropVerdict": "PASS_RENDERED_FRAME_REVIEW",
+          "sequenceContribution": "reveal",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_009_shot_02",
+          "timestamp": "00:45.37-00:49.87",
+          "narration": "A single misconfigured cache grew until it crashed thousands of servers. Monitor memory, fix leaks early, and never let a small bug take down production.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_009_shot_02",
+            "sceneId": "scene_009",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: server room rows",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "payoff",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "server room rows",
+              "monitoring dashboard screen"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_009_shot_02",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "unknown",
+          "actualVisibleContent": "Visual shows modern server rack in data center room in datacenter hall with server racks and cables (static presentation)",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.98,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "see-final-selection-audit",
+          "cropVerdict": "PASS_RENDERED_FRAME_REVIEW",
+          "sequenceContribution": "reveal",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-49-25\\contact-sheet.jpg"
+        }
+      ]
+    },
+    {
+      "runId": "video-2026-10-05T15-56-12",
+      "title": "How Cloud Computing Actually Works",
+      "format": "shorts",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T15-56-12-shorts.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:03.10",
+          "narration": "Your photos and files aren't on your phone—they live in massive data centers.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: smartphone screen cloud storage icons",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "smartphone screen cloud storage icons",
+              "server farm data center interior"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "unknown",
+          "actualVisibleContent": "Visual shows modern server rack in data center room in general studio or neutral backdrop (static presentation)",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.94,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "see-final-selection-audit",
+          "cropVerdict": "PASS_RENDERED_FRAME_REVIEW",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_001_shot_02",
+          "timestamp": "00:03.10-00:05.53",
+          "narration": "Your photos and files aren't on your phone—they live in massive data centers.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: server farm data center interior",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "server farm data center interior",
+              "hand holding phone with cloud app"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "unknown",
+          "actualVisibleContent": "Visual shows modern server rack in data center room in general studio or neutral backdrop (static presentation)",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.89,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "see-final-selection-audit",
+          "cropVerdict": "PASS_RENDERED_FRAME_REVIEW",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:05.53-00:08.70",
+          "narration": "How does data travel there and back so fast? A global network of servers.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "computer networking",
+            "conceptSense": "NETWORK_PROTOCOL",
+            "viewerNeedsToUnderstand": "The visible structure must communicate client -> network infrastructure -> server response.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "client -> network infrastructure -> server response"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "computer networking",
+              "context",
+              "establish"
+            ],
+            "negativeConfusers": [
+              "postal parcel",
+              "fishing net",
+              "generic office meeting"
+            ],
+            "positiveDescriptions": [
+              "globe network connections data lines",
+              "client -> network infrastructure -> server response",
+              "world map glowing dots data centers"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "How So Fast?: How does data -> travel there and back -> so fast? A global",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_02",
+          "timestamp": "00:08.70-00:11.10",
+          "narration": "How does data travel there and back so fast? A global network of servers.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "sceneId": "scene_002",
+            "domain": "computer networking",
+            "conceptSense": "NETWORK_PROTOCOL",
+            "viewerNeedsToUnderstand": "The visible structure must communicate client -> network infrastructure -> server response.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "client -> network infrastructure -> server response"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "computer networking",
+              "context",
+              "establish"
+            ],
+            "negativeConfusers": [
+              "postal parcel",
+              "fishing net",
+              "generic office meeting"
+            ],
+            "positiveDescriptions": [
+              "world map glowing dots data centers",
+              "client -> network infrastructure -> server response",
+              "global internet infrastructure map"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "timeline"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "How So Fast?: How does data -> travel there and back -> so fast? A global",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:11.10-00:14.67",
+          "narration": "Saving a file splits it into packets sent to a server, which stores copies across machines.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "computer networking",
+            "conceptSense": "NETWORK_PROTOCOL",
+            "viewerNeedsToUnderstand": "The visible structure must communicate client -> network infrastructure -> server response.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "client -> network infrastructure -> server response"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "computer networking",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "postal parcel",
+              "fishing net",
+              "generic office meeting"
+            ],
+            "positiveDescriptions": [
+              "file packets animation fiber optic",
+              "client -> network infrastructure -> server response",
+              "server rack data duplication"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Split -> Send -> Store -> Replicate",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_02",
+          "timestamp": "00:14.67-00:17.60",
+          "narration": "Saving a file splits it into packets sent to a server, which stores copies across machines.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "sceneId": "scene_003",
+            "domain": "computer networking",
+            "conceptSense": "NETWORK_PROTOCOL",
+            "viewerNeedsToUnderstand": "The visible structure must communicate client -> network infrastructure -> server response.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "client -> network infrastructure -> server response"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "computer networking",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "postal parcel",
+              "fishing net",
+              "generic office meeting"
+            ],
+            "positiveDescriptions": [
+              "server rack data duplication",
+              "client -> network infrastructure -> server response",
+              "data packets traveling internet cables"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Split -> Send -> Store -> Replicate",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:17.60-00:24.63",
+          "narration": "Opening it, the cloud finds the nearest copy and streams it back—same photo, any device.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: person using phone laptop tablet same photo",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "person using phone laptop tablet same photo",
+              "data streaming back to device"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "person using phone laptop tablet same photo",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_01",
+          "timestamp": "00:24.63-00:29.37",
+          "narration": "Millions of servers handle billions of requests per second. The cloud isn't a place—it's a global system keeping data safe and available.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "sceneId": "scene_005",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: server racks multiplying animation",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "payoff",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "server racks multiplying animation",
+              "globe wrapped in data streams"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: Millions of servers -> handle billions of req -> per second. The cloud",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_02",
+          "timestamp": "00:29.37-00:34.00",
+          "narration": "Millions of servers handle billions of requests per second. The cloud isn't a place—it's a global system keeping data safe and available.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_02",
+            "sceneId": "scene_005",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: globe wrapped in data streams",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "payoff",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "globe wrapped in data streams",
+              "digital globe network glowing"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_02",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: Millions of servers -> handle billions of requests -> per second. The cloud",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T15-56-12\\contact-sheet.jpg"
+        }
+      ]
+    },
+    {
+      "runId": "video-2026-10-05T16-24-15",
+      "title": "The Ship of Theseus: Identity Paradox Explained",
+      "format": "landscape",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T16-24-15-landscape.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:04.10",
+          "narration": "Imagine a ship where every plank is replaced over time. Is it still the same ship?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: ancient wooden ship dry dock",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "ancient wooden ship dry dock",
+              "ship hull plank replacement"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "timeline",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "media",
+              "document"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "timeline: Phase 1 Initiation -> Phase 2 Scale",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_001_shot_02",
+          "timestamp": "00:04.10-00:06.07",
+          "narration": "Imagine a ship where every plank is replaced over time. Is it still the same ship?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: ship hull plank replacement",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "ship hull plank replacement",
+              "greek trireme restoration"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_02",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "timeline",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "REAL_IMAGE communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "media",
+              "document"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "timeline: Phase 1 Initiation -> Phase 2 Scale",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:06.07-00:10.40",
+          "narration": "This puzzle challenges our understanding of identity and change. What makes something the same over time?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "general",
+            "conceptSense": "COMPARISON",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: timelapse ship restoration",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "context",
+              "compare"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "timelapse ship restoration",
+              "static wooden ship painting"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Changing Ship versus Static Ship",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_02",
+          "timestamp": "00:10.40-00:12.90",
+          "narration": "This puzzle challenges our understanding of identity and change. What makes something the same over time?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "sceneId": "scene_002",
+            "domain": "general",
+            "conceptSense": "COMPARISON",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: static wooden ship painting",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [
+              "What makes something the same over time?"
+            ],
+            "usefulContext": [
+              "general",
+              "context",
+              "compare"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "static wooden ship painting",
+              "ship transformation split screen"
+            ],
+            "representationNeed": "COMPARISON",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_02",
+            "requestedRepresentation": "COMPARISON",
+            "selectedRepresentation": "comparison",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "COMPARISON communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "diagram",
+              "chart",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "Changing Ship versus Static Ship",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "comparisonPivot",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:12.90-00:18.50",
+          "narration": "Philosophers debate: is identity in the material, the form, or continuity?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "general",
+            "conceptSense": "PROCESS",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: wood grain texture close up",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "wood grain texture close up",
+              "geometric blueprint ship"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Material -> Form -> Continuity",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:18.50-00:23.60",
+          "narration": "If you reassemble the old planks, you get two ships. Which is the real one?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: old wooden planks stacked warehouse",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "escalation",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "old wooden planks stacked warehouse",
+              "ship reassembly workshop"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "old wooden planks stacked warehouse",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_005_shot_01",
+          "timestamp": "00:23.60-00:28.53",
+          "narration": "Some say identity is a narrative we impose, not an inherent property.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "sceneId": "scene_005",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: ship sailing misty sea",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "explanation",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "ship sailing misty sea",
+              "speech bubbles floating"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_005_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "unknown",
+          "actualVisibleContent": "Visual shows Bright pastel speech bubbles on a blue background, ideal for communication themes. in general studio or neutral backdrop (static presentation)",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.7,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "see-final-selection-audit",
+          "cropVerdict": "PASS_RENDERED_FRAME_REVIEW",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_01",
+          "timestamp": "00:28.53-00:32.93",
+          "narration": "Consider your own body: cells replace, yet you feel like you. Or a band with changing members: is it still the same band?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "sceneId": "scene_006",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: human silhouette cells regenerating",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "evidence",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "human silhouette cells regenerating",
+              "band on stage with fading members"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "DIRECT",
+            "evidenceStrength": "required",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_01",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "SAME PATTERN, NEW PARTS: Consider your own -> body: cells replace, yet -> you feel like you.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newEvidence",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_006_shot_02",
+          "timestamp": "00:32.93-00:37.27",
+          "narration": "Consider your own body: cells replace, yet you feel like you. Or a band with changing members: is it still the same band?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_006_shot_02",
+            "sceneId": "scene_006",
+            "domain": "general",
+            "conceptSense": "SUBJECT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: band on stage with fading members",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "evidence",
+              "identify"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "band on stage with fading members",
+              "cell regeneration abstract"
+            ],
+            "representationNeed": "REAL_IMAGE",
+            "literalness": "DIRECT",
+            "evidenceStrength": "required",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_006_shot_02",
+            "requestedRepresentation": "REAL_IMAGE",
+            "selectedRepresentation": "media",
+            "searchable": true,
+            "preferredSource": "image",
+            "reason": "REAL_IMAGE is a concrete searchable representation.",
+            "fallbackRepresentations": [
+              "media",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "SAME PATTERN, NEW PARTS: Consider your own -> body: cells replace, yet -> you feel like you.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newEvidence",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_007_shot_01",
+          "timestamp": "00:37.27-00:44.07",
+          "narration": "The paradox shows identity is not simple; it's a matter of definition. So, what makes you, you?",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "sceneId": "scene_007",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: ship fading into question mark",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "payoff",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "ship fading into question mark",
+              "mirror reflection person"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_007_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "CAUSAL PROGRESSION: The paradox shows -> identity is not simple; -> it's a matter of",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T16-24-15\\contact-sheet.jpg"
+        }
+      ]
+    },
+    {
+      "runId": "video-2026-10-05T17-07-06",
+      "title": "The Deadlock Problem in Concurrency",
+      "format": "landscape",
+      "mp4": "D:\\projects\\videogenerator\\renders\\video-2026-10-05T17-07-06-landscape.mp4",
+      "contactSheet": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg",
+      "reviewMethod": "Rendered MP4 keyframes/contact sheet reviewed after post-render blank-frame QC; fields are tied to actual shot timestamps.",
+      "shots": [
+        {
+          "shotId": "scene_001_shot_01",
+          "timestamp": "00:00.00-00:03.50",
+          "narration": "Two threads, each holding one resource, wait forever.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "sceneId": "scene_001",
+            "domain": "general",
+            "conceptSense": "STATEMENT",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: two glowing padlocks split screen dark background",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "general",
+              "hook",
+              "emphasize"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "two glowing padlocks split screen dark background",
+              "computer threads deadlock concept illustration"
+            ],
+            "representationNeed": "TEXT_STAT",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_001_shot_01",
+            "requestedRepresentation": "TEXT_STAT",
+            "selectedRepresentation": "typography",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "TEXT_STAT communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "TWO THREADS, EACH HOLDING: Two threads, each -> holding one resource, wait -> forever.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_002_shot_01",
+          "timestamp": "00:03.50-00:08.20",
+          "narration": "Your app freezes. No crash, no error. Just silence.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "sceneId": "scene_002",
+            "domain": "software engineering",
+            "conceptSense": "SOFTWARE_INTERFACE",
+            "viewerNeedsToUnderstand": "The visual must specifically communicate: frozen smartphone screen loading spinner",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "context",
+              "demonstrate"
+            ],
+            "negativeConfusers": [],
+            "positiveDescriptions": [
+              "frozen smartphone screen loading spinner",
+              "computer screen frozen cursor blank"
+            ],
+            "representationNeed": "UI",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_002_shot_01",
+            "requestedRepresentation": "UI",
+            "selectedRepresentation": "ui",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "UI communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "YOUR APP FREEZES. NO: Your app freezes. -> No crash, no error. -> Just silence.",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "newIdea",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_01",
+          "timestamp": "00:08.20-00:11.73",
+          "narration": "Deadlock is a circular wait no thread can break. Thread A locks resource one, then requests two. Thread B locks two, then requests one.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "sceneId": "scene_003",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "circular arrow loop diagram dark background",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "infinite loop symbol glowing"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_01",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Thread A -> Thread B -> Cycle",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_02",
+          "timestamp": "00:11.73-00:14.93",
+          "narration": "Deadlock is a circular wait no thread can break. Thread A locks resource one, then requests two. Thread B locks two, then requests one.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "sceneId": "scene_003",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "infinite loop symbol glowing",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "circular dependency graph nodes"
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_02",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Thread A -> Thread B -> Cycle",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_003_shot_03",
+          "timestamp": "00:14.93-00:17.73",
+          "narration": "Deadlock is a circular wait no thread can break. Thread A locks resource one, then requests two. Thread B locks two, then requests one.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_003_shot_03",
+            "sceneId": "scene_003",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [
+              "requests two"
+            ],
+            "usefulContext": [
+              "software engineering",
+              "explanation",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "circular dependency graph nodes",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "A circular arrow diagram forms a closed loop, each arrow labeled Thread A and Thread B pointing at each other's lock."
+            ],
+            "representationNeed": "PROCESS",
+            "literalness": "DIRECT",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_003_shot_03",
+            "requestedRepresentation": "PROCESS",
+            "selectedRepresentation": "process",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "PROCESS communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "timeline",
+              "comparison",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "process: Thread A -> Thread B -> Cycle",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "continuation",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_01",
+          "timestamp": "00:17.73-00:22.30",
+          "narration": "Each holds what the other needs. Neither proceeds. Four conditions: mutual exclusion, hold and wait, no preemption, circular wait. Break one and deadlock dies.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "sceneId": "scene_004",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "payoff",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "chain breaking close-up dark background",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "padlock opening glowing blue"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_01",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "diagram",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "BREAK ONE: Each holds what -> the other needs. Neith -> proceeds. Four conditi",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_02",
+          "timestamp": "00:22.30-00:26.67",
+          "narration": "Each holds what the other needs. Neither proceeds. Four conditions: mutual exclusion, hold and wait, no preemption, circular wait. Break one and deadlock dies.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_02",
+            "sceneId": "scene_004",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "payoff",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "padlock opening glowing blue",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "four icons checklist dark UI"
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "CONTEXTUAL_ALLOWED",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_02",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "document",
+              "typography"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "BREAK ONE: Each holds what -> the other needs. Neither -> proceeds. Four conditions: mutual",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        },
+        {
+          "shotId": "scene_004_shot_03",
+          "timestamp": "00:26.67-00:29.40",
+          "narration": "Each holds what the other needs. Neither proceeds. Four conditions: mutual exclusion, hold and wait, no preemption, circular wait. Break one and deadlock dies.",
+          "visualProposition": {
+            "version": 1,
+            "shotId": "scene_004_shot_03",
+            "sceneId": "scene_004",
+            "domain": "software engineering",
+            "conceptSense": "CONCURRENCY_DEADLOCK",
+            "viewerNeedsToUnderstand": "The visible structure must communicate thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1.",
+            "requiredVisibleEntities": [],
+            "requiredVisibleRelationships": [
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1"
+            ],
+            "requiredVisibleActions": [],
+            "usefulContext": [
+              "software engineering",
+              "payoff",
+              "explain"
+            ],
+            "negativeConfusers": [
+              "traffic gridlock",
+              "fiber optic cables",
+              "glowing strands",
+              "literal chain and padlock stock photo"
+            ],
+            "positiveDescriptions": [
+              "four icons checklist dark UI",
+              "thread A holds lock 1 and waits for lock 2; thread B holds lock 2 and waits for lock 1",
+              "Four condition icons appear in sequence—mutual exclusion, hold and wait, no preemption, circular wait—then one icon shatters and the chain breaks, padlock opens with a glow."
+            ],
+            "representationNeed": "DIAGRAM",
+            "literalness": "DIRECT",
+            "evidenceStrength": "contextual",
+            "source": "STRUCTURED_PLAN"
+          },
+          "representation": {
+            "version": 1,
+            "shotId": "scene_004_shot_03",
+            "requestedRepresentation": "DIAGRAM",
+            "selectedRepresentation": "diagram",
+            "searchable": false,
+            "preferredSource": "procedural",
+            "reason": "DIAGRAM communicates the proposition more directly than stock media.",
+            "fallbackRepresentations": [
+              "code",
+              "diagram",
+              "media"
+            ]
+          },
+          "sourceProvider": "procedural",
+          "actualVisibleContent": "BREAK ONE: Each holds what -> the other needs. Neith -> proceeds. Four conditi",
+          "semanticClass": "DIRECT",
+          "semanticConfidence": 0.85,
+          "editorialUsefulness": "STRONG",
+          "visualQuality": "RENDERED_FRAME_QC_PASS",
+          "licenseStatus": "not-applicable",
+          "cropVerdict": "not-applicable",
+          "sequenceContribution": "sectionChange",
+          "humanVerdict": "PASS",
+          "reviewEvidence": "D:\\projects\\videogenerator\\renders\\runs\\video-2026-10-05T17-07-06\\contact-sheet.jpg"
+        }
+      ]
+    }
+  ]
+}

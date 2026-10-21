@@ -1,0 +1,80 @@
+{
+  "id": "cloud_computing_laptop_hologram_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Laptop with cloud computing hologram",
+  "path": "images/technology/cloud_computing_laptop_hologram_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "cloud computing",
+    "cloud",
+    "laptop",
+    "network",
+    "storage",
+    "sync",
+    "server",
+    "SaaS"
+  ],
+  "concepts": [
+    "cloud infrastructure",
+    "cloud storage",
+    "data sync",
+    "SaaS",
+    "distributed systems"
+  ],
+  "subjects": [
+    "laptop",
+    "cloud hologram",
+    "network icons",
+    "desk"
+  ],
+  "actions": [
+    "data syncing",
+    "cloud connection"
+  ],
+  "mood": [
+    "futuristic",
+    "professional",
+    "cinematic",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.68,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "cloud computing",
+    "SaaS",
+    "data synchronization",
+    "network architecture",
+    "technology intro"
+  ],
+  "avoidFor": [
+    "hardware manufacturing",
+    "cyber attack",
+    "mobile app"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

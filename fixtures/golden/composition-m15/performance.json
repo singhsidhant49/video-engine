@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-29T09:07:32.601Z",
+  "results": [
+    {
+      "name": "comparison",
+      "coldMs": 33.984,
+      "warmAverageMs": 0.736,
+      "warmIterations": 100,
+      "cache": {
+        "entries": 10,
+        "fontEntries": 2,
+        "hits": 1000,
+        "misses": 10
+      }
+    },
+    {
+      "name": "chart",
+      "coldMs": 12.989,
+      "warmAverageMs": 0.796,
+      "warmIterations": 100,
+      "cache": {
+        "entries": 11,
+        "fontEntries": 2,
+        "hits": 1403,
+        "misses": 11
+      }
+    }
+  ]
+}

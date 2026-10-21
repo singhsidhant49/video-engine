@@ -1,0 +1,77 @@
+{
+  "id": "edge_computing_industrial_factory_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Edge computing server rack in connected smart factory",
+  "path": "images/technology/edge_computing_industrial_factory_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "edge computing",
+    "server rack",
+    "smart factory",
+    "industry 4.0",
+    "industrial IoT",
+    "factory network",
+    "automation"
+  ],
+  "concepts": [
+    "edge infrastructure",
+    "industrial IoT",
+    "smart manufacturing",
+    "connected operations"
+  ],
+  "subjects": [
+    "server rack",
+    "robot arms",
+    "factory floor",
+    "network overlay"
+  ],
+  "actions": [
+    "processing data",
+    "connecting machines"
+  ],
+  "mood": [
+    "technical",
+    "industrial",
+    "connected",
+    "efficient"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.73,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "edge computing video",
+    "industry 4.0",
+    "industrial network",
+    "automation explainer"
+  ],
+  "avoidFor": [
+    "consumer electronics",
+    "healthcare",
+    "city lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

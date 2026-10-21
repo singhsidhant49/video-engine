@@ -8,25 +8,41 @@
     "start": "node src/server/studioServer.js",
     "generate": "node src/cli/generate.js",
     "remotion:studio": "npx remotion preview src/remotion/Root.jsx",
-    "test:tts": "node src/services/ttsService.js"
+    "test": "node --test tests/**/*.test.js",
+    "render:golden:m3": "node scripts/renderGoldenFixtures.js",
+    "render:golden:m14": "node scripts/renderProcessGoldens.js",
+    "render:golden:m15": "node scripts/renderMilestone15Goldens.js",
+    "benchmark:m15": "node scripts/benchmarkMilestone15.js",
+    "render:golden:m16": "node scripts/renderMilestone16Goldens.js",
+    "benchmark:m16": "node scripts/benchmarkMilestone16.js",
+    "benchmark:production": "node scripts/runProductionBenchmark.js",
+    "render:media-editorial": "node scripts/renderMediaEditorialBenchmarks.js",
+    "sheets:m15": "node scripts/buildMilestone15RegressionSheets.js",
+    "render:timeline": "node scripts/renderTimelineRun.js",
+    "test:contracts": "node --test tests/contracts.test.js",
+    "test:tts": "node src/services/ttsService.js",
+    "run:inspect": "node src/cli/inspectRun.js",
+    "cache:stats": "node src/cli/cacheStats.js stats",
+    "cache:clean": "node src/cli/cacheStats.js clean",
+    "pipeline:stage": "node src/cli/runStage.js"
   },
   "dependencies": {
-    "@img/sharp-win32-x64": "^0.35.4",
-    "@remotion/bundler": "^4.0.240",
-    "@remotion/media-utils": "^4.0.240",
-    "@remotion/renderer": "^4.0.240",
-    "@remotion/transitions": "^4.0.529",
-    "@xenova/transformers": "^2.17.2",
+    "@remotion/bundler": "4.0.535",
+    "@remotion/google-fonts": "4.0.535",
+    "@remotion/media-utils": "4.0.535",
+    "@remotion/renderer": "4.0.535",
+    "@remotion/transitions": "4.0.535",
+    "@huggingface/transformers": "4.3.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "music-metadata": "^10.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remotion": "^4.0.240",
-    "sharp": "^0.33.5",
-    "wavefile": "^11.0.0"
+    "remotion": "4.0.535",
+    "sharp": "0.35.5",
+    "wavefile": "^11.0.0",
+    "zod": "4.5.4"
   },
   "devDependencies": {
-    "@remotion/cli": "^4.0.240"
+    "@remotion/cli": "4.0.535"
   }
 }

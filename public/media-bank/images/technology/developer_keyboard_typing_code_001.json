@@ -1,0 +1,78 @@
+{
+  "id": "developer_keyboard_typing_code_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Hands typing on mechanical keyboard with code monitor",
+  "path": "images/technology/developer_keyboard_typing_code_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "keyboard",
+    "typing",
+    "coding",
+    "developer",
+    "programming",
+    "code",
+    "mechanical keyboard",
+    "workspace"
+  ],
+  "concepts": [
+    "software development",
+    "coding activity",
+    "developer workflow",
+    "technical work"
+  ],
+  "subjects": [
+    "hands",
+    "keyboard",
+    "monitor",
+    "code editor"
+  ],
+  "actions": [
+    "typing",
+    "coding"
+  ],
+  "mood": [
+    "focused",
+    "cinematic",
+    "technical",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.73,
+      "y": 0.58
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "high",
+  "usage": [
+    "coding b-roll",
+    "developer workflow",
+    "software explainer",
+    "detail shot"
+  ],
+  "avoidFor": [
+    "cloud computing",
+    "cybersecurity",
+    "mobile technology"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

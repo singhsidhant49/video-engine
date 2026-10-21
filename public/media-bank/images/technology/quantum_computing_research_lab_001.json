@@ -1,0 +1,77 @@
+{
+  "id": "quantum_computing_research_lab_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Quantum computing research lab with scientist and cryostat",
+  "path": "images/technology/quantum_computing_research_lab_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "quantum computing",
+    "research lab",
+    "scientist",
+    "cryostat",
+    "advanced computing",
+    "holographic interface",
+    "physics"
+  ],
+  "concepts": [
+    "quantum computing",
+    "scientific research",
+    "advanced computation",
+    "future technology"
+  ],
+  "subjects": [
+    "quantum computer",
+    "scientist",
+    "holographic dashboard",
+    "laboratory"
+  ],
+  "actions": [
+    "analyzing data",
+    "monitoring experiment"
+  ],
+  "mood": [
+    "futuristic",
+    "clinical",
+    "advanced",
+    "innovative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.39,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "quantum computing explainer",
+    "future tech video",
+    "scientific innovation",
+    "advanced research"
+  ],
+  "avoidFor": [
+    "consumer app",
+    "remote meeting",
+    "home office"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

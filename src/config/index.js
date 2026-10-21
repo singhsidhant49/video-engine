@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { DEFAULT_VISUAL_POLICY } from './visualMode.js';
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ export const config = {
     url: process.env.KOKORO_TTS_URL || 'http://localhost:8880/v1/audio/speech',
     defaultVoice: process.env.KOKORO_VOICE || 'af_bella',
     speed: parseFloat(process.env.KOKORO_SPEED || '0.9'),
+    meditationSpeed: parseFloat(process.env.KOKORO_MEDITATION_SPEED || '0.72'),
   },
 
   video: {
@@ -44,6 +46,8 @@ export const config = {
     widthLandscape: 1920,
     heightLandscape: 1080,
   },
+
+  visual: DEFAULT_VISUAL_POLICY,
 
   server: {
     port: parseInt(process.env.PORT || '3000', 10),

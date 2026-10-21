@@ -1,0 +1,614 @@
+{
+  "quality_subject-right-text-left_landscape": {
+    "version": 1,
+    "shotId": "m16-subject-right-text-left-landscape",
+    "solvedSceneId": "solved_m16-subject-right-text-left-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.6802083333333333,
+      "bounds": {
+        "x": 614,
+        "y": 0,
+        "width": 1306,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_subject-right-text-left_shorts": {
+    "version": 1,
+    "shotId": "m16-subject-right-text-left-shorts",
+    "solvedSceneId": "solved_m16-subject-right-text-left-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.3038315007716049,
+      "bounds": {
+        "x": 81,
+        "y": 230,
+        "width": 869,
+        "height": 725
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_centered-no-text_landscape": {
+    "version": 1,
+    "shotId": "m16-centered-no-text-landscape",
+    "solvedSceneId": "solved_m16-centered-no-text-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_centered-no-text_shorts": {
+    "version": 1,
+    "shotId": "m16-centered-no-text-shorts",
+    "solvedSceneId": "solved_m16-centered-no-text-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_portrait-landscape_landscape": {
+    "version": 1,
+    "shotId": "m16-portrait-landscape-landscape",
+    "solvedSceneId": "solved_m16-portrait-landscape-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.6802083333333333,
+      "bounds": {
+        "x": 614,
+        "y": 0,
+        "width": 1306,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_portrait-landscape_shorts": {
+    "version": 1,
+    "shotId": "m16-portrait-landscape-shorts",
+    "solvedSceneId": "solved_m16-portrait-landscape-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.3038315007716049,
+      "bounds": {
+        "x": 81,
+        "y": 230,
+        "width": 869,
+        "height": 725
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_landscape-to-shorts_landscape": {
+    "version": 1,
+    "shotId": "m16-landscape-to-shorts-landscape",
+    "solvedSceneId": "solved_m16-landscape-to-shorts-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_landscape-to-shorts_shorts": {
+    "version": 1,
+    "shotId": "m16-landscape-to-shorts-shorts",
+    "solvedSceneId": "solved_m16-landscape-to-shorts-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_native-video_landscape": {
+    "version": 1,
+    "shotId": "m16-native-video-landscape",
+    "solvedSceneId": "solved_m16-native-video-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_native-video_shorts": {
+    "version": 1,
+    "shotId": "m16-native-video-shorts",
+    "solvedSceneId": "solved_m16-native-video-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_image-stat_landscape": {
+    "version": 1,
+    "shotId": "m16-image-stat-landscape",
+    "solvedSceneId": "solved_m16-image-stat-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.6802083333333333,
+      "bounds": {
+        "x": 614,
+        "y": 0,
+        "width": 1306,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_image-stat_shorts": {
+    "version": 1,
+    "shotId": "m16-image-stat-shorts",
+    "solvedSceneId": "solved_m16-image-stat-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.3038315007716049,
+      "bounds": {
+        "x": 81,
+        "y": 230,
+        "width": 869,
+        "height": 725
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_image-annotation_landscape": {
+    "version": 1,
+    "shotId": "m16-image-annotation-landscape",
+    "solvedSceneId": "solved_m16-image-annotation-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 4,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_image-annotation_shorts": {
+    "version": 1,
+    "shotId": "m16-image-annotation-shorts",
+    "solvedSceneId": "solved_m16-image-annotation-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 4,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_two-media_landscape": {
+    "version": 1,
+    "shotId": "m16-two-media-landscape",
+    "solvedSceneId": "solved_m16-two-media-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.29822916666666666,
+      "bounds": {
+        "x": 134,
+        "y": 97,
+        "width": 818,
+        "height": 756
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_two-media_shorts": {
+    "version": 1,
+    "shotId": "m16-two-media-shorts",
+    "solvedSceneId": "solved_m16-two-media-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 2,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 0.22001591435185186,
+      "bounds": {
+        "x": 81,
+        "y": 230,
+        "width": 869,
+        "height": 525
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_three-image-montage_landscape": {
+    "version": 1,
+    "shotId": "m16-three-image-montage-landscape",
+    "solvedSceneId": "solved_m16-three-image-montage-landscape_landscape",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 4
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  },
+  "quality_three-image-montage_shorts": {
+    "version": 1,
+    "shotId": "m16-three-image-montage-shorts",
+    "solvedSceneId": "solved_m16-three-image-montage-shorts_shorts",
+    "publishable": true,
+    "strength": "STRONG",
+    "averageScore": 5,
+    "scores": {
+      "assetRelevance": 5,
+      "cropQuality": 5,
+      "subjectVisibility": 5,
+      "composition": 5,
+      "hierarchy": 5,
+      "textCoexistence": 5,
+      "captionCoexistence": 5,
+      "cameraBehavior": 5,
+      "motionRestraint": 5,
+      "transitionQuality": 5,
+      "mobileQuality": 5
+    },
+    "meaningfulOccupancy": {
+      "ratio": 1,
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "warnings": [],
+    "repairRequest": null,
+    "alternateAssetRequest": null,
+    "summary": "Media framing, text, caption, and camera behavior are publishable."
+  }
+}

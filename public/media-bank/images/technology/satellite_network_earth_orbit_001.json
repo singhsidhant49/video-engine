@@ -1,0 +1,77 @@
+{
+  "id": "satellite_network_earth_orbit_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Global satellite network orbiting Earth",
+  "path": "images/technology/satellite_network_earth_orbit_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "satellite",
+    "space",
+    "earth",
+    "communications",
+    "network",
+    "orbit",
+    "global connectivity",
+    "telecom"
+  ],
+  "concepts": [
+    "satellite communications",
+    "global network",
+    "space technology",
+    "orbital infrastructure"
+  ],
+  "subjects": [
+    "satellites",
+    "earth",
+    "network arcs"
+  ],
+  "actions": [
+    "transmitting data",
+    "orbiting"
+  ],
+  "mood": [
+    "epic",
+    "futuristic",
+    "global",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": false
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "space tech",
+    "telecom explainer",
+    "global connectivity",
+    "satellite internet"
+  ],
+  "avoidFor": [
+    "consumer home office",
+    "wearables",
+    "factory interior"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

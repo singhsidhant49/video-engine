@@ -1,0 +1,81 @@
+{
+  "id": "ai_assistant_workspace_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "AI assistant workspace with laptop hologram",
+  "path": "images/technology/ai_assistant_workspace_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "AI",
+    "assistant",
+    "laptop",
+    "workspace",
+    "dashboard",
+    "analytics",
+    "hologram",
+    "office",
+    "automation"
+  ],
+  "concepts": [
+    "AI assistant",
+    "workflow automation",
+    "digital workspace",
+    "AI productivity",
+    "analytics"
+  ],
+  "subjects": [
+    "laptop",
+    "AI avatar",
+    "desk",
+    "dashboard panels"
+  ],
+  "actions": [
+    "analyzing data",
+    "assisting workflow"
+  ],
+  "mood": [
+    "futuristic",
+    "clean",
+    "professional",
+    "premium"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.69,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "AI explainer",
+    "automation video",
+    "technology intro",
+    "software productivity",
+    "hero shot"
+  ],
+  "avoidFor": [
+    "medical research",
+    "hardware manufacturing",
+    "team meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "robotic_factory_manufacturing_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Precision robotics on smart manufacturing line",
+  "path": "images/technology/robotic_factory_manufacturing_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "robotics",
+    "factory",
+    "manufacturing",
+    "industrial automation",
+    "robot arm",
+    "industry 4.0",
+    "production",
+    "machining"
+  ],
+  "concepts": [
+    "smart manufacturing",
+    "industrial automation",
+    "precision engineering",
+    "industry 4.0"
+  ],
+  "subjects": [
+    "robot arm",
+    "metal component",
+    "factory line",
+    "engineering dashboard"
+  ],
+  "actions": [
+    "machining",
+    "assembling",
+    "welding"
+  ],
+  "mood": [
+    "industrial",
+    "precise",
+    "high-tech",
+    "premium"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "manufacturing explainer",
+    "robotics video",
+    "industry 4.0",
+    "engineering intro"
+  ],
+  "avoidFor": [
+    "consumer electronics",
+    "remote work",
+    "medical"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "generatedAt": "2026-09-29T08:53:02.809Z",
+  "states": [
+    "frame-0",
+    "state-25",
+    "state-50",
+    "state-75",
+    "final"
+  ],
+  "fixtures": [
+    {
+      "fixture": "ai-agent",
+      "format": "landscape",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "ai-agent/landscape/state-contact-sheet.png"
+    },
+    {
+      "fixture": "ai-agent",
+      "format": "shorts",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "ai-agent/shorts/state-contact-sheet.png"
+    },
+    {
+      "fixture": "dopamine",
+      "format": "landscape",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "dopamine/landscape/state-contact-sheet.png"
+    },
+    {
+      "fixture": "dopamine",
+      "format": "shorts",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "dopamine/shorts/state-contact-sheet.png"
+    },
+    {
+      "fixture": "transaction",
+      "format": "landscape",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "transaction/landscape/state-contact-sheet.png"
+    },
+    {
+      "fixture": "transaction",
+      "format": "shorts",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "transaction/shorts/state-contact-sheet.png"
+    },
+    {
+      "fixture": "science",
+      "format": "landscape",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "science/landscape/state-contact-sheet.png"
+    },
+    {
+      "fixture": "science",
+      "format": "shorts",
+      "frames": [
+        0,
+        40,
+        80,
+        119,
+        159
+      ],
+      "contactSheet": "science/shorts/state-contact-sheet.png"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "reviewedAt": "2026-09-29",
+  "reviewMethod": "Rendered state sheets reviewed at reduced player size for landscape and phone-like width for Shorts. Verdicts compare communication, hierarchy, typography, motion, rhythm, consistency, and format adaptation rather than schema validity.",
+  "goldens": [
+    {
+      "id": "comparison/reward/landscape",
+      "whatWorks": "NOW versus LATER reads immediately; both options exist at frame 0; the baseline and restrained accent make the tradeoff legible.",
+      "whatStillLooksGeneratedOrTemplated": "The two fields remain highly symmetrical and the VS marker is conventional.",
+      "whatWouldAHumanEditorChange": "On a premium pass, replace VS with a named delay axis and make the value shift more explicit.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/reward/shorts",
+      "whatWorks": "The stack is genuinely vertical, large at phone size, and leaves captions and the interaction rail clear.",
+      "whatStillLooksGeneratedOrTemplated": "The paired horizontal rules still expose a reusable comparison grammar.",
+      "whatWouldAHumanEditorChange": "Add a subtle temporal arrow between NOW and LATER if the surrounding edit can support it.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/software-agent/landscape",
+      "whatWorks": "The semantic distinction is understood without reading the narration caption; unequal copy remains balanced.",
+      "whatStillLooksGeneratedOrTemplated": "The central divider is familiar and the supporting descriptions are visually quiet.",
+      "whatWouldAHumanEditorChange": "Directly encode predefined flow versus adaptive loop in a future specialized grammar.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/software-agent/shorts",
+      "whatWorks": "Labels remain comfortably readable and the mobile hierarchy clearly moves from traditional software to agent.",
+      "whatStillLooksGeneratedOrTemplated": "The stacked fields share the same structure as other comparisons.",
+      "whatWouldAHumanEditorChange": "Use a small deterministic/agentic behavior glyph only if the video's icon language already supports it.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/fees/landscape",
+      "whatWorks": "The numeric delta is dominant, the conclusion is visible, and the solved version is clearer than the legacy columns.",
+      "whatStillLooksGeneratedOrTemplated": "Equal field treatment is slightly generic for a financial comparison.",
+      "whatWouldAHumanEditorChange": "Add a shared compounding baseline when real time-horizon data is available.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/fees/shorts",
+      "whatWorks": "Large fee values survive phone-size review and the key difference stays above captions.",
+      "whatStillLooksGeneratedOrTemplated": "The vertical stack is intentionally reusable rather than topic-specific.",
+      "whatWouldAHumanEditorChange": "Use a small accumulating-cost indicator if it can be evidence-backed.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/strategy/landscape",
+      "whatWorks": "Before/after direction is clear, restrained, and more editorial than card UI.",
+      "whatStillLooksGeneratedOrTemplated": "The fields are visually similar despite different strategic behavior.",
+      "whatWouldAHumanEditorChange": "Introduce directional movement only at the narration pivot, not continuously.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "comparison/strategy/shorts",
+      "whatWorks": "The frame uses the vertical canvas deliberately and the learning-speed takeaway is the final focal point.",
+      "whatStillLooksGeneratedOrTemplated": "The comparison rails are visibly part of a system.",
+      "whatWouldAHumanEditorChange": "Increase the separation between old and new with a semantic arrow in a topic-specific pass.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/reward-delay/landscape",
+      "whatWorks": "The falling curve tells the story before labels are read; the annotation and takeaway reinforce rather than compete.",
+      "whatStillLooksGeneratedOrTemplated": "The annotation leader is mechanically straight.",
+      "whatWouldAHumanEditorChange": "Use a hand-tuned elbow leader if this becomes a hero chart.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/reward-delay/shorts",
+      "whatWorks": "The plot remains large, the line is readable at phone width, and the draw reveals the trend progressively.",
+      "whatStillLooksGeneratedOrTemplated": "Axis typography is utilitarian rather than bespoke.",
+      "whatWouldAHumanEditorChange": "Drop one more nonessential tick for very small embedded players.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/revenue-segments/landscape",
+      "whatWorks": "Enterprise is dominant through height, accent, direct value, and takeaway; every label need not be inspected.",
+      "whatStillLooksGeneratedOrTemplated": "The basic vertical-bar grammar is intentionally conventional.",
+      "whatWouldAHumanEditorChange": "No change unless real brand or source styling is supplied.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/revenue-segments/shorts",
+      "whatWorks": "Horizontal recomposition is materially better than a shrunken desktop chart; values and categories pass phone-size review.",
+      "whatStillLooksGeneratedOrTemplated": "The axis and direct labels use a general-purpose editorial system.",
+      "whatWouldAHumanEditorChange": "Tighten category-to-bar spacing slightly for a final branded pass.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/fees-over-time/landscape",
+      "whatWorks": "The two lines are distinguishable, directly labeled, and the widening gap is immediately apparent.",
+      "whatStillLooksGeneratedOrTemplated": "Secondary-series styling is intentionally minimal.",
+      "whatWouldAHumanEditorChange": "Add a shaded delta only if it remains subordinate to the primary line.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/fees-over-time/shorts",
+      "whatWorks": "The trend and gap remain legible at phone width without a detached legend.",
+      "whatStillLooksGeneratedOrTemplated": "Direct endpoint labels are compact and somewhat mechanical.",
+      "whatWouldAHumanEditorChange": "Hand-place the secondary endpoint label if the values converge in real data.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/performance/landscape",
+      "whatWorks": "The highlighted multi-step point and takeaway make the conclusion obvious before axis inspection.",
+      "whatStillLooksGeneratedOrTemplated": "The dot plot is sparse by design and could feel neutral in a hero slot.",
+      "whatWouldAHumanEditorChange": "Add a reference threshold only when it has real semantic meaning.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "chart/performance/shorts",
+      "whatWorks": "Dots and values remain readable at reduced phone width and the plot does not collapse into a tiny desktop chart.",
+      "whatStillLooksGeneratedOrTemplated": "Category labels use the same axis treatment as other charts.",
+      "whatWouldAHumanEditorChange": "Shorten category labels further if production data is longer.",
+      "publishableAsIs": true
+    }
+  ],
+  "regressions": [
+    {
+      "id": "psychology-landscape",
+      "whatWorks": "The comparison and curve share palette, title position, restraint, and caption behavior; both communicate instant-gratification semantics immediately.",
+      "whatStillLooksGeneratedOrTemplated": "The transition evidence is a state sheet rather than a fully graded final edit.",
+      "whatWouldAHumanEditorChange": "Use a clean cut at the conceptual shift and preserve the blue accent across it.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "structured-landscape",
+      "whatWorks": "Wide-frame utilization and hierarchy are consistent between comparison and chart; the chart is materially clearer than legacy.",
+      "whatStillLooksGeneratedOrTemplated": "Both scenes use the same top-title system, which is consistent but recognizable.",
+      "whatWouldAHumanEditorChange": "Vary title alignment only when an adjacent shot provides a strong match anchor.",
+      "publishableAsIs": true
+    },
+    {
+      "id": "structured-shorts",
+      "whatWorks": "Both scenes are truly recomposed, readable at phone width, caption-safe, and free of a right-rail collision.",
+      "whatStillLooksGeneratedOrTemplated": "The reusable rule language remains visible.",
+      "whatWouldAHumanEditorChange": "No structural change; apply final brand typography if available.",
+      "publishableAsIs": true
+    }
+  ],
+  "legacyComparisons": [
+    {
+      "id": "comparison",
+      "verdict": "Solved is materially better in frame-0 completeness, explicit key difference, format adaptation, and controlled emphasis. Legacy has larger headline energy but weaker semantic structure.",
+      "keepSolvedActive": true
+    },
+    {
+      "id": "chart",
+      "verdict": "Solved is materially better through real axes, data-derived scales, explicit takeaway, source semantics, and mobile recomposition.",
+      "keepSolvedActive": true
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "smartwatch_health_tracking_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Smartwatch health dashboard on wrist",
+  "path": "images/technology/smartwatch_health_tracking_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "smartwatch",
+    "wearable",
+    "health tracking",
+    "fitness",
+    "heart rate",
+    "consumer technology",
+    "wellness"
+  ],
+  "concepts": [
+    "wearable technology",
+    "digital health",
+    "fitness tracking",
+    "personal wellness"
+  ],
+  "subjects": [
+    "smartwatch",
+    "wrist",
+    "health dashboard"
+  ],
+  "actions": [
+    "tracking health metrics"
+  ],
+  "mood": [
+    "clean",
+    "lifestyle",
+    "modern",
+    "minimal"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "high",
+  "usage": [
+    "wearable tech",
+    "health app",
+    "consumer electronics",
+    "fitness technology"
+  ],
+  "avoidFor": [
+    "industrial automation",
+    "space communication",
+    "team collaboration"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

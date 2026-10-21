@@ -1,0 +1,77 @@
+{
+  "id": "precision_agriculture_drone_monitoring_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Precision agriculture drone monitoring crop fields",
+  "path": "images/technology/precision_agriculture_drone_monitoring_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "agritech",
+    "drone",
+    "precision agriculture",
+    "crop monitoring",
+    "farm tech",
+    "field analytics",
+    "smart farming"
+  ],
+  "concepts": [
+    "agricultural technology",
+    "remote sensing",
+    "precision farming",
+    "crop analytics"
+  ],
+  "subjects": [
+    "drone",
+    "crop field",
+    "analytics overlays",
+    "sunset landscape"
+  ],
+  "actions": [
+    "scanning fields",
+    "monitoring crops"
+  ],
+  "mood": [
+    "optimistic",
+    "innovative",
+    "outdoor",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.36
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "agritech video",
+    "drone technology",
+    "smart farming",
+    "sustainability"
+  ],
+  "avoidFor": [
+    "urban fintech",
+    "quantum lab",
+    "office meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

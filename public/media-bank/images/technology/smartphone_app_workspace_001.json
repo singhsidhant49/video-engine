@@ -1,0 +1,78 @@
+{
+  "id": "smartphone_app_workspace_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Smartphone with modern app interface on desk",
+  "path": "images/technology/smartphone_app_workspace_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "smartphone",
+    "mobile app",
+    "phone",
+    "app interface",
+    "earbuds",
+    "desk",
+    "consumer tech",
+    "device"
+  ],
+  "concepts": [
+    "mobile technology",
+    "consumer apps",
+    "digital product",
+    "app usage",
+    "personal technology"
+  ],
+  "subjects": [
+    "smartphone",
+    "earbuds",
+    "notebook",
+    "desk"
+  ],
+  "actions": [],
+  "mood": [
+    "clean",
+    "minimal",
+    "modern",
+    "bright"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.68,
+      "y": 0.55
+    },
+    "safeTextAreas": [
+      "left",
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "high",
+  "usage": [
+    "mobile app",
+    "consumer technology",
+    "productivity app",
+    "device explainer",
+    "app UI"
+  ],
+  "avoidFor": [
+    "data center",
+    "cybersecurity operations",
+    "programming"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

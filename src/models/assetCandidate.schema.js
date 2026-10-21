@@ -1,0 +1,45 @@
+import { z } from 'zod';
+
+export const AssetCandidateSchema = z.object({
+  id: z.string().min(1),
+  providerId: z.string().min(1),
+  providerAssetId: z.string().optional(),
+  type: z.enum(['image', 'video', 'document', 'screenshot', 'procedural']),
+  sourceUrl: z.string().optional(),
+  localPath: z.string().optional(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
+  durationSeconds: z.number().positive().optional(),
+  label: z.string().nullable().optional(),
+  license: z.unknown().nullable().optional(),
+  query: z.string().optional(),
+  queryStage: z.enum(['EXACT', 'SPECIFIC_VARIANT', 'ENTITY_SUBJECT', 'CONCEPTUAL_FALLBACK']).optional(),
+  metadata: z.object({
+    title: z.string().nullable().optional(),
+    description: z.string().nullable().optional(),
+    tags: z.array(z.string()).default([]),
+    pageTitle: z.string().nullable().optional(),
+    categories: z.array(z.string()).default([]),
+    urlSlug: z.string().nullable().optional(),
+  }).optional(),
+  metadataConfidence: z.number().min(0).max(1).optional(),
+  sourceAuthority: z.number().min(0).max(1).optional(),
+  semanticScores: z.object({
+    relevance: z.number().min(0).max(1),
+    entityMatch: z.number().min(0).max(1),
+    contextMatch: z.number().min(0).max(1),
+    evidenceStrength: z.number().min(0).max(1),
+  }).optional(),
+  presentationScores: z.object({
+    resolution: z.number().min(0).max(1),
+    aspectFitness: z.number().min(0).max(1),
+    cropFitness: z.number().min(0).max(1),
+    subjectPlacement: z.number().min(0).max(1),
+    motionQuality: z.number().min(0).max(1),
+    safeAreaFitness: z.number().min(0).max(1),
+    technicalQuality: z.number().min(0).max(1),
+  }).optional(),
+  stockClichePenalty: z.number().min(0).max(1).default(0),
+}).passthrough().refine((candidate) => candidate.sourceUrl || candidate.localPath || candidate.type === 'procedural', {
+  message: 'A candidate needs sourceUrl, localPath, or procedural media',
+});

@@ -1,0 +1,78 @@
+{
+  "id": "renewable_energy_grid_control_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Renewable energy control center monitoring solar wind and storage",
+  "path": "images/technology/renewable_energy_grid_control_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "renewable energy",
+    "control center",
+    "solar",
+    "wind",
+    "battery storage",
+    "grid analytics",
+    "energy tech"
+  ],
+  "concepts": [
+    "smart grid",
+    "clean energy monitoring",
+    "renewable operations",
+    "energy management"
+  ],
+  "subjects": [
+    "operator",
+    "dashboards",
+    "solar farm",
+    "wind turbines",
+    "battery systems"
+  ],
+  "actions": [
+    "monitoring grid",
+    "analyzing energy data"
+  ],
+  "mood": [
+    "professional",
+    "clean",
+    "optimistic",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "energy explainer",
+    "renewables video",
+    "grid technology",
+    "sustainability intro"
+  ],
+  "avoidFor": [
+    "fintech retail",
+    "telemedicine",
+    "consumer app"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

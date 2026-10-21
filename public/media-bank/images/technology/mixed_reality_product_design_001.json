@@ -1,0 +1,79 @@
+{
+  "id": "mixed_reality_product_design_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mixed reality product design studio with holographic prototype",
+  "path": "images/technology/mixed_reality_product_design_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "mixed reality",
+    "XR",
+    "AR",
+    "product design",
+    "hologram",
+    "design studio",
+    "prototype",
+    "innovation"
+  ],
+  "concepts": [
+    "spatial computing",
+    "immersive collaboration",
+    "digital prototyping",
+    "future design workflow"
+  ],
+  "subjects": [
+    "designers",
+    "AR headsets",
+    "holographic product",
+    "studio table"
+  ],
+  "actions": [
+    "collaborating",
+    "designing",
+    "manipulating hologram"
+  ],
+  "mood": [
+    "creative",
+    "futuristic",
+    "premium",
+    "collaborative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "XR explainer",
+    "innovation video",
+    "design workflow",
+    "future interface"
+  ],
+  "avoidFor": [
+    "factory maintenance",
+    "medical consultation",
+    "agriculture"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

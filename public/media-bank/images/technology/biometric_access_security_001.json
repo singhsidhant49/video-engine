@@ -1,0 +1,75 @@
+{
+  "id": "biometric_access_security_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Biometric palm-scan access control system",
+  "path": "images/technology/biometric_access_security_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "biometric security",
+    "palm scan",
+    "access control",
+    "cybersecurity",
+    "secure facility",
+    "identity verification"
+  ],
+  "concepts": [
+    "biometric authentication",
+    "physical security",
+    "secure access",
+    "identity technology"
+  ],
+  "subjects": [
+    "hand",
+    "scanner panel",
+    "door access system"
+  ],
+  "actions": [
+    "authenticating",
+    "unlocking access"
+  ],
+  "mood": [
+    "secure",
+    "sleek",
+    "futuristic",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "security explainer",
+    "biometric access",
+    "enterprise security",
+    "identity systems"
+  ],
+  "avoidFor": [
+    "medical consultation",
+    "green energy",
+    "consumer lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

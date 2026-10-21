@@ -1,0 +1,809 @@
+{
+  "version": 3,
+  "videoId": "golden_business_doc",
+  "title": "The Dutch Monopoly That Controls Global Computing",
+  "format": "landscape",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "durationInFrames": 540,
+  "style": "cinematic_documentary",
+  "palette": {
+    "hue": 215,
+    "bg": "hsl(215 18% 5%)",
+    "bgRaised": "hsl(215 18% 10%)",
+    "line": "hsl(215 24% 24%)",
+    "accent": "hsl(215 62% 62%)",
+    "accentSoft": "hsl(215 62% 62% / 0.18)",
+    "counter": "hsl(35 42% 64%)",
+    "negative": "hsl(4 78% 60%)",
+    "positive": "hsl(152 55% 52%)",
+    "text": "#f4efe6",
+    "muted": "#b9b1a4",
+    "shade": "0 0 0"
+  },
+  "clips": [
+    {
+      "id": "c01",
+      "sceneId": "scene_001",
+      "kind": "statement",
+      "family": "statement",
+      "variant": "kinetic",
+      "intensity": 4,
+      "from": 0,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "words": [
+          "One",
+          "Machine",
+          "Rules",
+          "Them",
+          "All"
+        ],
+        "ats": [
+          4,
+          12,
+          20,
+          28,
+          36
+        ],
+        "kicker": "GLOBAL CHOKEPOINT"
+      },
+      "shots": [
+        {
+          "id": "shot_01_01",
+          "storyboardShotId": "shot_01_01",
+          "sceneId": "scene_001",
+          "from": 0,
+          "startFrame": 0,
+          "endFrame": 90,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "statement",
+          "variant": "kinetic",
+          "layout": "statement:kinetic",
+          "presentation": {
+            "family": "statement",
+            "variant": "kinetic",
+            "layout": "statement:kinetic",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "LOW",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "words": [
+              "One",
+              "Machine",
+              "Rules",
+              "Them",
+              "All"
+            ],
+            "ats": [
+              4,
+              12,
+              20,
+              28,
+              36
+            ],
+            "kicker": "GLOBAL CHOKEPOINT"
+          }
+        }
+      ],
+      "narration": "One company builds the machines that power the modern world."
+    },
+    {
+      "id": "c02",
+      "sceneId": "scene_002",
+      "kind": "process",
+      "family": "process",
+      "variant": "flow",
+      "intensity": 4,
+      "from": 90,
+      "durationInFrames": 120,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "steps": [
+          {
+            "title": "Tin Droplets",
+            "detail": "50,000 droplets per second in vacuum"
+          },
+          {
+            "title": "Laser Excitation",
+            "detail": "CO2 pulse vaporizes droplet to plasma"
+          },
+          {
+            "title": "EUV Light",
+            "detail": "Emits 13.5 nanometer wavelength"
+          }
+        ],
+        "ats": [
+          6,
+          45,
+          85
+        ]
+      },
+      "shots": [
+        {
+          "id": "shot_02_01",
+          "storyboardShotId": "shot_02_01",
+          "sceneId": "scene_002",
+          "from": 0,
+          "startFrame": 90,
+          "endFrame": 210,
+          "durationInFrames": 120,
+          "role": "subject",
+          "family": "process",
+          "variant": "flow",
+          "layout": "process:flow",
+          "presentation": {
+            "family": "process",
+            "variant": "flow",
+            "layout": "process:flow",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "steps": [
+              {
+                "title": "Tin Droplets",
+                "detail": "50,000 droplets per second in vacuum"
+              },
+              {
+                "title": "Laser Excitation",
+                "detail": "CO2 pulse vaporizes droplet to plasma"
+              },
+              {
+                "title": "EUV Light",
+                "detail": "Emits 13.5 nanometer wavelength"
+              }
+            ],
+            "ats": [
+              6,
+              45,
+              85
+            ]
+          }
+        }
+      ],
+      "narration": "The light generation process requires molten tin vaporized fifty thousand times per second."
+    },
+    {
+      "id": "c03",
+      "sceneId": "scene_003",
+      "kind": "stat",
+      "family": "stat",
+      "variant": "hero",
+      "intensity": 4,
+      "from": 210,
+      "durationInFrames": 90,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "value": "150",
+        "prefix": "$",
+        "suffix": " million",
+        "label": "Average cost per EUV machine",
+        "direction": "up",
+        "at": 6,
+        "countFrames": 24,
+        "kicker": "CAPITAL INTENSITY"
+      },
+      "shots": [
+        {
+          "id": "shot_03_01",
+          "storyboardShotId": "shot_03_01",
+          "sceneId": "scene_003",
+          "from": 0,
+          "startFrame": 210,
+          "endFrame": 300,
+          "durationInFrames": 90,
+          "role": "subject",
+          "family": "stat",
+          "variant": "hero",
+          "layout": "stat:hero",
+          "presentation": {
+            "family": "stat",
+            "variant": "hero",
+            "layout": "stat:hero",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "MEDIUM",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "value": "150",
+            "prefix": "$",
+            "suffix": " million",
+            "label": "Average cost per EUV machine",
+            "direction": "up",
+            "at": 6,
+            "countFrames": 24,
+            "kicker": "CAPITAL INTENSITY"
+          }
+        }
+      ],
+      "narration": "Each system costs more than one hundred and fifty million dollars."
+    },
+    {
+      "id": "c04",
+      "sceneId": "scene_004",
+      "kind": "list",
+      "family": "list",
+      "variant": "ledger",
+      "intensity": 4,
+      "from": 300,
+      "durationInFrames": 120,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "title": "TOP FAB CUSTOMERS",
+        "items": [
+          "Taiwan Semiconductor (TSMC)",
+          "Samsung Electronics",
+          "Intel Foundry"
+        ],
+        "ats": [
+          8,
+          48,
+          86
+        ]
+      },
+      "shots": [
+        {
+          "id": "shot_04_01",
+          "storyboardShotId": "shot_04_01",
+          "sceneId": "scene_004",
+          "from": 0,
+          "startFrame": 300,
+          "endFrame": 420,
+          "durationInFrames": 120,
+          "role": "subject",
+          "family": "list",
+          "variant": "ledger",
+          "layout": "list:ledger",
+          "presentation": {
+            "family": "list",
+            "variant": "ledger",
+            "layout": "list:ledger",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "HIGH",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "title": "TOP FAB CUSTOMERS",
+            "items": [
+              "Taiwan Semiconductor (TSMC)",
+              "Samsung Electronics",
+              "Intel Foundry"
+            ],
+            "ats": [
+              8,
+              48,
+              86
+            ]
+          }
+        }
+      ],
+      "narration": "The entire semiconductor industry depends entirely on this supply chain."
+    },
+    {
+      "id": "c05",
+      "sceneId": "scene_005",
+      "kind": "document",
+      "family": "document",
+      "variant": "default",
+      "intensity": 4,
+      "from": 420,
+      "durationInFrames": 120,
+      "cutAt": 0,
+      "enter": {
+        "type": "cut",
+        "frames": 0
+      },
+      "exit": {
+        "type": "cut",
+        "frames": 0
+      },
+      "bed": null,
+      "texture": null,
+      "overlay": {
+        "source": "STRATEGIC EXPORT DIRECTIVE",
+        "headline": "Direct export restrictions enacted on advanced extreme ultraviolet tools.",
+        "date": "SEPTEMBER 2024",
+        "highlightAt": 14
+      },
+      "shots": [
+        {
+          "id": "shot_05_01",
+          "storyboardShotId": "shot_05_01",
+          "sceneId": "scene_005",
+          "from": 0,
+          "startFrame": 420,
+          "endFrame": 540,
+          "durationInFrames": 120,
+          "role": "subject",
+          "family": "document",
+          "variant": "default",
+          "layout": "document:default",
+          "presentation": {
+            "family": "document",
+            "variant": "default",
+            "layout": "document:default",
+            "cameraMove": "static",
+            "movementState": "STATIC",
+            "visualDensity": "MEDIUM",
+            "overlayMode": "primary"
+          },
+          "asset": null,
+          "assets": [],
+          "move": {
+            "type": "static",
+            "scale": [
+              1,
+              1
+            ],
+            "focus": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ]
+          },
+          "overlay": {
+            "source": "STRATEGIC EXPORT DIRECTIVE",
+            "headline": "Direct export restrictions enacted on advanced extreme ultraviolet tools.",
+            "date": "SEPTEMBER 2024",
+            "highlightAt": 14
+          }
+        }
+      ],
+      "narration": "Governments have classified these systems as sovereign security assets."
+    }
+  ],
+  "realizedShots": [
+    {
+      "id": "shot_01_01",
+      "storyboardShotId": "shot_01_01",
+      "sceneId": "scene_001",
+      "from": 0,
+      "startFrame": 0,
+      "endFrame": 90,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "statement",
+      "variant": "kinetic",
+      "layout": "statement:kinetic",
+      "presentation": {
+        "family": "statement",
+        "variant": "kinetic",
+        "layout": "statement:kinetic",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "LOW",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "words": [
+          "One",
+          "Machine",
+          "Rules",
+          "Them",
+          "All"
+        ],
+        "ats": [
+          4,
+          12,
+          20,
+          28,
+          36
+        ],
+        "kicker": "GLOBAL CHOKEPOINT"
+      }
+    },
+    {
+      "id": "shot_02_01",
+      "storyboardShotId": "shot_02_01",
+      "sceneId": "scene_002",
+      "from": 0,
+      "startFrame": 90,
+      "endFrame": 210,
+      "durationInFrames": 120,
+      "role": "subject",
+      "family": "process",
+      "variant": "flow",
+      "layout": "process:flow",
+      "presentation": {
+        "family": "process",
+        "variant": "flow",
+        "layout": "process:flow",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "steps": [
+          {
+            "title": "Tin Droplets",
+            "detail": "50,000 droplets per second in vacuum"
+          },
+          {
+            "title": "Laser Excitation",
+            "detail": "CO2 pulse vaporizes droplet to plasma"
+          },
+          {
+            "title": "EUV Light",
+            "detail": "Emits 13.5 nanometer wavelength"
+          }
+        ],
+        "ats": [
+          6,
+          45,
+          85
+        ]
+      }
+    },
+    {
+      "id": "shot_03_01",
+      "storyboardShotId": "shot_03_01",
+      "sceneId": "scene_003",
+      "from": 0,
+      "startFrame": 210,
+      "endFrame": 300,
+      "durationInFrames": 90,
+      "role": "subject",
+      "family": "stat",
+      "variant": "hero",
+      "layout": "stat:hero",
+      "presentation": {
+        "family": "stat",
+        "variant": "hero",
+        "layout": "stat:hero",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "MEDIUM",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "value": "150",
+        "prefix": "$",
+        "suffix": " million",
+        "label": "Average cost per EUV machine",
+        "direction": "up",
+        "at": 6,
+        "countFrames": 24,
+        "kicker": "CAPITAL INTENSITY"
+      }
+    },
+    {
+      "id": "shot_04_01",
+      "storyboardShotId": "shot_04_01",
+      "sceneId": "scene_004",
+      "from": 0,
+      "startFrame": 300,
+      "endFrame": 420,
+      "durationInFrames": 120,
+      "role": "subject",
+      "family": "list",
+      "variant": "ledger",
+      "layout": "list:ledger",
+      "presentation": {
+        "family": "list",
+        "variant": "ledger",
+        "layout": "list:ledger",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "HIGH",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "title": "TOP FAB CUSTOMERS",
+        "items": [
+          "Taiwan Semiconductor (TSMC)",
+          "Samsung Electronics",
+          "Intel Foundry"
+        ],
+        "ats": [
+          8,
+          48,
+          86
+        ]
+      }
+    },
+    {
+      "id": "shot_05_01",
+      "storyboardShotId": "shot_05_01",
+      "sceneId": "scene_005",
+      "from": 0,
+      "startFrame": 420,
+      "endFrame": 540,
+      "durationInFrames": 120,
+      "role": "subject",
+      "family": "document",
+      "variant": "default",
+      "layout": "document:default",
+      "presentation": {
+        "family": "document",
+        "variant": "default",
+        "layout": "document:default",
+        "cameraMove": "static",
+        "movementState": "STATIC",
+        "visualDensity": "MEDIUM",
+        "overlayMode": "primary"
+      },
+      "asset": null,
+      "assets": [],
+      "move": {
+        "type": "static",
+        "scale": [
+          1,
+          1
+        ],
+        "focus": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      },
+      "overlay": {
+        "source": "STRATEGIC EXPORT DIRECTIVE",
+        "headline": "Direct export restrictions enacted on advanced extreme ultraviolet tools.",
+        "date": "SEPTEMBER 2024",
+        "highlightAt": 14
+      }
+    }
+  ],
+  "cutOverlays": [
+    {
+      "type": "fadeIn",
+      "frame": 0,
+      "frames": 12
+    },
+    {
+      "type": "fadeOut",
+      "frame": 540,
+      "frames": 16
+    }
+  ],
+  "captions": {
+    "mode": "phrase",
+    "hidden": [],
+    "chunks": [
+      {
+        "id": 0,
+        "startFrame": 4,
+        "endFrame": 60,
+        "words": [
+          {
+            "index": 0,
+            "text": "The",
+            "startFrame": 4,
+            "endFrame": 12
+          },
+          {
+            "index": 0,
+            "text": "hidden",
+            "startFrame": 12,
+            "endFrame": 20
+          },
+          {
+            "index": 0,
+            "text": "monopoly.",
+            "startFrame": 22,
+            "endFrame": 30
+          }
+        ]
+      }
+    ]
+  },
+  "audio": {
+    "narration": null,
+    "bgm": null,
+    "sfx": [],
+    "speech": []
+  }
+}

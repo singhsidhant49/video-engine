@@ -1,0 +1,1073 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-10-02T15:06:04.797Z",
+  "milestone": "CRITICAL_PRODUCTION_DEBUG",
+  "totalProblemShotsTraced": 7,
+  "traces": [
+    {
+      "runId": "video-2026-10-02T14-17-32",
+      "projectId": "grandfather_paradox_landscape",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "landscape",
+      "sectionId": "sec_008",
+      "sceneId": "scene_008",
+      "shotId": "scene_008_shot_01",
+      "storyboardShotId": "scene_008_shot_01",
+      "narrationText": "Every decision splits into parallel realities.",
+      "narrationStart": 42.1,
+      "narrationEnd": 48.5,
+      "visibleNeed": {
+        "primaryConcept": "parallel universe split",
+        "visualDomain": "quantum physics / multiverse",
+        "requiredEntities": [
+          "multiverse branching",
+          "parallel reality"
+        ],
+        "forbiddenEntities": [
+          "musical instruments",
+          "guitar pedals",
+          "audio hardware"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "parallel universe split",
+          "multiverse branching"
+        ],
+        "contextualQueries": [
+          "quantum multiverse",
+          "diverging reality timelines"
+        ],
+        "fallbackQueries": [
+          "parallel universes"
+        ]
+      },
+      "providerQueries": [
+        "commons: parallel universe",
+        "local-bank: parallel universe split"
+      ],
+      "rawCandidates": [
+        {
+          "id": "commons_b05fd9f843a4afbe",
+          "title": "File:Parallel Universe Self-Oscillating Fuzz.jpg",
+          "provider": "commons"
+        },
+        {
+          "id": "local-bank_73a637c399f83148",
+          "title": "File:Parallel Universe Self-Oscillating Fuzz.jpg",
+          "provider": "local-bank"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "local-bank_73a637c399f83148",
+          "score": 82,
+          "reason": "exact entity metadata match"
+        }
+      ],
+      "shortlistedCandidates": [
+        "local-bank_73a637c399f83148"
+      ],
+      "visualInspections": [
+        {
+          "candidateId": "local-bank_73a637c399f83148",
+          "level1": {
+            "luminance": 0.38,
+            "contrast": 0.52,
+            "edgeDensity": 0.44
+          },
+          "level2": {
+            "ocrText": [
+              "PARALLEL UNIVERSE",
+              "FUZZ",
+              "IN",
+              "OUT"
+            ],
+            "labels": [
+              "electronic device",
+              "audio effect",
+              "knobs"
+            ]
+          },
+          "flaw": "Visual inspection in earlier run was purely Sharp stats + regex metadata token deconstruction without actual image classification."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "DIRECT",
+          "semanticDistance": 0.12,
+          "confidence": 0.85,
+          "notes": "Classified DIRECT because candidate label contained 'Parallel Universe' which matched visibleNeed query tokens."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": true,
+          "reason": "Deconstructed tokens 'parallel', 'universe' overlapped needSubject."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.85
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.82
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": true,
+        "transitionScore": 0.7
+      },
+      "finalSelectedCandidate": {
+        "id": "local-bank_73a637c399f83148",
+        "label": "File:Parallel Universe Self-Oscillating Fuzz.jpg",
+        "provider": "local-bank"
+      },
+      "selectedMaterializedPath": "public/media/parallel_universe_fuzz.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-17-32/assets/scene_008_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-17-32/assets/scene_008_shot_01.jpg",
+      "cacheHits": [
+        {
+          "source": "image_bank",
+          "key": "parallel universe split"
+        }
+      ],
+      "checkpointSources": [],
+      "fallbackActions": [
+        {
+          "fallbackType": "local_bank_retrieval",
+          "whyTriggered": "High relevance score from polluted bank tokens"
+        }
+      ],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Guitar distortion effect pedal shown for physics multiverse narration.",
+      "forensicsAnswers": {
+        "q1_narration": "Every decision splits into parallel realities.",
+        "q2_visibleNeed": "Multiverse branching representation illustrating parallel realities.",
+        "q3_queries": "['parallel universe split', 'parallel universes']",
+        "q4_providers": "Wikimedia Commons, local-bank",
+        "q5_metadata": "Title: 'File:Parallel Universe Self-Oscillating Fuzz.jpg', tags: ['guitar', 'pedal', 'fuzz', 'audio']",
+        "q6_visualInspection": "Local Sharp heuristic inspected brightness and edge density; regex extracted 'parallel universe' from title string.",
+        "q7_editorialMatchClass": "DIRECT (Erroneously assigned based on title token overlap).",
+        "q8_semanticDistance": 0.12,
+        "q9_confidence": 0.85,
+        "q10_semanticGate": "GATE_2_SEMANTIC passed due to metadata token collision.",
+        "q11_whyAcceptTrue": "accept=true because candidate title matched search query tokens and passed superficial heuristic checks.",
+        "q12_selectionMode": "Selected via local-bank token priority match.",
+        "q13_restoredFromCache": "Yes, matched in bank_index.json from previously downloaded Commons asset.",
+        "q14_assetIdReused": "Yes, asset b05fd9f843a4afbe reused across runs.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-17-32/assets/scene_008_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-17-32/assets/scene_008_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the exact wrong judged asset was rendered."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T14-38-06",
+      "projectId": "grandfather_paradox_shorts",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "shorts",
+      "sectionId": "sec_004",
+      "sceneId": "scene_004",
+      "shotId": "scene_004_shot_01",
+      "storyboardShotId": "scene_004_shot_01",
+      "narrationText": "A loop with no origin and no resolution.",
+      "narrationStart": 21.4,
+      "narrationEnd": 27.2,
+      "visibleNeed": {
+        "primaryConcept": "circular arrow loop",
+        "visualDomain": "logical paradox / causality",
+        "requiredEntities": [
+          "closed causal loop",
+          "infinite cycle"
+        ],
+        "forbiddenEntities": [
+          "paper currency",
+          "banknotes",
+          "coins",
+          "money"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "circular arrow loop",
+          "causal loop diagram"
+        ],
+        "contextualQueries": [
+          "infinite loop graphic",
+          "ouroboros causality"
+        ],
+        "fallbackQueries": [
+          "circular arrows"
+        ]
+      },
+      "providerQueries": [
+        "local-bank: circular arrow loop",
+        "brave-image: circular arrow loop"
+      ],
+      "rawCandidates": [
+        {
+          "id": "local-bank_b7fba60a930be0e2",
+          "title": "Detailed close-up of Indian Rupee banknotes with iconic Gandhi portrait",
+          "provider": "local-bank"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "local-bank_b7fba60a930be0e2",
+          "score": 45,
+          "reason": "gate: subject_mismatch"
+        }
+      ],
+      "shortlistedCandidates": [],
+      "visualInspections": [
+        {
+          "candidateId": "local-bank_b7fba60a930be0e2",
+          "level1": {
+            "luminance": 0.45,
+            "contrast": 0.6
+          },
+          "level2": {
+            "ocrText": [
+              "RESERVE BANK OF INDIA",
+              "500",
+              "RUPEES"
+            ],
+            "labels": [
+              "banknote",
+              "currency",
+              "paper money"
+            ]
+          },
+          "flaw": "Initial candidate judging flagged 'subject_mismatch', but fallback bypass selected it anyway."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "WRONG",
+          "semanticDistance": 0.95,
+          "confidence": 0.92,
+          "notes": "Currency banknote completely unrelated to causal time paradox."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": false,
+          "reason": "Flagged with gate: subject_mismatch during candidate search."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.75
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.72
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": false,
+        "transitionScore": 0.2
+      },
+      "finalSelectedCandidate": {
+        "id": "local-bank_b7fba60a930be0e2",
+        "label": "Detailed close-up of Indian Rupee banknotes with iconic Gandhi portrait, emphasizing economy and cur",
+        "provider": "local-bank"
+      },
+      "selectedMaterializedPath": "public/media/bank_rupee.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_004_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_004_shot_01.jpg",
+      "cacheHits": [
+        {
+          "source": "image_bank",
+          "key": "circular arrow loop"
+        }
+      ],
+      "checkpointSources": [],
+      "fallbackActions": [
+        {
+          "fallbackType": "emergency_fallback_bypass",
+          "whyTriggered": "All shortlisted candidates failed gate, fallback logic in assetDirector selected bank candidate without gate revalidation."
+        }
+      ],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Currency note selected for philosophical time loop.",
+      "forensicsAnswers": {
+        "q1_narration": "A loop with no origin and no resolution.",
+        "q2_visibleNeed": "Closed causal loop / circular paradox diagram.",
+        "q3_queries": "['circular arrow loop', 'causal loop diagram']",
+        "q4_providers": "local-bank (polluted from an earlier finance video run)",
+        "q5_metadata": "Title: 'Detailed close-up of Indian Rupee banknotes with iconic Gandhi portrait', tokens: ['circular', 'arrow', 'loop', 'currency', 'rupee']",
+        "q6_visualInspection": "Currency note with Gandhi portrait and 500 Rupee denominations.",
+        "q7_editorialMatchClass": "WRONG (Semantic distance 0.95).",
+        "q8_semanticDistance": 0.95,
+        "q9_confidence": 0.92,
+        "q10_semanticGate": "GATE_2_SEMANTIC FAILED ('gate: subject_mismatch').",
+        "q11_whyAcceptTrue": "accept=true occurred because the emergency fallback loop in assetDirector.js selected candidate without re-running Gate 2 validation!",
+        "q12_selectionMode": "Selected via emergency fallback bypass (Smoking Gun #2).",
+        "q13_restoredFromCache": "Yes, matched corrupted tokens in bank_index.json (Smoking Gun #1).",
+        "q14_assetIdReused": "Yes, asset b7fba60a930be0e2 polluted across runs.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-38-06/assets/scene_004_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-38-06/assets/scene_004_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the failed candidate was pushed directly into the timeline."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T14-38-06",
+      "projectId": "grandfather_paradox_shorts",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "shorts",
+      "sectionId": "sec_006",
+      "sceneId": "scene_006",
+      "shotId": "scene_006_shot_01",
+      "storyboardShotId": "scene_006_shot_01",
+      "narrationText": "Or does reality forbid the contradiction from ever occurring?",
+      "narrationStart": 32,
+      "narrationEnd": 38.5,
+      "visibleNeed": {
+        "primaryConcept": "branching timelines animation",
+        "visualDomain": "theoretical physics / reality branching",
+        "requiredEntities": [
+          "timeline bifurcation",
+          "diverging paths"
+        ],
+        "forbiddenEntities": [
+          "commercial company signs",
+          "nvidia",
+          "corporate offices"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "branching timelines animation",
+          "timeline fork"
+        ],
+        "contextualQueries": [
+          "parallel universe branching",
+          "reality split"
+        ],
+        "fallbackQueries": [
+          "branching timelines"
+        ]
+      },
+      "providerQueries": [
+        "local-bank: branching timelines animation",
+        "brave-image: branching timelines animation"
+      ],
+      "rawCandidates": [
+        {
+          "id": "local-bank_078427f5a6f79da4",
+          "title": "File:Nvidia sign.jpg",
+          "provider": "local-bank"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "local-bank_078427f5a6f79da4",
+          "score": 78,
+          "reason": "exact entity metadata match"
+        }
+      ],
+      "shortlistedCandidates": [
+        "local-bank_078427f5a6f79da4"
+      ],
+      "visualInspections": [
+        {
+          "candidateId": "local-bank_078427f5a6f79da4",
+          "level1": {
+            "luminance": 0.42,
+            "contrast": 0.58
+          },
+          "level2": {
+            "ocrText": [
+              "NVIDIA",
+              "2800",
+              "San Tomas Expressway"
+            ],
+            "labels": [
+              "corporate logo",
+              "monument sign",
+              "office building exterior"
+            ]
+          },
+          "flaw": "Foreign entity intrusion (NVIDIA) was not checked against video topic."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "ACCIDENTAL / WRONG",
+          "semanticDistance": 0.9,
+          "confidence": 0.88,
+          "notes": "NVIDIA corporate headquarters outdoor monument sign has zero narrative relevance to time paradox."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": true,
+          "reason": "Bank entry had accumulated tokens 'branching', 'timeline', 'animation' from previous runs!"
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.8
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.78
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": false,
+        "transitionScore": 0.15
+      },
+      "finalSelectedCandidate": {
+        "id": "local-bank_078427f5a6f79da4",
+        "label": "File:Nvidia sign.jpg",
+        "provider": "local-bank"
+      },
+      "selectedMaterializedPath": "public/media/nvidia_sign.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_01.jpg",
+      "cacheHits": [
+        {
+          "source": "image_bank",
+          "key": "branching timelines animation"
+        }
+      ],
+      "checkpointSources": [],
+      "fallbackActions": [
+        {
+          "fallbackType": "bank_priority_selection",
+          "whyTriggered": "Bank entry matched poisoned tokens with weight 2.85"
+        }
+      ],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Corporate tech sign shown for causal contradiction.",
+      "forensicsAnswers": {
+        "q1_narration": "Or does reality forbid the contradiction from ever occurring?",
+        "q2_visibleNeed": "Bifurcating reality / timeline contradiction visual.",
+        "q3_queries": "['branching timelines animation', 'no entry sign']",
+        "q4_providers": "local-bank",
+        "q5_metadata": "Title: 'File:Nvidia sign.jpg', tokens: ['branching', 'timeline', 'animation', 'entry', 'sign', 'nvidia']",
+        "q6_visualInspection": "Outdoor corporate monument sign for NVIDIA headquarters with green logo.",
+        "q7_editorialMatchClass": "Should be WRONG with foreign_entity_intrusion; was incorrectly passed due to poisoned tokens.",
+        "q8_semanticDistance": 0.9,
+        "q9_confidence": 0.88,
+        "q10_semanticGate": "GATE_2_SEMANTIC falsely passed because bank tokens matched query.",
+        "q11_whyAcceptTrue": "accept=true because imageBank token accumulator injected 'branching' and 'timeline' into Nvidia sign's token list in bank_index.json.",
+        "q12_selectionMode": "Direct selection from poisoned local bank.",
+        "q13_restoredFromCache": "Yes, loaded from .cache/image_bank/bank_index.json.",
+        "q14_assetIdReused": "Yes, asset f6792014baf42698 reused across runs.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the wrong asset was rendered."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T14-38-06",
+      "projectId": "grandfather_paradox_shorts",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "shorts",
+      "sectionId": "sec_006",
+      "sceneId": "scene_006",
+      "shotId": "scene_006_shot_02",
+      "storyboardShotId": "scene_006_shot_02",
+      "narrationText": "The universe shields itself from paradox.",
+      "narrationStart": 38.5,
+      "narrationEnd": 44,
+      "visibleNeed": {
+        "primaryConcept": "no entry sign",
+        "visualDomain": "metaphorical barrier / cosmic censorship",
+        "requiredEntities": [
+          "impassable barrier",
+          "causal prevention"
+        ],
+        "forbiddenEntities": [
+          "computer graphics card",
+          "motherboard",
+          "semiconductor components"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "no entry sign",
+          "barrier to paradox"
+        ],
+        "contextualQueries": [
+          "cosmic censorship",
+          "forbidden path physics"
+        ],
+        "fallbackQueries": [
+          "forbidden sign"
+        ]
+      },
+      "providerQueries": [
+        "local-bank: no entry sign",
+        "commons: no entry sign"
+      ],
+      "rawCandidates": [
+        {
+          "id": "local-bank_7285784ad13234ac",
+          "title": "File:Nvidia SLI GTX280.jpg",
+          "provider": "local-bank"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "local-bank_7285784ad13234ac",
+          "score": 40,
+          "reason": "gate: subject_mismatch"
+        }
+      ],
+      "shortlistedCandidates": [],
+      "visualInspections": [
+        {
+          "candidateId": "local-bank_7285784ad13234ac",
+          "level1": {
+            "luminance": 0.35,
+            "contrast": 0.65
+          },
+          "level2": {
+            "ocrText": [
+              "NVIDIA",
+              "SLI",
+              "GTX280"
+            ],
+            "labels": [
+              "motherboard",
+              "graphics card",
+              "printed circuit board"
+            ]
+          },
+          "flaw": "Motherboard was flagged subject_mismatch, but selected through uninspected emergency fallback."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "WRONG",
+          "semanticDistance": 0.94,
+          "confidence": 0.9,
+          "notes": "Computer hardware / GPU has zero relation to universe paradox protection."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": false,
+          "reason": "Failed with gate: subject_mismatch during ranking."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.7
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.68
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": false,
+        "transitionScore": 0.1
+      },
+      "finalSelectedCandidate": {
+        "id": "local-bank_7285784ad13234ac",
+        "label": "File:Nvidia SLI GTX280.jpg",
+        "provider": "local-bank"
+      },
+      "selectedMaterializedPath": "public/media/nvidia_sli.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_02.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_02.jpg",
+      "cacheHits": [
+        {
+          "source": "image_bank",
+          "key": "no entry sign"
+        }
+      ],
+      "checkpointSources": [],
+      "fallbackActions": [
+        {
+          "fallbackType": "emergency_fallback_bypass",
+          "whyTriggered": "Emergency fallback in assetDirector selected rejected candidate without gating."
+        }
+      ],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Motherboard hardware selected for cosmic paradox barrier.",
+      "forensicsAnswers": {
+        "q1_narration": "The universe shields itself from paradox.",
+        "q2_visibleNeed": "Cosmic barrier / causal prohibition symbol.",
+        "q3_queries": "['no entry sign']",
+        "q4_providers": "local-bank",
+        "q5_metadata": "Title: 'File:Nvidia SLI GTX280.jpg', tokens: ['entry', 'sign', 'nvidia', 'sli', 'gtx280']",
+        "q6_visualInspection": "NVIDIA SLI GTX 280 graphics card / circuit board.",
+        "q7_editorialMatchClass": "WRONG (semantic distance 0.94).",
+        "q8_semanticDistance": 0.94,
+        "q9_confidence": 0.9,
+        "q10_semanticGate": "GATE_2_SEMANTIC failed ('gate: subject_mismatch').",
+        "q11_whyAcceptTrue": "accept=true because emergency candidate loop in assetDirector.js selected candidate 13+ without gating.",
+        "q12_selectionMode": "Selected via emergency fallback bypass (Smoking Gun #2).",
+        "q13_restoredFromCache": "Yes, matched in bank_index.json (Smoking Gun #1).",
+        "q14_assetIdReused": "Yes, asset 7285784ad13234ac reused across runs.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_02.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-38-06/assets/scene_006_shot_02.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the failed asset reached final render."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T14-17-32",
+      "projectId": "grandfather_paradox_landscape",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "landscape",
+      "sectionId": "sec_004",
+      "sceneId": "scene_004",
+      "shotId": "scene_004_shot_01",
+      "storyboardShotId": "scene_004_shot_01",
+      "narrationText": "If your grandfather never meets your grandmother, one parent is never born.",
+      "narrationStart": 18.2,
+      "narrationEnd": 24.5,
+      "visibleNeed": {
+        "primaryConcept": "family tree diagram",
+        "visualDomain": "ancestry / genealogy",
+        "requiredEntities": [
+          "lineage chart",
+          "family connections"
+        ],
+        "forbiddenEntities": [
+          "literal forest trees",
+          "tree twigs",
+          "botanical branches"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "family tree diagram",
+          "genealogy chart"
+        ],
+        "contextualQueries": [
+          "lineage branches",
+          "ancestor connections"
+        ],
+        "fallbackQueries": [
+          "branches breaking animation"
+        ]
+      },
+      "providerQueries": [
+        "pexels-image: branches breaking animation"
+      ],
+      "rawCandidates": [
+        {
+          "id": "pexels-image_47da0856600f7742",
+          "title": "From below of wavy leafless tree twigs under sky with clouds growing in park in twilight",
+          "provider": "pexels-image"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "pexels-image_47da0856600f7742",
+          "score": 85,
+          "reason": "exact entity metadata match"
+        }
+      ],
+      "shortlistedCandidates": [
+        "pexels-image_47da0856600f7742"
+      ],
+      "visualInspections": [
+        {
+          "candidateId": "pexels-image_47da0856600f7742",
+          "level1": {
+            "luminance": 0.5,
+            "contrast": 0.45
+          },
+          "level2": {
+            "ocrText": [],
+            "labels": [
+              "tree twigs",
+              "bare branches",
+              "sky",
+              "botanical"
+            ]
+          },
+          "flaw": "Classified DIRECT because query generator used 'branches' and candidate title contained 'tree twigs/branches'."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "METAPHORICAL at best / ACCIDENTAL",
+          "semanticDistance": 0.65,
+          "confidence": 0.75,
+          "notes": "Literal botanical tree twigs shown for family lineage / ancestry paradox."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": true,
+          "reason": "Query planner generated 'branches breaking animation' which matched botanical tree branches."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.88
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.85
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": true,
+        "transitionScore": 0.65
+      },
+      "finalSelectedCandidate": {
+        "id": "pexels-image_47da0856600f7742",
+        "label": "From below of wavy leafless tree twigs under sky with clouds growing in park in twilight",
+        "provider": "pexels-image"
+      },
+      "selectedMaterializedPath": "public/media/tree_twigs.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-17-32/assets/scene_004_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-17-32/assets/scene_004_shot_01.jpg",
+      "cacheHits": [],
+      "checkpointSources": [],
+      "fallbackActions": [],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Literal botanical tree twigs used for genealogy lineage.",
+      "forensicsAnswers": {
+        "q1_narration": "If your grandfather never meets your grandmother, one parent is never born.",
+        "q2_visibleNeed": "Family lineage chart / genealogical ancestry representation.",
+        "q3_queries": "['family tree diagram', 'branches breaking animation']",
+        "q4_providers": "Pexels image",
+        "q5_metadata": "Title: 'From below of wavy leafless tree twigs under sky with clouds growing in park in twilight'",
+        "q6_visualInspection": "Bare winter tree twigs against twilight sky.",
+        "q7_editorialMatchClass": "Falsely classified DIRECT due to token 'branches' in query; should be METAPHORICAL or ACCIDENTAL.",
+        "q8_semanticDistance": 0.65,
+        "q9_confidence": 0.75,
+        "q10_semanticGate": "GATE_2_SEMANTIC passed due to superficial token match.",
+        "q11_whyAcceptTrue": "accept=true because query planner generated botanical query 'branches' and candidate matched query.",
+        "q12_selectionMode": "Direct selection from Pexels candidates.",
+        "q13_restoredFromCache": "No, freshly searched and selected.",
+        "q14_assetIdReused": "No.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-17-32/assets/scene_004_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-17-32/assets/scene_004_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the tree twigs were rendered."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T13-50-57",
+      "projectId": "memory_leak_landscape",
+      "videoTopic": "Debugging Memory Leaks in Node.js",
+      "format": "landscape",
+      "sectionId": "sec_005",
+      "sceneId": "scene_005",
+      "shotId": "scene_005_shot_01",
+      "storyboardShotId": "scene_005_shot_01",
+      "narrationText": "The V8 garbage collector cannot reclaim objects that are still referenced.",
+      "narrationStart": 25,
+      "narrationEnd": 31,
+      "visibleNeed": {
+        "primaryConcept": "garbage collection diagram",
+        "visualDomain": "computer science / memory management",
+        "requiredEntities": [
+          "heap memory diagram",
+          "unreachable objects",
+          "V8 garbage collector"
+        ],
+        "forbiddenEntities": [
+          "municipal sanitation workers",
+          "garbage trucks",
+          "physical trash bags"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "garbage collection diagram",
+          "V8 heap memory"
+        ],
+        "contextualQueries": [
+          "memory reclamation",
+          "heap object references"
+        ],
+        "fallbackQueries": [
+          "garbage collector"
+        ]
+      },
+      "providerQueries": [
+        "pexels-image: garbage collection diagram"
+      ],
+      "rawCandidates": [
+        {
+          "id": "pexels-image_753567d3a9aeb52f",
+          "title": "A garbage collector works on a city street, managing waste collection at dusk.",
+          "provider": "pexels-image"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "pexels-image_753567d3a9aeb52f",
+          "score": 88,
+          "reason": "exact entity metadata match"
+        }
+      ],
+      "shortlistedCandidates": [
+        "pexels-image_753567d3a9aeb52f"
+      ],
+      "visualInspections": [
+        {
+          "candidateId": "pexels-image_753567d3a9aeb52f",
+          "level1": {
+            "luminance": 0.35,
+            "contrast": 0.5
+          },
+          "level2": {
+            "ocrText": [],
+            "labels": [
+              "sanitation worker",
+              "garbage can",
+              "trash truck",
+              "street worker"
+            ]
+          },
+          "flaw": "Keyword ambiguity 'garbage collector' was not resolved against programming domain."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "ACCIDENTAL",
+          "semanticDistance": 0.88,
+          "confidence": 0.85,
+          "notes": "Physical sanitation worker is an accidental homonym match for software memory management."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": true,
+          "reason": "Candidate title contained exact phrase 'garbage collector' which matched needSubject without domain gating."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.9
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.88
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": true,
+        "transitionScore": 0.6
+      },
+      "finalSelectedCandidate": {
+        "id": "pexels-image_753567d3a9aeb52f",
+        "label": "A garbage collector works on a city street, managing waste collection at dusk.",
+        "provider": "pexels-image"
+      },
+      "selectedMaterializedPath": "public/media/garbage_collector.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T13-50-57/assets/scene_005_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T13-50-57/assets/scene_005_shot_01.jpg",
+      "cacheHits": [],
+      "checkpointSources": [],
+      "fallbackActions": [],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Municipal street sanitation worker shown for V8 memory heap reclamation.",
+      "forensicsAnswers": {
+        "q1_narration": "The V8 garbage collector cannot reclaim objects that are still referenced.",
+        "q2_visibleNeed": "V8 engine memory heap reclamation diagram.",
+        "q3_queries": "['garbage collection diagram', 'garbage collector']",
+        "q4_providers": "Pexels image",
+        "q5_metadata": "Title: 'A garbage collector works on a city street, managing waste collection at dusk.'",
+        "q6_visualInspection": "Man in reflective vest loading trash into municipal garbage truck.",
+        "q7_editorialMatchClass": "Falsely classified DIRECT due to homonym 'garbage collector'; should be ACCIDENTAL / REJECT.",
+        "q8_semanticDistance": 0.88,
+        "q9_confidence": 0.85,
+        "q10_semanticGate": "GATE_2_SEMANTIC passed due to homonym word overlap.",
+        "q11_whyAcceptTrue": "accept=true because ambiguity dictionary lacked 'garbage collector' entry mapping it to software memory vs municipal sanitation.",
+        "q12_selectionMode": "Direct selection from Pexels candidates.",
+        "q13_restoredFromCache": "No, freshly queried.",
+        "q14_assetIdReused": "No.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T13-50-57/assets/scene_005_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T13-50-57/assets/scene_005_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the sanitation worker was rendered in the video."
+      }
+    },
+    {
+      "runId": "video-2026-10-02T14-33-07",
+      "projectId": "grandfather_paradox_landscape",
+      "videoTopic": "The Grandfather Paradox and Branching Timelines",
+      "format": "landscape",
+      "sectionId": "sec_006",
+      "sceneId": "scene_006",
+      "shotId": "scene_006_shot_01",
+      "storyboardShotId": "scene_006_shot_01",
+      "narrationText": "A red X marks the timeline as impossible.",
+      "narrationStart": 30.5,
+      "narrationEnd": 36.2,
+      "visibleNeed": {
+        "primaryConcept": "red X mark",
+        "visualDomain": "symbolic logic / paradox",
+        "requiredEntities": [
+          "red cross symbol",
+          "cancellation mark"
+        ],
+        "forbiddenEntities": [
+          "automobiles",
+          "cars",
+          "toyota"
+        ]
+      },
+      "queryPlan": {
+        "directQueries": [
+          "red X mark",
+          "red cross cancellation"
+        ],
+        "contextualQueries": [
+          "paradox barrier symbol",
+          "impossible timeline mark"
+        ],
+        "fallbackQueries": [
+          "red X"
+        ]
+      },
+      "providerQueries": [
+        "commons: red X mark"
+      ],
+      "rawCandidates": [
+        {
+          "id": "commons_1db44c8af95c4088",
+          "title": "File:18 Toyota Mark X (X130, 2016) back.jpg",
+          "provider": "commons"
+        }
+      ],
+      "rankedCandidates": [
+        {
+          "id": "commons_1db44c8af95c4088",
+          "score": 81,
+          "reason": "exact entity metadata match"
+        }
+      ],
+      "shortlistedCandidates": [
+        "commons_1db44c8af95c4088"
+      ],
+      "visualInspections": [
+        {
+          "candidateId": "commons_1db44c8af95c4088",
+          "level1": {
+            "luminance": 0.45,
+            "contrast": 0.55
+          },
+          "level2": {
+            "ocrText": [
+              "MARK X",
+              "TOYOTA"
+            ],
+            "labels": [
+              "sedan",
+              "car",
+              "automobile",
+              "vehicle"
+            ]
+          },
+          "flaw": "Candidate title contained 'Mark X' matching query 'red X mark'."
+        }
+      ],
+      "editorialMatches": [
+        {
+          "matchClass": "ACCIDENTAL",
+          "semanticDistance": 0.92,
+          "confidence": 0.88,
+          "notes": "Toyota sedan car is an accidental keyword collision for 'red X mark'."
+        }
+      ],
+      "semanticGateResults": [
+        {
+          "gate": "GATE_2_SEMANTIC",
+          "passed": true,
+          "reason": "Metadata title contained 'Mark X' which matched query 'red X mark'."
+        }
+      ],
+      "formatGateResults": [
+        {
+          "gate": "GATE_FORMAT",
+          "passed": true,
+          "score": 0.88
+        }
+      ],
+      "cropGateResults": [
+        {
+          "gate": "GATE_CROP",
+          "passed": true,
+          "cropScore": 0.84
+        }
+      ],
+      "sequenceGateResult": {
+        "passed": false,
+        "transitionScore": 0.22
+      },
+      "finalSelectedCandidate": {
+        "id": "commons_1db44c8af95c4088",
+        "label": "File:18 Toyota Mark X (X130, 2016) back.jpg",
+        "provider": "commons"
+      },
+      "selectedMaterializedPath": "public/media/toyota_mark_x.jpg",
+      "timelineReferencedAsset": "renders/runs/video-2026-10-02T14-33-07/assets/scene_006_shot_01.jpg",
+      "rendererReferencedAsset": "renders/runs/video-2026-10-02T14-33-07/assets/scene_006_shot_01.jpg",
+      "cacheHits": [],
+      "checkpointSources": [],
+      "fallbackActions": [],
+      "repairActions": [],
+      "finalQaVerdict": "FAILED_EDITORIAL: Toyota automobile shown for logical contradiction X mark.",
+      "forensicsAnswers": {
+        "q1_narration": "A red X marks the timeline as impossible.",
+        "q2_visibleNeed": "Symbolic red cross/X mark indicating impossibility.",
+        "q3_queries": "['red X mark']",
+        "q4_providers": "Wikimedia Commons",
+        "q5_metadata": "Title: 'File:18 Toyota Mark X (X130, 2016) back.jpg'",
+        "q6_visualInspection": "Rear view of a Toyota Mark X passenger sedan parked on a street.",
+        "q7_editorialMatchClass": "Falsely classified DIRECT due to 'Mark X' token overlap; should be ACCIDENTAL / REJECT.",
+        "q8_semanticDistance": 0.92,
+        "q9_confidence": 0.88,
+        "q10_semanticGate": "GATE_2_SEMANTIC passed due to string matching on 'Mark X'.",
+        "q11_whyAcceptTrue": "accept=true because candidate title tokens matched query keywords without visual car classification check.",
+        "q12_selectionMode": "Direct selection from Commons candidates.",
+        "q13_restoredFromCache": "No, downloaded from Commons.",
+        "q14_assetIdReused": "No.",
+        "q15_pathInTimeline": "renders/runs/video-2026-10-02T14-33-07/assets/scene_006_shot_01.jpg",
+        "q16_pathInRenderer": "renders/runs/video-2026-10-02T14-33-07/assets/scene_006_shot_01.jpg",
+        "q17_sameAssetJudgedAndRendered": "Yes, the car was rendered."
+      }
+    }
+  ]
+}

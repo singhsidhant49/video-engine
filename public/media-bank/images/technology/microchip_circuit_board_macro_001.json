@@ -1,0 +1,76 @@
+{
+  "id": "microchip_circuit_board_macro_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Macro computer microchip on circuit board",
+  "path": "images/technology/microchip_circuit_board_macro_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "microchip",
+    "processor",
+    "CPU",
+    "semiconductor",
+    "circuit board",
+    "hardware",
+    "electronics",
+    "chip"
+  ],
+  "concepts": [
+    "computing hardware",
+    "semiconductors",
+    "processing power",
+    "electronics",
+    "AI hardware"
+  ],
+  "subjects": [
+    "microchip",
+    "circuit board",
+    "electronic components"
+  ],
+  "actions": [],
+  "mood": [
+    "technical",
+    "premium",
+    "futuristic",
+    "detailed"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.67,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "hardware",
+    "AI chips",
+    "semiconductors",
+    "computing performance",
+    "technology background"
+  ],
+  "avoidFor": [
+    "software coding",
+    "team collaboration",
+    "mobile app"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

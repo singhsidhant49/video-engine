@@ -1,0 +1,79 @@
+{
+  "id": "smart_home_control_panel_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern smart home control dashboard at dusk",
+  "path": "images/technology/smart_home_control_panel_001.png",
+  "category": "technology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "smart home",
+    "IoT",
+    "home automation",
+    "control panel",
+    "living room",
+    "security",
+    "climate control",
+    "voice control"
+  ],
+  "concepts": [
+    "connected home",
+    "IoT devices",
+    "smart living",
+    "home automation",
+    "digital control"
+  ],
+  "subjects": [
+    "tablet control panel",
+    "living room",
+    "smart home icons"
+  ],
+  "actions": [
+    "controlling lights",
+    "managing temperature",
+    "home monitoring"
+  ],
+  "mood": [
+    "luxury",
+    "warm",
+    "modern",
+    "connected"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.76,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "smart home video",
+    "IoT explainer",
+    "consumer technology",
+    "connected devices"
+  ],
+  "avoidFor": [
+    "enterprise cloud",
+    "factory automation",
+    "space technology"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}
