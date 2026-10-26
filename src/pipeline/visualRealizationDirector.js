@@ -47,13 +47,18 @@ function compositionRejection(asset, format) {
 
 function selectEditorialAsset(pool, format, memory) {
   const rejectedAlternatives = [];
-  for (const candidate of pool.slice(0, 4)) {
+  for (const candidate of pool.slice(0, 6)) {
     const reason = compositionRejection(candidate, format);
-    if (!reason) {
+    const isDuplicate = memory.usedAssetSources?.includes(candidate.src);
+    if (!reason && !isDuplicate) {
       remember(memory, 'usedAssetSources', candidate.src, 30);
       return { asset: candidate, rejectedAlternatives };
     }
-    rejectedAlternatives.push({ assetId: String(candidate.id || candidate.assetId || candidate.src), reason });
+    if (isDuplicate) {
+      rejectedAlternatives.push({ assetId: String(candidate.id || candidate.assetId || candidate.src), reason: 'duplicate_already_used' });
+    } else if (reason) {
+      rejectedAlternatives.push({ assetId: String(candidate.id || candidate.assetId || candidate.src), reason });
+    }
   }
   const asset = pickAsset(pool, 0, memory);
   return { asset, rejectedAlternatives };

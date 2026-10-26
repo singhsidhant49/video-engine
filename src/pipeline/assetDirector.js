@@ -699,7 +699,8 @@ export async function directAssets(plan, specs, {
         return (isSameEntity || isSameConcept) && sel.usageCount < 2;
       });
       if (!matchingPrevious) {
-        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
+        // Fallback reuse is strictly restricted to same-scene continuity (e.g. detail crop of wide establishing)
+        matchingPrevious = memory.selections.find((sel) => sel.lastUsedScene === request.sceneId && sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
       }
       if (matchingPrevious && matchingPrevious.candidate) {
         const prevAsset = assets[matchingPrevious.lastUsedScene]?.byShot[matchingPrevious.lastUsedShot] || assets[matchingPrevious.lastUsedScene]?.primary;

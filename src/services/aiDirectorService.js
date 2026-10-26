@@ -61,7 +61,7 @@ Scene = {
   "contentBeat": "hook" | "why_it_matters" | "open_question" | "explanation" | "contrast" | "mechanism" | "payoff" | "conclusion",
   "kind": one of the visual kinds below,
   "visual": string,          // one concrete sentence: what fills the frame and where attention goes
-  "imageQueries": [string],  // 1–3 stock/archive photo searches for what is literally shown. Concrete nouns, no adjectives like "cinematic" or "8k".
+  "imageQueries": [string],  // 2–3 tangible photo searches for physical objects, environments, or actions literally visible. Use concrete real-world nouns only (e.g., "microscope lens close up", "server room blinking LEDs", "cargo ship at sea port"). NEVER use abstract buzzwords like "concept", "future", "success", "growth", "analysis", or "technology".
   "entity": { "name": string, "wikipedia": string } | null,  // a real person/org/place/event on screen; "wikipedia" = exact English Wikipedia article title
   "source": { "url": string, "label": string } | null, // required for dates, numbers, quotations, "first/oldest/largest", and other checkable factual claims
   "text": { "kicker": string?, "headline": string? } | null,  // on-screen text, see rules
@@ -106,7 +106,7 @@ EDITORIAL & PACING RULES:
 2. VARY HOLD TIMES: Simple atmospheric photos hold 3–5s; complex diagrams/processes hold 4–7s. Give ideas room to breathe.
 3. SPECIFIC HOOKS: Start with a concrete contradiction or high-stakes fact. Never open with "Have you ever wondered..." or "In this video...".
 4. PAYOFF MANDATE: Every question or mystery opened in the hook must be explicitly answered in the payoff scene.
-5. CINEMATIC FOOTAGE FIRST: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. A great video is visual cinema, not a PowerPoint slide deck.
+5. CINEMATIC FOOTAGE FIRST: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. Provide 2–3 diverse physical queries per scene (e.g. 1 wide environmental context, 1 specific physical subject, 1 macro texture/detail). Never output abstract conceptual queries.
 6. USE GRAPHICS SPARINGLY: Use "chart", "process", "quote", "statement", or "comparison" ONLY for 1 or 2 high-impact anchor moments in the entire video. Never use graphic/data kinds in consecutive scenes or in more than 20% of total scenes.
 7. On-screen text supports, never transcribes. "kicker" = a label such as a place/date/name ("NEW YORK · 2008"). "headline" = ≤6 words, a claim or keyword that is NOT a paraphrase of the whole sentence. Most photo scenes need no text at all.
 8. Truth: every number, date, quote, historical superlative, name and document must be real. For a checkable factual claim, provide a direct source URL in scene.source. Never invent a source; if you cannot cite it, rewrite the sentence without the unsupported exact claim.

@@ -154,10 +154,12 @@ export function estimateShotDemand(scene, strategy) {
     const configuredMaxHold = Number(strategy?.pacing?.maximumStillSeconds);
     const profileMinHold = Number.isFinite(configuredMinHold) ? configuredMinHold : (isShorts ? 2.8 : 4.2);
     const profileMaxHold = Number.isFinite(configuredMaxHold) ? configuredMaxHold : (isShorts ? 6.0 : 7.0);
-    // Hooks may cut slightly faster, but never collapse into micro-shot pacing.
+    // Dynamic purpose-aware pacing: hooks cut slightly faster, conclusions/payoffs hold longer for dramatic impact.
     const minHoldSec = scene.purpose === 'hook' && scene.energy >= 4
       ? Math.max(isShorts ? 2.2 : 3.4, profileMinHold * 0.82)
-      : profileMinHold;
+      : (scene.purpose === 'conclusion' || scene.purpose === 'payoff')
+        ? Math.max(profileMinHold * 1.15, profileMinHold)
+        : profileMinHold;
 
     // A strong shot may hold through a short single thought, but landscape
     // stills should change only when the selected channel profile calls for it.
@@ -165,7 +167,7 @@ export function estimateShotDemand(scene, strategy) {
       // In Shorts, high-energy/density scenes split at >= 5.0s to avoid static hold on mobile
       const energeticSplitThreshold = Number.isFinite(configuredMinHold) ? Math.max(4.5, minHoldSec * 2) : 5.0;
       if (isShorts && duration >= energeticSplitThreshold && (scene.energy >= 4 || scene.informationDensity >= 4)) return 2;
-      if (duration >= profileMaxHold) return clamp(Math.ceil(duration / profileMaxHold), 2, 6);
+      if (duration >= profileMaxHold) return clamp(Math.ceil(duration / profileMaxHold), 2, isShorts ? 4 : 3);
       return 1;
     }
 
@@ -177,7 +179,7 @@ export function estimateShotDemand(scene, strategy) {
     // Filter beats to meaningful shifts
     const holdDrivenShots = Math.ceil(duration / profileMaxHold);
     const meaningfulShots = Math.min(Math.max(beats.length, holdDrivenShots), maxSemShots);
-    return clamp(meaningfulShots, 1, 6);
+    return clamp(meaningfulShots, 1, isShorts ? 4 : 3);
   }
 
   // Legacy procedural path fallback
