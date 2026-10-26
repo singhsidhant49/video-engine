@@ -1,0 +1,77 @@
+{
+  "id": "science_team_digital_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Research team reviewing digital science visuals",
+  "path": "images/science/science_team_digital_presentation_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "research team",
+    "presentation",
+    "protein model",
+    "lab",
+    "collaboration",
+    "data"
+  ],
+  "concepts": [
+    "scientific collaboration",
+    "research review",
+    "data interpretation",
+    "lab discussion"
+  ],
+  "subjects": [
+    "scientists",
+    "large display",
+    "molecular visualization",
+    "lab desk"
+  ],
+  "actions": [
+    "presenting data",
+    "reviewing visuals",
+    "team discussion"
+  ],
+  "mood": [
+    "collaborative",
+    "advanced",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.73,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "research collaboration",
+    "science presentation",
+    "lab teamwork",
+    "innovation video"
+  ],
+  "avoidFor": [
+    "solo experiment",
+    "field study",
+    "consumer technology"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

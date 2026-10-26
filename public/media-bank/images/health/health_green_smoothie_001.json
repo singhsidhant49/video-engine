@@ -1,0 +1,65 @@
+{
+  "id": "health_green_smoothie_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Green smoothie and fresh ingredients",
+  "path": "images/health/health_green_smoothie_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "nutrition",
+    "smoothie",
+    "greens",
+    "healthy drink",
+    "whole foods"
+  ],
+  "concepts": [
+    "healthy nutrition",
+    "hydration",
+    "whole foods"
+  ],
+  "subjects": [
+    "green smoothie",
+    "spinach",
+    "lemon",
+    "ginger",
+    "cucumber"
+  ],
+  "actions": [
+    "preparing healthy drink",
+    "showcasing ingredients"
+  ],
+  "mood": [
+    "fresh",
+    "clean"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "nutrition videos",
+    "healthy eating",
+    "wellness intros"
+  ],
+  "avoidFor": [
+    "medical checkup",
+    "anatomy"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "science_chemistry_pipetting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist pipetting colorful laboratory solutions",
+  "path": "images/science/science_chemistry_pipetting_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "chemistry",
+    "pipette",
+    "laboratory",
+    "solutions",
+    "experiment"
+  ],
+  "concepts": [
+    "chemical experimentation",
+    "lab procedure",
+    "solution mixing",
+    "scientific testing"
+  ],
+  "subjects": [
+    "scientist",
+    "pipette",
+    "flasks",
+    "test tubes",
+    "microscope"
+  ],
+  "actions": [
+    "pipetting liquid",
+    "mixing samples",
+    "running experiment"
+  ],
+  "mood": [
+    "vibrant",
+    "precise",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "chemistry video",
+    "lab procedure",
+    "science education",
+    "experiment montage"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "field geology",
+    "conference presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

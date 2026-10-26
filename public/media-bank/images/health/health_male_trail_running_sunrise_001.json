@@ -1,0 +1,80 @@
+{
+  "id": "health_male_trail_running_sunrise_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Male trail runner at sunrise",
+  "path": "images/health/health_male_trail_running_sunrise_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "running",
+    "trail running",
+    "cardio",
+    "outdoor fitness",
+    "sunrise",
+    "endurance",
+    "active lifestyle"
+  ],
+  "concepts": [
+    "cardiovascular fitness",
+    "endurance training",
+    "outdoor exercise",
+    "healthy lifestyle"
+  ],
+  "subjects": [
+    "adult man",
+    "mountain trail",
+    "sunrise",
+    "valley",
+    "lake"
+  ],
+  "actions": [
+    "running uphill",
+    "training outdoors",
+    "moving through trail"
+  ],
+  "mood": [
+    "uplifting",
+    "energetic",
+    "adventurous"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "running videos",
+    "cardio scenes",
+    "fitness motivation",
+    "outdoor wellness content"
+  ],
+  "avoidFor": [
+    "clinical care",
+    "sleep hygiene",
+    "food nutrition"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

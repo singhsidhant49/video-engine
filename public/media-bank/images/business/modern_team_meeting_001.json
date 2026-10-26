@@ -1,0 +1,73 @@
+{
+  "id": "modern_team_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Collaborative team meeting in a modern office",
+  "path": "images/business/modern_team_meeting_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "team meeting",
+    "office",
+    "collaboration",
+    "reports",
+    "planning"
+  ],
+  "concepts": [
+    "teamwork",
+    "project planning",
+    "office collaboration",
+    "business discussion"
+  ],
+  "subjects": [
+    "team",
+    "laptops",
+    "documents"
+  ],
+  "actions": [
+    "discussing",
+    "reviewing reports"
+  ],
+  "mood": [
+    "professional",
+    "collaborative",
+    "positive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "team intro",
+    "business process",
+    "office culture"
+  ],
+  "avoidFor": [
+    "solo work",
+    "customer support",
+    "event networking"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

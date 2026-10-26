@@ -1,0 +1,76 @@
+{
+  "id": "finance_trading_desk_city_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Professional trading desk overlooking the city at sunset",
+  "path": "images/finance/finance_trading_desk_city_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "trading",
+    "markets",
+    "stocks",
+    "investment",
+    "charts",
+    "trader",
+    "city"
+  ],
+  "concepts": [
+    "capital markets",
+    "stock trading",
+    "market monitoring",
+    "investment analysis"
+  ],
+  "subjects": [
+    "trader",
+    "multi-monitor trading desk",
+    "stock charts"
+  ],
+  "actions": [
+    "monitoring markets",
+    "analyzing prices"
+  ],
+  "mood": [
+    "intense",
+    "cinematic",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.63,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "markets video",
+    "stock investing",
+    "trading explainer",
+    "financial news"
+  ],
+  "avoidFor": [
+    "personal budgeting",
+    "financial consultation",
+    "retail finance"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

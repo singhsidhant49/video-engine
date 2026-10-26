@@ -1,0 +1,76 @@
+{
+  "id": "psychology_emotional_support_friendship_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Emotional support between friends by the water",
+  "path": "images/psychology/psychology_emotional_support_friendship_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "friendship",
+    "support",
+    "empathy",
+    "human connection",
+    "emotional resilience"
+  ],
+  "concepts": [
+    "social support",
+    "empathetic listening",
+    "emotional validation",
+    "friendship psychology"
+  ],
+  "subjects": [
+    "two adult women",
+    "park path",
+    "waterfront",
+    "sunset"
+  ],
+  "actions": [
+    "talking honestly",
+    "listening supportively",
+    "walking together"
+  ],
+  "mood": [
+    "warm",
+    "supportive",
+    "hopeful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "support systems content",
+    "friendship psychology",
+    "empathy videos",
+    "healing scenes"
+  ],
+  "avoidFor": [
+    "isolation topic",
+    "sleep issues",
+    "office burnout"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "psychology_reflective_journaling_lakeside_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Reflective journaling by the lake at golden hour",
+  "path": "images/psychology/psychology_reflective_journaling_lakeside_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "journaling",
+    "self-reflection",
+    "mindfulness",
+    "self-help",
+    "mental wellness",
+    "habits"
+  ],
+  "concepts": [
+    "self-awareness",
+    "reflective writing",
+    "emotional processing",
+    "positive habits"
+  ],
+  "subjects": [
+    "adult woman",
+    "journal",
+    "coffee mug",
+    "lake view",
+    "books"
+  ],
+  "actions": [
+    "writing thoughts",
+    "journaling",
+    "reflecting"
+  ],
+  "mood": [
+    "cozy",
+    "peaceful",
+    "hopeful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.38,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "journaling content",
+    "self-help videos",
+    "wellness bank",
+    "mental health lifestyle"
+  ],
+  "avoidFor": [
+    "crisis scenes",
+    "crowded urban anxiety",
+    "couples conflict"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

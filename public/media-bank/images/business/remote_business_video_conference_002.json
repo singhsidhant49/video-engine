@@ -1,0 +1,76 @@
+{
+  "id": "remote_business_video_conference_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm home office video conference",
+  "path": "images/business/remote_business_video_conference_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "remote work",
+    "video conference",
+    "home office",
+    "virtual team",
+    "hybrid work"
+  ],
+  "concepts": [
+    "remote collaboration",
+    "distributed teams",
+    "virtual meetings",
+    "hybrid business"
+  ],
+  "subjects": [
+    "professional",
+    "laptop",
+    "video call",
+    "home office"
+  ],
+  "actions": [
+    "video calling",
+    "discussing",
+    "meeting remotely"
+  ],
+  "mood": [
+    "warm",
+    "friendly",
+    "productive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.57,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "remote work",
+    "team collaboration",
+    "future of work",
+    "virtual meeting"
+  ],
+  "avoidFor": [
+    "retail store",
+    "contract signing",
+    "factory"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

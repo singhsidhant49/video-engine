@@ -23,6 +23,18 @@ const UA = {
 };
 const CACHE_DIR = path.join(config.rootDir, '.cache', 'media');
 export const MIN_SHORT_SIDE = 640;
+const MAX_MEDIA_DOWNLOAD_BYTES = Math.max(1_000_000, Number(process.env.MAX_MEDIA_DOWNLOAD_BYTES || 150 * 1024 * 1024));
+
+function assertSafeRemoteUrl(value) {
+  const parsed = new URL(value);
+  if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error(`Unsupported media URL protocol: ${parsed.protocol}`);
+  const host = parsed.hostname.toLowerCase();
+  const privateHost = host === 'localhost' || host === '::1' || host === '0.0.0.0'
+    || /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host)
+    || /^169\.254\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host);
+  if (privateHost) throw new Error(`Private media host is not allowed: ${host}`);
+  return parsed;
+}
 
 async function fetchWithTimeout(url, opts = {}, ms = 5000) {
   const ctl = new AbortController();
@@ -40,7 +52,7 @@ const SEARCH_TTL_MS = 7 * 24 * 3600 * 1000;
 export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
 const providerState = new Map();
 const HOST_INTERVAL_MS = {
-  'api.pexels.com': 350,
+  'api.pexels.com': 550,
   'en.wikipedia.org': 180,
   'commons.wikimedia.org': 220,
   'api.search.brave.com': 450,
@@ -92,7 +104,7 @@ async function getJson(url, opts, ms = 5000) {
   const host = new URL(url).host;
   if (!(await reserveProvider(host))) return null;
   let lastErr = null;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const res = await fetchWithTimeout(url, opts, ms);
       if (res.ok) {
@@ -113,8 +125,10 @@ async function getJson(url, opts, ms = 5000) {
       }
       if (res.status === 429) {
         const retryAfter = Number(res.headers.get('retry-after'));
-        state.blockedUntil = Date.now() + (Number.isFinite(retryAfter) ? Math.max(15, retryAfter) * 1000 : 45_000);
-        break;
+        const waitMs = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 2500;
+        state.blockedUntil = Date.now() + waitMs;
+        await new Promise((r) => setTimeout(r, waitMs));
+        continue;
       }
       if (res.status < 500) break;
       await new Promise((r) => setTimeout(r, 600));
@@ -350,6 +364,7 @@ export const breakerOpen = (url) => {
 };
 
 async function downloadCached(url, timeout, retries = 0) {
+  assertSafeRemoteUrl(url);
   const key = crypto.createHash('sha1').update(url).digest('hex');
   const file = path.join(CACHE_DIR, `${key}.bin`);
   try {
@@ -369,20 +384,49 @@ async function downloadCached(url, timeout, retries = 0) {
     try {
       const res = await fetchWithTimeout(url, {}, timeout || 8000);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const buf = Buffer.from(await res.arrayBuffer());
+      assertSafeRemoteUrl(res.url || url);
+      const declaredSize = Number(res.headers.get('content-length') || 0);
+      if (declaredSize > MAX_MEDIA_DOWNLOAD_BYTES) throw new Error(`media response too large (${declaredSize} bytes)`);
+      const contentType = String(res.headers.get('content-type') || '').toLowerCase();
+      if (contentType && !/^(image|video)\//.test(contentType) && !contentType.includes('octet-stream')) {
+        throw new Error(`unsupported media content type: ${contentType}`);
+      }
       await fs.mkdir(CACHE_DIR, { recursive: true });
-      await fs.writeFile(file, buf);
+      const temp = `${file}.tmp.${process.pid}.${Date.now()}`;
+      const handle = await fs.open(temp, 'wx');
+      const contentHasher = crypto.createHash('sha256');
+      let downloadedSize = 0;
+      try {
+        if (!res.body) throw new Error('media response has no body');
+        for await (const chunk of res.body) {
+          const bytes = Buffer.from(chunk);
+          downloadedSize += bytes.length;
+          if (downloadedSize > MAX_MEDIA_DOWNLOAD_BYTES) throw new Error(`media response exceeded ${MAX_MEDIA_DOWNLOAD_BYTES} bytes`);
+          contentHasher.update(bytes);
+          await handle.write(bytes);
+        }
+      } catch (error) {
+        await handle.close().catch(() => {});
+        await fs.rm(temp, { force: true }).catch(() => {});
+        throw error;
+      }
+      await handle.close();
+      if (downloadedSize === 0) {
+        await fs.rm(temp, { force: true }).catch(() => {});
+        throw new Error('empty media response');
+      }
+      await fs.rename(temp, file);
       hostFailures.set(host, 0);
 
       // Write metadata sidecar preserving source and content hashes
-      const contentHash = crypto.createHash('sha256').update(buf).digest('hex');
+      const contentHash = contentHasher.digest('hex');
       const meta = {
         key,
         contentHash,
         sourceUrl: url,
         host,
         retrievedAt: new Date().toISOString(),
-        size: buf.length,
+        size: downloadedSize,
       };
       await fs.writeFile(path.join(CACHE_DIR, `${key}.json`), JSON.stringify(meta, null, 2)).catch(() => {});
 
@@ -482,9 +526,15 @@ export async function materialiseImage(candidate, outFile) {
   for (let attempt = 0; attempt < (remote ? 2 : 1); attempt++) {
     let cachedPath;
     try {
-      if (candidate.localPath) cachedPath = candidate.localPath;
-      else if (candidate.url?.startsWith('file://')) cachedPath = candidate.url.replace(/^file:\/\//, '');
-      else cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+      if (candidate.localPath) {
+        cachedPath = candidate.localPath;
+      } else if (candidate.url?.startsWith('file://')) {
+        let p = candidate.url.replace(/^file:\/\//, '');
+        if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+        cachedPath = p;
+      } else {
+        cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+      }
       return await transcodeImage(cachedPath, outFile, minimumShortSide);
     } catch (error) {
       lastError = error;
@@ -500,7 +550,15 @@ export async function materialiseImage(candidate, outFile) {
 }
 
 export async function materialiseVideo(candidate, outFile) {
-  const cached = await downloadCached(candidate.url, 90000, 1);
+  let cached = candidate.localPath;
+  if (!cached && candidate.url?.startsWith('file://')) {
+    let p = candidate.url.replace(/^file:\/\//, '');
+    if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+    cached = p;
+  }
+  if (!cached) {
+    cached = await downloadCached(candidate.url, 90000, 1);
+  }
   const { stdout } = await runBinary('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', cached]);
   const info = JSON.parse(stdout);
   const width = info.streams?.[0]?.width, height = info.streams?.[0]?.height, duration = parseFloat(info.format?.duration);

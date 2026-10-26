@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_e987b377e863bc28",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed shot of a hand holding a rock during outdoor climbing, showcasing focus and grip.",
+  "path": "images/saved-from-web/saved-from-web_e987b377e863bc28.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1731,
+  "aspectRatio": 1.502,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "hand",
+    "holding",
+    "rock",
+    "during",
+    "outdoor",
+    "climbing",
+    "showcasing",
+    "focu",
+    "grip",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "climber",
+    "gripping",
+    "hold",
+    "shot",
+    "focus"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed shot of a hand holding a rock during outdoor climbing, showcasing focus and grip."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "climber gripping rock hold",
+    "savedAt": "2026-10-23T07:21:31.598Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "César Guillotel",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-rock-climber-holding-on-a-rock-12897857/"
+  }
+}

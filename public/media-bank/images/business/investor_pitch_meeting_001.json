@@ -1,0 +1,73 @@
+{
+  "id": "investor_pitch_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour investor pitch",
+  "path": "images/business/investor_pitch_meeting_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "investor pitch",
+    "startup",
+    "presentation",
+    "fundraising",
+    "boardroom"
+  ],
+  "concepts": [
+    "startup fundraising",
+    "investor presentation",
+    "pitch meeting",
+    "business growth"
+  ],
+  "subjects": [
+    "founder",
+    "investors",
+    "presentation screen"
+  ],
+  "actions": [
+    "pitching",
+    "presenting to investors"
+  ],
+  "mood": [
+    "aspirational",
+    "premium",
+    "confident"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.75,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "startup story",
+    "fundraising content",
+    "pitch deck visuals"
+  ],
+  "avoidFor": [
+    "retail inventory",
+    "support center",
+    "home office"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

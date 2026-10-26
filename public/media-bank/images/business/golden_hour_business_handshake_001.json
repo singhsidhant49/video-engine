@@ -1,0 +1,73 @@
+{
+  "id": "golden_hour_business_handshake_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour executive handshake",
+  "path": "images/business/golden_hour_business_handshake_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "handshake",
+    "agreement",
+    "partnership",
+    "executives",
+    "contract"
+  ],
+  "concepts": [
+    "deal success",
+    "business agreement",
+    "executive partnership",
+    "client closing"
+  ],
+  "subjects": [
+    "executive man",
+    "executive woman",
+    "handshake"
+  ],
+  "actions": [
+    "shaking hands",
+    "closing agreement"
+  ],
+  "mood": [
+    "warm",
+    "successful",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.5
+    },
+    "safeTextAreas": [
+      "upper-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sales close",
+    "partnership story",
+    "corporate brand film"
+  ],
+  "avoidFor": [
+    "remote work",
+    "retail store",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "health_muscle_anatomy_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Muscle anatomy visualization",
+  "path": "images/health/health_muscle_anatomy_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "anatomy",
+    "muscle",
+    "fitness science",
+    "medical illustration"
+  ],
+  "concepts": [
+    "muscle health",
+    "human anatomy",
+    "exercise physiology"
+  ],
+  "subjects": [
+    "human back",
+    "muscular system"
+  ],
+  "actions": [
+    "flexing",
+    "showing muscle groups"
+  ],
+  "mood": [
+    "scientific",
+    "clinical"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "anatomy videos",
+    "fitness science",
+    "medical education"
+  ],
+  "avoidFor": [
+    "nutrition plate",
+    "sleep lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

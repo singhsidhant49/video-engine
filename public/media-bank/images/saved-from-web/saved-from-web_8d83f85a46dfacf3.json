@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_8d83f85a46dfacf3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A solitary bird perched on a branch against a warm, golden forest backdrop.",
+  "path": "images/saved-from-web/saved-from-web_8d83f85a46dfacf3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "solitary",
+    "bird",
+    "perched",
+    "branch",
+    "against",
+    "warm",
+    "golden",
+    "backdrop",
+    "resting",
+    "leaf",
+    "hour",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "bird resting on leaf golden hour",
+    "savedAt": "2026-10-26T05:46:54.978Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "P.R MALLIK",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/bird-perched-on-branch-in-golden-light-37184721/"
+  }
+}

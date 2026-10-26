@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "id": "vid_mvgab6jf_ed9e9ea2bf47",
+  "ownerId": "acct_2b354e29151920844b986f01",
+  "status": "completed",
+  "stage": "completed",
+  "progress": 100,
+  "request": {
+    "prompt": "Create an engaging two-minute cinematic documentary titled:\n\nHOW GPS KNOWS EXACTLY WHERE YOU ARE\n\nOPENING HOOK:\nBegin with a person opening a navigation application on a smartphone. Within seconds, a small blue dot identifies their location. Ask an intriguing question: how can a phone determine its location when it is not directly connected to a satellite?\n\nSTORY FLOW:\n\nFirst, reveal that more than twenty navigation satellites orbit Earth and continuously broadcast precise timing signals.\n\nExplain that every GPS satellite carries extremely accurate atomic clocks. Each transmitted signal contains the satellite's position and the exact moment the signal was sent.\n\nShow how the signal travels from space to a smartphone. Explain that the phone measures how long the signal took to arrive and uses that information to estimate its distance from the satellite.\n\nExplain trilateration in simple language. One satellite provides a broad distance area. A second satellite narrows the possible location. A third brings the possibilities closer, while a fourth helps correct timing errors and calculate a reliable three-dimensional position.\n\nIntroduce a compelling complication: satellite signals travel at the speed of light, so even a tiny timing error can move the calculated location by kilometres.\n\nExplain that engineers compensate for atmospheric interference, clock differences and effects predicted by Einstein's theories of relativity.\n\nPAYOFF:\nReturn to the smartphone from the opening. Explain that the blue location dot is the result of satellites, atomic clocks, radio signals, mathematics and relativity working together in seconds.\n\nEnd with this memorable idea: every time people request directions, they are quietly using a space-based timing system surrounding the entire planet.\n\nVISUAL DIRECTION:\n\nUse only relevant real photographs and video clips with subtitles. Do not use charts, diagrams, templates or decorative presentation graphics.\n\nShow cinematic views of Earth, navigation satellites, satellite launches, ground antennas, atomic clocks, smartphones, digital maps, city navigation and people travelling.\n\nUse focal-aware slow zooms, gentle horizontal or vertical pans and subtle camera drift on suitable still images. Preserve natural movement in video clips.\n\nCamera movement should continue naturally into image changes instead of freezing before a cut.\n\nUse mostly clean hard cuts, but add short cross-dissolves between suitable still images. Use a subtle zoom transition for an important reveal and a restrained chapter transition for a major conceptual shift.\n\nAvoid repetitive movement, rapid image changes, excessive effects, spinning, flashing, aggressive zooms and long slideshow-like static shots.\n\nKeep visual changes synchronized with narration. Every selected visual must directly support the sentence being spoken.\n\nWRITING REQUIREMENTS:\n\nUse clear language suitable for a general audience.\nMake the first fifteen seconds highly attention-grabbing.\nMaintain curiosity throughout the story.\nUse complete natural sentences.\nDo not speak chapter numbers or production instructions.\nDo not make unsupported exaggerated claims.\nFinish with a strong and memorable payoff.",
+    "output": {
+      "durationSeconds": 120,
+      "aspectRatio": "16:9",
+      "resolution": "1080p"
+    },
+    "creative": {
+      "contentType": "documentary",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "audience": "Curious adults interested in science, space, and technology",
+      "pacing": "cinematic",
+      "style": "cinematic_documentary"
+    },
+    "audio": {
+      "voice": "af_bella"
+    },
+    "subtitles": {
+      "enabled": true
+    },
+    "metadata": {
+      "externalId": "gps-location-documentary",
+      "category": "science-technology"
+    }
+  },
+  "pipelineBrief": {
+    "version": 1,
+    "prompt": "Create an engaging two-minute cinematic documentary titled:\n\nHOW GPS KNOWS EXACTLY WHERE YOU ARE\n\nOPENING HOOK:\nBegin with a person opening a navigation application on a smartphone. Within seconds, a small blue dot identifies their location. Ask an intriguing question: how can a phone determine its location when it is not directly connected to a satellite?\n\nSTORY FLOW:\n\nFirst, reveal that more than twenty navigation satellites orbit Earth and continuously broadcast precise timing signals.\n\nExplain that every GPS satellite carries extremely accurate atomic clocks. Each transmitted signal contains the satellite's position and the exact moment the signal was sent.\n\nShow how the signal travels from space to a smartphone. Explain that the phone measures how long the signal took to arrive and uses that information to estimate its distance from the satellite.\n\nExplain trilateration in simple language. One satellite provides a broad distance area. A second satellite narrows the possible location. A third brings the possibilities closer, while a fourth helps correct timing errors and calculate a reliable three-dimensional position.\n\nIntroduce a compelling complication: satellite signals travel at the speed of light, so even a tiny timing error can move the calculated location by kilometres.\n\nExplain that engineers compensate for atmospheric interference, clock differences and effects predicted by Einstein's theories of relativity.\n\nPAYOFF:\nReturn to the smartphone from the opening. Explain that the blue location dot is the result of satellites, atomic clocks, radio signals, mathematics and relativity working together in seconds.\n\nEnd with this memorable idea: every time people request directions, they are quietly using a space-based timing system surrounding the entire planet.\n\nVISUAL DIRECTION:\n\nUse only relevant real photographs and video clips with subtitles. Do not use charts, diagrams, templates or decorative presentation graphics.\n\nShow cinematic views of Earth, navigation satellites, satellite launches, ground antennas, atomic clocks, smartphones, digital maps, city navigation and people travelling.\n\nUse focal-aware slow zooms, gentle horizontal or vertical pans and subtle camera drift on suitable still images. Preserve natural movement in video clips.\n\nCamera movement should continue naturally into image changes instead of freezing before a cut.\n\nUse mostly clean hard cuts, but add short cross-dissolves between suitable still images. Use a subtle zoom transition for an important reveal and a restrained chapter transition for a major conceptual shift.\n\nAvoid repetitive movement, rapid image changes, excessive effects, spinning, flashing, aggressive zooms and long slideshow-like static shots.\n\nKeep visual changes synchronized with narration. Every selected visual must directly support the sentence being spoken.\n\nWRITING REQUIREMENTS:\n\nUse clear language suitable for a general audience.\nMake the first fifteen seconds highly attention-grabbing.\nMaintain curiosity throughout the story.\nUse complete natural sentences.\nDo not speak chapter numbers or production instructions.\nDo not make unsupported exaggerated claims.\nFinish with a strong and memorable payoff.",
+    "niche": "",
+    "format": "landscape",
+    "durationSec": 120,
+    "style": "cinematic_documentary",
+    "voice": "af_bella",
+    "channel": {
+      "id": "default",
+      "contentType": "documentary",
+      "pacingMode": "cinematic",
+      "audience": "Curious adults interested in science, space, and technology",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "language": "en",
+      "captions": "subtitles"
+    }
+  },
+  "metadata": {
+    "externalId": "gps-location-documentary",
+    "category": "science-technology"
+  },
+  "idempotencyKey": "gps-documentary-20261020-114039",
+  "requestHash": "c7d7bf496e9a23d3ea34448891d93d60b8db71995f77efac503c436988b45319",
+  "result": {
+    "outputPath": "D:\\projects\\videogenerator\\renders\\vid_mvgab6jf_ed9e9ea2bf47-landscape.mp4",
+    "outputFilename": "vid_mvgab6jf_ed9e9ea2bf47-landscape.mp4",
+    "durationSeconds": 114.532458,
+    "title": "HOW GPS KNOWS EXACTLY WHERE YOU ARE",
+    "runDir": "D:\\projects\\videogenerator\\renders\\runs\\vid_mvgab6jf_ed9e9ea2bf47"
+  },
+  "error": null,
+  "createdAt": "2026-10-20T06:10:39.195Z",
+  "updatedAt": "2026-10-20T06:21:29.891Z",
+  "startedAt": "2026-10-20T06:10:39.197Z",
+  "completedAt": "2026-10-20T06:21:29.891Z",
+  "resumeExisting": false,
+  "resumeFrom": null
+}

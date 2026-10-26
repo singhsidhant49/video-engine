@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_e1d8e02f56c385b3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Industrial oil pumpjack in a desert setting under a clear blue sky, illustrating oil extraction technology.",
+  "path": "images/saved-from-web/saved-from-web_e1d8e02f56c385b3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "industrial",
+    "oil",
+    "pumpjack",
+    "desert",
+    "setting",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "illustrating",
+    "extraction",
+    "technology",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "industrial",
+    "oil",
+    "pumpjack",
+    "desert",
+    "setting",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "illustrating",
+    "extraction",
+    "technology",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Industrial oil pumpjack in a desert setting under a clear blue sky, illustrating oil extraction technology."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "oil pumpjack desert",
+    "savedAt": "2026-10-26T10:42:53.378Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "jayjay13",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-pumpjack-extracting-oil-out-of-an-oil-well-16133914/"
+  }
+}

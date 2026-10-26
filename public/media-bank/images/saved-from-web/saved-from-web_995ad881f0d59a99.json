@@ -1,0 +1,104 @@
+{
+  "id": "saved-from-web_995ad881f0d59a99",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:La tour Burj Khalifa en construction en 2008.jpg",
+  "path": "images/saved-from-web/saved-from-web_995ad881f0d59a99.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1249,
+  "height": 807,
+  "aspectRatio": 1.5477,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "tour",
+    "burj",
+    "khalifa",
+    "construction",
+    "2008",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "tour",
+    "burj",
+    "khalifa",
+    "construction",
+    "2008",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Burj Khalifa construction",
+    "savedAt": "2026-10-26T10:45:19.175Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Aheilner",
+    "creator": "Aheilner",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:43.185Z",
+    "page": "https://commons.wikimedia.org/wiki/File:La_tour_Burj_Khalifa_en_construction_en_2008.jpg"
+  }
+}

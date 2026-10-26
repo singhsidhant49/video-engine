@@ -164,7 +164,7 @@ test('production chart compiler records explicit legacy fallback on failure', ()
   assert.ok(shot.compositionFallback.reason);
 });
 
-test('transition quality replaces an unanchored comparison push with a cut', () => {
+test('comparison boundary uses a clean cut', () => {
   const fixtures = [COMPARISON_FIXTURES[0], COMPARISON_FIXTURES[1]];
   const scenes = fixtures.map((fixture, index) => {
     const shot = { id: `shot_${fixture.id}`, role: 'graphic', durationHint: 6, visualConcept: index ? 'autonomous planning' : 'delayed value', assetIntent: 'concept', mediaPreference: 'procedural', searchConcepts: [], entities: [], evidenceRequirement: 'conceptual_allowed' };
@@ -173,7 +173,6 @@ test('transition quality replaces an unanchored comparison push with a cut', () 
   const words = fixtures.flatMap((fixture, index) => fixture.alignedWords.map((word) => ({ ...word, startFrame: word.startFrame + index * 180, endFrame: word.endFrame + index * 180, start: word.start + index * 6, end: word.end + index * 6 })));
   const coveragePlan = scenes.map((scene, index) => ({ shotId: scene.storyboardShots[0].id, sceneId: scene.id, sectionId: scene.sectionId, informationType: 'comparison', primaryRepresentation: 'comparison', fallbackRepresentations: ['diagram'], semanticPayload: { communicationObjective: fixtures[index].title, visualConcept: scene.storyboardShots[0].visualConcept, entities: [], role: 'graphic' }, evidenceRequirements: { level: 'conceptual_allowed', authenticSourceRequired: false }, mediaConstraints: { preference: 'procedural', orientation: 'landscape', focalPointHint: null, motionPreference: null }, rationale: 'Comparison', confidence: 0.95, coverageStatus: 'UNRESOLVED' }));
   const timeline = buildTimeline({ plan: { title: 'Transition quality', style: 'documentary', hue: 210, scenes }, specs: scenes.map((scene) => ({ sceneId: scene.id, family: 'compare', variant: 'default', treatment: 'graphic', recasts: [], accents: {} })), narration: { totalFrames: 360, words }, assets: Object.fromEntries(scenes.map((scene) => [scene.id, { primary: null, alternates: [] }])), sfx: {}, bgm: null, videoId: 'transition-quality', format: 'landscape', fps: 30, audioSrc: null, coveragePlan, editorialVisualPlan: fixtures.map((fixture) => editorialPlanForM15Fixture(fixture, 'comparison')) });
-  assert.equal(timeline.clips[1].transitionQuality.replacedWithCut, true);
   assert.equal(timeline.clips[1].enter.type, 'cut');
-  assert.equal(timeline.clips[1].transitionQuality.warnings[0], 'missing_transition_anchor');
+  assert.equal(timeline.clips[1].transitionPolicy, 'CUT');
 });

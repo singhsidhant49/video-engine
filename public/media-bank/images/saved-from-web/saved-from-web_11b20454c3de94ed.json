@@ -1,0 +1,74 @@
+{
+  "id": "saved-from-web_11b20454c3de94ed",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of the Milky Way galaxy showcasing countless stars in the night sky.",
+  "path": "images/saved-from-web/saved-from-web_11b20454c3de94ed.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "breathtaking",
+    "milky",
+    "way",
+    "galaxy",
+    "showcasing",
+    "countles",
+    "star",
+    "night",
+    "sky",
+    "moving",
+    "through",
+    "view",
+    "countless",
+    "stars",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "galaxy moving through space",
+    "savedAt": "2026-10-24T09:27:01.801Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Felix Mittermeier",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/blue-and-purple-cosmic-sky-956999/"
+  }
+}

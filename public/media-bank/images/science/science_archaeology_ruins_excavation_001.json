@@ -1,0 +1,76 @@
+{
+  "id": "science_archaeology_ruins_excavation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Archaeologist excavating at ancient ruins",
+  "path": "images/science/science_archaeology_ruins_excavation_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "archaeology",
+    "excavation",
+    "ancient ruins",
+    "dig site",
+    "heritage research"
+  ],
+  "concepts": [
+    "archaeological fieldwork",
+    "ancient civilization study",
+    "artifact excavation",
+    "heritage science"
+  ],
+  "subjects": [
+    "archaeologist",
+    "ruins",
+    "excavation square",
+    "notebook"
+  ],
+  "actions": [
+    "excavating artifacts",
+    "brushing soil",
+    "recording finds"
+  ],
+  "mood": [
+    "historical",
+    "methodical",
+    "golden-hour"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "archaeology explainer",
+    "history documentary",
+    "fieldwork montage",
+    "ancient civilizations"
+  ],
+  "avoidFor": [
+    "modern lab",
+    "space scene",
+    "business presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

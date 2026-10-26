@@ -186,7 +186,11 @@ export function MediaPrimitive({ element, geometry, motionPlan, frame }) {
   const focusY = evaluateMotionValue(motionPlan, element.id, 'cameraFocusY', frame);
   const x = Number.isFinite(focusX) ? focusX : geometry.objectPosition.x, y = Number.isFinite(focusY) ? focusY : geometry.objectPosition.y;
   const playback = videoPlayback(geometry, fps, motionPlan.durationInFrames);
-  const common = { width: '100%', height: '100%', objectFit: 'cover', objectPosition: `${x * 100}% ${y * 100}%`, transform: `scale(${scale})`, transformOrigin: `${x * 100}% ${y * 100}%`, filter: `brightness(${geometry.treatment.brightness}) contrast(${geometry.treatment.contrast})` };
+  // A percentage change in object-position is not a guaranteed percentage of
+  // visible travel. Convert the solved focal delta to viewport pixels so a
+  // planned 2-4% pan remains perceptible and deterministic after cover crop.
+  const translateX = (geometry.objectPosition.x - x) * geometry.rect.width;
+  const common = { width: '100%', height: '100%', objectFit: 'cover', objectPosition: `${geometry.objectPosition.x * 100}% ${geometry.objectPosition.y * 100}%`, transform: `translate3d(${translateX}px, 0, 0) scale(${scale})`, transformOrigin: `${geometry.objectPosition.x * 100}% ${geometry.objectPosition.y * 100}%`, filter: `brightness(${geometry.treatment.brightness}) contrast(${geometry.treatment.contrast})` };
   return <div style={{ position: 'absolute', left: geometry.rect.x, top: geometry.rect.y, width: geometry.rect.width, height: geometry.rect.height, overflow: 'hidden', zIndex: element.zIndex }}>
     {geometry.mediaType === 'video' ? <LoopedVideo src={mediaSrc(geometry.src)} muted playback={playback} style={common} /> : <Img src={mediaSrc(geometry.src)} style={common} />}
     {geometry.treatment.scrim !== 'none' ? <div style={{
@@ -202,8 +206,8 @@ export function MediaPrimitive({ element, geometry, motionPlan, frame }) {
 export function GroupPrimitive() { return null; }
 
 /** Pure solved-scene renderer: it consumes persisted pixels and line breaks and performs no layout. */
-export function GenericSceneRenderer({ solvedScene, motionPlan }) {
-  const frame = useCurrentFrame();
+export function GenericSceneRenderer({ solvedScene, motionPlan, frameOffset = 0 }) {
+  const frame = Math.max(0, useCurrentFrame() - frameOffset);
   const { fps } = useVideoConfig();
   const { palette } = useTheme();
   const elements = Object.values(solvedScene.elements).sort((a, b) => a.zIndex - b.zIndex || a.id.localeCompare(b.id));

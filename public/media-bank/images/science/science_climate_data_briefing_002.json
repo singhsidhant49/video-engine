@@ -1,0 +1,77 @@
+{
+  "id": "science_climate_data_briefing_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist presenting global climate data to a classroom",
+  "path": "images/science/science_climate_data_briefing_002.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "climate",
+    "data presentation",
+    "earth",
+    "weather",
+    "research briefing",
+    "education"
+  ],
+  "concepts": [
+    "climate communication",
+    "earth systems science",
+    "scientific presentation",
+    "global data analysis"
+  ],
+  "subjects": [
+    "presenter",
+    "classroom audience",
+    "large earth display",
+    "charts"
+  ],
+  "actions": [
+    "presenting findings",
+    "explaining climate data",
+    "teaching students"
+  ],
+  "mood": [
+    "educational",
+    "clear",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.69,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "climate explainer",
+    "science communication",
+    "earth science class",
+    "educational video"
+  ],
+  "avoidFor": [
+    "bench chemistry",
+    "microscope close-up",
+    "retail setting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

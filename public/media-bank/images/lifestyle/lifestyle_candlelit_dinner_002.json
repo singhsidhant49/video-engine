@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_candlelit_dinner_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Candlelit dinner setting together",
+  "path": "images/lifestyle/lifestyle_candlelit_dinner_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "dinner party",
+    "couple",
+    "hosting",
+    "table setting",
+    "candles",
+    "home entertaining"
+  ],
+  "concepts": [
+    "home entertaining",
+    "relationship lifestyle",
+    "hosting ritual",
+    "evening social life"
+  ],
+  "subjects": [
+    "couple",
+    "dining table",
+    "candles",
+    "flowers",
+    "wine glasses",
+    "plates"
+  ],
+  "actions": [
+    "setting table",
+    "preparing dinner",
+    "hosting at home"
+  ],
+  "mood": [
+    "elegant",
+    "warm",
+    "intimate"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship videos",
+    "hosting content",
+    "evening lifestyle scenes",
+    "home entertaining montages"
+  ],
+  "avoidFor": [
+    "morning routines",
+    "fitness clips",
+    "office scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

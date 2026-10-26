@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_6b46f4fcb56d4bdc",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A powerful storm cloud formation looms over a tranquil lake and forest, capturing nature's dynamic beauty.",
+  "path": "images/saved-from-web/saved-from-web_6b46f4fcb56d4bdc.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "powerful",
+    "storm",
+    "cloud",
+    "formation",
+    "loom",
+    "over",
+    "tranquil",
+    "lake",
+    "forest",
+    "capturing",
+    "nature",
+    "dynamic",
+    "beauty",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "dark",
+    "looms"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A powerful storm cloud formation looms over a tranquil lake and forest, capturing nature's dynamic beauty."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dark storm clouds over forest",
+    "savedAt": "2026-10-23T08:36:19.342Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Elina Volkova",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dramatic-sky-with-gray-storm-clouds-over-the-lake-17845889/"
+  }
+}

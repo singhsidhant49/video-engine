@@ -1,0 +1,79 @@
+{
+  "id": "history_postwar_reconstruction_planning_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Postwar reconstruction planning meeting",
+  "path": "images/history/history_postwar_reconstruction_planning_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "postwar",
+    "reconstruction",
+    "urban planning",
+    "1940s",
+    "city rebuilding",
+    "government"
+  ],
+  "concepts": [
+    "rebuilding after war",
+    "policy planning",
+    "modern reconstruction",
+    "urban recovery"
+  ],
+  "subjects": [
+    "officials",
+    "city map",
+    "ruined skyline",
+    "documents",
+    "planning room"
+  ],
+  "actions": [
+    "reviewing plans",
+    "discussing rebuilding",
+    "pointing at map"
+  ],
+  "mood": [
+    "serious",
+    "strategic",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "20th century history videos",
+    "postwar recovery content",
+    "planning scenes",
+    "modern history explainers"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "medieval life",
+    "mythic scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

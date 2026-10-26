@@ -1,0 +1,78 @@
+{
+  "id": "psychology_home_office_worry_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Pensive woman in a cozy home office",
+  "path": "images/psychology/psychology_home_office_worry_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "overthinking",
+    "worry",
+    "home office",
+    "mental load",
+    "stress",
+    "reflection"
+  ],
+  "concepts": [
+    "overthinking",
+    "mental fatigue",
+    "self-reflection",
+    "emotional uncertainty"
+  ],
+  "subjects": [
+    "adult woman",
+    "laptop",
+    "notebook",
+    "home office"
+  ],
+  "actions": [
+    "thinking deeply",
+    "staring at screen",
+    "pausing work"
+  ],
+  "mood": [
+    "pensive",
+    "quiet",
+    "slightly tense"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.41,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "overthinking videos",
+    "stress explainers",
+    "emotional reflection scenes",
+    "mental health storytelling"
+  ],
+  "avoidFor": [
+    "celebration scenes",
+    "group therapy",
+    "child topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

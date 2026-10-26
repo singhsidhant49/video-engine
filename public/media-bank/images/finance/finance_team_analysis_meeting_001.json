@@ -1,0 +1,78 @@
+{
+  "id": "finance_team_analysis_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Finance team reviewing performance reports",
+  "path": "images/finance/finance_team_analysis_meeting_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "team",
+    "analysis",
+    "reports",
+    "planning",
+    "forecast",
+    "meeting"
+  ],
+  "concepts": [
+    "financial analysis",
+    "team review",
+    "budget planning",
+    "forecasting",
+    "corporate finance"
+  ],
+  "subjects": [
+    "finance team",
+    "reports",
+    "laptops",
+    "calculator"
+  ],
+  "actions": [
+    "reviewing reports",
+    "discussing numbers",
+    "planning budget"
+  ],
+  "mood": [
+    "collaborative",
+    "focused",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "finance department",
+    "budget meeting",
+    "corporate planning",
+    "forecast review"
+  ],
+  "avoidFor": [
+    "personal budgeting",
+    "retail checkout",
+    "solo trader"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

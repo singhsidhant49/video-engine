@@ -1,0 +1,65 @@
+{
+  "id": "saved-from-web_e78a1cc9dd60ad0f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a vintage handwritten ledger detailing financial records and accounts.",
+  "path": "images/saved-from-web/saved-from-web_e78a1cc9dd60ad0f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1729,
+  "aspectRatio": 1.5038,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "vintage",
+    "handwritten",
+    "ledger",
+    "detailing",
+    "financial",
+    "record",
+    "account",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "number",
+    "close-up",
+    "records",
+    "accounts"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a vintage handwritten ledger detailing financial records and accounts."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ledger numbers close up",
+    "savedAt": "2026-10-23T07:33:09.383Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pixabay",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-photo-of-ledger-s-list-164686/"
+  }
+}

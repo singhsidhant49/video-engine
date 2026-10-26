@@ -1,0 +1,77 @@
+{
+  "id": "psychology_child_play_therapy_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm child play therapy session",
+  "path": "images/psychology/psychology_child_play_therapy_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "child therapy",
+    "play therapy",
+    "development",
+    "counseling",
+    "children",
+    "emotional support"
+  ],
+  "concepts": [
+    "play-based counseling",
+    "child emotional expression",
+    "developmental support",
+    "safe attachment"
+  ],
+  "subjects": [
+    "therapist",
+    "young girl",
+    "teddy bear",
+    "drawing table"
+  ],
+  "actions": [
+    "talking gently",
+    "drawing",
+    "play interaction"
+  ],
+  "mood": [
+    "gentle",
+    "safe",
+    "nurturing"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "child psychology videos",
+    "development scenes",
+    "parent education",
+    "therapy overviews"
+  ],
+  "avoidFor": [
+    "workplace stress",
+    "couples therapy",
+    "sleep topic"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

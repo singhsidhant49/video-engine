@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 import { SolvedSceneSchema } from './solvedScene.schema.js';
 import { MotionPlanSchema } from './motionPlan.schema.js';
 import { EditorialVisualBeatSchema } from './editorialVisualBeat.schema.js';
@@ -8,6 +8,11 @@ const FrameRangeSchema = z.object({
   from: z.number().int().nonnegative(),
   durationInFrames: z.number().int().positive(),
 }).passthrough();
+
+const ShotTransitionSchema = z.object({
+  type: z.enum(['cut', 'dissolve']),
+  frames: z.number().int().nonnegative(),
+}).strict();
 
 export const TimelineShotSchema = FrameRangeSchema.extend({
   id: z.string().min(1),
@@ -47,9 +52,11 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
   }).strict().nullable().default(null),
   unresolvedMedia: z.boolean().optional(),
   transitionReason: z.enum(['newIdea', 'newEvidence', 'newEntity', 'comparisonPivot', 'reveal', 'sectionChange', 'detailChange', 'continuation']),
-  transitionAnchor: z.object({ type: z.enum(['entity', 'concept']), value: z.string() }).strict().nullable(),
-  transitionPolicy: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL', 'PUSH', 'WIPE']),
-  imageBehavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'DETAIL_CROP', 'FOCAL_PAN', 'MATCH_CUT', 'MONTAGE']).nullable(),
+  transitionAnchor: z.object({ type: z.enum(['entity', 'concept', 'subject', 'detail', 'screen_region', 'location']), value: z.string() }).strict().nullable(),
+  transitionPolicy: z.enum(['CUT', 'SHORT_DISSOLVE']),
+  enter: ShotTransitionSchema.default({ type: 'cut', frames: 0 }),
+  exit: ShotTransitionSchema.default({ type: 'cut', frames: 0 }),
+  imageBehavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']).nullable(),
   captionPolicy: z.object({
     mode: z.enum(['NORMAL', 'COMPACT', 'INTEGRATED', 'HIDDEN']),
     style: z.enum(['CLEAN_TEXT', 'SOFT_SCRIM', 'COMPACT_CAPSULE', 'INTEGRATED']).optional(),
@@ -103,6 +110,7 @@ export const TimelineSchema = z.object({
   visualPolicy: z.object({
     visualMode: z.enum(['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']), useMediaEditorial: z.boolean(), enableProceduralGraphics: z.boolean(),
     enableLegacyVisualFamilies: z.boolean(), allowGeneratedMedia: z.literal(false), allowSplitLayout: z.boolean().default(false), defaultTransition: z.literal('CUT'), defaultCamera: z.literal('STATIC'),
+    motionPreset: z.enum(['minimal', 'standard']).default('standard'),
   }).strict(),
   clips: z.array(TimelineClipSchema).min(1),
   realizedShots: z.array(TimelineShotSchema).min(1),

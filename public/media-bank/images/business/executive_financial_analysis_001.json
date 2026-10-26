@@ -1,0 +1,74 @@
+{
+  "id": "executive_financial_analysis_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive financial analysis at sunset",
+  "path": "images/business/executive_financial_analysis_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "financial analysis",
+    "executive",
+    "reports",
+    "office",
+    "accounting"
+  ],
+  "concepts": [
+    "financial review",
+    "executive analysis",
+    "business reporting",
+    "performance analysis"
+  ],
+  "subjects": [
+    "executive",
+    "reports",
+    "laptop",
+    "calculator"
+  ],
+  "actions": [
+    "reviewing reports",
+    "analyzing numbers"
+  ],
+  "mood": [
+    "focused",
+    "premium",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.38,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "finance operations",
+    "accounting content",
+    "business reporting"
+  ],
+  "avoidFor": [
+    "team networking",
+    "retail store",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

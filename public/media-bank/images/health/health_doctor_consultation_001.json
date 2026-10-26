@@ -1,0 +1,63 @@
+{
+  "id": "health_doctor_consultation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Doctor patient consultation",
+  "path": "images/health/health_doctor_consultation_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "doctor",
+    "consultation",
+    "medical care",
+    "checkup",
+    "patient"
+  ],
+  "concepts": [
+    "preventive care",
+    "medical consultation",
+    "health guidance"
+  ],
+  "subjects": [
+    "doctor",
+    "adult patient",
+    "clinic"
+  ],
+  "actions": [
+    "discussing health",
+    "reviewing information"
+  ],
+  "mood": [
+    "professional",
+    "reassuring"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "doctor visit videos",
+    "preventive care",
+    "healthcare scenes"
+  ],
+  "avoidFor": [
+    "fitness motivation",
+    "food still life"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

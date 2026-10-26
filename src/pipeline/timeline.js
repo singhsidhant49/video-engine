@@ -39,9 +39,10 @@ function computeHash(content) {
 // Families whose on-screen text is large enough that captions should step aside.
 const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote', 'stat', 'process', 'timeline', 'list', 'compare', 'code', 'ui', 'diagram', 'map', 'document']);
 
-// burn (film light leak) and iris (circle reveal) are adapted from the MIT-licensed RVE templates.
-const TRANSITION_FRAMES = { cut: 0, dissolve: 14, push: 12, whip: 9, zoom: 12, wipe: 12, dip: 14, flash: 6, burn: 24, iris: 16 };
-const OVERLAY_TRANSITIONS = new Set(['dip', 'flash', 'burn']);
+// The production edit vocabulary is deliberately limited to clean cuts and
+// conventional 0.3-0.5 second cross dissolves.
+const TRANSITION_FRAMES = { cut: 0, dissolve: 12 };
+const OVERLAY_TRANSITIONS = new Set();
 const STOPWORDS = new Set(['the', 'a', 'an', 'of', 'to', 'and', 'in', 'on', 'for', 'with', 'at', 'by', 'or', 'is', 'are', 'was', 'its', 'it', 'this', 'that']);
 const STRUCTURED_STOPWORDS = new Set([...STOPWORDS, 'source', 'process', 'result', 'phase', 'step', 'title', 'flow', 'system']);
 
@@ -94,16 +95,17 @@ function transitionAnchorFor(scene, previous) {
   if (!previous) return null;
   const entity = scene.entity?.name, previousEntity = previous.entity?.name;
   if (entity && entity === previousEntity) return { type: 'entity', value: entity };
+  const currentSubjects = (scene.storyboardShots || []).map((shot) => String(shot.visualConcept || '').trim().toLowerCase()).filter(Boolean);
+  const previousSubjects = (previous.storyboardShots || []).map((shot) => String(shot.visualConcept || '').trim().toLowerCase()).filter(Boolean);
+  const exactSubject = previousSubjects.find((subject) => currentSubjects.includes(subject));
+  if (exactSubject) return { type: 'subject', value: exactSubject };
   const currentConcepts = new Set((scene.storyboardShots || []).flatMap((shot) => significantTokens(shot.visualConcept || '')));
   const shared = (previous.storyboardShots || []).flatMap((shot) => significantTokens(shot.visualConcept || '')).find((token) => currentConcepts.has(token));
   return shared ? { type: 'concept', value: shared } : null;
 }
 
 function transitionPolicyFor(type, anchor) {
-  // Requirement 27 & 28: Require identifiable anchor; broad concept token does not qualify.
-  const validMatchMoveAnchor = anchor && ['entity', 'subject', 'detail', 'screen_region', 'location'].includes(anchor.type);
-  if (validMatchMoveAnchor && type === 'cut') return 'MATCH_MOVE';
-  return ({ cut: 'CUT', dissolve: 'SHORT_DISSOLVE', push: 'PUSH', wipe: 'WIPE' })[type] || 'CUT';
+  return type === 'dissolve' ? 'SHORT_DISSOLVE' : 'CUT';
 }
 
 function imageBehaviorFor(shot, asset) {
@@ -111,8 +113,8 @@ function imageBehaviorFor(shot, asset) {
   if (shot.family !== 'image') return null;
   if (asset?.type === 'video') return 'STATIC';
   const move = shot.presentation?.cameraMove || shot.move?.type || 'static';
-  if (move === 'detailCrop') return 'DETAIL_CROP';
-  if (move === 'pan') return 'FOCAL_PAN';
+  if (move === 'panLeft') return 'PAN_LEFT';
+  if (move === 'panRight') return 'PAN_RIGHT';
   if (move === 'subtlePush' || move === 'push') return 'SUBTLE_PUSH';
   if (move === 'subtlePull' || move === 'pull') return 'SUBTLE_PULL';
   return 'STATIC';
@@ -122,10 +124,8 @@ const SOLVED_CAMERA_MOVE = Object.freeze({
   STATIC: 'static',
   SUBTLE_PUSH: 'subtlePush',
   SUBTLE_PULL: 'subtlePull',
-  FOCAL_PAN: 'pan',
-  DETAIL_CROP: 'detailCrop',
-  REFRAME: 'reframe',
-  MATCH_MOVE: 'matchMove',
+  PAN_LEFT: 'panLeft',
+  PAN_RIGHT: 'panRight',
 });
 
 /**
@@ -144,7 +144,7 @@ export function resolvedCameraPresentation(presentation = {}, compiled, asset) {
   const cameraMove = nativeMotion ? 'nativeMotion' : (SOLVED_CAMERA_MOVE[path.behavior] || 'static');
   const movementState = nativeMotion ? 'ACTIVE'
     : cameraMove === 'static' ? 'STATIC'
-      : ['subtlePush', 'subtlePull'].includes(cameraMove) ? 'SUBTLE' : 'ACTIVE';
+      : ['subtlePush', 'subtlePull', 'panLeft', 'panRight'].includes(cameraMove) ? 'SUBTLE' : 'ACTIVE';
   return {
     ...presentation,
     authoredCameraMove,
@@ -463,38 +463,132 @@ function titleOverlay(scene) {
 
 // ─── Transitions ───────────────────────────────────────────────────────────
 
-function chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy) {
+export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy, productionProfile = null, assets = null) {
   const minutes = totalFrames / fps / 60;
-  let budget = Math.max(1, Math.ceil(Math.min(3, style.transitions.perMinute) * Math.max(minutes, 0.5)));
+  const semanticRate = 3.5;
+  let budget = Math.max(1, Math.ceil(Math.min(3.5, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
+  // Uniform transition balance across all content types: 35% cross-dissolve, 65% clean cut
+  const designedShare = 0.35;
+  budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
-  if (visualPolicy?.useMediaEditorial) return out;
-  // Designed transitions are semantic punctuation, not decoration.
-  plan.scenes.forEach((s, i) => {
-    if (i === 0 || budget <= 0) return;
-    const reason = transitionReasonFor(s, plan.scenes[i - 1]);
-    if (reason === TRANSITION_REASON.SECTION_CHANGE) {
-      out[i] = 'wipe';
+  let previousWasDissolve = false;
+  plan.scenes.forEach((scene, index) => {
+    if (index === 0) return;
+    const previous = plan.scenes[index - 1];
+    const reason = transitionReasonFor(scene, previous);
+    const softTone = ['somber', 'reflective', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
+    const semanticPause = reason === TRANSITION_REASON.SECTION_CHANGE
+      || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason));
+    if (budget > 0 && semanticPause && !previousWasDissolve) {
+      out[index] = 'dissolve';
       budget--;
-    } else if (reason === TRANSITION_REASON.COMPARISON_PIVOT) {
-      out[i] = 'push';
-      budget--;
-    }
-  });
-  // A reflective continuation can dissolve; same-subject/new-angle remains a cut.
-  plan.scenes.forEach((s, i) => {
-    if (i === 0 || out[i] !== 'cut' || budget <= 0) return;
-    const bothPhotos = specs[i].family === 'image' && specs[i - 1].family === 'image';
-    const soft = ['somber', 'reflective'].includes(s.tone) || s.treatment === 'quiet';
-    const reason = transitionReasonFor(s, plan.scenes[i - 1]);
-    if (bothPhotos && soft && s.intensity <= 3 && reason === TRANSITION_REASON.CONTINUATION) {
-      out[i] = 'dissolve';
-      budget--;
+      previousWasDissolve = true;
+    } else {
+      previousWasDissolve = false;
     }
   });
   return out;
 }
 
 // ─── Main ──────────────────────────────────────────────────────────────────
+
+const SHOT_REASON_TO_BEAT_REASON = Object.freeze({
+  newIdea: 'NEW_IDEA', newEvidence: 'NEW_EVIDENCE', newEntity: 'NEW_ENTITY', comparisonPivot: 'NEW_IDEA',
+  reveal: 'EMOTIONAL_SHIFT', sectionChange: 'CHAPTER_CHANGE', detailChange: 'DETAIL_SHIFT', continuation: 'CONTINUATION',
+});
+
+const SHOT_POLICY_TO_PLAN_TYPE = Object.freeze({
+  CUT: 'CUT', SHORT_DISSOLVE: 'SHORT_DISSOLVE',
+});
+
+const normalizedConcept = (shot) => String(shot?.visualConcept || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+const shotFocal = (shot) => shot?.asset?.focalPoint || shot?.asset?.focal || { x: .5, y: .5 };
+const cameraDirection = (shot) => ({ panLeft: 'left', panRight: 'right' })[shot?.presentation?.cameraMove] || null;
+
+function actualTransitionAnchor(previous, shot) {
+  const previousConcept = normalizedConcept(previous), concept = normalizedConcept(shot);
+  if (concept && concept === previousConcept) return { type: 'subject', value: concept };
+  if (previous?.asset?.src && previous.asset.src === shot?.asset?.src) return { type: 'detail', value: String(shot.asset.src) };
+  const previousDirection = cameraDirection(previous), direction = cameraDirection(shot);
+  const a = shotFocal(previous), b = shotFocal(shot);
+  if (direction && direction === previousDirection && Math.hypot(a.x - b.x, a.y - b.y) <= .18) {
+    return { type: 'screen_region', value: `${direction}:${Math.round(b.x * 10)}:${Math.round(b.y * 10)}` };
+  }
+  return null;
+}
+
+function synchronizeShotTransition(shot, previous, { type, frames, policy, reason, anchor }, mediaSceneSpecs, mediaShotPlans) {
+  shot.enter = { type, frames };
+  shot.transitionPolicy = policy;
+  shot.transitionReason = reason;
+  shot.transitionAnchor = anchor;
+  if (previous) previous.exit = { type, frames };
+
+  const spec = mediaSceneSpecs?.[shot.mediaSceneSpecId || shot.storyboardShotId];
+  if (spec) spec.transitionIntent = { ...spec.transitionIntent, entry: policy, anchor };
+  const plan = mediaShotPlans?.[shot.storyboardShotId];
+  if (plan) {
+    const planType = SHOT_POLICY_TO_PLAN_TYPE[policy] || 'CUT';
+    const planReason = SHOT_REASON_TO_BEAT_REASON[reason] || 'NEW_IDEA';
+    plan.transitionIn = { type: planType, durationInFrames: frames, reason: planReason, anchor };
+    plan.visualChangeReason = planReason;
+    plan.transitionAnchor = anchor;
+    const previousPlan = previous && mediaShotPlans?.[previous.storyboardShotId];
+    if (previousPlan) previousPlan.transitionOut = { type: planType, durationInFrames: frames, reason: planReason, anchor };
+  }
+}
+
+/** Direct every visual boundary after assets, focal points, and camera paths exist. */
+export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, mediaSceneSpecs = {}, mediaShotPlans = {}, visualPolicy = null }) {
+  const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
+  const entries = clips.flatMap((clip, clipIndex) => (clip.shots || []).map((shot, shotIndex) => ({ clip, clipIndex, shot, shotIndex })));
+  // Standardized across all content types: 35% cross-dissolve, 65% clean cut
+  const maximumDissolves = Math.max(1, Math.floor(Math.max(0, entries.length - 1) * 0.35));
+  let remainingDissolves = maximumDissolves;
+  let previousWasDissolve = false;
+  const dissolveFrames = Math.min(Math.round(fps * .5), Math.max(Math.round(fps * .3), Math.round(fps * .4)));
+
+  entries.forEach((entry, index) => {
+    const { shot, clip } = entry;
+    shot.enter = { type: 'cut', frames: 0 };
+    shot.exit = { type: 'cut', frames: 0 };
+    shot.transitionPolicy = 'CUT';
+    shot.transitionAnchor = null;
+    if (index === 0) {
+      clip.enter = { type: 'cut', frames: 0 };
+      clip.transitionPolicy = 'CUT';
+      return;
+    }
+    const previousEntry = entries[index - 1];
+    const previous = previousEntry.shot;
+    const scene = sceneById.get(shot.sceneId) || scenes[entry.clipIndex] || {};
+    const spec = mediaSceneSpecs?.[shot.mediaSceneSpecId || shot.storyboardShotId];
+    const bothImages = previous.asset?.type !== 'video' && shot.asset?.type !== 'video';
+    const calm = ['reflective', 'somber', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
+    const detailChange = shot.role === 'detail' || spec?.imageChangeReason === 'newDetail' || previous.asset?.src === shot.asset?.src;
+    const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
+    const reason = sceneBoundary
+      ? clip.transitionReason || transitionReasonFor(scene, sceneById.get(previous.sceneId) || {})
+      : detailChange ? TRANSITION_REASON.DETAIL_CHANGE
+        : shot.role === 'subject' ? TRANSITION_REASON.NEW_ENTITY : TRANSITION_REASON.NEW_IDEA;
+    const semanticDissolve = sceneBoundary
+      ? clip.enter?.type === 'dissolve' || reason === TRANSITION_REASON.SECTION_CHANGE || (calm && reason === TRANSITION_REASON.CONTINUATION)
+      : bothImages && (detailChange || calm);
+    const useDissolve = remainingDissolves > 0 && !previousWasDissolve && semanticDissolve;
+    const decision = useDissolve
+      ? { type: 'dissolve', frames: dissolveFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
+      : { type: 'cut', frames: 0, policy: 'CUT', reason, anchor: null };
+    synchronizeShotTransition(shot, previous, decision, mediaSceneSpecs, mediaShotPlans);
+    if (sceneBoundary) {
+      clip.enter = { type: decision.type, frames: decision.frames };
+      clip.transitionPolicy = decision.policy;
+      clip.transitionAnchor = null;
+    }
+    if (useDissolve) remainingDissolves--;
+    previousWasDissolve = useDissolve;
+  });
+  return clips;
+}
 
 export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc, coveragePlan = [], editorialVisualPlan = [], visualPolicy: suppliedVisualPolicy = null, productionProfile = null }) {
   const timelineStartedAt = performance.now();
@@ -538,7 +632,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   });
   cuts.push(totalFrames);
 
-  const transitions = chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy);
+  const transitions = chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy, productionProfile, assets);
   const transitionQuality = transitions.map((type, index) => {
     const reason = transitionReasonFor(plan.scenes[index], plan.scenes[index - 1]);
     const anchor = transitionAnchorFor(plan.scenes[index], plan.scenes[index - 1]);
@@ -556,7 +650,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   });
   const presentationMemory = createPresentationMemory();
   const clips = [];
-  const cutOverlays = visualPolicy.useMediaEditorial ? [] : [{ type: 'fadeIn', frame: 0, frames: Math.round(fps * 0.4) }, { type: 'fadeOut', frame: totalFrames, frames: Math.round(fps * 0.6) }];
+  const cutOverlays = [];
 
   plan.scenes.forEach((scene, i) => {
     const spec = specs[i];
@@ -593,6 +687,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
       coverageByShot,
       visualPolicy,
       format,
+      fps,
     });
     const texture = sceneAssets?.primary ? {
       src: sceneAssets.primary.src,
@@ -647,6 +742,8 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
         transitionReason,
         transitionAnchor,
         transitionPolicy,
+        enter: { type: 'cut', frames: 0 },
+        exit: { type: 'cut', frames: 0 },
         imageBehavior: null,
         captionPolicy: null,
         continuityCompatibility: null,
@@ -854,6 +951,9 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
     });
   });
 
+  if (visualPolicy.useMediaEditorial) {
+    directSolvedShotTransitions({ clips, scenes: plan.scenes, fps, mediaSceneSpecs, mediaShotPlans, visualPolicy });
+  }
   const allRealizedShots = clips.flatMap((clip) => clip.shots);
   allRealizedShots.forEach((shot, index) => {
     shot.continuityCompatibility = continuityCompatibility(allRealizedShots[index - 1], shot, { solvedScenes, motionPlans });

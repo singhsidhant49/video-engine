@@ -1,0 +1,76 @@
+{
+  "id": "small_business_finance_workspace_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Small business owner reviewing finances",
+  "path": "images/finance/small_business_finance_workspace_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "small business",
+    "cash flow",
+    "expenses",
+    "analytics",
+    "entrepreneur"
+  ],
+  "concepts": [
+    "small business finance",
+    "cash flow management",
+    "business budgeting",
+    "financial operations"
+  ],
+  "subjects": [
+    "business owner",
+    "laptop dashboard",
+    "receipts",
+    "calculator"
+  ],
+  "actions": [
+    "reviewing finances",
+    "checking expenses",
+    "managing cash flow"
+  ],
+  "mood": [
+    "productive",
+    "practical",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.49,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "small business finance",
+    "cash flow explainer",
+    "entrepreneurship",
+    "business budgeting"
+  ],
+  "avoidFor": [
+    "institutional trading",
+    "retirement planning",
+    "boardroom presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

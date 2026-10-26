@@ -1,0 +1,62 @@
+{
+  "id": "health_restful_sleep_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Restful healthy sleep",
+  "path": "images/health/health_restful_sleep_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "sleep",
+    "rest",
+    "recovery",
+    "sleep hygiene"
+  ],
+  "concepts": [
+    "restorative sleep",
+    "recovery",
+    "healthy night routine"
+  ],
+  "subjects": [
+    "adult sleeping",
+    "bedroom",
+    "bed"
+  ],
+  "actions": [
+    "sleeping",
+    "resting"
+  ],
+  "mood": [
+    "calm",
+    "restful"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sleep videos",
+    "recovery scenes",
+    "night routine content"
+  ],
+  "avoidFor": [
+    "workout",
+    "doctor visit"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

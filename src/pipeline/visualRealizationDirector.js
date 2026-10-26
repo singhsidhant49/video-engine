@@ -18,7 +18,7 @@ const recentCount = (items, value, limit = 3) => items.slice(-limit).filter((ite
 export function createPresentationMemory() {
   return {
     recentFamilies: [], recentVariants: [], recentLayouts: [], recentOverlayModes: [], recentCameraMoves: [],
-    recentDensities: [], recentMovementStates: [], usedAssetSources: [],
+    recentDensities: [], recentMovementStates: [], usedAssetSources: [], shotsSinceCameraMotion: 99,
   };
 }
 
@@ -166,7 +166,7 @@ function chooseOverlayMode(family, shot, index) {
  * Prohibits identical camera move > 2 consecutive shots.
  * Introduces intentional static holds on documents, charts, quotes, hero photos.
  */
-function chooseCameraMove(shot, family, asset, memory) {
+function chooseCameraMove(shot, scene, family, asset, timing, memory, format = 'landscape', fps = 30) {
   // Charts, quotes, code, ui, diagrams, maps, and montage are always intentionally static
   if (['chart', 'quote', 'code', 'ui', 'diagram', 'map', 'montage'].includes(family)) return 'static';
   if (family === 'document' || shot.role === 'evidence') return 'static';
@@ -174,38 +174,80 @@ function chooseCameraMove(shot, family, asset, memory) {
   if (asset?.type === 'video') return 'static';
   if (shot.motionPreference === 'stable') return 'static';
 
-  const recentMoves = memory.recentCameraMoves.slice(-2);
-  const lastMove = last(recentMoves);
+  const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
+  if (durationSec < 3.6) return 'static';
 
-  // If previous 2 moves were moving, strongly consider an intentional static hold
-  const twoConsecutiveMoves = recentMoves.length === 2 && recentMoves[0] !== 'static' && recentMoves[1] !== 'static';
-  if (twoConsecutiveMoves && (shot.role === 'subject' || shot.role === 'detail')) {
-    return 'static';
+  const recentMoves = memory.recentCameraMoves.slice(-3);
+  const focal = asset?.focalPoint || asset?.focal || { x: .5, y: .5 };
+  const aspect = Number(asset?.width) / Math.max(1, Number(asset?.height));
+  const targetAspect = format === 'shorts' ? 9 / 16 : 16 / 9;
+  const horizontalSlack = aspect > targetAspect ? 1 - targetAspect / aspect : 0;
+  const importantMoment = ['hook', 'reveal', 'payoff'].includes(scene?.purpose) || Number(scene?.intensity || 0) >= 4;
+  const candidates = new Map([['static', 1]]);
+  const add = (move, score) => candidates.set(move, Math.max(candidates.get(move) ?? -Infinity, score));
+
+  if (shot.role === 'detail') add('subtlePush', 8);
+  if (shot.role === 'establishing' || ['conclusion', 'transition'].includes(scene?.purpose)) add('subtlePull', 6);
+  if (importantMoment || shot.assetIntent === 'action' || shot.visualIntent === 'identify') add('subtlePush', 5.5);
+
+  // Judge pan feasibility from the real cover crop, not from a coarse portrait/
+  // landscape label. A common 3:2 photograph has useful vertical travel on a
+  // 16:9 canvas even though it is not a portrait image.
+  if (horizontalSlack >= .08) add(focal.x >= .5 ? 'panRight' : 'panLeft', shot.role === 'context' ? 6.2 : 4.4);
+
+  const last = recentMoves.at(-1);
+  const lastTwo = recentMoves.slice(-2);
+  const movingRun = [...recentMoves].reverse().findIndex((move) => move === 'static');
+  const consecutiveMoving = movingRun === -1 ? recentMoves.length : movingRun;
+  const consecutiveStatic = [...recentMoves].reverse().findIndex((move) => move !== 'static');
+  const staticRun = consecutiveStatic === -1 ? recentMoves.length : consecutiveStatic;
+
+  for (const [move, score] of candidates) {
+    let adjusted = score;
+    if (move === last && move !== 'static') adjusted -= 3.5;
+    if (lastTwo.length === 2 && lastTwo.every((value) => value === move)) adjusted -= 6;
+    if (move === 'static' && consecutiveMoving >= 3) adjusted += 5;
+    if (move !== 'static' && staticRun >= 2) adjusted += 5;
+    candidates.set(move, adjusted);
   }
 
-  // Milestone 21: Motion must be editorially motivated, not alternated blindly.
-  // STATIC is a professional, valid default.
-  if (shot.role === 'detail') {
-    return 'detailCrop';
-  }
-  if (shot.role === 'establishing') {
-    return 'subtlePull';
-  }
-  if (shot.assetIntent === 'action' || shot.visualIntent === 'identify') {
-    return 'subtlePush';
-  }
-  if (shot.role === 'context' && asset && asset.width / Math.max(1, asset.height) > 1.6) {
-    return 'pan';
-  }
+  // STATIC remains a deliberate option, but variety is achieved by choosing a
+  // different feasible motion before freezing a healthy still image.
+  return [...candidates.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+}
 
-  // Without a specific editorial reason or on short holds, remain static.
+/** Keep the public motion vocabulary intentionally small and predictable. */
+function normalizeCameraMove(move, asset) {
+  const focal = asset?.focalPoint || asset?.focal || { x: .5, y: .5 };
+  if (['subtlePush', 'push', 'slowZoomIn', 'detailCrop', 'detailReveal'].includes(move)) return 'subtlePush';
+  if (['subtlePull', 'pull', 'slowZoomOut'].includes(move)) return 'subtlePull';
+  if (move === 'panLeft' || move === 'panRight') return move;
+  if (['pan', 'panUp', 'panDown', 'drift', 'parallax', 'focalPan'].includes(move)) return focal.x >= .5 ? 'panRight' : 'panLeft';
   return 'static';
 }
 
-function cameraPath(type, asset, magnitude = 0.05, base = 1) {
-  const focal = asset?.focal || { x: 0.5, y: 0.45 };
-  // Keep movement magnitude subtle (0.025 to 0.038) to avoid artificial continuous zooming
-  const subtle = Math.min(0.038, Math.max(0.02, magnitude * 0.45));
+function chooseMinimalCameraMove(shot, scene, family, asset, timing, memory, fps = 30) {
+  if (family !== 'image' || asset?.type === 'video' || shot.motionPreference === 'stable' || shot.role === 'evidence') return 'static';
+  const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
+  if (durationSec < 6 || Number(memory.shotsSinceCameraMotion || 0) < 4) return 'static';
+  const majorBeat = ['hook', 'reveal', 'payoff', 'conclusion'].includes(scene?.purpose);
+  if (!majorBeat) return 'static';
+  return scene?.purpose === 'hook' || scene?.purpose === 'conclusion' ? 'subtlePull' : 'subtlePush';
+}
+
+function cameraMagnitudeFor(timing, fps, move) {
+  if (move === 'static') return 0;
+  if (move === 'panLeft' || move === 'panRight') return .03;
+  const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
+  if (durationSec <= 3.5) return 0.04;
+  if (durationSec >= 7.0) return 0.08;
+  const t = (durationSec - 3.5) / (7.0 - 3.5);
+  return Number((0.04 + t * 0.04).toFixed(3));
+}
+
+function cameraPath(type, asset, magnitude = 0.06, base = 1) {
+  const focal = asset?.focalPoint || asset?.focal || { x: 0.5, y: 0.45 };
+  const subtle = Math.min(0.08, Math.max(0.04, Number(magnitude) || 0.06));
 
   if (type === 'static' || type === 'hold') {
     return { type: 'static', scale: [base, base], focus: [[focal.x, focal.y], [focal.x, focal.y]] };
@@ -213,25 +255,13 @@ function cameraPath(type, asset, magnitude = 0.05, base = 1) {
   if (type === 'subtlePull' || type === 'pull') {
     return { type: 'subtlePull', scale: [base * (1 + subtle), base], focus: [[focal.x, focal.y], [focal.x, focal.y]] };
   }
-  if (type === 'pan') {
+  if (['pan', 'panLeft', 'panRight'].includes(type)) {
+    const direction = type === 'panLeft' ? -1 : 1;
+    const travel = Math.min(.04, Math.max(.02, magnitude || .03));
     return {
-      type: 'pan',
-      scale: [base * 1.02, base * 1.025],
-      focus: [[Math.max(0.3, focal.x - 0.05), focal.y], [Math.min(0.7, focal.x + 0.05), focal.y]],
-    };
-  }
-  if (type === 'detailCrop') {
-    return {
-      type: 'detailCrop',
-      scale: [base * 1.18, base * 1.2],
-      focus: [[focal.x, focal.y], [focal.x, focal.y]],
-    };
-  }
-  if (type === 'parallax' || type === 'drift') {
-    return {
-      type: 'parallax',
-      scale: [base * 1.01, base * (1 + subtle * 0.7)],
-      focus: [[focal.x - 0.015, focal.y + 0.01], [focal.x + 0.015, focal.y - 0.01]],
+      type: type === 'pan' ? 'panRight' : type,
+      scale: [base * 1.04, base * 1.04],
+      focus: [[Math.max(0, Math.min(1, focal.x - direction * travel)), focal.y], [focal.x, focal.y]],
     };
   }
   return {
@@ -254,7 +284,7 @@ function densityFor(family, shot, scene, recentDensities) {
   return 'MEDIUM';
 }
 
-export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId, memory, coverageByShot = new Map(), visualPolicy = null, format = 'landscape' }) {
+export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId, memory, coverageByShot = new Map(), visualPolicy = null, format = 'landscape', fps = 30 }) {
   return scene.storyboardShots.map((shot, index) => {
     const pool = assetPool(sceneAssets, shot.id);
     const coverage = coverageByShot.get(shot.id) || null;
@@ -273,31 +303,35 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
     const overlayMode = mediaEditorial ? 'none' : chooseOverlayMode(family, shot, index);
     const timing = timings[index];
     let cameraMove = 'static';
-    if (shot.presentation?.cameraMove) {
-      cameraMove = shot.presentation.cameraMove;
+    const authoredMove = shot.presentation?.cameraMove;
+    if (mediaEditorial && visualPolicy?.motionPreset === 'minimal') {
+      cameraMove = chooseMinimalCameraMove(shot, scene, family, asset, timing, memory, fps);
+    } else if (authoredMove && authoredMove !== 'auto') {
+      cameraMove = authoredMove;
       // Persisted/LLM-authored storyboards can request the same zoom for every
       // scene. Preserve the authored move unless it would become the third
       // identical effect in a row, then let the editorial selector introduce
       // a restrained counter-move or intentional hold.
       const recentMoves = memory.recentCameraMoves.slice(-2);
       if (cameraMove !== 'static' && recentMoves.length === 2 && recentMoves.every((move) => move === cameraMove)) {
-        cameraMove = chooseCameraMove({ ...shot, presentation: {} }, family, asset, memory);
-        if (cameraMove === shot.presentation.cameraMove) {
-          cameraMove = shot.presentation.cameraMove === 'subtlePush' ? 'subtlePull' : 'static';
+        cameraMove = chooseCameraMove({ ...shot, presentation: {} }, scene, family, asset, timing, memory, format, fps);
+        if (cameraMove === authoredMove) {
+          cameraMove = authoredMove === 'subtlePush' ? 'subtlePull' : 'static';
         }
       }
     } else if (mediaEditorial) {
-      const durationSec = timing.durationInFrames / 30;
       const isStillImage = asset && asset.type !== 'video';
-      const recentMoves = memory.recentCameraMoves.slice(-2);
-      const lastWasStatic = recentMoves.length === 0 || last(recentMoves) === 'static';
-      if (durationSec > 4.5 && isStillImage && lastWasStatic && shot.role !== 'evidence' && scene.kind !== 'statistic') {
-        cameraMove = chooseCameraMove(shot, family, asset, memory);
+      if (isStillImage && shot.role !== 'evidence' && scene.kind !== 'statistic') {
+        cameraMove = chooseCameraMove(shot, scene, family, asset, timing, memory, format, fps);
       }
     } else {
-      cameraMove = chooseCameraMove(shot, family, asset, memory);
+      cameraMove = chooseCameraMove(shot, scene, family, asset, timing, memory, format, fps);
     }
+    cameraMove = normalizeCameraMove(cameraMove, asset);
     const movementState = classifyMovementState(cameraMove);
+    const cameraMagnitude = visualPolicy?.motionPreset === 'minimal' && cameraMove !== 'static'
+      ? Math.min(.04, cameraMagnitudeFor(timing, fps, cameraMove))
+      : cameraMagnitudeFor(timing, fps, cameraMove);
     const density = densityFor(family, shot, scene, memory.recentDensities);
     const layout = `${family}:${variant}`;
     const montageAssets = family === 'montage' ? pool.filter((item) => item?.src !== asset?.src && !editorialSelection?.rejectedAlternatives.some((rejected) => rejected.assetId === String(item.id || item.assetId || item.src))).slice(0, 4) : [];
@@ -310,6 +344,7 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
       focalPoint: asset?.focal || null,
       overlayMode,
       cameraMove,
+      cameraMagnitude,
       movementState,
       transitionIn: index === 0 ? 'scene' : 'cut',
       transitionOut: 'cut',
@@ -336,6 +371,9 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
     remember(memory, 'recentCameraMoves', cameraMove);
     remember(memory, 'recentMovementStates', movementState);
     remember(memory, 'recentDensities', density);
+    memory.shotsSinceCameraMotion = cameraMove === 'static'
+      ? Number(memory.shotsSinceCameraMotion || 0) + 1
+      : 0;
 
     return {
       storyboardShotId: shot.id,
@@ -350,7 +388,7 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
       assets: montageAssets,
       presentation,
       timing,
-      move: cameraPath(cameraMove, asset, spec.camera?.magnitude || 0.05, spec.camera?.baseScale || 1),
+      move: cameraPath(cameraMove, asset, cameraMagnitude || spec.camera?.magnitude || 0.05, spec.camera?.baseScale || 1),
       rejectedAlternatives: editorialSelection?.rejectedAlternatives || [],
     };
   });

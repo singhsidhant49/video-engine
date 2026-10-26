@@ -1,0 +1,78 @@
+{
+  "id": "history_railroad_expansion_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Forging rails through the mountain valley",
+  "path": "images/history/history_railroad_expansion_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "railroad",
+    "industrial expansion",
+    "workers",
+    "steam locomotive",
+    "19th century",
+    "infrastructure"
+  ],
+  "concepts": [
+    "industrial expansion",
+    "transport history",
+    "labor history",
+    "continental rail building"
+  ],
+  "subjects": [
+    "rail workers",
+    "steam train",
+    "tracks",
+    "bridge",
+    "mountain valley"
+  ],
+  "actions": [
+    "laying track",
+    "hammering spikes",
+    "moving freight"
+  ],
+  "mood": [
+    "gritty",
+    "expansive",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "industrial history videos",
+    "transport history",
+    "labor scenes",
+    "infrastructure explainers"
+  ],
+  "avoidFor": [
+    "ancient civilizations",
+    "quiet archive scenes",
+    "courtly history"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

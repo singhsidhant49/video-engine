@@ -84,6 +84,58 @@ Live preview and edit React video components in real-time:
 npm run remotion:studio
 ```
 
+### Option D: Asynchronous Video API
+
+The application-facing API is prompt-first; channel/profile settings are optional. Configure at least one API key for production:
+
+```env
+NODE_ENV=production
+VIDEO_API_KEYS=replace-with-a-long-random-api-key
+VIDEO_WORKER_CONCURRENCY=1
+VIDEO_API_MAX_REQUEST_BYTES=1mb
+VIDEO_MAX_QUEUED_JOBS=25
+VIDEO_MAX_OWNER_PENDING_JOBS=5
+VIDEO_SHUTDOWN_TIMEOUT_MS=30000
+```
+
+For local development, start the API and its in-process worker:
+
+```bash
+npm start
+```
+
+Create a job (returns `202` immediately):
+
+```bash
+curl -X POST http://localhost:3000/v1/videos \
+  -H "Authorization: Bearer replace-with-a-long-random-api-key" \
+  -H "Idempotency-Key: customer-order-123" \
+  -H "Content-Type: application/json" \
+  -d '{"prompt":"Create a two-minute documentary about coffee","output":{"durationSeconds":120,"aspectRatio":"16:9"}}'
+```
+
+Use `GET /v1/videos/:id` for progress, `GET /v1/videos/:id/result` for the result, and authenticated `GET /v1/videos/:id/download` for the MP4. `POST /v1/videos/:id/cancel` cancels a job and `POST /v1/videos/:id/retry` resumes a failed or cancelled job under the same video ID, reusing valid pipeline checkpoints.
+
+`DELETE /v1/videos/:id` is the single permanent deletion operation. It cancels active work, deletes the final video and every per-run artifact, and removes the video job record. Poll the returned `GET /v1/operations/:operationId` URL until it is complete. Shared caches and user media-bank files are never deleted.
+
+In Docker production mode, PostgreSQL stores job and deletion state, Redis/BullMQ coordinates a separate worker process, and generated files persist in a named Docker volume. Outside Docker, the local development fallback still stores state under `renders/api/` and runs an in-process queue.
+
+Prompt text may contain up to 50,000 characters, allowing complete narrative, visual, editing, and quality-control briefs. The total JSON request limit is configured by `VIDEO_API_MAX_REQUEST_BYTES`.
+
+`GET /health` is a process liveness check. `GET /ready` verifies that the worker is accepting jobs and that its persistent store is readable and writable. Queue admission is bounded globally and per API account; overload returns HTTP `429`. `SIGTERM` and `SIGINT` stop admission, allow active work a grace period, and leave interrupted jobs queued for recovery on restart. The legacy synchronous `/api/generate` and unscoped `/api/renders` endpoints are disabled in production.
+
+### Production Docker stack
+
+Merge `.env.docker.example` into `.env`, replace all placeholder secrets, then run:
+
+```powershell
+docker compose up -d --build
+docker compose ps
+docker compose logs -f api worker
+```
+
+Open [http://localhost:3000](http://localhost:3000) for the authenticated production dashboard. The stack contains the API, a separate video worker, PostgreSQL, Redis/BullMQ, and Kokoro TTS. Videos and databases survive restarts in named Docker volumes. See [Docker production deployment](docs/docker-production.md) for health checks, backups, scaling, storage, and the future multi-user migration.
+
 ---
 
 ## 📁 Output & Render Files
@@ -141,3 +193,10 @@ Useful validation commands:
 npm test
 npm run render:media-editorial
 ```
+
+
+
+
+
+
+The containerized system is ready for private, single-host production use across multiple YouTube channels. A public HeyGen-style multi-customer service still needs object storage/CDN delivery, full identity and billing, webhooks, observability, backups, retention automation, and load/security testing; the migration path is documented in [Docker production deployment](docs/docker-production.md).

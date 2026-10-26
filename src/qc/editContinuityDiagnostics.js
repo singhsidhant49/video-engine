@@ -2,9 +2,8 @@ const increment = (target, key) => { target[key] = (target[key] || 0) + 1; };
 const distribution = (values) => values.reduce((target, value) => { increment(target, value); return target; }, {});
 
 function canonicalTransition(clip) {
-  if (clip.transitionPolicy) return clip.transitionPolicy;
-  if (clip.transitionAnchor && clip.enter?.type === 'cut') return 'MATCH_MOVE';
-  return ({ cut: 'CUT', dissolve: 'SHORT_DISSOLVE', push: 'PUSH', wipe: 'WIPE' })[clip.enter?.type] || 'CUT';
+  if (clip.transitionPolicy) return clip.transitionPolicy === 'SHORT_DISSOLVE' ? 'SHORT_DISSOLVE' : 'CUT';
+  return clip.enter?.type === 'dissolve' ? 'SHORT_DISSOLVE' : 'CUT';
 }
 
 function repeatedRuns(items, valueFor, { minimum = 3, ignore = new Set() } = {}) {
@@ -57,8 +56,10 @@ function captionCoverage(timeline) {
 export function buildEditContinuityDiagnostics(timeline, { frameStatePreflight = {} } = {}) {
   const clips = timeline.clips || [];
   const shots = timeline.realizedShots || clips.flatMap((clip) => clip.shots || []);
+  const hasShotTransitionContracts = shots.slice(1).length > 0 && shots.slice(1).every((shot) => shot.enter || shot.transitionPolicy);
+  const transitionBoundaries = hasShotTransitionContracts ? shots.slice(1) : clips;
   const transitionDistribution = {}, motionModeDistribution = {}, captionModeDistribution = {}, imageCameraDistribution = {};
-  clips.forEach((clip) => increment(transitionDistribution, canonicalTransition(clip)));
+  transitionBoundaries.forEach((item) => increment(transitionDistribution, canonicalTransition(item)));
   shots.forEach((shot) => {
     increment(motionModeDistribution, shot.renderMode === 'solved'
       ? timeline.motionPlans?.[shot.motionPlanId]?.motionDensityBudget || 'MEDIUM'
@@ -73,7 +74,7 @@ export function buildEditContinuityDiagnostics(timeline, { frameStatePreflight =
     .filter((issue) => issue.code === 'late_unreadable_reveal').map((issue) => ({ shotId: result.shotId, ...issue })));
   const insufficientFinalHoldWarnings = Object.values(frameStatePreflight).flatMap((result) => (result.issues || [])
     .filter((issue) => issue.code === 'insufficient_final_hold').map((issue) => ({ shotId: result.shotId, ...issue })));
-  const repeatedTransitionRuns = repeatedRuns(clips, canonicalTransition, { ignore: new Set(['CUT']) });
+  const repeatedTransitionRuns = repeatedRuns(transitionBoundaries, canonicalTransition, { ignore: new Set(['CUT']) });
   const repeatedCameraRuns = repeatedRuns(shots.filter((shot) => shot.imageBehavior), (shot) => shot.imageBehavior, { ignore: new Set(['STATIC']) });
   const coverage = captionCoverage(timeline);
   const abruptSubtitleWarnings = coverage.longUncoveredIntervals.map((interval) => ({ ...interval, code: 'narration_without_subtitle_or_equivalent_text' }));
@@ -142,7 +143,7 @@ export function buildEditContinuityDiagnostics(timeline, { frameStatePreflight =
   const diagnostics = {
     version: 1,
     transitionDistribution,
-    transitionReasonDistribution: clips.reduce((result, clip) => { increment(result, clip.transitionReason || 'newIdea'); return result; }, {}),
+    transitionReasonDistribution: transitionBoundaries.reduce((result, item) => { increment(result, item.transitionReason || 'newIdea'); return result; }, {}),
     motionModeDistribution,
     motionDensityDistribution: motionModeDistribution,
     captionModeDistribution,
@@ -348,4 +349,3 @@ export function evaluateVideoPlaybackQuality(timeline, continuityDiagnostics, vi
           : 'Video failed core playback quality gate and must not be published.',
   };
 }
-

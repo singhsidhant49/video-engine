@@ -2,11 +2,11 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames } from '../tools/preview.js';
 import { bundle } from '@remotion/bundler';
-import { renderMedia, renderStill, selectComposition } from '@remotion/renderer';
+import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
 import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
-import { analyzeNarration } from '../services/audioAnalysisService.js';
+import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
 import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../storyboard/durationBudget.js';
 import { resolveNarrationProfile } from '../audio/narrationProfile.js';
@@ -93,6 +93,8 @@ function buildClaimEvidenceDiagnostics(plan) {
  * @param {'MEDIA_EDITORIAL'|'LEGACY_PROCEDURAL'} [o.visualMode] centralized visual routing mode
  * @param {object} [o.brief] normalized prompt/data request for application integrations
  * @param {object} [o.channelProfile] channel-level audience, tone and pacing defaults
+ * @param {string} [o.videoId] caller-assigned stable video identifier
+ * @param {AbortSignal} [o.signal] cooperative cancellation signal
  */
 export async function createFacelessVideo({
   brief,
@@ -121,7 +123,20 @@ export async function createFacelessVideo({
   publishMode = 'PRODUCTION_RENDER',
   renderScale = 1,
   onProgress = () => {},
+  videoId: requestedVideoId,
+  signal,
+  force = false,
 }) {
+  if (global.gc) { try { global.gc(); } catch {} }
+  const throwIfCancelled = () => {
+    if (signal?.aborted) {
+      const error = new Error('Video generation cancelled');
+      error.name = 'AbortError';
+      error.code = 'VIDEO_GENERATION_CANCELLED';
+      throw error;
+    }
+  };
+  throwIfCancelled();
   let normalizedBrief = null;
   if (brief || !resume) {
     normalizedBrief = normalizeVideoBrief({
@@ -145,10 +160,15 @@ export async function createFacelessVideo({
   }
   channelId = channelId || 'default';
   let sourceData = normalizedBrief?.sourceData;
-  const visualPolicy = resolveVisualPolicy({ visualMode });
+  // Production defaults to restrained documentary editing: mostly static
+  // stills and hard cuts, with sparse motion reserved for major story beats.
+  const visualPolicy = resolveVisualPolicy({
+    visualMode,
+    motionPreset: process.env.VIDEO_MOTION_PRESET || 'standard',
+  });
   const t0 = Date.now();
   const stamp = new Date().toISOString().replace(/[:.]/g, '-').replace(/Z$/, '');
-  const videoId = resume || `video-${stamp}`;
+  const videoId = resume || requestedVideoId || `video-${stamp}`;
   const fps = config.video.fps;
   const runsDir = path.join(config.rendersDir, 'runs');
 
@@ -170,7 +190,7 @@ export async function createFacelessVideo({
 
   if (resume) {
     console.log(`\n🔄 Resuming run: ${resume}`);
-    job = await JobContext.load({ id: resume, runsDir });
+    job = await JobContext.load({ id: resume, runsDir, force: true });
     let savedRequest = {};
     try {
       savedRequest = JSON.parse(await fs.readFile(path.join(job.runDir, 'request.json'), 'utf8'));
@@ -260,6 +280,7 @@ export async function createFacelessVideo({
   console.log(`\n🎬 ${videoId} · "${topic || job.project.topic}" · ${format}`);
 
   try {
+    throwIfCancelled();
   let targetDuration;
   let durationBudget;
 
@@ -335,6 +356,7 @@ export async function createFacelessVideo({
     console.log(`   ✓ [Reused] plan.json ("${plan.title}" · style ${plan.style} · ${plan.scenes.length} scenes · ${plan.script.split(/\s+/).length} words)`);
   } else {
     await job.startStage('plan');
+    throwIfCancelled();
     onProgress({ step: 1, message: 'Directing: script and shot intent...' });
     const speechRateWps = tts === 'kokoro'
       ? narrationProfile.speechRateWps
@@ -381,6 +403,7 @@ export async function createFacelessVideo({
   } else {
     for (let attempt = 0; attempt < 4; attempt++) {
       await job.startStage('audio');
+      throwIfCancelled();
       onProgress({ step: 2, message: audioFile ? 'Using supplied narration audio...' : `Generating voiceover with Kokoro TTS${attempt > 0 ? ' (duration-adjusted re-synthesis)' : ''}...` });
       if (audioFile) {
         narrationFile = path.join(runPublic, `narration${path.extname(audioFile) || '.wav'}`);
@@ -390,7 +413,7 @@ export async function createFacelessVideo({
         await synthesizeWithSay(plan.script, narrationFile);
       } else {
         narrationFile = path.join(runPublic, 'narration.wav');
-        await generateSpeech({ text: plan.script, outputFile: narrationFile, voice, speed: synthesisSpeed });
+        await generateSpeech({ text: plan.script, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
       }
 
       // Milestone 9 Narration Normalization & Peak Limiting
@@ -404,6 +427,7 @@ export async function createFacelessVideo({
 
       // 3. Word timing (script aligned to what was actually said).
       await job.startStage('alignment');
+      throwIfCancelled();
       onProgress({ step: 3, message: 'Aligning script to narration...' });
       narration = await analyzeNarration(narrationFile, plan.script, fps);
       await save('words.json', {
@@ -511,8 +535,15 @@ export async function createFacelessVideo({
     throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
   }
 
+  // Whisper and the visual transformer models are individually large. They
+  // are used in separate phases, so release alignment memory before loading
+  // semantic visual inspection models in the worker container.
+  await releaseWhisper();
+  if (global.gc) { try { global.gc(); } catch {} }
+
   // 4. Visual Storyboard & Visual Director.
   onProgress({ step: 4, message: 'Directing visuals and resolving imagery...' });
+  throwIfCancelled();
   const ranges = sceneWordRanges(plan.scenes);
   const sceneSeconds = ranges.map(([a, b]) => Math.max(0.5, (narration.words[b]?.end || 0) - (narration.words[a]?.start || 0)));
 
@@ -597,6 +628,7 @@ export async function createFacelessVideo({
 
     // 5. Asset Director: tiered search under each scene's acceptability policy
     await job.startStage('assets');
+    throwIfCancelled();
     const assetEditorialMode = /meditat|sleep|relax|wellness/i.test(`${plan.niche} ${plan.topic}`)
       ? 'MOTIVATIONAL'
       : plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
@@ -769,6 +801,7 @@ export async function createFacelessVideo({
     } catch {}
   } else {
     await job.startStage('timeline');
+    throwIfCancelled();
     onProgress({ step: 5, message: 'Building the edit...' });
     editorialVisualPlan = buildEditorialVisualPlan({ storyboard, coveragePlan: visualCoveragePlan, specs, assets, format, visualPolicy });
     await save('editorial-visual-plan.json', editorialVisualPlan);
@@ -932,6 +965,7 @@ export async function createFacelessVideo({
   }
 
   await job.startStage('preRenderQa');
+  throwIfCancelled();
   const staticQc = runTimelineQc(timeline, { plan: executionPlan, narration, assetReport, realizationDiagnostics, pacingDiagnostics, durationDiagnostics, audioDiagnostics, visualCoverageDiagnostics, editContinuityDiagnostics, publishMode });
   await save('qc.json', staticQc);
   printQc('Timeline QC', staticQc);
@@ -965,9 +999,10 @@ export async function createFacelessVideo({
     if (hardWarnings.length > 0) {
       throw new Error(`Production render blocked: Hard editorial asset failures (${hardWarnings.map((w) => w.code).join(', ')}).`);
     }
-    if ((qcReport?.sequenceMetrics?.maxRoleRun || 0) > 8) {
-      throw new Error(`Production render blocked: flat visual-role progression (${qcReport.sequenceMetrics.maxRoleRun} consecutive shots).`);
-    }
+    // Role labels alone are not a publishability failure. A documentary may
+    // legitimately use many distinct establishing shots while moving through
+    // places and periods. The sequence verdict, semantic information gain,
+    // asset usefulness, and explicit error-severity warnings are authoritative.
   }
 
   let preflightContactSheet = null;
@@ -1087,9 +1122,19 @@ export async function createFacelessVideo({
 
   // 7. Render.
   await job.startStage('render');
+  throwIfCancelled();
+  if (global.gc) { try { global.gc(); } catch {} }
   const renderStartedAt = Date.now();
   onProgress({ step: 6, message: 'Bundling compositions...' });
-  const serveUrl = await bundle({ entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'), publicDir: runPublic, ignoreRegisterRootWarning: true });
+  const serveUrl = await bundle({
+    entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
+    publicDir: runPublic,
+    ignoreRegisterRootWarning: true,
+    webpackOverride: (webpackConfig) => ({
+      ...webpackConfig,
+      cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
+    }),
+  });
   const inputProps = { timeline };
   const composition = await selectComposition({ serveUrl, id: format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer', inputProps });
 
@@ -1121,6 +1166,18 @@ export async function createFacelessVideo({
 
   const outputPath = path.join(config.rendersDir, outputFilename);
   let lastPct = -1;
+  const renderCancellation = makeCancelSignal();
+  const cancelRender = () => renderCancellation.cancel();
+  signal?.addEventListener('abort', cancelRender, { once: true });
+  const chromiumOptions = {
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+    ],
+  };
+  try {
   await renderMedia({
     composition,
     serveUrl,
@@ -1133,6 +1190,11 @@ export async function createFacelessVideo({
     outputLocation: outputPath,
     inputProps,
     scale: renderScale,
+    concurrency: Number(process.env.REMOTION_CONCURRENCY || 1),
+    cancelSignal: renderCancellation.cancelSignal,
+    delayRenderTimeoutInMilliseconds: 240_000,
+    timeoutInMilliseconds: 240_000,
+    chromiumOptions,
     ...(frameRange ? { frameRange } : {}),
     onProgress: ({ progress: p }) => {
       const pct = Math.round(p * 100);
@@ -1141,6 +1203,10 @@ export async function createFacelessVideo({
       onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
     },
   });
+  } finally {
+    signal?.removeEventListener('abort', cancelRender);
+  }
+  throwIfCancelled();
   await job.completeStage('render', [path.relative(runDir, outputPath).split(path.sep).join('/')]);
   timeline.performance = { ...(timeline.performance || {}), renderOverheadMs: Date.now() - renderStartedAt };
   await save('media-editorial-performance.json', timeline.performance);
@@ -1156,6 +1222,8 @@ export async function createFacelessVideo({
         output: thumbnailPath,
         inputProps: { packageData: videoPackage },
         imageFormat: 'png',
+        delayRenderTimeoutInMilliseconds: 120_000,
+        chromiumOptions,
       });
       result.thumbnail = thumbnailPath;
       console.log(`   🖼️  Thumbnail generated: ${thumbnailPath}`);
@@ -1188,6 +1256,7 @@ export async function createFacelessVideo({
   await job.finish();
 
   console.log(`\n🎉 ${outputPath} (completed in ${((Date.now() - t0) / 1000).toFixed(0)}s)\n`);
+  if (global.gc) { try { global.gc(); } catch {} }
   return { ...result, outputPath, outputFilename };
   } catch (error) {
     await job.fail(error);

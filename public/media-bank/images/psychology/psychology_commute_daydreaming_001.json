@@ -1,0 +1,78 @@
+{
+  "id": "psychology_commute_daydreaming_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Pensive commute by the river",
+  "path": "images/psychology/psychology_commute_daydreaming_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "daydreaming",
+    "reflection",
+    "urban life",
+    "mind wandering",
+    "commute",
+    "human behavior"
+  ],
+  "concepts": [
+    "mind wandering",
+    "quiet reflection",
+    "urban contemplation",
+    "inner narrative"
+  ],
+  "subjects": [
+    "adult woman",
+    "tram interior",
+    "window view",
+    "river cityscape"
+  ],
+  "actions": [
+    "looking outside",
+    "thinking quietly",
+    "riding transit"
+  ],
+  "mood": [
+    "contemplative",
+    "calm",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "human behavior videos",
+    "reflection scenes",
+    "urban psychology",
+    "storytelling transitions"
+  ],
+  "avoidFor": [
+    "high-energy social scenes",
+    "therapy office",
+    "nature hiking"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

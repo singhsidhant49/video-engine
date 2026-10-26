@@ -1,0 +1,81 @@
+{
+  "id": "lifestyle_reading_nook_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy sunset reading nook",
+  "path": "images/lifestyle/lifestyle_reading_nook_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "reading",
+    "cozy",
+    "books",
+    "slow living",
+    "sunset",
+    "home"
+  ],
+  "concepts": [
+    "quiet leisure",
+    "slow living",
+    "comfort",
+    "homebody lifestyle"
+  ],
+  "subjects": [
+    "woman",
+    "book",
+    "armchair",
+    "blanket",
+    "coffee mug",
+    "bookshelves",
+    "dog"
+  ],
+  "actions": [
+    "reading",
+    "relaxing indoors",
+    "unwinding at sunset"
+  ],
+  "mood": [
+    "cozy",
+    "peaceful",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "cozy lifestyle content",
+    "reading scenes",
+    "slow living videos",
+    "home routine montages"
+  ],
+  "avoidFor": [
+    "high-energy sports",
+    "busy crowds",
+    "formal office scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_9895a15397c0137b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Illuminated city street at night with neon lights reflecting on wet pavement in rainy weather.",
+  "path": "images/saved-from-web/saved-from-web_9895a15397c0137b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "illuminated",
+    "city",
+    "street",
+    "night",
+    "neon",
+    "light",
+    "reflecting",
+    "wet",
+    "pavement",
+    "rainy",
+    "weather",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "lights"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "illuminated",
+    "city",
+    "street",
+    "night",
+    "neon",
+    "light",
+    "reflecting",
+    "wet",
+    "pavement",
+    "rainy",
+    "weather",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "lights"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Illuminated city street at night with neon lights reflecting on wet pavement in rainy weather."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "futuristic city night rain neon",
+    "savedAt": "2026-10-26T08:41:27.528Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jimmy Liao",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-rainy-evening-with-moving-cars-on-the-road-14556059/"
+  }
+}

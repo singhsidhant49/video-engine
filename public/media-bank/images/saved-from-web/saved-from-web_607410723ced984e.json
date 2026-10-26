@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_607410723ced984e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Explore the ancient architecture of the Roman Colosseum with its iconic arches and stonework.",
+  "path": "images/saved-from-web/saved-from-web_607410723ced984e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "ancient",
+    "architecture",
+    "roman",
+    "colosseum",
+    "it",
+    "iconic",
+    "arche",
+    "stonework",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "engineer",
+    "construction",
+    "authentic",
+    "real",
+    "world",
+    "environment",
+    "matching",
+    "context",
+    "its",
+    "arches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Explore the ancient architecture of the Roman Colosseum with its iconic arches and stonework."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman engineer construction authentic real-world environment matching context",
+    "savedAt": "2026-10-24T07:26:08.950Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Magda Ehlers",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/historic-colosseum-architecture-in-rome-36240434/"
+  }
+}

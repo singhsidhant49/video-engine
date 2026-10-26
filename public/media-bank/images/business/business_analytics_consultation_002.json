@@ -1,0 +1,75 @@
+{
+  "id": "business_analytics_consultation_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Business analytics office consultation",
+  "path": "images/business/business_analytics_consultation_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "analytics",
+    "consultation",
+    "dashboard",
+    "advisor",
+    "client meeting"
+  ],
+  "concepts": [
+    "business analytics",
+    "client advisory",
+    "performance review",
+    "data-driven decisions"
+  ],
+  "subjects": [
+    "consultant",
+    "client",
+    "laptop dashboard"
+  ],
+  "actions": [
+    "reviewing dashboard",
+    "consulting",
+    "explaining metrics"
+  ],
+  "mood": [
+    "professional",
+    "trustworthy",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "analytics explainer",
+    "business consulting",
+    "client meeting",
+    "performance review"
+  ],
+  "avoidFor": [
+    "retail checkout",
+    "warehouse packing",
+    "event networking"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

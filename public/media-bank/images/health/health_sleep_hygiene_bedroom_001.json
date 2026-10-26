@@ -1,0 +1,79 @@
+{
+  "id": "health_sleep_hygiene_bedroom_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Peaceful nighttime bedroom retreat",
+  "path": "images/health/health_sleep_hygiene_bedroom_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "sleep",
+    "sleep hygiene",
+    "bedroom",
+    "rest",
+    "night routine",
+    "wellness"
+  ],
+  "concepts": [
+    "restorative sleep",
+    "healthy routine",
+    "sleep quality",
+    "recovery"
+  ],
+  "subjects": [
+    "adult woman",
+    "bedroom",
+    "alarm clock",
+    "lamp",
+    "bed"
+  ],
+  "actions": [
+    "sleeping peacefully",
+    "resting",
+    "maintaining healthy sleep"
+  ],
+  "mood": [
+    "cozy",
+    "restful",
+    "calm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.46,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sleep videos",
+    "wellness content",
+    "night routine scenes",
+    "recovery topics"
+  ],
+  "avoidFor": [
+    "active workout",
+    "clinical checkup",
+    "nutrition scene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

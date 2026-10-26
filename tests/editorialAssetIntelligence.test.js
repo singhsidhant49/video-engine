@@ -329,6 +329,19 @@ test('Part 82: VisualSequenceDirector catches repeated generic stock run', () =>
   assert.ok(review.warnings.some((w) => w.code === 'repeated_visual_role'), 'Flags repeated visual role run');
 });
 
+test('distinct documentary establishing shots remain publishable despite a long role-label run', () => {
+  const shots = Array.from({ length: 11 }, (_, index) => ({
+    id: `history-${index + 1}`,
+    visualRole: index === 0 ? 'HOOK' : index === 10 ? 'PAYOFF' : 'ESTABLISH',
+    visibleNeed: { primaryConcept: `historical-period-${index + 1}`, subject: `location-${index + 1}` },
+    asset: { label: `distinct historical location ${index + 1}`, type: 'image' },
+  }));
+  const review = evaluateVisualSequence({ shots, editorialJudgments: {}, editorialMode: 'GENERAL' });
+  assert.equal(review.verdict, 'STRONG');
+  assert.equal(review.metrics.maxRoleRun, 9);
+  assert.equal(review.warnings.some((warning) => warning.code === 'flat_visual_progression'), false);
+});
+
 test('Part 83: VisualSequenceDirector catches metaphor run in technical video', () => {
   const shots = [
     { id: 's1', visualRole: 'HOOK' },
@@ -431,4 +444,3 @@ test('Part 86: Authentic Wikipedia entity match is classified as DIRECT', async 
   assert.equal(judgment.classification, 'DIRECT');
   assert.equal(judgment.accepted, true);
 });
-

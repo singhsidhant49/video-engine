@@ -1,0 +1,77 @@
+{
+  "id": "science_photonics_laser_lab_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist working in a photonics and laser lab",
+  "path": "images/science/science_photonics_laser_lab_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "physics",
+    "laser",
+    "photonics",
+    "optics",
+    "laboratory",
+    "precision"
+  ],
+  "concepts": [
+    "optics research",
+    "photonics experiment",
+    "physics instrumentation",
+    "laser science"
+  ],
+  "subjects": [
+    "scientist",
+    "laser bench",
+    "optical equipment",
+    "monitors"
+  ],
+  "actions": [
+    "aligning instruments",
+    "running optics experiment",
+    "measuring results"
+  ],
+  "mood": [
+    "technical",
+    "precise",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.4,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "physics video",
+    "advanced research",
+    "optics explainer",
+    "lab technology"
+  ],
+  "avoidFor": [
+    "biology cultures",
+    "field ecology",
+    "astronomy skywatching"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

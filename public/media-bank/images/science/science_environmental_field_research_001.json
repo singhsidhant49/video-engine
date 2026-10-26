@@ -1,0 +1,76 @@
+{
+  "id": "science_environmental_field_research_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Environmental scientists conducting alpine lake field research",
+  "path": "images/science/science_environmental_field_research_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "field research",
+    "environmental science",
+    "lake",
+    "ecology",
+    "sampling"
+  ],
+  "concepts": [
+    "environmental monitoring",
+    "field science",
+    "water quality research",
+    "ecological study"
+  ],
+  "subjects": [
+    "scientists",
+    "lake",
+    "sampling equipment",
+    "mountains"
+  ],
+  "actions": [
+    "collecting samples",
+    "measuring water",
+    "recording observations"
+  ],
+  "mood": [
+    "natural",
+    "adventurous",
+    "observational"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.33,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "environmental science",
+    "fieldwork montage",
+    "ecology explainer",
+    "climate content"
+  ],
+  "avoidFor": [
+    "indoor lab chemistry",
+    "space astronomy",
+    "corporate meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

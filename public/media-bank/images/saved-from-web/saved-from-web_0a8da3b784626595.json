@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_0a8da3b784626595",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Security officer seated in a dimly lit control room, analyzing multiple surveillance screens.",
+  "path": "images/saved-from-web/saved-from-web_0a8da3b784626595.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "security",
+    "officer",
+    "seated",
+    "dimly",
+    "lit",
+    "control",
+    "room",
+    "analyzing",
+    "multiple",
+    "surveillance",
+    "screen",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "screens",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "security",
+    "officer",
+    "seated",
+    "dimly",
+    "lit",
+    "control",
+    "room",
+    "analyzing",
+    "multiple",
+    "surveillance",
+    "screen",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "screens",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Security officer seated in a dimly lit control room, analyzing multiple surveillance screens."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "surveillance room",
+    "savedAt": "2026-10-26T08:42:35.467Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "AMORIE SAM",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/security-officer-in-dark-control-room-with-monitors-30692441/"
+  }
+}

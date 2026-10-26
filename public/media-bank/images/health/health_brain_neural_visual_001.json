@@ -1,0 +1,78 @@
+{
+  "id": "health_brain_neural_visual_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Neon brain in profile",
+  "path": "images/health/health_brain_neural_visual_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "brain",
+    "neuroscience",
+    "nervous system",
+    "mental function",
+    "medical illustration",
+    "neurology"
+  ],
+  "concepts": [
+    "brain health",
+    "neural pathways",
+    "cognition",
+    "neurology education"
+  ],
+  "subjects": [
+    "human head profile",
+    "brain cross-section",
+    "neurons",
+    "neural glow"
+  ],
+  "actions": [
+    "visualizing brain activity",
+    "explaining nervous system",
+    "showing neural network"
+  ],
+  "mood": [
+    "futuristic",
+    "scientific",
+    "intense"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "brain health videos",
+    "neuroscience explainers",
+    "mental performance content",
+    "medical education"
+  ],
+  "avoidFor": [
+    "fitness lifestyle",
+    "meal prep",
+    "sleep scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

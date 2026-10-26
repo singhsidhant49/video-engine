@@ -1,0 +1,76 @@
+{
+  "id": "finance_cash_flow_strategy_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cash flow strategy review at sunset",
+  "path": "images/finance/finance_cash_flow_strategy_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "cash flow",
+    "strategy",
+    "executive",
+    "forecast",
+    "dashboard",
+    "city office"
+  ],
+  "concepts": [
+    "cash flow management",
+    "financial strategy",
+    "liquidity planning",
+    "executive review"
+  ],
+  "subjects": [
+    "executive",
+    "cash flow dashboard",
+    "city skyline"
+  ],
+  "actions": [
+    "reviewing cash flow",
+    "analyzing metrics",
+    "planning strategy"
+  ],
+  "mood": [
+    "premium",
+    "focused",
+    "data-driven"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "cash flow explainer",
+    "corporate finance",
+    "CFO content",
+    "financial planning"
+  ],
+  "avoidFor": [
+    "personal budgeting",
+    "retail checkout",
+    "home finance"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

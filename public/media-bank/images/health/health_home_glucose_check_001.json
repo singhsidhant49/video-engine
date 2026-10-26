@@ -1,0 +1,79 @@
+{
+  "id": "health_home_glucose_check_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Home blood sugar check at the table",
+  "path": "images/health/health_home_glucose_check_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "diabetes",
+    "blood sugar",
+    "glucose meter",
+    "home monitoring",
+    "finger prick",
+    "chronic care"
+  ],
+  "concepts": [
+    "self-monitoring",
+    "diabetes management",
+    "preventive care",
+    "daily health routine"
+  ],
+  "subjects": [
+    "adult hands",
+    "glucose meter",
+    "test strip",
+    "blood drop",
+    "lancet pen"
+  ],
+  "actions": [
+    "checking blood sugar",
+    "testing finger",
+    "monitoring health at home"
+  ],
+  "mood": [
+    "practical",
+    "clean",
+    "informative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.64,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "diabetes videos",
+    "home healthcare content",
+    "chronic disease management",
+    "patient education"
+  ],
+  "avoidFor": [
+    "fitness motivation",
+    "mental health scenery",
+    "food still life"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

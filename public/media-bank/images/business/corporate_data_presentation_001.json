@@ -1,0 +1,76 @@
+{
+  "id": "corporate_data_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern corporate data presentation",
+  "path": "images/business/corporate_data_presentation_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "presentation",
+    "analytics",
+    "meeting",
+    "growth",
+    "dashboard",
+    "boardroom"
+  ],
+  "concepts": [
+    "corporate reporting",
+    "business analytics",
+    "strategy presentation",
+    "performance review"
+  ],
+  "subjects": [
+    "presenter",
+    "screen",
+    "charts",
+    "meeting participants"
+  ],
+  "actions": [
+    "presenting",
+    "explaining results"
+  ],
+  "mood": [
+    "professional",
+    "focused",
+    "polished"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.66,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "business analytics",
+    "presentation opener",
+    "management content",
+    "board meeting"
+  ],
+  "avoidFor": [
+    "retail",
+    "customer support",
+    "factory"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "saved-from-web_6d3524f8cd811dfb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Male runner with eyes closed, deep in focus during a marathon race.",
+  "path": "images/saved-from-web/saved-from-web_6d3524f8cd811dfb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "male",
+    "runner",
+    "eye",
+    "closed",
+    "deep",
+    "focu",
+    "during",
+    "marathon",
+    "race",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "visualizing",
+    "eyes",
+    "focus"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Male runner with eyes closed, deep in focus during a marathon race."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "runner eyes closed visualizing",
+    "savedAt": "2026-10-26T07:37:40.040Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RUN 4 FFWPU",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-green-shirt-running-10098666/"
+  }
+}

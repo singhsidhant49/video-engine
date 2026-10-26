@@ -1,0 +1,77 @@
+{
+  "id": "science_laser_optics_experiment_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist conducting a laser optics experiment",
+  "path": "images/science/science_laser_optics_experiment_002.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "physics",
+    "laser",
+    "optics",
+    "photonics",
+    "experiment",
+    "laboratory"
+  ],
+  "concepts": [
+    "optics research",
+    "photonics experiment",
+    "laser science",
+    "physics instrumentation"
+  ],
+  "subjects": [
+    "scientist",
+    "laser bench",
+    "optical equipment",
+    "beams"
+  ],
+  "actions": [
+    "aligning equipment",
+    "running experiment",
+    "measuring results"
+  ],
+  "mood": [
+    "technical",
+    "high-tech",
+    "precise"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.68,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "physics explainer",
+    "advanced lab research",
+    "optics video",
+    "scientific technology"
+  ],
+  "avoidFor": [
+    "microbiology cultures",
+    "field ecology",
+    "astronomy briefing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

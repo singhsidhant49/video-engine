@@ -1,0 +1,79 @@
+{
+  "id": "history_enlightenment_salon_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Enlightenment salon of scholars",
+  "path": "images/history/history_enlightenment_salon_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "enlightenment",
+    "scholars",
+    "salon",
+    "europe",
+    "ideas",
+    "philosophy"
+  ],
+  "concepts": [
+    "intellectual exchange",
+    "scientific revolution",
+    "political ideas",
+    "elite discussion"
+  ],
+  "subjects": [
+    "scholars",
+    "books",
+    "candles",
+    "globes",
+    "maps",
+    "salon room"
+  ],
+  "actions": [
+    "debating ideas",
+    "reading documents",
+    "presenting arguments"
+  ],
+  "mood": [
+    "intellectual",
+    "warm",
+    "elegant"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "enlightenment history videos",
+    "idea history",
+    "european intellectual life",
+    "discussion scenes"
+  ],
+  "avoidFor": [
+    "battlefields",
+    "ancient temples",
+    "industrial labor"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

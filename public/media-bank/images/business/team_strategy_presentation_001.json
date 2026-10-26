@@ -1,0 +1,76 @@
+{
+  "id": "team_strategy_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern office presentation with team",
+  "path": "images/business/team_strategy_presentation_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "presentation",
+    "team meeting",
+    "strategy",
+    "office",
+    "leadership"
+  ],
+  "concepts": [
+    "strategy presentation",
+    "team alignment",
+    "leadership communication",
+    "business planning"
+  ],
+  "subjects": [
+    "presenter",
+    "team",
+    "whiteboard",
+    "conference table"
+  ],
+  "actions": [
+    "presenting",
+    "explaining strategy",
+    "taking notes"
+  ],
+  "mood": [
+    "professional",
+    "optimistic",
+    "engaged"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.7,
+      "y": 0.38
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "leadership content",
+    "strategy meeting",
+    "corporate communications",
+    "business planning"
+  ],
+  "avoidFor": [
+    "retail",
+    "warehouse logistics",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

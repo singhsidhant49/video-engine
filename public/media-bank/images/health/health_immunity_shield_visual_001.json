@@ -1,0 +1,77 @@
+{
+  "id": "health_immunity_shield_visual_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Holographic immunity shield against viruses",
+  "path": "images/health/health_immunity_shield_visual_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "immunity",
+    "immune system",
+    "virus",
+    "protection",
+    "medical illustration",
+    "infection"
+  ],
+  "concepts": [
+    "immune defense",
+    "infection prevention",
+    "protective response",
+    "body resilience"
+  ],
+  "subjects": [
+    "human body silhouette",
+    "protective shield",
+    "virus particles"
+  ],
+  "actions": [
+    "blocking viruses",
+    "visualizing immunity",
+    "showing defense mechanism"
+  ],
+  "mood": [
+    "protective",
+    "high-tech",
+    "dramatic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "immune system videos",
+    "infection explainers",
+    "public health content",
+    "medical visuals"
+  ],
+  "avoidFor": [
+    "food content",
+    "exercise routine",
+    "doctor consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

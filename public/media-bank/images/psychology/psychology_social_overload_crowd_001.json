@@ -1,0 +1,77 @@
+{
+  "id": "psychology_social_overload_crowd_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stillness amid the commuter rush",
+  "path": "images/psychology/psychology_social_overload_crowd_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "social anxiety",
+    "crowd",
+    "isolation",
+    "urban stress",
+    "overstimulation",
+    "human behavior"
+  ],
+  "concepts": [
+    "social overstimulation",
+    "feeling alone in a crowd",
+    "urban anxiety",
+    "disconnection"
+  ],
+  "subjects": [
+    "adult woman",
+    "commuter crowd",
+    "city concourse"
+  ],
+  "actions": [
+    "standing still",
+    "observing crowd",
+    "feeling disconnected"
+  ],
+  "mood": [
+    "isolated",
+    "tense",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "social anxiety video",
+    "human behavior explainer",
+    "overstimulation content",
+    "urban mental health"
+  ],
+  "avoidFor": [
+    "mindfulness retreat",
+    "close therapy session",
+    "family support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

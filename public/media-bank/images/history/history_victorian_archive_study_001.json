@@ -1,0 +1,78 @@
+{
+  "id": "history_victorian_archive_study_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Victorian scholar studying in an archive at dusk",
+  "path": "images/history/history_victorian_archive_study_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "victorian",
+    "scholar",
+    "archive",
+    "study",
+    "maps",
+    "library"
+  ],
+  "concepts": [
+    "historical scholarship",
+    "archival research",
+    "intellectual history",
+    "empire era study"
+  ],
+  "subjects": [
+    "scholar",
+    "desk",
+    "oil lamp",
+    "maps",
+    "bookshelves"
+  ],
+  "actions": [
+    "writing notes",
+    "studying documents",
+    "researching history"
+  ],
+  "mood": [
+    "quiet",
+    "intellectual",
+    "moody"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.57,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "history research videos",
+    "scholar scenes",
+    "narrative transitions",
+    "educational intros"
+  ],
+  "avoidFor": [
+    "battle scenes",
+    "market life",
+    "ancient ruins excavation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

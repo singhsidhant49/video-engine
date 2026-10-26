@@ -1,0 +1,78 @@
+{
+  "id": "history_timbuktu_scholar_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Timbuktu scholar among ancient manuscripts",
+  "path": "images/history/history_timbuktu_scholar_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "timbuktu",
+    "west africa",
+    "scholar",
+    "manuscripts",
+    "library",
+    "sahel"
+  ],
+  "concepts": [
+    "african intellectual history",
+    "manuscript tradition",
+    "islamic scholarship",
+    "knowledge centers"
+  ],
+  "subjects": [
+    "scholar",
+    "bookshelves",
+    "manuscripts",
+    "mud-brick city",
+    "desk"
+  ],
+  "actions": [
+    "reading manuscripts",
+    "studying texts",
+    "turning pages"
+  ],
+  "mood": [
+    "quiet",
+    "scholarly",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.39,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "african history videos",
+    "timbuktu explainers",
+    "scholar scenes",
+    "knowledge history"
+  ],
+  "avoidFor": [
+    "industrial revolution",
+    "battle scenes",
+    "modern classrooms"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -5,49 +5,82 @@
  */
 
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 
 const LOCK_FILENAME = '.lock';
 
 /**
- * Checks if a given PID is currently active.
+ * Checks if a given PID is currently active as an independent process.
  */
 function isPidRunning(pid) {
   try {
     process.kill(pid, 0);
-    return true;
   } catch {
     return false;
   }
+
+  // If locked by our own process pid, process.kill succeeded
+  if (pid === process.pid) return true;
+
+  // On Linux systems, verify that pid corresponds to a process thread-group leader
+  // and is NOT an internal secondary thread of our own process or another process.
+  try {
+    const status = fsSync.readFileSync(`/proc/${pid}/status`, 'utf8');
+    const tgidMatch = status.match(/^Tgid:\s+(\d+)/m);
+    const pidMatch = status.match(/^Pid:\s+(\d+)/m);
+    if (tgidMatch && pidMatch && tgidMatch[1] !== pidMatch[1]) {
+      // It is a secondary thread, not a process leader
+      return false;
+    }
+    if (tgidMatch && Number(tgidMatch[1]) === process.pid) {
+      // It belongs to our own process
+      return false;
+    }
+  } catch {
+    // Fall back to process.kill result on platforms without /proc
+  }
+
+  return true;
 }
 
 /**
  * Acquires a non-blocking lock on the run directory.
  * 
  * @param {string} runDir
+ * @param {object} [options]
+ * @param {boolean} [options.force=false]
  * @returns {Promise<{ lockPath: string, release: () => Promise<void> }>}
  */
-export async function acquireRunLock(runDir) {
+export async function acquireRunLock(runDir, { force = false } = {}) {
   const lockPath = path.join(runDir, LOCK_FILENAME);
+  const currentHost = os.hostname();
 
   try {
     const existingRaw = await fs.readFile(lockPath, 'utf8');
     const existing = JSON.parse(existingRaw);
 
-    // If locked by our own process, we re-enter safely
-    if (existing.pid === process.pid) {
-      return { lockPath, pid: process.pid, release: () => releaseRunLock(runDir) };
-    }
+    if (force) {
+      console.warn(`   ⚠️ Force acquiring run lock on ${runDir} (clearing PID ${existing.pid})`);
+      await fs.unlink(lockPath).catch(() => {});
+    } else {
+      // If locked by our own process, we re-enter safely
+      if (existing.pid === process.pid && (!existing.host || existing.host === currentHost)) {
+        return { lockPath, pid: process.pid, release: () => releaseRunLock(runDir) };
+      }
 
-    // Check if the previous lockholder process is still running
-    if (existing.pid && isPidRunning(existing.pid)) {
-      throw new Error(`Run directory is locked by active process PID ${existing.pid} (started at ${existing.lockedAt})`);
-    }
+      // Container PIDs are commonly reused after a worker is recreated. A PID
+      // can only prove liveness when the lock came from this same host.
+      const sameHost = !existing.host || existing.host === currentHost;
+      if (sameHost && existing.pid && isPidRunning(existing.pid)) {
+        throw new Error(`Run directory is locked by active process PID ${existing.pid} (started at ${existing.lockedAt})`);
+      }
 
-    // Stale lock from dead process; take over
-    console.warn(`   ⚠️ Releasing stale lock from dead process PID ${existing.pid}`);
-    await fs.unlink(lockPath).catch(() => {});
+      // Stale lock from dead process; take over
+      console.warn(`   ⚠️ Releasing stale lock from dead process PID ${existing.pid}`);
+      await fs.unlink(lockPath).catch(() => {});
+    }
   } catch (err) {
     if (err.code !== 'ENOENT' && !err.message.includes('locked by active process')) {
       // JSON parse error or similar; safe to overwrite
@@ -58,7 +91,7 @@ export async function acquireRunLock(runDir) {
 
   const payload = {
     pid: process.pid,
-    host: os.hostname(),
+    host: currentHost,
     lockedAt: new Date().toISOString(),
   };
 

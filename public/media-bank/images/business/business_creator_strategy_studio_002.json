@@ -1,0 +1,77 @@
+{
+  "id": "business_creator_strategy_studio_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Business creator teaching strategy in studio",
+  "path": "images/business/business_creator_strategy_studio_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "creator",
+    "strategy",
+    "leadership",
+    "webinar",
+    "online business",
+    "personal brand"
+  ],
+  "concepts": [
+    "business education",
+    "thought leadership",
+    "online business",
+    "creator economy"
+  ],
+  "subjects": [
+    "speaker",
+    "camera",
+    "microphone",
+    "strategy screen"
+  ],
+  "actions": [
+    "teaching",
+    "recording",
+    "presenting"
+  ],
+  "mood": [
+    "confident",
+    "modern",
+    "inspiring"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "business education",
+    "webinar",
+    "coaching",
+    "online course"
+  ],
+  "avoidFor": [
+    "warehouse",
+    "retail checkout",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

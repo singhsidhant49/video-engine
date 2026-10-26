@@ -1,19 +1,49 @@
 import express from 'express';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { config } from '../config/index.js';
 import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
+import { createConfiguredVideoJobService } from './serviceFactory.js';
+import { createApiAuth, createVideoApiRouter, videoApiErrorHandler } from './videoApiRouter.js';
 
 const app = express();
-app.use(express.json());
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+  const requestId = String(req.get('x-request-id') || crypto.randomUUID()).slice(0, 128);
+  req.requestId = requestId;
+  res.set({
+    'x-request-id': requestId,
+    'x-content-type-options': 'nosniff',
+    'referrer-policy': 'no-referrer',
+    'content-security-policy': "default-src 'self'; img-src 'self' data: https:; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com",
+  });
+  next();
+});
+app.use(express.json({ limit: config.server.maxRequestBytes }));
+
+const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all' });
+await videoJobService.init();
+const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production: process.env.NODE_ENV === 'production' });
+
+app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
+app.get('/ready', async (req, res) => {
+  const readiness = await videoJobService.readiness();
+  res.status(readiness.ready ? 200 : 503).json({ status: readiness.ready ? 'ready' : 'not_ready', ...readiness });
+});
+app.use('/v1', apiAuth, createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
 app.use('/media', express.static(path.join(config.publicDir, 'media')));
-app.use('/renders', express.static(config.rendersDir));
+app.use('/media-bank', express.static(path.join(config.publicDir, 'media-bank')));
+if (process.env.NODE_ENV !== 'production') app.use('/renders', express.static(config.rendersDir));
 
 // Endpoint: Trigger Video Generation
-app.post('/api/generate', async (req, res) => {
+app.post('/api/generate', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(410).json({ error: { code: 'LEGACY_ENDPOINT_DISABLED', message: 'Use POST /v1/videos for asynchronous generation' } });
+  }
   const input = req.body?.brief || req.body || {};
   const topic = input.prompt || input.topic;
 
@@ -54,7 +84,10 @@ app.post('/api/generate', async (req, res) => {
 });
 
 // Endpoint: List Generated Videos
-app.get('/api/renders', async (req, res) => {
+app.get('/api/renders', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(410).json({ error: { code: 'LEGACY_ENDPOINT_DISABLED', message: 'Use GET /v1/videos for account-scoped video records' } });
+  }
   try {
     const files = await fs.readdir(config.rendersDir);
     const mp4Files = files.filter(f => f.endsWith('.mp4')).reverse();
@@ -71,15 +104,39 @@ app.get('/api/renders', async (req, res) => {
 
 // Serve Visual Studio Frontend Dashboard
 app.get('/', (req, res) => {
-  res.send(getStudioHtml());
+  res.sendFile(path.join(config.publicDir, 'dashboard', 'index.html'));
 });
+app.use('/dashboard', express.static(path.join(config.publicDir, 'dashboard')));
+
+// Body-parser failures happen before the /v1 router is entered. Keep those
+// failures on the same JSON contract instead of returning Express HTML and a
+// local stack trace.
+app.use(videoApiErrorHandler);
 
 const PORT = config.server.port;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n======================================================`);
   console.log(`✨ Faceless Video Studio Running at: http://localhost:${PORT}`);
   console.log(`======================================================\n`);
 });
+server.on('error', (error) => {
+  console.error(`Video API failed to listen on port ${PORT}:`, error);
+  process.exitCode = 1;
+});
+
+let stopping = false;
+async function shutdown(signal) {
+  if (stopping) return;
+  stopping = true;
+  console.log(`${signal} received; stopping new work and draining active video jobs...`);
+  videoJobService.stopAccepting();
+  const closeServer = new Promise((resolve) => server.close(resolve));
+  await videoJobService.shutdown({ timeoutMs: config.server.shutdownTimeoutMs });
+  await closeServer;
+  console.log('Video API shutdown complete.');
+}
+process.once('SIGTERM', () => { void shutdown('SIGTERM'); });
+process.once('SIGINT', () => { void shutdown('SIGINT'); });
 
 function getStudioHtml() {
   return `<!DOCTYPE html>

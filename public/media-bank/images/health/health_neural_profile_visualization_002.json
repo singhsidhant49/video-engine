@@ -1,0 +1,78 @@
+{
+  "id": "health_neural_profile_visualization_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Neon neural profile visualization",
+  "path": "images/health/health_neural_profile_visualization_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "brain",
+    "neuroscience",
+    "nervous system",
+    "medical illustration",
+    "cognition",
+    "neurology"
+  ],
+  "concepts": [
+    "brain health",
+    "neural activity",
+    "cognitive science",
+    "nervous system education"
+  ],
+  "subjects": [
+    "human head profile",
+    "brain",
+    "neural pathways",
+    "spinal cord"
+  ],
+  "actions": [
+    "visualizing brain activity",
+    "showing nervous system",
+    "explaining neural networks"
+  ],
+  "mood": [
+    "futuristic",
+    "scientific",
+    "intense"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "brain health videos",
+    "neuroscience explainers",
+    "mental performance content",
+    "medical education"
+  ],
+  "avoidFor": [
+    "fitness lifestyle",
+    "food scenes",
+    "sleep routines"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

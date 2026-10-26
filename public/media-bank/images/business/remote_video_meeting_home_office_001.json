@@ -1,0 +1,73 @@
+{
+  "id": "remote_video_meeting_home_office_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy home office video meeting",
+  "path": "images/business/remote_video_meeting_home_office_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "remote work",
+    "video meeting",
+    "home office",
+    "virtual team",
+    "hybrid work"
+  ],
+  "concepts": [
+    "remote collaboration",
+    "distributed work",
+    "virtual meetings",
+    "hybrid business"
+  ],
+  "subjects": [
+    "woman",
+    "laptop",
+    "video call"
+  ],
+  "actions": [
+    "taking notes",
+    "video calling"
+  ],
+  "mood": [
+    "warm",
+    "productive",
+    "friendly"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "remote work content",
+    "team collaboration",
+    "future of work"
+  ],
+  "avoidFor": [
+    "trading",
+    "retail inventory",
+    "live presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

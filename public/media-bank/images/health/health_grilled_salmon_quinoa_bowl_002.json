@@ -1,0 +1,80 @@
+{
+  "id": "health_grilled_salmon_quinoa_bowl_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Rustic grilled salmon quinoa bowl",
+  "path": "images/health/health_grilled_salmon_quinoa_bowl_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "nutrition",
+    "healthy food",
+    "salmon",
+    "quinoa",
+    "avocado",
+    "whole foods"
+  ],
+  "concepts": [
+    "balanced diet",
+    "clean eating",
+    "meal planning",
+    "heart-healthy food"
+  ],
+  "subjects": [
+    "salmon fillet",
+    "quinoa",
+    "avocado",
+    "tomatoes",
+    "greens",
+    "nuts"
+  ],
+  "actions": [
+    "presenting healthy meal",
+    "showcasing balanced plate",
+    "illustrating nutrition"
+  ],
+  "mood": [
+    "fresh",
+    "natural",
+    "appetizing"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.59,
+      "y": 0.55
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "nutrition videos",
+    "healthy eating content",
+    "diet explainers",
+    "meal prep intros"
+  ],
+  "avoidFor": [
+    "clinical visuals",
+    "sleep scenes",
+    "exercise setups"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

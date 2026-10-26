@@ -1,0 +1,77 @@
+{
+  "id": "science_astronomy_field_telescope_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Field astronomer operating a telescope under the Milky Way",
+  "path": "images/science/science_astronomy_field_telescope_003.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "astronomy",
+    "telescope",
+    "milky way",
+    "night sky",
+    "observatory",
+    "field science"
+  ],
+  "concepts": [
+    "astronomical observation",
+    "space research",
+    "field astronomy",
+    "cosmos exploration"
+  ],
+  "subjects": [
+    "astronomer",
+    "telescope",
+    "laptop",
+    "starry sky"
+  ],
+  "actions": [
+    "operating telescope",
+    "monitoring sky",
+    "capturing data"
+  ],
+  "mood": [
+    "epic",
+    "curious",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "astronomy explainer",
+    "space documentary",
+    "science intro",
+    "cosmos video"
+  ],
+  "avoidFor": [
+    "laboratory chemistry",
+    "finance meeting",
+    "retail"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

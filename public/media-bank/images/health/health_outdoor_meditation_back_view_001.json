@@ -1,0 +1,80 @@
+{
+  "id": "health_outdoor_meditation_back_view_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Outdoor meditation overlooking a sunrise valley",
+  "path": "images/health/health_outdoor_meditation_back_view_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "meditation",
+    "mindfulness",
+    "mental wellness",
+    "stress relief",
+    "sunrise",
+    "outdoors",
+    "yoga"
+  ],
+  "concepts": [
+    "stress management",
+    "mind-body wellness",
+    "mindfulness practice",
+    "relaxation"
+  ],
+  "subjects": [
+    "adult woman",
+    "yoga mat",
+    "water bottle",
+    "mountain valley",
+    "sunrise"
+  ],
+  "actions": [
+    "meditating",
+    "sitting cross-legged",
+    "practicing breathwork"
+  ],
+  "mood": [
+    "serene",
+    "peaceful",
+    "restorative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.52
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "stress relief scenes",
+    "mental wellness content",
+    "healthy routine videos"
+  ],
+  "avoidFor": [
+    "clinical procedures",
+    "high-intensity exercise",
+    "nutrition scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

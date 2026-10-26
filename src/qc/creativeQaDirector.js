@@ -352,7 +352,11 @@ export function evaluateCreativeQa({
     }
 
     // 5. SHOT HOLD & PACING
-    if (shotDurationSec > 5.5 && ['image', 'statement', 'ground'].includes(shot.family)) {
+    const cameraMove = shot.presentation?.cameraMove || shot.move?.type || 'static';
+    const hasMicroProgression = shot.asset?.type === 'video'
+      || !['static', 'hold', 'nativeMotion'].includes(cameraMove)
+      || ['SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT'].includes(shot.imageBehavior);
+    if (shotDurationSec > 5.5 && ['image', 'statement', 'ground'].includes(shot.family) && !hasMicroProgression) {
       issues.push('hold_too_long');
       if (state === SHOT_QUALITY_STATE.GOOD) state = SHOT_QUALITY_STATE.ACCEPTABLE;
       severity = severity || ISSUE_SEVERITY.EDITORIAL;
@@ -692,14 +696,26 @@ export function applyCreativeRepairs(timeline, repairsNeeded = [], context = {})
       }
 
       case REPAIR_ACTIONS.ADD_MICRO_PROGRESSION: {
+        if (repaired.visualPolicy?.motionPreset === 'minimal') break;
+        let changed = false;
         // In code shots, toggle terminal pass at midpoint
         if (shot.family === 'code' && shot.overlay?.code) {
           shot.overlay.highlightLines = [2, 3];
           shot.overlay.terminal = '$ agent test\nPASS 14 tests verified.';
+          changed = true;
         } else if (shot.family === 'diagram' && shot.overlay?.nodes) {
           shot.overlay.nodes = shot.overlay.nodes.map((n, idx) => ({ ...n, activeAt: idx * Math.round(fps * 1.5) }));
+          changed = true;
+        } else if (shot.family === 'image' && shot.asset?.type !== 'video') {
+          const focal = shot.asset?.focalPoint || shot.asset?.focal || { x: .5, y: .5 };
+          shot.move = { type: 'subtlePush', scale: [1, 1.04], focus: [[focal.x, focal.y], [focal.x, focal.y]] };
+          if (shot.presentation) {
+            shot.presentation.cameraMove = 'subtlePush';
+            shot.presentation.movementState = 'SUBTLE';
+          }
+          changed = true;
         }
-        appliedRepairs.push({
+        if (changed) appliedRepairs.push({
           shotId: item.shotId,
           sceneId: item.sceneId,
           action: REPAIR_ACTIONS.ADD_MICRO_PROGRESSION,

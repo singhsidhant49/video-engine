@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_dc5fe0bde954f1b2",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/diver-and-sperm-whale-underwater-interaction-36717426/",
+  "path": "video/saved-from-web/saved-from-web_dc5fe0bde954f1b2.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1080,
+  "height": 1920,
+  "aspectRatio": 0.5625,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "diver",
+    "sperm",
+    "whale",
+    "underwater",
+    "interaction",
+    "36717426",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "diver-and-sperm-whale-underwater-interaction-36717426",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "diver",
+    "sperm",
+    "whale",
+    "underwater",
+    "interaction",
+    "36717426",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "diver-and-sperm-whale-underwater-interaction-36717426",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/diver-and-sperm-whale-underwater-interaction-36717426/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "faint silhouette ocean",
+    "savedAt": "2026-10-26T09:48:16.896Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Chen EdisoN",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/diver-and-sperm-whale-underwater-interaction-36717426/"
+  }
+}

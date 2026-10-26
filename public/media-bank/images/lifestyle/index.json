@@ -1,0 +1,2231 @@
+[
+  {
+    "id": "lifestyle_balcony_breakfast_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit balcony breakfast with city views",
+    "path": "images/lifestyle/lifestyle_balcony_breakfast_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "breakfast",
+      "balcony",
+      "city view",
+      "morning routine",
+      "coffee",
+      "slow living"
+    ],
+    "concepts": [
+      "morning ritual",
+      "urban lifestyle",
+      "slow living",
+      "self care"
+    ],
+    "subjects": [
+      "woman",
+      "coffee mug",
+      "croissant",
+      "berries",
+      "balcony table",
+      "city skyline"
+    ],
+    "actions": [
+      "drinking coffee",
+      "having breakfast",
+      "enjoying morning view"
+    ],
+    "mood": [
+      "calm",
+      "sunny",
+      "aspirational"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "morning routine videos",
+      "city lifestyle scenes",
+      "self-care content",
+      "slow living montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_beach_stroll_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour shoreline stroll",
+    "path": "images/lifestyle/lifestyle_beach_stroll_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "beach walk",
+      "sunset",
+      "travel",
+      "relaxation",
+      "ocean",
+      "slow living"
+    ],
+    "concepts": [
+      "mindful walking",
+      "coastal lifestyle",
+      "relaxation",
+      "personal freedom"
+    ],
+    "subjects": [
+      "woman",
+      "beach",
+      "waves",
+      "sunset",
+      "rocky shoreline"
+    ],
+    "actions": [
+      "walking barefoot",
+      "enjoying sunset",
+      "strolling by ocean"
+    ],
+    "mood": [
+      "peaceful",
+      "cinematic",
+      "reflective"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.64,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "travel lifestyle videos",
+      "relaxation scenes",
+      "personal growth montages",
+      "coastal content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_bicycle_ride_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden hour bicycle ride",
+    "path": "images/lifestyle/lifestyle_bicycle_ride_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "cycling",
+      "city life",
+      "sunset",
+      "mobility",
+      "fashion",
+      "outdoor"
+    ],
+    "concepts": [
+      "active lifestyle",
+      "urban freedom",
+      "casual elegance",
+      "golden hour living"
+    ],
+    "subjects": [
+      "woman on bicycle",
+      "cobblestone street",
+      "basket with flowers",
+      "cafe street"
+    ],
+    "actions": [
+      "riding bicycle",
+      "smiling outdoors",
+      "moving through city"
+    ],
+    "mood": [
+      "free",
+      "sunny",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "city lifestyle videos",
+      "summer montage scenes",
+      "active lifestyle content",
+      "travel-adjacent clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_bookstore_browsing_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy bookstore reading moment",
+    "path": "images/lifestyle/lifestyle_bookstore_browsing_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "bookstore",
+      "reading",
+      "books",
+      "cozy",
+      "shopping",
+      "slow living"
+    ],
+    "concepts": [
+      "bookish lifestyle",
+      "quiet leisure",
+      "curiosity",
+      "offline living"
+    ],
+    "subjects": [
+      "woman",
+      "book",
+      "bookshelves",
+      "tote bag",
+      "plants"
+    ],
+    "actions": [
+      "browsing books",
+      "reading standing up",
+      "shopping for books"
+    ],
+    "mood": [
+      "cozy",
+      "thoughtful",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "reading videos",
+      "slow living scenes",
+      "book content",
+      "quiet lifestyle montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_cafe_coworking_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy café co-working moment",
+    "path": "images/lifestyle/lifestyle_cafe_coworking_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "cafe",
+      "remote work",
+      "digital nomad",
+      "laptop",
+      "coffee",
+      "productivity"
+    ],
+    "concepts": [
+      "work-life balance",
+      "modern workstyle",
+      "freelance lifestyle",
+      "creative work"
+    ],
+    "subjects": [
+      "man",
+      "laptop",
+      "coffee cup",
+      "notebook",
+      "café interior"
+    ],
+    "actions": [
+      "working on laptop",
+      "thinking",
+      "co-working in café"
+    ],
+    "mood": [
+      "focused",
+      "relaxed",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.49,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "remote work videos",
+      "productivity content",
+      "lifestyle vlogs",
+      "digital nomad scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_candlelit_dinner_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Candlelit dinner setting together",
+    "path": "images/lifestyle/lifestyle_candlelit_dinner_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "dinner party",
+      "couple",
+      "hosting",
+      "table setting",
+      "candles",
+      "home entertaining"
+    ],
+    "concepts": [
+      "home entertaining",
+      "relationship lifestyle",
+      "hosting ritual",
+      "evening social life"
+    ],
+    "subjects": [
+      "couple",
+      "dining table",
+      "candles",
+      "flowers",
+      "wine glasses",
+      "plates"
+    ],
+    "actions": [
+      "setting table",
+      "preparing dinner",
+      "hosting at home"
+    ],
+    "mood": [
+      "elegant",
+      "warm",
+      "intimate"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "relationship videos",
+      "hosting content",
+      "evening lifestyle scenes",
+      "home entertaining montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_cooking_together_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy evening kitchen cooking together",
+    "path": "images/lifestyle/lifestyle_cooking_together_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "couple",
+      "cooking",
+      "home life",
+      "kitchen",
+      "healthy eating",
+      "evening"
+    ],
+    "concepts": [
+      "relationship lifestyle",
+      "domestic comfort",
+      "shared routine",
+      "home cooking"
+    ],
+    "subjects": [
+      "couple",
+      "vegetables",
+      "kitchen counter",
+      "salad bowl",
+      "olive oil"
+    ],
+    "actions": [
+      "chopping vegetables",
+      "cooking together",
+      "smiling at each other"
+    ],
+    "mood": [
+      "warm",
+      "intimate",
+      "homey"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "relationship videos",
+      "home lifestyle content",
+      "cooking scenes",
+      "healthy lifestyle montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_cooking_together_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit kitchen cooking together",
+    "path": "images/lifestyle/lifestyle_cooking_together_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "couple",
+      "cooking",
+      "kitchen",
+      "healthy food",
+      "home life",
+      "relationship"
+    ],
+    "concepts": [
+      "home lifestyle",
+      "shared routine",
+      "healthy living",
+      "togetherness"
+    ],
+    "subjects": [
+      "couple",
+      "vegetables",
+      "salad bowl",
+      "kitchen island",
+      "olive oil"
+    ],
+    "actions": [
+      "chopping vegetables",
+      "mixing salad",
+      "cooking together"
+    ],
+    "mood": [
+      "bright",
+      "warm",
+      "joyful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "relationship videos",
+      "home lifestyle content",
+      "cooking scenes",
+      "healthy living clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_farmers_market_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit farmers market stroll",
+    "path": "images/lifestyle/lifestyle_farmers_market_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "farmers market",
+      "shopping",
+      "fresh produce",
+      "flowers",
+      "weekend",
+      "outdoor"
+    ],
+    "concepts": [
+      "local living",
+      "healthy lifestyle",
+      "community market",
+      "slow shopping"
+    ],
+    "subjects": [
+      "woman",
+      "market stalls",
+      "flowers",
+      "vegetables",
+      "baguette",
+      "basket bag"
+    ],
+    "actions": [
+      "browsing flowers",
+      "shopping produce",
+      "walking through market"
+    ],
+    "mood": [
+      "fresh",
+      "sunlit",
+      "cheerful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "weekend lifestyle videos",
+      "healthy living content",
+      "market scenes",
+      "seasonal montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_golden_retriever_home_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy living room with golden retriever",
+    "path": "images/lifestyle/lifestyle_golden_retriever_home_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "pet",
+      "dog",
+      "home",
+      "cozy",
+      "companion",
+      "slow living"
+    ],
+    "concepts": [
+      "pet ownership",
+      "comfort",
+      "home life",
+      "companionship"
+    ],
+    "subjects": [
+      "woman",
+      "golden retriever",
+      "living room",
+      "rug",
+      "plants"
+    ],
+    "actions": [
+      "petting dog",
+      "sitting on floor",
+      "bonding with pet"
+    ],
+    "mood": [
+      "heartwarming",
+      "cozy",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "pet lifestyle videos",
+      "home life content",
+      "cozy montage scenes",
+      "companion animal content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_hiker_mountain_lake_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Hiker at sunrise over mountain lake",
+    "path": "images/lifestyle/lifestyle_hiker_mountain_lake_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "travel",
+      "adventure",
+      "hiking",
+      "mountains",
+      "sunrise",
+      "outdoors"
+    ],
+    "concepts": [
+      "active lifestyle",
+      "wanderlust",
+      "freedom",
+      "nature escape"
+    ],
+    "subjects": [
+      "male hiker",
+      "backpack",
+      "mountain ridge",
+      "lake valley",
+      "sunrise"
+    ],
+    "actions": [
+      "standing on overlook",
+      "taking in the view",
+      "exploring outdoors"
+    ],
+    "mood": [
+      "epic",
+      "inspiring",
+      "adventurous"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.27,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "travel videos",
+      "adventure montages",
+      "motivation content",
+      "outdoor lifestyle scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_home_office_setup_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Warm minimalist home office setup",
+    "path": "images/lifestyle/lifestyle_home_office_setup_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "home office",
+      "remote work",
+      "desk setup",
+      "productivity",
+      "minimalism",
+      "work from home"
+    ],
+    "concepts": [
+      "modern work lifestyle",
+      "productivity",
+      "organized living",
+      "remote work"
+    ],
+    "subjects": [
+      "man",
+      "laptop",
+      "notebook",
+      "headphones",
+      "coffee mug",
+      "wooden desk"
+    ],
+    "actions": [
+      "organizing workspace",
+      "starting workday",
+      "planning tasks"
+    ],
+    "mood": [
+      "focused",
+      "clean",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "remote work videos",
+      "productivity scenes",
+      "home office content",
+      "digital lifestyle clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_indoor_gardening_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit indoor jungle gardening",
+    "path": "images/lifestyle/lifestyle_indoor_gardening_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "houseplants",
+      "gardening",
+      "home decor",
+      "plant care",
+      "slow living",
+      "indoor garden"
+    ],
+    "concepts": [
+      "home care",
+      "plant lifestyle",
+      "mindful routine",
+      "biophilic living"
+    ],
+    "subjects": [
+      "woman",
+      "watering can",
+      "houseplants",
+      "living room",
+      "dog"
+    ],
+    "actions": [
+      "watering plants",
+      "caring for houseplants",
+      "gardening indoors"
+    ],
+    "mood": [
+      "fresh",
+      "peaceful",
+      "homey"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "home lifestyle videos",
+      "plant care content",
+      "slow living scenes",
+      "wellness montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_journaling_lakeside_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit journaling by the lake",
+    "path": "images/lifestyle/lifestyle_journaling_lakeside_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "journaling",
+      "self care",
+      "morning routine",
+      "lake view",
+      "cozy",
+      "mindful living"
+    ],
+    "concepts": [
+      "slow living",
+      "reflection",
+      "intentional lifestyle",
+      "wellness routine"
+    ],
+    "subjects": [
+      "woman",
+      "notebook",
+      "coffee mug",
+      "table",
+      "lake view",
+      "plants"
+    ],
+    "actions": [
+      "writing in journal",
+      "sipping coffee",
+      "reflecting quietly"
+    ],
+    "mood": [
+      "peaceful",
+      "warm",
+      "aspirational"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.42,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "self improvement videos",
+      "morning routine scenes",
+      "slow living content",
+      "wellness intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_lakeside_picnic_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Lakeside picnic with strawberries and friends",
+    "path": "images/lifestyle/lifestyle_lakeside_picnic_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "picnic",
+      "friends",
+      "summer",
+      "park",
+      "food",
+      "social life"
+    ],
+    "concepts": [
+      "friendship",
+      "weekend leisure",
+      "outdoor lifestyle",
+      "social connection"
+    ],
+    "subjects": [
+      "two women",
+      "picnic blanket",
+      "strawberries",
+      "bread",
+      "flowers",
+      "lake"
+    ],
+    "actions": [
+      "laughing",
+      "eating fruit",
+      "relaxing outdoors"
+    ],
+    "mood": [
+      "joyful",
+      "bright",
+      "carefree"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.48,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "upper-center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "friendship videos",
+      "summer lifestyle scenes",
+      "weekend montages",
+      "social content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_living_room_yoga_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit living room yoga stretch",
+    "path": "images/lifestyle/lifestyle_living_room_yoga_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "yoga",
+      "stretching",
+      "wellness",
+      "home workout",
+      "living room",
+      "mindful movement"
+    ],
+    "concepts": [
+      "wellness routine",
+      "home exercise",
+      "mind-body balance",
+      "healthy lifestyle"
+    ],
+    "subjects": [
+      "woman",
+      "living room",
+      "rug",
+      "sofa",
+      "plants"
+    ],
+    "actions": [
+      "stretching",
+      "doing yoga pose",
+      "exercising at home"
+    ],
+    "mood": [
+      "calm",
+      "bright",
+      "healthy"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.41,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wellness videos",
+      "home workout scenes",
+      "morning routine content",
+      "mindful movement clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_market_harvest_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit market harvest",
+    "path": "images/lifestyle/lifestyle_market_harvest_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "farmers market",
+      "shopping",
+      "fresh produce",
+      "weekend",
+      "flowers",
+      "healthy living"
+    ],
+    "concepts": [
+      "local living",
+      "seasonal shopping",
+      "community market",
+      "healthy lifestyle"
+    ],
+    "subjects": [
+      "woman",
+      "market stalls",
+      "vegetables",
+      "flowers",
+      "straw bag"
+    ],
+    "actions": [
+      "choosing produce",
+      "shopping outdoors",
+      "browsing market"
+    ],
+    "mood": [
+      "fresh",
+      "sunlit",
+      "cheerful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.58,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "weekend videos",
+      "healthy lifestyle content",
+      "market montages",
+      "seasonal reels"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_pottery_studio_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit pottery studio creation",
+    "path": "images/lifestyle/lifestyle_pottery_studio_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "pottery",
+      "creative hobby",
+      "studio",
+      "craft",
+      "ceramics",
+      "artistic lifestyle"
+    ],
+    "concepts": [
+      "creative living",
+      "hands-on hobby",
+      "artisan lifestyle",
+      "mindful making"
+    ],
+    "subjects": [
+      "woman",
+      "pottery wheel",
+      "clay",
+      "ceramic bowls",
+      "studio shelves"
+    ],
+    "actions": [
+      "shaping clay",
+      "making pottery",
+      "working in studio"
+    ],
+    "mood": [
+      "focused",
+      "creative",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "creative lifestyle videos",
+      "hobby scenes",
+      "slow living content",
+      "artisan stories"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_potter_at_work_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit potter at work",
+    "path": "images/lifestyle/lifestyle_potter_at_work_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "craft",
+      "pottery",
+      "studio",
+      "creative hobby",
+      "maker",
+      "artisan"
+    ],
+    "concepts": [
+      "creative lifestyle",
+      "handmade living",
+      "slow craft",
+      "artistic routine"
+    ],
+    "subjects": [
+      "woman potter",
+      "clay wheel",
+      "ceramics shelves",
+      "studio window"
+    ],
+    "actions": [
+      "shaping pottery",
+      "working with clay",
+      "creating handmade ceramics"
+    ],
+    "mood": [
+      "artistic",
+      "sunlit",
+      "focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.4,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "creative lifestyle videos",
+      "hobby content",
+      "artisan scenes",
+      "slow living clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_rainy_reading_nook_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Rainy-day reading nook",
+    "path": "images/lifestyle/lifestyle_rainy_reading_nook_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "rainy day",
+      "reading",
+      "cozy home",
+      "dog",
+      "tea",
+      "relaxation"
+    ],
+    "concepts": [
+      "comfort",
+      "homebody lifestyle",
+      "rest day",
+      "slow living"
+    ],
+    "subjects": [
+      "woman",
+      "book",
+      "dog",
+      "blanket",
+      "tea mug",
+      "rainy window"
+    ],
+    "actions": [
+      "reading",
+      "drinking tea",
+      "relaxing with dog"
+    ],
+    "mood": [
+      "cozy",
+      "calm",
+      "intimate"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.43,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "cozy lifestyle videos",
+      "rainy day scenes",
+      "home routine content",
+      "relaxation montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_reading_nook_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy golden-hour reading nook",
+    "path": "images/lifestyle/lifestyle_reading_nook_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "reading",
+      "cozy home",
+      "slow living",
+      "book",
+      "dog",
+      "sunset"
+    ],
+    "concepts": [
+      "comfort",
+      "homebody lifestyle",
+      "relaxation",
+      "quiet leisure"
+    ],
+    "subjects": [
+      "woman",
+      "book",
+      "armchair",
+      "blanket",
+      "dog",
+      "coffee cup",
+      "fireplace"
+    ],
+    "actions": [
+      "reading book",
+      "relaxing with dog",
+      "resting at home"
+    ],
+    "mood": [
+      "cozy",
+      "peaceful",
+      "golden"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "cozy lifestyle videos",
+      "home routine content",
+      "slow living montages",
+      "bookish scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_reading_nook_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy sunset reading nook",
+    "path": "images/lifestyle/lifestyle_reading_nook_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "reading",
+      "cozy",
+      "books",
+      "slow living",
+      "sunset",
+      "home"
+    ],
+    "concepts": [
+      "quiet leisure",
+      "slow living",
+      "comfort",
+      "homebody lifestyle"
+    ],
+    "subjects": [
+      "woman",
+      "book",
+      "armchair",
+      "blanket",
+      "coffee mug",
+      "bookshelves",
+      "dog"
+    ],
+    "actions": [
+      "reading",
+      "relaxing indoors",
+      "unwinding at sunset"
+    ],
+    "mood": [
+      "cozy",
+      "peaceful",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.48,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "cozy lifestyle content",
+      "reading scenes",
+      "slow living videos",
+      "home routine montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_road_trip_overlook_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden road-trip overlook",
+    "path": "images/lifestyle/lifestyle_road_trip_overlook_002.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "road trip",
+      "friends",
+      "mountains",
+      "travel",
+      "car",
+      "adventure"
+    ],
+    "concepts": [
+      "adventure lifestyle",
+      "friendship",
+      "travel freedom",
+      "weekend escape"
+    ],
+    "subjects": [
+      "group of friends",
+      "SUV",
+      "mountain overlook",
+      "camera",
+      "travel mugs"
+    ],
+    "actions": [
+      "taking a break",
+      "chatting",
+      "enjoying mountain view"
+    ],
+    "mood": [
+      "adventurous",
+      "social",
+      "sunny"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "travel videos",
+      "road trip scenes",
+      "friendship content",
+      "adventure montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_rooftop_brunch_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Rooftop brunch toast above the city",
+    "path": "images/lifestyle/lifestyle_rooftop_brunch_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "brunch",
+      "friends",
+      "social life",
+      "rooftop",
+      "city view",
+      "weekend"
+    ],
+    "concepts": [
+      "social connection",
+      "urban lifestyle",
+      "weekend leisure",
+      "friendship"
+    ],
+    "subjects": [
+      "group of friends",
+      "brunch table",
+      "city skyline",
+      "juice glasses",
+      "food spread"
+    ],
+    "actions": [
+      "toasting drinks",
+      "laughing",
+      "sharing brunch"
+    ],
+    "mood": [
+      "vibrant",
+      "joyful",
+      "sunny"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-center",
+        "lower-center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "social lifestyle videos",
+      "friendship scenes",
+      "weekend content",
+      "urban living montages"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_rooftop_gathering_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour rooftop gathering",
+    "path": "images/lifestyle/lifestyle_rooftop_gathering_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "friends",
+      "rooftop",
+      "sunset",
+      "social life",
+      "city view",
+      "gathering"
+    ],
+    "concepts": [
+      "urban lifestyle",
+      "friendship",
+      "weekend socializing",
+      "city living"
+    ],
+    "subjects": [
+      "group of friends",
+      "drinks",
+      "rooftop seating",
+      "city skyline",
+      "candles"
+    ],
+    "actions": [
+      "chatting",
+      "laughing",
+      "relaxing together"
+    ],
+    "mood": [
+      "vibrant",
+      "social",
+      "golden"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-center",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "friendship videos",
+      "urban lifestyle reels",
+      "weekend montage scenes",
+      "social content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_shoreline_stroll_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunset stroll by the shoreline",
+    "path": "images/lifestyle/lifestyle_shoreline_stroll_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "beach",
+      "couple",
+      "sunset",
+      "romance",
+      "travel",
+      "vacation"
+    ],
+    "concepts": [
+      "romantic lifestyle",
+      "vacation mood",
+      "connection",
+      "golden hour"
+    ],
+    "subjects": [
+      "couple",
+      "beach",
+      "waves",
+      "sunset sky",
+      "shoreline"
+    ],
+    "actions": [
+      "walking hand in hand",
+      "strolling by the sea",
+      "sharing a sunset moment"
+    ],
+    "mood": [
+      "romantic",
+      "warm",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "relationship videos",
+      "travel lifestyle content",
+      "romantic montages",
+      "vacation scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_skincare_routine_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Serene spa skincare routine in a marble bathroom",
+    "path": "images/lifestyle/lifestyle_skincare_routine_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "skincare",
+      "beauty",
+      "self care",
+      "spa",
+      "bathroom",
+      "wellness"
+    ],
+    "concepts": [
+      "personal care",
+      "beauty ritual",
+      "luxury lifestyle",
+      "self-care routine"
+    ],
+    "subjects": [
+      "woman",
+      "mirror",
+      "towel",
+      "serum bottle",
+      "cream jar",
+      "bathroom vanity"
+    ],
+    "actions": [
+      "applying face cream",
+      "looking in mirror",
+      "doing skincare"
+    ],
+    "mood": [
+      "clean",
+      "serene",
+      "luxurious"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "left-lower",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "beauty videos",
+      "self-care content",
+      "morning routine scenes",
+      "wellness lifestyle clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_travel_packing_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy Mediterranean travel packing",
+    "path": "images/lifestyle/lifestyle_travel_packing_001.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "travel",
+      "packing",
+      "vacation",
+      "bedroom",
+      "suitcase",
+      "organized"
+    ],
+    "concepts": [
+      "travel preparation",
+      "aspirational travel",
+      "organized living",
+      "getaway lifestyle"
+    ],
+    "subjects": [
+      "woman",
+      "open suitcase",
+      "bedroom",
+      "passport",
+      "camera",
+      "hat"
+    ],
+    "actions": [
+      "packing clothes",
+      "preparing for travel",
+      "organizing suitcase"
+    ],
+    "mood": [
+      "anticipatory",
+      "bright",
+      "aspirational"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "travel videos",
+      "packing tips content",
+      "vacation montage scenes",
+      "organization clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_workspace_riverside_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit cozy workspace by the river",
+    "path": "images/lifestyle/lifestyle_workspace_riverside_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "remote work",
+      "home office",
+      "productivity",
+      "cozy",
+      "river view",
+      "work from home"
+    ],
+    "concepts": [
+      "balanced lifestyle",
+      "creative work",
+      "calm productivity",
+      "modern living"
+    ],
+    "subjects": [
+      "woman",
+      "laptop",
+      "desk",
+      "coffee mug",
+      "plants",
+      "river view"
+    ],
+    "actions": [
+      "working on laptop",
+      "writing notes",
+      "enjoying a quiet work session"
+    ],
+    "mood": [
+      "warm",
+      "focused",
+      "peaceful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "productivity videos",
+      "remote work content",
+      "lifestyle montages",
+      "creator scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "lifestyle_yoga_stretch_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit serenity yoga stretch",
+    "path": "images/lifestyle/lifestyle_yoga_stretch_003.png",
+    "category": "lifestyle",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "lifestyle",
+      "yoga",
+      "wellness",
+      "stretching",
+      "home workout",
+      "mindful movement"
+    ],
+    "concepts": [
+      "wellness routine",
+      "mind-body balance",
+      "healthy living",
+      "morning practice"
+    ],
+    "subjects": [
+      "woman",
+      "yoga mat",
+      "water bottle",
+      "plants",
+      "living room"
+    ],
+    "actions": [
+      "doing a side stretch",
+      "exercising at home",
+      "practicing mindfulness"
+    ],
+    "mood": [
+      "calm",
+      "healthy",
+      "bright"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wellness videos",
+      "morning routine content",
+      "home workout scenes",
+      "mindful lifestyle clips"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

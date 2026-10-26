@@ -1,0 +1,75 @@
+{
+  "id": "saved-from-web_dd7d6a34d0d33b3d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A captivating view of numerous galaxies scattered across the universe, showcasing the vastness of space.",
+  "path": "images/saved-from-web/saved-from-web_dd7d6a34d0d33b3d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1474,
+  "aspectRatio": 1.7639,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "captivating",
+    "numerou",
+    "galaxie",
+    "scattered",
+    "acros",
+    "universe",
+    "showcasing",
+    "vastnes",
+    "moving",
+    "apart",
+    "view",
+    "numerous",
+    "galaxies",
+    "across",
+    "vastness",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "galaxies moving apart",
+    "savedAt": "2026-10-24T09:30:28.025Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zelch Csaba",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/distant-galaxies-in-a-vast-cosmic-scene-32961167/"
+  }
+}

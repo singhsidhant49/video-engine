@@ -1,0 +1,63 @@
+{
+  "id": "health_hydration_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Healthy hydration with water",
+  "path": "images/health/health_hydration_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "hydration",
+    "water",
+    "wellness",
+    "healthy habits"
+  ],
+  "concepts": [
+    "daily hydration",
+    "healthy routine",
+    "fluid intake"
+  ],
+  "subjects": [
+    "glass of water",
+    "water bottle",
+    "lemon",
+    "mint"
+  ],
+  "actions": [
+    "pouring water",
+    "drinking water"
+  ],
+  "mood": [
+    "refreshing",
+    "clean"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "hydration videos",
+    "wellness content",
+    "healthy habits"
+  ],
+  "avoidFor": [
+    "anatomy",
+    "clinical exam"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

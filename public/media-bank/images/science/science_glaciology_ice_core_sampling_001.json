@@ -1,0 +1,78 @@
+{
+  "id": "science_glaciology_ice_core_sampling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Glaciologist collecting an ice core on a glacier",
+  "path": "images/science/science_glaciology_ice_core_sampling_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "glaciology",
+    "ice core",
+    "glacier",
+    "climate research",
+    "polar science",
+    "fieldwork"
+  ],
+  "concepts": [
+    "ice core sampling",
+    "polar climate science",
+    "cryosphere research",
+    "glacier field study"
+  ],
+  "subjects": [
+    "scientist",
+    "ice corer",
+    "glacier",
+    "mountains",
+    "equipment"
+  ],
+  "actions": [
+    "drilling ice core",
+    "sampling glacier",
+    "collecting climate data"
+  ],
+  "mood": [
+    "crisp",
+    "extreme",
+    "scientific"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.37,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "climate science",
+    "glacier documentary",
+    "field research",
+    "environmental science"
+  ],
+  "avoidFor": [
+    "indoor lab",
+    "ocean reef",
+    "urban setting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

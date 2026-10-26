@@ -1,0 +1,76 @@
+{
+  "id": "psychology_group_mindfulness_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Group mindfulness practice in a lakeside park",
+  "path": "images/psychology/psychology_group_mindfulness_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "mindfulness",
+    "group meditation",
+    "wellbeing",
+    "community",
+    "stress relief"
+  ],
+  "concepts": [
+    "collective mindfulness",
+    "community wellness",
+    "group meditation",
+    "emotional balance"
+  ],
+  "subjects": [
+    "diverse adults",
+    "park",
+    "lake",
+    "meditation mats"
+  ],
+  "actions": [
+    "meditating together",
+    "breathing calmly",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "peaceful",
+    "inclusive",
+    "uplifting"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wellness videos",
+    "group mindfulness",
+    "community mental health",
+    "meditation scenes"
+  ],
+  "avoidFor": [
+    "crisis content",
+    "office burnout",
+    "insomnia"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

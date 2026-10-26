@@ -1,0 +1,79 @@
+{
+  "id": "health_herbal_roots_remedies_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden roots and herbal remedies",
+  "path": "images/health/health_herbal_roots_remedies_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "herbal wellness",
+    "ginger",
+    "turmeric",
+    "mint",
+    "natural remedies",
+    "supplements"
+  ],
+  "concepts": [
+    "natural wellness",
+    "herbal ingredients",
+    "supplement lifestyle",
+    "traditional remedies"
+  ],
+  "subjects": [
+    "ginger root",
+    "turmeric root",
+    "capsules",
+    "mint leaves",
+    "mortar and pestle"
+  ],
+  "actions": [
+    "displaying herbal ingredients",
+    "showcasing remedies",
+    "presenting supplements"
+  ],
+  "mood": [
+    "earthy",
+    "fresh",
+    "natural"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.5
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "natural health videos",
+    "supplement content",
+    "wellness intros",
+    "ingredient explainers"
+  ],
+  "avoidFor": [
+    "clinical examination",
+    "sleep scenes",
+    "anatomy graphics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

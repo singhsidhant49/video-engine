@@ -1,0 +1,76 @@
+{
+  "id": "science_global_data_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist presenting global research data",
+  "path": "images/science/science_global_data_presentation_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "presentation",
+    "global data",
+    "earth",
+    "climate data",
+    "research briefing"
+  ],
+  "concepts": [
+    "scientific presentation",
+    "global research",
+    "data communication",
+    "earth systems science"
+  ],
+  "subjects": [
+    "scientist",
+    "large display",
+    "earth visualization",
+    "charts"
+  ],
+  "actions": [
+    "presenting findings",
+    "explaining data",
+    "teaching audience"
+  ],
+  "mood": [
+    "educational",
+    "professional",
+    "clear"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.67,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "science communication",
+    "research presentation",
+    "climate explainer",
+    "educational video"
+  ],
+  "avoidFor": [
+    "bench chemistry",
+    "field sample collection",
+    "consumer product demo"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

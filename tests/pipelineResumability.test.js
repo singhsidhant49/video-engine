@@ -251,6 +251,24 @@ test('Run Locking: prevents concurrent processes on same run directory', async (
   }
 });
 
+test('Run Locking: treats a reused PID from another container host as stale', async () => {
+  const tmpDir = path.join(config.rootDir, '.cache', 'test-foreign-lock-' + Date.now());
+  await fs.mkdir(tmpDir, { recursive: true });
+  try {
+    await fs.writeFile(path.join(tmpDir, '.lock'), JSON.stringify({
+      pid: process.pid,
+      host: 'previous-container-host',
+      lockedAt: new Date().toISOString(),
+    }));
+    const lock = await acquireRunLock(tmpDir);
+    const saved = JSON.parse(await fs.readFile(lock.lockPath, 'utf8'));
+    assert.notEqual(saved.host, 'previous-container-host');
+    await lock.release();
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
+  }
+});
+
 test('Run Cloning: forks run non-destructively for visual/editorial iteration', async () => {
   const runsDir = path.join(config.rendersDir, 'runs');
   const sourceId = 'test-source-' + Date.now();

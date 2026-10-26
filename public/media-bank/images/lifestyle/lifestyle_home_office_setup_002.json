@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_home_office_setup_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm minimalist home office setup",
+  "path": "images/lifestyle/lifestyle_home_office_setup_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "home office",
+    "remote work",
+    "desk setup",
+    "productivity",
+    "minimalism",
+    "work from home"
+  ],
+  "concepts": [
+    "modern work lifestyle",
+    "productivity",
+    "organized living",
+    "remote work"
+  ],
+  "subjects": [
+    "man",
+    "laptop",
+    "notebook",
+    "headphones",
+    "coffee mug",
+    "wooden desk"
+  ],
+  "actions": [
+    "organizing workspace",
+    "starting workday",
+    "planning tasks"
+  ],
+  "mood": [
+    "focused",
+    "clean",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "remote work videos",
+    "productivity scenes",
+    "home office content",
+    "digital lifestyle clips"
+  ],
+  "avoidFor": [
+    "travel adventure",
+    "spa scenes",
+    "party scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

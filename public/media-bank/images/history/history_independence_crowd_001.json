@@ -1,0 +1,73 @@
+{
+  "id": "history_independence_crowd_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Independence-era public gathering",
+  "path": "images/history/history_independence_crowd_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 302,
+  "height": 506,
+  "aspectRatio": 0.5968,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "independence",
+    "public movement",
+    "crowd",
+    "political history",
+    "india"
+  ],
+  "concepts": [
+    "mass politics",
+    "independence movement",
+    "public mobilization"
+  ],
+  "subjects": [
+    "crowd",
+    "flag",
+    "historic architecture"
+  ],
+  "actions": [
+    "gathering",
+    "demonstrating",
+    "raising flag"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "independence history videos",
+    "political movement scenes",
+    "20th century history"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "medieval life"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

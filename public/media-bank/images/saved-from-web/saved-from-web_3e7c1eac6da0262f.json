@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_3e7c1eac6da0262f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Pantheon, Rome",
+  "path": "images/saved-from-web/saved-from-web_3e7c1eac6da0262f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2094,
+  "aspectRatio": 1.2416,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "pantheon",
+    "rome",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Pantheon, Rome",
+    "savedAt": "2026-10-24T07:24:16.563Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "NikonZ7II",
+    "creator": "NikonZ7II",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T07:23:25.139Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Pantheon_(Rome)_-_Right_side_and_front.jpg"
+  }
+}

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 import { isMeditationNarration } from '../audio/narrationProfile.js';
 
 export const ContentTypeSchema = z.enum([

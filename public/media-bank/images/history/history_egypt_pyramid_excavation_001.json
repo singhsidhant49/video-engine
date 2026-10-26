@@ -1,0 +1,79 @@
+{
+  "id": "history_egypt_pyramid_excavation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Archaeological excavation beneath the pyramids",
+  "path": "images/history/history_egypt_pyramid_excavation_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient egypt",
+    "archaeology",
+    "pyramids",
+    "excavation",
+    "hieroglyphs",
+    "desert"
+  ],
+  "concepts": [
+    "ancient civilizations",
+    "archaeological discovery",
+    "historical research",
+    "egyptology"
+  ],
+  "subjects": [
+    "archaeologist",
+    "pyramids",
+    "ruins",
+    "sphinx fragment",
+    "hieroglyph wall"
+  ],
+  "actions": [
+    "documenting carvings",
+    "excavating ruins",
+    "studying ancient site"
+  ],
+  "mood": [
+    "epic",
+    "scholarly",
+    "golden-hour"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.33,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "ancient history videos",
+    "egypt videos",
+    "archaeology scenes",
+    "civilization explainers"
+  ],
+  "avoidFor": [
+    "modern politics",
+    "science lab",
+    "business content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

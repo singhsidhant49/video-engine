@@ -1,0 +1,77 @@
+{
+  "id": "science_wildlife_camera_trap_research_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Wildlife biologist checking a forest camera trap",
+  "path": "images/science/science_wildlife_camera_trap_research_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "wildlife biology",
+    "camera trap",
+    "forest",
+    "ecology",
+    "field research",
+    "conservation"
+  ],
+  "concepts": [
+    "wildlife monitoring",
+    "forest ecology",
+    "camera trap survey",
+    "conservation science"
+  ],
+  "subjects": [
+    "field researcher",
+    "camera trap",
+    "forest stream",
+    "backpack"
+  ],
+  "actions": [
+    "checking camera trap",
+    "reviewing wildlife image",
+    "field monitoring"
+  ],
+  "mood": [
+    "natural",
+    "observational",
+    "immersive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.33,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wildlife documentary",
+    "ecology explainer",
+    "conservation video",
+    "field science"
+  ],
+  "avoidFor": [
+    "indoor lab",
+    "space science",
+    "office setting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

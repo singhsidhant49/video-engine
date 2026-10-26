@@ -1,0 +1,79 @@
+{
+  "id": "history_ancient_babylon_scribe_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scribe overlooking ancient Babylon at sunset",
+  "path": "images/history/history_ancient_babylon_scribe_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient babylon",
+    "mesopotamia",
+    "scribe",
+    "ziggurat",
+    "cityscape",
+    "river civilization"
+  ],
+  "concepts": [
+    "early civilization",
+    "written records",
+    "mesopotamian history",
+    "urban antiquity"
+  ],
+  "subjects": [
+    "scribe",
+    "clay tablets",
+    "ziggurat",
+    "city walls",
+    "river"
+  ],
+  "actions": [
+    "writing records",
+    "observing city",
+    "documenting knowledge"
+  ],
+  "mood": [
+    "golden",
+    "epic",
+    "scholarly"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.32,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "ancient history videos",
+    "mesopotamia explainers",
+    "civilization intros",
+    "history documentaries"
+  ],
+  "avoidFor": [
+    "modern history",
+    "industrial era",
+    "science content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -3,7 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { ffmpeg } from '../services/ffmpeg.js';
 import { materialiseImage, materialiseVideo, mapLimit, hamming, searchStats, resetSearchStats } from '../services/freeMediaService.js';
-import { recordImageInBank, searchImageBank } from '../services/imageBank.js';
+import { recordImageInBank, recordMediaInBank, searchImageBank } from '../services/imageBank.js';
 import { licenseAllowed } from '../shared/licensing.js';
 import { contrastiveRelevance, relevanceEnabled } from '../services/relevance.js';
 import { defaultAssetProviders, searchAssetProviderStage } from '../assets/providerRegistry.js';
@@ -416,11 +416,13 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
   const sceneIndex = new Map(sceneIds.map((id, index) => [id, index]));
   const requestByShot = new Map(assetRequests.map((request) => [request.storyboardShotId, request]));
   const approved = [];
+  const reuseCounts = new Map();
 
   for (const [sceneId, sceneAssets] of Object.entries(assets)) {
     for (const [shotId, asset] of Object.entries(sceneAssets.byShot || {})) {
       if (asset && !asset.unresolved && ['image', 'video'].includes(asset.type)) {
         approved.push({ sceneId, shotId, asset, index: sceneIndex.get(sceneId) ?? Number.MAX_SAFE_INTEGER });
+        reuseCounts.set(asset.src, (reuseCounts.get(asset.src) || 0) + 1);
       }
     }
   }
@@ -433,7 +435,7 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
     const target = assets[report.sceneId];
     if (!request || !target) continue;
     const targetIndex = sceneIndex.get(report.sceneId) ?? Number.MAX_SAFE_INTEGER;
-    const evaluatedSources = approved.map((source) => {
+    const evaluatedSources = approved.filter((source) => (reuseCounts.get(source.asset.src) || 0) < 2).map((source) => {
       const judgment = judgeAssetCandidate({
         candidate: {
           ...source.asset,
@@ -477,6 +479,7 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
       } : undefined,
     };
     target.byShot[report.storyboardShotId] = reusedAsset;
+    reuseCounts.set(reusedAsset.src, (reuseCounts.get(reusedAsset.src) || 0) + 1);
     if (!target.primary) target.primary = reusedAsset;
     else if (!target.alternates.some((asset) => asset?.src === reusedAsset.src)) target.alternates.push(reusedAsset);
 
@@ -795,7 +798,7 @@ export async function directAssets(plan, specs, {
       if (!sceneAssets.primary) sceneAssets.primary = selected.asset;
       else sceneAssets.alternates.push(selected.asset);
       if (selected.asset.type === 'image') {
-        recordImageInBank({
+        await recordImageInBank({
           filePath: path.join(publicDir, selected.asset.src),
           description: selected.visualInspection?.sceneSummary || '',
           query: selected.candidate.query || request.concept,
@@ -805,7 +808,24 @@ export async function directAssets(plan, specs, {
           width: selected.asset.width || 1920,
           height: selected.asset.height || 1080,
           inspection: selected.visualInspection,
-        }).catch(() => {});
+          category: request.category || context?.niche,
+          candidate: selected.candidate,
+        });
+      } else {
+        await recordMediaInBank({
+          filePath: path.join(publicDir, selected.asset.src),
+          type: selected.asset.type,
+          description: selected.visualInspection?.sceneSummary || '',
+          query: selected.candidate.query || request.concept,
+          source: selected.asset.source,
+          label: selected.asset.label || '',
+          license: selected.asset.license,
+          width: selected.asset.width || 1920,
+          height: selected.asset.height || 1080,
+          inspection: selected.visualInspection,
+          category: request.category || context?.niche,
+          candidate: selected.candidate,
+        });
       }
     } else if (publishMode !== 'PRODUCTION_RENDER' && unresolvedMediaMode === 'ALLOW_DEV_PLACEHOLDER') {
       // Step 8: Unresolved media placeholder & audit tracking
@@ -962,19 +982,25 @@ export async function directAssets(plan, specs, {
   const diagnostics = buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, memory });
 
   const report = plan.scenes.map((scene, index) => {
-    const sceneAssets = assets[scene.id];
-    const p = sceneAssets.primary;
+    const sceneAssets = assets[scene.id] || { byShot: {}, alternates: [] };
+    const p = sceneAssets.primary || Object.values(sceneAssets.byShot || {})[0];
     const requests = requestReports.filter((item) => item.sceneId === scene.id);
+    const rawLicense = p?.license;
+    const licenseName = rawLicense
+      ? (typeof rawLicense === 'string'
+        ? rawLicense
+        : rawLicense.name || rawLicense.license_name || rawLicense.type || rawLicense.source || (rawLicense.commercial_use ? `Commercial (${rawLicense.commercial_use})` : 'Curated / Owned'))
+      : null;
     return {
       sceneId: scene.id,
       role: specs[index].need.role,
-      tier: p?.tier || 'none',
+      tier: p?.tier || (Object.keys(sceneAssets.byShot || {}).length ? 'approved' : 'none'),
       type: p?.type || null,
       source: p?.source || null,
       label: p?.label || null,
-      license: p?.license?.name || null,
+      license: licenseName,
       relevance: p?.relevance ?? null,
-      count: Object.keys(sceneAssets.byShot).length,
+      count: Object.keys(sceneAssets.byShot || {}).length,
       requests,
       rejected: requests.flatMap((item) => item.materializationRejects || []).slice(0, 10),
     };

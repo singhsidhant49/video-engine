@@ -1,0 +1,78 @@
+{
+  "id": "science_river_field_sampling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Environmental scientist collecting river samples in the mountains",
+  "path": "images/science/science_river_field_sampling_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "field research",
+    "environmental science",
+    "river",
+    "sampling",
+    "mountains",
+    "ecology"
+  ],
+  "concepts": [
+    "environmental monitoring",
+    "water sampling",
+    "field science",
+    "ecosystem research"
+  ],
+  "subjects": [
+    "scientist",
+    "river",
+    "sample bottle",
+    "tablet",
+    "mountain landscape"
+  ],
+  "actions": [
+    "collecting water sample",
+    "recording data",
+    "field observation"
+  ],
+  "mood": [
+    "natural",
+    "observational",
+    "adventurous"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "environmental science",
+    "fieldwork montage",
+    "climate content",
+    "ecology explainer"
+  ],
+  "avoidFor": [
+    "indoor lab chemistry",
+    "space science",
+    "medical lab"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "history_japanese_castle_town_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunrise over a Japanese castle town",
+  "path": "images/history/history_japanese_castle_town_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "japan",
+    "castle town",
+    "edo period",
+    "samurai",
+    "market street",
+    "feudal japan"
+  ],
+  "concepts": [
+    "feudal society",
+    "urban life in early modern japan",
+    "samurai culture",
+    "town commerce"
+  ],
+  "subjects": [
+    "castle",
+    "samurai",
+    "townspeople",
+    "bridge",
+    "market street"
+  ],
+  "actions": [
+    "walking through town",
+    "guarding streets",
+    "selling goods"
+  ],
+  "mood": [
+    "serene",
+    "historic",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "japanese history videos",
+    "edo period scenes",
+    "daily life explainers",
+    "history intros"
+  ],
+  "avoidFor": [
+    "industrial era",
+    "modern city",
+    "middle eastern history"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

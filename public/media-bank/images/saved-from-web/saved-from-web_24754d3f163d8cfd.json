@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_24754d3f163d8cfd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Sperm whale skeleton, Museum of the World Ocean, Kaliningrad.jpg",
+  "path": "images/saved-from-web/saved-from-web_24754d3f163d8cfd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1741,
+  "aspectRatio": 1.4934,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "sperm",
+    "whale",
+    "skeleton",
+    "museum",
+    "world",
+    "ocean",
+    "kaliningrad",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Sperm whale skeleton, Museum of the World Ocean, Kaliningrad.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Sperm whale",
+    "savedAt": "2026-10-24T05:17:12.952Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC0",
+    "license_name": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Vsatinet",
+    "creator": "Vsatinet",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-24T05:15:49.343Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Sperm_whale_skeleton,_Museum_of_the_World_Ocean,_Kaliningrad.jpg"
+  }
+}

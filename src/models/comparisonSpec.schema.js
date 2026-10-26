@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 const TextVariantsSchema = z.object({ full: z.string().min(1), short: z.string().min(1), labelOnly: z.string().min(1) }).strict();
 
@@ -29,4 +29,3 @@ export const ComparisonSpecSchema = z.object({
 }).strict().superRefine((spec, ctx) => {
   if (spec.subjectA.id === spec.subjectB.id) ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Comparison subjects must be distinct' });
 });
-

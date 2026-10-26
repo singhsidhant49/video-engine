@@ -1,0 +1,76 @@
+{
+  "id": "science_microscope_research_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist working with microscope in a modern laboratory",
+  "path": "images/science/science_microscope_research_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "microscope",
+    "laboratory",
+    "biology",
+    "research",
+    "petri dish"
+  ],
+  "concepts": [
+    "microscopy",
+    "biological research",
+    "lab experimentation",
+    "scientific analysis"
+  ],
+  "subjects": [
+    "scientist",
+    "microscope",
+    "petri dishes",
+    "lab bench"
+  ],
+  "actions": [
+    "using microscope",
+    "examining samples",
+    "recording notes"
+  ],
+  "mood": [
+    "focused",
+    "clean",
+    "methodical"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "biology content",
+    "lab research",
+    "medical science",
+    "scientific method"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "earth science fieldwork",
+    "boardroom presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

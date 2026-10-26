@@ -1,0 +1,76 @@
+{
+  "id": "psychology_couples_counseling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm couples counseling session",
+  "path": "images/psychology/psychology_couples_counseling_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "couples therapy",
+    "relationship counseling",
+    "communication",
+    "marriage",
+    "support"
+  ],
+  "concepts": [
+    "relationship repair",
+    "healthy communication",
+    "guided counseling",
+    "emotional connection"
+  ],
+  "subjects": [
+    "couple",
+    "therapist",
+    "sofa",
+    "notebook"
+  ],
+  "actions": [
+    "discussing issues",
+    "listening",
+    "guided conversation"
+  ],
+  "mood": [
+    "constructive",
+    "supportive",
+    "honest"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship videos",
+    "couples counseling content",
+    "communication skills",
+    "family psychology"
+  ],
+  "avoidFor": [
+    "solo mindfulness",
+    "cognitive aging",
+    "group meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

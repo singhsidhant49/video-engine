@@ -1,0 +1,78 @@
+{
+  "id": "history_renaissance_inventor_workshop_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Renaissance inventor\u2019s sunlit workshop",
+  "path": "images/history/history_renaissance_inventor_workshop_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "renaissance",
+    "inventor",
+    "workshop",
+    "engineering",
+    "florence",
+    "innovation"
+  ],
+  "concepts": [
+    "renaissance innovation",
+    "art and science",
+    "historical invention",
+    "humanist creativity"
+  ],
+  "subjects": [
+    "inventor",
+    "flying machine sketch",
+    "globe",
+    "models",
+    "tools"
+  ],
+  "actions": [
+    "drawing inventions",
+    "studying devices",
+    "working at desk"
+  ],
+  "mood": [
+    "inspired",
+    "scholarly",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.62,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "renaissance videos",
+    "innovation history",
+    "art and science content",
+    "inventor scenes"
+  ],
+  "avoidFor": [
+    "industrial factories",
+    "roman empire",
+    "modern technology"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

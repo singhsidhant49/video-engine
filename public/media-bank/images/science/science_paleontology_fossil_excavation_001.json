@@ -1,0 +1,77 @@
+{
+  "id": "science_paleontology_fossil_excavation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Paleontologist carefully excavating a fossil skeleton in the desert",
+  "path": "images/science/science_paleontology_fossil_excavation_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "paleontology",
+    "fossil",
+    "excavation",
+    "desert",
+    "fieldwork",
+    "dig site"
+  ],
+  "concepts": [
+    "fossil excavation",
+    "paleontological fieldwork",
+    "ancient life research",
+    "desert science"
+  ],
+  "subjects": [
+    "scientist",
+    "fossil skeleton",
+    "tools",
+    "dig site"
+  ],
+  "actions": [
+    "brushing fossil",
+    "documenting find",
+    "excavating remains"
+  ],
+  "mood": [
+    "adventurous",
+    "methodical",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.41,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "paleontology explainer",
+    "prehistoric life",
+    "excavation montage",
+    "science documentary"
+  ],
+  "avoidFor": [
+    "lab biotech",
+    "finance",
+    "city office"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

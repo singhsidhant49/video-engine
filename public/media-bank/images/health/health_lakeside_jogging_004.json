@@ -1,0 +1,77 @@
+{
+  "id": "health_lakeside_jogging_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunrise jog along the lakeside path",
+  "path": "images/health/health_lakeside_jogging_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "fitness",
+    "running",
+    "jogging",
+    "cardio",
+    "outdoor exercise",
+    "sunrise"
+  ],
+  "concepts": [
+    "cardiovascular fitness",
+    "active lifestyle",
+    "morning exercise"
+  ],
+  "subjects": [
+    "adult woman",
+    "running path",
+    "lake",
+    "city skyline"
+  ],
+  "actions": [
+    "jogging",
+    "exercising outdoors",
+    "morning workout"
+  ],
+  "mood": [
+    "energizing",
+    "uplifting",
+    "active"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "cardio scenes",
+    "active lifestyle content",
+    "morning routine videos"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

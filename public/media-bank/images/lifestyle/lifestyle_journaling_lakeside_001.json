@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_journaling_lakeside_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit journaling by the lake",
+  "path": "images/lifestyle/lifestyle_journaling_lakeside_001.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "journaling",
+    "self care",
+    "morning routine",
+    "lake view",
+    "cozy",
+    "mindful living"
+  ],
+  "concepts": [
+    "slow living",
+    "reflection",
+    "intentional lifestyle",
+    "wellness routine"
+  ],
+  "subjects": [
+    "woman",
+    "notebook",
+    "coffee mug",
+    "table",
+    "lake view",
+    "plants"
+  ],
+  "actions": [
+    "writing in journal",
+    "sipping coffee",
+    "reflecting quietly"
+  ],
+  "mood": [
+    "peaceful",
+    "warm",
+    "aspirational"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.42,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "self improvement videos",
+    "morning routine scenes",
+    "slow living content",
+    "wellness intros"
+  ],
+  "avoidFor": [
+    "party scenes",
+    "fitness training",
+    "formal business topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

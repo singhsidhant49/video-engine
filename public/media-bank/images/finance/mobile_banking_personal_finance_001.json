@@ -1,0 +1,76 @@
+{
+  "id": "mobile_banking_personal_finance_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mobile banking and personal finance dashboard",
+  "path": "images/finance/mobile_banking_personal_finance_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "mobile banking",
+    "banking app",
+    "personal finance",
+    "budgeting",
+    "digital banking"
+  ],
+  "concepts": [
+    "digital banking",
+    "money management",
+    "personal finance tracking",
+    "fintech"
+  ],
+  "subjects": [
+    "smartphone",
+    "banking app",
+    "laptop analytics",
+    "bank card"
+  ],
+  "actions": [
+    "checking balance",
+    "reviewing transactions",
+    "tracking spending"
+  ],
+  "mood": [
+    "clean",
+    "modern",
+    "accessible"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "personal finance",
+    "banking explainer",
+    "fintech",
+    "budgeting content"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "institutional investing",
+    "retirement meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

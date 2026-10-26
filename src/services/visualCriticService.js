@@ -133,6 +133,7 @@ export function applySceneRepairs(timeline, repairs = []) {
       const secondDuration = clip.durationInFrames - firstDuration;
       if (firstDuration > 0 && secondDuration > 0) {
         original.durationInFrames = firstDuration;
+        original.exit = { type: 'cut', frames: 0 };
         const clone = JSON.parse(JSON.stringify(original));
         clone.id = `${original.id || original.storyboardShotId}_repair_detail`;
         clone.storyboardShotId = `${original.storyboardShotId}_repair_detail`;
@@ -147,14 +148,19 @@ export function applySceneRepairs(timeline, repairs = []) {
         clone.role = 'detail';
         clone.variant = 'detail';
         clone.layout = `${clone.family}:detail`;
+        const nextCamera = (original.presentation?.cameraMove === 'subtlePush') ? 'subtlePull' : 'subtlePush';
         clone.presentation = {
           ...(clone.presentation || {}),
           variant: 'detail',
           layout: `${clone.family}:detail`,
-          cameraMove: (original.presentation?.cameraMove === 'detailCrop') ? 'subtlePush' : 'detailCrop',
+          cameraMove: nextCamera,
           movementState: 'SUBTLE',
           transitionIn: 'cut',
         };
+        clone.imageBehavior = nextCamera === 'subtlePush' ? 'SUBTLE_PUSH' : 'SUBTLE_PULL';
+        clone.enter = { type: 'cut', frames: 0 };
+        clone.exit = { type: 'cut', frames: 0 };
+        clone.transitionPolicy = 'CUT';
         clip.shots.push(clone);
       }
     }

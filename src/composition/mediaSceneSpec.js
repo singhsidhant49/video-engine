@@ -162,16 +162,26 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     || (strategy === 'LAYERED_MEDIA' && consecutiveLayered > 1);
 
   const nativeVideo = primary.type === 'video' && primary.motionPresent !== false;
-  let cameraIntent = nativeVideo || role === 'EVIDENCE' ? 'STATIC' : shot?.presentation?.cameraMove === 'detailCrop' || role === 'DETAIL' ? 'DETAIL_CROP'
-    : shot?.presentation?.cameraMove === 'pan' ? 'FOCAL_PAN' : ['subtlePush', 'push'].includes(shot?.presentation?.cameraMove) ? 'SUBTLE_PUSH'
-      : ['subtlePull', 'pull'].includes(shot?.presentation?.cameraMove) ? 'SUBTLE_PULL' : 'STATIC';
+  const authoredCamera = shot?.presentation?.cameraMove;
+  const cameraMap = {
+    panLeft: 'PAN_LEFT', panRight: 'PAN_RIGHT',
+    pan: primary.focalPoint?.x >= .5 ? 'PAN_RIGHT' : 'PAN_LEFT',
+    panUp: primary.focalPoint?.x >= .5 ? 'PAN_RIGHT' : 'PAN_LEFT',
+    panDown: primary.focalPoint?.x >= .5 ? 'PAN_RIGHT' : 'PAN_LEFT',
+    drift: primary.focalPoint?.x >= .5 ? 'PAN_RIGHT' : 'PAN_LEFT',
+    parallax: primary.focalPoint?.x >= .5 ? 'PAN_RIGHT' : 'PAN_LEFT',
+    detailCrop: 'SUBTLE_PUSH', detailReveal: 'SUBTLE_PUSH',
+    subtlePush: 'SUBTLE_PUSH', push: 'SUBTLE_PUSH', slowZoomIn: 'SUBTLE_PUSH',
+    subtlePull: 'SUBTLE_PULL', pull: 'SUBTLE_PULL', slowZoomOut: 'SUBTLE_PULL',
+  };
+  let cameraIntent = nativeVideo || role === 'EVIDENCE' ? 'STATIC'
+    : cameraMap[authoredCamera] || (role === 'DETAIL' ? 'SUBTLE_PUSH' : 'STATIC');
   if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 800 : 1280) || primary.qualityTier === 'FALLBACK')) {
     cameraIntent = 'STATIC';
   }
 
   let cameraReason = 'STATIC_HOLD';
-  if (cameraIntent === 'DETAIL_CROP') cameraReason = 'MOVE_TO_DETAIL';
-  else if (cameraIntent === 'FOCAL_PAN') cameraReason = 'FOLLOW_SUBJECT';
+  if (['PAN_LEFT', 'PAN_RIGHT'].includes(cameraIntent)) cameraReason = 'FOLLOW_SUBJECT';
   else if (cameraIntent === 'SUBTLE_PUSH') cameraReason = 'INTENSIFY_FOCUS';
   else if (cameraIntent === 'SUBTLE_PULL') cameraReason = 'REVEAL_CONTEXT';
 
@@ -182,8 +192,13 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     primaryAssetId: primary.assetId, supportingAssetIds: assets.slice(1).map((a) => a.assetId), subjectIntent: shot.visualConcept || 'Preserve the primary subject',
     evidenceIntent: role === 'EVIDENCE' ? 'Preserve authentic source framing and attribution.' : 'Support the narrated claim without overstating evidence.',
     textNeed: need, annotationNeed: overlay?.annotation || overlay?.label && role === 'DETAIL' ? 'LABEL' : 'NONE', cameraIntent,
+    cameraMagnitude: cameraIntent === 'STATIC' ? 0 : ['PAN_LEFT', 'PAN_RIGHT'].includes(cameraIntent) ? .03 : .06,
     cameraReason,
-    transitionIntent: { entry: 'CUT', exit: 'CUT', anchor: shot.transitionAnchor || null },
+    transitionIntent: {
+      entry: shot.transitionPolicy === 'SHORT_DISSOLVE' ? 'SHORT_DISSOLVE' : 'CUT',
+      exit: 'CUT',
+      anchor: shot.transitionAnchor || null,
+    },
     durationIntent: { durationInFrames, rationale: ['narration_span', assets.length > 1 ? 'visual_novelty' : 'asset_complexity', need !== 'NONE' ? 'text_read_time' : 'clean_hold'] },
     imageChangeReason: role === 'MONTAGE' ? 'montageProgression' : ({ EVIDENCE: 'newEvidence', DETAIL: 'newDetail', CONTEXT: 'newLocation' })[role] || 'newIdea',
     strategy, captionPosition,
@@ -193,4 +208,3 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     visibleNeed: shot?.visibleNeed || undefined,
   });
 }
-

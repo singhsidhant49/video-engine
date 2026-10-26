@@ -1,0 +1,78 @@
+{
+  "id": "history_classical_greece_philosopher_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Philosopher teaching beneath the Acropolis",
+  "path": "images/history/history_classical_greece_philosopher_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient greece",
+    "philosophy",
+    "acropolis",
+    "athens",
+    "classical world",
+    "scholars"
+  ],
+  "concepts": [
+    "classical education",
+    "philosophical teaching",
+    "greek civilization",
+    "public discourse"
+  ],
+  "subjects": [
+    "philosopher",
+    "students",
+    "marble colonnade",
+    "acropolis"
+  ],
+  "actions": [
+    "teaching",
+    "discussing ideas",
+    "listening to a lesson"
+  ],
+  "mood": [
+    "sunlit",
+    "classical",
+    "intellectual"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.35,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "greek history videos",
+    "philosophy explainers",
+    "classical civilization content",
+    "scholar scenes"
+  ],
+  "avoidFor": [
+    "medieval scenes",
+    "modern classroom",
+    "industrial content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

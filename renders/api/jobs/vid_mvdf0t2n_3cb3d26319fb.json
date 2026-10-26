@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "id": "vid_mvdf0t2n_3cb3d26319fb",
+  "ownerId": "acct_local",
+  "status": "completed",
+  "stage": "completed",
+  "progress": 100,
+  "request": {
+    "prompt": "Create a two-minute documentary about the history of coffee",
+    "output": {
+      "durationSeconds": 120,
+      "aspectRatio": "16:9",
+      "resolution": "1080p"
+    },
+    "creative": {
+      "contentType": "auto",
+      "tone": "clear and engaging",
+      "audience": "general audience",
+      "pacing": "auto"
+    },
+    "audio": {},
+    "subtitles": {
+      "enabled": true
+    }
+  },
+  "pipelineBrief": {
+    "version": 1,
+    "prompt": "Create a two-minute documentary about the history of coffee",
+    "niche": "",
+    "format": "landscape",
+    "durationSec": 120,
+    "channel": {
+      "id": "default",
+      "contentType": "auto",
+      "pacingMode": "auto",
+      "audience": "general audience",
+      "tone": "clear and engaging",
+      "language": "en",
+      "captions": "subtitles"
+    }
+  },
+  "metadata": null,
+  "idempotencyKey": "customer-order-123",
+  "requestHash": "c2cf313594cbacd9115f436278808ddf0fe769bf3ff139872e0afff216ddfec2",
+  "result": {
+    "outputPath": "D:\\projects\\videogenerator\\renders\\vid_mvdf0t2n_3cb3d26319fb-landscape.mp4",
+    "outputFilename": "vid_mvdf0t2n_3cb3d26319fb-landscape.mp4",
+    "durationSeconds": 115.553,
+    "title": "The History of Coffee: From Goat Herds to Global Ritual",
+    "runDir": "D:\\projects\\videogenerator\\renders\\runs\\vid_mvdf0t2n_3cb3d26319fb"
+  },
+  "error": null,
+  "createdAt": "2026-10-18T05:59:14.735Z",
+  "updatedAt": "2026-10-18T06:11:12.876Z",
+  "startedAt": "2026-10-18T05:59:14.745Z",
+  "completedAt": "2026-10-18T06:11:12.876Z"
+}

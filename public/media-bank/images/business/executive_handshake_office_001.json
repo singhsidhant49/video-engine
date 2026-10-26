@@ -1,0 +1,75 @@
+{
+  "id": "executive_handshake_office_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Professional handshake in a sunlit office",
+  "path": "images/business/executive_handshake_office_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "handshake",
+    "deal",
+    "partnership",
+    "agreement",
+    "office",
+    "executive"
+  ],
+  "concepts": [
+    "business partnership",
+    "deal closing",
+    "professional trust",
+    "corporate agreement"
+  ],
+  "subjects": [
+    "two executives",
+    "handshake",
+    "office"
+  ],
+  "actions": [
+    "shaking hands",
+    "closing a deal"
+  ],
+  "mood": [
+    "professional",
+    "optimistic",
+    "confident"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.52
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "business intro",
+    "partnership explainer",
+    "sales content",
+    "corporate storytelling"
+  ],
+  "avoidFor": [
+    "technology hardware",
+    "medical scene",
+    "casual lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

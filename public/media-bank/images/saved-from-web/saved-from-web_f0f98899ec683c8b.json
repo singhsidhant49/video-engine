@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_f0f98899ec683c8b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Close up bird eye view. Søsterhøj, Aarhus.jpg",
+  "path": "images/saved-from-web/saved-from-web_f0f98899ec683c8b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1536,
+  "height": 2040,
+  "aspectRatio": 0.7529,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "bird",
+    "eye",
+    "sterh",
+    "aarhu",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "view",
+    "aarhus",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Close up bird eye view. Søsterhøj, Aarhus.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "bird eye close up",
+    "savedAt": "2026-10-23T08:34:44.218Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC0",
+    "license_name": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Vrkiller",
+    "creator": "Vrkiller",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-23T08:31:02.889Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Close_up_bird_eye_view._S%C3%B8sterh%C3%B8j,_Aarhus.jpg"
+  }
+}

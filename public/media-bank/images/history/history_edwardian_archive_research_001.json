@@ -1,0 +1,79 @@
+{
+  "id": "history_edwardian_archive_research_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Edwardian archive research room",
+  "path": "images/history/history_edwardian_archive_research_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "edwardian",
+    "archive",
+    "research room",
+    "documents",
+    "library",
+    "historians"
+  ],
+  "concepts": [
+    "historical research",
+    "archival work",
+    "document preservation",
+    "early modern scholarship"
+  ],
+  "subjects": [
+    "researchers",
+    "archive tables",
+    "documents",
+    "card catalog",
+    "bookshelves"
+  ],
+  "actions": [
+    "reading records",
+    "sorting photos",
+    "working in archive"
+  ],
+  "mood": [
+    "quiet",
+    "scholarly",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "research scenes",
+    "modern history videos",
+    "archive intros",
+    "documentary visuals"
+  ],
+  "avoidFor": [
+    "ancient world",
+    "medieval battles",
+    "desert caravans"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

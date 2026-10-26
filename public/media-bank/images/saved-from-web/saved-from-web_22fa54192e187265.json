@@ -1,0 +1,63 @@
+{
+  "id": "saved-from-web_22fa54192e187265",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Laniakea Supercluster",
+  "path": "images/saved-from-web/saved-from-web_22fa54192e187265.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1903,
+  "aspectRatio": 1.3663,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "laniakea",
+    "supercluster",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Laniakea Supercluster"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Laniakea Supercluster",
+    "savedAt": "2026-10-24T09:29:33.027Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Andrew Z. Colvin",
+    "creator": "Andrew Z. Colvin",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T09:25:54.715Z",
+    "page": "https://commons.wikimedia.org/wiki/File:07-Laniakea_(LofE07240).png"
+  }
+}

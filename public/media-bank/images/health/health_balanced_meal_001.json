@@ -1,0 +1,65 @@
+{
+  "id": "health_balanced_meal_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Balanced healthy meal",
+  "path": "images/health/health_balanced_meal_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "nutrition",
+    "balanced meal",
+    "salmon",
+    "vegetables",
+    "avocado",
+    "whole foods"
+  ],
+  "concepts": [
+    "balanced diet",
+    "heart healthy eating",
+    "meal planning"
+  ],
+  "subjects": [
+    "salmon",
+    "vegetables",
+    "avocado",
+    "grains"
+  ],
+  "actions": [
+    "serving meal",
+    "showcasing nutrition"
+  ],
+  "mood": [
+    "fresh",
+    "appetizing"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "nutrition videos",
+    "diet explainers",
+    "healthy lifestyle"
+  ],
+  "avoidFor": [
+    "sleep",
+    "medical illustration"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "business_networking_reception_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunset skyline networking reception",
+  "path": "images/business/business_networking_reception_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "networking",
+    "event",
+    "reception",
+    "cocktail",
+    "business cards"
+  ],
+  "concepts": [
+    "professional networking",
+    "relationship building",
+    "corporate event",
+    "business development"
+  ],
+  "subjects": [
+    "professionals",
+    "business card exchange",
+    "reception venue"
+  ],
+  "actions": [
+    "networking",
+    "exchanging cards",
+    "socializing"
+  ],
+  "mood": [
+    "social",
+    "premium",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "upper-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "event promo",
+    "networking theme",
+    "business community"
+  ],
+  "avoidFor": [
+    "customer support",
+    "warehouse operations",
+    "one-on-one interview"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

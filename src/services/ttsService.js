@@ -83,6 +83,7 @@ async function joinWavFiles(files, gapMs = 140) {
  * @param {string} options.outputFile - Target destination file path (.mp3)
  * @param {string} [options.voice] - Voice ID (e.g. af_bella, am_adam, af_sarah)
  * @param {number} [options.speed] - Speech speed (e.g. 0.9, 1.0)
+ * @param {AbortSignal} [options.signal] - optional cancellation signal
  * @returns {Promise<{ filePath: string, wavPath: string, success: boolean, cached?: boolean }>}
  */
 export async function generateSpeech({
@@ -90,7 +91,9 @@ export async function generateSpeech({
   outputFile,
   voice = config.kokoro.defaultVoice,
   speed = config.kokoro.speed,
+  signal,
 }) {
+  if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
   // Ensure target directory exists
   const dir = path.dirname(outputFile);
   await fs.mkdir(dir, { recursive: true });
@@ -113,7 +116,7 @@ export async function generateSpeech({
     try {
       for (let index = 0; index < chunks.length; index++) {
         const chunkFile = path.join(dir, `.tts-chunk-${String(index + 1).padStart(4, '0')}.mp3`);
-        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed });
+        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed, signal });
         chunkFiles.push(chunkFile, generated.wavPath);
         chunkWavFiles.push(generated.wavPath);
       }
@@ -132,6 +135,8 @@ export async function generateSpeech({
 
   try {
     const controller = new AbortController();
+    const abortFromCaller = () => controller.abort();
+    signal?.addEventListener('abort', abortFromCaller, { once: true });
     const timeoutMs = Math.min(15 * 60_000, Math.max(120_000, text.length * 45));
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     // Fetch raw WAV from Kokoro for instant zero-loss Whisper alignment
@@ -154,6 +159,7 @@ export async function generateSpeech({
       });
     } finally {
       clearTimeout(timeout);
+      signal?.removeEventListener('abort', abortFromCaller);
     }
 
     if (!response.ok) {

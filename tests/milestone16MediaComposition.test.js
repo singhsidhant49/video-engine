@@ -57,9 +57,16 @@ test('caption collision is solved by alternate caption geometry', () => {
 test('camera path is explicit, subtle, and swept during preflight', () => {
   const result = compile({ cameraMove: 'subtlePush' });
   assert.equal(result.mediaSceneSpec.cameraIntent, 'SUBTLE_PUSH');
-  assert.equal(result.solvedScene.cameraPaths.media_primary.end.scale, 1.025);
+  assert.equal(result.solvedScene.cameraPaths.media_primary.end.scale, 1.06);
+  assert.ok(result.solvedScene.cameraPaths.media_primary.end.scale - result.solvedScene.cameraPaths.media_primary.start.scale >= 0.03);
+  assert.ok(result.solvedScene.cameraPaths.media_primary.end.scale - result.solvedScene.cameraPaths.media_primary.start.scale <= 0.08);
   assert.ok(result.motionPlan.tracks.some((track) => track.property === 'cameraScale'));
   assert.ok(result.preflight.sweptBounds.media_primary);
+  assert.equal(result.preflight.issues.some((issue) => issue.code === 'insufficient_final_hold'), false);
+  const settle = result.motionPlan.lifecycle.find((phase) => phase.phase === 'SETTLE');
+  assert.ok(settle.endFrame - settle.startFrame >= result.motionPlan.frameQuality.minimumFinalHold);
+  const cameraTrack = result.motionPlan.tracks.find((track) => track.property === 'cameraScale');
+  assert.equal(cameraTrack.endFrame, result.motionPlan.durationInFrames - 1);
 });
 
 test('video preserves focal position and native motion without synthetic camera', () => {

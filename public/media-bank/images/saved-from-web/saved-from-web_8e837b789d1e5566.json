@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_8e837b789d1e5566",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Athleta abyssicola (deep sea volute snail) 2 (24793455581).jpg",
+  "path": "images/saved-from-web/saved-from-web_8e837b789d1e5566.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1311,
+  "height": 2597,
+  "aspectRatio": 0.5048,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "athleta",
+    "abyssicola",
+    "deep",
+    "sea",
+    "volute",
+    "snail",
+    "24793455581",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "athleta",
+    "abyssicola",
+    "deep",
+    "sea",
+    "volute",
+    "snail",
+    "24793455581",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Athleta abyssicola (deep sea volute snail) 2 (24793455581).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "deep sea predator",
+    "savedAt": "2026-10-26T09:46:51.492Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "James St. John",
+    "creator": "James St. John",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T09:42:13.565Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Athleta_abyssicola_(deep_sea_volute_snail)_2_(24793455581).jpg"
+  }
+}

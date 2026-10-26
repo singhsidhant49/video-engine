@@ -1,0 +1,17 @@
+node_modules
+.git
+.env
+.env.*
+!.env.docker.example
+renders
+temp
+cache
+.cache
+benchmarks
+fixtures
+scratch
+*.mp4
+/speech.wav
+/test_barry.jpg
+public/media-bank
+npm-debug.log*

@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_898e8ef8cc187ad6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Surveillance camera in Königsdorf.jpg",
+  "path": "images/saved-from-web/saved-from-web_898e8ef8cc187ad6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "surveillance",
+    "camera",
+    "nigsdorf",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "surveillance",
+    "camera",
+    "nigsdorf",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Surveillance camera in Königsdorf.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "surveillance camera street",
+    "savedAt": "2026-10-26T08:45:18.560Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Holzklöppel",
+    "creator": "Holzklöppel",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T08:40:18.624Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Surveillance_camera_in_K%C3%B6nigsdorf.jpg"
+  }
+}

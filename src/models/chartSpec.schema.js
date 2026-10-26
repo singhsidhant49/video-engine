@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 const DatumSchema = z.object({
   x: z.union([z.string(), z.number()]),

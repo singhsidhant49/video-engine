@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 import { VideoVisualStrategySchema } from './visualStrategy.schema.js';
 
 export const ScenePurposeSchema = z.enum([

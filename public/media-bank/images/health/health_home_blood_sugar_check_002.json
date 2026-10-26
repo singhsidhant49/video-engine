@@ -1,0 +1,79 @@
+{
+  "id": "health_home_blood_sugar_check_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Checking blood sugar at home",
+  "path": "images/health/health_home_blood_sugar_check_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "diabetes",
+    "blood sugar",
+    "glucose meter",
+    "home healthcare",
+    "chronic care",
+    "self monitoring"
+  ],
+  "concepts": [
+    "diabetes management",
+    "preventive care",
+    "daily routine",
+    "home monitoring"
+  ],
+  "subjects": [
+    "adult hands",
+    "glucose meter",
+    "test strip",
+    "lancet device",
+    "table"
+  ],
+  "actions": [
+    "checking glucose",
+    "finger prick test",
+    "monitoring blood sugar"
+  ],
+  "mood": [
+    "practical",
+    "clean",
+    "informative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.6,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "diabetes videos",
+    "home care content",
+    "chronic disease explainers",
+    "patient education"
+  ],
+  "avoidFor": [
+    "fitness motivation",
+    "herbal still life",
+    "sleep content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

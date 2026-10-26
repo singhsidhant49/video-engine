@@ -1,0 +1,72 @@
+{
+  "id": "history_mesoamerican_pyramid_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mesoamerican pyramid at sunset",
+  "path": "images/history/history_mesoamerican_pyramid_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "mesoamerica",
+    "pyramid",
+    "maya",
+    "aztec",
+    "temple"
+  ],
+  "concepts": [
+    "mesoamerican civilization",
+    "ritual architecture",
+    "ancient urbanism"
+  ],
+  "subjects": [
+    "step pyramid",
+    "stone carvings",
+    "sunset"
+  ],
+  "actions": [
+    "approaching temple",
+    "observing monument"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "maya history",
+    "aztec history",
+    "ancient america scenes"
+  ],
+  "avoidFor": [
+    "european medieval history",
+    "industrial era"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

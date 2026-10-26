@@ -1,0 +1,77 @@
+{
+  "id": "health_indoor_yoga_meditation_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Serene indoor yoga meditation corner",
+  "path": "images/health/health_indoor_yoga_meditation_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "yoga",
+    "meditation",
+    "mindfulness",
+    "wellness",
+    "stress relief",
+    "home"
+  ],
+  "concepts": [
+    "mind-body wellness",
+    "stress management",
+    "mindfulness practice"
+  ],
+  "subjects": [
+    "adult woman",
+    "yoga mat",
+    "water bottle",
+    "plants"
+  ],
+  "actions": [
+    "meditating",
+    "breathing calmly",
+    "practicing yoga"
+  ],
+  "mood": [
+    "serene",
+    "balanced",
+    "peaceful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wellness videos",
+    "mindfulness content",
+    "stress relief scenes",
+    "home wellness"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

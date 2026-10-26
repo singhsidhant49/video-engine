@@ -1,0 +1,69 @@
+{
+  "id": "saved-from-web_fdca88ed0b4540c6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A runner is silhouetted against a stunning sunrise in Stamford, CT, adding a peaceful yet dynamic feel.",
+  "path": "images/saved-from-web/saved-from-web_fdca88ed0b4540c6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "runner",
+    "silhouetted",
+    "against",
+    "stunning",
+    "sunrise",
+    "stamford",
+    "adding",
+    "peaceful",
+    "yet",
+    "dynamic",
+    "feel",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "silhouette",
+    "track",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A runner is silhouetted against a stunning sunrise in Stamford, CT, adding a peaceful yet dynamic feel."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "runner silhouette sunrise track",
+    "savedAt": "2026-10-26T07:40:46.514Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "David Kanigan",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-of-person-running-near-bare-tree-14920440/"
+  }
+}

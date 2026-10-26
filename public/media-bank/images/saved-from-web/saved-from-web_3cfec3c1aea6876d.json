@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_3cfec3c1aea6876d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Dubai Creek view.jpg",
+  "path": "images/saved-from-web/saved-from-web_3cfec3c1aea6876d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "creek",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "view",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "creek",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "view",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Dubai Creek view.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Dubai Creek old souk",
+    "savedAt": "2026-10-26T10:43:48.432Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Mashairmohamed",
+    "creator": "Mashairmohamed",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:29.937Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Dubai_Creek_view.jpg"
+  }
+}

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const VisualPropositionSchema = z.object({
   version: z.literal(1),
@@ -37,7 +37,16 @@ function domainAndSense(text, kind) {
   if (/\b(?:memory leak|heap|garbage collect(?:ion|or)?|retained reference|ram)\b/i.test(text)) return ['software engineering', 'SOFTWARE_MEMORY'];
   if (/\b(?:cloud comput(?:ing)?|aws|azure|server cluster|datacenter)\b/i.test(text)) return ['cloud computing', 'COMPUTING_CLOUD'];
   if (/\b(?:dns|tcp|packet|network|http|server request)\b/i.test(text)) return ['computer networking', 'NETWORK_PROTOCOL'];
-  if (/\b(?:bank|bond|stock|market|finance|mortgage|credit)\b/i.test(text)) return ['finance', 'FINANCIAL_SYSTEM'];
+  const sanitizedText = text
+    .replace(/\bstock\s*(?:footage|photo|video|image|clip|media|asset|library)s?\b/gi, '')
+    .replace(/\b(?:river|snow|image|media|memory)\s+bank\b/gi, '');
+  if (/\b(?:bank run|banking panic|stock market|financial market|wall street|depositor|insolvency|mortgage|credit score|cryptocurrency|portfolio|bonds? and stocks?)\b/i.test(sanitizedText)
+    || (/\b(?:finance|financial|banking)\b/i.test(sanitizedText) && !/\b(?:river bank)\b/i.test(sanitizedText))) {
+    return ['finance', 'FINANCIAL_SYSTEM'];
+  }
+  if (/\b(?:runner|running|athlete|athletics|sprint|marathon|jogging|track and field|workout|fitness|gym|training session)\b/i.test(sanitizedText)) {
+    return ['sports and fitness', 'ATHLETIC_TRAINING'];
+  }
   if (kind === 'timeline') return ['history', 'HISTORICAL_TIMELINE'];
   if (kind === 'code' || kind === 'ui') return ['software engineering', kind === 'code' ? 'SOURCE_CODE' : 'SOFTWARE_INTERFACE'];
   return ['general', String(kind || 'subject').toUpperCase()];
@@ -45,6 +54,10 @@ function domainAndSense(text, kind) {
 
 function confusersFor(sense) {
   const values = {
+    ATHLETIC_TRAINING: [
+      'office desk paperwork', 'computer keyboard laptop', 'stock chart graphs',
+      'corporate boardroom meeting', 'circuit board motherboard', 'car traffic jam',
+    ],
     ANCESTRAL_CAUSALITY: ['botanical trees', 'man walking in a park', 'forest scenery', 'family lifestyle stock photo'],
     CAUSAL_TIMELINE: ['video editing timeline', 'project management roadmap', 'railway route map', 'fishbone defect diagram'],
     TIMELINE_BRANCHING: ['botanical tree branches', 'video editing timeline', 'project roadmap', 'microscope cells', 'abstract glowing background'],
@@ -146,6 +159,13 @@ export function buildVisualProposition({ shot, scene, topic = '' }) {
       'computer screen code terminal dark mode',
       'database query terminal log monitor',
       'modern server rack data center glowing lights',
+    );
+  } else if (conceptSense === 'ATHLETIC_TRAINING') {
+    domainSpecificPositives.push(
+      'athlete runner training outdoor',
+      'running track stadium athlete',
+      'runner shoes pavement dawn sunrise',
+      'determined runner sprinting',
     );
   }
   let searchConcepts = shot.searchConcepts || [];

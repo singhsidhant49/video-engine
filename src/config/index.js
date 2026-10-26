@@ -51,5 +51,13 @@ export const config = {
 
   server: {
     port: parseInt(process.env.PORT || '3000', 10),
+    apiKeys: (process.env.VIDEO_API_KEYS || '').split(',').map((key) => key.trim()).filter(Boolean),
+    maxRequestBytes: process.env.VIDEO_API_MAX_REQUEST_BYTES || '1mb',
+    workerConcurrency: Math.max(1, parseInt(process.env.VIDEO_WORKER_CONCURRENCY || '1', 10)),
+    maxQueuedJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_QUEUED_JOBS || '25', 10)),
+    maxOwnerPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_OWNER_PENDING_JOBS || '5', 10)),
+    shutdownTimeoutMs: Math.max(1_000, parseInt(process.env.VIDEO_SHUTDOWN_TIMEOUT_MS || '30000', 10)),
+    jobStore: process.env.VIDEO_JOB_STORE || (process.env.DATABASE_URL ? 'postgres' : 'file'),
+    queueBackend: process.env.VIDEO_QUEUE_BACKEND || (process.env.REDIS_URL ? 'bullmq' : 'memory'),
   }
 };

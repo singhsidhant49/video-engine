@@ -29,7 +29,7 @@ export const progress = (frame, start = 0, duration = 14, easing = ease.out) => 
  */
 export function classifyMovementState(moveType) {
   if (!moveType || moveType === 'static' || moveType === 'hold') return MOVEMENT_STATES.STATIC;
-  if (['subtlePush', 'subtlePull', 'drift', 'subtle'].includes(moveType)) return MOVEMENT_STATES.SUBTLE;
+  if (['subtlePush', 'subtlePull', 'drift', 'subtle', 'panLeft', 'panRight', 'panUp', 'panDown', 'detailReveal'].includes(moveType)) return MOVEMENT_STATES.SUBTLE;
   return MOVEMENT_STATES.ACTIVE;
 }
 
@@ -56,4 +56,3 @@ export function reveal(kind, frame, at = 0, unit = 1, duration = 16) {
       return { opacity: p, transform: `translateY(${(1 - p) * 24 * u}px)` };
   }
 }
-

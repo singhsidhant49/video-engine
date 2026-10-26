@@ -1,0 +1,73 @@
+{
+  "id": "executive_job_interview_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive interview in a glass office",
+  "path": "images/business/executive_job_interview_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "interview",
+    "recruitment",
+    "office",
+    "HR",
+    "candidate"
+  ],
+  "concepts": [
+    "hiring process",
+    "executive interview",
+    "talent acquisition",
+    "professional conversation"
+  ],
+  "subjects": [
+    "interviewer",
+    "candidate",
+    "resume"
+  ],
+  "actions": [
+    "interviewing",
+    "discussing experience"
+  ],
+  "mood": [
+    "professional",
+    "welcoming",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "recruitment content",
+    "HR materials",
+    "career explainer"
+  ],
+  "avoidFor": [
+    "retail",
+    "trading floor",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

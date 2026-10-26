@@ -1,0 +1,74 @@
+{
+  "id": "saved-from-web_94bee1b3fd8f6775",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed view of fresh green leaves budding on tree branches symbolizing spring renewal.",
+  "path": "images/saved-from-web/saved-from-web_94bee1b3fd8f6775.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "detailed",
+    "fresh",
+    "green",
+    "leave",
+    "budding",
+    "symbolizing",
+    "spring",
+    "renewal",
+    "view",
+    "leaves",
+    "branches",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "tree branches budding green leaves",
+    "savedAt": "2026-10-26T05:46:40.617Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Alexey Demidov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/green-leaves-on-brown-tree-branch-10504683/"
+  }
+}

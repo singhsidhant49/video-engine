@@ -1,0 +1,79 @@
+{
+  "id": "health_blood_pressure_check_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Calm blood pressure check",
+  "path": "images/health/health_blood_pressure_check_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "blood pressure",
+    "hypertension",
+    "doctor visit",
+    "screening",
+    "preventive care",
+    "checkup"
+  ],
+  "concepts": [
+    "preventive screening",
+    "cardiovascular health",
+    "routine care",
+    "patient monitoring"
+  ],
+  "subjects": [
+    "doctor",
+    "adult man",
+    "blood pressure cuff",
+    "stethoscope",
+    "clinic room"
+  ],
+  "actions": [
+    "measuring blood pressure",
+    "listening with stethoscope",
+    "routine examination"
+  ],
+  "mood": [
+    "reassuring",
+    "clean",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "doctor visit videos",
+    "heart health content",
+    "preventive care scenes",
+    "clinic explainers"
+  ],
+  "avoidFor": [
+    "mindfulness landscape",
+    "immune illustration",
+    "sleep hygiene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

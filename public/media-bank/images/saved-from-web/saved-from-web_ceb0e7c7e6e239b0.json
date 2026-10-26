@@ -1,0 +1,69 @@
+{
+  "id": "saved-from-web_ceb0e7c7e6e239b0",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial shot of vibrant green wetlands surrounded by forests during golden hour.",
+  "path": "images/saved-from-web/saved-from-web_ceb0e7c7e6e239b0.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "vibrant",
+    "green",
+    "wetland",
+    "surrounded",
+    "forest",
+    "during",
+    "golden",
+    "hour",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "lush",
+    "canopy",
+    "shot",
+    "wetlands",
+    "forests",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial shot of vibrant green wetlands surrounded by forests during golden hour."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "lush green forest canopy golden hour aerial",
+    "savedAt": "2026-10-26T05:43:28.131Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sam McCool",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-lush-forest-wetlands-at-golden-hour-31938544/"
+  }
+}

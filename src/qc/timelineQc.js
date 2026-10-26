@@ -13,6 +13,18 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const shots = timeline.realizedShots || clips.flatMap((clip) => clip.shots || []);
   const diagnostics = realizationDiagnostics || buildVisualRealizationDiagnostics(timeline);
 
+  const allowedCameraBehaviors = new Set(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']);
+  const allowedTransitionPolicies = new Set(['CUT', 'SHORT_DISSOLVE']);
+  const unsupportedMotion = shots.filter((shot) => shot.imageBehavior && !allowedCameraBehaviors.has(shot.imageBehavior));
+  const unsupportedTransitions = shots.filter((shot) => !allowedTransitionPolicies.has(shot.transitionPolicy || 'CUT')
+    || !['cut', 'dissolve'].includes(shot.enter?.type || 'cut'));
+  add('motion-vocabulary', unsupportedMotion.length === 0, 'error', unsupportedMotion.length
+    ? `unsupported camera motion: ${unsupportedMotion.map((shot) => `${shot.storyboardShotId}:${shot.imageBehavior}`).join(', ')}`
+    : 'only static, zoom in/out, and horizontal pan are used');
+  add('transition-vocabulary', unsupportedTransitions.length === 0, 'error', unsupportedTransitions.length
+    ? `unsupported transitions: ${unsupportedTransitions.map((shot) => `${shot.storyboardShotId}:${shot.transitionPolicy || shot.enter?.type}`).join(', ')}`
+    : 'only clean cuts and cross dissolves are used');
+
   const sorted = [...clips].sort((a, b) => a.from - b.from);
   let reach = 0;
   const holes = [];
@@ -98,6 +110,7 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   add('variant-repetition', mediaOnly || diagnostics.variantRepetitionRate <= 0.4, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.variantRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('motion-repetition', diagnostics.cameraMoveRepetitionRate <= 0.55, 'warn', `${(diagnostics.cameraMoveRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('asset-reuse', diagnostics.assetReuseRate <= 0.35, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
+  add('asset-reuse-hard-limit', diagnostics.assetReuseRate <= 0.60, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (production hard limit: 60%)`);
   const photoRunLimit = mediaOnly ? 10 : 4;
   const excessivePhotoRun = diagnostics.consecutivePhotoCount > photoRunLimit;
   // A lack of third-party stock footage must not make an otherwise valid
@@ -134,14 +147,23 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   }
 
   const familyRuntime = {};
-  for (const shot of shots) {
+  // Transition overlaps make summed shot durations exceed the timeline. Count
+  // one dominant family per frame so shares are bounded to 100%.
+  const familyFrames = new Map();
+  for (const clip of clips) for (const shot of (clip.shots || [])) {
     const family = shot.asset?.type === 'video' ? 'video' : shot.family;
-    familyRuntime[family] = (familyRuntime[family] || 0) + shot.durationInFrames / total;
+    const start = Math.max(0, Number.isFinite(shot.startFrame) ? shot.startFrame : clip.from + shot.from);
+    const end = Math.min(total, Number.isFinite(shot.endFrame) ? shot.endFrame : start + shot.durationInFrames);
+    for (let frame = start; frame < end; frame++) familyFrames.set(frame, family);
   }
+  for (const family of familyFrames.values()) familyRuntime[family] = (familyRuntime[family] || 0) + 1 / total;
   const dominant = Object.entries(familyRuntime).filter(([family, share]) => share > (family === 'image' ? 0.75 : 0.42));
   add('family-share', dominant.length === 0, 'warn', Object.entries(familyRuntime).map(([family, share]) => `${family} ${(share * 100).toFixed(0)}%`).join(', '));
 
-  const designed = clips.filter((clip, index) => index > 0 && clip.enter?.type && clip.enter.type !== 'cut').length
+  const baselineTransitions = new Set(['CUT', 'MATCH_MOVE', 'SMOOTH_CUT']);
+  const designed = clips.filter((clip, index) => index > 0 && !baselineTransitions.has(clip.transitionPolicy || 'CUT')).length
+    + shots.filter((shot, index) => index > 0 && !baselineTransitions.has(shot.transitionPolicy || 'CUT')
+      && !clips.some((clip) => clip.shots?.[0]?.storyboardShotId === shot.storyboardShotId)).length
     + (timeline.cutOverlays || []).filter((overlay) => overlay.type === 'dip' || overlay.type === 'flash').length;
   const allowed = Math.ceil(style.transitions.perMinute * Math.max(0.5, total / fps / 60)) + 1;
   add('transition-budget', designed <= allowed, 'warn', `${designed} designed transitions (budget ${allowed})`);
@@ -176,7 +198,23 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
       ? assetReport
       : Array.isArray(assetReport.scenes) ? assetReport.scenes : [];
     const used = reports.filter((report) => report.tier !== 'none' && report.tier !== 'unresolved' && report.role !== 'none');
-    const unlicensed = used.filter((report) => !report.license).map((report) => report.sceneId);
+    const unlicensed = used.filter((report) => {
+      let lic = report.license;
+      if (!lic && assetReport?.assets && assetReport.assets[report.sceneId]) {
+        const sa = assetReport.assets[report.sceneId];
+        const p = sa.primary || Object.values(sa.byShot || {})[0];
+        if (p?.license) lic = p.license;
+      }
+      if (!lic && Array.isArray(report.requests)) {
+        for (const req of report.requests) {
+          if (req.selectedCandidate?.license) lic = req.selectedCandidate.license;
+          else if (req.selectedCandidate?.provider) lic = req.selectedCandidate.provider;
+        }
+      }
+      if (!lic) return true;
+      if (typeof lic === 'string') return lic.trim().length === 0;
+      return !(lic.name || lic.license_name || lic.type || lic.source || lic.provider);
+    }).map((report) => report.sceneId);
     add('licensing', unlicensed.length === 0, 'error', unlicensed.length ? `assets without recorded licence: ${unlicensed.join(', ')}` : `${used.length} used assets have recorded licences`);
     const missingSubjects = reports.filter((report) => report.role === 'subject' && report.tier === 'none').map((report) => report.sceneId);
     add('subject-coverage', missingSubjects.length === 0, 'warn', missingSubjects.length ? `no acceptable image for ${missingSubjects.join(', ')}` : 'ok');

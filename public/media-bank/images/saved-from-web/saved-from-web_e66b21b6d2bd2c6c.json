@@ -1,0 +1,71 @@
+{
+  "id": "saved-from-web_e66b21b6d2bd2c6c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vibrant green tree canopy viewed from below, with sunlight gently filtering through the leaves.",
+  "path": "images/saved-from-web/saved-from-web_e66b21b6d2bd2c6c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "green",
+    "tree",
+    "canopy",
+    "viewed",
+    "from",
+    "below",
+    "sunlight",
+    "gently",
+    "filtering",
+    "through",
+    "leave",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "flooding",
+    "leaves",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vibrant green tree canopy viewed from below, with sunlight gently filtering through the leaves."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunlight flooding green forest canopy",
+    "savedAt": "2026-10-26T05:47:38.627Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mico Medel",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/lush-green-tree-canopy-with-sunlight-filtering-through-38149495/"
+  }
+}

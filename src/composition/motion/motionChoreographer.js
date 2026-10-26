@@ -97,6 +97,7 @@ export function evaluateMotionValue(plan, targetId, property, frame) {
     const raw = (frame - track.startFrame) / Math.max(1, track.endFrame - track.startFrame);
     const t = track.easing === 'easeOutCubic' ? 1 - (1 - raw) ** 3
       : track.easing === 'easeInOutCubic' ? (raw < 0.5 ? 4 * raw ** 3 : 1 - ((-2 * raw + 2) ** 3) / 2)
+        : track.easing === 'cinematic' ? raw * raw * (3 - 2 * raw)
         : raw;
     value = track.from + (track.to - track.from) * t;
   }

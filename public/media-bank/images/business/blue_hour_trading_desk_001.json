@@ -1,0 +1,73 @@
+{
+  "id": "blue_hour_trading_desk_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Blue-hour skyline trading desk",
+  "path": "images/business/blue_hour_trading_desk_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "trading",
+    "finance",
+    "markets",
+    "trader",
+    "monitors"
+  ],
+  "concepts": [
+    "market trading",
+    "financial monitoring",
+    "investment desk",
+    "capital markets"
+  ],
+  "subjects": [
+    "trader",
+    "monitors",
+    "stock charts"
+  ],
+  "actions": [
+    "monitoring markets",
+    "analyzing charts"
+  ],
+  "mood": [
+    "intense",
+    "professional",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.66,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "finance explainer",
+    "markets content",
+    "investment theme"
+  ],
+  "avoidFor": [
+    "retail shop",
+    "brainstorming session",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

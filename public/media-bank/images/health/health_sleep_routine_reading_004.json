@@ -1,0 +1,76 @@
+{
+  "id": "health_sleep_routine_reading_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy nighttime bedtime reading",
+  "path": "images/health/health_sleep_routine_reading_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "sleep",
+    "bedtime routine",
+    "sleep hygiene",
+    "reading",
+    "rest"
+  ],
+  "concepts": [
+    "healthy sleep habits",
+    "night routine",
+    "relaxation before sleep"
+  ],
+  "subjects": [
+    "adult woman",
+    "bed",
+    "book",
+    "bedside lamp"
+  ],
+  "actions": [
+    "reading before bed",
+    "winding down",
+    "preparing for sleep"
+  ],
+  "mood": [
+    "cozy",
+    "calm",
+    "restful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sleep videos",
+    "night routine content",
+    "wellness scenes",
+    "sleep hygiene explainers"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

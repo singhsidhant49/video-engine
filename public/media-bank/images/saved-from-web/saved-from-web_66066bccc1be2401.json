@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_66066bccc1be2401",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Solar panels in a desert landscape with a shed under a clear sunset sky.",
+  "path": "images/saved-from-web/saved-from-web_66066bccc1be2401.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1673,
+  "aspectRatio": 1.5541,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "solar",
+    "panel",
+    "desert",
+    "landscape",
+    "shed",
+    "under",
+    "clear",
+    "sunset",
+    "sky",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "panels"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "solar",
+    "panel",
+    "desert",
+    "landscape",
+    "shed",
+    "under",
+    "clear",
+    "sunset",
+    "sky",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "panels"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Solar panels in a desert landscape with a shed under a clear sunset sky."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "solar panels desert",
+    "savedAt": "2026-10-26T10:46:07.195Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Magda Ehlers",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/solar-panels-on-a-desert-5322775/"
+  }
+}

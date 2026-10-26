@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_24a15c9bd9f7dd10",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A modern lab setup with a microscope and green lighting, focused on research and technology.",
+  "path": "images/saved-from-web/saved-from-web_24a15c9bd9f7dd10.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "lab",
+    "setup",
+    "microscope",
+    "green",
+    "lighting",
+    "focused",
+    "research",
+    "technology",
+    "scientific",
+    "laboratory",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "lab",
+    "setup",
+    "microscope",
+    "green",
+    "lighting",
+    "focused",
+    "research",
+    "technology",
+    "scientific",
+    "laboratory",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A modern lab setup with a microscope and green lighting, focused on research and technology."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "modern office collaboration scientific laboratory or engineering test facility",
+    "savedAt": "2026-10-26T08:44:47.558Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Artem Podrez",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/green-light-in-office-of-scientist-8533133/"
+  }
+}

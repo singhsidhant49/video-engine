@@ -1,0 +1,68 @@
+{
+  "id": "saved-from-web_88ef1d485843d6f3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "High-resolution image of cracked and dried earth, ideal for drought or nature themes.",
+  "path": "images/saved-from-web/saved-from-web_88ef1d485843d6f3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "resolution",
+    "cracked",
+    "dried",
+    "earth",
+    "ideal",
+    "drought",
+    "nature",
+    "theme",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "riverbed",
+    "high-resolution",
+    "image",
+    "themes",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "High-resolution image of cracked and dried earth, ideal for drought or nature themes."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dried cracked riverbed drought",
+    "savedAt": "2026-10-26T05:44:00.019Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Yuri Elizegi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-cracked-dried-earth-texture-34040846/"
+  }
+}

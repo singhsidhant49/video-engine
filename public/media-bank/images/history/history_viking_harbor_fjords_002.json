@@ -1,0 +1,79 @@
+{
+  "id": "history_viking_harbor_fjords_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Viking harbor beneath snowy fjords",
+  "path": "images/history/history_viking_harbor_fjords_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "vikings",
+    "norse",
+    "harbor",
+    "longship",
+    "fjord",
+    "scandinavia",
+    "trade"
+  ],
+  "concepts": [
+    "maritime culture",
+    "norse commerce",
+    "seafaring life",
+    "harbor economy"
+  ],
+  "subjects": [
+    "longship",
+    "traders",
+    "dock",
+    "snowy mountains",
+    "market goods"
+  ],
+  "actions": [
+    "trading goods",
+    "loading ship",
+    "working at harbor"
+  ],
+  "mood": [
+    "rugged",
+    "cinematic",
+    "cold"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.67,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "viking history videos",
+    "norse culture content",
+    "maritime scenes",
+    "daily life explainers"
+  ],
+  "avoidFor": [
+    "desert civilizations",
+    "roman content",
+    "modern logistics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

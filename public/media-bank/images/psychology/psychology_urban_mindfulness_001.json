@@ -1,0 +1,79 @@
+{
+  "id": "psychology_urban_mindfulness_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Urban mindfulness by the waterfront at sunset",
+  "path": "images/psychology/psychology_urban_mindfulness_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "mindfulness",
+    "mental wellness",
+    "self-care",
+    "meditation",
+    "calm",
+    "urban life"
+  ],
+  "concepts": [
+    "mindfulness practice",
+    "stress relief",
+    "emotional regulation",
+    "inner calm",
+    "wellbeing"
+  ],
+  "subjects": [
+    "young woman",
+    "park bench",
+    "waterfront skyline",
+    "sunset"
+  ],
+  "actions": [
+    "breathing deeply",
+    "resting mindfully",
+    "self-soothing"
+  ],
+  "mood": [
+    "calm",
+    "peaceful",
+    "restorative"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "mental health intros",
+    "wellness content",
+    "self-care scenes"
+  ],
+  "avoidFor": [
+    "clinical assessment",
+    "high conflict scene",
+    "child therapy"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_357254cb47122658",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Calm ocean surface with gentle waves and warm light, captured from above.",
+  "path": "images/saved-from-web/saved-from-web_357254cb47122658.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "calm",
+    "ocean",
+    "surface",
+    "gentle",
+    "wave",
+    "warm",
+    "light",
+    "captured",
+    "from",
+    "above",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "calm",
+    "ocean",
+    "surface",
+    "gentle",
+    "wave",
+    "warm",
+    "light",
+    "captured",
+    "from",
+    "above",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Calm ocean surface with gentle waves and warm light, captured from above."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "calm cafe portrait natural light",
+    "savedAt": "2026-10-26T11:09:26.171Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zeynep Sude  Emek",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-peaceful-ocean-waves-at-dusk-34962541/"
+  }
+}

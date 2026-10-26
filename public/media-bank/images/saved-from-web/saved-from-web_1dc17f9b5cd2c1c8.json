@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_1dc17f9b5cd2c1c8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tranquil scene of a lighthouse under a full moon, illuminating the dark night seashore.",
+  "path": "images/saved-from-web/saved-from-web_1dc17f9b5cd2c1c8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "scene",
+    "lighthouse",
+    "under",
+    "full",
+    "moon",
+    "illuminating",
+    "dark",
+    "night",
+    "seashore",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "scene",
+    "lighthouse",
+    "under",
+    "full",
+    "moon",
+    "illuminating",
+    "dark",
+    "night",
+    "seashore",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tranquil scene of a lighthouse under a full moon, illuminating the dark night seashore."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "dark ocean texture",
+    "savedAt": "2026-10-26T09:48:22.200Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "chris clark",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/lighthouse-at-night-under-a-full-moon-9282252/"
+  }
+}

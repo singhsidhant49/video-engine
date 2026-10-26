@@ -1,0 +1,78 @@
+{
+  "id": "psychology_home_meditation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Meditation by the window at golden hour",
+  "path": "images/psychology/psychology_home_meditation_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "meditation",
+    "mindfulness",
+    "self-regulation",
+    "calm",
+    "self-care",
+    "wellbeing"
+  ],
+  "concepts": [
+    "mindfulness practice",
+    "emotional regulation",
+    "nervous system calming",
+    "inner stillness"
+  ],
+  "subjects": [
+    "adult woman",
+    "meditation pose",
+    "window",
+    "mountain view"
+  ],
+  "actions": [
+    "meditating",
+    "breathing",
+    "sitting still"
+  ],
+  "mood": [
+    "calm",
+    "restorative",
+    "serene"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.53
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "self-care content",
+    "wellness visuals",
+    "stress relief"
+  ],
+  "avoidFor": [
+    "work burnout",
+    "relationship conflict",
+    "social overload"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

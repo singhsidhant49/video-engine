@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_bookstore_browsing_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy bookstore reading moment",
+  "path": "images/lifestyle/lifestyle_bookstore_browsing_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "bookstore",
+    "reading",
+    "books",
+    "cozy",
+    "shopping",
+    "slow living"
+  ],
+  "concepts": [
+    "bookish lifestyle",
+    "quiet leisure",
+    "curiosity",
+    "offline living"
+  ],
+  "subjects": [
+    "woman",
+    "book",
+    "bookshelves",
+    "tote bag",
+    "plants"
+  ],
+  "actions": [
+    "browsing books",
+    "reading standing up",
+    "shopping for books"
+  ],
+  "mood": [
+    "cozy",
+    "thoughtful",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "reading videos",
+    "slow living scenes",
+    "book content",
+    "quiet lifestyle montages"
+  ],
+  "avoidFor": [
+    "sports",
+    "medical scenes",
+    "party nightlife"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

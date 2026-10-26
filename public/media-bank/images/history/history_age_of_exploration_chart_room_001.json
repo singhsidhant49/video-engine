@@ -1,0 +1,78 @@
+{
+  "id": "history_age_of_exploration_chart_room_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Renaissance navigators charting the world",
+  "path": "images/history/history_age_of_exploration_chart_room_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "age of exploration",
+    "navigation",
+    "maps",
+    "globes",
+    "ships",
+    "renaissance"
+  ],
+  "concepts": [
+    "global exploration",
+    "mapmaking",
+    "navigation history",
+    "maritime expansion"
+  ],
+  "subjects": [
+    "navigators",
+    "map room",
+    "globes",
+    "charts",
+    "model ships"
+  ],
+  "actions": [
+    "studying maps",
+    "planning voyages",
+    "comparing charts"
+  ],
+  "mood": [
+    "strategic",
+    "grand",
+    "golden-hour"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "exploration history videos",
+    "map sequences",
+    "navigation explainers",
+    "empire content"
+  ],
+  "avoidFor": [
+    "industrial content",
+    "ancient archaeology",
+    "modern classrooms"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

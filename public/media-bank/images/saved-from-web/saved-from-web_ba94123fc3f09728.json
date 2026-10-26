@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_ba94123fc3f09728",
+  "type": "image",
+  "mediaType": "image",
+  "title": "View of Earth's night lights with a glowing atmosphere captured from space.",
+  "path": "images/saved-from-web/saved-from-web_ba94123fc3f09728.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "earth",
+    "night",
+    "light",
+    "glowing",
+    "atmosphere",
+    "captured",
+    "from",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "earth",
+    "night",
+    "light",
+    "glowing",
+    "atmosphere",
+    "captured",
+    "from",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "View of Earth's night lights with a glowing atmosphere captured from space."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Earth at night from space",
+    "savedAt": "2026-10-26T08:45:33.585Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zelch Csaba",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/earth-s-night-lights-viewed-from-space-30596264/"
+  }
+}

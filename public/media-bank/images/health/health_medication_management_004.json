@@ -1,0 +1,76 @@
+{
+  "id": "health_medication_management_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Organizing a weekly medication plan",
+  "path": "images/health/health_medication_management_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "medication",
+    "pill organizer",
+    "prescription",
+    "adherence",
+    "daily routine"
+  ],
+  "concepts": [
+    "medication adherence",
+    "chronic care routine",
+    "prescription management"
+  ],
+  "subjects": [
+    "adult hands",
+    "pill organizer",
+    "medicine bottles",
+    "water glass"
+  ],
+  "actions": [
+    "sorting pills",
+    "following medication plan",
+    "organizing prescriptions"
+  ],
+  "mood": [
+    "practical",
+    "calm",
+    "organized"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "medication videos",
+    "chronic care content",
+    "senior health",
+    "patient routine scenes"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

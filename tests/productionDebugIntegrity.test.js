@@ -96,6 +96,20 @@ test('fictional first occurrence is not treated as a historical superlative', ()
   assert.equal(plan.claims.length, 0);
 });
 
+test('figurative moral and narrative superlatives in stories are not treated as unverified factual claims', () => {
+  const plan = normalizePlan({
+    title: 'The Little Bird and the Thirsty Tree',
+    scenes: [
+      { id: 's1', kind: 'subject', purpose: 'hook', narration: 'Once upon a time, a little bird lived in a beautiful forest.' },
+      { id: 's2', kind: 'subject', purpose: 'payoff', narration: 'The bird sang her happiest song. Even the smallest effort can change everything. Never give up on doing good.' },
+    ],
+  }, { topic: 'The Little Bird and the Thirsty Tree', niche: 'children story', format: 'landscape' });
+  const result = validateContentQuality(plan);
+  assert.equal(plan.claims.length, 0);
+  assert.equal(result.issues.some((issue) => issue.type === 'unverified_exact_claim'), false);
+  assert.equal(result.valid, true);
+});
+
 test('explicit hypothetical numbers are classified as illustrative, not unsupported facts', () => {
   const plan = normalizePlan({ title: 'Weekly budget', scenes: [
     { id: 's1', kind: 'statistic', purpose: 'explain', narration: 'For example, say you earn $700 a week and essentials cost $500.', visual: 'A sample weekly budget.' },

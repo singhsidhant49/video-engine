@@ -1,0 +1,68 @@
+{
+  "id": "saved-from-web_d44fec4d6c497ca3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of athletics starting blocks on a wet blue track, ready for a race.",
+  "path": "images/saved-from-web/saved-from-web_d44fec4d6c497ca3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "athletic",
+    "starting",
+    "block",
+    "wet",
+    "blue",
+    "track",
+    "ready",
+    "race",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "runner",
+    "close-up",
+    "athletics",
+    "blocks",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of athletics starting blocks on a wet blue track, ready for a race."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "runner at starting blocks",
+    "savedAt": "2026-10-26T07:39:10.412Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Writchid Snipes",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/athletics-starting-blocks-on-blue-track-37695154/"
+  }
+}

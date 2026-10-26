@@ -1,0 +1,79 @@
+{
+  "id": "history_medieval_scriptorium_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Candlelit medieval scriptorium",
+  "path": "images/history/history_medieval_scriptorium_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "medieval",
+    "scriptorium",
+    "monk",
+    "manuscript",
+    "library",
+    "candlelight"
+  ],
+  "concepts": [
+    "medieval scholarship",
+    "book production",
+    "religious learning",
+    "knowledge preservation"
+  ],
+  "subjects": [
+    "monk",
+    "illuminated manuscript",
+    "wooden desks",
+    "candles",
+    "stone room"
+  ],
+  "actions": [
+    "copying manuscript",
+    "writing by candlelight",
+    "studying texts"
+  ],
+  "mood": [
+    "quiet",
+    "scholarly",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.3,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "medieval history videos",
+    "church history",
+    "knowledge preservation scenes",
+    "documentary visuals"
+  ],
+  "avoidFor": [
+    "ancient egypt",
+    "industrial revolution",
+    "modern museum"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

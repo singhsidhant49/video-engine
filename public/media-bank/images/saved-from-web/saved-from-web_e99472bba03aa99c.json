@@ -1,0 +1,64 @@
+{
+  "id": "saved-from-web_e99472bba03aa99c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Captivating aerial view of a city at night with glowing streetlights and buildings.",
+  "path": "images/saved-from-web/saved-from-web_e99472bba03aa99c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "aerial",
+    "city",
+    "night",
+    "glowing",
+    "streetlight",
+    "building",
+    "municipal",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "view",
+    "streetlights",
+    "buildings",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Captivating aerial view of a city at night with glowing streetlights and buildings."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "city aerial view night",
+    "savedAt": "2026-10-23T09:04:12.510Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Daniel Ellis",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/illuminated-city-street-11381271/"
+  }
+}

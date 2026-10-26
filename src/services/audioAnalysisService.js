@@ -2,12 +2,13 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import wavefile from 'wavefile';
-import { pipeline } from '@huggingface/transformers';
+import { env, pipeline } from '@huggingface/transformers';
 import { ffmpeg, probeDuration } from './ffmpeg.js';
 import { tokenizeScript, alignScriptToTranscript, estimateTiming } from './alignmentService.js';
 
 // base.en is markedly more accurate than tiny.en on word boundaries and numbers.
 const WHISPER_MODEL = process.env.WHISPER_MODEL || 'Xenova/whisper-base.en';
+env.cacheDir = process.env.TRANSFORMERS_CACHE || path.resolve('.cache', 'huggingface');
 let whisperPipeline = null;
 
 async function getWhisper() {
@@ -16,6 +17,13 @@ async function getWhisper() {
     whisperPipeline = await pipeline('automatic-speech-recognition', WHISPER_MODEL);
   }
   return whisperPipeline;
+}
+
+/** Release ONNX model memory before the visual models are loaded. */
+export async function releaseWhisper() {
+  const active = whisperPipeline;
+  whisperPipeline = null;
+  await active?.dispose?.();
 }
 
 /** Decode any audio file to 16 kHz mono float samples via the bundled ffmpeg. */

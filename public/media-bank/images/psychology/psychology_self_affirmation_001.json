@@ -1,0 +1,76 @@
+{
+  "id": "psychology_self_affirmation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Self-affirmation in the mirror",
+  "path": "images/psychology/psychology_self_affirmation_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "self-esteem",
+    "self-compassion",
+    "affirmation",
+    "confidence",
+    "identity",
+    "personal growth"
+  ],
+  "concepts": [
+    "self-acceptance",
+    "positive self-talk",
+    "confidence building",
+    "self-image"
+  ],
+  "subjects": [
+    "young woman",
+    "mirror",
+    "bedroom"
+  ],
+  "actions": [
+    "looking at reflection",
+    "self-affirming",
+    "practicing self-compassion"
+  ],
+  "mood": [
+    "hopeful",
+    "gentle",
+    "empowering"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.66,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "self-esteem videos",
+    "confidence content",
+    "self-love",
+    "personal growth scenes"
+  ],
+  "avoidFor": [
+    "clinical therapy",
+    "group support",
+    "sleep disorder"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

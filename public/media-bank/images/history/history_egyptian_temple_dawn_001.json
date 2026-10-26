@@ -1,0 +1,79 @@
+{
+  "id": "history_egyptian_temple_dawn_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden dawn at an Egyptian temple",
+  "path": "images/history/history_egyptian_temple_dawn_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient egypt",
+    "temple",
+    "hieroglyphs",
+    "pharaoh era",
+    "nile civilization",
+    "sunrise"
+  ],
+  "concepts": [
+    "religious architecture",
+    "ancient civilization",
+    "sacred space",
+    "egyptian culture"
+  ],
+  "subjects": [
+    "temple columns",
+    "statues",
+    "obelisks",
+    "priests",
+    "courtyard"
+  ],
+  "actions": [
+    "walking through temple",
+    "observing ritual space",
+    "exploring monumental architecture"
+  ],
+  "mood": [
+    "epic",
+    "golden",
+    "majestic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "ancient egypt videos",
+    "civilization intros",
+    "monument scenes",
+    "history documentaries"
+  ],
+  "avoidFor": [
+    "modern history",
+    "industrial scenes",
+    "indoor scholarship"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

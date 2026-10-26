@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_cafe_coworking_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy caf\u00e9 co-working moment",
+  "path": "images/lifestyle/lifestyle_cafe_coworking_001.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "cafe",
+    "remote work",
+    "digital nomad",
+    "laptop",
+    "coffee",
+    "productivity"
+  ],
+  "concepts": [
+    "work-life balance",
+    "modern workstyle",
+    "freelance lifestyle",
+    "creative work"
+  ],
+  "subjects": [
+    "man",
+    "laptop",
+    "coffee cup",
+    "notebook",
+    "caf\u00e9 interior"
+  ],
+  "actions": [
+    "working on laptop",
+    "thinking",
+    "co-working in caf\u00e9"
+  ],
+  "mood": [
+    "focused",
+    "relaxed",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.49,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "remote work videos",
+    "productivity content",
+    "lifestyle vlogs",
+    "digital nomad scenes"
+  ],
+  "avoidFor": [
+    "medical content",
+    "high-energy sports",
+    "historical topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

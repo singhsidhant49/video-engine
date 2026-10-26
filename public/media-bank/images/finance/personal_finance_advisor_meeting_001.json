@@ -1,0 +1,76 @@
+{
+  "id": "personal_finance_advisor_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Friendly financial consultation at the desk",
+  "path": "images/finance/personal_finance_advisor_meeting_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "advisor",
+    "client",
+    "financial overview",
+    "savings",
+    "budget",
+    "consultation"
+  ],
+  "concepts": [
+    "personal finance",
+    "savings planning",
+    "financial advice",
+    "budget review"
+  ],
+  "subjects": [
+    "financial advisor",
+    "client",
+    "financial dashboard"
+  ],
+  "actions": [
+    "explaining finances",
+    "reviewing budget",
+    "discussing savings"
+  ],
+  "mood": [
+    "friendly",
+    "trustworthy",
+    "clear"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.42,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "financial advice",
+    "savings explainer",
+    "budgeting",
+    "consumer finance"
+  ],
+  "avoidFor": [
+    "stock trading",
+    "corporate finance presentation",
+    "small business logistics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

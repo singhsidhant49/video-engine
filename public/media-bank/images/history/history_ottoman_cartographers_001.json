@@ -1,0 +1,78 @@
+{
+  "id": "history_ottoman_cartographers_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Ottoman cartographers at work",
+  "path": "images/history/history_ottoman_cartographers_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ottoman empire",
+    "cartography",
+    "maps",
+    "scholars",
+    "istanbul",
+    "navigation"
+  ],
+  "concepts": [
+    "mapmaking history",
+    "imperial administration",
+    "geographic knowledge",
+    "maritime planning"
+  ],
+  "subjects": [
+    "cartographers",
+    "large world map",
+    "globes",
+    "harbor view",
+    "worktable"
+  ],
+  "actions": [
+    "drawing maps",
+    "measuring distances",
+    "studying geography"
+  ],
+  "mood": [
+    "intellectual",
+    "busy",
+    "golden-hour"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "ottoman history videos",
+    "cartography content",
+    "empire administration scenes",
+    "map explainers"
+  ],
+  "avoidFor": [
+    "ancient egypt",
+    "factory scenes",
+    "modern planning rooms"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

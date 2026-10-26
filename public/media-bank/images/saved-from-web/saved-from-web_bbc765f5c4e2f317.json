@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_bbc765f5c4e2f317",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Hand holding smartphone with blank screen and coffee cup in cozy cafe setting.",
+  "path": "images/saved-from-web/saved-from-web_bbc765f5c4e2f317.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "holding",
+    "smartphone",
+    "blank",
+    "screen",
+    "coffee",
+    "cup",
+    "cozy",
+    "cafe",
+    "setting",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "holding",
+    "smartphone",
+    "blank",
+    "screen",
+    "coffee",
+    "cup",
+    "cozy",
+    "cafe",
+    "setting",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Hand holding smartphone with blank screen and coffee cup in cozy cafe setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hands holding smartphone coffee shop",
+    "savedAt": "2026-10-26T11:06:01.404Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Artem Podrez",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-black-iphone-with-blank-screen-6278753/"
+  }
+}

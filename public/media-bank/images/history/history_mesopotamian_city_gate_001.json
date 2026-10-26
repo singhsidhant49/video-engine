@@ -1,0 +1,72 @@
+{
+  "id": "history_mesopotamian_city_gate_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mesopotamian city gate and urban life",
+  "path": "images/history/history_mesopotamian_city_gate_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "mesopotamia",
+    "ancient city",
+    "gate",
+    "babylon",
+    "urban history"
+  ],
+  "concepts": [
+    "early cities",
+    "mesopotamian civilization",
+    "urban antiquity"
+  ],
+  "subjects": [
+    "city gate",
+    "citizens",
+    "blue glazed architecture"
+  ],
+  "actions": [
+    "entering city",
+    "walking through gate"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mesopotamia videos",
+    "ancient civilization scenes",
+    "city history"
+  ],
+  "avoidFor": [
+    "modern city",
+    "medieval europe"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

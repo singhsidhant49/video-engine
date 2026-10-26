@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, interpolate } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import './fonts.js';
 import { ThemeProvider, useTheme } from './theme.js';
 import { progress, ease } from './motion.js';
 import { Captions } from './Captions.jsx';
-import { Letterbox, FilmBurn, irisClip } from './accents.jsx';
+import { Letterbox } from './accents.jsx';
 import { StatShot, StatementShot, ChapterShot, QuoteShot, DocumentShot } from '../families/editorial.jsx';
 import { PhotoShot } from '../families/photo.jsx';
 import { ListShot, ProcessShot, TimelineShot, ChartShot, CompareShot, GroundShot } from '../families/structured.jsx';
@@ -27,43 +27,11 @@ const FAMILIES = {
  */
 function ClipFrame({ clip, children }) {
   const frame = useCurrentFrame();
-  const { width, unit } = useTheme();
-  const { enter, exit, durationInFrames: d } = clip;
+  const { width } = useTheme();
+  const { enter, durationInFrames: d } = clip;
   const pin = enter.frames ? progress(frame, 0, enter.frames, ease.inOut) : 1;
-  const pout = exit.frames ? progress(frame, d - exit.frames, exit.frames, ease.inOut) : 0;
   const style = {};
-  const transforms = [];
-
-  if (pin < 1) {
-    switch (enter.type) {
-      case 'dissolve': style.opacity = pin; break;
-      case 'push': transforms.push(`translateX(${(1 - pin) * 100}%)`); break;
-      case 'whip': {
-        const w = progress(frame, 0, enter.frames, ease.whip);
-        transforms.push(`translateX(${(1 - w) * 100}%)`);
-        style.filter = `blur(${Math.sin(Math.PI * w) * 26 * unit}px)`;
-        break;
-      }
-      case 'zoom': style.opacity = pin; transforms.push(`scale(${1.18 - 0.18 * pin})`); break;
-      case 'wipe': style.clipPath = `inset(0 0 0 ${(1 - pin) * 100}%)`; break;
-      case 'iris': style.clipPath = irisClip(pin); break;
-      default: break;
-    }
-  }
-  if (pout > 0) {
-    switch (exit.type) {
-      case 'push': transforms.push(`translateX(${-pout * 100}%)`); break;
-      case 'whip': {
-        const w = progress(frame, d - exit.frames, exit.frames, ease.whip);
-        transforms.push(`translateX(${-w * 100}%)`);
-        style.filter = `blur(${Math.sin(Math.PI * w) * 26 * unit}px)`;
-        break;
-      }
-      case 'zoom': transforms.push(`scale(${1 + 0.3 * pout})`); break;
-      default: break; // dissolve/wipe: the incoming clip covers this one
-    }
-  }
-  if (transforms.length) style.transform = transforms.join(' ');
+  if (pin < 1 && enter.type === 'dissolve') style.opacity = pin;
   return (
     <AbsoluteFill style={{ ...style, overflow: 'hidden', width }}>
       {children}
@@ -72,26 +40,16 @@ function ClipFrame({ clip, children }) {
   );
 }
 
-/** Dips, flashes and the opening/closing fades — drawn over everything but captions. */
-function CutOverlays({ overlays, total }) {
+/** Restrained transitions between shots that live inside the same scene clip. */
+function ShotTransitionFrame({ enter, children }) {
   const frame = useCurrentFrame();
-  let black = 0, white = 0;
-  for (const o of overlays) {
-    const half = o.frames / 2;
-    if (o.type === 'fadeIn') black = Math.max(black, interpolate(frame, [0, o.frames], [1, 0], { extrapolateRight: 'clamp' }));
-    else if (o.type === 'fadeOut') black = Math.max(black, interpolate(frame, [total - o.frames, total - 1], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }));
-    else if (o.type === 'dip') black = Math.max(black, interpolate(frame, [o.frame - half, o.frame, o.frame + half], [0, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }));
-    else if (o.type === 'flash') white = Math.max(white, interpolate(frame, [o.frame - 1, o.frame + 1, o.frame + o.frames], [0, 0.8, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }));
-  }
-  const burns = overlays.filter((o) => o.type === 'burn');
-  return (
-    <>
-      {burns.map((o, i) => <FilmBurn key={i} frame={frame} at={o.frame} frames={o.frames} />)}
-      {white > 0 && <AbsoluteFill style={{ background: '#fff', opacity: white }} />}
-      {black > 0 && <AbsoluteFill style={{ background: '#000', opacity: black }} />}
-    </>
-  );
+  const pin = enter?.frames ? progress(frame, 0, enter.frames, ease.inOut) : 1;
+  const style = {};
+  if (pin < 1 && enter?.type === 'dissolve') style.opacity = pin;
+  return <AbsoluteFill style={{ ...style, overflow: 'hidden' }}>{children}</AbsoluteFill>;
 }
+
+/** Dips, flashes and the opening/closing fades — drawn over everything but captions. */
 
 const GRAIN = `url("data:image/svg+xml;utf8,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="256" height="256" filter="url(#n)"/></svg>',
@@ -184,13 +142,23 @@ function MultiShotClip({ clip, timeline }) {
       {clip.shots.map((shot, idx) => {
         const solvedScene = shot.renderMode === 'solved' ? timeline.solvedScenes?.[shot.solvedSceneId] : null;
         const motionPlan = shot.renderMode === 'solved' ? timeline.motionPlans?.[shot.motionPlanId] : null;
+        const internalEnter = idx > 0 ? shot.enter || { type: 'cut', frames: 0 } : { type: 'cut', frames: 0 };
+        const internalExit = idx < clip.shots.length - 1 ? shot.exit || { type: 'cut', frames: 0 } : { type: 'cut', frames: 0 };
+        const overlapIn = internalEnter.type === 'cut' ? 0 : Math.floor(internalEnter.frames / 2);
+        const overlapOut = internalExit.type === 'cut' ? 0 : Math.ceil(internalExit.frames / 2);
+        const sequenceFrom = Math.max(0, shot.from - overlapIn);
+        const sequenceEnd = Math.min(clip.durationInFrames, shot.from + shot.durationInFrames + overlapOut);
+        const sequenceDuration = Math.max(1, sequenceEnd - sequenceFrom);
+        const frameOffset = shot.from - sequenceFrom;
         return (
-          <Sequence key={shot.id || idx} from={shot.from} durationInFrames={shot.durationInFrames} name={shot.id}>
-            {solvedScene && motionPlan
-              ? <GenericSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} />
-              : mediaEditorial && ['image', 'montage'].includes(shot.family)
-                ? <AbsoluteFill style={{ background: '#000', color: '#fff', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>MEDIA_EDITORIAL preflight failure: {shot.id}</AbsoluteFill>
-                : <LegacyFamilyAdapter shot={shot} clip={clip} />}
+          <Sequence key={shot.id || idx} from={sequenceFrom} durationInFrames={sequenceDuration} name={shot.id}>
+            <ShotTransitionFrame enter={internalEnter} exit={internalExit} durationInFrames={sequenceDuration}>
+              {solvedScene && motionPlan
+                ? <GenericSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} frameOffset={frameOffset} />
+                : mediaEditorial && ['image', 'montage'].includes(shot.family)
+                  ? <AbsoluteFill style={{ background: '#000', color: '#fff', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>MEDIA_EDITORIAL preflight failure: {shot.id}</AbsoluteFill>
+                  : <LegacyFamilyAdapter shot={shot} clip={clip} />}
+            </ShotTransitionFrame>
           </Sequence>
         );
       })}
@@ -221,7 +189,6 @@ export const Video = ({ timeline }) => {
           );
         })}
         <Finish />
-        <CutOverlays overlays={timeline.cutOverlays} total={total} />
         <Captions captions={timeline.captions} />
         <Soundtrack audio={timeline.audio} total={total} />
       </AbsoluteFill>

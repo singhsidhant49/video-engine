@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const MotionTrackSchema = z.object({
   id: z.string(),
@@ -8,7 +8,7 @@ export const MotionTrackSchema = z.object({
   to: z.number(),
   startFrame: z.number().int().nonnegative(),
   endFrame: z.number().int().nonnegative(),
-  easing: z.enum(['linear', 'easeOutCubic', 'easeInOutCubic']),
+  easing: z.enum(['linear', 'easeOutCubic', 'easeInOutCubic', 'cinematic']),
   triggerPhraseId: z.string().nullable(),
 }).strict().refine((track) => track.endFrame >= track.startFrame, { message: 'motion track must not run backwards' });
 

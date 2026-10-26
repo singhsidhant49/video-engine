@@ -1,0 +1,78 @@
+{
+  "id": "history_silk_road_caravan_city_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Silk Road caravan approaching a golden walled city",
+  "path": "images/history/history_silk_road_caravan_city_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "silk road",
+    "caravan",
+    "trade routes",
+    "desert city",
+    "camels",
+    "merchant history"
+  ],
+  "concepts": [
+    "long-distance trade",
+    "cross-cultural exchange",
+    "merchant travel",
+    "historic commerce"
+  ],
+  "subjects": [
+    "camel caravan",
+    "travelers",
+    "city walls",
+    "mountains",
+    "oasis river"
+  ],
+  "actions": [
+    "traveling",
+    "approaching city",
+    "transporting goods"
+  ],
+  "mood": [
+    "adventurous",
+    "golden",
+    "expansive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "trade history videos",
+    "silk road explainers",
+    "empire connections",
+    "travel and commerce scenes"
+  ],
+  "avoidFor": [
+    "naval history",
+    "modern logistics",
+    "indoor scholarship"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

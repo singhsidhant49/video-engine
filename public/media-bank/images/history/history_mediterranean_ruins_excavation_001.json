@@ -1,0 +1,78 @@
+{
+  "id": "history_mediterranean_ruins_excavation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Archaeologists excavating ancient Mediterranean ruins",
+  "path": "images/history/history_mediterranean_ruins_excavation_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "archaeology",
+    "ancient ruins",
+    "mediterranean",
+    "excavation",
+    "artifacts",
+    "fieldwork"
+  ],
+  "concepts": [
+    "archaeological fieldwork",
+    "material culture",
+    "historical discovery",
+    "classical ruins"
+  ],
+  "subjects": [
+    "archaeologists",
+    "dig site",
+    "amphora",
+    "stone ruins",
+    "tools"
+  ],
+  "actions": [
+    "brushing artifacts",
+    "excavating trenches",
+    "cataloging finds"
+  ],
+  "mood": [
+    "focused",
+    "sunlit",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "archaeology videos",
+    "ancient world content",
+    "artifact discovery scenes",
+    "fieldwork visuals"
+  ],
+  "avoidFor": [
+    "victorian city",
+    "renaissance indoor workshop",
+    "modern museum"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

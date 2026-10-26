@@ -1,0 +1,78 @@
+{
+  "id": "history_18th_century_print_shop_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Eighteenth-century print shop in action",
+  "path": "images/history/history_18th_century_print_shop_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "printing press",
+    "18th century",
+    "print shop",
+    "pamphlets",
+    "publishing",
+    "information"
+  ],
+  "concepts": [
+    "print culture",
+    "spread of ideas",
+    "publishing networks",
+    "information revolution"
+  ],
+  "subjects": [
+    "printers",
+    "press machine",
+    "ink trays",
+    "printed sheets",
+    "workshop"
+  ],
+  "actions": [
+    "setting type",
+    "operating press",
+    "stacking pages"
+  ],
+  "mood": [
+    "productive",
+    "historic",
+    "earthy"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.49,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "history of media videos",
+    "enlightenment content",
+    "book history scenes",
+    "communication history"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "battle scenes",
+    "modern offices"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

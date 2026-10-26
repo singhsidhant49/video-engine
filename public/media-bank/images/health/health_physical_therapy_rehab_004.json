@@ -1,0 +1,76 @@
+{
+  "id": "health_physical_therapy_rehab_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Guided leg stretch in modern rehab clinic",
+  "path": "images/health/health_physical_therapy_rehab_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "physical therapy",
+    "rehab",
+    "mobility",
+    "recovery",
+    "physiotherapy"
+  ],
+  "concepts": [
+    "rehabilitation",
+    "mobility recovery",
+    "injury recovery"
+  ],
+  "subjects": [
+    "physical therapist",
+    "adult man",
+    "therapy table",
+    "rehab clinic"
+  ],
+  "actions": [
+    "stretching leg",
+    "guiding rehabilitation",
+    "improving mobility"
+  ],
+  "mood": [
+    "supportive",
+    "clinical",
+    "active"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "rehab videos",
+    "injury recovery content",
+    "mobility scenes",
+    "physiotherapy explainers"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

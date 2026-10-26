@@ -1,0 +1,63 @@
+{
+  "id": "health_trail_running_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Trail running at sunrise",
+  "path": "images/health/health_trail_running_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "fitness",
+    "running",
+    "outdoor exercise",
+    "cardio",
+    "active lifestyle"
+  ],
+  "concepts": [
+    "cardiovascular fitness",
+    "endurance",
+    "outdoor wellness"
+  ],
+  "subjects": [
+    "runner",
+    "mountain trail",
+    "sunrise"
+  ],
+  "actions": [
+    "running",
+    "exercising outdoors"
+  ],
+  "mood": [
+    "energetic",
+    "uplifting"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "cardio scenes",
+    "active lifestyle content"
+  ],
+  "avoidFor": [
+    "sleep",
+    "doctor consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

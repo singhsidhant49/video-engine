@@ -1,0 +1,75 @@
+{
+  "id": "saved-from-web_1ad7f1321eeddeef",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Stamp of Albania - 1987 - Colnect 366165 - Globe Podium Runners.jpeg",
+  "path": "images/saved-from-web/saved-from-web_1ad7f1321eeddeef.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1014,
+  "height": 731,
+  "aspectRatio": 1.3871,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stamp",
+    "albania",
+    "1987",
+    "colnect",
+    "366165",
+    "globe",
+    "podium",
+    "runner",
+    "supermarket",
+    "grocery",
+    "store",
+    "aisle",
+    "static",
+    "presentation",
+    "medal",
+    "file",
+    "runners",
+    "jpeg",
+    "store shelves",
+    "food products or jars"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Stamp of Albania - 1987 - Colnect 366165 - Globe Podium Runners.jpeg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "supermarket or grocery store aisle"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "runner podium medal",
+    "savedAt": "2026-10-26T07:40:23.272Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Post of Albania",
+    "creator": "Post of Albania",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-26T07:35:10.325Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Stamp_of_Albania_-_1987_-_Colnect_366165_-_Globe_Podium_Runners.jpeg"
+  }
+}

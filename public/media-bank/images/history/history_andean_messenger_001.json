@@ -1,0 +1,79 @@
+{
+  "id": "history_andean_messenger_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Andean messenger among ancient terraces",
+  "path": "images/history/history_andean_messenger_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "inca",
+    "andes",
+    "messenger",
+    "terraces",
+    "mountains",
+    "south america"
+  ],
+  "concepts": [
+    "inca civilization",
+    "mountain networks",
+    "imperial communication",
+    "andean culture"
+  ],
+  "subjects": [
+    "messenger",
+    "terraces",
+    "rope bridge",
+    "mountain valley",
+    "stone path"
+  ],
+  "actions": [
+    "traveling along trail",
+    "carrying messages",
+    "crossing terrain"
+  ],
+  "mood": [
+    "epic",
+    "adventurous",
+    "highland"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "inca history videos",
+    "south american civilizations",
+    "empire communication scenes",
+    "travel and terrain"
+  ],
+  "avoidFor": [
+    "european history",
+    "industrial topics",
+    "urban scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

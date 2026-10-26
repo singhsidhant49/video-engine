@@ -13,7 +13,10 @@ dist/
 build/
 
 # Video Renders and temporary media
-renders/*.mp4
+*.mp4
+renders/**/*.mp4
+renders/downloads/
+renders/transition-audit/
 renders/*.png
 renders/stills/
 renders/template_tests/
@@ -32,3 +35,6 @@ renders/runs/
 .cache/
 renders/evals/
 renders/matrix/
+
+# Crash-safe API store scratch files (canonical job records remain tracked/visible)
+renders/api/**/*.json.tmp-*

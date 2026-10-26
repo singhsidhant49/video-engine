@@ -1,0 +1,78 @@
+{
+  "id": "health_clinic_blood_pressure_check_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Blood pressure check in clinic",
+  "path": "images/health/health_clinic_blood_pressure_check_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "blood pressure",
+    "hypertension",
+    "doctor visit",
+    "screening",
+    "preventive care",
+    "clinic"
+  ],
+  "concepts": [
+    "routine screening",
+    "cardiovascular health",
+    "patient care",
+    "medical checkup"
+  ],
+  "subjects": [
+    "doctor",
+    "adult man",
+    "blood pressure cuff",
+    "clinic exam room"
+  ],
+  "actions": [
+    "measuring blood pressure",
+    "checking vitals",
+    "routine examination"
+  ],
+  "mood": [
+    "professional",
+    "reassuring",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "doctor visit videos",
+    "heart health explainers",
+    "preventive care content",
+    "clinic scenes"
+  ],
+  "avoidFor": [
+    "mindfulness landscape",
+    "fitness setup",
+    "food close-ups"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

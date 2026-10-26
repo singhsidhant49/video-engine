@@ -1,0 +1,108 @@
+{
+  "id": "saved-from-web_01b2032e6b790480",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial view of Dubai's modern skyline featuring the iconic Burj Khalifa under a clear blue sky.",
+  "path": "images/saved-from-web/saved-from-web_01b2032e6b790480.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 4141,
+  "height": 2761,
+  "aspectRatio": 1.4998,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "featuring",
+    "iconic",
+    "burj",
+    "khalifa",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "featuring",
+    "iconic",
+    "burj",
+    "khalifa",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Burj Khalifa skyline aerial",
+    "savedAt": "2026-10-26T10:46:29.026Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nelemson G",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-dubai-skyline-with-burj-khalifa-29470840/"
+  }
+}

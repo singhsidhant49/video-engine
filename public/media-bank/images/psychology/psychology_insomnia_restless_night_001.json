@@ -1,0 +1,77 @@
+{
+  "id": "psychology_insomnia_restless_night_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Restless night and insomnia",
+  "path": "images/psychology/psychology_insomnia_restless_night_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "sleep",
+    "insomnia",
+    "anxiety",
+    "rumination",
+    "mental health",
+    "night"
+  ],
+  "concepts": [
+    "sleep difficulty",
+    "restless thoughts",
+    "night anxiety",
+    "emotional fatigue"
+  ],
+  "subjects": [
+    "young woman",
+    "bedroom",
+    "moonlit window",
+    "alarm clock"
+  ],
+  "actions": [
+    "lying awake",
+    "worrying",
+    "staring into distance"
+  ],
+  "mood": [
+    "moody",
+    "lonely",
+    "restless"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.39
+    },
+    "safeTextAreas": [
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sleep content",
+    "anxiety videos",
+    "mental health storytelling",
+    "stress scenes"
+  ],
+  "avoidFor": [
+    "uplifting therapy intro",
+    "child development",
+    "group support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

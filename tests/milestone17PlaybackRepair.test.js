@@ -214,7 +214,7 @@ test('Milestone 17: Candidate comparison prioritizes native landscape over portr
   assert.ok(comparison > 0, 'Landscape asset must sort before portrait asset in landscape mode');
 });
 
-test('Milestone 17: Validated MATCH_MOVE requires identifiable anchor and downgrades broad concept tokens to CUT', () => {
+test('Milestone 17: broad concept tokens remain a clean cut', () => {
   const plan = {
     style: 'editorialDark',
     hue: 220,
@@ -252,8 +252,43 @@ test('Milestone 17: Validated MATCH_MOVE requires identifiable anchor and downgr
     visualPolicy: resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' }),
   });
 
-  // Scene transition between sc1 and sc2 must be CUT because shared concept token "browser" does not qualify for MATCH_MOVE
+  // The simplified transition vocabulary never promotes this boundary to a
+  // match move or decorative blend.
   assert.equal(timeline.clips[1].transitionPolicy, 'CUT');
+  assert.equal(timeline.durationInFrames, 180);
+  assert.equal(Math.max(...timeline.clips.map((clip) => clip.from + clip.durationInFrames)), 180);
+});
+
+test('cinematic dissolve overlaps picture without changing narration or total timeline duration', () => {
+  const plan = {
+    style: 'cinematic_documentary', hue: 220,
+    scenes: [
+      { id: 'calm_1', sectionId: 'section_1', durationSec: 3, narration: 'Quiet shoreline.', purpose: 'context', tone: 'neutral', storyboardShots: [{ id: 'calm_sh1', role: 'context', visualConcept: 'quiet shoreline', mediaPreference: 'auto', assetIntent: 'location', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }] },
+      { id: 'calm_2', sectionId: 'section_1', durationSec: 3, narration: 'Current continues.', purpose: 'context', tone: 'reflective', continuity: 'continue', storyboardShots: [{ id: 'calm_sh2', role: 'context', visualConcept: 'underwater current', mediaPreference: 'auto', assetIntent: 'atmosphere', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }] },
+    ],
+  };
+  const words = [
+    { word: 'Quiet', start: 0, end: .5, startFrame: 0, endFrame: 15 },
+    { word: 'shoreline.', start: .5, end: 2.8, startFrame: 15, endFrame: 84 },
+    { word: 'Current', start: 3, end: 3.5, startFrame: 90, endFrame: 105 },
+    { word: 'continues.', start: 3.5, end: 5.8, startFrame: 105, endFrame: 174 },
+  ];
+  const assets = {
+    calm_1: { primary: { src: 'shore.jpg', width: 1920, height: 1080, type: 'image', focal: { x: .5, y: .5 } }, alternates: [] },
+    calm_2: { primary: { src: 'water.jpg', width: 1920, height: 1080, type: 'image', focal: { x: .5, y: .5 } }, alternates: [] },
+  };
+  const timeline = buildTimeline({
+    plan, specs: plan.scenes.map(() => ({ family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .05, baseScale: 1 }, recasts: [], accents: {} })),
+    narration: { words, durationInSeconds: 6, totalFrames: 180 }, assets, sfx: [], bgm: null,
+    videoId: 'cinematic-dissolve', format: 'landscape', fps: 30, audioSrc: 'audio.mp3',
+    visualPolicy: resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' }), productionProfile: { pacing: { mode: 'cinematic' } },
+  });
+  assert.equal(timeline.clips[1].enter.type, 'dissolve');
+  assert.equal(timeline.clips[1].transitionPolicy, 'SHORT_DISSOLVE');
+  assert.equal(timeline.clips[1].enter.frames, 12);
+  assert.equal(timeline.durationInFrames, 180);
+  assert.equal(Math.max(...timeline.clips.map((clip) => clip.from + clip.durationInFrames)), 180);
+  assert.ok(timeline.clips[0].from + timeline.clips[0].durationInFrames > timeline.clips[1].from);
 });
 
 test('Milestone 17: Unresolved media does not throw unhandled error and marks shot as UNRESOLVED_MEDIA with FAILED quality', () => {

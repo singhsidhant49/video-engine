@@ -165,7 +165,7 @@ export function directScenes(creativePlan, { format, rng, sceneSeconds } = {}) {
     // Cinematic accents ported from the RVE templates, switched per style.
     const acc = style.accents || {};
     const accents = {
-      focusPull: Boolean(acc.focusPull) && BED_FAMILIES.has(family) && (['hook', 'reveal'].includes(scene.purpose) || scene.importance >= 5),
+      focusPull: false,
       letterbox: Boolean(acc.letterbox) && (i === 0 || family === 'chapter'),
     };
 

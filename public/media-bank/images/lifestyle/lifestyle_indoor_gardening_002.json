@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_indoor_gardening_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit indoor jungle gardening",
+  "path": "images/lifestyle/lifestyle_indoor_gardening_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "houseplants",
+    "gardening",
+    "home decor",
+    "plant care",
+    "slow living",
+    "indoor garden"
+  ],
+  "concepts": [
+    "home care",
+    "plant lifestyle",
+    "mindful routine",
+    "biophilic living"
+  ],
+  "subjects": [
+    "woman",
+    "watering can",
+    "houseplants",
+    "living room",
+    "dog"
+  ],
+  "actions": [
+    "watering plants",
+    "caring for houseplants",
+    "gardening indoors"
+  ],
+  "mood": [
+    "fresh",
+    "peaceful",
+    "homey"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "home lifestyle videos",
+    "plant care content",
+    "slow living scenes",
+    "wellness montages"
+  ],
+  "avoidFor": [
+    "nightlife",
+    "business travel",
+    "medical topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

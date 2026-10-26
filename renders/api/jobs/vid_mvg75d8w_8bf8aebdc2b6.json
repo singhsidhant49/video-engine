@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "id": "vid_mvg75d8w_8bf8aebdc2b6",
+  "ownerId": "acct_2b354e29151920844b986f01",
+  "status": "cancelled",
+  "stage": "cancelled",
+  "progress": 0,
+  "request": {
+    "prompt": "Create an engaging two-minute cinematic documentary explaining how the Internet travels through undersea cables.\n\nBegin with a powerful hook: most international Internet traffic does not travel through satellites—it travels through cables lying on the ocean floor.\n\nExplain how data leaves a person's device, reaches a coastal landing station, travels through fiber-optic cables across the ocean, and arrives in another country.\n\nUse relevant real photographs and video clips. Keep the visual storytelling cinematic and professional. Use focal-aware slow zooms, gentle pans, subtle camera drift and occasional intentional static shots. Use mostly clean hard cuts, with restrained dissolves, match cuts and chapter transitions where appropriate. Avoid flashy effects, repetitive animation and rapid image changes.\n\nEnd by returning to the opening idea: every message, video call and online payment may cross an ocean through a cable thinner than most people imagine.\n\nUse clear language for a general audience. Include an attention-grabbing hook, curiosity gaps, smooth narrative progression and a memorable payoff.",
+    "output": {
+      "durationSeconds": 120,
+      "aspectRatio": "16:9",
+      "resolution": "1080p"
+    },
+    "creative": {
+      "contentType": "documentary",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "audience": "Curious adults interested in technology",
+      "pacing": "cinematic",
+      "style": "cinematic_documentary"
+    },
+    "audio": {
+      "voice": "af_bella"
+    },
+    "subtitles": {
+      "enabled": true
+    },
+    "metadata": {
+      "externalId": "undersea-cables-motion-test",
+      "category": "technology"
+    }
+  },
+  "pipelineBrief": {
+    "version": 1,
+    "prompt": "Create an engaging two-minute cinematic documentary explaining how the Internet travels through undersea cables.\n\nBegin with a powerful hook: most international Internet traffic does not travel through satellites—it travels through cables lying on the ocean floor.\n\nExplain how data leaves a person's device, reaches a coastal landing station, travels through fiber-optic cables across the ocean, and arrives in another country.\n\nUse relevant real photographs and video clips. Keep the visual storytelling cinematic and professional. Use focal-aware slow zooms, gentle pans, subtle camera drift and occasional intentional static shots. Use mostly clean hard cuts, with restrained dissolves, match cuts and chapter transitions where appropriate. Avoid flashy effects, repetitive animation and rapid image changes.\n\nEnd by returning to the opening idea: every message, video call and online payment may cross an ocean through a cable thinner than most people imagine.\n\nUse clear language for a general audience. Include an attention-grabbing hook, curiosity gaps, smooth narrative progression and a memorable payoff.",
+    "niche": "",
+    "format": "landscape",
+    "durationSec": 120,
+    "style": "cinematic_documentary",
+    "voice": "af_bella",
+    "channel": {
+      "id": "default",
+      "contentType": "documentary",
+      "pacingMode": "cinematic",
+      "audience": "Curious adults interested in technology",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "language": "en",
+      "captions": "subtitles"
+    }
+  },
+  "metadata": {
+    "externalId": "undersea-cables-motion-test",
+    "category": "technology"
+  },
+  "idempotencyKey": "cinematic-motion-20261020-101208",
+  "requestHash": "d3e35bdf1345158f0af22d8436cde6691420da5c5bd8d61be9651d96ac221d9b",
+  "result": null,
+  "error": null,
+  "createdAt": "2026-10-20T04:42:09.104Z",
+  "updatedAt": "2026-10-20T04:47:53.678Z",
+  "startedAt": null,
+  "completedAt": "2026-10-20T04:47:53.678Z"
+}

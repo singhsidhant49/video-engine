@@ -1,0 +1,75 @@
+{
+  "id": "psychology_parent_teen_support_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Caring parent supporting a worried teenager",
+  "path": "images/psychology/psychology_parent_teen_support_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "teen mental health",
+    "family support",
+    "parenting",
+    "emotional support",
+    "adolescence"
+  ],
+  "concepts": [
+    "parental support",
+    "teen anxiety",
+    "family communication",
+    "emotional connection"
+  ],
+  "subjects": [
+    "mother",
+    "teenage boy",
+    "kitchen table"
+  ],
+  "actions": [
+    "comforting",
+    "listening",
+    "talking through emotions"
+  ],
+  "mood": [
+    "caring",
+    "concerned",
+    "supportive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "teen psychology",
+    "parenting content",
+    "family mental health",
+    "emotional support scenes"
+  ],
+  "avoidFor": [
+    "workplace stress",
+    "group therapy",
+    "senior cognition"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

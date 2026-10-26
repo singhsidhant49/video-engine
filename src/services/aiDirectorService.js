@@ -825,7 +825,9 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
   // Only claims with a genuinely checkable exact value or historical
   // superlative need evidence. Absolute words used as creative language
   // ("the only sound", "always waiting") are not factual statistics.
-  const exactClaimPattern = /(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b|\b(?:the|world(?:'s)?|history(?:'s)?)\s+(?:first(?!\s+(?:step|thing|move|way|place|time)\b)|earliest|oldest|largest|smallest)\b)/i;
+  const exactClaimPattern = /(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b|\b(?:world(?:'s)?|history(?:'s)?|earth(?:'s)?|planet(?:'s)?|country(?:'s)?|nation(?:'s)?)\s+(?:first|earliest|oldest|largest|smallest)\b|\bthe\s+(?:first|earliest|oldest|largest|smallest)\s+(?:ever|known|recorded|modern|commercial|living|measured|documented|discovered)\b|\bthe\s+(?:first(?!\s+(?:step|thing|move|way|place|time)\b)|earliest(?!\s+(?:memory|memories|moment|opportunity|stage)\b)|oldest(?!\s+(?:trick|story|saying|tale|wisdom|tree|friend)\b)|largest(?!\s+(?:part|share|extent|degree|sense|impact)\b)|smallest(?!\s+(?:effort|efforts|step|steps|gesture|gestures|detail|details|thing|things|change|changes|difference|differences|action|actions|deed|deeds|amount|bit|part|moment|drop|drops|bird|creature|seed|spark)\b))\b)/i;
+  const isCreativeNarrative = /\b(?:once upon a time|story|fable|parable|fairy tale|folktale|tale|bedtime|moral of the story|fiction|narrated story)\b/i.test(`${topic} ${niche} ${raw?.title || ''}`)
+    || scenes.some((sc) => /\b(?:once upon a time|moral of the story)\b/i.test(sc.narration));
   let illustrativeContext = false;
   scenes.forEach((s, idx) => {
     // Only explicit hypothetical framing may bypass source evidence. Phrases
@@ -834,10 +836,13 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     const startsIllustration = /\b(?:example|for example|for instance|suppose|imagine|say you|let's say)\b/i.test(s.narration);
     const continuesIllustration = illustrativeContext && /^(?:by\s+\w+|then|next|after|before)|\b(?:she|he|they)\b/i.test(s.narration);
     illustrativeContext = startsIllustration || continuesIllustration;
-    const genericNarrativeFirst = /\bthe first\b/i.test(s.narration)
-      && !/\b(?:world(?:'s)?|history(?:'s)?)\s+first\b|\bthe first\s+(?:ever|known|recorded|modern|commercial)\b/i.test(s.narration)
+    const genericNarrativeSuperlative = /\bthe\s+(?:first|smallest|largest|oldest|earliest)\b/i.test(s.narration)
+      && !/\b(?:world(?:'s)?|history(?:'s)?|earth(?:'s)?|planet(?:'s)?|country(?:'s)?|nation(?:'s)?)\s+(?:first|smallest|largest|oldest|earliest)\b/i.test(s.narration)
+      && !/\bthe\s+(?:first|smallest|largest|oldest|earliest)\s+(?:ever|known|recorded|modern|commercial|living|measured|documented|discovered)\b/i.test(s.narration)
       && !/(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b)/i.test(s.narration);
-    if (s.data?.value || s.kind === 'statistic' || (exactClaimPattern.test(s.narration) && !genericNarrativeFirst)) {
+    const isFactualTrigger = s.data?.value || s.kind === 'statistic'
+      || (exactClaimPattern.test(s.narration) && !genericNarrativeSuperlative && (!isCreativeNarrative || /(?:\b(?:1\d{3}|20\d{2})\b|[$£€]\s*\d|\b\d+(?:\.\d+)?\s*(?:%|percent|million|billion|trillion)\b)/i.test(s.narration)));
+    if (isFactualTrigger) {
       const illustrative = !s.source?.url && illustrativeContext;
       claims.push({
         claim_id: `claim_${String(idx + 1).padStart(3, '0')}`,

@@ -1,5 +1,6 @@
 import { getSharp } from './imageUtils.js';
-import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@huggingface/transformers';
+import path from 'node:path';
+import { env, AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@huggingface/transformers';
 
 /**
  * CLIP image↔text relevance.
@@ -15,6 +16,7 @@ import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextMo
  */
 
 const MODEL = 'Xenova/clip-vit-base-patch32';
+env.cacheDir = process.env.TRANSFORMERS_CACHE || path.resolve('.cache', 'huggingface');
 let models = null;
 const textCache = new Map();
 

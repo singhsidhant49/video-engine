@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_13ec0dcc24fc20ab",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A man stands thoughtfully in a dimly lit control room with various screens.",
+  "path": "images/saved-from-web/saved-from-web_13ec0dcc24fc20ab.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "stand",
+    "thoughtfully",
+    "dimly",
+    "lit",
+    "control",
+    "room",
+    "variou",
+    "screen",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "stands",
+    "various",
+    "screens",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "stand",
+    "thoughtfully",
+    "dimly",
+    "lit",
+    "control",
+    "room",
+    "variou",
+    "screen",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "stands",
+    "various",
+    "screens",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A man stands thoughtfully in a dimly lit control room with various screens."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "bedroom night phone charging across room evaluating, comparing, or choosing options",
+    "savedAt": "2026-10-26T11:09:23.697Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "AMORIE SAM",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-contemplating-in-dimly-lit-control-room-30576172/"
+  }
+}

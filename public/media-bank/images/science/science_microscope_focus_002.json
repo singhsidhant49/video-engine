@@ -1,0 +1,77 @@
+{
+  "id": "science_microscope_focus_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Focused scientist using a microscope in a bright laboratory",
+  "path": "images/science/science_microscope_focus_002.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "microscope",
+    "laboratory",
+    "scientist",
+    "biology",
+    "research",
+    "analysis"
+  ],
+  "concepts": [
+    "microscopy research",
+    "laboratory science",
+    "sample inspection",
+    "biological analysis"
+  ],
+  "subjects": [
+    "scientist",
+    "microscope",
+    "lab bench",
+    "test tubes"
+  ],
+  "actions": [
+    "observing sample",
+    "using microscope",
+    "conducting research"
+  ],
+  "mood": [
+    "clean",
+    "focused",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.32,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "general science video",
+    "biology explainer",
+    "lab research",
+    "medical science"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "field ecology",
+    "industrial engineering"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

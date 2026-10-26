@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_a27f1b400449021d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene autumn morning in a misty forest with sunlight filtering through the trees.",
+  "path": "images/saved-from-web/saved-from-web_a27f1b400449021d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "serene",
+    "autumn",
+    "morning",
+    "misty",
+    "sunlight",
+    "filtering",
+    "through",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "serene",
+    "autumn",
+    "morning",
+    "misty",
+    "sunlight",
+    "filtering",
+    "through",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "misty forest sunlight",
+    "savedAt": "2026-10-26T08:42:08.363Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Matvei",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/autumn-morning-sunlight-in-misty-forest-36612667/"
+  }
+}

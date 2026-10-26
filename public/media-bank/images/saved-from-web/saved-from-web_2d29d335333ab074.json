@@ -1,0 +1,75 @@
+{
+  "id": "saved-from-web_2d29d335333ab074",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking capture of the Milky Way galaxy showcasing the vastness of space.",
+  "path": "images/saved-from-web/saved-from-web_2d29d335333ab074.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "breathtaking",
+    "capture",
+    "milky",
+    "way",
+    "galaxy",
+    "showcasing",
+    "vastnes",
+    "moving",
+    "through",
+    "active",
+    "demonstration",
+    "relevant",
+    "physical",
+    "phenomenon",
+    "vastness",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Milky Way moving through space active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-24T09:30:54.445Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lucas Pezeta",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/the-milky-is-shown-in-this-image-27759652/"
+  }
+}

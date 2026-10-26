@@ -1,0 +1,66 @@
+{
+  "id": "saved-from-web_1c5ce56aae48742d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Calm underwater scene with sun rays penetrating the ocean surface, creating a tranquil ambiance.",
+  "path": "images/saved-from-web/saved-from-web_1c5ce56aae48742d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1950,
+  "height": 2600,
+  "aspectRatio": 0.75,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "calm",
+    "underwater",
+    "scene",
+    "sun",
+    "ray",
+    "penetrating",
+    "ocean",
+    "surface",
+    "creating",
+    "tranquil",
+    "ambiance",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "dark",
+    "deep",
+    "rays",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Calm underwater scene with sun rays penetrating the ocean surface, creating a tranquil ambiance."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dark underwater ocean surface deep ocean seabed or underwater marine",
+    "savedAt": "2026-10-24T05:16:20.714Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Francesco Ungaro",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/sun-rays-passing-through-water-12621842/"
+  }
+}

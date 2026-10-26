@@ -1,0 +1,78 @@
+{
+  "id": "history_postwar_city_planning_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Postwar city planning studio",
+  "path": "images/history/history_postwar_city_planning_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "postwar",
+    "reconstruction",
+    "urban planning",
+    "20th century",
+    "city rebuilding",
+    "architecture"
+  ],
+  "concepts": [
+    "urban recovery",
+    "reconstruction planning",
+    "policy and design",
+    "modern rebuilding"
+  ],
+  "subjects": [
+    "planners",
+    "city maps",
+    "scale models",
+    "rebuilding skyline",
+    "office studio"
+  ],
+  "actions": [
+    "reviewing plans",
+    "drafting layouts",
+    "surveying reconstruction"
+  ],
+  "mood": [
+    "serious",
+    "strategic",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "20th century history videos",
+    "postwar recovery content",
+    "planning scenes",
+    "urban history"
+  ],
+  "avoidFor": [
+    "ancient civilizations",
+    "medieval life",
+    "religious study"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

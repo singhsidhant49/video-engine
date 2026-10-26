@@ -402,9 +402,16 @@ export function authorShots(scene, strategy, topic) {
     }
 
     // If scene has 1 shot: apply subtle camera move to maintain gentle visual vitality throughout the hold
-    const cameraMove = (count === 1)
-      ? (sceneOrdinal % 2 === 0 ? 'subtlePull' : 'subtlePush')
-      : (role === 'detail' ? 'detailCrop' : (index % 2 === 0 ? 'subtlePush' : 'static'));
+    // Media motion is selected only after the real asset, its focal point,
+    // orientation, duration, and neighbouring shots are known. Persisting a
+    // blind push/pull alternation here made unrelated shots move identically
+    // and prevented subject-aware pans. Legacy procedural rendering keeps its
+    // deterministic hint for backwards compatibility.
+    const cameraMove = isMediaEditorial
+      ? 'auto'
+      : (count === 1
+        ? (sceneOrdinal % 2 === 0 ? 'subtlePull' : 'subtlePush')
+        : (role === 'detail' ? 'detailCrop' : (index % 2 === 0 ? 'subtlePush' : 'static')));
 
     return {
       id: `${scene.id}_shot_${String(index + 1).padStart(2, '0')}`,

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_59f1608e031bc101",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of hands using a smartphone with a blank screen on a wooden table indoors.",
+  "path": "images/saved-from-web/saved-from-web_59f1608e031bc101.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "using",
+    "smartphone",
+    "blank",
+    "screen",
+    "wooden",
+    "table",
+    "indoor",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "close-up",
+    "hands",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "using",
+    "smartphone",
+    "blank",
+    "screen",
+    "wooden",
+    "table",
+    "indoor",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "close-up",
+    "hands",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of hands using a smartphone with a blank screen on a wooden table indoors."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hand reaching for phone table",
+    "savedAt": "2026-10-26T11:06:42.871Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "VAZHNIK",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-mobile-phone-on-brown-wooden-table-7563459/"
+  }
+}

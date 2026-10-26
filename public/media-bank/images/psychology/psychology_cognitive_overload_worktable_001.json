@@ -1,0 +1,79 @@
+{
+  "id": "psychology_cognitive_overload_worktable_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Overwhelmed at a cluttered worktable",
+  "path": "images/psychology/psychology_cognitive_overload_worktable_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "stress",
+    "cognitive overload",
+    "overthinking",
+    "burnout",
+    "mental fatigue",
+    "productivity"
+  ],
+  "concepts": [
+    "cognitive overload",
+    "decision fatigue",
+    "mental clutter",
+    "work stress"
+  ],
+  "subjects": [
+    "adult woman",
+    "desk",
+    "notes",
+    "sticky notes",
+    "laptop"
+  ],
+  "actions": [
+    "holding head",
+    "feeling overwhelmed",
+    "trying to organize thoughts"
+  ],
+  "mood": [
+    "stressed",
+    "fatigued",
+    "pressured"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.49,
+      "y": 0.37
+    },
+    "safeTextAreas": [
+      "left-lower",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "burnout videos",
+    "overthinking explainer",
+    "stress content",
+    "mental overload scenes"
+  ],
+  "avoidFor": [
+    "calm mindfulness",
+    "group therapy",
+    "relationship topic"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

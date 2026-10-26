@@ -1,0 +1,76 @@
+{
+  "id": "science_microbiology_colony_analysis_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Microbiologist examining bacterial colonies in a petri dish",
+  "path": "images/science/science_microbiology_colony_analysis_002.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "microbiology",
+    "bacterial colonies",
+    "petri dish",
+    "laboratory",
+    "microbes"
+  ],
+  "concepts": [
+    "microbiology research",
+    "culture analysis",
+    "bacterial growth study",
+    "biological testing"
+  ],
+  "subjects": [
+    "scientist",
+    "petri dish",
+    "microscope",
+    "culture plates"
+  ],
+  "actions": [
+    "examining colonies",
+    "holding petri dish",
+    "studying growth"
+  ],
+  "mood": [
+    "clean",
+    "analytical",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.65,
+      "y": 0.36
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "microbiology explainer",
+    "medical lab",
+    "science education",
+    "research montage"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "field sampling",
+    "boardroom lecture"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -34,7 +34,7 @@ export function buildVisualRealizationDiagnostics(timeline) {
     return shot.asset?.type === 'video' ? base.replace(/^image/, 'video') : base;
   });
   const moves = shots.map((shot) => shot.presentation?.cameraMove || shot.move?.type || 'static');
-  const transitions = clips.map((clip) => clip.enter?.type || 'cut');
+  const transitions = shots.slice(1).map((shot) => shot.transitionPolicy || shot.enter?.type || 'CUT');
   const assetIds = shots.map((shot) => shot.asset?.src).filter(Boolean);
   const staticShots = shots.filter((shot) => shot.asset?.type !== 'video' && (shot.presentation?.cameraMove || shot.move?.type) === 'static');
   const staticSeconds = staticShots.map((shot) => {

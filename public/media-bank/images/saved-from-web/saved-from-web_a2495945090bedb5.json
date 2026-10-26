@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_a2495945090bedb5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Doctor examines brain MRI scans closely for medical diagnosis in a hospital environment.",
+  "path": "images/saved-from-web/saved-from-web_a2495945090bedb5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "doctor",
+    "examine",
+    "brain",
+    "mri",
+    "scan",
+    "closely",
+    "medical",
+    "diagnosi",
+    "hospital",
+    "environment",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "comparison",
+    "before",
+    "after",
+    "examines",
+    "scans",
+    "diagnosis",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Doctor examines brain MRI scans closely for medical diagnosis in a hospital environment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "brain scan comparison before after",
+    "savedAt": "2026-10-23T07:22:13.430Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Anna Shvets",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/doctor-pointing-to-an-mri-scan-4226123/"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "finance_couple_budget_planning_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Couple planning household finances at home",
+  "path": "images/finance/finance_couple_budget_planning_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "budgeting",
+    "couple",
+    "home finance",
+    "planning",
+    "household budget",
+    "personal finance"
+  ],
+  "concepts": [
+    "household budgeting",
+    "shared financial planning",
+    "money management",
+    "family finance"
+  ],
+  "subjects": [
+    "couple",
+    "laptop",
+    "financial papers",
+    "calculator"
+  ],
+  "actions": [
+    "reviewing bills",
+    "planning budget",
+    "calculating expenses"
+  ],
+  "mood": [
+    "warm",
+    "practical",
+    "relatable"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.6,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "personal finance",
+    "budget planning",
+    "family finance",
+    "money saving video"
+  ],
+  "avoidFor": [
+    "trading desk",
+    "corporate earnings",
+    "institutional investing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

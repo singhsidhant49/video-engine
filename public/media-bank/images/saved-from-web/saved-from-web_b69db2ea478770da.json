@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_b69db2ea478770da",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two men engaging in a friendly conversation over beer at an indoor cafe setting.",
+  "path": "images/saved-from-web/saved-from-web_b69db2ea478770da.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "two",
+    "men",
+    "engaging",
+    "friendly",
+    "conversation",
+    "over",
+    "beer",
+    "indoor",
+    "cafe",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "two",
+    "men",
+    "engaging",
+    "friendly",
+    "conversation",
+    "over",
+    "beer",
+    "indoor",
+    "cafe",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "hand hovering over smartphone",
+    "savedAt": "2026-10-26T11:09:29.358Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ketut Subiyanto",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/men-having-conversation-while-looking-at-each-other-5054673/"
+  }
+}

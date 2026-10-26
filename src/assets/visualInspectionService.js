@@ -275,7 +275,8 @@ async function getVisionClassifier() {
 
   visionLoadingPromise = (async () => {
     try {
-      const { pipeline } = await import('@huggingface/transformers');
+      const { env, pipeline } = await import('@huggingface/transformers');
+      env.cacheDir = process.env.TRANSFORMERS_CACHE || path.resolve('.cache', 'huggingface');
       visionClassifier = await pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32');
       return visionClassifier;
     } catch (err) {

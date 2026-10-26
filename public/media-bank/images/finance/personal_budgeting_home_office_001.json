@@ -1,0 +1,77 @@
+{
+  "id": "personal_budgeting_home_office_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Personal budgeting session in a cozy home office",
+  "path": "images/finance/personal_budgeting_home_office_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "budgeting",
+    "personal finance",
+    "home office",
+    "calculator",
+    "expenses",
+    "planning"
+  ],
+  "concepts": [
+    "household budgeting",
+    "expense tracking",
+    "financial planning",
+    "money management"
+  ],
+  "subjects": [
+    "woman",
+    "calculator",
+    "laptop",
+    "financial papers"
+  ],
+  "actions": [
+    "budgeting",
+    "calculating expenses",
+    "planning finances"
+  ],
+  "mood": [
+    "calm",
+    "practical",
+    "relatable"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "budgeting video",
+    "personal finance",
+    "saving money",
+    "financial literacy"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "stock trading",
+    "institutional investing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

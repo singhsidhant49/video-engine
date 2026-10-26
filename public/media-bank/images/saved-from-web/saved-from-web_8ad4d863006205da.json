@@ -1,0 +1,69 @@
+{
+  "id": "saved-from-web_8ad4d863006205da",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength.",
+  "path": "images/saved-from-web/saved-from-web_8ad4d863006205da.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "steel",
+    "security",
+    "vault",
+    "door",
+    "attached",
+    "vintage",
+    "brick",
+    "wall",
+    "showcasing",
+    "industrial",
+    "strength",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "open",
+    "doors",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "steel vault door open",
+    "savedAt": "2026-10-23T09:03:06.467Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "wutthichai charoenburi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/steel-heavy-doors-of-vault-19882101/"
+  }
+}

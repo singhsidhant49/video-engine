@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const InformationTypeSchema = z.enum([
   'code', 'interface', 'process', 'comparison', 'relationship', 'timeline',

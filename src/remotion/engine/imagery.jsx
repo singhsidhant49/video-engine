@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { useTheme } from './theme.js';
 import { ease } from './motion.js';
-import { FocusPull } from './accents.jsx';
+
 
 const lerp = (a, b, t) => a + (b - a) * t;
 
@@ -116,9 +116,9 @@ export function Bed({ shots, dim = 0, box, filter }) {
     <AbsoluteFill>
       {shots.map((shot, i) => (
         <Sequence key={i} from={shot.from} durationInFrames={shot.durationInFrames} layout="none">
-          {shot.reveal === 'focus'
-            ? <FocusPull><ShotMedia shot={shot} filter={filter ?? style.grade.image} box={box} /></FocusPull>
-            : <ShotMedia shot={shot} filter={filter ?? style.grade.image} box={box} />}
+          <ShotMedia shot={shot} filter={filter ?? style.grade.image} box={box} />
+
+
         </Sequence>
       ))}
       {dim > 0 && <div style={{ position: 'absolute', left: box?.x ?? 0, top: box?.y ?? 0, width: box?.w ?? '100%', height: box?.h ?? '100%', background: `rgba(0,0,0,${dim})` }} />}

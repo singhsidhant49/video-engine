@@ -32,10 +32,29 @@ async function grabFrame(file, seconds, tmpDir, i) {
   return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30 };
 }
 
-function diff(a, b) {
-  let s = 0;
-  for (let i = 0; i < a.data.length; i++) s += Math.abs(a.data[i] - b.data[i]);
-  return s / a.data.length;
+export function pixelDifferenceExcludingRect(a, b, ignoreRect = null) {
+  let s = 0, count = 0;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (ignoreRect && x >= ignoreRect.x && x <= ignoreRect.right && y >= ignoreRect.y && y <= ignoreRect.bottom) continue;
+      const index = y * W + x;
+      s += Math.abs(a.data[index] - b.data[index]);
+      count++;
+    }
+  }
+  return s / Math.max(1, count);
+}
+
+function captionMaskFor(shot, timeline) {
+  const geometry = shot.captionPolicy?.geometry;
+  if (!geometry || !timeline.width || !timeline.height) return null;
+  const padX = Math.max(2, Math.round(W * .015)), padY = Math.max(2, Math.round(H * .015));
+  return {
+    x: Math.max(0, Math.floor(geometry.x / timeline.width * W) - padX),
+    y: Math.max(0, Math.floor(geometry.y / timeline.height * H) - padY),
+    right: Math.min(W - 1, Math.ceil((geometry.x + geometry.width) / timeline.width * W) + padX),
+    bottom: Math.min(H - 1, Math.ceil((geometry.y + geometry.height) / timeline.height * H) + padY),
+  };
 }
 
 export function classifyRenderedMotion({ differences = [], expectedMotion = false, nativeMotion = false, threshold = 0.35 } = {}) {
@@ -108,8 +127,9 @@ export async function runRenderQc(videoFile, timeline) {
         if (shot.asset) lumas.push(...frames.map((frame) => frame.mean));
         for (const frame of frames) if (frame.mean < 8 && frame.stdev < 4) blank.push(shot.id);
         const expectation = shotMotionExpectation(shot, timeline);
+        const captionMask = captionMaskFor(shot, timeline);
         const classification = classifyRenderedMotion({
-          differences: [diff(frames[0], frames[1]), diff(frames[1], frames[2]), diff(frames[0], frames[2])],
+          differences: [pixelDifferenceExcludingRect(frames[0], frames[1], captionMask), pixelDifferenceExcludingRect(frames[1], frames[2], captionMask), pixelDifferenceExcludingRect(frames[0], frames[2], captionMask)],
           expectedMotion: expectation.expectedMotion,
           nativeMotion: expectation.nativeMotion,
           threshold: renderedMotionThreshold({

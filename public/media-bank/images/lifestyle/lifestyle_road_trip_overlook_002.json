@@ -1,0 +1,78 @@
+{
+  "id": "lifestyle_road_trip_overlook_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden road-trip overlook",
+  "path": "images/lifestyle/lifestyle_road_trip_overlook_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "road trip",
+    "friends",
+    "mountains",
+    "travel",
+    "car",
+    "adventure"
+  ],
+  "concepts": [
+    "adventure lifestyle",
+    "friendship",
+    "travel freedom",
+    "weekend escape"
+  ],
+  "subjects": [
+    "group of friends",
+    "SUV",
+    "mountain overlook",
+    "camera",
+    "travel mugs"
+  ],
+  "actions": [
+    "taking a break",
+    "chatting",
+    "enjoying mountain view"
+  ],
+  "mood": [
+    "adventurous",
+    "social",
+    "sunny"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "travel videos",
+    "road trip scenes",
+    "friendship content",
+    "adventure montages"
+  ],
+  "avoidFor": [
+    "indoor routines",
+    "office work",
+    "spa content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

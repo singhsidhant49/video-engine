@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "id": "vid_mvdizba1_f2ba72bf95b5",
+  "ownerId": "acct_2b354e29151920844b986f01",
+  "status": "completed",
+  "stage": "completed",
+  "progress": 100,
+  "request": {
+    "prompt": "Create an engaging two-minute cinematic YouTube documentary titled\n\"The Internet Is Under the Ocean.\"\n\nBegin with a powerful three-second hook showing someone sending a message.\nReveal that the wireless connection is only the beginning and that the\ninformation may travel through physical fiber-optic cables beneath the ocean.\n\nExplain the journey from the viewer's device to a router, terrestrial fiber,\na coastal cable landing station, an undersea cable, and another continent.\nExplain how light carries information through protected glass fibers.\n\nMake cable damage and repair the most suspenseful section. Show relevant\noceans, coastlines, fiber-optic equipment, cable-laying ships, cable reels,\ntechnicians, landing facilities, server infrastructure, and data centers.\n\nUse only relevant images and authentic video clips with subtitles. Do not use\ncharts, diagrams, statement cards, animated templates, fake interfaces, or\ngeneric unrelated technology footage.\n\nUse a strong opening hook, curiosity gaps, natural cause-and-effect\ntransitions, and a memorable closing payoff. Write natural documentary\nnarration for a general audience. Do not read headings or production\ninstructions aloud. Do not invent statistics, cable names, capacities,\ndistances, dates, companies, or repair times.\n\nTarget approximately 120 seconds. Keep visual changes synchronized with\nmeaningful narration boundaries. Avoid excessive cuts, repeated assets,\nunrelated visuals, blank frames, and abruptly cut narration.",
+    "niche": "technology and global infrastructure",
+    "output": {
+      "durationSeconds": 120,
+      "aspectRatio": "16:9",
+      "resolution": "1080p"
+    },
+    "creative": {
+      "contentType": "documentary",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "audience": "Curious adults interested in technology and engineering",
+      "pacing": "cinematic",
+      "style": "cinematic_documentary"
+    },
+    "audio": {
+      "voice": "af_bella"
+    },
+    "subtitles": {
+      "enabled": true
+    },
+    "metadata": {
+      "externalId": "undersea-cables-documentary",
+      "category": "technology"
+    }
+  },
+  "pipelineBrief": {
+    "version": 1,
+    "prompt": "Create an engaging two-minute cinematic YouTube documentary titled\n\"The Internet Is Under the Ocean.\"\n\nBegin with a powerful three-second hook showing someone sending a message.\nReveal that the wireless connection is only the beginning and that the\ninformation may travel through physical fiber-optic cables beneath the ocean.\n\nExplain the journey from the viewer's device to a router, terrestrial fiber,\na coastal cable landing station, an undersea cable, and another continent.\nExplain how light carries information through protected glass fibers.\n\nMake cable damage and repair the most suspenseful section. Show relevant\noceans, coastlines, fiber-optic equipment, cable-laying ships, cable reels,\ntechnicians, landing facilities, server infrastructure, and data centers.\n\nUse only relevant images and authentic video clips with subtitles. Do not use\ncharts, diagrams, statement cards, animated templates, fake interfaces, or\ngeneric unrelated technology footage.\n\nUse a strong opening hook, curiosity gaps, natural cause-and-effect\ntransitions, and a memorable closing payoff. Write natural documentary\nnarration for a general audience. Do not read headings or production\ninstructions aloud. Do not invent statistics, cable names, capacities,\ndistances, dates, companies, or repair times.\n\nTarget approximately 120 seconds. Keep visual changes synchronized with\nmeaningful narration boundaries. Avoid excessive cuts, repeated assets,\nunrelated visuals, blank frames, and abruptly cut narration.",
+    "niche": "technology and global infrastructure",
+    "format": "landscape",
+    "durationSec": 120,
+    "style": "cinematic_documentary",
+    "voice": "af_bella",
+    "channel": {
+      "id": "default",
+      "contentType": "documentary",
+      "pacingMode": "cinematic",
+      "audience": "Curious adults interested in technology and engineering",
+      "tone": "cinematic, intriguing, accessible, and authoritative",
+      "language": "en",
+      "captions": "subtitles"
+    }
+  },
+  "metadata": {
+    "externalId": "undersea-cables-documentary",
+    "category": "technology"
+  },
+  "idempotencyKey": "undersea-cables-20261018-132003",
+  "requestHash": "9db46e921467a68fd4b08d02abf2ba0609e310218db7d6ce281adc401c5a0e57",
+  "result": {
+    "outputPath": "D:\\projects\\videogenerator\\renders\\vid_mvdizba1_f2ba72bf95b5-landscape.mp4",
+    "outputFilename": "vid_mvdizba1_f2ba72bf95b5-landscape.mp4",
+    "durationSeconds": 114.492667,
+    "title": "The Internet Is Under the Ocean",
+    "runDir": "D:\\projects\\videogenerator\\renders\\runs\\vid_mvdizba1_f2ba72bf95b5"
+  },
+  "error": null,
+  "createdAt": "2026-10-18T07:50:03.481Z",
+  "updatedAt": "2026-10-18T08:01:10.752Z",
+  "startedAt": "2026-10-18T07:50:03.488Z",
+  "completedAt": "2026-10-18T08:01:10.752Z",
+  "resumeExisting": false
+}

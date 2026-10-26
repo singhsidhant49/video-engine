@@ -1,0 +1,77 @@
+{
+  "id": "psychology_morning_meditation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit morning meditation at home",
+  "path": "images/psychology/psychology_morning_meditation_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "mindfulness",
+    "meditation",
+    "mental wellness",
+    "calm",
+    "self-care",
+    "stress relief"
+  ],
+  "concepts": [
+    "mindfulness practice",
+    "emotional regulation",
+    "inner calm",
+    "self-care routine"
+  ],
+  "subjects": [
+    "young woman",
+    "bedroom",
+    "meditation pose",
+    "sunlight"
+  ],
+  "actions": [
+    "meditating",
+    "breathing calmly",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "peaceful",
+    "restorative",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "mental wellness",
+    "self-care content",
+    "stress management"
+  ],
+  "avoidFor": [
+    "crisis scenes",
+    "relationship conflict",
+    "clinical assessment"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

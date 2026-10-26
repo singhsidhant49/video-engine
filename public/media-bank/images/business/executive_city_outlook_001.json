@@ -1,0 +1,74 @@
+{
+  "id": "executive_city_outlook_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive overlooking city at sunrise",
+  "path": "images/business/executive_city_outlook_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "executive",
+    "leadership",
+    "city skyline",
+    "vision",
+    "strategy"
+  ],
+  "concepts": [
+    "executive leadership",
+    "business vision",
+    "strategic thinking",
+    "success mindset"
+  ],
+  "subjects": [
+    "executive",
+    "office",
+    "city skyline"
+  ],
+  "actions": [
+    "looking over city",
+    "reflecting"
+  ],
+  "mood": [
+    "aspirational",
+    "cinematic",
+    "premium"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.45,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "leadership theme",
+    "vision statement",
+    "executive story",
+    "success montage"
+  ],
+  "avoidFor": [
+    "teamwork scene",
+    "retail operations",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_24b229c52605beff",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Explore the deep blue underwater world with bubbles, rope, and ambient light.",
+  "path": "images/saved-from-web/saved-from-web_24b229c52605beff.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "deep",
+    "blue",
+    "underwater",
+    "world",
+    "bubble",
+    "rope",
+    "ambient",
+    "light",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "bubbles",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "deep",
+    "blue",
+    "underwater",
+    "world",
+    "bubble",
+    "rope",
+    "ambient",
+    "light",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "bubbles",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Explore the deep blue underwater world with bubbles, rope, and ambient light."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "desalination plant authentic real-world environment matching context",
+    "savedAt": "2026-10-26T10:46:09.208Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Saad Alaiyadhi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-rope-anchor-underwater-13010775/"
+  }
+}

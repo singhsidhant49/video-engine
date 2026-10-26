@@ -1,0 +1,61 @@
+{
+  "id": "health_brain_health_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Brain health visualization",
+  "path": "images/health/health_brain_health_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "brain",
+    "neuroscience",
+    "mental health",
+    "medical illustration"
+  ],
+  "concepts": [
+    "brain health",
+    "cognition",
+    "nervous system"
+  ],
+  "subjects": [
+    "human head profile",
+    "brain",
+    "neural pathways"
+  ],
+  "actions": [
+    "visualizing brain activity"
+  ],
+  "mood": [
+    "futuristic",
+    "scientific"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "brain health videos",
+    "neuroscience explainers",
+    "mental health content"
+  ],
+  "avoidFor": [
+    "meal prep",
+    "workout scene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

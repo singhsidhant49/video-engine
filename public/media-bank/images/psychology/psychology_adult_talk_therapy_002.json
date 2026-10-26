@@ -1,0 +1,78 @@
+{
+  "id": "psychology_adult_talk_therapy_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm therapy conversation in a cozy office",
+  "path": "images/psychology/psychology_adult_talk_therapy_002.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "therapy",
+    "talk therapy",
+    "counseling",
+    "mental health",
+    "therapist",
+    "adult client"
+  ],
+  "concepts": [
+    "psychotherapy",
+    "emotional support",
+    "therapeutic alliance",
+    "guided reflection"
+  ],
+  "subjects": [
+    "adult woman",
+    "therapist",
+    "chairs",
+    "notebook",
+    "office"
+  ],
+  "actions": [
+    "talking",
+    "listening",
+    "taking notes"
+  ],
+  "mood": [
+    "safe",
+    "empathetic",
+    "supportive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "therapy videos",
+    "mental health education",
+    "psychology explainer",
+    "support scenes"
+  ],
+  "avoidFor": [
+    "crowd anxiety",
+    "nature hiking",
+    "phone addiction"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

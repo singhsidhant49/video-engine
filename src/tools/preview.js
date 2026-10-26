@@ -25,7 +25,15 @@ export async function renderContactSheet(runDir, { scale = 0.4, ats = [0.2, 0.85
       await fs.rm(path.join(outDir, existing), { force: true });
     }
   }
-  const serveUrl = await bundle({ entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'), publicDir: path.join(runDir, 'public'), ignoreRegisterRootWarning: true });
+  const serveUrl = await bundle({
+    entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
+    publicDir: path.join(runDir, 'public'),
+    ignoreRegisterRootWarning: true,
+    webpackOverride: (webpackConfig) => ({
+      ...webpackConfig,
+      cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
+    }),
+  });
   const id = timeline.format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer';
   const composition = await selectComposition({ serveUrl, id, inputProps: { timeline } });
 

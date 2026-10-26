@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_beach_stroll_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour shoreline stroll",
+  "path": "images/lifestyle/lifestyle_beach_stroll_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "beach walk",
+    "sunset",
+    "travel",
+    "relaxation",
+    "ocean",
+    "slow living"
+  ],
+  "concepts": [
+    "mindful walking",
+    "coastal lifestyle",
+    "relaxation",
+    "personal freedom"
+  ],
+  "subjects": [
+    "woman",
+    "beach",
+    "waves",
+    "sunset",
+    "rocky shoreline"
+  ],
+  "actions": [
+    "walking barefoot",
+    "enjoying sunset",
+    "strolling by ocean"
+  ],
+  "mood": [
+    "peaceful",
+    "cinematic",
+    "reflective"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.64,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "travel lifestyle videos",
+    "relaxation scenes",
+    "personal growth montages",
+    "coastal content"
+  ],
+  "avoidFor": [
+    "office scenes",
+    "indoor wellness",
+    "crowded social scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "history_museum_ancient_wonders_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Grand hall of ancient wonders",
+  "path": "images/history/history_museum_ancient_wonders_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "museum",
+    "ancient artifacts",
+    "classical art",
+    "display hall",
+    "heritage",
+    "civilizations"
+  ],
+  "concepts": [
+    "public history",
+    "cultural heritage",
+    "museum curation",
+    "ancient world overview"
+  ],
+  "subjects": [
+    "museum hall",
+    "armor",
+    "statues",
+    "vases",
+    "maps",
+    "display cases"
+  ],
+  "actions": [
+    "displaying artifacts",
+    "curating history",
+    "walking through gallery"
+  ],
+  "mood": [
+    "grand",
+    "elegant",
+    "educational"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "history overview videos",
+    "museum content",
+    "civilization compilations",
+    "artifact explainers"
+  ],
+  "avoidFor": [
+    "active excavation",
+    "industrial revolution",
+    "market life"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

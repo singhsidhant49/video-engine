@@ -1,0 +1,78 @@
+{
+  "id": "psychology_breathwork_city_morning_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mindful morning over the city",
+  "path": "images/psychology/psychology_breathwork_city_morning_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "mindfulness",
+    "breathwork",
+    "self-regulation",
+    "calm",
+    "morning routine",
+    "mental wellness"
+  ],
+  "concepts": [
+    "breathwork",
+    "mindfulness practice",
+    "nervous system regulation",
+    "daily grounding"
+  ],
+  "subjects": [
+    "adult man",
+    "balcony",
+    "city skyline",
+    "sunrise"
+  ],
+  "actions": [
+    "breathing deeply",
+    "grounding",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "calm",
+    "centered",
+    "hopeful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.26,
+      "y": 0.37
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "self-regulation content",
+    "wellness intros",
+    "stress relief scenes"
+  ],
+  "avoidFor": [
+    "conflict scenes",
+    "crowded social anxiety",
+    "sleep deprivation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

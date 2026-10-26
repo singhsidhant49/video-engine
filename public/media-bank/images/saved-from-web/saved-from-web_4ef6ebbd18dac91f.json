@@ -1,0 +1,73 @@
+{
+  "id": "saved-from-web_4ef6ebbd18dac91f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of the vibrant Milky Way galaxy with countless distant stars.",
+  "path": "images/saved-from-web/saved-from-web_4ef6ebbd18dac91f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "breathtaking",
+    "vibrant",
+    "milky",
+    "way",
+    "galaxy",
+    "countles",
+    "distant",
+    "star",
+    "dusty",
+    "plane",
+    "view",
+    "countless",
+    "stars",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dusty galaxy plane",
+    "savedAt": "2026-10-24T09:31:29.740Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Samara Hammer",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/purple-and-black-starry-night-sky-11737041/"
+  }
+}

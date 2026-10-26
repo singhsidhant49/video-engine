@@ -1,0 +1,73 @@
+{
+  "id": "customer_support_team_office_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Smiling customer support team in modern office",
+  "path": "images/business/customer_support_team_office_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "customer support",
+    "call center",
+    "service team",
+    "headsets",
+    "customer success"
+  ],
+  "concepts": [
+    "customer support",
+    "service operations",
+    "support center",
+    "client communication"
+  ],
+  "subjects": [
+    "support agents",
+    "monitors",
+    "service dashboard"
+  ],
+  "actions": [
+    "taking calls",
+    "helping customers"
+  ],
+  "mood": [
+    "friendly",
+    "efficient",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "customer success",
+    "service explainer",
+    "support team intro"
+  ],
+  "avoidFor": [
+    "retail boutique",
+    "trading desk",
+    "executive speech"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

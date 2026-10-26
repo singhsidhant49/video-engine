@@ -1,0 +1,76 @@
+{
+  "id": "psychology_choice_overload_supermarket_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Choice overload in a supermarket aisle",
+  "path": "images/psychology/psychology_choice_overload_supermarket_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "decision fatigue",
+    "choice overload",
+    "consumer behavior",
+    "supermarket",
+    "decision making"
+  ],
+  "concepts": [
+    "choice overload",
+    "decision paralysis",
+    "consumer psychology",
+    "cognitive load"
+  ],
+  "subjects": [
+    "adult woman",
+    "supermarket aisle",
+    "many products"
+  ],
+  "actions": [
+    "hesitating",
+    "comparing options",
+    "scratching head"
+  ],
+  "mood": [
+    "uncertain",
+    "overwhelmed",
+    "everyday"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "consumer behavior videos",
+    "decision making explainers",
+    "behavioral psychology",
+    "choice paralysis scenes"
+  ],
+  "avoidFor": [
+    "therapy office",
+    "nature meditation",
+    "relationship conflict"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

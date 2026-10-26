@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_cfaba5bfdefe5b2d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Empty industrial hallway with steel lockers and railing in a warehouse.",
+  "path": "images/saved-from-web/saved-from-web_cfaba5bfdefe5b2d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "server",
+    "rack",
+    "data",
+    "center",
+    "room",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "empty",
+    "industrial",
+    "hallway",
+    "steel",
+    "locker",
+    "railing",
+    "warehouse",
+    "lockers"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "server",
+    "rack",
+    "data",
+    "center",
+    "room",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "empty",
+    "industrial",
+    "hallway",
+    "steel",
+    "locker",
+    "railing",
+    "warehouse",
+    "lockers"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "modern server rack in data center room"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "empty locker worker",
+    "savedAt": "2026-10-26T08:45:08.733Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "David Slaager",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/steel-doors-inside-warehouse-5759123/"
+  }
+}

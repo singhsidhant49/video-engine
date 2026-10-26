@@ -1,0 +1,78 @@
+{
+  "id": "history_womens_suffrage_workshop_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Women\u2019s suffrage workshop in purple, white, and green",
+  "path": "images/history/history_womens_suffrage_workshop_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "womens suffrage",
+    "activism",
+    "banners",
+    "votes for women",
+    "early 20th century",
+    "social movement"
+  ],
+  "concepts": [
+    "political organizing",
+    "women\u2019s rights",
+    "movement building",
+    "social reform"
+  ],
+  "subjects": [
+    "activists",
+    "banners",
+    "papers",
+    "meeting room",
+    "sashes"
+  ],
+  "actions": [
+    "preparing banners",
+    "organizing materials",
+    "coordinating campaign"
+  ],
+  "mood": [
+    "determined",
+    "focused",
+    "historic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "social history videos",
+    "women rights content",
+    "activism history",
+    "political movement scenes"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "military campaigns",
+    "industrial labor"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "after_hours_market_analysis_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "After-hours holographic market analysis",
+  "path": "images/business/after_hours_market_analysis_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "market analysis",
+    "analytics",
+    "finance",
+    "night office",
+    "data"
+  ],
+  "concepts": [
+    "market research",
+    "financial analytics",
+    "late-night strategy",
+    "investment analysis"
+  ],
+  "subjects": [
+    "analyst",
+    "laptop",
+    "floating charts"
+  ],
+  "actions": [
+    "analyzing data",
+    "reviewing trends"
+  ],
+  "mood": [
+    "focused",
+    "high-tech",
+    "dramatic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.68,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "finance video",
+    "analytics theme",
+    "business intelligence"
+  ],
+  "avoidFor": [
+    "retail store",
+    "casual meeting",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

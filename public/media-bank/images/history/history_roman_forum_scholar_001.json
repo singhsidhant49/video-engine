@@ -1,0 +1,78 @@
+{
+  "id": "history_roman_forum_scholar_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scholar in the Roman Forum",
+  "path": "images/history/history_roman_forum_scholar_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient rome",
+    "roman forum",
+    "scholar",
+    "classical civilization",
+    "temple",
+    "rome"
+  ],
+  "concepts": [
+    "roman civilization",
+    "public life in antiquity",
+    "historical scholarship",
+    "classical world"
+  ],
+  "subjects": [
+    "roman scholar",
+    "forum",
+    "temple",
+    "crowd",
+    "statues"
+  ],
+  "actions": [
+    "studying scrolls",
+    "observing civic life",
+    "walking through forum"
+  ],
+  "mood": [
+    "grand",
+    "classical",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "roman history videos",
+    "empire explainers",
+    "classical antiquity content",
+    "history intros"
+  ],
+  "avoidFor": [
+    "medieval content",
+    "industrial era",
+    "modern city"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

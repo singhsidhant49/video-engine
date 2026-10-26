@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FrameForge — Video Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dashboard/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">F</span><span>FrameForge</span></a>
+    <div class="system"><span id="healthDot" class="dot"></span><span id="healthText">Connecting</span></div>
+    <button id="settingsButton" class="icon-button" aria-label="API settings">API</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">LOCAL PRODUCTION STUDIO</p>
+        <h1>Turn an idea into<br><em>a finished film.</em></h1>
+        <p class="lede">Direct, generate, review, and manage documentary videos from one production desk.</p>
+      </div>
+      <div class="stats" aria-label="Video statistics">
+        <div><strong id="totalCount">0</strong><span>Total</span></div>
+        <div><strong id="activeCount">0</strong><span>In production</span></div>
+        <div><strong id="completedCount">0</strong><span>Completed</span></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <form id="createForm" class="composer">
+        <div class="section-label"><span>01</span> Creative brief</div>
+        <label for="prompt">What should we create?</label>
+        <textarea id="prompt" minlength="3" maxlength="50000" required placeholder="Create a cinematic documentary about how undersea cables carry the internet..."></textarea>
+        <div class="field-grid">
+          <label>Duration <select id="duration"><option value="60">1 minute</option><option value="120" selected>2 minutes</option><option value="300">5 minutes</option><option value="600">10 minutes</option></select></label>
+          <label>Format <select id="aspect"><option value="16:9">Landscape 16:9</option><option value="9:16">Shorts 9:16</option></select></label>
+          <label>Content <select id="contentType"><option>documentary</option><option>explainer</option><option>educational</option><option>investigative</option><option>story</option><option>meditation</option><option>audiobook</option><option>motivational</option></select></label>
+          <label>Pacing <select id="pacing"><option value="auto">Automatic</option><option value="cinematic">Cinematic</option><option value="balanced">Balanced</option><option value="contemplative">Contemplative</option><option value="energetic">Energetic</option></select></label>
+          <label>Channel ID <input id="channel" value="default" maxlength="100"></label>
+          <label>Voice <input id="voice" value="af_bella" maxlength="80"></label>
+        </div>
+        <label>Tone <input id="tone" value="cinematic, intriguing, accessible, and authoritative" maxlength="120"></label>
+        <button class="primary" type="submit"><span>Generate video</span><span aria-hidden="true">→</span></button>
+        <p id="formMessage" class="message" role="status"></p>
+      </form>
+
+      <section class="library">
+        <div class="library-head">
+          <div><div class="section-label"><span>02</span> Production queue</div><h2>Your videos</h2></div>
+          <button id="refreshButton" class="secondary">Refresh</button>
+        </div>
+        <div id="videoGrid" class="video-grid"><div class="empty">No videos yet. Your first production will appear here.</div></div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card">
+      <div><p class="eyebrow">CONNECTION</p><h2>API access</h2></div>
+      <label>API key <input id="apiKey" type="password" autocomplete="off" placeholder="Your VIDEO_API_KEYS value"></label>
+      <p>The key stays in this browser session and is never written to the dashboard files.</p>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="saveKey" value="default" class="primary small">Save key</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="reviewDialog" class="review-dialog">
+    <div class="review-card"><button id="closeReview" class="close" aria-label="Close">×</button><h2 id="reviewTitle">Video review</h2><video id="reviewVideo" controls playsinline></video></div>
+  </dialog>
+  <script type="module" src="/dashboard/app.js"></script>
+</body>
+</html>

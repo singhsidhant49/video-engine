@@ -1,0 +1,79 @@
+{
+  "id": "health_meditation_misty_mountains_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunrise meditation over misty mountains",
+  "path": "images/health/health_meditation_misty_mountains_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "wellness",
+    "meditation",
+    "mindfulness",
+    "stress relief",
+    "mental health",
+    "sunrise"
+  ],
+  "concepts": [
+    "mind-body wellness",
+    "relaxation",
+    "stress management",
+    "daily mindfulness"
+  ],
+  "subjects": [
+    "adult woman",
+    "meditation pose",
+    "mountain view",
+    "misty valley",
+    "sunrise deck"
+  ],
+  "actions": [
+    "meditating",
+    "breathing calmly",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "serene",
+    "uplifting",
+    "peaceful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.55
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wellness videos",
+    "stress relief content",
+    "mindfulness intros",
+    "mental wellness scenes"
+  ],
+  "avoidFor": [
+    "clinical checkups",
+    "nutrition plate",
+    "immune system diagrams"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "history_buddhist_temple_meditation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Buddhist temple and seated monk",
+  "path": "images/history/history_buddhist_temple_meditation_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 302,
+  "height": 506,
+  "aspectRatio": 0.5968,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "buddhism",
+    "temple",
+    "monk",
+    "asia",
+    "religious history"
+  ],
+  "concepts": [
+    "religious history",
+    "buddhist culture",
+    "sacred architecture"
+  ],
+  "subjects": [
+    "buddha statue",
+    "monk",
+    "temple courtyard"
+  ],
+  "actions": [
+    "meditating",
+    "studying sacred space"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "asian history videos",
+    "religious history",
+    "temple scenes"
+  ],
+  "avoidFor": [
+    "industrial history",
+    "battle scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "psychology_late_night_work_stress_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Late-night office overwhelm",
+  "path": "images/psychology/psychology_late_night_work_stress_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "burnout",
+    "work stress",
+    "late night",
+    "mental fatigue",
+    "anxiety",
+    "overwork"
+  ],
+  "concepts": [
+    "burnout risk",
+    "work-related stress",
+    "emotional exhaustion",
+    "late-night rumination"
+  ],
+  "subjects": [
+    "adult woman",
+    "desk",
+    "laptop",
+    "city lights",
+    "papers"
+  ],
+  "actions": [
+    "holding head",
+    "working late",
+    "feeling overwhelmed"
+  ],
+  "mood": [
+    "drained",
+    "stressed",
+    "heavy"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "burnout explainer",
+    "stress videos",
+    "workplace psychology",
+    "corporate wellbeing"
+  ],
+  "avoidFor": [
+    "peaceful meditation",
+    "supportive therapy",
+    "outdoor resilience"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

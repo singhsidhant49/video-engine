@@ -1,0 +1,65 @@
+{
+  "id": "saved-from-web_c50c95c189ba5330",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Aerial daytime view of Miami, Florida capturing city skyline and distant ocean.",
+  "path": "images/saved-from-web/saved-from-web_c50c95c189ba5330.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "aerial",
+    "daytime",
+    "miami",
+    "florida",
+    "capturing",
+    "city",
+    "skyline",
+    "distant",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Aerial daytime view of Miami, Florida capturing city skyline and distant ocean."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "city skyline aerial view",
+    "savedAt": "2026-10-23T09:03:31.049Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "David Daza",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-miami-in-sunlight-30147234/"
+  }
+}

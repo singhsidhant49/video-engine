@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_d74ad8833e63f776",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Conceptual image of hands reaching for smartphone with health app on blue background.",
+  "path": "images/saved-from-web/saved-from-web_d74ad8833e63f776.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "conceptual",
+    "hand",
+    "reaching",
+    "smartphone",
+    "health",
+    "app",
+    "blue",
+    "background",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "image",
+    "hands",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "conceptual",
+    "hand",
+    "reaching",
+    "smartphone",
+    "health",
+    "app",
+    "blue",
+    "background",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "image",
+    "hands",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Conceptual image of hands reaching for smartphone with health app on blue background."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "hand reaching smartphone anticipation",
+    "savedAt": "2026-10-26T11:08:54.030Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Artem Podrez",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-wearing-latex-gloves-holding-smartphone-6823569/"
+  }
+}

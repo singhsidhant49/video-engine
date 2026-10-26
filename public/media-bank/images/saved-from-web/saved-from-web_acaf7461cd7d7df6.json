@@ -1,0 +1,69 @@
+{
+  "id": "saved-from-web_acaf7461cd7d7df6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Foggy railway platform in Chartres, France, showing empty tracks and misty ambiance.",
+  "path": "images/saved-from-web/saved-from-web_acaf7461cd7d7df6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "foggy",
+    "railway",
+    "platform",
+    "chartre",
+    "france",
+    "empty",
+    "track",
+    "misty",
+    "ambiance",
+    "city",
+    "street",
+    "parking",
+    "lot",
+    "static",
+    "presentation",
+    "dark",
+    "morning",
+    "chartres",
+    "showing",
+    "tracks",
+    "automobile sedan",
+    "car"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Foggy railway platform in Chartres, France, showing empty tracks and misty ambiance."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "city street or parking lot"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dark morning track empty",
+    "savedAt": "2026-10-26T07:36:43.236Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Moin Uddin",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/railway-station-covered-with-fog-19532513/"
+  }
+}

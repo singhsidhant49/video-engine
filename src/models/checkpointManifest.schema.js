@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 import { ProjectStageSchema } from './videoProject.schema.js';
 
 export const CheckpointStageSchema = z.object({

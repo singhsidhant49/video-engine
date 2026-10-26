@@ -1,0 +1,90 @@
+{
+  "id": "science_83c08e0a9e4e6812",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Oceanographer deploying instruments from a research vessel",
+  "path": "images/science/science_83c08e0a9e4e6812.jpg",
+  "category": "science",
+  "extension": ".jpg",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "show",
+    "oceanographer",
+    "deploying",
+    "instrument",
+    "from",
+    "research",
+    "vessel",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "oceanography",
+    "research vessel",
+    "ocean instruments",
+    "marine science",
+    "sea",
+    "instruments",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "science",
+    "show",
+    "oceanographer",
+    "deploying",
+    "instrument",
+    "from",
+    "research",
+    "vessel",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "oceanography",
+    "research vessel",
+    "ocean instruments",
+    "marine science",
+    "sea",
+    "instruments",
+    "undersea environment"
+  ],
+  "concepts": [
+    "ocean data collection",
+    "marine fieldwork",
+    "instrument deployment",
+    "sea research"
+  ],
+  "subjects": [
+    "Oceanographer deploying instruments from a research vessel"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "silhouette ocean",
+    "savedAt": "2026-10-26T09:48:17.830Z"
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

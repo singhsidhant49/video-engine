@@ -1,0 +1,73 @@
+{
+  "id": "history_medieval_knight_castle_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Medieval knight before a castle",
+  "path": "images/history/history_medieval_knight_castle_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "medieval",
+    "knight",
+    "castle",
+    "crusader era",
+    "warrior"
+  ],
+  "concepts": [
+    "feudal society",
+    "medieval warfare",
+    "castle culture"
+  ],
+  "subjects": [
+    "mounted knight",
+    "castle",
+    "banner"
+  ],
+  "actions": [
+    "riding",
+    "guarding",
+    "traveling"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "medieval history videos",
+    "knight scenes",
+    "feudalism explainers"
+  ],
+  "avoidFor": [
+    "ancient civilizations",
+    "modern war"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

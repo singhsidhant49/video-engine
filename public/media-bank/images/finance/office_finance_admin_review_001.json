@@ -1,0 +1,76 @@
+{
+  "id": "office_finance_admin_review_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Focused office finance paperwork review",
+  "path": "images/finance/office_finance_admin_review_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "paperwork",
+    "accounting",
+    "office",
+    "calculator",
+    "admin"
+  ],
+  "concepts": [
+    "accounting workflow",
+    "invoice review",
+    "finance administration",
+    "expense review"
+  ],
+  "subjects": [
+    "professional woman",
+    "calculator",
+    "documents",
+    "laptop"
+  ],
+  "actions": [
+    "reviewing paperwork",
+    "calculating totals",
+    "checking invoices"
+  ],
+  "mood": [
+    "practical",
+    "clean",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.38,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "accounting content",
+    "bookkeeping",
+    "expense management",
+    "office finance"
+  ],
+  "avoidFor": [
+    "investment banking",
+    "fintech app",
+    "retirement planning"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

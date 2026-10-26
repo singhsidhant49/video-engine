@@ -30,6 +30,9 @@ export function resolveVisualPolicy(overrides = {}) {
     && envBoolean(overrides.enableProceduralGraphics ?? process.env.ENABLE_PROCEDURAL_GRAPHICS, true)
     && envBoolean(overrides.enableLegacyVisualFamilies ?? process.env.ENABLE_LEGACY_VISUAL_FAMILIES, true);
   const allowSplitLayout = envBoolean(overrides.allowSplitLayout ?? process.env.ALLOW_SPLIT_LAYOUT, false);
+  const motionPreset = String(overrides.motionPreset ?? process.env.VIDEO_MOTION_PRESET ?? 'standard').trim().toLowerCase() === 'minimal'
+    ? 'minimal'
+    : 'standard';
   return Object.freeze({
     visualMode: mediaEditorial ? VISUAL_MODES.MEDIA_EDITORIAL : VISUAL_MODES.LEGACY_PROCEDURAL,
     useMediaEditorial: mediaEditorial,
@@ -37,6 +40,7 @@ export function resolveVisualPolicy(overrides = {}) {
     enableLegacyVisualFamilies: proceduralEnabled,
     allowGeneratedMedia: false,
     allowSplitLayout,
+    motionPreset,
     defaultTransition: 'CUT',
     defaultCamera: 'STATIC',
   });

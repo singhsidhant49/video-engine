@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_82600ad31cd7c324",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A man and woman engaging with a transparent holographic screen in a modern studio setting.",
+  "path": "images/saved-from-web/saved-from-web_82600ad31cd7c324.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "woman",
+    "engaging",
+    "transparent",
+    "holographic",
+    "screen",
+    "modern",
+    "studio",
+    "setting",
+    "general",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "woman",
+    "engaging",
+    "transparent",
+    "holographic",
+    "screen",
+    "modern",
+    "studio",
+    "setting",
+    "general",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A man and woman engaging with a transparent holographic screen in a modern studio setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "holographic coworker",
+    "savedAt": "2026-10-26T08:44:58.739Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Michelangelo Buonarroti",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/young-man-and-woman-holding-a-transparent-plate-8728245/"
+  }
+}

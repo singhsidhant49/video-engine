@@ -1,0 +1,79 @@
+{
+  "id": "health_home_workout_corner_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit Scandinavian home workout corner",
+  "path": "images/health/health_home_workout_corner_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "fitness",
+    "home workout",
+    "exercise",
+    "wellness",
+    "strength training",
+    "equipment"
+  ],
+  "concepts": [
+    "active lifestyle",
+    "home fitness",
+    "exercise habit",
+    "wellness routine"
+  ],
+  "subjects": [
+    "yoga mat",
+    "dumbbells",
+    "kettlebell",
+    "water bottle",
+    "towel"
+  ],
+  "actions": [
+    "preparing for workout",
+    "showing home gym setup",
+    "illustrating exercise routine"
+  ],
+  "mood": [
+    "bright",
+    "clean",
+    "motivating"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.6
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "exercise intros",
+    "active lifestyle content",
+    "wellness scenes"
+  ],
+  "avoidFor": [
+    "clinical diagnosis",
+    "body anatomy graphics",
+    "sleep videos"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}
