@@ -69,13 +69,16 @@ export function staticVisualCritic(timeline, { plan, storyboard, continuityRepor
     // is intentional in landscape and should not automatically be a defect.
     const durationSec = clip.durationInFrames / (timeline.fps || 30);
     const pacing = timeline.productionProfile?.pacing || {};
+    const isContemplative = pacing.mode === 'contemplative'
+      || timeline.productionProfile?.contentType === 'meditation'
+      || timeline.plan?.contentType === 'meditation';
     const staleThreshold = Number(pacing.maximumStillSeconds) || (timeline.format === 'shorts' ? 6.8 : 7.0);
     const minimumSplitHold = Math.max(
       Number(pacing.minimumShotSeconds || 0) * 0.72,
       Number(pacing.targetAverageShotSeconds || 0) * 0.82,
       2,
     );
-    if (durationSec > staleThreshold && shots.length <= 1 && shots[0]?.family === 'image') {
+    if (!isContemplative && durationSec > staleThreshold && shots.length <= 1 && shots[0]?.family === 'image') {
       const splitPreservesPacing = durationSec / 2 >= minimumSplitHold;
       issues.push({
         sceneId,
@@ -133,7 +136,7 @@ export function applySceneRepairs(timeline, repairs = []) {
       const secondDuration = clip.durationInFrames - firstDuration;
       if (firstDuration > 0 && secondDuration > 0) {
         original.durationInFrames = firstDuration;
-        original.exit = { type: 'cut', frames: 0 };
+        original.exit = { type: 'dissolve', frames: 12 };
         const clone = JSON.parse(JSON.stringify(original));
         clone.id = `${original.id || original.storyboardShotId}_repair_detail`;
         clone.storyboardShotId = `${original.storyboardShotId}_repair_detail`;
@@ -155,12 +158,13 @@ export function applySceneRepairs(timeline, repairs = []) {
           layout: `${clone.family}:detail`,
           cameraMove: nextCamera,
           movementState: 'SUBTLE',
-          transitionIn: 'cut',
+          transitionIn: 'dissolve',
         };
         clone.imageBehavior = nextCamera === 'subtlePush' ? 'SUBTLE_PUSH' : 'SUBTLE_PULL';
-        clone.enter = { type: 'cut', frames: 0 };
+        // Never hard-cut to identical same image; dissolve smoothly to prevent jump-cut
+        clone.enter = { type: 'dissolve', frames: 12 };
         clone.exit = { type: 'cut', frames: 0 };
-        clone.transitionPolicy = 'CUT';
+        clone.transitionPolicy = 'SHORT_DISSOLVE';
         clip.shots.push(clone);
       }
     }

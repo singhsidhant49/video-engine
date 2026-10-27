@@ -184,6 +184,7 @@ export async function createFacelessVideo({
   let narrationProfile = resolveNarrationProfile({
     topic,
     niche,
+    contentType: productionProfile.contentType,
     baseSpeed: config.kokoro.speed,
     meditationSpeed: config.kokoro.meditationSpeed,
   });
@@ -212,6 +213,7 @@ export async function createFacelessVideo({
     narrationProfile = resolveNarrationProfile({
       topic,
       niche,
+      contentType: productionProfile.contentType,
       baseSpeed: config.kokoro.speed,
       meditationSpeed: config.kokoro.meditationSpeed,
     });
@@ -413,7 +415,8 @@ export async function createFacelessVideo({
         await synthesizeWithSay(plan.script, narrationFile);
       } else {
         narrationFile = path.join(runPublic, 'narration.wav');
-        await generateSpeech({ text: plan.script, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
+        const ttsText = (plan.scenes || []).map((s) => s.narration?.trim()).filter(Boolean).join('\n\n') || plan.script;
+        await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
       }
 
       // Milestone 9 Narration Normalization & Peak Limiting

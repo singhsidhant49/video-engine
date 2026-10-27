@@ -565,7 +565,8 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     const spec = mediaSceneSpecs?.[shot.mediaSceneSpecId || shot.storyboardShotId];
     const bothImages = previous.asset?.type !== 'video' && shot.asset?.type !== 'video';
     const calm = ['reflective', 'somber', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
-    const detailChange = shot.role === 'detail' || spec?.imageChangeReason === 'newDetail' || previous.asset?.src === shot.asset?.src;
+    const isSameAsset = Boolean(previous.asset?.src && shot.asset?.src && previous.asset.src === shot.asset.src);
+    const detailChange = shot.role === 'detail' || spec?.imageChangeReason === 'newDetail' || isSameAsset;
     const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
     const reason = sceneBoundary
       ? clip.transitionReason || transitionReasonFor(scene, sceneById.get(previous.sceneId) || {})
@@ -574,7 +575,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     const semanticDissolve = sceneBoundary
       ? clip.enter?.type === 'dissolve' || reason === TRANSITION_REASON.SECTION_CHANGE || (calm && reason === TRANSITION_REASON.CONTINUATION)
       : bothImages && (detailChange || calm);
-    const useDissolve = remainingDissolves > 0 && !previousWasDissolve && semanticDissolve;
+    const useDissolve = isSameAsset ? true : (remainingDissolves > 0 && !previousWasDissolve && semanticDissolve);
     const decision = useDissolve
       ? { type: 'dissolve', frames: dissolveFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
       : { type: 'cut', frames: 0, policy: 'CUT', reason, anchor: null };

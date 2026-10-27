@@ -35,7 +35,7 @@ export const VideoBriefSchema = z.object({
 }).passthrough();
 
 const BASE_PACING = Object.freeze({
-  contemplative: { minimumShotSeconds: 7.0, maximumStillSeconds: 11.0, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 8.0 },
+  contemplative: { minimumShotSeconds: 9.5, maximumStillSeconds: 18.0, maximumCutsPer10Seconds: 1, targetAverageShotSeconds: 12.0 },
   cinematic: { minimumShotSeconds: 5.5, maximumStillSeconds: 9.0, maximumCutsPer10Seconds: 3, targetAverageShotSeconds: 6.5 },
   balanced: { minimumShotSeconds: 4.8, maximumStillSeconds: 8.0, maximumCutsPer10Seconds: 4, targetAverageShotSeconds: 5.7 },
   energetic: { minimumShotSeconds: 3.4, maximumStillSeconds: 6.0, maximumCutsPer10Seconds: 5, targetAverageShotSeconds: 4.2 },

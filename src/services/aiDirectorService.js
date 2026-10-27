@@ -193,16 +193,19 @@ function finishTruncatedSentence(words) {
   for (let index = kept.length - 1; index >= 0; index--) {
     if (/[.!?]["')\]]*$/.test(kept[index])) {
       const text = kept.slice(0, index + 1).join(' ').trim();
-      if (text.split(/\s+/).length >= 4) return text;
+      if (text.split(/\s+/).length >= 4 && !DANGLING_END_RE.test(text)) return text;
     }
   }
 
   // A comma or semicolon can delimit a complete leading clause. Only use it
-  // when the result is substantive and does not end with a connector.
+  // when the result is substantive, does not start with an incomplete subordinate clause,
+  // and does not end with a connector.
   for (let index = kept.length - 1; index >= 3; index--) {
     if (/[,;:]["')\]]*$/.test(kept[index])) {
       const text = kept.slice(0, index + 1).join(' ').replace(/[,;:]+["')\]]*$/, '').trim();
-      if (text && !DANGLING_END_RE.test(`${text}.`)) return `${text}.`;
+      const firstWord = text.split(/\s+/)[0]?.toLowerCase() || '';
+      const isSubordinate = /^(?:when|while|if|because|although|since|until|where|after|before|as|though|unless|whereas)\b/i.test(firstWord);
+      if (text && !isSubordinate && !DANGLING_END_RE.test(`${text}.`)) return `${text}.`;
     }
   }
   return '';
@@ -547,7 +550,7 @@ const tokensOf = (text) => tokenizeScript(text).flatMap((w) => w.norm);
 
 const NUMBER_WORD = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve';
 const SPOKEN_CHAPTER_RE = new RegExp(`^\\s*chapter\\s+(?:\\d+|${NUMBER_WORD})\\s*:\\s*`, 'i');
-const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|of|to|for|with|than|into|from|by|as|which|who|whose|represents|deposited|stretched|define|shape)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
+const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|of|to|for|with|than|into|from|by|as|which|who|whose|when|while|if|because|although|since|until|where|after|before|during|so|that|whether|like|about|between|through|under|over|without|upon|against|among|toward|towards|represents|deposited|stretched|define|shape)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
 
 export function stripSpokenChapterLabel(text) {
   return String(text || '').replace(SPOKEN_CHAPTER_RE, '').trim();
@@ -750,8 +753,11 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
   for (const s of Array.isArray(raw?.scenes) ? raw.scenes : []) {
     const rawNarration = str(s?.narration || s?.voiceoverSentence);
     const spokenChapter = spokenChapterMetadata(rawNarration);
-    const narration = str(stripSpokenChapterLabel(rawNarration));
+    let narration = str(stripSpokenChapterLabel(rawNarration));
     if (!narration) continue;
+    if (!/[.!?]["')\]]*$/.test(narration)) {
+      narration = `${narration}.`;
+    }
     let kind = KINDS.includes(s.kind) ? s.kind : LEGACY_KIND[s.kind || s.type] || 'subject';
     if (spokenChapter && (s.section || s.purpose === 'chapter')) kind = 'chapter';
     let data = null;

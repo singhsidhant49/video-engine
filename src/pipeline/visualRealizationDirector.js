@@ -29,9 +29,18 @@ function remember(memory, key, value, limit = 8) {
 function assetPool(sceneAssets, shotId) {
   const shotAsset = sceneAssets?.byShot?.[shotId];
   if (shotAsset) return [shotAsset];
-  if (sceneAssets?.primary && (!sceneAssets.primary.storyboardShotId || sceneAssets.primary.storyboardShotId === shotId)) return [sceneAssets.primary];
   if (Array.isArray(sceneAssets)) return sceneAssets;
-  return [];
+  const pool = [];
+  if (sceneAssets?.primary && (!sceneAssets.primary.storyboardShotId || sceneAssets.primary.storyboardShotId === shotId)) {
+    pool.push(sceneAssets.primary);
+  }
+  if (Array.isArray(sceneAssets?.alternates)) {
+    pool.push(...sceneAssets.alternates.filter(Boolean));
+  }
+  if (!pool.length && sceneAssets?.primary) {
+    pool.push(sceneAssets.primary);
+  }
+  return pool;
 }
 
 function compositionRejection(asset, format) {
@@ -290,6 +299,7 @@ function densityFor(family, shot, scene, recentDensities) {
 }
 
 export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId, memory, coverageByShot = new Map(), visualPolicy = null, format = 'landscape', fps = 30 }) {
+  let previousShotAsset = null;
   return scene.storyboardShots.map((shot, index) => {
     const pool = assetPool(sceneAssets, shot.id);
     const coverage = coverageByShot.get(shot.id) || null;
@@ -299,7 +309,14 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
       && (!coverage || routedRepresentation === 'media');
     const familyChoice = mediaEditorial ? (pool.length > 2 && (scene.purpose === 'hook' || shot.role === 'montage') ? 'montage' : 'image') : chooseFamily(shot, scene, pool, memory, spec, coverage);
     const editorialSelection = mediaEditorial ? selectEditorialAsset(pool, format, memory) : null;
-    const asset = ['image', 'montage'].includes(familyChoice) ? (editorialSelection?.asset || pickAsset(pool, index, memory)) : null;
+    let asset = ['image', 'montage'].includes(familyChoice) ? (editorialSelection?.asset || pickAsset(pool, index, memory)) : null;
+    if (asset && previousShotAsset && asset.src === previousShotAsset.src) {
+      const distinct = pool.find((item) => item?.src && item.src !== asset.src && !memory.usedAssetSources?.includes(item.src))
+        || pool.find((item) => item?.src && item.src !== asset.src)
+        || (sceneAssets?.alternates || []).find((item) => item?.src && item.src !== asset.src);
+      if (distinct) asset = distinct;
+    }
+    previousShotAsset = asset;
     const variantChoice = mediaEditorial ? (familyChoice === 'montage' ? 'montage' : 'full') : chooseVariant(familyChoice, shot, scene, spec, asset, pool, memory);
     const family = variantChoice === 'montage' ? 'montage' : familyChoice;
     const variant = family === 'montage' ? 'dynamic' : variantChoice;

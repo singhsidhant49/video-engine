@@ -8,7 +8,8 @@ const finitePositive = (value, fallback) => {
   return Number.isFinite(number) && number > 0 ? number : fallback;
 };
 
-export function isMeditationNarration({ topic = '', niche = '' } = {}) {
+export function isMeditationNarration({ topic = '', niche = '', contentType = '' } = {}) {
+  if (contentType === 'meditation' || contentType === 'audiobook') return true;
   const text = `${niche} ${topic}`;
   return DIRECT_MEDITATION_RE.test(text)
     || (CALM_CUE_RE.test(text) && REST_CUE_RE.test(text))
@@ -20,13 +21,14 @@ export function isMeditationNarration({ topic = '', niche = '' } = {}) {
 export function resolveNarrationProfile({
   topic = '',
   niche = '',
+  contentType = '',
   baseSpeed = 0.9,
-  meditationSpeed = 0.72,
+  meditationSpeed = 0.58,
 } = {}) {
   const normalSpeed = finitePositive(baseSpeed, 0.9);
-  const meditation = isMeditationNarration({ topic, niche });
+  const meditation = isMeditationNarration({ topic, niche, contentType });
   const speed = meditation
-    ? Math.min(normalSpeed, finitePositive(meditationSpeed, 0.72))
+    ? Math.min(normalSpeed, finitePositive(meditationSpeed, 0.58))
     : normalSpeed;
   return {
     id: meditation ? 'guided_meditation' : 'standard',

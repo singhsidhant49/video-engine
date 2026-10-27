@@ -36,7 +36,7 @@ export const config = {
     url: process.env.KOKORO_TTS_URL || 'http://localhost:8880/v1/audio/speech',
     defaultVoice: process.env.KOKORO_VOICE || 'af_bella',
     speed: parseFloat(process.env.KOKORO_SPEED || '0.9'),
-    meditationSpeed: parseFloat(process.env.KOKORO_MEDITATION_SPEED || '0.72'),
+    meditationSpeed: parseFloat(process.env.KOKORO_MEDITATION_SPEED || '0.58'),
   },
 
   video: {

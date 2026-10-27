@@ -72,7 +72,30 @@ async function joinWavFiles(files, gapMs = 140) {
   const output = new WaveFile();
   output.fromScratch(1, sampleRate, '32f', joined);
   output.toBitDepth('16');
-  return Buffer.from(output.toBuffer());
+  return appendWavSilence(Buffer.from(output.toBuffer()), 800);
+}
+
+/**
+ * Appends safe clean silence to the end of a WAV buffer to prevent player audio truncation.
+ */
+export function appendWavSilence(buffer, silenceMs = 800) {
+  try {
+    const wav = new WaveFile(buffer);
+    wav.toBitDepth('32f');
+    const decoded = wav.getSamples(false, Float32Array);
+    const samples = Array.isArray(decoded) ? decoded[0] : decoded;
+    const sampleRate = wav.fmt.sampleRate || 24000;
+    const padSamples = Math.round(sampleRate * (silenceMs / 1000));
+    if (padSamples <= 0) return buffer;
+    const padded = new Float32Array(samples.length + padSamples);
+    padded.set(samples, 0);
+    const output = new WaveFile();
+    output.fromScratch(1, sampleRate, '32f', padded);
+    output.toBitDepth('16');
+    return Buffer.from(output.toBuffer());
+  } catch {
+    return buffer;
+  }
 }
 
 /**
@@ -167,7 +190,8 @@ export async function generateSpeech({
     }
 
     const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    const rawBuffer = Buffer.from(arrayBuffer);
+    const buffer = appendWavSilence(rawBuffer, 800);
 
     await fs.writeFile(wavFile, buffer);
     // Also save MP3 destination (or write buffer)
