@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_43424245d1b6db81",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of lush green mountains and a winding river in Himachal Pradesh, India.",
+  "path": "images/saved-from-web/saved-from-web_43424245d1b6db81.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "lush",
+    "green",
+    "mountain",
+    "winding",
+    "river",
+    "himachal",
+    "pradesh",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "lush",
+    "green",
+    "mountain",
+    "winding",
+    "river",
+    "himachal",
+    "pradesh",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking view of lush green mountains and a winding river in Himachal Pradesh, India."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "winding mountain road river India",
+    "savedAt": "2026-10-27T06:44:14.727Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vijay Richhiya",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-mountain-valley-in-himachal-pradesh-36781455/"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "saved-from-web_b19e1b3a88b3e4ef",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Uttarakhand",
+  "path": "images/saved-from-web/saved-from-web_b19e1b3a88b3e4ef.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1803,
+  "aspectRatio": 1.442,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "uttarakhand",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "uttarakhand",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Uttarakhand"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Uttarakhand",
+    "savedAt": "2026-10-27T06:45:41.364Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 2.0",
+    "license_name": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "author": "Paul Hamilton",
+    "creator": "Paul Hamilton",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-27T06:24:57.351Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Nanda_Devi_-_Hidden_Summit,_Uttarakhand_India_2013.jpg"
+  }
+}

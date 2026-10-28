@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_d48feafd6e2c0f36",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Peaceful sunset over a calm lake with dramatic clouds and vibrant colors, perfect for relaxation themes.",
+  "path": "images/saved-from-web/saved-from-web_d48feafd6e2c0f36.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "peaceful",
+    "sunset",
+    "over",
+    "calm",
+    "lake",
+    "dramatic",
+    "cloud",
+    "vibrant",
+    "color",
+    "perfect",
+    "relaxation",
+    "theme",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "clouds",
+    "colors",
+    "themes",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "peaceful",
+    "sunset",
+    "over",
+    "calm",
+    "lake",
+    "dramatic",
+    "cloud",
+    "vibrant",
+    "color",
+    "perfect",
+    "relaxation",
+    "theme",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "clouds",
+    "colors",
+    "themes",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Peaceful sunset over a calm lake with dramatic clouds and vibrant colors, perfect for relaxation themes."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "quiet lake reflecting evening sky",
+    "savedAt": "2026-10-26T16:25:41.488Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Image Hunter",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/serene-sunset-over-calm-lake-waters-39588915/"
+  }
+}

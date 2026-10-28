@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_210105128ad7a04c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A stunning view of a mountainous valley in Niti, Uttarakhand, India with dramatic clouds and river.",
+  "path": "images/saved-from-web/saved-from-web_210105128ad7a04c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "mountainou",
+    "valley",
+    "niti",
+    "uttarakhand",
+    "india",
+    "dramatic",
+    "cloud",
+    "river",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountainous",
+    "clouds"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "mountainou",
+    "valley",
+    "niti",
+    "uttarakhand",
+    "india",
+    "dramatic",
+    "cloud",
+    "river",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountainous",
+    "clouds"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A stunning view of a mountainous valley in Niti, Uttarakhand, India with dramatic clouds and river."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "uttarakhand alpine meadow river",
+    "savedAt": "2026-10-27T06:28:04.097Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Achyutha B S",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/majestic-himalayan-valley-in-niti-uttarakhand-36464495/"
+  }
+}

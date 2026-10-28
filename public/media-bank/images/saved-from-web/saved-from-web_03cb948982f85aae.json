@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_03cb948982f85aae",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Modern library interior with chairs.jpg",
+  "path": "images/saved-from-web/saved-from-web_03cb948982f85aae.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "library",
+    "interior",
+    "chair",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "chairs",
+    "jpg",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "library",
+    "interior",
+    "chair",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "chairs",
+    "jpg",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Modern library interior with chairs.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "modern library interior",
+    "savedAt": "2026-10-28T08:16:05.324Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "Shixart1985",
+    "creator": "Shixart1985",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T08:12:28.435Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Modern_library_interior_with_chairs.jpg"
+  }
+}

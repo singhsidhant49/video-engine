@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_45499f16294b7047",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scenic aerial landscape of vibrant green and yellow fields in the Kashmir Valley, India.",
+  "path": "images/saved-from-web/saved-from-web_45499f16294b7047.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1948,
+  "aspectRatio": 1.3347,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "aerial",
+    "landscape",
+    "vibrant",
+    "green",
+    "yellow",
+    "field",
+    "kashmir",
+    "valley",
+    "india",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "fields",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "aerial",
+    "landscape",
+    "vibrant",
+    "green",
+    "yellow",
+    "field",
+    "kashmir",
+    "valley",
+    "india",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "fields",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Scenic aerial landscape of vibrant green and yellow fields in the Kashmir Valley, India."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Kashmir Valley terraced fields",
+    "savedAt": "2026-10-27T06:44:41.189Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Syed Qaarif Andrabi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-photo-of-farmland-11768992/"
+  }
+}

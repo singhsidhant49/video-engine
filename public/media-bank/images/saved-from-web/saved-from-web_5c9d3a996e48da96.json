@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_5c9d3a996e48da96",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A peaceful beach with a white cross, rocks, and a group of friends enjoying the seaside view.",
+  "path": "images/saved-from-web/saved-from-web_5c9d3a996e48da96.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "peaceful",
+    "beach",
+    "white",
+    "cros",
+    "rock",
+    "group",
+    "friend",
+    "enjoying",
+    "seaside",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "cross",
+    "rocks",
+    "friends",
+    "view",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "peaceful",
+    "beach",
+    "white",
+    "cros",
+    "rock",
+    "group",
+    "friend",
+    "enjoying",
+    "seaside",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "cross",
+    "rocks",
+    "friends",
+    "view",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A peaceful beach with a white cross, rocks, and a group of friends enjoying the seaside view."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ocean cross-section",
+    "savedAt": "2026-10-26T15:08:40.812Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marcio Antonucci",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/group-of-people-sitting-on-the-beach-15875110/"
+  }
+}

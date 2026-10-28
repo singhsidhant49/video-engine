@@ -100,6 +100,16 @@ const KNOWN_VARIANTS = [
     aliases: ['developer coding React component', 'programmer writing React JSX code', 'frontend engineer typing code in editor'],
     values: ['software developer writing React code', 'programmer coding React application', 'developer typing JavaScript code in editor'],
   },
+  {
+    test: /\bdubai\b/i,
+    aliases: ['Dubai Burj Khalifa skyline', 'Dubai Marina modern architecture aerial', 'Downtown Dubai skyline city view', 'Dubai UAE skyscrapers aerial'],
+    values: ['Dubai Burj Khalifa skyline', 'Dubai Marina aerial shot', 'Downtown Dubai skyline'],
+  },
+  {
+    test: /\b(roman\s+empire|ancient\s+rome|ancient\s+roman|roman\s+republic)\b/i,
+    aliases: ['Ancient Roman Colosseum ruins Rome', 'Roman Forum ancient ruins Rome', 'Ancient Roman architecture marble columns', 'Pantheon Rome ancient architecture'],
+    values: ['Ancient Rome Colosseum ruins', 'Roman Forum ancient ruins', 'Ancient Roman architecture'],
+  },
 ];
 
 function targetSubject(request) {

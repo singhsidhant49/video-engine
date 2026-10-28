@@ -80,7 +80,7 @@ Scene = {
   "focus": string | null,    // the single thing the eye should land on
   "camera": "still" | "slow" | "push" | "drift" | "reveal" | "track",
   "continuity": "continue" | "new" | "contrast",
-  "template": "bubblePop" | "popScale" | "floatingChip" | "pulsing" | "typewriter" | "highlight" | "chars" | "bounce" | "editorial" | "cards" | "ledger" | "versus" | null,
+  "template": "editorial" | "highlight" | null,
   "treatment": "cinematic" | "graphic" | "typographic" | "quiet"
 }
 
@@ -106,13 +106,20 @@ EDITORIAL & PACING RULES:
 2. VARY HOLD TIMES: Simple atmospheric photos hold 3–5s; complex diagrams/processes hold 4–7s. Give ideas room to breathe.
 3. SPECIFIC HOOKS: Start with a concrete contradiction or high-stakes fact. Never open with "Have you ever wondered..." or "In this video...".
 4. PAYOFF MANDATE: Every question or mystery opened in the hook must be explicitly answered in the payoff scene.
-5. CINEMATIC FOOTAGE FIRST: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. Provide 2–3 diverse physical queries per scene (e.g. 1 wide environmental context, 1 specific physical subject, 1 macro texture/detail). Never output abstract conceptual queries.
+5. CINEMATIC FOOTAGE FIRST & REAL-IMAGE PRIORITY: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. Prioritize real, tangible photography and authentic footage over abstract art or synthetic graphics across ALL content types. Provide 2–3 diverse physical queries per scene (e.g. 1 wide environmental context, 1 specific physical subject, 1 macro texture/detail). Never output abstract conceptual queries.
 6. USE GRAPHICS SPARINGLY: Use "chart", "process", "quote", "statement", or "comparison" ONLY for 1 or 2 high-impact anchor moments in the entire video. Never use graphic/data kinds in consecutive scenes or in more than 20% of total scenes.
 7. On-screen text supports, never transcribes. "kicker" = a label such as a place/date/name ("NEW YORK · 2008"). "headline" = ≤6 words, a claim or keyword that is NOT a paraphrase of the whole sentence. Most photo scenes need no text at all.
 8. Truth: every number, date, quote, historical superlative, name and document must be real. For a checkable factual claim, provide a direct source URL in scene.source. Never invent a source; if you cannot cite it, rewrite the sentence without the unsupported exact claim.
 9. "emphasis" must be copied verbatim from that scene's narration.
 10. Write for the ear: short sentences, concrete nouns, a strong hook in the first sentence, a payoff at the end.
-11. Direct the feel, not just the content: vary shot scale (establish wide, then move closer), give the key revelations importance 4–5 and the connective sentences 1–2, and mark 1–2 moments per minute as "quiet".`;
+11. Direct the feel, not just the content: vary shot scale (establish wide, then move closer), give the key revelations importance 4–5 and the connective sentences 1–2, and mark 1–2 moments per minute as "quiet".
+12. FINAL SPOKEN PROSE ONLY: Every scene's "narration" must be the literal words spoken by the voice actor. NEVER output meta-commentary, notes, apologies, or placeholder strings like "The narration for this segment is incomplete" or "[To be completed]". If you reach the conclusion, write a concise, complete resolution sentence.
+13. REAL ENTITY & LOCATION RELEVANCE MANDATE: Whenever narration mentions or refers to a specific real-world location (e.g., Dubai, Tokyo, New York, Rome, Paris, Cairo), landmark (e.g., Burj Khalifa, Colosseum, Eiffel Tower, Pyramids, Roman Forum), civilization / historical empire (e.g., Ancient Rome, Roman Empire, Ancient Egypt, Ottoman Empire, Victorian Era), or historical figure/organization:
+    a. You MUST set "entity": { "name": "<Entity/Location/Civilization Name>", "wikipedia": "<Exact English Wikipedia Article Title>" }.
+    b. Your "imageQueries" MUST contain 2–3 tangible real-world photography and footage searches for that exact place, era, or landmark.
+       - If talking about Dubai: imageQueries MUST search for Dubai's real landmarks and skyline (e.g., ["Dubai Burj Khalifa skyline", "Dubai Marina aerial skyscraper view", "Downtown Dubai modern city"]).
+       - If talking about Ancient Rome / Roman Empire: imageQueries MUST search for real Roman architecture, ruins, and artifacts (e.g., ["Roman Colosseum ancient ruins Rome", "Roman Forum ancient marble architecture", "Ancient Roman mosaic archeological artifact"]).
+    c. NEVER show unrelated generic corporate stock, modern office meetings, or abstract metaphorical art when a real place, civilization, or entity is spoken in narration. Show the real thing!`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -552,6 +559,20 @@ const NUMBER_WORD = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twe
 const SPOKEN_CHAPTER_RE = new RegExp(`^\\s*chapter\\s+(?:\\d+|${NUMBER_WORD})\\s*:\\s*`, 'i');
 const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|of|to|for|with|than|into|from|by|as|which|who|whose|when|while|if|because|although|since|until|where|after|before|during|so|that|whether|like|about|between|through|under|over|without|upon|against|among|toward|towards|represents|deposited|stretched|define|shape)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
 
+export const META_NARRATION_RE = /(?:^|\b)(?:(?:the\s+)?narration\s+(?:for\s+this\s+segment\s+)?(?:is|in|was|remains)?\s*incomplete|(?:the\s+)?narration\s+for\s+this\s+(?:segment|scene|part|section)\s+(?:is|in|was|remains)?\s*incomplete|this\s+(?:segment|scene|part|section)\s+(?:is|in|was)?\s*incomplete|incomplete\s+narration|incomplete\s+segment|incomplete\s+sentence|narration\s+(?:is\s+)?missing|placeholder\s+narration|to\s+be\s+completed|tbd\b|\[incomplete\]|\[to\s+be\s+completed\]|as\s+an\s+ai\b|i\s+cannot\s+(?:complete|generate|fulfill)|narration\s+truncated|segment\s+truncated)(?:$|\b)/i;
+
+export function stripMetaNarration(text) {
+  if (!text || typeof text !== 'string') return '';
+  const sentences = String(text).split(/(?<=[.!?])\s+/).filter(Boolean);
+  const cleanSentences = sentences.filter((s) => !META_NARRATION_RE.test(s.trim()));
+  return cleanSentences.join(' ').trim();
+}
+
+export function isMetaNarration(text) {
+  if (!text || typeof text !== 'string') return false;
+  return META_NARRATION_RE.test(text.trim());
+}
+
 export function stripSpokenChapterLabel(text) {
   return String(text || '').replace(SPOKEN_CHAPTER_RE, '').trim();
 }
@@ -568,6 +589,7 @@ export function narrationCompletenessIssues(scenes = []) {
   const issues = [];
   for (let index = 0; index < scenes.length; index++) {
     const narration = String(scenes[index]?.narration || scenes[index]?.script || '').trim();
+    const isMeta = isMetaNarration(narration);
     const sentences = narration.split(/(?<=[.!?])\s+/).filter(Boolean);
     const lastSentence = sentences.at(-1) || narration;
     const lastWords = lastSentence.replace(/[.!?]+$/, '').trim().split(/\s+/).filter(Boolean);
@@ -575,13 +597,15 @@ export function narrationCompletenessIssues(scenes = []) {
     const dangling = DANGLING_END_RE.test(narration);
     const tinyFragment = (lastWords.length === 1 && /^(?:this|that|these|those|it)[.!?]?$/i.test(lastSentence.trim()))
       || (lastWords.length === 2 && /^(?:their|our|his|her)\b/i.test(lastSentence));
-    if (!/[.!?]$/.test(narration) || malformed || dangling || tinyFragment) {
+    if (isMeta || !/[.!?]$/.test(narration) || malformed || dangling || tinyFragment) {
       issues.push({
-        type: 'incomplete_narration',
+        type: isMeta ? 'meta_narration' : 'incomplete_narration',
         severity: 'error',
         sceneIndex: index,
         sceneId: scenes[index]?.id || null,
-        message: `Scene ${index + 1} ends with an incomplete or malformed sentence: "${lastSentence.slice(-120)}"`,
+        message: isMeta
+          ? `Scene ${index + 1} contains meta-commentary or placeholder narration: "${narration}"`
+          : `Scene ${index + 1} ends with an incomplete or malformed sentence: "${lastSentence.slice(-120)}"`,
       });
     }
   }
@@ -590,13 +614,21 @@ export function narrationCompletenessIssues(scenes = []) {
 
 function removeTrailingFragment(text) {
   const clean = String(text || '').replace(/,\s*\./g, '.').trim();
-  if (!narrationCompletenessIssues([{ narration: clean }]).length) return clean;
-  const sentences = clean.match(/[^.!?]+[.!?]+/g)?.map((part) => part.trim()).filter(Boolean) || [];
-  const complete = (/[.!?]$/.test(clean) ? sentences.slice(0, -1) : sentences).join(' ').trim();
-  return complete && complete.split(/\s+/).length >= 4 ? complete : clean;
+  const stripped = stripMetaNarration(clean);
+  if (!stripped) return '';
+  if (!narrationCompletenessIssues([{ narration: stripped }]).length) return stripped;
+  const sentences = stripped.match(/[^.!?]+[.!?]+/g)?.map((part) => part.trim()).filter(Boolean) || [];
+  const complete = (/[.!?]$/.test(stripped) ? sentences.slice(0, -1) : sentences).join(' ').trim();
+  return complete && complete.split(/\s+/).length >= 4 && !isMetaNarration(complete) ? complete : stripped;
 }
 
 export async function repairIncompleteNarration(plan, llm) {
+  // Pre-pass: sanitize any meta-commentary sentences embedded in the script
+  for (const scene of plan?.scenes || []) {
+    if (scene?.narration && META_NARRATION_RE.test(scene.narration)) {
+      scene.narration = stripMetaNarration(scene.narration);
+    }
+  }
   let issues = narrationCompletenessIssues(plan?.scenes || []);
   if (!issues.length) return plan;
   for (let pass = 0; llm && pass < 2 && issues.length; pass++) {
@@ -608,17 +640,22 @@ export async function repairIncompleteNarration(plan, llm) {
       const repaired = await callJson(llm, [
         {
           role: 'system',
-          content: 'You repair unfinished documentary narration. Complete grammar and meaning using only facts already present in the supplied text. Do not add numbers, dates, names, quotations, superlatives, or new claims. Reply with JSON only.',
+          content: 'You repair unfinished documentary narration. Complete grammar and meaning naturally using only facts already present in the supplied text. CRITICAL: Never write meta-commentary, notes, or explanations such as "The narration for this segment is incomplete" or "[To be completed]". Output ONLY natural, complete narrative sentences ready to be spoken aloud. Reply with JSON only.',
         },
         {
           role: 'user',
-          content: `Repair each incomplete narration below. Return {"repairs":[{"index":number,"narration":string}]}. Preserve the intended meaning, make every entry end in a complete sentence, and do not include spoken chapter numbers.\n${JSON.stringify(targets)}`,
+          content: `Repair each incomplete narration below. Return {"repairs":[{"index":number,"narration":string}]}. Preserve the intended meaning, make every entry end in a complete sentence, and do not include spoken chapter numbers or meta-text.\n${JSON.stringify(targets)}`,
         },
       ], { temperature: 0.2, retries: 2, timeoutMs: 60000 });
       for (const item of repaired?.repairs || []) {
         const index = Number(item.index);
         if (!Number.isInteger(index) || !plan.scenes[index] || !item.narration) continue;
-        plan.scenes[index].narration = stripSpokenChapterLabel(String(item.narration).replace(/\s+/g, ' ').trim());
+        const candidate = stripSpokenChapterLabel(String(item.narration).replace(/\s+/g, ' ').trim());
+        if (isMetaNarration(candidate)) {
+          console.warn(`   Filtered out meta-commentary from repair response: "${candidate}"`);
+          continue;
+        }
+        plan.scenes[index].narration = candidate;
       }
       issues = narrationCompletenessIssues(plan.scenes);
     } catch (error) {
@@ -632,13 +669,17 @@ export async function repairIncompleteNarration(plan, llm) {
   for (const issue of narrationCompletenessIssues(plan.scenes)) {
     const scene = plan.scenes[issue.sceneIndex];
     if (scene) {
-      const repaired = removeTrailingFragment(scene.narration);
-      const unrecoverableMicroFragment = repaired === scene.narration
-        && repaired.split(/\s+/).filter(Boolean).length <= 8;
-      scene.narration = unrecoverableMicroFragment ? '' : repaired;
+      if (isMetaNarration(scene.narration)) {
+        scene.narration = '';
+      } else {
+        const repaired = removeTrailingFragment(scene.narration);
+        const unrecoverableMicroFragment = repaired === scene.narration
+          && repaired.split(/\s+/).filter(Boolean).length <= 8;
+        scene.narration = unrecoverableMicroFragment ? '' : repaired;
+      }
     }
   }
-  plan.scenes = (plan.scenes || []).filter((scene) => String(scene.narration || '').trim());
+  plan.scenes = (plan.scenes || []).filter((scene) => String(scene.narration || '').trim() && !isMetaNarration(scene.narration));
   plan.script = (plan.scenes || []).map((scene) => scene.narration).join(' ');
   return plan;
 }
@@ -754,7 +795,15 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     const rawNarration = str(s?.narration || s?.voiceoverSentence);
     const spokenChapter = spokenChapterMetadata(rawNarration);
     let narration = str(stripSpokenChapterLabel(rawNarration));
-    if (!narration) continue;
+    if (!narration || isMetaNarration(narration)) continue;
+    if (META_NARRATION_RE.test(narration)) {
+      narration = narration
+        .split(/(?<=[.!?])\s+/)
+        .filter((sent) => !isMetaNarration(sent))
+        .join(' ')
+        .trim();
+      if (!narration) continue;
+    }
     if (!/[.!?]["')\]]*$/.test(narration)) {
       narration = `${narration}.`;
     }
@@ -778,6 +827,28 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     const queries = [...(Array.isArray(s.imageQueries) ? s.imageQueries : []), s.params?.assetQuery, s.params?.backgroundAssetQuery]
       .map((q) => str(q, 12)).filter(Boolean);
     const entityName = str(s.entity?.name, 8);
+    let inferredEntity = null;
+    if (!entityName) {
+      if (/\bdubai\b/i.test(narration)) {
+        inferredEntity = { name: 'Dubai', wikipedia: 'Dubai' };
+      } else if (/\b(colosseum|flavian\s+amphitheatre)\b/i.test(narration)) {
+        inferredEntity = { name: 'Colosseum', wikipedia: 'Colosseum' };
+      } else if (/\b(roman\s+empire|ancient\s+rome|ancient\s+roman)\b/i.test(narration)) {
+        inferredEntity = { name: 'Ancient Rome', wikipedia: 'Ancient Rome' };
+      }
+    }
+    const resolvedEntity = entityName
+      ? { name: entityName, wikipedia: str(s.entity?.wikipedia, 10) || str(s.params?.wikiQuery, 10) || entityName }
+      : inferredEntity;
+
+    if (resolvedEntity?.name === 'Dubai' && !queries.some((q) => /dubai|burj/i.test(q))) {
+      queries.unshift('Dubai Burj Khalifa skyline', 'Dubai Marina aerial view');
+    } else if (resolvedEntity?.name === 'Ancient Rome' && !queries.some((q) => /rome|roman|colosseum/i.test(q))) {
+      queries.unshift('Roman Colosseum ancient ruins Rome', 'Roman Forum ancient ruins Rome');
+    } else if (resolvedEntity?.name === 'Colosseum' && !queries.some((q) => /colosseum|colosseo/i.test(q))) {
+      queries.unshift('Roman Colosseum ancient ruins Rome');
+    }
+
     let source = null;
     try {
       if (s.source?.url) {
@@ -785,8 +856,8 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
         if (['http:', 'https:'].includes(parsed.protocol)) source = { url: parsed.toString(), label: str(s.source.label, 12) || parsed.hostname };
       }
     } catch { /* invalid source remains unverified */ }
-    if (!source && entityName && s.entity?.wikipedia) {
-      source = { url: `https://en.wikipedia.org/wiki/${encodeURIComponent(s.entity.wikipedia)}`, label: `${entityName} reference` };
+    if (!source && resolvedEntity?.name && resolvedEntity?.wikipedia) {
+      source = { url: `https://en.wikipedia.org/wiki/${encodeURIComponent(resolvedEntity.wikipedia)}`, label: `${resolvedEntity.name} reference` };
     }
     const pick = (v, list, fallback) => (list.includes(v) ? v : fallback);
     const defaultTreatment = ['atmosphere', 'subject'].includes(kind) ? 'cinematic' : kind === 'statement' ? 'typographic' : 'graphic';
@@ -797,7 +868,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
       kind,
       visual: str(s.visual) || '',
       imageQueries: [...new Set(queries)].slice(0, 3),
-      entity: entityName ? { name: entityName, wikipedia: str(s.entity?.wikipedia, 10) || str(s.params?.wikiQuery, 10) || entityName } : null,
+      entity: resolvedEntity,
       source,
       text: kicker || headline ? { kicker, headline } : null,
       emphasis: emphasis && coverage(emphasis, narration) >= 0.99 ? emphasis : null,
@@ -818,6 +889,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
       requiredComprehensionTime: Number(s.requiredComprehensionTime) || (['process', 'timeline', 'comparison', 'chart'].includes(kind) ? 5.0 : ['statistic', 'document', 'ui', 'code'].includes(kind) ? 3.5 : 2.5),
       visualChangeTolerance: ['low', 'moderate', 'high'].includes(s.visualChangeTolerance) ? s.visualChangeTolerance : (kind === 'atmosphere' ? 'high' : ['process', 'chart', 'comparison'].includes(kind) ? 'low' : 'moderate'),
       pauseAfterSec: Number(s.pauseAfterSec) || (s.purpose === 'hook' || s.purpose === 'reveal' ? 0.3 : 0),
+      template: ['editorial', 'highlight'].includes(s.template) ? s.template : null,
     });
     if (s.emphasis && !scenes[scenes.length - 1].emphasis) diagnostics.invalidEmphasis++;
     if (s.text?.headline && !scenes[scenes.length - 1].text?.headline) diagnostics.droppedHeadlines++;

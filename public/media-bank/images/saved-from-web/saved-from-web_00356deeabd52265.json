@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_00356deeabd52265",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Yaks on Manali, Himachal Pradesh.jpg",
+  "path": "images/saved-from-web/saved-from-web_00356deeabd52265.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "yak",
+    "manali",
+    "himachal",
+    "pradesh",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "yaks",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "yak",
+    "manali",
+    "himachal",
+    "pradesh",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "yaks",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Yaks on Manali, Himachal Pradesh.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Manali, Himachal Pradesh",
+    "savedAt": "2026-10-27T07:02:34.679Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Shameer Thajudeen",
+    "creator": "Shameer Thajudeen",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-27T07:01:12.993Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Yaks_on_Manali,_Himachal_Pradesh.jpg"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_0bba17edcd36748e",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/wildflowers-swaying-in-a-lush-green-meadow-32541680/",
+  "path": "video/saved-from-web/saved-from-web_0bba17edcd36748e.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "wildflower",
+    "swaying",
+    "lush",
+    "green",
+    "meadow",
+    "32541680",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "wildflowers-swaying-in-a-lush-green-meadow-32541680",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "wildflower",
+    "swaying",
+    "lush",
+    "green",
+    "meadow",
+    "32541680",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "wildflowers-swaying-in-a-lush-green-meadow-32541680",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/wildflowers-swaying-in-a-lush-green-meadow-32541680/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "wildflowers swaying meadow",
+    "savedAt": "2026-10-26T16:25:21.992Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Đào Thân",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/wildflowers-swaying-in-a-lush-green-meadow-32541680/"
+  }
+}

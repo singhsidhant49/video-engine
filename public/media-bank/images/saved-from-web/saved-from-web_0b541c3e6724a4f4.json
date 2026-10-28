@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_0b541c3e6724a4f4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial view of Auckland skyline at sunrise with fog enveloping the city.",
+  "path": "images/saved-from-web/saved-from-web_0b541c3e6724a4f4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1461,
+  "aspectRatio": 1.7796,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "auckland",
+    "skyline",
+    "sunrise",
+    "fog",
+    "enveloping",
+    "city",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "auckland",
+    "skyline",
+    "sunrise",
+    "fog",
+    "enveloping",
+    "city",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial view of Auckland skyline at sunrise with fog enveloping the city."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunrise modern city skyline",
+    "savedAt": "2026-10-28T07:20:13.152Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ollie Craig",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/drone-shot-of-auckland-at-sunset-18201085/"
+  }
+}

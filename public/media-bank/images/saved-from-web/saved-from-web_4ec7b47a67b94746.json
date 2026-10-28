@@ -6,9 +6,9 @@
   "path": "images/saved-from-web/saved-from-web_4ec7b47a67b94746.jpg",
   "category": "saved-from-web",
   "extension": ".jpg",
-  "width": 7200,
-  "height": 4050,
-  "aspectRatio": 1.7778,
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
   "orientation": "landscape",
   "tags": [
     "saved-from-web",
@@ -31,9 +31,30 @@
     "connection",
     "soft",
     "color",
-    "brain",
-    "scan",
-    "pathway",
+    "connections",
+    "colors"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "rendering",
+    "neural",
+    "network",
+    "neuron",
+    "connection",
+    "soft",
+    "color",
     "connections",
     "colors"
   ],
@@ -54,10 +75,11 @@
     "goodForFullBleed": true
   },
   "quality": "curated",
+  "verificationStatus": "verified",
   "source": {
     "provider": "pexels-image",
-    "originalQuery": "brain scan glowing neural pathways",
-    "savedAt": "2026-10-23T07:21:33.640Z"
+    "originalQuery": "brain neurons network glowing",
+    "savedAt": "2026-10-28T08:36:27.733Z"
   },
   "license": {
     "name": "Pexels License",

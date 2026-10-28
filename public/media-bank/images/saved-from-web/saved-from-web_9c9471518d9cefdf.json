@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_9c9471518d9cefdf",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A man sits comfortably on a sofa using his smartphone while enjoying a cup of coffee.",
+  "path": "images/saved-from-web/saved-from-web_9c9471518d9cefdf.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "sit",
+    "comfortably",
+    "sofa",
+    "using",
+    "hi",
+    "smartphone",
+    "while",
+    "enjoying",
+    "cup",
+    "coffee",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "sits",
+    "his",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "sit",
+    "comfortably",
+    "sofa",
+    "using",
+    "hi",
+    "smartphone",
+    "while",
+    "enjoying",
+    "cup",
+    "coffee",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "sits",
+    "his",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A man sits comfortably on a sofa using his smartphone while enjoying a cup of coffee."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "man procrastinating on smartphone couch",
+    "savedAt": "2026-10-28T08:35:08.470Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Gustavo Fring",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-sitting-on-sofa-7155725/"
+  }
+}

@@ -189,6 +189,28 @@ test('offline narration repair drops only a mechanically truncated trailing frag
   assert.equal(narrationCompletenessIssues(repaired.scenes).length, 0);
 });
 
+test('narration repair and normalizePlan strip placeholder and meta-commentary narration', async () => {
+  const plan = {
+    scenes: [
+      { id: 's1', narration: 'The internet is remarkably physical.' },
+      { id: 's2', narration: 'The narration for this segment is incomplete.' },
+      { id: 's3', narration: 'Every cable reaches across the dark ocean. The narration for this segment is incomplete.' },
+      { id: 's4', narration: 'This segment is incomplete.' },
+    ],
+  };
+
+  const repaired = await repairIncompleteNarration(plan, null);
+  assert.equal(repaired.scenes.some((s) => s.id === 's2'), false);
+  assert.equal(repaired.scenes.some((s) => s.id === 's4'), false);
+  assert.equal(repaired.scenes.find((s) => s.id === 's3')?.narration, 'Every cable reaches across the dark ocean.');
+  assert.equal(narrationCompletenessIssues(repaired.scenes).length, 0);
+
+  const normalized = normalizePlan(plan, { topic: 'Subsea internet cables' });
+  assert.equal(normalized.scenes.some((s) => /incomplete/i.test(s.narration)), false);
+  assert.equal(normalized.scenes.length, 2);
+  assert.equal(normalized.scenes[1].narration, 'Every cable reaches across the dark ocean.');
+});
+
 test('cool nighttime meditation language does not create a technical heat-dissipation query', () => {
   const need = buildVisibleNeed({
     id: 'garden-detail',

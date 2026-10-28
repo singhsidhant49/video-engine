@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_68b7b241c031477e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of flames on a gas burner. Dark and intense atmosphere with glowing fire.",
+  "path": "images/saved-from-web/saved-from-web_68b7b241c031477e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "flame",
+    "ga",
+    "burner",
+    "dark",
+    "intense",
+    "atmosphere",
+    "glowing",
+    "fire",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "flames",
+    "gas",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "flame",
+    "ga",
+    "burner",
+    "dark",
+    "intense",
+    "atmosphere",
+    "glowing",
+    "fire",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "flames",
+    "gas",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of flames on a gas burner. Dark and intense atmosphere with glowing fire."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "gas burner flame out",
+    "savedAt": "2026-10-26T15:25:48.320Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Juan Pablo Serrano",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/burned-case-1209928/"
+  }
+}

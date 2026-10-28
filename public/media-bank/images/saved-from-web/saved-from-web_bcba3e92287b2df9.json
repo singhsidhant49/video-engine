@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_bcba3e92287b2df9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Breathtaking view of the Himalayan mountain range lit by sunset hues, as seen from Nainital, India.",
+  "path": "images/saved-from-web/saved-from-web_bcba3e92287b2df9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1652,
+  "aspectRatio": 1.5738,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "himalayan",
+    "mountain",
+    "range",
+    "lit",
+    "sunset",
+    "hue",
+    "seen",
+    "from",
+    "nainital",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "hues"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "himalayan",
+    "mountain",
+    "range",
+    "lit",
+    "sunset",
+    "hue",
+    "seen",
+    "from",
+    "nainital",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "hues"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Breathtaking view of the Himalayan mountain range lit by sunset hues, as seen from Nainital, India."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "himalayan range background end screen",
+    "savedAt": "2026-10-27T07:06:15.811Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Angshu Purkait",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-of-hills-with-mountains-behind-at-sunset-20848833/"
+  }
+}

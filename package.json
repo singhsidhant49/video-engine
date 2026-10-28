@@ -28,7 +28,8 @@
     "cache:clean": "node src/cli/cacheStats.js clean",
     "pipeline:stage": "node src/cli/runStage.js",
     "media-bank:sync": "node scripts/extractMediaBank.js",
-    "api:migrate-owner": "node scripts/migrateVideoOwner.js"
+    "api:migrate-owner": "node scripts/migrateVideoOwner.js",
+    "runs:clean": "node src/cli/cleanRuns.js"
   },
   "dependencies": {
     "@huggingface/transformers": "4.3.1",

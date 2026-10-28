@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_dfe27cf324c371c6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A conceptual portrait of a bearded man with long hair holding ancient scrolls, evoking a historical or religious theme.",
+  "path": "images/saved-from-web/saved-from-web_dfe27cf324c371c6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "conceptual",
+    "portrait",
+    "bearded",
+    "man",
+    "long",
+    "hair",
+    "holding",
+    "ancient",
+    "scroll",
+    "evoking",
+    "historical",
+    "religiou",
+    "theme",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "scrolls",
+    "religious"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "conceptual",
+    "portrait",
+    "bearded",
+    "man",
+    "long",
+    "hair",
+    "holding",
+    "ancient",
+    "scroll",
+    "evoking",
+    "historical",
+    "religiou",
+    "theme",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "scrolls",
+    "religious"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A conceptual portrait of a bearded man with long hair holding ancient scrolls, evoking a historical or religious theme."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ancient scribes copying scrolls",
+    "savedAt": "2026-10-28T08:14:53.033Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ivan S",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-holding-worn-out-paper-8957694/"
+  }
+}

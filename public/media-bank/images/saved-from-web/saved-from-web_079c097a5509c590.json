@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_079c097a5509c590",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Portrait of a smiling Buddhist monk in traditional maroon robes, conveying tranquility.",
+  "path": "images/saved-from-web/saved-from-web_079c097a5509c590.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "smiling",
+    "buddhist",
+    "monk",
+    "traditional",
+    "maroon",
+    "robe",
+    "conveying",
+    "tranquility",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "robes"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "smiling",
+    "buddhist",
+    "monk",
+    "traditional",
+    "maroon",
+    "robe",
+    "conveying",
+    "tranquility",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "robes"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Portrait of a smiling Buddhist monk in traditional maroon robes, conveying tranquility."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Ladakhi monk smiling",
+    "savedAt": "2026-10-27T06:46:57.970Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Abhishek Agarwal",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/portrait-of-a-smiling-monk-17093552/"
+  }
+}

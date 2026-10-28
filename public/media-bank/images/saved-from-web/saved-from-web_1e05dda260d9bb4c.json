@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_1e05dda260d9bb4c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Street artist spray painting on a canvas with colorful graffiti background indoors.",
+  "path": "images/saved-from-web/saved-from-web_1e05dda260d9bb4c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "street",
+    "artist",
+    "spray",
+    "painting",
+    "canva",
+    "colorful",
+    "graffiti",
+    "background",
+    "indoor",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "canvas",
+    "indoors"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "street",
+    "artist",
+    "spray",
+    "painting",
+    "canva",
+    "colorful",
+    "graffiti",
+    "background",
+    "indoor",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "canvas",
+    "indoors"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Street artist spray painting on a canvas with colorful graffiti background indoors."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "artist painting canvas splash",
+    "savedAt": "2026-10-28T08:38:16.570Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Felicity Tai",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-spray-painting-on-white-cloth-7951572/"
+  }
+}

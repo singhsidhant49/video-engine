@@ -536,8 +536,11 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     };
   }
 
-  // Authentic Documentary Entity Match:
+  // Authentic Documentary / Real Entity Match:
   const isDocEntitySource = candidate.providerId === 'wikipedia' || candidate.providerId === 'commons' || candidate.provider === 'wikipedia' || candidate.provider === 'commons';
+  const isRealPhotoOrVideoSource = isDocEntitySource
+    || ['pexels-image', 'pexels-video', 'pixabay-image', 'brave-image', 'local-bank'].includes(candidate.providerId)
+    || ['pexels-image', 'pexels-video', 'pixabay-image', 'brave-image', 'local-bank'].includes(candidate.provider);
   const docEntities = [
     ...(visibleNeed?.requiredEntities || []),
     ...(visibleNeed?.visualProposition?.requiredVisibleEntities || []),
@@ -546,7 +549,7 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     ...(visibleNeed?.primaryConcept ? [visibleNeed.primaryConcept] : []),
   ];
   let matchedDocEntity = null;
-  const matchesDocEntity = isDocEntitySource && docEntities.some((ent) => {
+  const matchesDocEntity = isRealPhotoOrVideoSource && docEntities.some((ent) => {
     if (!ent || typeof ent !== 'string') return false;
     const eTokens = ent.toLowerCase().split(/\s+/).filter((t) => t.length > 2);
     if (eTokens.length > 0 && eTokens.every((t) => candidateText.toLowerCase().includes(t))) {
@@ -555,18 +558,19 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     }
     return false;
   });
-  if (isDocEntitySource && matchesDocEntity) {
+  if (isRealPhotoOrVideoSource && matchesDocEntity) {
+    const isPrimaryDoc = isDocEntitySource;
     return {
       classification: 'DIRECT',
-      subjectMatch: Math.max(0.95, comparison.subjectMatch),
+      subjectMatch: Math.max(isPrimaryDoc ? 0.95 : 0.92, comparison.subjectMatch),
       actionMatch: comparison.actionMatch,
-      environmentMatch: Math.max(0.85, comparison.environmentMatch),
-      objectMatch: Math.max(0.90, comparison.objectMatch),
-      meaningMatch: 0.95,
-      evidenceMatch: 0.95,
-      semanticDistance: 0.10,
-      confidence: 0.95,
-      reasons: [`authentic documentary entity visual for "${matchedDocEntity || 'entity'}"`],
+      environmentMatch: Math.max(isPrimaryDoc ? 0.85 : 0.82, comparison.environmentMatch),
+      objectMatch: Math.max(isPrimaryDoc ? 0.90 : 0.88, comparison.objectMatch),
+      meaningMatch: isPrimaryDoc ? 0.95 : 0.92,
+      evidenceMatch: isPrimaryDoc ? 0.95 : 0.88,
+      semanticDistance: isPrimaryDoc ? 0.10 : 0.12,
+      confidence: isPrimaryDoc ? 0.95 : 0.92,
+      reasons: [`authentic real visual for "${matchedDocEntity || 'entity'}"`],
       accept: true,
       comparison,
     };

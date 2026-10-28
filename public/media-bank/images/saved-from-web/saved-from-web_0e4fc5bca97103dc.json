@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_0e4fc5bca97103dc",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Captivating abstract image of swirling blue smoke on a dark background.",
+  "path": "images/saved-from-web/saved-from-web_0e4fc5bca97103dc.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1625,
+  "aspectRatio": 1.6,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "captivating",
+    "swirling",
+    "blue",
+    "smoke",
+    "dark",
+    "background",
+    "image"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "captivating",
+    "swirling",
+    "blue",
+    "smoke",
+    "dark",
+    "background",
+    "image"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "smoke curling upward dark",
+    "savedAt": "2026-10-28T06:04:12.874Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marek Piwnicki",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/blue-smoke-on-black-background-8991552/"
+  }
+}

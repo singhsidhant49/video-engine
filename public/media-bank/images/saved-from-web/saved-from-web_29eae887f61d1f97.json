@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_29eae887f61d1f97",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Dramatic sunset over a modern city skyline with high-rise buildings and a vibrant sky.",
+  "path": "images/saved-from-web/saved-from-web_29eae887f61d1f97.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "sunset",
+    "over",
+    "modern",
+    "city",
+    "skyline",
+    "high",
+    "rise",
+    "building",
+    "vibrant",
+    "sky",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "high-rise",
+    "buildings"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "sunset",
+    "over",
+    "modern",
+    "city",
+    "skyline",
+    "high",
+    "rise",
+    "building",
+    "vibrant",
+    "sky",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "high-rise",
+    "buildings"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Dramatic sunset over a modern city skyline with high-rise buildings and a vibrant sky."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "modern city skyline sunset",
+    "savedAt": "2026-10-26T13:23:45.213Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kevin Yang",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scenic-view-of-a-city-at-dusk-19494803/"
+  }
+}

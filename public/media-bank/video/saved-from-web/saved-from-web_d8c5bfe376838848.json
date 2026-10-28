@@ -1,0 +1,102 @@
+{
+  "id": "saved-from-web_d8c5bfe376838848",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/hands-typing-code-on-laptop-keyboard-close-up-29474195/",
+  "path": "video/saved-from-web/saved-from-web_d8c5bfe376838848.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "operating",
+    "keyboard",
+    "workstation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "hand",
+    "typing",
+    "laptop",
+    "close",
+    "29474195",
+    "https",
+    "pexels",
+    "video",
+    "hands-typing-code-on-laptop-keyboard-close-up-29474195",
+    "code editor screen"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "operating",
+    "keyboard",
+    "workstation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "hand",
+    "typing",
+    "laptop",
+    "close",
+    "29474195",
+    "https",
+    "pexels",
+    "video",
+    "hands-typing-code-on-laptop-keyboard-close-up-29474195",
+    "code editor screen"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "computer code editor on screen"
+  ],
+  "actions": [
+    "operating computer keyboard or workstation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "close up hand hesitating over laptop keyboard",
+    "savedAt": "2026-10-28T08:32:51.962Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "khanhhoangminh  3",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/hands-typing-code-on-laptop-keyboard-close-up-29474195/"
+  }
+}

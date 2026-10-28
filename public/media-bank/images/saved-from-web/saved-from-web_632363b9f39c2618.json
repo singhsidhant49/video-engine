@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_632363b9f39c2618",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Police Academy Stunt Show - explosion and car flip.jpg",
+  "path": "images/saved-from-web/saved-from-web_632363b9f39c2618.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1600,
+  "height": 1278,
+  "aspectRatio": 1.252,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "municipal",
+    "street",
+    "sanitation",
+    "worker",
+    "garbage",
+    "truck",
+    "city",
+    "dusk",
+    "static",
+    "presentation",
+    "police",
+    "academy",
+    "stunt",
+    "explosion",
+    "car",
+    "flip",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "municipal",
+    "street",
+    "sanitation",
+    "worker",
+    "garbage",
+    "truck",
+    "city",
+    "dusk",
+    "static",
+    "presentation",
+    "police",
+    "academy",
+    "stunt",
+    "explosion",
+    "car",
+    "flip",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "municipal street sanitation worker or garbage truck"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "car explosion movie",
+    "savedAt": "2026-10-26T15:08:25.422Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 2.0",
+    "license_name": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "author": "Dave Keeshan from Sydney, Australia",
+    "creator": "Dave Keeshan from Sydney, Australia",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T15:01:19.949Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Police_Academy_Stunt_Show_-_explosion_and_car_flip.jpg"
+  }
+}

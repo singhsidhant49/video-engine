@@ -1,10 +1,25 @@
 import { z } from 'zod-api';
 import { isMeditationNarration } from '../audio/narrationProfile.js';
 
-export const ContentTypeSchema = z.enum([
-  'auto', 'documentary', 'investigative', 'explainer', 'educational',
-  'tutorial', 'meditation', 'audiobook', 'motivational', 'story',
+// Canonical 6 Production Content Types (+ auto)
+export const CANONICAL_CONTENT_TYPES = Object.freeze([
+  'documentary',
+  'explainer',
+  'meditation',
+  'motivational',
+  'audiobook',
+  'story',
 ]);
+
+export const ContentTypeSchema = z.enum([
+  'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  // Backward-compatible aliases normalized on ingress:
+  'investigative', 'educational', 'tutorial',
+]).transform((val) => {
+  if (val === 'investigative') return 'documentary';
+  if (val === 'educational' || val === 'tutorial') return 'explainer';
+  return val;
+});
 
 export const PacingModeSchema = z.enum([
   'auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid',
@@ -46,10 +61,7 @@ function inferContentType(topic = '', niche = '') {
   const text = `${niche} ${topic}`.toLowerCase();
   if (isMeditationNarration({ topic, niche })) return 'meditation';
   if (/\b(?:audiobook|narrated book|book summary|bedtime story)\b/.test(text)) return 'audiobook';
-  if (/\b(?:crime|fraud|scam|mystery|investigat|scandal|unsolved)\b/.test(text)) return 'investigative';
-  if (/\b(?:history|historical|documentary|ancient|empire|war|biography)\b/.test(text)) return 'documentary';
-  if (/\b(?:tutorial|how to|walkthrough|step by step)\b/.test(text)) return 'tutorial';
-  if (/\b(?:facts|tips|quiz|learn|educational|listicle)\b/.test(text)) return 'educational';
+  if (/\b(?:history|historical|documentary|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat|scandal|unsolved)\b/.test(text)) return 'documentary';
   if (/\b(?:motivation|self improvement|discipline|mindset|inspiration)\b/.test(text)) return 'motivational';
   if (/\b(?:story|tale|narrative)\b/.test(text)) return 'story';
   return 'explainer';
@@ -57,15 +69,70 @@ function inferContentType(topic = '', niche = '') {
 
 function defaultPacingMode(contentType, format) {
   if (contentType === 'meditation' || contentType === 'audiobook') return 'contemplative';
-  if (['documentary', 'investigative', 'story'].includes(contentType)) return 'cinematic';
-  if (['educational', 'tutorial', 'motivational'].includes(contentType)) return format === 'shorts' ? 'rapid' : 'energetic';
-  return format === 'shorts' ? 'energetic' : 'balanced';
+  if (['documentary', 'story'].includes(contentType)) return 'cinematic';
+  if (contentType === 'motivational') return format === 'shorts' ? 'rapid' : 'energetic';
+  return format === 'shorts' ? 'rapid' : 'balanced';
+}
+
+export const ALLOWED_VOICES = Object.freeze([
+  'af_heart',  // Heart (Female - Warm, Calm, Smooth)
+  'af_bella',  // Bella (Female - Crisp, Polished, Modern)
+  'af_kore',   // Kore (Female - Balanced, Instructional)
+  'am_puck',   // Puck (Male - Agile, Resonant, Confident)
+  'bm_george', // George (Male - British Documentary Narrator)
+  'am_adam',   // Adam (Male - Direct, Focused)
+  'af_sky',    // Sky (Female - Bright, Youthful, Shorts)
+  'af_nicole', // Nicole (Female - Soft Whisper, Sleep & Bedtime)
+]);
+
+const VOICE_ALIAS_MAP = Object.freeze({
+  heart: 'af_heart',
+  bella: 'af_bella',
+  kore: 'af_kore',
+  puck: 'am_puck',
+  puch: 'am_puck',
+  george: 'bm_george',
+  adam: 'am_adam',
+  sky: 'af_sky',
+  nicole: 'af_nicole',
+});
+
+export function normalizeSelectedVoice(voice = '', contentType = 'auto') {
+  if (!voice || voice === 'auto') return defaultVoiceForContentType(contentType);
+  const clean = String(voice).trim().toLowerCase();
+  if (ALLOWED_VOICES.includes(clean)) return clean;
+  if (VOICE_ALIAS_MAP[clean]) return VOICE_ALIAS_MAP[clean];
+  // Unsupported voice: enforce fallback to user's curated default for this content type
+  return defaultVoiceForContentType(contentType);
+}
+
+export function defaultVoiceForContentType(contentType = 'auto') {
+  switch (contentType) {
+    case 'meditation':
+      return 'af_heart';
+    case 'documentary':
+    case 'investigative':
+      return 'bm_george';
+    case 'motivational':
+      return 'am_puck';
+    case 'story':
+      return 'af_heart';
+    case 'audiobook':
+      return 'af_heart';
+    case 'tutorial':
+      return 'af_kore';
+    case 'educational':
+    case 'explainer':
+    default:
+      return 'af_bella';
+  }
 }
 
 export function resolveProductionProfile({ topic = '', niche = '', format = 'landscape', channelProfile = {} } = {}) {
   const channel = ChannelProfileSchema.parse(channelProfile || {});
   const contentType = channel.contentType === 'auto' ? inferContentType(topic, niche) : channel.contentType;
   const pacingMode = channel.pacingMode === 'auto' ? defaultPacingMode(contentType, format) : channel.pacingMode;
+  const voice = normalizeSelectedVoice(channel.voice, contentType);
   const base = BASE_PACING[pacingMode];
   const verticalScale = format === 'shorts' && !['contemplative', 'cinematic'].includes(pacingMode) ? 0.82 : 1;
   const pacing = {
@@ -82,6 +149,7 @@ export function resolveProductionProfile({ topic = '', niche = '', format = 'lan
     audience: channel.audience,
     tone: channel.tone,
     language: channel.language,
+    voice,
     captions: channel.captions,
     pacing,
   };

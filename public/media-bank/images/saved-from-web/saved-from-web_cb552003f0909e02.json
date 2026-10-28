@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_cb552003f0909e02",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern server rack with blue lighting in a secure data center environment.",
+  "path": "images/saved-from-web/saved-from-web_cb552003f0909e02.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "server",
+    "rack",
+    "blue",
+    "lighting",
+    "secure",
+    "data",
+    "center",
+    "environment",
+    "datacenter",
+    "hall",
+    "cable",
+    "static",
+    "presentation",
+    "server rack",
+    "data center infrastructure"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "server",
+    "rack",
+    "blue",
+    "lighting",
+    "secure",
+    "data",
+    "center",
+    "environment",
+    "datacenter",
+    "hall",
+    "cable",
+    "static",
+    "presentation",
+    "server rack",
+    "data center infrastructure"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Modern server rack with blue lighting in a secure data center environment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "datacenter hall with server racks and cables"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "modern datacenter server rack lights",
+    "savedAt": "2026-10-26T15:09:46.900Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "panumas nikhomkhai",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-a-blue-server-rack-in-datacenter-37730211/"
+  }
+}

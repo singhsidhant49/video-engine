@@ -118,7 +118,7 @@ export function directScenes(creativePlan, { format, rng, sceneSeconds } = {}) {
       variant = scene.template || weightedPick(style.variants?.stat || { hero: 1 }, rng) || 'hero';
       imageHistory.push(`stat-${variant}`);
     } else if (family === 'statement' || family === 'chapter') {
-      variant = scene.template || weightedPick(style.variants?.[family] || { highlight: 1, bubblePop: 1, floatingChip: 1, typewriter: 1, words: 1 }, rng) || 'highlight';
+      variant = scene.template || weightedPick(style.variants?.[family] || { highlight: 1, editorial: 1, words: 1 }, rng) || 'highlight';
       imageHistory.push(`${family}-${variant}`);
     } else if (family === 'list' || family === 'compare') {
       variant = scene.template || weightedPick(style.variants?.[family] || { default: 1 }, rng) || 'default';

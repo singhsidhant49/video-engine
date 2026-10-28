@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_e55c7872a7c37104",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial view of the ancient Roman Forum in Rome, showcasing historical architecture and ruins.",
+  "path": "images/saved-from-web/saved-from-web_e55c7872a7c37104.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "ancient",
+    "roman",
+    "forum",
+    "rome",
+    "showcasing",
+    "historical",
+    "architecture",
+    "ruin",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "ruins",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "ancient",
+    "roman",
+    "forum",
+    "rome",
+    "showcasing",
+    "historical",
+    "architecture",
+    "ruin",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "ruins",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial view of the ancient Roman Forum in Rome, showcasing historical architecture and ruins."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman Forum aerial view",
+    "savedAt": "2026-10-26T13:16:55.082Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ludovic Delot",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-roman-forum-in-rome-italy-38119182/"
+  }
+}

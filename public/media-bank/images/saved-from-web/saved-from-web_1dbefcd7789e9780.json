@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_1dbefcd7789e9780",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed view of an oxygen tank with a pressure gauge, showcasing medical equipment usage.",
+  "path": "images/saved-from-web/saved-from-web_1dbefcd7789e9780.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "oxygen",
+    "tank",
+    "pressure",
+    "gauge",
+    "showcasing",
+    "medical",
+    "equipment",
+    "usage",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "oxygen",
+    "tank",
+    "pressure",
+    "gauge",
+    "showcasing",
+    "medical",
+    "equipment",
+    "usage",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed view of an oxygen tank with a pressure gauge, showcasing medical equipment usage."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "medical oxygen gauge",
+    "savedAt": "2026-10-26T15:04:19.371Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vladimir Srajber",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-oxygen-tank-with-pressure-gauge-28490731/"
+  }
+}

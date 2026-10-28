@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_851c05c318982ab7",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlight streaming through lush rainforest canopy, creating a serene and mystical atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_851c05c318982ab7.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "sunlight",
+    "streaming",
+    "through",
+    "lush",
+    "rainforest",
+    "canopy",
+    "creating",
+    "serene",
+    "mystical",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "sunlight",
+    "streaming",
+    "through",
+    "lush",
+    "rainforest",
+    "canopy",
+    "creating",
+    "serene",
+    "mystical",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Sunlight streaming through lush rainforest canopy, creating a serene and mystical atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunlight through forest canopy",
+    "savedAt": "2026-10-26T16:21:29.594Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "VANNGO Ng",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/sunlight-filtering-through-dense-forest-canopy-38504040/"
+  }
+}

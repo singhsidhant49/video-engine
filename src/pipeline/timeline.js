@@ -40,8 +40,8 @@ function computeHash(content) {
 const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote', 'stat', 'process', 'timeline', 'list', 'compare', 'code', 'ui', 'diagram', 'map', 'document']);
 
 // The production edit vocabulary is deliberately limited to clean cuts and
-// conventional 0.3-0.5 second cross dissolves.
-const TRANSITION_FRAMES = { cut: 0, dissolve: 12 };
+// conventional 0.5-0.67 second cross dissolves (15-20 frames).
+const TRANSITION_FRAMES = { cut: 0, dissolve: 16 };
 const OVERLAY_TRANSITIONS = new Set();
 const STOPWORDS = new Set(['the', 'a', 'an', 'of', 'to', 'and', 'in', 'on', 'for', 'with', 'at', 'by', 'or', 'is', 'are', 'was', 'its', 'it', 'this', 'that']);
 const STRUCTURED_STOPWORDS = new Set([...STOPWORDS, 'source', 'process', 'result', 'phase', 'step', 'title', 'flow', 'system']);
@@ -467,24 +467,29 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
   const minutes = totalFrames / fps / 60;
   const semanticRate = 3.5;
   let budget = Math.max(1, Math.ceil(Math.min(3.5, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
-  // Uniform transition balance across all content types: 35% cross-dissolve, 65% clean cut
-  const designedShare = 0.35;
+  // Uniform transition balance across all content types: 20%–25% cross-dissolve, 75%–80% clean cut
+  const designedShare = 0.22;
   budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
+  let scenesSinceDissolve = 99;
   plan.scenes.forEach((scene, index) => {
     if (index === 0) return;
     const previous = plan.scenes[index - 1];
     const reason = transitionReasonFor(scene, previous);
     const softTone = ['somber', 'reflective', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
-    const semanticPause = reason === TRANSITION_REASON.SECTION_CHANGE
+    const isSectionBreak = scene.section || reason === TRANSITION_REASON.SECTION_CHANGE;
+    const isMajorPayoff = (scene.purpose === 'payoff' || reason === TRANSITION_REASON.REVEAL) && scene.intensity <= 4;
+    const semanticPause = isSectionBreak || isMajorPayoff
       || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason));
-    if (budget > 0 && semanticPause && !previousWasDissolve) {
+    if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= 2) {
       out[index] = 'dissolve';
       budget--;
       previousWasDissolve = true;
+      scenesSinceDissolve = 0;
     } else {
       previousWasDissolve = false;
+      scenesSinceDissolve++;
     }
   });
   return out;
@@ -542,11 +547,13 @@ function synchronizeShotTransition(shot, previous, { type, frames, policy, reaso
 export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, mediaSceneSpecs = {}, mediaShotPlans = {}, visualPolicy = null }) {
   const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
   const entries = clips.flatMap((clip, clipIndex) => (clip.shots || []).map((shot, shotIndex) => ({ clip, clipIndex, shot, shotIndex })));
-  // Standardized across all content types: 35% cross-dissolve, 65% clean cut
-  const maximumDissolves = Math.max(1, Math.floor(Math.max(0, entries.length - 1) * 0.35));
+  // Standardized across all content types: 20-25% cross-dissolve, 75-80% clean cut
+  const maximumDissolves = Math.max(1, Math.floor(Math.max(0, entries.length - 1) * 0.25));
   let remainingDissolves = maximumDissolves;
   let previousWasDissolve = false;
-  const dissolveFrames = Math.min(Math.round(fps * .5), Math.max(Math.round(fps * .3), Math.round(fps * .4)));
+  let shotsSinceDissolve = 99;
+  // Standardized duration: 15-20 frames (~0.5s-0.67s)
+  const dissolveFrames = Math.min(20, Math.max(15, Math.round(fps * 0.53)));
 
   entries.forEach((entry, index) => {
     const { shot, clip } = entry;
@@ -575,7 +582,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     const semanticDissolve = sceneBoundary
       ? clip.enter?.type === 'dissolve' || reason === TRANSITION_REASON.SECTION_CHANGE || (calm && reason === TRANSITION_REASON.CONTINUATION)
       : bothImages && (detailChange || calm);
-    const useDissolve = isSameAsset ? true : (remainingDissolves > 0 && !previousWasDissolve && semanticDissolve);
+    const useDissolve = isSameAsset ? true : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= 2 && semanticDissolve);
     const decision = useDissolve
       ? { type: 'dissolve', frames: dissolveFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
       : { type: 'cut', frames: 0, policy: 'CUT', reason, anchor: null };
@@ -585,7 +592,12 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       clip.transitionPolicy = decision.policy;
       clip.transitionAnchor = null;
     }
-    if (useDissolve) remainingDissolves--;
+    if (useDissolve) {
+      remainingDissolves--;
+      shotsSinceDissolve = 0;
+    } else {
+      shotsSinceDissolve++;
+    }
     previousWasDissolve = useDissolve;
   });
   return clips;

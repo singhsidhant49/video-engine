@@ -6,6 +6,7 @@ import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@
 import { config } from '../config/index.js';
 import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
+import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
 import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../storyboard/durationBudget.js';
@@ -185,6 +186,7 @@ export async function createFacelessVideo({
     topic,
     niche,
     contentType: productionProfile.contentType,
+    format: format || 'landscape',
     baseSpeed: config.kokoro.speed,
     meditationSpeed: config.kokoro.meditationSpeed,
   });
@@ -214,6 +216,7 @@ export async function createFacelessVideo({
       topic,
       niche,
       contentType: productionProfile.contentType,
+      format: format || 'landscape',
       baseSpeed: config.kokoro.speed,
       meditationSpeed: config.kokoro.meditationSpeed,
     });
@@ -262,7 +265,7 @@ export async function createFacelessVideo({
   } else {
     niche = niche || '';
     format = format || 'shorts';
-    voice = voice || config.kokoro.defaultVoice;
+    voice = voice || productionProfile?.voice || config.kokoro.defaultVoice;
     tts = tts || 'kokoro';
     job = await JobContext.create({
       id: videoId,
@@ -415,8 +418,26 @@ export async function createFacelessVideo({
         await synthesizeWithSay(plan.script, narrationFile);
       } else {
         narrationFile = path.join(runPublic, 'narration.wav');
-        const ttsText = (plan.scenes || []).map((s) => s.narration?.trim()).filter(Boolean).join('\n\n') || plan.script;
-        await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
+        if (narrationProfile.meditation) {
+          console.log(`🧘 Synthesizing deterministic meditation narration with structured pauses...`);
+          const medResult = await generateMeditationSpeech({
+            scenes: plan.scenes,
+            script: plan.script,
+            outputFile: narrationFile,
+            voice,
+            speed: synthesisSpeed,
+            subprofile: narrationProfile.subprofile || 'guided',
+            signal,
+          });
+          if (Array.isArray(medResult.segments) && Array.isArray(plan.scenes)) {
+            for (let sIdx = 0; sIdx < plan.scenes.length && sIdx < medResult.segments.length; sIdx++) {
+              plan.scenes[sIdx].pauseAfterSec = Number((medResult.segments[sIdx].pauseAfterMs / 1000).toFixed(2));
+            }
+          }
+        } else {
+          const ttsText = (plan.scenes || []).map((s) => s.narration?.trim()).filter(Boolean).join('\n\n') || plan.script;
+          await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
+        }
       }
 
       // Milestone 9 Narration Normalization & Peak Limiting
@@ -632,9 +653,7 @@ export async function createFacelessVideo({
     // 5. Asset Director: tiered search under each scene's acceptability policy
     await job.startStage('assets');
     throwIfCancelled();
-    const assetEditorialMode = /meditat|sleep|relax|wellness/i.test(`${plan.niche} ${plan.topic}`)
-      ? 'MOTIVATIONAL'
-      : plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
+    const assetEditorialMode = plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
     const assetRequests = planAssetRequests(storyboard, { format, visualPolicy, coveragePlan: visualCoveragePlan, editorialMode: assetEditorialMode });
     await save('asset-requests.json', assetRequests, { schema: AssetRequestListSchema });
     await save('visual-propositions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.visualProposition])));

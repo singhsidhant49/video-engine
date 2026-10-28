@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_2875d9bc0f961124",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/man-looking-at-desk-clock-12041903/",
+  "path": "video/saved-from-web/saved-from-web_2875d9bc0f961124.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "man",
+    "looking",
+    "desk",
+    "clock",
+    "12041903",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "man-looking-at-desk-clock-12041903",
+    "office desk",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "man",
+    "looking",
+    "desk",
+    "clock",
+    "12041903",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "man-looking-at-desk-clock-12041903",
+    "office desk",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/man-looking-at-desk-clock-12041903/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "office worker looking at clock impatient",
+    "savedAt": "2026-10-28T08:36:17.423Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nitin Khajotia",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/man-looking-at-desk-clock-12041903/"
+  }
+}

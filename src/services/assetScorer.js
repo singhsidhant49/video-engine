@@ -173,6 +173,19 @@ export function scoreCandidate(cand, context = {}) {
   if (cand.tier === 'verified' || cand.label) claimGrounding = 0.95;
   else if (cand.tier === 'relevant') claimGrounding = 0.80;
 
+  const candidateText = `${cand.label || ''} ${cand.title || ''} ${cand.description || ''} ${(cand.tags || []).join(' ')}`.toLowerCase();
+  const requiredEntities = [...(need.entities || []), ...(need.requiredEntities || []), ...(need.subject ? [need.subject] : [])].filter(Boolean);
+  const matchesEntity = requiredEntities.some((ent) => {
+    const tokens = String(ent).toLowerCase().split(/\s+/).filter((t) => t.length > 2);
+    return tokens.length > 0 && tokens.every((t) => candidateText.includes(t));
+  });
+  if (matchesEntity && cand.tier !== 'generic') {
+    semantic = Math.max(semantic, 0.95);
+    claimGrounding = Math.max(claimGrounding, 0.95);
+    semanticMethod = 'entity_match';
+    semanticAvailable = true;
+  }
+
   // 3. Focal composition & Crop fitness
   const cropAnalysis = analyzeCropFitness(cand, format);
   const focalComp = cropAnalysis.cropScore;

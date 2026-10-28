@@ -151,3 +151,87 @@ test('media editorial shot planner limits shot duration in Shorts to prevent sta
   const shortsDemand = estimateShotDemand(shortScene, { useMediaEditorial: true, visualDensity: 0.7, format: 'shorts' });
   assert.equal(shortsDemand, 2, 'A 5.5s Shorts scene should split into 2 shots so each is under 3s');
 });
+
+test('real ancient ruins are accepted and prioritized for historical civilization topics', () => {
+  const request = {
+    id: 'req_rome',
+    concept: 'Ancient Roman Colosseum ruins',
+    assetIntent: 'historical',
+    entities: ['Ancient Rome'],
+    evidenceRequired: false,
+    constraints: { orientation: 'landscape', minWidth: 1920, minHeight: 1080 },
+  };
+  const context = analyzeAssetRequest(request);
+  const candidate = {
+    id: 'colosseum-ruins',
+    label: 'Roman Colosseum amphitheatre ancient ruins in Rome Italy',
+    width: 2560,
+    height: 1440,
+    providerId: 'pexels-image',
+    license: { nonFree: false, page: 'https://pexels.com' },
+    metadata: { description: 'Sunlight shining on ancient Roman Colosseum stone ruins in Rome' },
+  };
+
+  const scored = scoreAssetCandidate(candidate, request, context);
+  assert.equal(scored.resolutionStatus, 'excellent');
+  assert.ok(!scored.gates.includes('abandoned_mismatch'), 'Ruins must not be rejected for historical topics');
+  assert.ok(scored.semantic.overall >= 0.70, `Expected high score for authentic historical ruins, got ${scored.semantic.overall}`);
+});
+
+test('real Dubai skyline is prioritized and matches target entity', () => {
+  const request = {
+    id: 'req_dubai',
+    concept: 'Dubai Burj Khalifa skyline',
+    assetIntent: 'location',
+    entities: ['Dubai'],
+    evidenceRequired: false,
+    constraints: { orientation: 'landscape', minWidth: 1920, minHeight: 1080 },
+  };
+  const context = analyzeAssetRequest(request);
+  const candidate = {
+    id: 'dubai-burj',
+    label: 'Dubai Burj Khalifa skyscraper skyline evening aerial view',
+    width: 3840,
+    height: 2160,
+    providerId: 'pexels-image',
+    license: { nonFree: false, page: 'https://pexels.com' },
+    metadata: { description: 'Dubai city aerial view showing Burj Khalifa and modern downtown skyscrapers' },
+  };
+
+  const scored = scoreAssetCandidate(candidate, request, context);
+  assert.equal(scored.resolutionStatus, 'excellent');
+  assert.ok(scored.semantic.overall >= 0.75, `Expected high score for real Dubai landmark, got ${scored.semantic.overall}`);
+});
+
+test('asset request planner preserves ancient ruins and does not replace with datacenter', () => {
+  const historyStoryboard = {
+    format: 'landscape',
+    sections: [{
+      id: 'section-history',
+      scenes: [{
+        id: 'scene-rome',
+        narration: 'The Ancient Roman Empire built massive monuments like the Colosseum.',
+        shots: [{
+          id: 'shot-rome-1',
+          role: 'subject',
+          visualConcept: 'Ancient Roman Colosseum ruins',
+          assetIntent: 'historical',
+          mediaPreference: 'real',
+          searchConcepts: ['Ancient Roman ruins Colosseum Rome'],
+          entities: ['Ancient Rome'],
+          durationHint: 4,
+        }],
+      }],
+    }],
+  };
+
+  const [req] = planAssetRequests(historyStoryboard, {
+    visualPolicy: resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' }),
+  });
+
+  assert.ok(!req.exclusions.includes('ruins'), 'Ruins should not be in exclusions for historical topic');
+  assert.ok(!req.exclusions.includes('abandoned'), 'Abandoned should not be in exclusions for historical topic');
+  const allQueries = [...req.stagedQueries.specific, ...req.stagedQueries.fallback].join(' ').toLowerCase();
+  assert.ok(!allQueries.includes('datacenter'), 'Ruins should NOT be replaced by datacenter for historical topic');
+  assert.ok(allQueries.includes('colosseum') || allQueries.includes('ruins') || allQueries.includes('rome'), 'Must contain historical keywords');
+});

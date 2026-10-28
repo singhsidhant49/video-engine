@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_f09a646e921c949a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Barrett Branch Library Alexandria 2019a.jpg",
+  "path": "images/saved-from-web/saved-from-web_f09a646e921c949a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "barrett",
+    "branch",
+    "library",
+    "alexandria",
+    "2019a",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "barrett",
+    "branch",
+    "library",
+    "alexandria",
+    "2019a",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Barrett Branch Library Alexandria 2019a.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Library of Alexandria",
+    "savedAt": "2026-10-28T08:16:24.220Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Antony-22",
+    "creator": "Antony-22",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T07:13:27.622Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Barrett_Branch_Library_Alexandria_2019a.jpg"
+  }
+}

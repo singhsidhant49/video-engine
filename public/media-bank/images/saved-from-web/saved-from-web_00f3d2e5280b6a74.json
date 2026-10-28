@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_00f3d2e5280b6a74",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A detailed close-up of flames dancing within a campfire, showcasing the heat and light against rocks.",
+  "path": "images/saved-from-web/saved-from-web_00f3d2e5280b6a74.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "flame",
+    "dancing",
+    "within",
+    "campfire",
+    "showcasing",
+    "heat",
+    "light",
+    "against",
+    "rock",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "flames",
+    "rocks",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "flame",
+    "dancing",
+    "within",
+    "campfire",
+    "showcasing",
+    "heat",
+    "light",
+    "against",
+    "rock",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "flames",
+    "rocks",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A detailed close-up of flames dancing within a campfire, showcasing the heat and light against rocks."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "campfire flames close up",
+    "savedAt": "2026-10-26T15:25:19.964Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Dương Nhân",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/flame-near-rocks-2278647/"
+  }
+}

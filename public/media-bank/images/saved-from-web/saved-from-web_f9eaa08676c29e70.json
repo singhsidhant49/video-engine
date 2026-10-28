@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_f9eaa08676c29e70",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a businessman signing a contract at an office desk.",
+  "path": "images/saved-from-web/saved-from-web_f9eaa08676c29e70.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "businessman",
+    "signing",
+    "contract",
+    "office",
+    "desk",
+    "modern",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "businessman",
+    "signing",
+    "contract",
+    "office",
+    "desk",
+    "modern",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a businessman signing a contract at an office desk."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "businessman signing contract close up",
+    "savedAt": "2026-10-28T08:37:53.323Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Cytonn Photography",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-gray-twist-pen-and-white-printer-paper-on-brown-wooden-table-955389/"
+  }
+}

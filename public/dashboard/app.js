@@ -45,16 +45,30 @@ async function loadVideos() {
   }
 }
 
+$('aspect').addEventListener('change', () => {
+  if ($('aspect').value === '9:16') {
+    if (['75', '90', '120', '180', '300', '600'].includes($('duration').value)) {
+      $('duration').value = '45';
+    }
+  } else {
+    if (['30', '45'].includes($('duration').value)) {
+      $('duration').value = '120';
+    }
+  }
+});
+
 $('createForm').addEventListener('submit', async (event) => {
   event.preventDefault();
   const button = event.currentTarget.querySelector('button[type=submit]');
   button.disabled = true; $('formMessage').textContent = 'Submitting production…';
   try {
+    const voiceVal = $('voice').value;
     const body = {
       prompt: $('prompt').value, profileId: $('channel').value || 'default',
       output: { durationSeconds: Number($('duration').value), aspectRatio: $('aspect').value, resolution: '1080p' },
-      creative: { contentType: $('contentType').value, tone: $('tone').value, audience: 'general YouTube audience', pacing: $('pacing').value, style: 'cinematic_documentary' },
-      audio: { voice: $('voice').value }, subtitles: { enabled: true },
+      creative: { contentType: $('contentType').value, tone: $('tone').value, audience: 'general YouTube audience', pacing: 'auto', style: 'cinematic_documentary' },
+      audio: voiceVal && voiceVal !== 'auto' ? { voice: voiceVal } : {},
+      subtitles: { enabled: true },
       metadata: { source: 'dashboard', channelId: $('channel').value || 'default' },
     };
     const created = await api('/v1/videos', { method: 'POST', headers: { 'Idempotency-Key': crypto.randomUUID() }, body: JSON.stringify(body) });

@@ -23,8 +23,6 @@ const GENERIC_AVOID_VISUALS = [
   'generic smiling office team',
   'corporate handshake in boardroom',
   'abstract technology background with meaningless floating lines',
-  'abandoned ruined concrete bunker',
-  'decaying ruins',
   'blank green screen mockup phone',
   'cartoon clipart or 3D stickman',
   'stock photography watermark',
@@ -502,12 +500,14 @@ export function buildVisibleNeed(firstArg = {}, secondArg = {}) {
     ...(visualProposition?.negativeConfusers || []),
   ];
 
-  if (/machine|equipment|hardware|chip|cable|server|blade|engine/i.test(subject)) {
+  if (/machine|equipment|hardware|chip|cable|server|blade|engine|database|software|tech|cloud|datacenter|network/i.test(subject) || /server|datacenter|cloud|software|tech|database/i.test(primaryConcept)) {
     avoidVisuals.push(
       'corporate headquarters exterior glass building',
       'executive portrait in business suit',
       'generic business people laughing at laptop',
-      'generic office meeting handshake'
+      'generic office meeting handshake',
+      'abandoned ruined concrete bunker',
+      'decaying ruins'
     );
   }
 

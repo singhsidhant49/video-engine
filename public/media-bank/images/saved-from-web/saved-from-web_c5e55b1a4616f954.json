@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_c5e55b1a4616f954",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A traditional Moroccan scribe in an ancient stone room, writing on parchment.",
+  "path": "images/saved-from-web/saved-from-web_c5e55b1a4616f954.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1857,
+  "aspectRatio": 1.4001,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "traditional",
+    "moroccan",
+    "scribe",
+    "ancient",
+    "stone",
+    "room",
+    "writing",
+    "parchment",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "traditional",
+    "moroccan",
+    "scribe",
+    "ancient",
+    "stone",
+    "room",
+    "writing",
+    "parchment",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A traditional Moroccan scribe in an ancient stone room, writing on parchment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "scribes writing scrolls",
+    "savedAt": "2026-10-28T07:15:38.127Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mehdi Batal",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/traditional-moroccan-scribe-in-historical-setting-30434322/"
+  }
+}

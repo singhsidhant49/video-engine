@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_d01bcb023c6c7f64",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A stunning aerial view of a mountainous landscape with a winding road and river.",
+  "path": "images/saved-from-web/saved-from-web_d01bcb023c6c7f64.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "mountainou",
+    "landscape",
+    "winding",
+    "road",
+    "river",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "mountainous",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "mountainou",
+    "landscape",
+    "winding",
+    "road",
+    "river",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "mountainous",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A stunning aerial view of a mountainous landscape with a winding road and river."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "winding mountain road high pass river",
+    "savedAt": "2026-10-27T07:04:02.193Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Christian",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scenic-mountain-pass-with-winding-roads-and-river-28699073/"
+  }
+}

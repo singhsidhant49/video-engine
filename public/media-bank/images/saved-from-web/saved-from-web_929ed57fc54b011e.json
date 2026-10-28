@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_929ed57fc54b011e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Valley of Flowers National Park",
+  "path": "images/saved-from-web/saved-from-web_929ed57fc54b011e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "valley",
+    "flower",
+    "national",
+    "park",
+    "outdoor",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "flowers",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "valley",
+    "flower",
+    "national",
+    "park",
+    "outdoor",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "flowers",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Valley of Flowers National Park"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Valley of Flowers National Park",
+    "savedAt": "2026-10-27T07:03:01.766Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Original: Rohit Sharma Derivative work: UnpetitproleX",
+    "creator": "Original: Rohit Sharma Derivative work: UnpetitproleX",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-27T07:01:11.162Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Valley_of_flowers_national_park,_Uttarakhand,_India_03_(edit).jpg"
+  }
+}

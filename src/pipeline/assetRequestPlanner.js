@@ -26,14 +26,17 @@ function normalizeHistoricalEventShot(shot, scene) {
 function preferredSource(shot, mediaEditorial = false, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER') {
   const motionFriendly = ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.assetIntent)
     || ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.role);
-  // Meditation and motivational edits benefit from native environmental
-  // movement. "auto" searches both video and still providers, preserving a
+  // Content type does not restrict visuals. Any motion-friendly shot
+  // searches both video and still providers via 'auto', preserving a
   // safe image fallback when suitable footage is unavailable.
-  if (mediaEditorial && editorialMode === 'MOTIVATIONAL' && motionFriendly) return 'auto';
-  if (representationDecision?.preferredSource) return representationDecision.preferredSource;
+  if (representationDecision?.preferredSource) {
+    if (representationDecision.preferredSource === 'image' && motionFriendly) return 'auto';
+    return representationDecision.preferredSource;
+  }
   if (shot.mediaPreference === 'procedural' && !mediaEditorial) return 'procedural';
+  if (shot.mediaPreference === 'video' || shot.motionPreference === 'energetic') return 'video';
+  if (motionFriendly) return 'auto';
   if (shot.mediaPreference === 'real') {
-    if (['action', 'atmosphere'].includes(shot.assetIntent) && shot.motionPreference === 'energetic') return 'video';
     return 'image';
   }
   return 'auto';
@@ -54,9 +57,9 @@ function semanticConcept(shot, mediaEditorial = false) {
 }
 
 function exclusionsFor(shot, concept, visibleNeed = null) {
-  const exclusions = ['watermark', 'collage', 'low resolution', 'diagram', 'mindmap', 'flowchart', 'infographic', 'green screen', 'mockup', 'abandoned', 'ruins'];
-  if (/deadlock|concurrency|database|software|transaction|thread/i.test(concept)) {
-    exclusions.push('padlock', 'chain', 'keys', 'key', 'handcuffs', 'handcuff', 'jail', 'prison', 'valet parking', 'dining table', 'credit card');
+  const exclusions = ['watermark', 'collage', 'low resolution', 'diagram', 'mindmap', 'flowchart', 'infographic', 'green screen', 'mockup'];
+  if (/\b(?:deadlock|concurrency|database|software|transaction|thread|tech|server|datacenter|cloud|computer|code|terminal|screen|app|ui)\b/i.test(concept)) {
+    exclusions.push('abandoned', 'ruins', 'padlock', 'chain', 'keys', 'key', 'handcuffs', 'handcuff', 'jail', 'prison', 'valet parking', 'dining table', 'credit card');
   }
   if (shot.entities.length || ['entity', 'product', 'evidence', 'document'].includes(shot.assetIntent)) {
     exclusions.push('generic office', 'unrelated employees', 'logo-only image');
@@ -223,6 +226,24 @@ export function mapActionToVisibleQueries(concept = '') {
       'traders reacting stock exchange panic',
     ];
   }
+  // Dubai / Burj Khalifa / Dubai Marina
+  if (/\bdubai\b/i.test(lower)) {
+    return [
+      'Dubai Burj Khalifa modern skyline',
+      'Dubai Marina aerial view',
+      'Downtown Dubai skyscrapers cityscape',
+      'Dubai modern architecture drone shot',
+    ];
+  }
+  // Ancient Rome / Roman Empire / Colosseum / Roman Forum
+  if (/\b(roman\s+empire|ancient\s+rome|ancient\s+roman|colosseum|flavian\s+amphitheatre)\b/i.test(lower)) {
+    return [
+      'Roman Colosseum ancient ruins Rome',
+      'Roman Forum ancient marble architecture ruins',
+      'Ancient Roman architecture columns aerial',
+      'Ancient Roman statue and temple marble',
+    ];
+  }
   return [];
 }
 
@@ -230,7 +251,10 @@ function sanitizeEditorialQuery(q) {
   const mapped = mapActionToVisibleQueries(q);
   if (mapped.length) return mapped[0];
 
-  return String(q || '')
+  const lower = String(q || '').toLowerCase();
+  const isTechOrHardware = /\b(html|dom|http|request|response|database|sql|table|schema|engine|deadlock|concurrency|server|datacenter|duga|network|code|terminal|query|software)\b/i.test(lower);
+
+  let res = String(q || '')
     .replace(/\b(html\s+dom\s+tree\s+diagram|dom\s+tree\s+diagram|dom\s+tree)\b/gi, 'browser developer tools elements inspector')
     .replace(/\b(http\s+request\s+response\s+diagram|request\s+response\s+protocol\s+diagram)\b/gi, 'modern datacenter server rack lights')
     .replace(/\b(video\s+streaming\s+icons?|streaming\s+icons?|data\s+speed\s+infographic)\b/gi, 'high speed fiber optic network data')
@@ -242,10 +266,13 @@ function sanitizeEditorialQuery(q) {
     .replace(/\b(hand\s+holding\s+keys?|holding\s+keys?|physical\s+keys?|handcuffs?|prison\s+break|jail)\b/gi, 'computer screen code terminal dark mode')
     .replace(/\b(diagram|mindmap|mind map|infographic|flowchart|flow chart|icons?|symbols?|clipart)\b/gi, 'screen monitor')
     .replace(/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|clean\s+editorial\s+title\s+card|editorial\s+title\s+card|title\s+card|chapter\s+card|title\s+screen|clean\s+typography\s+on\s+a\s+neutral\s+background)\b/gi, 'thoughtful person reading book desk')
-    .replace(/\b(duga-1|abandoned|ruins)\b/gi, 'datacenter')
-    .replace(/\b(green screen|chroma key)\b/gi, 'screen')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\b(green screen|chroma key)\b/gi, 'screen');
+
+  if (isTechOrHardware) {
+    res = res.replace(/\b(duga-1|abandoned|ruins)\b/gi, 'datacenter');
+  }
+
+  return res.replace(/\s+/g, ' ').trim();
 }
 
 /**

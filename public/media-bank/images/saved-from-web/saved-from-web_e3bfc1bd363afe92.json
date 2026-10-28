@@ -1,0 +1,112 @@
+{
+  "id": "saved-from-web_e3bfc1bd363afe92",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Roman relief of soldiers from Cumae (Berlin Ant Sk 959) 01.jpg",
+  "path": "images/saved-from-web/saved-from-web_e3bfc1bd363afe92.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1933,
+  "aspectRatio": 1.3451,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "roman",
+    "relief",
+    "soldier",
+    "from",
+    "cumae",
+    "berlin",
+    "ant",
+    "959",
+    "file",
+    "soldiers",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "roman",
+    "relief",
+    "soldier",
+    "from",
+    "cumae",
+    "berlin",
+    "ant",
+    "959",
+    "file",
+    "soldiers",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Roman soldiers armor",
+    "savedAt": "2026-10-26T13:18:21.078Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 4.0",
+    "license_name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "author": "Mark Landon",
+    "creator": "Mark Landon",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T13:15:52.884Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Roman_relief_of_soldiers_from_Cumae_(Berlin_Ant_Sk_959)_01.jpg"
+  }
+}

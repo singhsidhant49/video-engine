@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_da5bcb5940c6d709",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Colorful books neatly arranged on modern shelves in a bright library.",
+  "path": "images/saved-from-web/saved-from-web_da5bcb5940c6d709.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "colorful",
+    "book",
+    "neatly",
+    "arranged",
+    "modern",
+    "shelve",
+    "bright",
+    "library",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "books",
+    "shelves",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "colorful",
+    "book",
+    "neatly",
+    "arranged",
+    "modern",
+    "shelve",
+    "bright",
+    "library",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "books",
+    "shelves",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Colorful books neatly arranged on modern shelves in a bright library."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "modern library shelves",
+    "savedAt": "2026-10-28T07:18:43.016Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Erik Mclean",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/books-on-brown-wooden-shelves-8045884/"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_b5222d9fb170f4b3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed macro shot of a human eye capturing intricate details of the iris and reflections.",
+  "path": "images/saved-from-web/saved-from-web_b5222d9fb170f4b3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1729,
+  "aspectRatio": 1.5038,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "macro",
+    "human",
+    "eye",
+    "capturing",
+    "intricate",
+    "detail",
+    "iri",
+    "reflection",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "shot",
+    "details",
+    "iris",
+    "reflections"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "macro",
+    "human",
+    "eye",
+    "capturing",
+    "intricate",
+    "detail",
+    "iri",
+    "reflection",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "shot",
+    "details",
+    "iris",
+    "reflections"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed macro shot of a human eye capturing intricate details of the iris and reflections."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "human eye close-up reflection",
+    "savedAt": "2026-10-26T15:03:36.034Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Subin Backwaters",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/brown-human-eye-946727/"
+  }
+}

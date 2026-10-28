@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_c6187312dd2dc2d1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene young woman peacefully sleeping on a white pillow indoors at night.",
+  "path": "images/saved-from-web/saved-from-web_c6187312dd2dc2d1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "young",
+    "woman",
+    "peacefully",
+    "sleeping",
+    "white",
+    "pillow",
+    "indoor",
+    "night",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "indoors"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "young",
+    "woman",
+    "peacefully",
+    "sleeping",
+    "white",
+    "pillow",
+    "indoor",
+    "night",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "indoors"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene young woman peacefully sleeping on a white pillow indoors at night."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sleeping brain night",
+    "savedAt": "2026-10-26T15:49:15.043Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Polina ⠀",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photo-of-a-woman-sleeping-6541074/"
+  }
+}

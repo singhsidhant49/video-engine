@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_db7dcfd67eafe96a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning view of a snow-capped Himalayan peak illuminated by the sun at dawn.",
+  "path": "images/saved-from-web/saved-from-web_db7dcfd67eafe96a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "snow",
+    "capped",
+    "himalayan",
+    "peak",
+    "illuminated",
+    "sun",
+    "dawn",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "snow-capped"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "snow",
+    "capped",
+    "himalayan",
+    "peak",
+    "illuminated",
+    "sun",
+    "dawn",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "snow-capped"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning view of a snow-capped Himalayan peak illuminated by the sun at dawn."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "aerial drone himalayan peaks sunrise clouds",
+    "savedAt": "2026-10-27T07:01:46.502Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "ashim bhatta",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/majestic-himalayan-mountain-at-sunrise-29228171/"
+  }
+}

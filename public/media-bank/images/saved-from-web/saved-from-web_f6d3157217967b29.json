@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_f6d3157217967b29",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a woman tying her shoes on a running track, ready to sprint.",
+  "path": "images/saved-from-web/saved-from-web_f6d3157217967b29.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "woman",
+    "tying",
+    "her",
+    "shoe",
+    "running",
+    "track",
+    "ready",
+    "sprint",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "close-up",
+    "shoes"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "woman",
+    "tying",
+    "her",
+    "shoe",
+    "running",
+    "track",
+    "ready",
+    "sprint",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "close-up",
+    "shoes"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a woman tying her shoes on a running track, ready to sprint."
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "tying running shoes close up",
+    "savedAt": "2026-10-28T08:44:48.397Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Andrea Piacquadio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-photo-of-woman-tying-her-white-sneakers-on-running-track-3763869/"
+  }
+}

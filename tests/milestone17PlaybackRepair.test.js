@@ -285,7 +285,7 @@ test('cinematic dissolve overlaps picture without changing narration or total ti
   });
   assert.equal(timeline.clips[1].enter.type, 'dissolve');
   assert.equal(timeline.clips[1].transitionPolicy, 'SHORT_DISSOLVE');
-  assert.equal(timeline.clips[1].enter.frames, 12);
+  assert.equal(timeline.clips[1].enter.frames, 16);
   assert.equal(timeline.durationInFrames, 180);
   assert.equal(Math.max(...timeline.clips.map((clip) => clip.from + clip.durationInFrames)), 180);
   assert.ok(timeline.clips[0].from + timeline.clips[0].durationInFrames > timeline.clips[1].from);

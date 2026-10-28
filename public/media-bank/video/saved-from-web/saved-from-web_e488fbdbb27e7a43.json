@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_e488fbdbb27e7a43",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/time-lapse-of-clouds-on-sky-during-evening-11150531/",
+  "path": "video/saved-from-web/saved-from-web_e488fbdbb27e7a43.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "cloud",
+    "sky",
+    "during",
+    "evening",
+    "11150531",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-of-clouds-on-sky-during-evening-11150531",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "cloud",
+    "sky",
+    "during",
+    "evening",
+    "11150531",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-of-clouds-on-sky-during-evening-11150531",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/time-lapse-of-clouds-on-sky-during-evening-11150531/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "time lapse clouds dusk",
+    "savedAt": "2026-10-28T06:06:06.657Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Dmitry Marchenkov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/time-lapse-of-clouds-on-sky-during-evening-11150531/"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_4b7c8996985a3919",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of weathered ancient Roman coins displaying rich textures and patinas, symbolizing history and archaeology.",
+  "path": "images/saved-from-web/saved-from-web_4b7c8996985a3919.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "weathered",
+    "ancient",
+    "roman",
+    "coin",
+    "displaying",
+    "rich",
+    "texture",
+    "patina",
+    "symbolizing",
+    "history",
+    "archaeology",
+    "financial",
+    "macro",
+    "static",
+    "presentation",
+    "close-up",
+    "coins",
+    "textures",
+    "patinas",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "weathered",
+    "ancient",
+    "roman",
+    "coin",
+    "displaying",
+    "rich",
+    "texture",
+    "patina",
+    "symbolizing",
+    "history",
+    "archaeology",
+    "financial",
+    "macro",
+    "static",
+    "presentation",
+    "close-up",
+    "coins",
+    "textures",
+    "patinas",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of weathered ancient Roman coins displaying rich textures and patinas, symbolizing history and archaeology."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman coins debasement",
+    "savedAt": "2026-10-26T13:21:49.069Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Magda Ehlers",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/pile-of-ancient-roman-coins-with-patina-29927968/"
+  }
+}

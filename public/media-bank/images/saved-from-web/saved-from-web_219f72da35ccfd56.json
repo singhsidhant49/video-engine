@@ -1,0 +1,104 @@
+{
+  "id": "saved-from-web_219f72da35ccfd56",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Laurel wreath cornice Forum Romanum Rome Italy.jpg",
+  "path": "images/saved-from-web/saved-from-web_219f72da35ccfd56.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2019,
+  "aspectRatio": 1.2878,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "outdoor",
+    "corporate",
+    "sign",
+    "office",
+    "building",
+    "monument",
+    "plaque",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "laurel",
+    "wreath",
+    "cornice",
+    "forum",
+    "romanum",
+    "rome",
+    "italy",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "outdoor",
+    "corporate",
+    "sign",
+    "office",
+    "building",
+    "monument",
+    "plaque",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "laurel",
+    "wreath",
+    "cornice",
+    "forum",
+    "romanum",
+    "rome",
+    "italy",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "outdoor corporate sign or office building monument plaque"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "laurel wreath",
+    "savedAt": "2026-10-26T13:24:00.930Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Jebulon",
+    "creator": "Jebulon",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T13:16:18.802Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Laurel_wreath_cornice_Forum_Romanum_Rome_Italy.jpg"
+  }
+}

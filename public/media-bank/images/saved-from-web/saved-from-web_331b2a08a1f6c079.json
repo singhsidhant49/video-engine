@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_331b2a08a1f6c079",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scenic view of an ancient castle wall with boats moored in a serene seaside harbor.",
+  "path": "images/saved-from-web/saved-from-web_331b2a08a1f6c079.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "ancient",
+    "castle",
+    "wall",
+    "boat",
+    "moored",
+    "serene",
+    "seaside",
+    "harbor",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "boats",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "ancient",
+    "castle",
+    "wall",
+    "boat",
+    "moored",
+    "serene",
+    "seaside",
+    "harbor",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "boats",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Scenic view of an ancient castle wall with boats moored in a serene seaside harbor."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ancient harbor inspection",
+    "savedAt": "2026-10-28T07:16:58.084Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mehmet Turgut  Kirkgoz",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/castle-wall-on-shore-on-cyprus-16531859/"
+  }
+}

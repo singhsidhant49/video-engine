@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_391a63227b836e22",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Teen jumping energetically beside a chair in a minimalist indoor setting.",
+  "path": "images/saved-from-web/saved-from-web_391a63227b836e22.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "teen",
+    "jumping",
+    "energetically",
+    "beside",
+    "chair",
+    "minimalist",
+    "indoor",
+    "setting",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "teen",
+    "jumping",
+    "energetically",
+    "beside",
+    "chair",
+    "minimalist",
+    "indoor",
+    "setting",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Teen jumping energetically beside a chair in a minimalist indoor setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person jumping up from chair energetic",
+    "savedAt": "2026-10-28T08:36:44.785Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-person-jumping-near-a-metal-chair-6724570/"
+  }
+}

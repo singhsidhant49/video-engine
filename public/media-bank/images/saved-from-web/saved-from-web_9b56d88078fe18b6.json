@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_9b56d88078fe18b6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Black and white image of a person diving off a wall into water, creating a dramatic shadow.",
+  "path": "images/saved-from-web/saved-from-web_9b56d88078fe18b6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "person",
+    "diving",
+    "off",
+    "wall",
+    "into",
+    "water",
+    "creating",
+    "dramatic",
+    "shadow",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "person",
+    "diving",
+    "off",
+    "wall",
+    "into",
+    "water",
+    "creating",
+    "dramatic",
+    "shadow",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Black and white image of a person diving off a wall into water, creating a dramatic shadow."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "leap into water slow motion",
+    "savedAt": "2026-10-28T08:46:22.626Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Soner Arkan",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/grayscale-photo-of-a-person-diving-on-the-river-13018844/"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_c9f9cdebf47c4ebb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Manali Bus Stand (Himachal Pradesh).jpg",
+  "path": "images/saved-from-web/saved-from-web_c9f9cdebf47c4ebb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1600,
+  "height": 1201,
+  "aspectRatio": 1.3322,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "manali",
+    "bu",
+    "stand",
+    "himachal",
+    "pradesh",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "bus",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "manali",
+    "bu",
+    "stand",
+    "himachal",
+    "pradesh",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "bus",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Manali Bus Stand (Himachal Pradesh).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Manali, Himachal Pradesh",
+    "savedAt": "2026-10-27T07:02:43.878Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Rajani Gairshail",
+    "creator": "Rajani Gairshail",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-27T07:01:12.456Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Manali_Bus_Stand_(Himachal_Pradesh).jpg"
+  }
+}

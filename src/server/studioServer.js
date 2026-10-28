@@ -52,16 +52,18 @@ app.post('/api/generate', process.env.NODE_ENV === 'production' ? apiAuth : (req
   }
 
   try {
+    const contentType = input.contentType || input.niche;
+    const channelProfile = input.channel || input.channelProfile || (contentType ? { contentType, voice: input.voice } : {});
     const result = await createFacelessVideo({
       brief: req.body?.brief,
       topic,
-      niche: input.niche,
+      niche: input.niche || contentType,
       format: input.format,
-      voice: input.voice,
+      voice: input.voice || undefined,
       style: input.style,
-      durationSec: input.durationSec,
+      durationSec: input.durationSec ? Number(input.durationSec) : undefined,
       channelId: input.channelId || input.channel?.id,
-      channelProfile: input.channel || input.channelProfile,
+      channelProfile,
       visualMode: input.visualMode,
       onProgress: (progress) => {
         // Simple console logging for progress
@@ -233,6 +235,13 @@ function getStudioHtml() {
     input[type="text"]:focus, select:focus {
       border-color: var(--accent); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
+    .form-hint {
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 6px;
+      line-height: 1.4;
+      opacity: 0.9;
+    }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
@@ -291,38 +300,56 @@ function getStudioHtml() {
         <input type="text" id="topicInput" value="How Airbnb Scaled from Zero to 100 Billion" placeholder="e.g. How Airbnb Scaled from Zero to 100 Billion">
       </div>
 
-      <div class="grid-2">
-        <div class="form-group">
-          <label>Niche / Category</label>
-          <select id="nicheSelect">
-            <option value="business" selected>Business & Startups</option>
-            <option value="finance">Finance & Markets</option>
-            <option value="tech-explainer">Tech & AI Systems</option>
-            <option value="history">History & Documentaries</option>
-            <option value="science">Science & Space</option>
-            <option value="code-snippet">Coding & Dev Tutorials</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Video Format</label>
-          <select id="formatSelect">
-            <option value="shorts" selected>9:16 Vertical (Shorts/Reels)</option>
-            <option value="landscape">16:9 Widescreen (YouTube)</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Content Type / Niche</label>
+        <select id="contentTypeSelect">
+          <option value="explainer" selected>Explainer &amp; Deep Dive</option>
+          <option value="documentary">Documentary &amp; History</option>
+          <option value="meditation">Guided Meditation &amp; Sleep</option>
+          <option value="motivational">Motivational &amp; Mindset</option>
+          <option value="audiobook">Audiobook &amp; Literature</option>
+          <option value="story">Narrative Storytelling</option>
+        </select>
+        <div class="form-hint">⚡ Pacing, shot durations, and speech cadence are automatically tailored to this content type.</div>
       </div>
 
       <div class="grid-2">
         <div class="form-group">
-          <label>Kokoro Voice</label>
-          <select id="voiceSelect">
-            <option value="af_bella" selected>Bella (Female - Crisp & Energetic)</option>
-            <option value="am_adam">Adam (Male - Clear Technical)</option>
-            <option value="af_sarah">Sarah (Female - Professional)</option>
-            <option value="am_michael">Michael (Male - Authoritative)</option>
+          <label>Video Format</label>
+          <select id="formatSelect" onchange="updateDurationForFormat()">
+            <option value="shorts" selected>9:16 Vertical (Shorts / Reels)</option>
+            <option value="landscape">16:9 Widescreen (YouTube)</option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label>Target Duration</label>
+          <select id="durationSelect">
+            <option value="30">30 seconds (Quick Short)</option>
+            <option value="45" selected>45 seconds (Standard Short)</option>
+            <option value="60">60 seconds (1 Minute)</option>
+            <option value="75">75 seconds (Standard Explainer)</option>
+            <option value="90">90 seconds (In-depth Explainer)</option>
+            <option value="120">120 seconds (2-Minute Documentary)</option>
+            <option value="180">180 seconds (3-Minute Deep Dive)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Narration Voice</label>
+        <select id="voiceSelect">
+          <option value="auto" selected>✨ Auto (Matches Content Type)</option>
+          <option value="af_heart">Heart (Female - Warm, Smooth · Grade A)</option>
+          <option value="af_bella">Bella (Female - Crisp, Modern · Grade A-)</option>
+          <option value="af_kore">Kore (Female - Balanced & Articulate)</option>
+          <option value="af_sky">Sky (Female - Bright & Youthful)</option>
+          <option value="af_nicole">Nicole (Female - Soft Whisper · Sleep/Mindfulness)</option>
+          <option value="am_puck">Puck (Male - Agile & Resonant)</option>
+          <option value="bm_george">George (Male - British Documentary Narrator)</option>
+          <option value="am_adam">Adam (Male - Direct & Focused)</option>
+        </select>
+        <div class="form-hint">Auto selects the optimal voice (e.g. Heart for Meditation, George for Documentary, Puck for Motivational).</div>
       </div>
 
       <button class="btn-generate" id="generateBtn" onclick="startGeneration()">
@@ -346,11 +373,27 @@ function getStudioHtml() {
   </main>
 
   <script>
+    function updateDurationForFormat() {
+      const format = document.getElementById('formatSelect').value;
+      const durationSelect = document.getElementById('durationSelect');
+      if (format === 'shorts') {
+        if (['75', '90', '120', '180'].includes(durationSelect.value)) {
+          durationSelect.value = '45';
+        }
+      } else {
+        if (['30', '45'].includes(durationSelect.value)) {
+          durationSelect.value = '75';
+        }
+      }
+    }
+
     async function startGeneration() {
       const topic = document.getElementById('topicInput').value.trim();
-      const niche = document.getElementById('nicheSelect').value;
+      const contentType = document.getElementById('contentTypeSelect').value;
       const format = document.getElementById('formatSelect').value;
-      const voice = document.getElementById('voiceSelect').value;
+      const durationSec = Number(document.getElementById('durationSelect').value) || (format === 'shorts' ? 45 : 75);
+      const voiceVal = document.getElementById('voiceSelect').value;
+      const voice = voiceVal === 'auto' ? undefined : voiceVal;
       const btn = document.getElementById('generateBtn');
 
       if (!topic) return alert('Please enter a topic prompt');
@@ -366,16 +409,27 @@ function getStudioHtml() {
       previewArea.innerHTML = \`
         <div class="loader"></div>
         <p style="margin-top: 20px; font-weight: 700; font-size: 18px;">Rendering Video Frame-by-Frame...</p>
-        <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Scripting AI -> Kokoro Speech -> Remotion Bundle -> MP4</p>
+        <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Director Plan -> Kokoro Speech -> Visual Assets -> Remotion MP4</p>
       \`;
 
-      logContent.innerText = '🤖 [1/4] Generating AI Script & Layout...\\n';
+      logContent.innerText = '🤖 [1/4] Generating AI Script & Shot Plan...\\n';
 
       try {
         const response = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic, niche, format, voice }),
+          body: JSON.stringify({
+            topic,
+            niche: contentType,
+            contentType,
+            format,
+            durationSec,
+            voice,
+            channel: {
+              contentType,
+              voice,
+            },
+          }),
         });
 
         const data = await response.json();
@@ -390,9 +444,9 @@ function getStudioHtml() {
 
         previewArea.innerHTML = \`
           <video controls autoplay loop src="\${data.videoUrl}"></video>
-          <div style="margin-top: 16px; display: flex; gap: 12px; align-items: center;">
-            <a href="\${data.videoUrl}" download class="btn-generate" style="padding: 10px 24px; font-size: 14px; text-decoration: none;">
-              ⬇️ Download MP4 (\${data.durationSeconds.toFixed(1)}s)
+          <div style="margin-top: 16px; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <a href="\${data.videoUrl}" download class="btn-generate" style="padding: 10px 24px; font-size: 14px; text-decoration: none; width: auto; margin-top: 0;">
+              ⬇️ Download MP4 (\${data.durationSeconds ? data.durationSeconds.toFixed(1) + 's' : ''})
             </a>
           </div>
         \`;

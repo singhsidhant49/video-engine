@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_14b821175700d857",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A low-angle shot of golden sheer curtains beautifully illuminated by sunlight.",
+  "path": "images/saved-from-web/saved-from-web_14b821175700d857.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "low",
+    "angle",
+    "golden",
+    "sheer",
+    "curtain",
+    "beautifully",
+    "illuminated",
+    "sunlight",
+    "low-angle",
+    "shot",
+    "curtains"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "low",
+    "angle",
+    "golden",
+    "sheer",
+    "curtain",
+    "beautifully",
+    "illuminated",
+    "sunlight",
+    "low-angle",
+    "shot",
+    "curtains"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sheer curtains evening breeze",
+    "savedAt": "2026-10-28T06:03:39.047Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pexels User",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/low-angle-shot-of-a-curtain-11111717/"
+  }
+}

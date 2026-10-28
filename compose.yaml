@@ -12,7 +12,9 @@ x-app-environment: &app-environment
   VIDEO_QUEUE_LOCK_RENEW_MS: ${VIDEO_QUEUE_LOCK_RENEW_MS:-30000}
   VIDEO_QUEUE_STALLED_INTERVAL_MS: ${VIDEO_QUEUE_STALLED_INTERVAL_MS:-60000}
   VIDEO_QUEUE_MAX_STALLED_COUNT: ${VIDEO_QUEUE_MAX_STALLED_COUNT:-2}
-  REMOTION_CONCURRENCY: ${REMOTION_CONCURRENCY:-1}
+  REMOTION_CONCURRENCY: ${REMOTION_CONCURRENCY:-2}
+  RUNS_RETENTION_DAYS: ${RUNS_RETENTION_DAYS:-7}
+  RUNS_CLEANUP_INTERVAL_HOURS: ${RUNS_CLEANUP_INTERVAL_HOURS:-12}
   VIDEO_MOTION_PRESET: ${VIDEO_MOTION_PRESET:-standard}
   VIDEO_MAX_QUEUED_JOBS: ${VIDEO_MAX_QUEUED_JOBS:-25}
   VIDEO_MAX_OWNER_PENDING_JOBS: ${VIDEO_MAX_OWNER_PENDING_JOBS:-5}
@@ -105,7 +107,8 @@ services:
     volumes:
       - video_data:/app/renders
       - engine_cache:/app/.cache
-      - ./public/media-bank:/app/public/media-bank
+      - ./public:/app/public
+      - ./src:/app/src
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -129,7 +132,8 @@ services:
     volumes:
       - video_data:/app/renders
       - engine_cache:/app/.cache
-      - ./public/media-bank:/app/public/media-bank
+      - ./public:/app/public
+      - ./src:/app/src
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }

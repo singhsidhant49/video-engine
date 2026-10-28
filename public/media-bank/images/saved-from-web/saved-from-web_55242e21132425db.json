@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_55242e21132425db",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A 3D rendered concept of artificial intelligence with geometric structures and connections.",
+  "path": "images/saved-from-web/saved-from-web_55242e21132425db.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "rendered",
+    "concept",
+    "artificial",
+    "intelligence",
+    "geometric",
+    "structure",
+    "connection",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "structures",
+    "connections"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "rendered",
+    "concept",
+    "artificial",
+    "intelligence",
+    "geometric",
+    "structure",
+    "connection",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "structures",
+    "connections"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A 3D rendered concept of artificial intelligence with geometric structures and connections."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "synapse firing close up",
+    "savedAt": "2026-10-26T15:47:03.202Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Santhosh Kanthala",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/futuristic-abstract-network-with-geometric-shapes-39588781/"
+  }
+}

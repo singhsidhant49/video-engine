@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_fa697f9682f86664",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/serene-ocean-horizon-at-sunrise-31052155/",
+  "path": "video/saved-from-web/saved-from-web_fa697f9682f86664.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "serene",
+    "ocean",
+    "horizon",
+    "sunrise",
+    "31052155",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "serene-ocean-horizon-at-sunrise-31052155",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "serene",
+    "ocean",
+    "horizon",
+    "sunrise",
+    "31052155",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "serene-ocean-horizon-at-sunrise-31052155",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/serene-ocean-horizon-at-sunrise-31052155/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "sunrise horizon hopeful landscape",
+    "savedAt": "2026-10-28T08:41:50.137Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marianna Sigov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/serene-ocean-horizon-at-sunrise-31052155/"
+  }
+}

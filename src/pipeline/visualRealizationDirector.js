@@ -175,59 +175,47 @@ function chooseOverlayMode(family, shot, index) {
 }
 
 /**
- * Editorial camera selection:
- * Deliberate movement states: STATIC, SUBTLE, ACTIVE.
- * Prohibits identical camera move > 2 consecutive shots.
- * Introduces intentional static holds on documents, charts, quotes, hero photos.
+ * Standardized Unified Camera Selection:
+ * Minimalist palette: static | subtlePush | subtlePull (with optional subtle pan for wide photos).
+ * Deliberate movement states: STATIC, SUBTLE.
+ * Alternates smoothly between subtlePush and subtlePull, with intentional static holds every 3-4 shots.
+ * Strict maximum scale factor of 1.04 (4% max motion) across all content types.
  */
 function chooseCameraMove(shot, scene, family, asset, timing, memory, format = 'landscape', fps = 30) {
-  // Charts, quotes, code, ui, diagrams, maps, and montage are always intentionally static
-  if (['chart', 'quote', 'code', 'ui', 'diagram', 'map', 'montage'].includes(family)) return 'static';
+  // 1. Moving footage, charts, quotes, code, UI, diagrams, maps, process, and documents are strictly static
+  if (STRUCTURED.has(family) || ['montage', 'statement', 'chapter', 'ground'].includes(family)) return 'static';
   if (family === 'document' || shot.role === 'evidence') return 'static';
-  // Moving footage already supplies motion; never stack synthetic Ken Burns motion on it.
   if (asset?.type === 'video') return 'static';
   if (shot.motionPreference === 'stable') return 'static';
 
   const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
-  if (durationSec < 3.6) return 'static';
+  if (durationSec < 3.0) return 'static';
 
-  const recentMoves = memory.recentCameraMoves.slice(-3);
-  const focal = asset?.focalPoint || asset?.focal || { x: .5, y: .5 };
   const aspect = Number(asset?.width) / Math.max(1, Number(asset?.height));
   const targetAspect = format === 'shorts' ? 9 / 16 : 16 / 9;
-  const horizontalSlack = aspect > targetAspect ? 1 - targetAspect / aspect : 0;
-  const importantMoment = ['hook', 'reveal', 'payoff'].includes(scene?.purpose) || Number(scene?.intensity || 0) >= 4;
-  const candidates = new Map([['static', 1]]);
-  const add = (move, score) => candidates.set(move, Math.max(candidates.get(move) ?? -Infinity, score));
+  // If extreme vertical image on landscape (pillarbox), hold static to preserve clarity
+  if (aspect < targetAspect * 0.6) return 'static';
 
-  if (shot.role === 'detail') add('subtlePush', 8);
-  if (shot.role === 'establishing' || ['conclusion', 'transition'].includes(scene?.purpose)) add('subtlePull', 6);
-  if (importantMoment || shot.assetIntent === 'action' || shot.visualIntent === 'identify') add('subtlePush', 5.5);
-
-  // Judge pan feasibility from the real cover crop, not from a coarse portrait/
-  // landscape label. A common 3:2 photograph has useful vertical travel on a
-  // 16:9 canvas even though it is not a portrait image.
-  if (horizontalSlack >= .08) add(focal.x >= .5 ? 'panRight' : 'panLeft', shot.role === 'context' ? 6.2 : 4.4);
-
-  const last = recentMoves.at(-1);
-  const lastTwo = recentMoves.slice(-2);
+  const recentMoves = memory.recentCameraMoves.slice(-4);
   const movingRun = [...recentMoves].reverse().findIndex((move) => move === 'static');
   const consecutiveMoving = movingRun === -1 ? recentMoves.length : movingRun;
-  const consecutiveStatic = [...recentMoves].reverse().findIndex((move) => move !== 'static');
-  const staticRun = consecutiveStatic === -1 ? recentMoves.length : consecutiveStatic;
 
-  for (const [move, score] of candidates) {
-    let adjusted = score;
-    if (move === last && move !== 'static') adjusted -= 3.5;
-    if (lastTwo.length === 2 && lastTwo.every((value) => value === move)) adjusted -= 6;
-    if (move === 'static' && consecutiveMoving >= 3) adjusted += 5;
-    if (move !== 'static' && staticRun >= 2) adjusted += 5;
-    candidates.set(move, adjusted);
+  // 2. Intermittent deliberate still rests every 3–4 shots
+  if (consecutiveMoving >= 3) return 'static';
+
+  // 3. Wide panoramic photo slack: optional subtle horizontal drift (<= 3% travel)
+  const horizontalSlack = aspect > targetAspect ? 1 - targetAspect / aspect : 0;
+  const focal = asset?.focalPoint || asset?.focal || { x: .5, y: .5 };
+  if (horizontalSlack >= .08 && (shot.role === 'context' || shot.role === 'establishing') && !recentMoves.includes('panRight') && !recentMoves.includes('panLeft')) {
+    return focal.x >= .5 ? 'panRight' : 'panLeft';
   }
 
-  // STATIC remains a deliberate option, but variety is achieved by choosing a
-  // different feasible motion before freezing a healthy still image.
-  return [...candidates.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+  // 4. Smooth alternating cycle between subtlePush and subtlePull
+  const lastDirection = [...recentMoves].reverse().find((m) => m === 'subtlePush' || m === 'subtlePull');
+  if (shot.role === 'detail') return 'subtlePush';
+  if (shot.role === 'establishing') return 'subtlePull';
+  if (lastDirection === 'subtlePush') return 'subtlePull';
+  return 'subtlePush';
 }
 
 /** Keep the public motion vocabulary intentionally small and predictable. */
@@ -243,25 +231,22 @@ function normalizeCameraMove(move, asset) {
 function chooseMinimalCameraMove(shot, scene, family, asset, timing, memory, fps = 30) {
   if (family !== 'image' || asset?.type === 'video' || shot.motionPreference === 'stable' || shot.role === 'evidence') return 'static';
   const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
-  if (durationSec < 6 || Number(memory.shotsSinceCameraMotion || 0) < 4) return 'static';
-  const majorBeat = ['hook', 'reveal', 'payoff', 'conclusion'].includes(scene?.purpose);
-  if (!majorBeat) return 'static';
-  return scene?.purpose === 'hook' || scene?.purpose === 'conclusion' ? 'subtlePull' : 'subtlePush';
+  if (durationSec < 5 || Number(memory.shotsSinceCameraMotion || 0) < 3) return 'static';
+  const lastMove = [...(memory.recentCameraMoves || [])].reverse().find((m) => m === 'subtlePush' || m === 'subtlePull');
+  return lastMove === 'subtlePush' ? 'subtlePull' : 'subtlePush';
 }
 
 function cameraMagnitudeFor(timing, fps, move) {
   if (move === 'static') return 0;
   if (move === 'panLeft' || move === 'panRight') return .03;
-  const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
-  if (durationSec <= 3.5) return 0.04;
-  if (durationSec >= 7.0) return 0.08;
-  const t = (durationSec - 3.5) / (7.0 - 3.5);
-  return Number((0.04 + t * 0.04).toFixed(3));
+  // Standardized strict maximum scale factor of 1.04 (4% max motion) across all content types
+  return 0.04;
 }
 
-function cameraPath(type, asset, magnitude = 0.06, base = 1) {
+function cameraPath(type, asset, magnitude = 0.04, base = 1) {
   const focal = asset?.focalPoint || asset?.focal || { x: 0.5, y: 0.45 };
-  const subtle = Math.min(0.08, Math.max(0.04, Number(magnitude) || 0.06));
+  // Bounded strictly between 2% and 4% (scale <= 1.04)
+  const subtle = Math.min(0.04, Math.max(0.02, Number(magnitude) || 0.04));
 
   if (type === 'static' || type === 'hold') {
     return { type: 'static', scale: [base, base], focus: [[focal.x, focal.y], [focal.x, focal.y]] };
@@ -271,7 +256,7 @@ function cameraPath(type, asset, magnitude = 0.06, base = 1) {
   }
   if (['pan', 'panLeft', 'panRight'].includes(type)) {
     const direction = type === 'panLeft' ? -1 : 1;
-    const travel = Math.min(.04, Math.max(.02, magnitude || .03));
+    const travel = Math.min(.03, Math.max(.02, magnitude || .03));
     return {
       type: type === 'pan' ? 'panRight' : type,
       scale: [base * 1.04, base * 1.04],

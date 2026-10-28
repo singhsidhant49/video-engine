@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_082ea68af255db5f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Five fighter jets flying in a precise V formation against a clear blue sky.",
+  "path": "images/saved-from-web/saved-from-web_082ea68af255db5f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "five",
+    "fighter",
+    "jet",
+    "flying",
+    "precise",
+    "formation",
+    "against",
+    "clear",
+    "blue",
+    "sky",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "jets",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "five",
+    "fighter",
+    "jet",
+    "flying",
+    "precise",
+    "formation",
+    "against",
+    "clear",
+    "blue",
+    "sky",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "jets",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Five fighter jets flying in a precise V formation against a clear blue sky."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "jet climbing sky active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-26T15:02:52.294Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lance Button",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-display-of-fighter-jets-in-formation-40221569/"
+  }
+}

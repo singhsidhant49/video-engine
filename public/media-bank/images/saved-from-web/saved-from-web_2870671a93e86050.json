@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_2870671a93e86050",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking sunset view of a coastal highway running alongside the ocean, perfect for travel and nature themes.",
+  "path": "images/saved-from-web/saved-from-web_2870671a93e86050.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "sunset",
+    "coastal",
+    "highway",
+    "running",
+    "alongside",
+    "ocean",
+    "perfect",
+    "travel",
+    "nature",
+    "theme",
+    "seabed",
+    "marine",
+    "underwater",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "view",
+    "themes",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "sunset",
+    "coastal",
+    "highway",
+    "running",
+    "alongside",
+    "ocean",
+    "perfect",
+    "travel",
+    "nature",
+    "theme",
+    "seabed",
+    "marine",
+    "underwater",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "view",
+    "themes",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking sunset view of a coastal highway running alongside the ocean, perfect for travel and nature themes."
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "highway at sunset",
+    "savedAt": "2026-10-26T13:22:37.970Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Wei86 Travel",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scenic-coastal-highway-at-sunset-28641515/"
+  }
+}

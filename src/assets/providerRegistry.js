@@ -98,8 +98,8 @@ export const defaultAssetProviders = [
 const ROUTES = {
   ENTITY: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
   PRODUCT: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image'],
-  HISTORICAL: ['local-bank', 'wikipedia', 'commons', 'brave-image'],
-  LOCATION: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image'],
+  HISTORICAL: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
+  LOCATION: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
   EVIDENCE: ['local-bank', 'commons', 'wikipedia', 'pexels-image', 'pixabay-image', 'brave-image'],
   INTERFACE: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
   ACTION: ['local-bank', 'pexels-video', 'pexels-image', 'pixabay-image', 'brave-image'],

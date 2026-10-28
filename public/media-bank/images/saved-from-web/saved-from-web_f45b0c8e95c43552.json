@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_f45b0c8e95c43552",
+  "type": "image",
+  "mediaType": "image",
+  "title": "3D rendered digital artwork featuring an abstract human form composed of orange molecules.",
+  "path": "images/saved-from-web/saved-from-web_f45b0c8e95c43552.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "rendered",
+    "digital",
+    "artwork",
+    "featuring",
+    "abstract",
+    "human",
+    "form",
+    "composed",
+    "orange",
+    "molecule",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "molecules"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "rendered",
+    "digital",
+    "artwork",
+    "featuring",
+    "abstract",
+    "human",
+    "form",
+    "composed",
+    "orange",
+    "molecule",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "molecules"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "3D rendered digital artwork featuring an abstract human form composed of orange molecules."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dopamine molecule synapse 3d render",
+    "savedAt": "2026-10-28T08:36:22.342Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marek Piwnicki",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-3d-rendering-of-molecules-forming-a-human-shape-12489156/"
+  }
+}

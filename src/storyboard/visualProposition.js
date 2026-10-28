@@ -44,6 +44,12 @@ function domainAndSense(text, kind) {
     || (/\b(?:finance|financial|banking)\b/i.test(sanitizedText) && !/\b(?:river bank)\b/i.test(sanitizedText))) {
     return ['finance', 'FINANCIAL_SYSTEM'];
   }
+  if (/\b(?:dubai|burj\s+khalifa|uae|emirates|marina)\b/i.test(text)) {
+    return ['geography and travel', 'LOCATION_LANDMARK'];
+  }
+  if (/\b(?:roman\s+empire|ancient\s+rome|ancient\s+roman|roman\s+forum|colosseum|pompeii|ancient\s+greece|ancient\s+egypt|ottoman\s+empire|mesopotamia|persian\s+empire)\b/i.test(text)) {
+    return ['history and civilizations', 'HISTORICAL_CIVILIZATION'];
+  }
   if (/\b(?:runner|running|athlete|athletics|sprint|marathon|jogging|track and field|workout|fitness|gym|training session)\b/i.test(sanitizedText)) {
     return ['sports and fitness', 'ATHLETIC_TRAINING'];
   }
@@ -54,6 +60,8 @@ function domainAndSense(text, kind) {
 
 function confusersFor(sense) {
   const values = {
+    LOCATION_LANDMARK: ['generic modern office meeting', 'stock business team', 'unrelated city skyline without landmark'],
+    HISTORICAL_CIVILIZATION: ['modern office building', 'contemporary skyscrapers', 'digital abstract mesh', 'generic modern traffic'],
     ATHLETIC_TRAINING: [
       'office desk paperwork', 'computer keyboard laptop', 'stock chart graphs',
       'corporate boardroom meeting', 'circuit board motherboard', 'car traffic jam',
@@ -148,8 +156,11 @@ export function buildVisualProposition({ shot, scene, topic = '' }) {
     || /abstract|ambient|background|texture|metaphor/i.test(concept);
   const isDocumentOrHistoricalEvidence = (scene.evidenceRequirement === 'required' || shot.evidenceRequirement === 'required')
     && (shot.assetIntent === 'document' || shot.assetIntent === 'historical' || /document|paper|receipt|certificate|contract|court|record/i.test(concept));
-  const isSpecificNamedEntity = shot.assetIntent === 'entity' && (shot.entities?.length > 0 || /^[A-Z][a-z]+(\s+[A-Z][a-z]+)+$/.test(concept));
-  const literalness = !isAbstractOrConceptual && (isDocumentOrHistoricalEvidence || isSpecificNamedEntity)
+  const isLocationOrCivilization = conceptSense === 'LOCATION_LANDMARK' || conceptSense === 'HISTORICAL_CIVILIZATION'
+    || shot.assetIntent === 'location' || shot.assetIntent === 'historical';
+  const isSpecificNamedEntity = (shot.assetIntent === 'entity' || isLocationOrCivilization)
+    && (shot.entities?.length > 0 || /^[A-Z][a-z]+(\s+[A-Z][a-z]+)+$/.test(concept) || isLocationOrCivilization);
+  const literalness = !isAbstractOrConceptual && (isDocumentOrHistoricalEvidence || isSpecificNamedEntity || isLocationOrCivilization)
     ? 'DIRECT'
     : (shot.role === 'atmosphere' || /abstract|background/i.test(concept)) ? 'METAPHOR_ALLOWED' : 'CONTEXTUAL_ALLOWED';
   const domainSpecificPositives = [];
@@ -166,6 +177,20 @@ export function buildVisualProposition({ shot, scene, topic = '' }) {
       'running track stadium athlete',
       'runner shoes pavement dawn sunrise',
       'determined runner sprinting',
+    );
+  } else if (conceptSense === 'LOCATION_LANDMARK') {
+    domainSpecificPositives.push(
+      'Dubai Burj Khalifa modern skyline',
+      'Dubai Marina aerial view',
+      'Downtown Dubai skyscrapers cityscape',
+      'Dubai modern architecture drone shot',
+    );
+  } else if (conceptSense === 'HISTORICAL_CIVILIZATION') {
+    domainSpecificPositives.push(
+      'Roman Colosseum ancient ruins Rome',
+      'Roman Forum ancient marble architecture ruins',
+      'Ancient Roman architecture columns aerial',
+      'Ancient Roman statue and temple marble',
     );
   }
   let searchConcepts = shot.searchConcepts || [];

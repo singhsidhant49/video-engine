@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_40e5a1aec5874191",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A dramatic close-up of human eyes illuminated by warm sunlight casting shadows.",
+  "path": "images/saved-from-web/saved-from-web_40e5a1aec5874191.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "close",
+    "human",
+    "eye",
+    "illuminated",
+    "warm",
+    "sunlight",
+    "casting",
+    "shadow",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "close-up",
+    "eyes",
+    "shadows"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "close",
+    "human",
+    "eye",
+    "illuminated",
+    "warm",
+    "sunlight",
+    "casting",
+    "shadow",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "close-up",
+    "eyes",
+    "shadows"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A dramatic close-up of human eyes illuminated by warm sunlight casting shadows."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "eyes closing close up warm light",
+    "savedAt": "2026-10-28T06:03:48.336Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vadim Malitskii",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-eyes-in-dramatic-lighting-31861371/"
+  }
+}

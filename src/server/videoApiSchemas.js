@@ -1,9 +1,14 @@
 import { z } from 'zod-api';
 
 const ContentType = z.enum([
-  'auto', 'documentary', 'investigative', 'explainer', 'educational',
-  'tutorial', 'meditation', 'audiobook', 'motivational', 'story',
-]);
+  'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  // Backward-compatible alias support:
+  'investigative', 'educational', 'tutorial',
+]).transform((val) => {
+  if (val === 'investigative') return 'documentary';
+  if (val === 'educational' || val === 'tutorial') return 'explainer';
+  return val;
+});
 const Pacing = z.enum(['auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid']);
 
 export const CreateVideoRequestSchema = z.object({

@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_5ef2ce70ea038315",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Dramatic silhouette of the Himalayas during a vivid sunset in Nepal's mountainous landscape.",
+  "path": "images/saved-from-web/saved-from-web_5ef2ce70ea038315.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "silhouette",
+    "himalaya",
+    "during",
+    "vivid",
+    "sunset",
+    "nepal",
+    "mountainou",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "himalayas",
+    "mountainous"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "silhouette",
+    "himalaya",
+    "during",
+    "vivid",
+    "sunset",
+    "nepal",
+    "mountainou",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "himalayas",
+    "mountainous"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Dramatic silhouette of the Himalayas during a vivid sunset in Nepal's mountainous landscape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "fragile high altitude landscape Himalaya",
+    "savedAt": "2026-10-27T07:06:04.326Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Arjay Neyra",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-himalayan-peaks-at-sunset-in-nepal-32132399/"
+  }
+}

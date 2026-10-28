@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_bae17d2f356fefd4",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/close-up-of-hand-pressing-slot-machine-buttons-35728851/",
+  "path": "video/saved-from-web/saved-from-web_bae17d2f356fefd4.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "close",
+    "hand",
+    "pressing",
+    "slot",
+    "machine",
+    "button",
+    "35728851",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "close-up-of-hand-pressing-slot-machine-buttons-35728851"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "close",
+    "hand",
+    "pressing",
+    "slot",
+    "machine",
+    "button",
+    "35728851",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "close-up-of-hand-pressing-slot-machine-buttons-35728851"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/close-up-of-hand-pressing-slot-machine-buttons-35728851/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "hand pressing button close up",
+    "savedAt": "2026-10-28T08:43:43.720Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Evgenij Mikhailov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/close-up-of-hand-pressing-slot-machine-buttons-35728851/"
+  }
+}
