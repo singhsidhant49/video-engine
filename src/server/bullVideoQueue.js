@@ -23,7 +23,7 @@ export class BullVideoQueue {
     this.worker = null;
   }
 
-  async init({ onGenerate, onDelete } = {}) {
+  async init({ onGenerate, onDelete, onFailed } = {}) {
     await this.queue.waitUntilReady();
     if (this.processJobs) {
       // BullMQ owns active-job leases and stalled-job recovery. Removing active
@@ -43,7 +43,12 @@ export class BullVideoQueue {
         stalledInterval: Number(process.env.VIDEO_QUEUE_STALLED_INTERVAL_MS || 60_000),
         maxStalledCount: Number(process.env.VIDEO_QUEUE_MAX_STALLED_COUNT || 2),
       });
-      this.worker.on('failed', (job, error) => console.error(`BullMQ job ${job?.id || 'unknown'} failed:`, error));
+      this.worker.on('failed', async (job, error) => {
+        console.error(`BullMQ job ${job?.id || 'unknown'} failed:`, error);
+        if (job?.name === 'generate' && job?.data?.videoId && typeof onFailed === 'function') {
+          await onFailed(job.data.videoId, error).catch(() => {});
+        }
+      });
       await this.worker.waitUntilReady();
     }
   }
@@ -51,7 +56,13 @@ export class BullVideoQueue {
   async enqueueGeneration(videoId, attempt = 0) {
     const jobId = `video-${videoId}-${attempt}`;
     const existing = await this.queue.getJob(jobId);
-    if (existing) return existing;
+    if (existing) {
+      const state = await existing.getState().catch(() => null);
+      if (['waiting', 'active', 'delayed', 'paused', 'prioritized'].includes(state)) {
+        return existing;
+      }
+      await existing.remove().catch(() => {});
+    }
     return this.queue.add('generate', { videoId, attempt }, {
       jobId, attempts: 1,
       removeOnComplete: { age: 86_400, count: 1_000 }, removeOnFail: { age: 604_800, count: 2_000 },
@@ -59,7 +70,10 @@ export class BullVideoQueue {
   }
 
   async hasGeneration(videoId, attempt = 0) {
-    return Boolean(await this.queue.getJob(`video-${videoId}-${attempt}`));
+    const job = await this.queue.getJob(`video-${videoId}-${attempt}`);
+    if (!job) return false;
+    const state = await job.getState().catch(() => null);
+    return ['waiting', 'active', 'delayed', 'paused', 'prioritized'].includes(state);
   }
 
   async cancelGeneration(videoId, attempt = 0) {

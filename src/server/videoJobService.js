@@ -102,6 +102,7 @@ export class VideoJobService {
       await this.taskQueue.init({
         onGenerate: (id) => this.#runExternal(id),
         onDelete: (id) => this.#runExternalDeletion(id),
+        onFailed: (id, err) => this.#handleQueueFailure(id, err),
       });
       // API replicas enqueue newly-created requests but must not replay every
       // persisted job when they start. Reconciliation belongs to workers.
@@ -406,6 +407,20 @@ export class VideoJobService {
     const job = await this.store.getJob(id);
     if (!job || job.status !== 'delete_requested') return;
     return this.#beginDeletion(job, this.active.get(id)?.promise || null);
+  }
+
+  async #handleQueueFailure(id, err) {
+    const job = await this.store.getJob(id);
+    if (!job || ['completed', 'failed', 'cancelled'].includes(job.status)) return;
+    job.status = 'failed';
+    job.stage = 'failed';
+    job.error = {
+      code: 'RENDER_STALLED_OR_CRASHED',
+      message: err?.message || 'Worker process crashed or stalled during rendering',
+    };
+    job.completedAt = now();
+    job.updatedAt = now();
+    await this.store.putJob(job);
   }
 
   async #run(id, controller) {
