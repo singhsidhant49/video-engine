@@ -26,17 +26,18 @@ function normalizeHistoricalEventShot(shot, scene) {
 function preferredSource(shot, mediaEditorial = false, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER') {
   const motionFriendly = ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.assetIntent)
     || ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.role);
-  // Content type does not restrict visuals. Any motion-friendly shot
-  // searches both video and still providers via 'auto', preserving a
-  // safe image fallback when suitable footage is unavailable.
+  const isStaticEvidence = shot.motionPreference === 'stable'
+    || shot.assetIntent === 'document'
+    || (shot.assetIntent === 'historical' && (shot.entities || []).length > 0);
+
   if (representationDecision?.preferredSource) {
-    if (representationDecision.preferredSource === 'image' && motionFriendly) return 'auto';
+    if (representationDecision.preferredSource === 'image' && (motionFriendly || !isStaticEvidence)) return 'auto';
     return representationDecision.preferredSource;
   }
   if (shot.mediaPreference === 'procedural' && !mediaEditorial) return 'procedural';
-  if (shot.mediaPreference === 'video' || shot.motionPreference === 'energetic') return 'video';
+  if (shot.mediaPreference === 'video' || shot.motionPreference === 'energetic' || shot.motionPreference === 'active') return 'video';
   if (motionFriendly) return 'auto';
-  if (shot.mediaPreference === 'real') {
+  if (isStaticEvidence) {
     return 'image';
   }
   return 'auto';
@@ -302,9 +303,10 @@ function stagedQueries(shot, concept, mediaEditorial = false, visibleNeed = null
   ].filter(Boolean));
 
   // Level 2: Specific Subject + Action
+  const isTechConcept = /\b(?:deadlock|concurrency|database|software|transaction|thread|tech|server|datacenter|cloud|computer|code|terminal|screen|app|ui|browser|javascript|html|css|gpu|cpu)\b/i.test(cleanConcept);
   const level2 = unique([
     ...entities.map((e) => `${e} in action`),
-    ...entities.map((e) => `${e} screen`),
+    ...(isTechConcept ? entities.map((e) => `${e} screen`) : entities.map((e) => `${e} footage`)),
     ...(shot.searchConcepts || []),
   ]);
 

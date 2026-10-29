@@ -126,7 +126,13 @@ EDITORIAL & PACING RULES:
        - Banking, credit, & mortgages: search "bank vault steel door heavy security", "signing mortgage loan agreement table", "bank teller service counter", "bank deposit ledger screen". NEVER search "empty shelves" or "closet racks" or "puzzle pieces".
        - Economic recession & debt: search "New York Stock Exchange trading floor red charts", "closed retail store financial crisis", "financial news broadcast screen". NEVER search "coin spinning on table" or "falling dominoes".
        - Real cities, empires, and countries: search the authentic real landmarks, skyline, and archaeological sites.
-    b. Priority is ALWAYS authentic, real, tangible photography and footage of the actual topic.`;
+    b. Priority is ALWAYS authentic, real, tangible photography and footage of the actual topic.
+15. AUTHENTIC FOOTAGE & B-ROLL ACROSS ALL CONTENT TYPES:
+    a. No matter the genre (documentary, explainer, storytelling, motivation, meditation/sleep, audiobook), if the narration touches on real people, history, athletics, nature, geography, exploration, science, or real events, you MUST direct authentic real-world photography and b-roll footage.
+    b. For Motivational: direct raw athletic discipline, intense training in rain, climbers ascending frozen ridges, runners at dawn, heavy work. NEVER generic business meetings, handshakes, or corporate people smiling at laptops!
+    c. For Story/Audiobook: direct cinematic narrative b-roll of authentic environments, stormy seas, moody historical streets, atmospheric interiors, period objects.
+    d. For Meditation/Sleep: direct tranquil, slow-motion nature b-roll (pine forest mist, gentle rain on leaves, slow twilight ocean tide, moonlight).
+    e. NEVER generate abstract clichés like "concept", "handshake", "business team", "growth arrows", "lightbulb", or "puzzle pieces".`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -426,6 +432,69 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
   }
 }
 
+export function getGenreDirectingInstructions(contentType = 'explainer') {
+  const type = String(contentType || '').toLowerCase().trim();
+  switch (type) {
+    case 'documentary':
+      return {
+        roleDescription: 'You are an award-winning historical and investigative documentary film director and writer.',
+        structureGuidance: `- Cold Open / Incident: 1 scene (the dramatic catalyst or high-stakes turning point)\n` +
+          `- Historical Setting & Mission: 1–2 scenes (the geopolitical context, expedition, figures, and what was at stake)\n` +
+          `- Escalation & Adversity: 3–4 scenes (the unfolding crisis, physical struggle, decisive moves, archival testimony)\n` +
+          `- Archival Proof & Turning Point: 2 scenes (the harrowing climax and decisive resolution)\n` +
+          `- Historical Legacy: 1–2 scenes (the enduring historical impact and profound human meaning)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize authentic archival historical photography, real period artifacts, and tangible environmental footage (ocean storms, pack ice, ruins, battlefields, vintage blueprints, real historical figures). Every imageQuery must search for real tangible places, artifacts, or footage—NEVER abstract graphics or corporate stock.`,
+        toneGuidance: `Write with gravitas, tension, historical accuracy, vivid tangible sensory details, and profound human stakes.`,
+      };
+    case 'motivational':
+      return {
+        roleDescription: 'You are an elite performance director and motivational author.',
+        structureGuidance: `- The Harsh Mirror / Confrontation: 1 scene (cutting through excuses and confronting the friction)\n` +
+          `- The Hidden Cost: 1–2 scenes (the painful cost of inaction and why cheap hype fails)\n` +
+          `- The Mental Shift / Standards: 3–4 scenes (uncompromising internal standards, discipline, and daily execution)\n` +
+          `- Proof in the Crucible: 2 scenes (real physical struggle, adversity endured, pushing past breaking points)\n` +
+          `- Victorious Call to Action: 1–2 scenes (empowered forward drive, conquer the day)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize authentic, powerful cinematic footage of real athletes in heavy rain, solo training in raw gyms, mountain climbers ascending frozen ridges, runners at dawn, exhausted contenders pushing limits. NEVER show generic office workers smiling or cartoonish metaphors.`,
+        toneGuidance: `Write with raw visceral urgency, resolute discipline, powerful cadence, and grounded strength.`,
+      };
+    case 'meditation':
+      return {
+        roleDescription: 'You are a master mindfulness guide and sleep story writer.',
+        structureGuidance: `- Gentle Arrival & Grounding: 1 scene (softening the breath, relaxing the body, settling into the moment)\n` +
+          `- Sensory Nature Immersion: 1–2 scenes (evoking the stillness of rain, quiet forests, starry night sky, ocean tide)\n` +
+          `- Progressive Deepening: 3–4 scenes (releasing tension from shoulders and mind, breathing with slow ease)\n` +
+          `- Stillness & Deep Peace: 2 scenes (safe sanctuary, quiet surrender of racing thoughts)\n` +
+          `- Tranquil Rest / Drift: 1–2 scenes (peaceful closure, drifting into restorative sleep or lasting calm)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize serene, slow-motion 4K nature footage: misty pine forests, gentle raindrops on calm lake, slow twilight ocean waves, moonlight through bamboo, quiet night sky. No frantic motion or abrupt visual shifts.`,
+        toneGuidance: `Write with gentle, poetic, soothing phrasing, slow cadence, soft sensory words, and tranquil warmth.`,
+      };
+    case 'story':
+    case 'audiobook':
+      return {
+        roleDescription: 'You are a master dramatic storyteller and literary narrator.',
+        structureGuidance: `- The Hook & Atmosphere: 1 scene (dropping the listener straight into the room or landscape)\n` +
+          `- Character & Stakes: 1–2 scenes (desires, unspoken tension, the world they inhabit)\n` +
+          `- Rising Complication: 3–4 scenes (mounting obstacles, unexpected discovery, building suspense)\n` +
+          `- The Climax: 2 scenes (the confrontation, revelation, or point of no return)\n` +
+          `- Resonant Aftermath: 1–2 scenes (emotional truth, poignant resolution, lingering insight)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize rich cinematic narrative b-roll and atmospheric photography: moody streets, dramatic natural landscapes, evocative period textures, dramatic lighting, and authentic physical details.`,
+        toneGuidance: `Write with literary elegance, immersive atmosphere, character stakes, suspenseful pacing, and emotional depth.`,
+      };
+    case 'explainer':
+    default:
+      return {
+        roleDescription: 'You are the executive director of a premium documentary and analytical explainer channel.',
+        structureGuidance: `- Hook: 1 scene (specific tension, startling paradox, or high stakes)\n` +
+          `- Why It Matters: 1–2 scenes (immediate relevance and the hidden paradox)\n` +
+          `- Core Mechanism: 3–4 scenes (foundational step-by-step physical breakdown)\n` +
+          `- Real-World Evidence: 2 scenes (concrete examples, actual machines, verified data)\n` +
+          `- Payoff / Conclusion: 1–2 scenes (direct resolution of the open question, lasting insight)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize real tangible photography and authentic b-roll footage of actual machines, facilities, laboratories, and physical operations. Never search for abstract buzzwords or generic corporate meetings.`,
+        toneGuidance: `Write with clarity, intellect, momentum, vivid concrete nouns, and clear logical progression.`,
+      };
+  }
+}
+
 /**
  * @param {{ topic: string, niche?: string, format?: 'shorts'|'landscape', durationSec?: number, style?: string, speechRateWps?: number, sourceData?: unknown, productionProfile?: object }} brief
  */
@@ -440,7 +509,8 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
     return demo;
   }
 
-  console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats`);
+  const genre = getGenreDirectingInstructions(productionProfile?.contentType || niche);
+  console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats · Genre: ${productionProfile?.contentType || 'explainer'}`);
   const styleHint = style && STYLES[style] ? `\nThe directing style is fixed: "${style}".` : '';
   const serializedSource = sourceData == null
     ? ''
@@ -457,21 +527,18 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
   let compressionPasses = 0;
   if (target <= 180) {
     // Pass 1: Structured Beat Outline
-    console.log(`   📝 Pass 1: Outlining ${budget.targetSceneCount} content beats for ${target}s...`);
+    console.log(`   📝 Pass 1: Outlining ${budget.targetSceneCount} content beats for ${target}s (${productionProfile?.contentType || 'explainer'})...`);
     const outline = await callJson(llm, [
       {
         role: 'system',
-        content: 'You outline documentary-style YouTube explainers. Reply with JSON only.',
+        content: `${genre.roleDescription} Reply with JSON only.`,
       },
       {
         role: 'user',
         content: `${brief}\nTarget duration: ${target} seconds.\nTotal narration word budget: ${budget.targetWords} words (ABSOLUTE MAXIMUM: ${budget.maxWords} words).\n` +
           `Design a beat outline with EXACTLY ${budget.targetSceneCount} content beats conforming to these section targets:\n` +
-          `- Hook: 1 scene, ~${budget.sectionBudgets.hook.targetWords} words\n` +
-          `- Why it matters / Open question: 1–2 scenes, ~${budget.sectionBudgets.why_it_matters.targetWords} words total\n` +
-          `- Core explanation / mechanism: 3–4 scenes, ~${budget.sectionBudgets.core_explanation.targetWords} words total\n` +
-          `- Example / evidence: 2 scenes, ~${budget.sectionBudgets.example_evidence.targetWords} words total\n` +
-          `- Payoff / conclusion: 1–2 scenes, ~${budget.sectionBudgets.payoff_conclusion.targetWords} words total\n\n` +
+          genre.structureGuidance +
+          `\n${genre.visualGuidance}\n` +
           `Return {"title": string, "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "targetWords": number, "visualType": string}]}`,
       },
     ]);
@@ -484,6 +551,7 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
       {
         role: 'user',
         content: `${brief}\nVideo Title: "${outline?.title || topic}". Style: "${outline?.style || style || 'minimal_premium'}".\n` +
+          `GENRE EDITORIAL GUIDANCE:\n${genre.toneGuidance}\n${genre.visualGuidance}\n\n` +
           `STRICT DURATION & WORD BUDGET:\n` +
           `- Total narration length: EXACTLY ${budget.targetWords} words (minimum ${budget.minWords} words, ABSOLUTE CEILING: ${budget.maxWords} words).\n` +
           `- Total scenes: EXACTLY ${budget.targetSceneCount} content beats.\n` +

@@ -457,8 +457,13 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
         && (!directRequired || judgment.classification === 'DIRECT');
       return { source, judgment, valid };
     }).filter((item) => item.valid)
-      .sort((a, b) => (b.judgment.finalEditorialScore || 0) - (a.judgment.finalEditorialScore || 0)
-        || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex));
+      .sort((a, b) => {
+        const aAdjacent = Math.abs(a.source.index - targetIndex) <= 1 ? 1 : 0;
+        const bAdjacent = Math.abs(b.source.index - targetIndex) <= 1 ? 1 : 0;
+        if (aAdjacent !== bAdjacent) return aAdjacent - bAdjacent;
+        return (b.judgment.finalEditorialScore || 0) - (a.judgment.finalEditorialScore || 0)
+          || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex);
+      });
     const evaluated = evaluatedSources[0];
     if (!evaluated) continue;
     const { source, judgment } = evaluated;

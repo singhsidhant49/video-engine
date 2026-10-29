@@ -97,6 +97,16 @@ function buildClaimEvidenceDiagnostics(plan) {
  * @param {string} [o.videoId] caller-assigned stable video identifier
  * @param {AbortSignal} [o.signal] cooperative cancellation signal
  */
+export function resolveEditorialMode(contentType = '', niche = '') {
+  const norm = String(contentType || '').toLowerCase().trim();
+  if (norm === 'documentary') return 'DOCUMENTARY';
+  if (norm === 'motivational') return 'MOTIVATIONAL';
+  if (norm === 'story' || norm === 'audiobook') return 'STORY';
+  if (norm === 'meditation') return 'GENERAL';
+  if (norm === 'explainer' || niche === 'tech') return niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
+  return niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
+}
+
 export async function createFacelessVideo({
   brief,
   channelProfile,
@@ -320,6 +330,7 @@ export async function createFacelessVideo({
 
   // 1. Editorial plan.
   let plan;
+  let assetEditorialMode = resolveEditorialMode(productionProfile?.contentType, niche);
   const reusablePlanStage = canReuse('plan');
   let recoveredFailedPlan = false;
   let savedPlan = null;
@@ -663,7 +674,7 @@ export async function createFacelessVideo({
     // 5. Asset Director: tiered search under each scene's acceptability policy
     await job.startStage('assets');
     throwIfCancelled();
-    const assetEditorialMode = plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL';
+    assetEditorialMode = resolveEditorialMode(productionProfile?.contentType, plan.niche);
     const assetRequests = planAssetRequests(storyboard, { format, visualPolicy, coveragePlan: visualCoveragePlan, editorialMode: assetEditorialMode });
     await save('asset-requests.json', assetRequests, { schema: AssetRequestListSchema });
     await save('visual-propositions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.visualProposition])));
@@ -943,11 +954,12 @@ export async function createFacelessVideo({
       }
     }
     const allRealizedShots = timeline.realizedShots || timeline.scenes?.flatMap((s) => s.shots || []) || [];
+    assetEditorialMode = assetEditorialMode || resolveEditorialMode(productionProfile?.contentType, plan?.niche);
     const visualSequenceReview = evaluateVisualSequence({
       shots: allRealizedShots,
       storyboard,
       editorialJudgments: judgments,
-      editorialMode: plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL',
+      editorialMode: assetEditorialMode,
       format,
     });
     await save('visual-sequence-review.json', visualSequenceReview);
@@ -955,7 +967,7 @@ export async function createFacelessVideo({
     editorialMediaQc = {
       version: 1,
       format,
-      editorialMode: plan.niche === 'tech' ? 'TECHNICAL_EXPLAINER' : 'GENERAL',
+      editorialMode: assetEditorialMode,
       sequenceVerdict: visualSequenceReview.verdict,
       sequenceMetrics: visualSequenceReview.metrics,
       sequenceWarnings: visualSequenceReview.warnings,

@@ -120,12 +120,15 @@ export function solveMediaLayout(composition, mediaSceneSpec, ctx) {
     const subjectSafeRegion = unionRects(protectedBounds.map((region) => projectRect(region, cropResult, target)));
     mediaGeometry[id] = { assetId: asset.assetId, src: asset.src, mediaType: asset.type, rect: target, crop: { x: cropResult.x, y: cropResult.y, width: cropResult.width, height: cropResult.height }, objectPosition: cropResult.objectPosition, scale: 1, transformOrigin: `${Math.round(cropResult.objectPosition.x * 100)}% ${Math.round(cropResult.objectPosition.y * 100)}%`, subjectSafeRegion,
       treatment: { scrim: mediaSceneSpec.textNeed !== 'NONE' ? 'subtle-gradient' : 'none', brightness: 1, contrast: 1, tintOpacity: 0, vignette: mediaSceneSpec.mediaRole === 'ATMOSPHERE' ? .12 : 0 }, sourceDimensions: asset.dimensions, nativeMotion: asset.type === 'video' && asset.motionPresent !== false, videoTrim: asset.videoTrim || null, activeRange: (() => { const cut = mediaSceneSpec.montage?.cuts.find((item) => item.assetId === asset.assetId); return cut ? { startFrame: cut.startFrame, endFrame: cut.endFrame } : null; })() };
-    const focus = asset.focalPoint || { x: .5, y: .5 };
+    const isDetailReframe = Boolean(asset.isDeliberateReuse || mediaSceneSpec.mediaRole === 'DETAIL' || asset.role === 'detail');
+    const focus = (isDetailReframe && asset.focusBox)
+      ? { x: clamp(asset.focusBox.x + asset.focusBox.width / 2, 0, 1), y: clamp(asset.focusBox.y + asset.focusBox.height / 2, 0, 1) }
+      : (asset.focalPoint || { x: .5, y: .5 });
     const behavior = asset.type === 'video' && asset.motionPresent !== false ? 'STATIC' : mediaSceneSpec.cameraIntent;
-    const magnitude = ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? .03 : .06;
-    const scales = behavior === 'SUBTLE_PUSH' ? [1, 1.06]
-      : behavior === 'SUBTLE_PULL' ? [1.06, 1]
-        : ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? [1.04, 1.04] : [1, 1];
+    const baseScale = isDetailReframe ? 1.25 : 1.0;
+    const scales = behavior === 'SUBTLE_PUSH' ? [baseScale, Number((baseScale * 1.06).toFixed(4))]
+      : behavior === 'SUBTLE_PULL' ? [Number((baseScale * 1.06).toFixed(4)), baseScale]
+        : ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? [Number((baseScale * 1.04).toFixed(4)), Number((baseScale * 1.04).toFixed(4))] : [baseScale, baseScale];
     const travel = .03;
     const startX = behavior === 'PAN_LEFT' ? focus.x + travel
       : behavior === 'PAN_RIGHT' ? focus.x - travel : focus.x;

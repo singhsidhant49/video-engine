@@ -102,17 +102,18 @@ function representationNeed(scene, shot, sense, text) {
   if (kind === 'document' || kind === 'quote') return 'DOCUMENT';
   if (shot.assetIntent === 'historical') return 'ARCHIVAL_IMAGE';
   if (kind === 'statement' || kind === 'chapter') return 'TEXT_STAT';
-  if (shot.entities?.length || scene.entities?.length) return scene.evidenceRequirement === 'required' ? 'ARCHIVAL_IMAGE' : 'REAL_IMAGE';
   if (['ANCESTRAL_CAUSALITY', 'CAUSAL_TIMELINE', 'TIMELINE_BRANCHING', 'SOFTWARE_MEMORY', 'NETWORK_PROTOCOL', 'CONCURRENCY_DEADLOCK'].includes(sense)) {
     if (sense === 'ANCESTRAL_CAUSALITY' || sense.includes('TIMELINE')) return 'TIMELINE';
     return 'DIAGRAM';
   }
   if (/connects?|flows?|causes?|depends?|cycle|loop|mechanism|branch/i.test(text)) return 'DIAGRAM';
-  if (shot.assetIntent === 'action'
+  const hasDynamicMotion = shot.assetIntent === 'action'
     || ['NEW_ACTION', 'NEW_LOCATION', 'STATE_CHANGE'].includes(shot.semanticSubBeat?.shift)
-    || /\b(walks?|runs?|drives?|flies?|moves?|builds?|opens?|closes?|types?|writes?|works?|operates?|travels?|crosses?|launches?|falls?|rises?|crowd|traffic|factory|assembly line|waves?|burns?|flows?)\b/i.test(text)) {
+    || /\b(walks?|runs?|drives?|flies?|moves?|builds?|opens?|closes?|types?|writes?|works?|operates?|travels?|crosses?|launches?|falls?|rises?|crowd|traffic|factory|assembly line|waves?|burns?|flows?|storm|blizzard|winds?|ocean|sailing|rowing|crushing|struggle|workout|training|sprint|marathon)\b/i.test(text);
+  if (hasDynamicMotion && shot.assetIntent !== 'document' && shot.role !== 'graphic') {
     return 'REAL_VIDEO';
   }
+  if (shot.entities?.length || scene.entities?.length) return scene.evidenceRequirement === 'required' ? 'ARCHIVAL_IMAGE' : 'REAL_IMAGE';
   return 'REAL_IMAGE';
 }
 

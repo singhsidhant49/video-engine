@@ -352,10 +352,36 @@ export function deriveSemanticAlternatives(primaryConcept = '', subject = '', ac
       'microprocessor execution units',
       'processor architecture schematic'
     );
+  } else if (/antarctic|expedition|ship|pack\s+ice|ocean|storm|sea|voyage|survival|shackleton/i.test(text)) {
+    alternatives.push(
+      'expedition ship navigating heavy pack ice',
+      'stormy ocean waves crashing violently',
+      'antarctic ice pack frozen sea landscape',
+      'polar explorers trekking across ice',
+      'blizzard winds blowing over frozen ocean',
+      'crew surviving on antarctic ice floe'
+    );
+  } else if (/discipline|workout|athlete|gym|train|marathon|struggle|overcome|conquer/i.test(text)) {
+    alternatives.push(
+      'athlete training intensely in heavy rain',
+      'fighter training in dark raw gym',
+      'mountain climber ascending frozen ridge',
+      'runner pushing past exhaustion at dawn',
+      'weightlifter gripping barbell chalk dust'
+    );
+  } else if (/meditation|breathe|peace|mindful|calm|tranquil|sleep/i.test(text)) {
+    alternatives.push(
+      'gentle rain falling on forest leaves',
+      'mist rolling slowly over pine trees',
+      'calm twilight ocean waves lapping shore',
+      'moonlight reflecting on still lake water',
+      'bamboo stalks swaying in gentle breeze'
+    );
   }
 
   if (subject) {
     alternatives.push(`authentic close up or detail of ${subject}`);
+    alternatives.push(`authentic real footage or broll of ${subject}`);
     const technicalContext = /\b(?:technical|engineering|laboratory|machine|hardware|chip|cpu|gpu|server|engine|thermal|microscopic)\b/i.test(text);
     if (technicalContext) {
       alternatives.push(
