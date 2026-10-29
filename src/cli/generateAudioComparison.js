@@ -29,19 +29,19 @@ const CANONICAL_CONTENT_TYPES = [
   {
     id: 'meditation',
     label: 'Guided Meditation & Sleep',
-    voice: 'af_heart',
+    voice: 'af_nicole',
     speed: 0.76,
     format: 'landscape',
     isMeditation: true,
-    comment: 'Calibrated at 0.76x with professional YouTube meditation silence pauses (5s inhale, 5.5s exhale, 4s body scan, 7s deep rest).',
+    comment: 'Calibrated at 0.76x with soft whisper (Nicole) and professional YouTube meditation silence pauses (5s inhale, 5.5s exhale, 4s body scan, 7s deep rest).',
   },
   {
     id: 'documentary',
     label: 'Documentary & History',
-    voice: 'bm_george',
+    voice: 'am_puck',
     speed: 0.95,
     format: 'landscape',
-    comment: 'Authoritative, grounded documentary pace with measured historical gravity (George).',
+    comment: 'Agile, resonant pace with documentary gravity (Puck).',
   },
   {
     id: 'explainer_landscape',

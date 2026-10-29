@@ -63,8 +63,8 @@ const BASE_PACING = Object.freeze({
 
 function inferContentType(topic = '', niche = '') {
   const text = `${niche} ${topic}`.toLowerCase();
-  if (isMeditationNarration({ topic, niche })) return 'meditation';
-  if (/\b(?:audiobook|narrated book|book summary|bedtime story)\b/.test(text)) return 'audiobook';
+  if (isMeditationNarration({ topic, niche }) || /\b(?:sleep|bedtime story|asmr|whisper)\b/.test(text)) return 'meditation';
+  if (/\b(?:audiobook|narrated book|book summary)\b/.test(text)) return 'audiobook';
   if (/\b(?:history|historical|documentary|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat|scandal|unsolved)\b/.test(text)) return 'documentary';
   if (/\b(?:motivation|self improvement|discipline|mindset|inspiration)\b/.test(text)) return 'motivational';
   if (/\b(?:story|tale|narrative)\b/.test(text)) return 'story';
@@ -79,26 +79,28 @@ function defaultPacingMode(contentType, format) {
 }
 
 export const ALLOWED_VOICES = Object.freeze([
-  'af_heart',  // Heart (Female - Warm, Calm, Smooth)
-  'af_bella',  // Bella (Female - Crisp, Polished, Modern)
-  'af_kore',   // Kore (Female - Balanced, Instructional)
-  'am_puck',   // Puck (Male - Agile, Resonant, Confident)
-  'bm_george', // George (Male - British Documentary Narrator)
-  'am_adam',   // Adam (Male - Direct, Focused)
-  'af_sky',    // Sky (Female - Bright, Youthful, Shorts)
-  'af_nicole', // Nicole (Female - Soft Whisper, Sleep & Bedtime)
+  'af_heart',  // Heart (Female - Warm, Calm, Smooth · Grade A)
+  'af_bella',  // Bella (Female - Crisp, Polished, Modern · Grade A-)
+  'am_puck',   // Puck (Male - Agile, Resonant, Confident · Grade C+/B)
+  'af_nicole', // Nicole (Female - Soft Whisper, Sleep & Bedtime · Grade B-)
 ]);
 
 const VOICE_ALIAS_MAP = Object.freeze({
   heart: 'af_heart',
   bella: 'af_bella',
-  kore: 'af_kore',
   puck: 'am_puck',
   puch: 'am_puck',
-  george: 'bm_george',
-  adam: 'am_adam',
-  sky: 'af_sky',
   nicole: 'af_nicole',
+  whisper: 'af_nicole',
+  // Backward-compatibility aliases for legacy / pruned voices
+  george: 'am_puck',
+  bm_george: 'am_puck',
+  adam: 'am_puck',
+  am_adam: 'am_puck',
+  sky: 'af_bella',
+  af_sky: 'af_bella',
+  kore: 'af_bella',
+  af_kore: 'af_bella',
 });
 
 export function normalizeSelectedVoice(voice = '', contentType = 'auto') {
@@ -113,18 +115,15 @@ export function normalizeSelectedVoice(voice = '', contentType = 'auto') {
 export function defaultVoiceForContentType(contentType = 'auto') {
   switch (contentType) {
     case 'meditation':
-      return 'af_heart';
+      return 'af_nicole';
     case 'documentary':
     case 'investigative':
-      return 'bm_george';
     case 'motivational':
       return 'am_puck';
     case 'story':
-      return 'af_heart';
     case 'audiobook':
       return 'af_heart';
     case 'tutorial':
-      return 'af_kore';
     case 'educational':
     case 'explainer':
     default:

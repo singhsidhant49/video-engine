@@ -19,14 +19,14 @@ const LANGUAGE_SAMPLES = {
   if_sara: "Ciao! Questa è una dimostrazione vocale di Kokoro TTS, chiara e naturale per i tuoi video.",
 };
 
-// Curated metadata and categories for Kokoro voices (strictly user's selected voice list)
+// Curated metadata and categories for Kokoro voices (strictly user's selected 4 voices)
 const VOICE_METADATA = {
   af_heart: {
     name: 'Heart',
     category: 'female',
     accent: 'American Female',
     quality: 'Top Tier (Grade A)',
-    traits: 'Warm, calm, soothing, highly articulate. #1 choice for Guided Meditation, Sleep & Audiobook.',
+    traits: 'Warm, calm, soothing, highly articulate. #1 choice for Storytelling and Audiobook.',
     sampleText: 'Welcome. Allow your mind and body to settle into quiet stillness as we begin this session.',
   },
   af_bella: {
@@ -37,21 +37,13 @@ const VOICE_METADATA = {
     traits: 'Polished, clear, energetic, modern. Outstanding for Explainers, Tutorials, Educational & Shorts.',
     sampleText: 'Welcome! Today we are exploring how modern digital networks quietly power our connected world.',
   },
-  af_kore: {
-    name: 'Kore',
-    category: 'female',
-    accent: 'American Female',
-    quality: 'Good (Grade C+)',
-    traits: 'Balanced, articulate, steady pace. Excellent for Step-by-Step Tutorials and instructional content.',
-    sampleText: 'In this step-by-step walkthrough, we will examine each key component in complete detail.',
-  },
-  af_sky: {
-    name: 'Sky',
-    category: 'female',
-    accent: 'American Female',
-    quality: 'Standard (Grade C-)',
-    traits: 'Bright, youthful, upbeat cadence. Perfect for high-energy Shorts, quick facts, and micro-learning.',
-    sampleText: 'Did you know that ninety-nine percent of international internet traffic travels through underwater cables?',
+  am_puck: {
+    name: 'Puck',
+    category: 'male',
+    accent: 'American Male',
+    quality: 'Top Male (Grade C+ / Quality B)',
+    traits: 'Agile, characterful, confident, resonant male delivery. Recommended for Documentaries, History, and Motivational.',
+    sampleText: 'Discipline is not about motivation in the moment; it is about building daily habits that never break.',
   },
   af_nicole: {
     name: 'Nicole (Whisper)',
@@ -60,30 +52,6 @@ const VOICE_METADATA = {
     quality: 'High (Grade B-)',
     traits: 'Soft whisper voice. Ideal for Bedtime Stories, Sleep Meditation, and ASMR (not for general content).',
     sampleText: 'Close your eyes now... let the quiet rhythm of the night gently carry you into deep sleep.',
-  },
-  am_puck: {
-    name: 'Puck',
-    category: 'male',
-    accent: 'American Male',
-    quality: 'Top Male (Grade C+ / Quality B)',
-    traits: 'Agile, characterful, confident, resonant male delivery. Recommended for Motivational & Mindset videos.',
-    sampleText: 'Discipline is not about motivation in the moment; it is about building daily habits that never break.',
-  },
-  bm_george: {
-    name: 'George',
-    category: 'male',
-    accent: 'British Male',
-    quality: 'Distinguished (Grade C)',
-    traits: 'Authoritative, grounded, distinguished documentary narrator. Perfect for History, Documentaries & True Crime.',
-    sampleText: 'In the early decades of the twentieth century, expeditions set forth into uncharted territory.',
-  },
-  am_adam: {
-    name: 'Adam',
-    category: 'male',
-    accent: 'American Male',
-    quality: 'Direct (Grade F+)',
-    traits: 'Direct, focused American male voice. Useful for straightforward presentations and tech overviews.',
-    sampleText: 'This overview breaks down the system architecture and its core operational principles.',
   },
 };
 

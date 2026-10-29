@@ -63,7 +63,7 @@ test('Invalidation Graph: audio/music change invalidates audio-mastering and ren
 });
 
 test('TTS Cache: deterministic key, cache hit, cache miss, and metrics', async () => {
-  const params = { text: 'The 2008 financial crisis was triggered by subprime lending.', voice: 'am_adam', speed: 0.9 };
+  const params = { text: 'The 2008 financial crisis was triggered by subprime lending.', voice: 'am_puck', speed: 0.9 };
   const dummyWav = Buffer.from('RIFF....WAVEfmt ....data' + '0'.repeat(1200));
 
   // Ensure fresh cache entry

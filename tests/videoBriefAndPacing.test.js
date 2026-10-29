@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { normalizeVideoBrief, resolveProductionProfile } from '../src/config/videoBrief.js';
+import {
+  normalizeVideoBrief,
+  resolveProductionProfile,
+  ALLOWED_VOICES,
+  normalizeSelectedVoice,
+  defaultVoiceForContentType,
+} from '../src/config/videoBrief.js';
 import { estimateShotDemand } from '../src/storyboard/shotPlanner.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
@@ -71,5 +77,68 @@ test('production QC blocks an edit that violates its channel pacing profile', ()
   assert.equal(qc.checks.find((check) => check.id === 'pacing-profile-holds')?.severity, 'error');
   assert.equal(qc.checks.find((check) => check.id === 'pacing-rapid-cuts')?.ok, false);
   assert.equal(qc.ok, false);
+});
+
+test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole whisper', () => {
+  assert.deepEqual([...ALLOWED_VOICES].sort(), ['af_bella', 'af_heart', 'af_nicole', 'am_puck']);
+  assert.ok(!ALLOWED_VOICES.includes('bm_george'), 'george must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('af_sky'), 'sky must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('am_adam'), 'adam must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('af_kore'), 'kore must be removed');
+});
+
+test('voice curation: defaultVoiceForContentType assigns nicole whisper to meditation and puck to documentary', () => {
+  assert.equal(defaultVoiceForContentType('meditation'), 'af_nicole');
+  assert.equal(defaultVoiceForContentType('documentary'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('investigative'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('motivational'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('story'), 'af_heart');
+  assert.equal(defaultVoiceForContentType('audiobook'), 'af_heart');
+  assert.equal(defaultVoiceForContentType('explainer'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('educational'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('tutorial'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('unknown'), 'af_bella');
+});
+
+test('voice curation: normalizeSelectedVoice handles aliases and safe legacy fallbacks', () => {
+  // Curated voices pass through
+  assert.equal(normalizeSelectedVoice('af_nicole', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('af_heart', 'explainer'), 'af_heart');
+  assert.equal(normalizeSelectedVoice('af_bella', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('am_puck', 'explainer'), 'am_puck');
+
+  // Friendly short aliases
+  assert.equal(normalizeSelectedVoice('nicole', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('whisper', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('heart', 'explainer'), 'af_heart');
+  assert.equal(normalizeSelectedVoice('bella', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('puck', 'explainer'), 'am_puck');
+
+  // Legacy removed voices map safely without throwing:
+  // Male removed voices map to am_puck
+  assert.equal(normalizeSelectedVoice('george', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('bm_george', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('adam', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('am_adam', 'documentary'), 'am_puck');
+
+  // Female removed voices map to af_bella
+  assert.equal(normalizeSelectedVoice('sky', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('af_sky', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('kore', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('af_kore', 'explainer'), 'af_bella');
+
+  // Auto / empty uses content type default
+  assert.equal(normalizeSelectedVoice('auto', 'meditation'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('', 'documentary'), 'am_puck');
+});
+
+test('voice curation: resolveProductionProfile auto-assigns nicole whisper for meditation and sleep', () => {
+  const meditation = resolveProductionProfile({ topic: 'Deep sleep and relaxation meditation', format: 'landscape' });
+  assert.equal(meditation.contentType, 'meditation');
+  assert.equal(meditation.voice, 'af_nicole');
+
+  const documentary = resolveProductionProfile({ topic: 'The rise of the Roman Empire', format: 'landscape' });
+  assert.equal(documentary.contentType, 'documentary');
+  assert.equal(documentary.voice, 'am_puck');
 });
 
