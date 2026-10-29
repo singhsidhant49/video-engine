@@ -83,9 +83,9 @@ test('selectBackgroundMusic deterministically rotates tracks by videoId', () => 
 
 test('selectBackgroundMusic honors explicit user track override', () => {
   const catalog = getAudioCatalog();
-  const requested = 'Liquid Time';
+  const requested = 'Journeyman';
   const selected = selectBackgroundMusic({ requestedTrack: requested }, catalog);
-  assert.ok(selected.title.toLowerCase().includes('liquid time') || selected.artist.toLowerCase().includes('liquid time') || selected.id.includes('liquid-time'));
+  assert.ok(selected.title.toLowerCase().includes('journeyman') || selected.artist.toLowerCase().includes('journeyman') || selected.id.includes('journeyman'));
 });
 
 test('ensureBackgroundMusic integrates smoothly with options object and legacy string', async () => {

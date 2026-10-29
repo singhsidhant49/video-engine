@@ -23,14 +23,15 @@ const CRIME_MYSTERY_REGEX = /\b(crime|murder|killer|detective|investigation|frau
  * @param {Array} [options.catalog] - Optional custom or mock catalog
  * @returns {Object|null} Selected track metadata or null if no track available
  */
-export function selectBackgroundMusic({
-  contentType = 'explainer',
-  style = 'editorial_explainer',
-  topic = '',
-  videoId = '',
-  requestedTrack = null,
-  catalog = getAudioCatalog(),
-} = {}) {
+export function selectBackgroundMusic(options = {}, catalogArg = null) {
+  const {
+    contentType = 'explainer',
+    style = 'editorial_explainer',
+    topic = '',
+    videoId = '',
+    requestedTrack = null,
+    catalog = catalogArg || options?.catalog || getAudioCatalog(),
+  } = options || {};
   if (!catalog || !catalog.length) {
     return null;
   }

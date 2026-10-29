@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_48de85f137f7d754",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking black and white view of Dubai's iconic skyline during twilight, featuring the Burj Khalifa.",
+  "path": "images/saved-from-web/saved-from-web_48de85f137f7d754.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "black",
+    "white",
+    "dubai",
+    "iconic",
+    "skyline",
+    "during",
+    "twilight",
+    "featuring",
+    "burj",
+    "khalifa",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "black",
+    "white",
+    "dubai",
+    "iconic",
+    "skyline",
+    "during",
+    "twilight",
+    "featuring",
+    "burj",
+    "khalifa",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking black and white view of Dubai's iconic skyline during twilight, featuring the Burj Khalifa."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai skyline fade to black",
+    "savedAt": "2026-10-29T04:43:08.619Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kirandeep Singh Walia",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/grayscale-photography-of-city-skyline-11370461/"
+  }
+}

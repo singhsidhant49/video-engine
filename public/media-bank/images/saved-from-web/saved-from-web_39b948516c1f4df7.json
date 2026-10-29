@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_39b948516c1f4df7",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city ligh",
+  "path": "images/saved-from-web/saved-from-web_39b948516c1f4df7.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "burj",
+    "khalifa",
+    "night",
+    "showcasing",
+    "vibrant",
+    "city",
+    "ligh",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "burj",
+    "khalifa",
+    "night",
+    "showcasing",
+    "vibrant",
+    "city",
+    "ligh",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city ligh"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Burj Khalifa base Y shaped footprint aerial",
+    "savedAt": "2026-10-29T06:23:50.599Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Will Mu",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dubai-skyline-illuminated-at-night-view-33338662/"
+  }
+}

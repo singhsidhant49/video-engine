@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_52dde4be0fa2846a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Museum of the Future",
+  "path": "images/saved-from-web/saved-from-web_52dde4be0fa2846a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2000,
+  "height": 1383,
+  "aspectRatio": 1.4461,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "museum",
+    "future",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "museum",
+    "future",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Museum of the Future"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Museum of the Future stainless steel panels",
+    "savedAt": "2026-10-29T06:25:01.164Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC-BY-SA-4.0",
+    "license_name": "CC-BY-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "author": "Lyonerov",
+    "creator": "Lyonerov",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T06:22:08.009Z",
+    "page": "https://en.wikipedia.org/wiki/File:Museum_of_the_future,_Dubai.jpeg"
+  }
+}

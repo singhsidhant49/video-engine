@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_eb8ec08a2b6e4813",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Dubai Skyline mit Burj Khalifa (18241030269).jpg",
+  "path": "images/saved-from-web/saved-from-web_eb8ec08a2b6e4813.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "skyline",
+    "mit",
+    "burj",
+    "khalifa",
+    "18241030269",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "skyline",
+    "mit",
+    "burj",
+    "khalifa",
+    "18241030269",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Dubai Skyline mit Burj Khalifa (18241030269).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Burj_Khalifa",
+    "savedAt": "2026-10-29T04:38:56.763Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "Tim Reckmann from Hamm, Deutschland",
+    "creator": "Tim Reckmann from Hamm, Deutschland",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T04:37:24.997Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Dubai_Skyline_mit_Burj_Khalifa_(18241030269).jpg"
+  }
+}

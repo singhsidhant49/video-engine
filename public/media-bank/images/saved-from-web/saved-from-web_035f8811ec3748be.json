@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_035f8811ec3748be",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear b",
+  "path": "images/saved-from-web/saved-from-web_035f8811ec3748be.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "museum",
+    "future",
+    "exterior",
+    "showcasing",
+    "intricate",
+    "arabic",
+    "calligraphy",
+    "under",
+    "clear",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "museum",
+    "future",
+    "exterior",
+    "showcasing",
+    "intricate",
+    "arabic",
+    "calligraphy",
+    "under",
+    "clear",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear b"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Museum of the Future",
+    "savedAt": "2026-10-29T06:24:51.396Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Maxx Sas",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/museum-of-the-future-in-dubai-with-arabic-calligraphy-38810281/"
+  }
+}

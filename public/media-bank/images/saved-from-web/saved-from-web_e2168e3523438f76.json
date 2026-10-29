@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_e2168e3523438f76",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Aerial view of Dubai desert landscape with city skyline at sunset.",
+  "path": "images/saved-from-web/saved-from-web_e2168e3523438f76.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "aerial",
+    "dubai",
+    "desert",
+    "landscape",
+    "city",
+    "skyline",
+    "sunset",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "aerial",
+    "dubai",
+    "desert",
+    "landscape",
+    "city",
+    "skyline",
+    "sunset",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Aerial view of Dubai desert landscape with city skyline at sunset."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Dubai skyline aerial dusk desert",
+    "savedAt": "2026-10-29T04:38:16.894Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ahmad  Malulein",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dubai-desert-sunset-with-city-skyline-view-29104554/"
+  }
+}

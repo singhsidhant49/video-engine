@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_006334b71ffdd0c1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Museum of the Future 9.jpg",
+  "path": "images/saved-from-web/saved-from-web_006334b71ffdd0c1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "museum",
+    "future",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "museum",
+    "future",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Museum of the Future 9.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Museum of the Future",
+    "savedAt": "2026-10-29T04:42:05.323Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC0",
+    "license_name": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "EditQ",
+    "creator": "EditQ",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T04:37:35.398Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Future_9.jpg"
+  }
+}

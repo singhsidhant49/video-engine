@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedAt": "2026-10-26T08:27:15.797Z",
-  "totalAssets": 515,
+  "totalAssets": 539,
   "categories": {
     "business": {
       "mediaType": "images",
@@ -24512,8 +24512,8 @@
       "verificationStatus": "verified",
       "source": {
         "provider": "commons",
-        "originalQuery": "Burj Khalifa construction",
-        "savedAt": "2026-10-26T10:45:19.175Z"
+        "originalQuery": "Burj Khalifa",
+        "savedAt": "2026-10-29T06:24:32.562Z"
       },
       "license": {
         "provider": "wikipedia",
@@ -24528,7 +24528,7 @@
         "nonFree": false,
         "commercial_use": "editorial_only",
         "verification_status": "editorial_only",
-        "retrieved_at": "2026-10-26T10:41:43.185Z",
+        "retrieved_at": "2026-10-26T10:41:43.963Z",
         "page": "https://commons.wikimedia.org/wiki/File:La_tour_Burj_Khalifa_en_construction_en_2008.jpg"
       }
     },
@@ -41380,6 +41380,2164 @@
         "attributionRequired": false,
         "nonFree": false,
         "page": "https://www.pexels.com/video/silhouette-of-man-watching-sunset-over-ocean-34375634/"
+      }
+    },
+    {
+      "id": "saved-from-web_2282009705ae78f8",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Breathtaking view of Dubai's iconic skyline featuring Burj Khalifa at twilight.",
+      "path": "images/saved-from-web/saved-from-web_2282009705ae78f8.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1734,
+      "aspectRatio": 1.4994,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "dubai",
+        "iconic",
+        "skyline",
+        "featuring",
+        "burj",
+        "khalifa",
+        "twilight",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "dubai",
+        "iconic",
+        "skyline",
+        "featuring",
+        "burj",
+        "khalifa",
+        "twilight",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Breathtaking view of Dubai's iconic skyline featuring Burj Khalifa at twilight."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai skyline aerial dusk Burj Khalifa",
+        "savedAt": "2026-10-29T06:25:39.783Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Lloyd Alozie",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/stunning-aerial-view-of-dubai-skyline-at-dusk-33687833/"
+      }
+    },
+    {
+      "id": "saved-from-web_6884a06626ca1cce",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Stunning aerial view of Dubai's modern skyline featuring the iconic Burj Khalifa under a clear blue ",
+      "path": "images/saved-from-web/saved-from-web_6884a06626ca1cce.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1734,
+      "aspectRatio": 1.4994,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "stunning",
+        "aerial",
+        "dubai",
+        "skyline",
+        "featuring",
+        "iconic",
+        "burj",
+        "khalifa",
+        "under",
+        "clear",
+        "blue",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "stunning",
+        "aerial",
+        "dubai",
+        "skyline",
+        "featuring",
+        "iconic",
+        "burj",
+        "khalifa",
+        "under",
+        "clear",
+        "blue",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "people meeting, talking, or shaking hands in a business setting"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "Burj Khalifa facade glass steel close up",
+        "savedAt": "2026-10-29T06:23:43.482Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Nelemson G",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/aerial-view-of-dubai-skyline-with-burj-khalifa-29470840/"
+      }
+    },
+    {
+      "id": "saved-from-web_e2168e3523438f76",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Aerial view of Dubai desert landscape with city skyline at sunset.",
+      "path": "images/saved-from-web/saved-from-web_e2168e3523438f76.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1462,
+      "aspectRatio": 1.7784,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "aerial",
+        "dubai",
+        "desert",
+        "landscape",
+        "city",
+        "skyline",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "aerial",
+        "dubai",
+        "desert",
+        "landscape",
+        "city",
+        "skyline",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Aerial view of Dubai desert landscape with city skyline at sunset."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "Dubai skyline aerial dusk desert",
+        "savedAt": "2026-10-29T04:38:16.894Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ahmad  Malulein",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/dubai-desert-sunset-with-city-skyline-view-29104554/"
+      }
+    },
+    {
+      "id": "saved-from-web_39b948516c1f4df7",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city ligh",
+      "path": "images/saved-from-web/saved-from-web_39b948516c1f4df7.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "aerial",
+        "dubai",
+        "skyline",
+        "burj",
+        "khalifa",
+        "night",
+        "showcasing",
+        "vibrant",
+        "city",
+        "ligh",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "aerial",
+        "dubai",
+        "skyline",
+        "burj",
+        "khalifa",
+        "night",
+        "showcasing",
+        "vibrant",
+        "city",
+        "ligh",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city ligh"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "Burj Khalifa base Y shaped footprint aerial",
+        "savedAt": "2026-10-29T06:23:50.599Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Will Mu",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/dubai-skyline-illuminated-at-night-view-33338662/"
+      }
+    },
+    {
+      "id": "saved-from-web_7243fecd9bd67ce4",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Burj Khalifa",
+      "path": "images/saved-from-web/saved-from-web_7243fecd9bd67ce4.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1736,
+      "aspectRatio": 1.4977,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "burj",
+        "khalifa",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "burj",
+        "khalifa",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Burj Khalifa"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "wikipedia",
+        "originalQuery": "Burj Khalifa",
+        "savedAt": "2026-10-29T06:23:58.069Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY 2.0",
+        "license_name": "CC BY 2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "author": "imran shahabuddin",
+        "creator": "imran shahabuddin",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-26T10:41:41.174Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_eb8ec08a2b6e4813",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Dubai Skyline mit Burj Khalifa (18241030269).jpg",
+      "path": "images/saved-from-web/saved-from-web_eb8ec08a2b6e4813.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "dubai",
+        "skyline",
+        "mit",
+        "burj",
+        "khalifa",
+        "18241030269",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "dubai",
+        "skyline",
+        "mit",
+        "burj",
+        "khalifa",
+        "18241030269",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Dubai Skyline mit Burj Khalifa (18241030269).jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "Burj_Khalifa",
+        "savedAt": "2026-10-29T04:38:56.763Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY 2.0",
+        "license_name": "CC BY 2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "author": "Tim Reckmann from Hamm, Deutschland",
+        "creator": "Tim Reckmann from Hamm, Deutschland",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-29T04:37:24.997Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Dubai_Skyline_mit_Burj_Khalifa_(18241030269).jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_e6bd4c474201e02d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Captivating silhouette of Dubai's skyline with vibrant sunset colors and Burj Khalifa dominating the scene.",
+      "path": "images/saved-from-web/saved-from-web_e6bd4c474201e02d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "captivating",
+        "silhouette",
+        "dubai",
+        "skyline",
+        "vibrant",
+        "sunset",
+        "color",
+        "burj",
+        "khalifa",
+        "dominating",
+        "scene",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "colors",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "captivating",
+        "silhouette",
+        "dubai",
+        "skyline",
+        "vibrant",
+        "sunset",
+        "color",
+        "burj",
+        "khalifa",
+        "dominating",
+        "scene",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "colors",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Captivating silhouette of Dubai's skyline with vibrant sunset colors and Burj Khalifa dominating the scene."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai Burj Khalifa modern skyline",
+        "savedAt": "2026-10-29T06:24:09.424Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Vitaly Gariev",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/stunning-dubai-skyline-silhouette-at-sunset-36813102/"
+      }
+    },
+    {
+      "id": "saved-from-web_b09ef6d74b96e1d1",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A breathtaking view of the Burj Khalifa towering over the stunning skyline of Dubai under dramatic clouds.",
+      "path": "images/saved-from-web/saved-from-web_b09ef6d74b96e1d1.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "burj",
+        "khalifa",
+        "towering",
+        "over",
+        "stunning",
+        "skyline",
+        "dubai",
+        "under",
+        "dramatic",
+        "cloud",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "clouds",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "burj",
+        "khalifa",
+        "towering",
+        "over",
+        "stunning",
+        "skyline",
+        "dubai",
+        "under",
+        "dramatic",
+        "cloud",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "clouds",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A breathtaking view of the Burj Khalifa towering over the stunning skyline of Dubai under dramatic clouds."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai Burj Khalifa modern skyline",
+        "savedAt": "2026-10-29T06:24:17.936Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Walid Ahmad",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/majestic-view-of-burj-khalifa-and-dubai-skyline-31566720/"
+      }
+    },
+    {
+      "id": "saved-from-web_af561f6a540ad595",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Construction site with skyscrapers including the Burj Khalifa in Dubai, UAE.",
+      "path": "images/saved-from-web/saved-from-web_af561f6a540ad595.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "construction",
+        "site",
+        "skyscraper",
+        "including",
+        "burj",
+        "khalifa",
+        "dubai",
+        "uae",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "skyscrapers",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "construction",
+        "site",
+        "skyscraper",
+        "including",
+        "burj",
+        "khalifa",
+        "dubai",
+        "uae",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "skyscrapers",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Construction site with skyscrapers including the Burj Khalifa in Dubai, UAE."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Burj Khalifa construction time-lapse",
+        "savedAt": "2026-10-29T04:39:47.001Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Andrea Piacquadio",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/high-rise-buildings-under-construction-in-dubai-3367920/"
+      }
+    },
+    {
+      "id": "saved-from-web_52dde4be0fa2846a",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Museum of the Future",
+      "path": "images/saved-from-web/saved-from-web_52dde4be0fa2846a.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2000,
+      "height": 1383,
+      "aspectRatio": 1.4461,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "museum",
+        "future",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "corporate monument sign",
+        "signage"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "museum",
+        "future",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "corporate monument sign",
+        "signage"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Museum of the Future"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "corporate office campus exterior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "wikipedia",
+        "originalQuery": "Museum of the Future stainless steel panels",
+        "savedAt": "2026-10-29T06:25:01.164Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC-BY-SA-4.0",
+        "license_name": "CC-BY-SA-4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "author": "Lyonerov",
+        "creator": "Lyonerov",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "allowed",
+        "verification_status": "verified",
+        "retrieved_at": "2026-10-29T06:22:08.009Z",
+        "page": "https://en.wikipedia.org/wiki/File:Museum_of_the_future,_Dubai.jpeg"
+      }
+    },
+    {
+      "id": "saved-from-web_eceb3934f8d88ed1",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear blue sky.",
+      "path": "images/saved-from-web/saved-from-web_eceb3934f8d88ed1.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "museum",
+        "future",
+        "exterior",
+        "showcasing",
+        "intricate",
+        "arabic",
+        "calligraphy",
+        "under",
+        "clear",
+        "blue",
+        "sky",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "museum",
+        "future",
+        "exterior",
+        "showcasing",
+        "intricate",
+        "arabic",
+        "calligraphy",
+        "under",
+        "clear",
+        "blue",
+        "sky",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear blue sky."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Museum of the Future stainless steel facade",
+        "savedAt": "2026-10-29T04:40:42.836Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Maxx Sas",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/museum-of-the-future-in-dubai-with-arabic-calligraphy-38810281/"
+      }
+    },
+    {
+      "id": "saved-from-web_6312721aa3591840",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/",
+      "path": "video/saved-from-web/saved-from-web_6312721aa3591840.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "machine",
+        "cutting",
+        "steel",
+        "plate",
+        "7622764",
+        "electronic",
+        "hardware",
+        "interior",
+        "laser",
+        "drilling",
+        "welding",
+        "thermal",
+        "https",
+        "pexels",
+        "video",
+        "machine-cutting-steel-plate-7622764",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "machine",
+        "cutting",
+        "steel",
+        "plate",
+        "7622764",
+        "electronic",
+        "hardware",
+        "interior",
+        "laser",
+        "drilling",
+        "welding",
+        "thermal",
+        "https",
+        "pexels",
+        "video",
+        "machine-cutting-steel-plate-7622764",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/"
+      ],
+      "actions": [
+        "laser drilling, welding, or thermal cutting"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "robotic arms cutting steel panels",
+        "savedAt": "2026-10-29T04:41:37.584Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "gusat silviu",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/"
+      }
+    },
+    {
+      "id": "saved-from-web_006334b71ffdd0c1",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Museum of the Future 9.jpg",
+      "path": "images/saved-from-web/saved-from-web_006334b71ffdd0c1.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "museum",
+        "future",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "museum",
+        "future",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Museum of the Future 9.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "Museum of the Future",
+        "savedAt": "2026-10-29T04:42:05.323Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC0",
+        "license_name": "CC0",
+        "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "author": "EditQ",
+        "creator": "EditQ",
+        "attributionRequired": false,
+        "attribution_required": false,
+        "nonFree": false,
+        "commercial_use": "allowed",
+        "verification_status": "verified",
+        "retrieved_at": "2026-10-29T04:37:35.398Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Museum_of_the_Future_9.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_490ec9394cfee770",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Dubai",
+      "path": "images/saved-from-web/saved-from-web_490ec9394cfee770.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1798,
+      "aspectRatio": 1.4461,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "dubai",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "dubai",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Dubai"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "wikipedia",
+        "originalQuery": "Dubai Marina modern architecture aerial",
+        "savedAt": "2026-10-29T04:42:21.962Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC-BY-2.0",
+        "license_name": "CC-BY-2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0/",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "author": "Francisco Anzola",
+        "creator": "Francisco Anzola",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "allowed",
+        "verification_status": "verified",
+        "retrieved_at": "2026-10-29T04:20:44.557Z",
+        "page": "https://en.wikipedia.org/wiki/File:Burj_Khalifa_2021.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_def2a11959a262a2",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Silhouette of Dubai skyline featuring Burj Al Arab and Burj Khalifa at sunset.",
+      "path": "images/saved-from-web/saved-from-web_def2a11959a262a2.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1737,
+      "aspectRatio": 1.4968,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "silhouette",
+        "dubai",
+        "skyline",
+        "featuring",
+        "burj",
+        "arab",
+        "khalifa",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "silhouette",
+        "dubai",
+        "skyline",
+        "featuring",
+        "burj",
+        "arab",
+        "khalifa",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Silhouette of Dubai skyline featuring Burj Al Arab and Burj Khalifa at sunset."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai sunset skyline silhouette",
+        "savedAt": "2026-10-29T04:42:38.159Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Vitaly Gariev",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/dubai-skyline-at-sunset-with-iconic-landmarks-36813120/"
+      }
+    },
+    {
+      "id": "saved-from-web_5a5e98765f975c3e",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Stunning night view of Dubai's illuminated skyline featuring the iconic Burj Khalifa and waterfront reflections.",
+      "path": "images/saved-from-web/saved-from-web_5a5e98765f975c3e.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "night",
+        "dubai",
+        "illuminated",
+        "skyline",
+        "featuring",
+        "iconic",
+        "burj",
+        "khalifa",
+        "waterfront",
+        "reflection",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "reflections",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "night",
+        "dubai",
+        "illuminated",
+        "skyline",
+        "featuring",
+        "iconic",
+        "burj",
+        "khalifa",
+        "waterfront",
+        "reflection",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "reflections",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Stunning night view of Dubai's illuminated skyline featuring the iconic Burj Khalifa and waterfront reflections."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai skyline night lights",
+        "savedAt": "2026-10-29T04:42:53.536Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "NYWREX FLORES",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/city-light-photography-837908/"
+      }
+    },
+    {
+      "id": "saved-from-web_48de85f137f7d754",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A breathtaking black and white view of Dubai's iconic skyline during twilight, featuring the Burj Khalifa.",
+      "path": "images/saved-from-web/saved-from-web_48de85f137f7d754.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1463,
+      "aspectRatio": 1.7772,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "black",
+        "white",
+        "dubai",
+        "iconic",
+        "skyline",
+        "during",
+        "twilight",
+        "featuring",
+        "burj",
+        "khalifa",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "breathtaking",
+        "black",
+        "white",
+        "dubai",
+        "iconic",
+        "skyline",
+        "during",
+        "twilight",
+        "featuring",
+        "burj",
+        "khalifa",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A breathtaking black and white view of Dubai's iconic skyline during twilight, featuring the Burj Khalifa."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai skyline fade to black",
+        "savedAt": "2026-10-29T04:43:08.619Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Kirandeep Singh Walia",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/grayscale-photography-of-city-skyline-11370461/"
+      }
+    },
+    {
+      "id": "saved-from-web_00c08f90e440ae2a",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/",
+      "path": "video/saved-from-web/saved-from-web_00c08f90e440ae2a.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "aerial",
+        "luxuriou",
+        "dubai",
+        "marina",
+        "30821553",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "aerial-view-of-luxurious-dubai-marina-30821553",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "aerial",
+        "luxuriou",
+        "dubai",
+        "marina",
+        "30821553",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "aerial-view-of-luxurious-dubai-marina-30821553",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "Dubai Marina modern architecture aerial",
+        "savedAt": "2026-10-29T06:23:12.637Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Nelemson G",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/"
+      }
+    },
+    {
+      "id": "saved-from-web_a7a846137b54e035",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Black and white photo of traditional buildings along Dubai Creek with birds flying overhead.",
+      "path": "images/saved-from-web/saved-from-web_a7a846137b54e035.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "black",
+        "white",
+        "traditional",
+        "building",
+        "along",
+        "dubai",
+        "creek",
+        "bird",
+        "flying",
+        "overhead",
+        "municipal",
+        "city",
+        "street",
+        "dusk",
+        "static",
+        "presentation",
+        "photo",
+        "buildings",
+        "birds",
+        "garbage truck",
+        "waste bins"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "black",
+        "white",
+        "traditional",
+        "building",
+        "along",
+        "dubai",
+        "creek",
+        "bird",
+        "flying",
+        "overhead",
+        "municipal",
+        "city",
+        "street",
+        "dusk",
+        "static",
+        "presentation",
+        "photo",
+        "buildings",
+        "birds",
+        "garbage truck",
+        "waste bins"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Black and white photo of traditional buildings along Dubai Creek with birds flying overhead."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "municipal city street at dusk"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Dubai Creek 1960s archival black and white",
+        "savedAt": "2026-10-29T06:23:27.818Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Walid Ahmad",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/traditional-architecture-along-dubai-creek-35308598/"
+      }
+    },
+    {
+      "id": "saved-from-web_a6fc0c4a741757a4",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Stylish hexagonal concrete card holders on a dark background, perfect for modern designs.",
+      "path": "images/saved-from-web/saved-from-web_a6fc0c4a741757a4.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1685,
+      "aspectRatio": 1.543,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "stylish",
+        "hexagonal",
+        "concrete",
+        "card",
+        "holder",
+        "dark",
+        "background",
+        "perfect",
+        "modern",
+        "design",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "holders",
+        "designs",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "stylish",
+        "hexagonal",
+        "concrete",
+        "card",
+        "holder",
+        "dark",
+        "background",
+        "perfect",
+        "modern",
+        "design",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "holders",
+        "designs",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Stylish hexagonal concrete card holders on a dark background, perfect for modern designs."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "hexagonal concrete core",
+        "savedAt": "2026-10-29T06:24:25.913Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "PNW Production",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/blank-cards-glued-to-concrete-placards-on-black-background-8489959/"
+      }
+    },
+    {
+      "id": "saved-from-web_8a917babf65ade36",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:The making of Burj Khalifa, Dubai (Ank Kumar) 11.jpg",
+      "path": "images/saved-from-web/saved-from-web_8a917babf65ade36.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "making",
+        "burj",
+        "khalifa",
+        "dubai",
+        "ank",
+        "kumar",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "making",
+        "burj",
+        "khalifa",
+        "dubai",
+        "ank",
+        "kumar",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:The making of Burj Khalifa, Dubai (Ank Kumar) 11.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "Burj Khalifa",
+        "savedAt": "2026-10-29T06:24:41.689Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 4.0",
+        "license_name": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Ank Kumar",
+        "creator": "Ank Kumar",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-26T10:41:43.962Z",
+        "page": "https://commons.wikimedia.org/wiki/File:The_making_of_Burj_Khalifa,_Dubai_(Ank_Kumar)_11.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_035f8811ec3748be",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear b",
+      "path": "images/saved-from-web/saved-from-web_035f8811ec3748be.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "museum",
+        "future",
+        "exterior",
+        "showcasing",
+        "intricate",
+        "arabic",
+        "calligraphy",
+        "under",
+        "clear",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "museum",
+        "future",
+        "exterior",
+        "showcasing",
+        "intricate",
+        "arabic",
+        "calligraphy",
+        "under",
+        "clear",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of Museum of the Future's exterior, showcasing intricate Arabic calligraphy under a clear b"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "Museum of the Future",
+        "savedAt": "2026-10-29T06:24:51.396Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Maxx Sas",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/museum-of-the-future-in-dubai-with-arabic-calligraphy-38810281/"
+      }
+    },
+    {
+      "id": "saved-from-web_d220f9f81820cb3c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Futuristic facade of the Museum of the Future in Dubai's skyline showcasing modern architecture.",
+      "path": "images/saved-from-web/saved-from-web_d220f9f81820cb3c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1735,
+      "aspectRatio": 1.4986,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "outdoor",
+        "corporate",
+        "sign",
+        "office",
+        "building",
+        "monument",
+        "plaque",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "futuristic",
+        "facade",
+        "museum",
+        "future",
+        "dubai",
+        "skyline",
+        "showcasing",
+        "modern",
+        "architecture",
+        "corporate monument sign",
+        "signage"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "outdoor",
+        "corporate",
+        "sign",
+        "office",
+        "building",
+        "monument",
+        "plaque",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "futuristic",
+        "facade",
+        "museum",
+        "future",
+        "dubai",
+        "skyline",
+        "showcasing",
+        "modern",
+        "architecture",
+        "corporate monument sign",
+        "signage"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "outdoor corporate sign or office building monument plaque"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "corporate office campus exterior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Museum of the Future facade glowing windows",
+        "savedAt": "2026-10-29T06:25:19.939Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Diego F. Parra",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/museum-of-the-future-in-dubai-15177904/"
+      }
+    },
+    {
+      "id": "saved-from-web_0fdaf1da131333d3",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Aerial view of Dubai desert landscape with city skyline at sunset.",
+      "path": "images/saved-from-web/saved-from-web_0fdaf1da131333d3.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1462,
+      "aspectRatio": 1.7784,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "aerial",
+        "dubai",
+        "desert",
+        "landscape",
+        "city",
+        "skyline",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "aerial",
+        "dubai",
+        "desert",
+        "landscape",
+        "city",
+        "skyline",
+        "sunset",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Aerial view of Dubai desert landscape with city skyline at sunset."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "Dubai desert sunset timelapse",
+        "savedAt": "2026-10-29T06:26:26.113Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ahmad  Malulein",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/dubai-desert-sunset-with-city-skyline-view-29104554/"
       }
     }
   ]

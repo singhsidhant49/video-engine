@@ -358,7 +358,11 @@ export class VideoJobService {
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
     if (job.status !== 'completed' || !job.result?.outputPath) throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
     const file = safeOwnedPath(this.rendersDir, job.result.outputPath);
-    await fs.access(file);
+    try {
+      await fs.access(file);
+    } catch {
+      throw apiError(404, 'OUTPUT_FILE_NOT_FOUND', 'Video file not found on disk');
+    }
     return file;
   }
 
@@ -367,7 +371,11 @@ export class VideoJobService {
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
     if (!job.result?.runDir) throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
     const file = safeOwnedPath(this.rendersDir, path.join(job.result.runDir, 'thumbnail.png'));
-    await fs.access(file);
+    try {
+      await fs.access(file);
+    } catch {
+      throw apiError(404, 'THUMBNAIL_NOT_FOUND', 'Thumbnail not found on disk');
+    }
     return file;
   }
 

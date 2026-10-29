@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_5a5e98765f975c3e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning night view of Dubai's illuminated skyline featuring the iconic Burj Khalifa and waterfront reflections.",
+  "path": "images/saved-from-web/saved-from-web_5a5e98765f975c3e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "night",
+    "dubai",
+    "illuminated",
+    "skyline",
+    "featuring",
+    "iconic",
+    "burj",
+    "khalifa",
+    "waterfront",
+    "reflection",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "reflections",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "night",
+    "dubai",
+    "illuminated",
+    "skyline",
+    "featuring",
+    "iconic",
+    "burj",
+    "khalifa",
+    "waterfront",
+    "reflection",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "reflections",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning night view of Dubai's illuminated skyline featuring the iconic Burj Khalifa and waterfront reflections."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai skyline night lights",
+    "savedAt": "2026-10-29T04:42:53.536Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "NYWREX FLORES",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/city-light-photography-837908/"
+  }
+}

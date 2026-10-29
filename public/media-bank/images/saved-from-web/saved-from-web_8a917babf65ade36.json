@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_8a917babf65ade36",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:The making of Burj Khalifa, Dubai (Ank Kumar) 11.jpg",
+  "path": "images/saved-from-web/saved-from-web_8a917babf65ade36.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "making",
+    "burj",
+    "khalifa",
+    "dubai",
+    "ank",
+    "kumar",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "making",
+    "burj",
+    "khalifa",
+    "dubai",
+    "ank",
+    "kumar",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:The making of Burj Khalifa, Dubai (Ank Kumar) 11.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Burj Khalifa",
+    "savedAt": "2026-10-29T06:24:41.689Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Ank Kumar",
+    "creator": "Ank Kumar",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:43.962Z",
+    "page": "https://commons.wikimedia.org/wiki/File:The_making_of_Burj_Khalifa,_Dubai_(Ank_Kumar)_11.jpg"
+  }
+}

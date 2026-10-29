@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_a7a846137b54e035",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Black and white photo of traditional buildings along Dubai Creek with birds flying overhead.",
+  "path": "images/saved-from-web/saved-from-web_a7a846137b54e035.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "traditional",
+    "building",
+    "along",
+    "dubai",
+    "creek",
+    "bird",
+    "flying",
+    "overhead",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "photo",
+    "buildings",
+    "birds",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "traditional",
+    "building",
+    "along",
+    "dubai",
+    "creek",
+    "bird",
+    "flying",
+    "overhead",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "photo",
+    "buildings",
+    "birds",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Black and white photo of traditional buildings along Dubai Creek with birds flying overhead."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai Creek 1960s archival black and white",
+    "savedAt": "2026-10-29T06:23:27.818Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Walid Ahmad",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/traditional-architecture-along-dubai-creek-35308598/"
+  }
+}
