@@ -325,7 +325,7 @@ export class VideoJobService {
   async retry(ownerId, id) {
     const job = await this.store.getJob(id);
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
-    if (!['failed', 'cancelled'].includes(job.status)) throw apiError(409, 'VIDEO_NOT_RETRYABLE', `Video is ${job.status}`);
+    if (!['failed', 'cancelled', 'cancel_requested'].includes(job.status)) throw apiError(409, 'VIDEO_NOT_RETRYABLE', `Video is ${job.status}`);
     const failedCode = job.error?.code;
     job.status = 'queued';
     job.stage = 'queued';

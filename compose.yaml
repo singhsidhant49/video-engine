@@ -12,7 +12,7 @@ x-app-environment: &app-environment
   VIDEO_QUEUE_LOCK_RENEW_MS: ${VIDEO_QUEUE_LOCK_RENEW_MS:-30000}
   VIDEO_QUEUE_STALLED_INTERVAL_MS: ${VIDEO_QUEUE_STALLED_INTERVAL_MS:-60000}
   VIDEO_QUEUE_MAX_STALLED_COUNT: ${VIDEO_QUEUE_MAX_STALLED_COUNT:-2}
-  REMOTION_CONCURRENCY: ${REMOTION_CONCURRENCY:-2}
+  REMOTION_CONCURRENCY: ${REMOTION_CONCURRENCY:-1}
   RUNS_RETENTION_DAYS: ${RUNS_RETENTION_DAYS:-7}
   RUNS_CLEANUP_INTERVAL_HOURS: ${RUNS_CLEANUP_INTERVAL_HOURS:-12}
   VIDEO_MOTION_PRESET: ${VIDEO_MOTION_PRESET:-standard}
@@ -96,6 +96,9 @@ services:
     build: .
     restart: unless-stopped
     init: true
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     environment:
       <<: *app-environment
       VIDEO_PROCESS_ROLE: api
@@ -124,6 +127,9 @@ services:
     build: .
     restart: unless-stopped
     init: true
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     command: ["npm", "run", "worker"]
     environment:
       <<: *app-environment

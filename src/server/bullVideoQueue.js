@@ -54,35 +54,36 @@ export class BullVideoQueue {
   }
 
   async enqueueGeneration(videoId, attempt = 0) {
-    const jobId = `video-${videoId}-${attempt}`;
-    const existing = await this.queue.getJob(jobId);
-    if (existing) {
-      const state = await existing.getState().catch(() => null);
-      if (['waiting', 'active', 'delayed', 'paused', 'prioritized'].includes(state)) {
-        return existing;
-      }
-      await existing.remove().catch(() => {});
-    }
+    const jobId = `video-${videoId}-${attempt}-${Date.now()}`;
     return this.queue.add('generate', { videoId, attempt }, {
       jobId, attempts: 1,
       removeOnComplete: { age: 86_400, count: 1_000 }, removeOnFail: { age: 604_800, count: 2_000 },
     });
   }
 
-  async hasGeneration(videoId, attempt = 0) {
-    const job = await this.queue.getJob(`video-${videoId}-${attempt}`);
-    if (!job) return false;
-    const state = await job.getState().catch(() => null);
-    return ['waiting', 'active', 'delayed', 'paused', 'prioritized'].includes(state);
+  async hasGeneration(videoId) {
+    try {
+      const jobs = await this.queue.getJobs(['waiting', 'active', 'delayed', 'paused', 'prioritized']);
+      return jobs.some((j) => j?.data?.videoId === videoId);
+    } catch {
+      return false;
+    }
   }
 
-  async cancelGeneration(videoId, attempt = 0) {
-    const job = await this.queue.getJob(`video-${videoId}-${attempt}`);
-    if (!job) return false;
-    const state = await job.getState();
-    if (!['waiting', 'delayed', 'waiting-children', 'paused'].includes(state)) return false;
-    await job.remove();
-    return true;
+  async cancelGeneration(videoId) {
+    try {
+      const jobs = await this.queue.getJobs(['waiting', 'delayed', 'waiting-children', 'paused']);
+      let removed = false;
+      for (const job of jobs) {
+        if (job?.data?.videoId === videoId) {
+          await job.remove().catch(() => {});
+          removed = true;
+        }
+      }
+      return removed;
+    } catch {
+      return false;
+    }
   }
 
   async enqueueDeletion(videoId, operationId) {

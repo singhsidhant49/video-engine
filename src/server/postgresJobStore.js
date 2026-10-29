@@ -56,12 +56,12 @@ export class PostgresJobStore {
       ON CONFLICT (id) DO UPDATE SET owner_id=EXCLUDED.owner_id,
         status=CASE
           WHEN video_jobs.status='delete_requested' AND EXCLUDED.status<>'delete_requested' THEN video_jobs.status
-          WHEN video_jobs.status='cancel_requested' AND EXCLUDED.status NOT IN ('cancelled','delete_requested') THEN video_jobs.status
+          WHEN video_jobs.status='cancel_requested' AND EXCLUDED.status NOT IN ('cancelled','delete_requested','queued') THEN video_jobs.status
           ELSE EXCLUDED.status END,
         idempotency_key=EXCLUDED.idempotency_key, request_hash=EXCLUDED.request_hash,
         document=CASE
           WHEN video_jobs.status='delete_requested' AND EXCLUDED.status<>'delete_requested' THEN video_jobs.document
-          WHEN video_jobs.status='cancel_requested' AND EXCLUDED.status NOT IN ('cancelled','delete_requested') THEN video_jobs.document
+          WHEN video_jobs.status='cancel_requested' AND EXCLUDED.status NOT IN ('cancelled','delete_requested','queued') THEN video_jobs.document
           ELSE EXCLUDED.document END,
         updated_at=EXCLUDED.updated_at
     `, [job.id, job.ownerId, job.status, job.idempotencyKey || null, job.requestHash || '', JSON.stringify(job), job.createdAt || new Date().toISOString(), job.updatedAt || new Date().toISOString()]);
