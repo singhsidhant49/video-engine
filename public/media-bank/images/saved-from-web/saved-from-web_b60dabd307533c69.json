@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_b60dabd307533c69",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a couple's legs and feet intertwined on white bed sheets, conveying intimacy and comfort.",
+  "path": "images/saved-from-web/saved-from-web_b60dabd307533c69.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "couple",
+    "leg",
+    "feet",
+    "intertwined",
+    "white",
+    "bed",
+    "sheet",
+    "conveying",
+    "intimacy",
+    "comfort",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "close-up",
+    "legs",
+    "sheets"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "couple",
+    "leg",
+    "feet",
+    "intertwined",
+    "white",
+    "bed",
+    "sheet",
+    "conveying",
+    "intimacy",
+    "comfort",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "close-up",
+    "legs",
+    "sheets"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a couple's legs and feet intertwined on white bed sheets, conveying intimacy and comfort."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "feet stepping forward from bed authentic real-world environment matching context",
+    "savedAt": "2026-10-28T10:35:52.993Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ron Lach",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-couple-close-to-each-other-9497933/"
+  }
+}

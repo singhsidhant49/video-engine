@@ -22,11 +22,16 @@ const searchQueries = async (request, fn, providerId = 'default', max = 5) => {
     if (request.offline) {
       return [];
     }
-    const fresh = await fn(query);
+    let fresh = [];
+    try {
+      fresh = (await fn(query)) || [];
+    } catch {
+      fresh = [];
+    }
     if (fresh && fresh.length > 0) {
       await searchCache.set({ provider: providerId, query }, fresh);
     }
-    return fresh.map((result) => ({ ...result, query, queryStage: request.activeQueryStage }));
+    return (fresh || []).map((result) => ({ ...result, query, queryStage: request.activeQueryStage }));
   }));
   return results.flat();
 };
@@ -96,19 +101,19 @@ export const defaultAssetProviders = [
 ];
 
 const ROUTES = {
-  ENTITY: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
-  PRODUCT: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image'],
-  HISTORICAL: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
-  LOCATION: ['local-bank', 'wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video'],
-  EVIDENCE: ['local-bank', 'commons', 'wikipedia', 'pexels-image', 'pixabay-image', 'brave-image'],
-  INTERFACE: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
-  ACTION: ['local-bank', 'pexels-video', 'pexels-image', 'pixabay-image', 'brave-image'],
-  CONCEPT: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
-  ATMOSPHERE: ['local-bank', 'pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'generic-library'],
+  ENTITY: ['wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'pexels-video'],
+  PRODUCT: ['commons', 'wikipedia', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank'],
+  HISTORICAL: ['commons', 'wikipedia', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'pexels-video'],
+  LOCATION: ['wikipedia', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'pexels-video'],
+  EVIDENCE: ['commons', 'wikipedia', 'pexels-image', 'brave-image', 'pixabay-image', 'local-bank'],
+  INTERFACE: ['brave-image', 'commons', 'pexels-image', 'pixabay-image', 'local-bank', 'generic-library'],
+  ACTION: ['pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'local-bank'],
+  CONCEPT: ['pexels-image', 'pexels-video', 'commons', 'brave-image', 'pixabay-image', 'local-bank', 'generic-library'],
+  ATMOSPHERE: ['pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'local-bank', 'generic-library'],
   // DATA requests are procedural only when the request itself says so. In
   // MEDIA_EDITORIAL the request planner deliberately changes those shots to
   // `auto`, so route them through real-media providers like other concepts.
-  DATA: ['local-bank', 'commons', 'brave-image', 'pexels-image', 'pixabay-image', 'pexels-video', 'generic-library'],
+  DATA: ['commons', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'generic-library'],
 };
 
 export function routeAssetProviders(request, context, providers = defaultAssetProviders, queryStage = 'EXACT') {

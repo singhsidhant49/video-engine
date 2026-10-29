@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_711a9472fae1063c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vibrant city street scene with people walking among urban architecture and buildings.",
+  "path": "images/saved-from-web/saved-from-web_711a9472fae1063c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1938,
+  "aspectRatio": 1.3416,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "city",
+    "street",
+    "scene",
+    "people",
+    "walking",
+    "among",
+    "urban",
+    "architecture",
+    "building",
+    "municipal",
+    "dusk",
+    "static",
+    "presentation",
+    "buildings",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "city",
+    "street",
+    "scene",
+    "people",
+    "walking",
+    "among",
+    "urban",
+    "architecture",
+    "building",
+    "municipal",
+    "dusk",
+    "static",
+    "presentation",
+    "buildings",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vibrant city street scene with people walking among urban architecture and buildings."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "busy city street people walking finance",
+    "savedAt": "2026-10-28T15:43:52.127Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sizwe Shabalala",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photo-of-people-walking-near-buildings-2464890/"
+  }
+}

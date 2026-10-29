@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_090e01374df03a4a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A contemporary workspace featuring a laptop with blank screen, coffee mug, and smartwatch on a table.",
+  "path": "images/saved-from-web/saved-from-web_090e01374df03a4a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "contemporary",
+    "workspace",
+    "featuring",
+    "laptop",
+    "blank",
+    "screen",
+    "coffee",
+    "mug",
+    "smartwatch",
+    "table",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "contemporary",
+    "workspace",
+    "featuring",
+    "laptop",
+    "blank",
+    "screen",
+    "coffee",
+    "mug",
+    "smartwatch",
+    "table",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A contemporary workspace featuring a laptop with blank screen, coffee mug, and smartwatch on a table."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "blank page on laptop screen",
+    "savedAt": "2026-10-28T10:37:08.815Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "KATRIN  BOLOVTSOVA",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/laptop-displaying-a-blank-white-screen-6372949/"
+  }
+}

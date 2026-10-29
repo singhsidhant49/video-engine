@@ -315,6 +315,8 @@ export async function searchMediaBank(queryText, { mediaType = 'all', orientatio
 
   for (const asset of catalog.assets) {
     if (asset.verificationStatus === 'quarantined') continue;
+    // saved-from-web are transient web downloads from past runs; only search curated bank unless explicitly requested
+    if (asset.category === 'saved-from-web' && category !== 'saved-from-web') continue;
     // Media type filter
     if (mediaType !== 'all') {
       const assetType = asset.mediaType || asset.type;
@@ -324,7 +326,7 @@ export async function searchMediaBank(queryText, { mediaType = 'all', orientatio
 
     // Category filter
     if (category && normalizeCategory(category) !== normalizeCategory(asset.category)) {
-      // Allow cross-category if score is strong, but weight current category
+      continue;
     }
 
     // Full searchable text fields with weights
@@ -371,7 +373,7 @@ export async function searchMediaBank(queryText, { mediaType = 'all', orientatio
       : 0;
     const totalScore = normalizedScore + orientationBonus + categoryAdjustment;
 
-    if (totalScore >= minScore || matchedTerms >= Math.min(2, searchTokens.length)) {
+    if (totalScore >= minScore && matchedTerms >= Math.min(2, searchTokens.length)) {
       const absolutePath = path.join(mediaBankDir, asset.path);
       if (fs.existsSync(absolutePath)) {
         candidates.push({

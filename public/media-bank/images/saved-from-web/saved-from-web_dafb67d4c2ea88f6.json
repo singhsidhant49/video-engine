@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_dafb67d4c2ea88f6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength.",
+  "path": "images/saved-from-web/saved-from-web_dafb67d4c2ea88f6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "steel",
+    "security",
+    "vault",
+    "door",
+    "attached",
+    "vintage",
+    "brick",
+    "wall",
+    "showcasing",
+    "industrial",
+    "strength",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "doors",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "steel",
+    "security",
+    "vault",
+    "door",
+    "attached",
+    "vintage",
+    "brick",
+    "wall",
+    "showcasing",
+    "industrial",
+    "strength",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "doors",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "empty bank vault interior",
+    "savedAt": "2026-10-28T16:27:50.897Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "wutthichai charoenburi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/steel-heavy-doors-of-vault-19882101/"
+  }
+}

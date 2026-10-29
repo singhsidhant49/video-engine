@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import express from 'express';
 import { ZodError } from 'zod-api';
 import { CreateVideoRequestSchema } from './videoApiSchemas.js';
+import { getAudioCatalog } from '../audio/musicCatalog.js';
 
 function ownerForKey(key) {
   return `acct_${crypto.createHash('sha256').update(key).digest('hex').slice(0, 24)}`;
@@ -24,7 +25,9 @@ export function createApiAuth({ apiKeys = [], production = false } = {}) {
       return next();
     }
     const authorization = req.get('authorization') || '';
-    const supplied = authorization.startsWith('Bearer ') ? authorization.slice(7).trim() : '';
+    const supplied = authorization.startsWith('Bearer ')
+      ? authorization.slice(7).trim()
+      : (req.query?.token ? String(req.query.token).trim() : '');
     const suppliedHash = crypto.createHash('sha256').update(supplied).digest();
     const match = allowed.find(({ key }) => crypto.timingSafeEqual(suppliedHash, crypto.createHash('sha256').update(key).digest()));
     if (!match) return res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'A valid bearer API key is required' } });
@@ -104,6 +107,11 @@ export function createVideoApiRouter({ service }) {
 
   router.get('/operations/:id', async (req, res, next) => {
     try { res.json(operationView(await service.getOperation(req.ownerId, req.params.id))); }
+    catch (error) { next(error); }
+  });
+
+  router.get('/audiotracks', async (req, res, next) => {
+    try { res.json({ status: 'ok', tracks: getAudioCatalog() }); }
     catch (error) { next(error); }
   });
 

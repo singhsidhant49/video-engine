@@ -255,6 +255,7 @@ function sourceConcepts(scene, topic) {
   const narrationKey = normalized(scene.narration);
   const concepts = [];
   const isTechnicalTopic = /database|software|code|tech|computer|concurrency|deadlock|backend/i.test(topic || '');
+  const isFinancialTopic = /\b(?:bank|banking|money|finance|financial|debt|credit|mortgage|interest\s+rate|economy|economic|recession|stock\s+market|inflation|investing)\b/i.test(`${topic || ''} ${scene.narration || ''}`);
   const requiresEntityEvidence = scene.evidenceRequirement === 'required';
   for (const entity of scene.entities) {
     if (!isAbstractEventEntity(entity) && (requiresEntityEvidence || entityMentioned(scene.narration, entity))) concepts.push(entity);
@@ -276,6 +277,14 @@ function sourceConcepts(scene, topic) {
             .replace(/\s+/g, ' ')
             .trim();
         }
+        if (isFinancialTopic) {
+          cleaned = cleaned
+            .replace(/\b(?:hand\s+adjusting\s+dial|adjusting\s+dial|turning\s+dial|pulling\s+lever)\b/gi, 'central bank trading floor financial monitor')
+            .replace(/\b(?:empty\s+bank\s+vault\s+shelves|empty\s+vault\s+shelves)\b/gi, 'heavy steel bank vault door security')
+            .replace(/\b(?:coin\s+spinning\s+on\s+table|coin\s+spinning|spinning\s+coin)\b/gi, 'stack of currency banknotes and gold bullion')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
         if (/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|title\s+card|chapter\s+card|editorial\s+title\s+card|clean\s+typography|neutral\s+background|stark\s+black\s+frame|black\s+frame|chapter\s+title|kinetic\s+type|serif\s+type|sans-serif\s+type|clean\s+type|single\s+sentence\s+appears|large,\s+clean\s+type|words?\s+appear|sentence\s+appears)\b/i.test(cleaned)) {
           cleaned = scene.entities?.[0] ? `${scene.entities[0]} research desk` : 'open book on library wooden desk';
         }
@@ -293,6 +302,14 @@ function sourceConcepts(scene, topic) {
           .replace(/\b(circular\s+arrow\s+diagram|database\s+lock\s+cycle|cycle\s+diagram)\b/gi, 'computer screen code terminal dark mode')
           .replace(/\b(database\s+engine\s+diagram|graph\s+cycle\s+detection|server\s+algorithm\s+visualization)\b/gi, 'database server terminal screen')
           .replace(/\b(diagram|flowchart|flow\s+chart|infographic|icons?|symbols?)\b/gi, 'screen monitor')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+      if (isFinancialTopic) {
+        cleanedVis = cleanedVis
+          .replace(/\b(?:hand\s+adjusting\s+dial|adjusting\s+dial|turning\s+dial|pulling\s+lever)\b/gi, 'central bank trading floor financial monitor')
+          .replace(/\b(?:empty\s+bank\s+vault\s+shelves|empty\s+vault\s+shelves)\b/gi, 'heavy steel bank vault door security')
+          .replace(/\b(?:coin\s+spinning\s+on\s+table|coin\s+spinning|spinning\s+coin)\b/gi, 'stack of currency banknotes and gold bullion')
           .replace(/\s+/g, ' ')
           .trim();
       }

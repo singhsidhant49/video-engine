@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_2f04de7814131082",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A creative overlay of a hand silhouette on a tranquil river view with a bridge in the background, evoking mystery.",
+  "path": "images/saved-from-web/saved-from-web_2f04de7814131082.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1759,
+  "aspectRatio": 1.4781,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "creative",
+    "overlay",
+    "hand",
+    "silhouette",
+    "tranquil",
+    "river",
+    "bridge",
+    "background",
+    "evoking",
+    "mystery",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "creative",
+    "overlay",
+    "hand",
+    "silhouette",
+    "tranquil",
+    "river",
+    "bridge",
+    "background",
+    "evoking",
+    "mystery",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A creative overlay of a hand silhouette on a tranquil river view with a bridge in the background, evoking mystery."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "neural overlay animation on hands peaceful nighttime landscape",
+    "savedAt": "2026-10-28T10:36:06.103Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "meomupmofilm",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/artistic-silhouette-of-hand-over-serene-river-scene-33181520/"
+  }
+}

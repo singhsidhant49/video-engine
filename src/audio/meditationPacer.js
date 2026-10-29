@@ -236,14 +236,17 @@ export async function generateMeditationSpeech({
       pauseAfterMs: Number(s.pauseAfterMs) || calculateMeditationPauseMs(s.text, s.pauseType, { isLastScene: idx === segments.length - 1 }, subprofile),
     }));
   } else if (Array.isArray(scenes) && scenes.length) {
-    items = scenes.map((s, idx) => {
-      const text = (s.narration || '').trim();
-      const pauseType = classifyMeditationPause(text, { isLastScene: idx === scenes.length - 1 });
-      const pauseAfterMs = s.pauseAfterSec
-        ? Math.round(Number(s.pauseAfterSec) * 1000)
-        : calculateMeditationPauseMs(text, pauseType, { isLastScene: idx === scenes.length - 1 }, subprofile);
-      return { text, pauseType, pauseAfterMs };
-    });
+    items = scenes
+      .filter((s) => Boolean(s?.narration && s.narration.trim()))
+      .map((s, idx, arr) => {
+        const text = (s.narration || '').trim();
+        const isLast = idx === arr.length - 1;
+        const pauseType = classifyMeditationPause(text, { isLastScene: isLast });
+        const pauseAfterMs = s.pauseAfterSec
+          ? Math.round(Number(s.pauseAfterSec) * 1000)
+          : calculateMeditationPauseMs(text, pauseType, { isLastScene: isLast }, subprofile);
+        return { text, pauseType, pauseAfterMs };
+      });
   } else if (script) {
     items = segmentMeditationText(script, subprofile);
   }

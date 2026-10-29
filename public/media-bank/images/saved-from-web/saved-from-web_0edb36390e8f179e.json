@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_0edb36390e8f179e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of euro banknotes with a digital stock market chart displaying a downward trend, symbolizing financial volatility.",
+  "path": "images/saved-from-web/saved-from-web_0edb36390e8f179e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "paper",
+    "currency",
+    "banknote",
+    "cash",
+    "bill",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "euro",
+    "digital",
+    "stock",
+    "market",
+    "chart",
+    "displaying",
+    "downward",
+    "trend",
+    "symbolizing",
+    "volatility",
+    "close-up",
+    "banknotes",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "paper",
+    "currency",
+    "banknote",
+    "cash",
+    "bill",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "euro",
+    "digital",
+    "stock",
+    "market",
+    "chart",
+    "displaying",
+    "downward",
+    "trend",
+    "symbolizing",
+    "volatility",
+    "close-up",
+    "banknotes",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "paper currency banknotes or cash bills"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "recession graph downward",
+    "savedAt": "2026-10-28T15:43:12.939Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jakub Zerdzicki",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/euro-currency-banknote-26841237/"
+  }
+}

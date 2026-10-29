@@ -57,6 +57,18 @@ test('narration completeness rejects dangling generated prose', () => {
   assert.equal(issues[0].type, 'incomplete_narration');
 });
 
+test('narration completeness permits natural questions and clauses ending with prepositions or particles', () => {
+  const issues = narrationCompletenessIssues([
+    { narration: 'So next time you deposit a check, ask: where does that money really come from?' },
+    { narration: 'This is fractional reserve lending, allowing banks to create credit many times over.' },
+    { narration: 'Consider what modern money is actually made of.' },
+    { narration: 'There was nowhere left to turn to.' },
+    { narration: 'Who was this system actually designed for?' },
+    { narration: 'They had no tools to work with.' },
+  ]);
+  assert.equal(issues.length, 0);
+});
+
 test('creative meditation absolutes are not misclassified as factual statistics', () => {
   const plan = normalizePlan({
     title: 'Sleep meditation',
@@ -515,4 +527,88 @@ test('Sections 77 & 78: Municipal street sanitation worker rejected for software
   assert.equal(judgment.classification, 'ACCIDENTAL');
   assert.equal(judgment.accepted, false);
   assert.ok(judgment.rejectReasons.some((r) => r.includes('accidental_keyword_match')));
+});
+
+test('Visual Relevance: Supermarket food shelves rejected for bank vault concept', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_vault',
+    concept: 'bank vault door opening dark',
+    narration: 'Most people believe banks lend out money deposited by savers in a vault.',
+    videoTopic: 'How Banks Create Money and Fractional Reserve Lending',
+  });
+
+  const supermarketCandidate = {
+    id: 'cand_supermarket',
+    label: 'High angle of empty and full shelves in supermarket with price tags and cardboard boxes',
+    description: 'Empty grocery store aisle shelves with price tags',
+    tags: ['shelves', 'supermarket', 'grocery', 'aisle', 'store'],
+  };
+
+  const inspection = await inspectVisualCandidate(supermarketCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: supermarketCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
+});
+
+test('Visual Relevance: Kitchen oven dial rejected for central bank interest rates', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_fed_rates',
+    concept: 'central bank adjusts interest rates',
+    narration: 'Central banks manipulate interest rates to influence the economic cycle.',
+    videoTopic: 'Central Banking and Interest Rates',
+  });
+
+  const ovenDialCandidate = {
+    id: 'cand_oven_dial',
+    label: 'Hand adjusting the temperature dial on a modern stainless steel oven in a contemporary kitchen',
+    description: 'Close up of hand turning oven temperature dial in kitchen',
+    tags: ['hand', 'adjusting', 'dial', 'oven', 'kitchen', 'stove'],
+  };
+
+  const inspection = await inspectVisualCandidate(ovenDialCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: ovenDialCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
+});
+
+test('Visual Relevance: Tibetan prayer flags rejected for financial bank statement', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_bank_statement',
+    concept: 'bank statement paper close up',
+    narration: 'The bank statement showed the newly created ledger balance.',
+    videoTopic: 'How Banks Create Money',
+  });
+
+  const prayerFlagCandidate = {
+    id: 'cand_prayer_flags',
+    label: 'Vibrant Tibetan prayer flags fluttering in the wind at Ladakh, India',
+    description: 'Colorful Buddhist prayer flags in high mountain wind',
+    tags: ['prayer flags', 'tibetan', 'ladakh', 'wind'],
+  };
+
+  const inspection = await inspectVisualCandidate(prayerFlagCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: prayerFlagCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
 });

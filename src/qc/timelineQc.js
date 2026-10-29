@@ -126,9 +126,10 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     const hardMax = durationDiagnostics.hardLimits.max;
     const allowedMin = durationDiagnostics.allowedRange.min;
     const allowedMax = durationDiagnostics.allowedRange.max;
-    const okHard = durSec >= hardMin && durSec <= hardMax;
-    const okTarget = durSec >= allowedMin && durSec <= allowedMax;
-    const isFatal = durSec < hardMin || durSec > hardMax || (publishMode === 'PRODUCTION_RENDER' && !okTarget);
+    const frameTolerance = 1 / fps + 0.01;
+    const okHard = durSec >= (hardMin - frameTolerance) && durSec <= (hardMax + frameTolerance);
+    const okTarget = durSec >= (allowedMin - frameTolerance) && durSec <= (allowedMax + frameTolerance);
+    const isFatal = durSec < (hardMin - frameTolerance) || durSec > (hardMax + frameTolerance) || (publishMode === 'PRODUCTION_RENDER' && !okTarget);
     add('duration-tolerance', !isFatal, isFatal ? 'error' : 'warn', `duration ${durSec.toFixed(1)}s (target ${target}s ±5%: ${allowedMin}-${allowedMax}s, hard limits: ${hardMin}-${hardMax}s)`);
     if (okHard && !okTarget) {
       add('duration-target-drift', false, 'warn', `duration ${durSec.toFixed(1)}s drifted outside ±5% ideal range (${allowedMin}-${allowedMax}s)`);

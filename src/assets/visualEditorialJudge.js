@@ -330,6 +330,59 @@ const ACCIDENTAL_KEYWORD_PATTERNS = [
     semanticDistance: 0.95,
     reason: 'accidental_keyword_match: broken or shattered glass does not represent software database rollback',
   },
+  // 33. Financial / Banking / Vault vs Supermarket / Grocery / Closet shelves
+  {
+    topicRegex: /bank|banking|vault|deposit|reserve|mortgage|debt|credit|monetary|finance/i,
+    literalExceptionRegex: /supermarket|grocery|retail|shopping|closet/i,
+    candidateRejectRegex: /supermarket|grocery|food\s+shelves|price\s+tags|cardboard\s+boxes|walk[\s-]in\s+closet|wardrobe|clothing\s+rack|aisle/i,
+    classification: 'WRONG',
+    semanticDistance: 0.95,
+    reason: 'wrong_subject_match: supermarket food shelves or closet racks do not represent bank vaults or financial reserves',
+  },
+  // 34. Central Bank / Interest Rates vs Kitchen Oven / Stove / Temperature Dial
+  {
+    topicRegex: /central\s+bank|interest\s+rate|monetary\s+policy|federal\s+reserve|the\s+fed|macroeconomic|debt\s+cycle/i,
+    literalExceptionRegex: /oven|stove|kitchen|baking|cooking|appliance/i,
+    candidateRejectRegex: /temperature\s+dial|oven|stove|kitchen|stainless\s+steel\s+oven|baking|burner/i,
+    classification: 'WRONG',
+    semanticDistance: 0.96,
+    reason: 'wrong_subject_match: kitchen oven temperature dial does not represent central bank monetary interest rates',
+  },
+  // 35. Currency / Economy vs Tourist Coin-Operated Binoculars / Vending Machine
+  {
+    topicRegex: /currency|money|banking|debt|financial|economy|inflation|recession/i,
+    literalExceptionRegex: /binoculars|sightseeing|viewpoint|lookout/i,
+    candidateRejectRegex: /coin[\s-]operated\s+binoculars|tourist\s+binoculars|vending\s+machine/i,
+    classification: 'WRONG',
+    semanticDistance: 0.94,
+    reason: 'wrong_subject_match: coin-operated tourist binoculars does not represent monetary economics',
+  },
+  // 36. Financial Statement / Banking Documents vs Religious / Prayer Flags
+  {
+    topicRegex: /bank\s+statement|financial\s+statement|loan\s+contract|mortgage|ledger|bank\s+account/i,
+    literalExceptionRegex: /prayer\s+flag|tibetan|temple|buddhism|ladakh/i,
+    candidateRejectRegex: /prayer\s+flag|tibetan\s+prayer|fluttering\s+in\s+the\s+wind\s+at\s+ladakh|temple\s+flags/i,
+    classification: 'WRONG',
+    semanticDistance: 0.98,
+    reason: 'wrong_subject_match: Tibetan prayer flags do not represent financial bank statements or documents',
+  },
+  // 37. Real World Locations & Empires (Dubai, Ancient Rome, Egypt, etc.) vs Mismatched Stock
+  {
+    topicRegex: /\bdubai\b/i,
+    literalExceptionRegex: /general|global/i,
+    candidateRejectRegex: /suburban\s+neighborhood|american\s+suburb|european\s+village|snowy\s+mountain/i,
+    classification: 'WRONG',
+    semanticDistance: 0.95,
+    reason: 'wrong_subject_match: general suburbs or snowy mountains do not represent Dubai skyline or desert architecture',
+  },
+  {
+    topicRegex: /\b(?:ancient\s+rome|roman\s+empire|colosseum|forum\s+romanum)\b/i,
+    literalExceptionRegex: /modern\s+rome|italy\s+travel/i,
+    candidateRejectRegex: /modern\s+skyscraper|glass\s+tower|subway\s+station|modern\s+train/i,
+    classification: 'WRONG',
+    semanticDistance: 0.95,
+    reason: 'wrong_subject_match: modern skyscrapers or transit do not represent ancient Roman architecture',
+  },
 ];
 
 /**
@@ -683,7 +736,7 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
   }
 
   // 6. CONTEXTUAL match
-  if (comparison.environmentMatch >= 0.40 || comparison.subjectMatch >= 0.25 || comparison.overallVisualMatch >= 0.35) {
+  if (comparison.environmentMatch >= 0.40 || comparison.subjectMatch >= 0.30 || comparison.overallVisualMatch >= 0.35) {
     const accepted = true;
     return {
       classification: 'CONTEXTUAL',

@@ -145,3 +145,20 @@ test('production timeline QC rejects duration outside the ideal range even insid
   assert.equal(production.ok, false);
   assert.equal(production.checks.find((check) => check.id === 'duration-tolerance')?.severity, 'error');
 });
+
+test('production timeline QC allows single-frame quantization boundary without fatal error', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 120 });
+  // 120s with ±5% allowedMin is 114s = 3420 frames at 30fps.
+  // 3419 frames is 113.9667s, off by 1 frame (0.033s).
+  const quantizedTimeline = {
+    fps: 30,
+    durationInFrames: 3419,
+    clips: [{ id: 'c1', from: 0, durationInFrames: 3419, enter: { type: 'cut' }, shots: [{ id: 'sh1', storyboardShotId: 'sh1', sceneId: 'c1', sectionId: 's1', presentation: { layout: 'full' }, durationInFrames: 3419, from: 0 }] }],
+  };
+  const diagnostics = buildDurationDiagnostics({ budget, timeline: quantizedTimeline });
+  const production = runTimelineQc(quantizedTimeline, { durationDiagnostics: diagnostics, publishMode: 'PRODUCTION_RENDER' });
+
+  assert.equal(diagnostics.isWithinTolerance, true);
+  const durCheck = production.checks.find((check) => check.id === 'duration-tolerance');
+  assert.equal(durCheck?.ok, true);
+});

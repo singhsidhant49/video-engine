@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_38ed615b08f14cad",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A warm, inviting bedroom with a glowing lamp and digital alarm clock reading 15:11.",
+  "path": "images/saved-from-web/saved-from-web_38ed615b08f14cad.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1223,
+  "aspectRatio": 2.1259,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "warm",
+    "inviting",
+    "bedroom",
+    "glowing",
+    "lamp",
+    "digital",
+    "alarm",
+    "clock",
+    "reading",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "warm",
+    "inviting",
+    "bedroom",
+    "glowing",
+    "lamp",
+    "digital",
+    "alarm",
+    "clock",
+    "reading",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A warm, inviting bedroom with a glowing lamp and digital alarm clock reading 15:11."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "digital alarm clock 5:59 AM close up",
+    "savedAt": "2026-10-28T10:31:58.956Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jakub Zerdzicki",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/lamp-and-alarm-clock-in-bedroom-17378218/"
+  }
+}

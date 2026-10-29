@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_9827e4ddfb2205de",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A heavy steel door with iron bars in a concrete urban setting, exuding vintage charm.",
+  "path": "images/saved-from-web/saved-from-web_9827e4ddfb2205de.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1757,
+  "aspectRatio": 1.4798,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "heavy",
+    "steel",
+    "door",
+    "iron",
+    "bar",
+    "concrete",
+    "urban",
+    "setting",
+    "exuding",
+    "vintage",
+    "charm",
+    "portrait",
+    "educational",
+    "presentation",
+    "static",
+    "bars"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "heavy",
+    "steel",
+    "door",
+    "iron",
+    "bar",
+    "concrete",
+    "urban",
+    "setting",
+    "exuding",
+    "vintage",
+    "charm",
+    "portrait",
+    "educational",
+    "presentation",
+    "static",
+    "bars"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A heavy steel door with iron bars in a concrete urban setting, exuding vintage charm."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "heavy steel bank vault door security",
+    "savedAt": "2026-10-28T16:28:55.496Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Robert So",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/steel-doors-between-windows-blocked-by-iron-bars-15796464/"
+  }
+}

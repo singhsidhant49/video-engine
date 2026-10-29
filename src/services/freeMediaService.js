@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { config } from '../config/index.js';
 import { runBinary, ffmpeg } from './ffmpeg.js';
 import { licenseFromExtmeta } from '../shared/licensing.js';
@@ -51,6 +52,7 @@ const SEARCH_TTL_MS = 7 * 24 * 3600 * 1000;
 /** Search failures (rate limits, outages) this process — so reports can tell "unreachable" from "nothing found". */
 export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
 const providerState = new Map();
+const hostFailures = new Map();
 const HOST_INTERVAL_MS = {
   'api.pexels.com': 550,
   'en.wikipedia.org': 180,
@@ -351,7 +353,6 @@ export async function pexelsVideoSearch(query, orientation, minSeconds = 4) {
  * Circuit breaker per download host. Major CDNs (Pexels, Unsplash, Brave, Commons)
  * are exempt from aggressive tripping so individual slow images never block the entire source.
  */
-const hostFailures = new Map();
 const CDN_EXEMPT = new Set(['images.pexels.com', 'images.unsplash.com', 'api.search.brave.com', 'upload.wikimedia.org', 'commons.wikimedia.org']);
 export const breakerOpen = (url) => {
   try {
@@ -529,9 +530,13 @@ export async function materialiseImage(candidate, outFile) {
       if (candidate.localPath) {
         cachedPath = candidate.localPath;
       } else if (candidate.url?.startsWith('file://')) {
-        let p = candidate.url.replace(/^file:\/\//, '');
-        if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
-        cachedPath = p;
+        try {
+          cachedPath = fileURLToPath(candidate.url);
+        } catch {
+          let p = decodeURIComponent(candidate.url.replace(/^file:\/\//, ''));
+          if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+          cachedPath = p;
+        }
       } else {
         cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
       }
@@ -552,9 +557,13 @@ export async function materialiseImage(candidate, outFile) {
 export async function materialiseVideo(candidate, outFile) {
   let cached = candidate.localPath;
   if (!cached && candidate.url?.startsWith('file://')) {
-    let p = candidate.url.replace(/^file:\/\//, '');
-    if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
-    cached = p;
+    try {
+      cached = fileURLToPath(candidate.url);
+    } catch {
+      let p = decodeURIComponent(candidate.url.replace(/^file:\/\//, ''));
+      if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+      cached = p;
+    }
   }
   if (!cached) {
     cached = await downloadCached(candidate.url, 90000, 1);

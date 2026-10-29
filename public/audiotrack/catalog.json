@@ -1,0 +1,587 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-10-28T09:08:52.609Z",
+  "totalTracks": 58,
+  "tracks": [
+    {
+      "id": "audiobook_a-quiet-thought",
+      "title": "A Quiet Thought",
+      "artist": "Wayne Jones",
+      "category": "audiobook",
+      "filename": "A Quiet Thought - Wayne Jones.mp3",
+      "src": "audiotrack/audiobook/A Quiet Thought - Wayne Jones.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_beneath-the-moonlight",
+      "title": "Beneath the Moonlight",
+      "artist": "Aaron Kenny",
+      "category": "audiobook",
+      "filename": "Beneath the Moonlight - Aaron Kenny.mp3",
+      "src": "audiotrack/audiobook/Beneath the Moonlight - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_kiss-the-sky",
+      "title": "Kiss the Sky",
+      "artist": "Aakash Gandhi",
+      "category": "audiobook",
+      "filename": "Kiss the Sky - Aakash Gandhi.mp3",
+      "src": "audiotrack/audiobook/Kiss the Sky - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_liquid-time",
+      "title": "Liquid Time",
+      "artist": "Aakash Gandhi",
+      "category": "audiobook",
+      "filename": "Liquid Time - Aakash Gandhi.mp3",
+      "src": "audiotrack/audiobook/Liquid Time - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_no-2-remembering-her",
+      "title": "No.2 Remembering Her",
+      "artist": "Esther Abrami",
+      "category": "audiobook",
+      "filename": "No.2 Remembering Her - Esther Abrami.mp3",
+      "src": "audiotrack/audiobook/No.2 Remembering Her - Esther Abrami.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_rain-heavy-loud",
+      "title": "Rain Heavy Loud",
+      "artist": "Nature Ambient",
+      "category": "audiobook",
+      "filename": "Rain Heavy Loud.mp3",
+      "src": "audiotrack/audiobook/Rain Heavy Loud.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_silence-for-a-film",
+      "title": "Silence for a Film",
+      "artist": "ann annie",
+      "category": "audiobook",
+      "filename": "Silence for a Film - ann annie.mp3",
+      "src": "audiotrack/audiobook/Silence for a Film - ann annie.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_white-river",
+      "title": "White River",
+      "artist": "Aakash Gandhi",
+      "category": "audiobook",
+      "filename": "White River - Aakash Gandhi.mp3",
+      "src": "audiotrack/audiobook/White River - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "documentary",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/documentary/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_borderless",
+      "title": "Borderless",
+      "artist": "Aakash Gandhi",
+      "category": "documentary",
+      "filename": "Borderless - Aakash Gandhi.mp3",
+      "src": "audiotrack/documentary/Borderless - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_eyes-of-glory",
+      "title": "Eyes of Glory",
+      "artist": "Aakash Gandhi",
+      "category": "documentary",
+      "filename": "Eyes of Glory - Aakash Gandhi.mp3",
+      "src": "audiotrack/documentary/Eyes of Glory - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_journeyman",
+      "title": "Journeyman",
+      "artist": "Aakash Gandhi",
+      "category": "documentary",
+      "filename": "Journeyman - Aakash Gandhi.mp3",
+      "src": "audiotrack/documentary/Journeyman - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "documentary",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/documentary/July - John Patitucci.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documenty_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "documenty",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/documenty/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documenty_borderless",
+      "title": "Borderless",
+      "artist": "Aakash Gandhi",
+      "category": "documenty",
+      "filename": "Borderless - Aakash Gandhi.mp3",
+      "src": "audiotrack/documenty/Borderless - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documenty_eyes-of-glory",
+      "title": "Eyes of Glory",
+      "artist": "Aakash Gandhi",
+      "category": "documenty",
+      "filename": "Eyes of Glory - Aakash Gandhi.mp3",
+      "src": "audiotrack/documenty/Eyes of Glory - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documenty_journeyman",
+      "title": "Journeyman",
+      "artist": "Aakash Gandhi",
+      "category": "documenty",
+      "filename": "Journeyman - Aakash Gandhi.mp3",
+      "src": "audiotrack/documenty/Journeyman - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documenty_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "documenty",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/documenty/July - John Patitucci.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "education_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "education",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/education/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_crimson-fly",
+      "title": "Crimson Fly",
+      "artist": "Huma-Huma",
+      "category": "education",
+      "filename": "Crimson Fly - Huma-Huma.mp3",
+      "src": "audiotrack/education/Crimson Fly - Huma-Huma.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_crock-pot",
+      "title": "Crock Pot",
+      "artist": "Diamond Ortiz",
+      "category": "education",
+      "filename": "Crock Pot - Diamond Ortiz.mp3",
+      "src": "audiotrack/education/Crock Pot - Diamond Ortiz.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "education",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/education/July - John Patitucci.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_liquid-time",
+      "title": "Liquid Time",
+      "artist": "Aakash Gandhi",
+      "category": "education",
+      "filename": "Liquid Time - Aakash Gandhi.mp3",
+      "src": "audiotrack/education/Liquid Time - Aakash Gandhi.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_one-step-closer",
+      "title": "One Step Closer",
+      "artist": "Aakash Gandhi",
+      "category": "education",
+      "filename": "One Step Closer - Aakash Gandhi.mp3",
+      "src": "audiotrack/education/One Step Closer - Aakash Gandhi.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_corporate-mellow-groove",
+      "title": "Corporate Mellow Groove",
+      "artist": "Doug Maxwell",
+      "category": "explainer",
+      "filename": "Corporate Mellow Groove - Doug Maxwell.mp3",
+      "src": "audiotrack/explainer/Corporate Mellow Groove - Doug Maxwell.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_crimson-fly",
+      "title": "Crimson Fly",
+      "artist": "Huma-Huma",
+      "category": "explainer",
+      "filename": "Crimson Fly - Huma-Huma.mp3",
+      "src": "audiotrack/explainer/Crimson Fly - Huma-Huma.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_crock-pot",
+      "title": "Crock Pot",
+      "artist": "Diamond Ortiz",
+      "category": "explainer",
+      "filename": "Crock Pot - Diamond Ortiz.mp3",
+      "src": "audiotrack/explainer/Crock Pot - Diamond Ortiz.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_hypnosis",
+      "title": "Hypnosis",
+      "artist": "Godmode",
+      "category": "explainer",
+      "filename": "Hypnosis - Godmode.mp3",
+      "src": "audiotrack/explainer/Hypnosis - Godmode.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "explainer",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/explainer/July - John Patitucci.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_walk-in-the-park",
+      "title": "Walk In The Park",
+      "artist": "Audionautix",
+      "category": "explainer",
+      "filename": "Walk In The Park - Audionautix.mp3",
+      "src": "audiotrack/explainer/Walk In The Park - Audionautix.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "investigate_crime_hypnosis",
+      "title": "Hypnosis",
+      "artist": "Godmode",
+      "category": "investigate_crime",
+      "filename": "Hypnosis - Godmode.mp3",
+      "src": "audiotrack/investigate_crime/Hypnosis - Godmode.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_intrigue",
+      "title": "Intrigue",
+      "artist": "Max Surla_Media Right Productions",
+      "category": "investigate_crime",
+      "filename": "Intrigue - Max Surla_Media Right Productions.mp3",
+      "src": "audiotrack/investigate_crime/Intrigue - Max Surla_Media Right Productions.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_keys-to-unravel",
+      "title": "Keys To Unravel",
+      "artist": "The Soundlings",
+      "category": "investigate_crime",
+      "filename": "Keys To Unravel - The Soundlings.mp3",
+      "src": "audiotrack/investigate_crime/Keys To Unravel - The Soundlings.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_phantom",
+      "title": "Phantom",
+      "artist": "Density & Time",
+      "category": "investigate_crime",
+      "filename": "Phantom - Density & Time.mp3",
+      "src": "audiotrack/investigate_crime/Phantom - Density & Time.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_spirit-of-the-dead",
+      "title": "Spirit of the Dead",
+      "artist": "Aakash Gandhi",
+      "category": "investigate_crime",
+      "filename": "Spirit of the Dead - Aakash Gandhi.mp3",
+      "src": "audiotrack/investigate_crime/Spirit of the Dead - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "meditation_a-quiet-thought",
+      "title": "A Quiet Thought",
+      "artist": "Wayne Jones",
+      "category": "meditation",
+      "filename": "A Quiet Thought - Wayne Jones.mp3",
+      "src": "audiotrack/meditation/A Quiet Thought - Wayne Jones.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_dreamland",
+      "title": "Dreamland",
+      "artist": "Aakash Gandhi",
+      "category": "meditation",
+      "filename": "Dreamland - Aakash Gandhi.mp3",
+      "src": "audiotrack/meditation/Dreamland - Aakash Gandhi.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_liquid-time",
+      "title": "Liquid Time",
+      "artist": "Aakash Gandhi",
+      "category": "meditation",
+      "filename": "Liquid Time - Aakash Gandhi.mp3",
+      "src": "audiotrack/meditation/Liquid Time - Aakash Gandhi.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_rain-on-rooftop",
+      "title": "Rain On Rooftop",
+      "artist": "Nature Ambient",
+      "category": "meditation",
+      "filename": "Rain On Rooftop.mp3",
+      "src": "audiotrack/meditation/Rain On Rooftop.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_tratak",
+      "title": "Tratak",
+      "artist": "Jesse Gallagher",
+      "category": "meditation",
+      "filename": "Tratak - Jesse Gallagher.mp3",
+      "src": "audiotrack/meditation/Tratak - Jesse Gallagher.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_watercolor-lilies",
+      "title": "Watercolor Lilies",
+      "artist": "Aaron Kenny",
+      "category": "meditation",
+      "filename": "Watercolor Lilies - Aaron Kenny.mp3",
+      "src": "audiotrack/meditation/Watercolor Lilies - Aaron Kenny.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "motivational_eyes-of-glory",
+      "title": "Eyes of Glory",
+      "artist": "Aakash Gandhi",
+      "category": "motivational",
+      "filename": "Eyes of Glory - Aakash Gandhi.mp3",
+      "src": "audiotrack/motivational/Eyes of Glory - Aakash Gandhi.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_goddess-of-the-sea",
+      "title": "Goddess of the Sea",
+      "artist": "Jimena Contreras",
+      "category": "motivational",
+      "filename": "Goddess of the Sea - Jimena Contreras.mp3",
+      "src": "audiotrack/motivational/Goddess of the Sea - Jimena Contreras.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_journeyman",
+      "title": "Journeyman",
+      "artist": "Aakash Gandhi",
+      "category": "motivational",
+      "filename": "Journeyman - Aakash Gandhi.mp3",
+      "src": "audiotrack/motivational/Journeyman - Aakash Gandhi.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_lifting-dreams",
+      "title": "Lifting Dreams",
+      "artist": "Aakash Gandhi",
+      "category": "motivational",
+      "filename": "Lifting Dreams - Aakash Gandhi.mp3",
+      "src": "audiotrack/motivational/Lifting Dreams - Aakash Gandhi.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_one-step-closer",
+      "title": "One Step Closer",
+      "artist": "Aakash Gandhi",
+      "category": "motivational",
+      "filename": "One Step Closer - Aakash Gandhi.mp3",
+      "src": "audiotrack/motivational/One Step Closer - Aakash Gandhi.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "story",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/story/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_beneath-the-moonlight",
+      "title": "Beneath the Moonlight",
+      "artist": "Aaron Kenny",
+      "category": "story",
+      "filename": "Beneath the Moonlight - Aaron Kenny.mp3",
+      "src": "audiotrack/story/Beneath the Moonlight - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_liquid-time",
+      "title": "Liquid Time",
+      "artist": "Aakash Gandhi",
+      "category": "story",
+      "filename": "Liquid Time - Aakash Gandhi.mp3",
+      "src": "audiotrack/story/Liquid Time - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_not-forgotten",
+      "title": "Not Forgotten",
+      "artist": "Dan Lebowitz",
+      "category": "story",
+      "filename": "Not Forgotten - Dan Lebowitz.mp3",
+      "src": "audiotrack/story/Not Forgotten - Dan Lebowitz.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_one-step-closer",
+      "title": "One Step Closer",
+      "artist": "Aakash Gandhi",
+      "category": "story",
+      "filename": "One Step Closer - Aakash Gandhi.mp3",
+      "src": "audiotrack/story/One Step Closer - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "story_who-can-say",
+      "title": "Who Can Say",
+      "artist": "The 126ers",
+      "category": "story",
+      "filename": "Who Can Say - The 126ers.mp3",
+      "src": "audiotrack/story/Who Can Say - The 126ers.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "storytelling",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/storytelling/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_beneath-the-moonlight",
+      "title": "Beneath the Moonlight",
+      "artist": "Aaron Kenny",
+      "category": "storytelling",
+      "filename": "Beneath the Moonlight - Aaron Kenny.mp3",
+      "src": "audiotrack/storytelling/Beneath the Moonlight - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_liquid-time",
+      "title": "Liquid Time",
+      "artist": "Aakash Gandhi",
+      "category": "storytelling",
+      "filename": "Liquid Time - Aakash Gandhi.mp3",
+      "src": "audiotrack/storytelling/Liquid Time - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_not-forgotten",
+      "title": "Not Forgotten",
+      "artist": "Dan Lebowitz",
+      "category": "storytelling",
+      "filename": "Not Forgotten - Dan Lebowitz.mp3",
+      "src": "audiotrack/storytelling/Not Forgotten - Dan Lebowitz.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_one-step-closer",
+      "title": "One Step Closer",
+      "artist": "Aakash Gandhi",
+      "category": "storytelling",
+      "filename": "One Step Closer - Aakash Gandhi.mp3",
+      "src": "audiotrack/storytelling/One Step Closer - Aakash Gandhi.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_who-can-say",
+      "title": "Who Can Say",
+      "artist": "The 126ers",
+      "category": "storytelling",
+      "filename": "Who Can Say - The 126ers.mp3",
+      "src": "audiotrack/storytelling/Who Can Say - The 126ers.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    }
+  ]
+}

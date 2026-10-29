@@ -173,10 +173,11 @@ export function buildDurationDiagnostics({
   const durationVarianceSec = Number((finalVideoDuration - (budget?.targetDurationSec || 75)).toFixed(2));
   const durationVariancePercent = Number(((durationVarianceSec / (budget?.targetDurationSec || 75)) * 100).toFixed(2));
 
-  const isWithinTolerance = finalVideoDuration >= (budget?.allowedMinDuration || 0)
-    && finalVideoDuration <= (budget?.allowedMaxDuration || 9999);
-  const isWithinHardBounds = finalVideoDuration >= (budget?.hardMinDuration || 0)
-    && finalVideoDuration <= (budget?.hardMaxDuration || 9999);
+  const frameTolerance = 1 / fps + 0.01;
+  const isWithinTolerance = finalVideoDuration >= ((budget?.allowedMinDuration || 0) - frameTolerance)
+    && finalVideoDuration <= ((budget?.allowedMaxDuration || 9999) + frameTolerance);
+  const isWithinHardBounds = finalVideoDuration >= ((budget?.hardMinDuration || 0) - frameTolerance)
+    && finalVideoDuration <= ((budget?.hardMaxDuration || 9999) + frameTolerance);
 
   return {
     requestedDuration: budget?.targetDurationSec || 75,

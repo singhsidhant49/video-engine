@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_053fe4a8144137a1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "High angle of empty and full shelves in supermarket with price tags and cardboard boxes",
+  "path": "images/saved-from-web/saved-from-web_053fe4a8144137a1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "empty",
+    "full",
+    "shelve",
+    "supermarket",
+    "price",
+    "tag",
+    "cardboard",
+    "boxe",
+    "grocery",
+    "store",
+    "aisle",
+    "static",
+    "presentation",
+    "shelves",
+    "tags",
+    "boxes",
+    "store shelves",
+    "food products or jars"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "empty",
+    "full",
+    "shelve",
+    "supermarket",
+    "price",
+    "tag",
+    "cardboard",
+    "boxe",
+    "grocery",
+    "store",
+    "aisle",
+    "static",
+    "presentation",
+    "shelves",
+    "tags",
+    "boxes",
+    "store shelves",
+    "food products or jars"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "High angle of empty and full shelves in supermarket with price tags and cardboard boxes"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "supermarket or grocery store aisle"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "empty bank vault shelves",
+    "savedAt": "2026-10-28T15:40:17.747Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Roy Broo",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/various-products-on-half-empty-store-shelves-4437145/"
+  }
+}

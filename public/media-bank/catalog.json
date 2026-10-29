@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedAt": "2026-10-26T08:27:15.797Z",
-  "totalAssets": 447,
+  "totalAssets": 515,
   "categories": {
     "business": {
       "mediaType": "images",
@@ -21409,72 +21409,32 @@
       "aspectRatio": 1.5003,
       "orientation": "landscape",
       "tags": [
-        "saved-from-web",
-        "show",
-        "people",
-        "meeting",
-        "talking",
-        "shaking",
-        "hand",
-        "busines",
-        "setting",
-        "modern",
-        "corporate",
-        "office",
-        "interior",
-        "static",
-        "presentation",
-        "technician",
-        "working",
-        "humanoid",
         "robot",
-        "tech",
-        "exhibition",
-        "guimarae",
-        "portugal",
-        "guimaraes",
-        "handshake",
-        "business meeting"
+        "humanoid robot",
+        "robotics",
+        "technology",
+        "engineering",
+        "exhibition"
       ],
       "intrinsicTags": [
-        "saved-from-web",
-        "show",
-        "people",
-        "meeting",
-        "talking",
-        "shaking",
-        "hand",
-        "busines",
-        "setting",
-        "modern",
-        "corporate",
-        "office",
-        "interior",
-        "static",
-        "presentation",
-        "technician",
-        "working",
-        "humanoid",
         "robot",
-        "tech",
-        "exhibition",
-        "guimarae",
-        "portugal",
-        "guimaraes",
-        "handshake",
-        "business meeting"
+        "humanoid robot",
+        "robotics",
+        "technology",
+        "engineering",
+        "exhibition"
       ],
       "concepts": [
         "saved-from-web"
       ],
       "subjects": [
-        "people meeting, talking, or shaking hands in a business setting"
+        "humanoid robot at exhibition"
       ],
       "actions": [
         "static presentation"
       ],
       "mood": [
-        "modern corporate office interior"
+        "technology engineering exhibition"
       ],
       "composition": {
         "focalPoint": null,
@@ -28859,72 +28819,36 @@
       "aspectRatio": 1.5012,
       "orientation": "landscape",
       "tags": [
-        "saved-from-web",
-        "show",
-        "paper",
-        "currency",
-        "banknote",
-        "cash",
-        "bill",
-        "financial",
-        "macro",
-        "close",
-        "static",
-        "presentation",
-        "vibrant",
         "tibetan",
-        "prayer",
-        "flag",
-        "fluttering",
-        "wind",
+        "prayer flags",
         "ladakh",
         "india",
-        "symbolizing",
+        "mountains",
         "peace",
-        "compassion",
-        "flags",
-        "currency denomination",
-        "paper money"
+        "wind",
+        "colorful"
       ],
       "intrinsicTags": [
-        "saved-from-web",
-        "show",
-        "paper",
-        "currency",
-        "banknote",
-        "cash",
-        "bill",
-        "financial",
-        "macro",
-        "close",
-        "static",
-        "presentation",
-        "vibrant",
         "tibetan",
-        "prayer",
-        "flag",
-        "fluttering",
-        "wind",
+        "prayer flags",
         "ladakh",
         "india",
-        "symbolizing",
+        "mountains",
         "peace",
-        "compassion",
-        "flags",
-        "currency denomination",
-        "paper money"
+        "wind",
+        "colorful"
       ],
       "concepts": [
         "saved-from-web"
       ],
       "subjects": [
-        "paper currency banknotes or cash bills"
+        "Tibetan prayer flags in Ladakh mountains"
       ],
       "actions": [
         "static presentation"
       ],
       "mood": [
-        "financial macro close-up"
+        "peaceful mountain landscape"
       ],
       "composition": {
         "focalPoint": null,
@@ -32987,9 +32911,9 @@
       "quality": "curated",
       "verificationStatus": "verified",
       "source": {
-        "provider": "pexels-video",
-        "originalQuery": "close up hand hesitating over laptop keyboard",
-        "savedAt": "2026-10-28T08:32:51.962Z"
+        "provider": "local-bank",
+        "originalQuery": "hands hovering over keyboard close up",
+        "savedAt": "2026-10-28T10:37:00.796Z"
       },
       "license": {
         "name": "Pexels License",
@@ -33536,8 +33460,8 @@
       "verificationStatus": "verified",
       "source": {
         "provider": "pexels-image",
-        "originalQuery": "brain neurons network glowing",
-        "savedAt": "2026-10-28T08:36:27.733Z"
+        "originalQuery": "brain neural network glowing dark background",
+        "savedAt": "2026-10-28T10:34:15.316Z"
       },
       "license": {
         "name": "Pexels License",
@@ -33911,72 +33835,32 @@
       "aspectRatio": 1.5003,
       "orientation": "landscape",
       "tags": [
-        "saved-from-web",
-        "show",
-        "people",
-        "meeting",
-        "talking",
-        "shaking",
-        "hand",
-        "busines",
-        "setting",
-        "modern",
-        "corporate",
-        "office",
-        "interior",
-        "static",
-        "presentation",
-        "technician",
-        "working",
-        "humanoid",
         "robot",
-        "tech",
-        "exhibition",
-        "guimarae",
-        "portugal",
-        "guimaraes",
-        "handshake",
-        "business meeting"
+        "humanoid robot",
+        "robotics",
+        "technology",
+        "engineering",
+        "exhibition"
       ],
       "intrinsicTags": [
-        "saved-from-web",
-        "show",
-        "people",
-        "meeting",
-        "talking",
-        "shaking",
-        "hand",
-        "busines",
-        "setting",
-        "modern",
-        "corporate",
-        "office",
-        "interior",
-        "static",
-        "presentation",
-        "technician",
-        "working",
-        "humanoid",
         "robot",
-        "tech",
-        "exhibition",
-        "guimarae",
-        "portugal",
-        "guimaraes",
-        "handshake",
-        "business meeting"
+        "humanoid robot",
+        "robotics",
+        "technology",
+        "engineering",
+        "exhibition"
       ],
       "concepts": [
         "saved-from-web"
       ],
       "subjects": [
-        "people meeting, talking, or shaking hands in a business setting"
+        "humanoid robot at exhibition"
       ],
       "actions": [
         "static presentation"
       ],
       "mood": [
-        "modern corporate office interior"
+        "technology engineering exhibition"
       ],
       "composition": {
         "focalPoint": null,
@@ -35172,6 +35056,6330 @@
         "attributionRequired": false,
         "nonFree": false,
         "page": "https://www.pexels.com/photo/silhouette-of-person-at-scenic-sunrise-view-32505700/"
+      }
+    },
+    {
+      "id": "saved-from-web_0289e0580b45737c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of a digital alarm clock displaying 20:50 and temperature on a wooden desk with a notepad.",
+      "path": "images/saved-from-web/saved-from-web_0289e0580b45737c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "digital",
+        "alarm",
+        "clock",
+        "displaying",
+        "temperature",
+        "wooden",
+        "desk",
+        "notepad",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "office desk",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "digital",
+        "alarm",
+        "clock",
+        "displaying",
+        "temperature",
+        "wooden",
+        "desk",
+        "notepad",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "office desk",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of a digital alarm clock displaying 20:50 and temperature on a wooden desk with a notepad."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "digital alarm clock 5:59 AM close up",
+        "savedAt": "2026-10-28T10:31:19.541Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Wanshan Luo",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/digital-alarm-clock-20383452/"
+      }
+    },
+    {
+      "id": "saved-from-web_38ed615b08f14cad",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A warm, inviting bedroom with a glowing lamp and digital alarm clock reading 15:11.",
+      "path": "images/saved-from-web/saved-from-web_38ed615b08f14cad.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1223,
+      "aspectRatio": 2.1259,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "warm",
+        "inviting",
+        "bedroom",
+        "glowing",
+        "lamp",
+        "digital",
+        "alarm",
+        "clock",
+        "reading",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "warm",
+        "inviting",
+        "bedroom",
+        "glowing",
+        "lamp",
+        "digital",
+        "alarm",
+        "clock",
+        "reading",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A warm, inviting bedroom with a glowing lamp and digital alarm clock reading 15:11."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "digital alarm clock 5:59 AM close up",
+        "savedAt": "2026-10-28T10:31:58.956Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Jakub Zerdzicki",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/lamp-and-alarm-clock-in-bedroom-17378218/"
+      }
+    },
+    {
+      "id": "saved-from-web_86e1cfa88d2b414d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Acoustic and electric guitar with placed on floor under window near bookshelves and houseplants in cozy room",
+      "path": "images/saved-from-web/saved-from-web_86e1cfa88d2b414d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1875,
+      "aspectRatio": 1.3867,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "acoustic",
+        "electric",
+        "guitar",
+        "placed",
+        "floor",
+        "under",
+        "window",
+        "near",
+        "bookshelve",
+        "houseplant",
+        "cozy",
+        "room",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "bookshelves",
+        "houseplants",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "acoustic",
+        "electric",
+        "guitar",
+        "placed",
+        "floor",
+        "under",
+        "window",
+        "near",
+        "bookshelve",
+        "houseplant",
+        "cozy",
+        "room",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "bookshelves",
+        "houseplants",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Acoustic and electric guitar with placed on floor under window near bookshelves and houseplants in cozy room"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "dusty acoustic guitar in corner",
+        "savedAt": "2026-10-28T10:32:30.380Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Alina Vilchenko",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/room-interior-with-guitars-and-musical-equipment-near-shelves-and-plants-4122135/"
+      }
+    },
+    {
+      "id": "saved-from-web_56daab3c4cf8012d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A modern gym with equipment, punching bags, and open space for workouts.",
+      "path": "images/saved-from-web/saved-from-web_56daab3c4cf8012d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "gym",
+        "equipment",
+        "punching",
+        "bag",
+        "open",
+        "space",
+        "workout",
+        "deep",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "bags",
+        "workouts",
+        "handshake",
+        "business meeting",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "gym",
+        "equipment",
+        "punching",
+        "bag",
+        "open",
+        "space",
+        "workout",
+        "deep",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "bags",
+        "workouts",
+        "handshake",
+        "business meeting",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A modern gym with equipment, punching bags, and open space for workouts."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "deep space astronomical cosmos"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "gym bag on floor by door",
+        "savedAt": "2026-10-28T10:33:27.359Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Mikhail Nilov",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-spacious-gym-with-tools-and-equipments-6739958/"
+      }
+    },
+    {
+      "id": "saved-from-web_a2e9a9958aaed120",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/",
+      "path": "video/saved-from-web/saved-from-web_a2e9a9958aaed120.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "dolly",
+        "package",
+        "paper",
+        "bag",
+        "left",
+        "door",
+        "7362603",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "dolly",
+        "package",
+        "paper",
+        "bag",
+        "left",
+        "door",
+        "7362603",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "gym bag on floor by door",
+        "savedAt": "2026-10-28T10:34:02.969Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/"
+      }
+    },
+    {
+      "id": "saved-from-web_68fd237fcc3099ca",
+      "type": "image",
+      "mediaType": "image",
+      "title": "3D rendered abstract brain concept with neural network.",
+      "path": "images/saved-from-web/saved-from-web_68fd237fcc3099ca.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1463,
+      "aspectRatio": 1.7772,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "rendered",
+        "brain",
+        "concept",
+        "neural",
+        "network"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "rendered",
+        "brain",
+        "concept",
+        "neural",
+        "network"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "glowing cosmic abstract quantum illustration"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "brain neural network glowing dark background",
+        "savedAt": "2026-10-28T10:34:07.680Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Google DeepMind",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/an-artist-s-illustration-of-artificial-intelligence-ai-this-image-represents-how-machine-learning-is-inspired-by-neuroscience-and-the-human-brain-it-was-created-by-novoto-studio-as-par-17483869/"
+      }
+    },
+    {
+      "id": "saved-from-web_e51ef618a79b61dd",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Captivating abstract design with loops and lines on a dark backdrop, ideal for modern projects.",
+      "path": "images/saved-from-web/saved-from-web_e51ef618a79b61dd.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1737,
+      "aspectRatio": 1.4968,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "captivating",
+        "design",
+        "loop",
+        "line",
+        "dark",
+        "ideal",
+        "modern",
+        "project",
+        "loops",
+        "lines",
+        "projects"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "captivating",
+        "design",
+        "loop",
+        "line",
+        "dark",
+        "ideal",
+        "modern",
+        "project",
+        "loops",
+        "lines",
+        "projects"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "glowing cosmic abstract quantum illustration"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "neural loop animation dark background",
+        "savedAt": "2026-10-28T10:34:30.966Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "František",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/black-abstract-image-with-thin-looping-lines-16503707/"
+      }
+    },
+    {
+      "id": "saved-from-web_320dde4a19698338",
+      "type": "image",
+      "mediaType": "image",
+      "title": "3D artwork featuring an abstract sculpture with intertwined loops against a starry background.",
+      "path": "images/saved-from-web/saved-from-web_320dde4a19698338.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "artwork",
+        "featuring",
+        "sculpture",
+        "intertwined",
+        "loop",
+        "against",
+        "starry",
+        "background",
+        "loops"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "glowing",
+        "cosmic",
+        "abstract",
+        "quantum",
+        "illustration",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "artwork",
+        "featuring",
+        "sculpture",
+        "intertwined",
+        "loop",
+        "against",
+        "starry",
+        "background",
+        "loops"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "glowing cosmic abstract quantum illustration"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "neural loop animation dark background",
+        "savedAt": "2026-10-28T10:34:37.462Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Steve A Johnson",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/intricate-abstract-3d-render-sculpture-28844046/"
+      }
+    },
+    {
+      "id": "saved-from-web_c53b59b310de36f6",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Captivating black and white image of a runner's shadow casting on the pavement in motion.",
+      "path": "images/saved-from-web/saved-from-web_c53b59b310de36f6.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 7008,
+      "height": 4672,
+      "aspectRatio": 1.5,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "captivating",
+        "black",
+        "white",
+        "runner",
+        "shadow",
+        "casting",
+        "pavement",
+        "motion",
+        "municipal",
+        "city",
+        "street",
+        "dusk",
+        "static",
+        "presentation",
+        "image",
+        "garbage truck",
+        "waste bins"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "captivating",
+        "black",
+        "white",
+        "runner",
+        "shadow",
+        "casting",
+        "pavement",
+        "motion",
+        "municipal",
+        "city",
+        "street",
+        "dusk",
+        "static",
+        "presentation",
+        "image",
+        "garbage truck",
+        "waste bins"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Captivating black and white image of a runner's shadow casting on the pavement in motion."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "municipal city street at dusk"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "runner in motion cinematic lighting",
+        "savedAt": "2026-10-28T10:34:58.612Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Mathias Reding",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/runner-s-shadow-silhouette-in-black-and-white-33995259/"
+      }
+    },
+    {
+      "id": "saved-from-web_36587f6771d22830",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Flexible woman performing acro yoga handstand on a chair indoors, showcasing balance and strength.",
+      "path": "images/saved-from-web/saved-from-web_36587f6771d22830.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "flexible",
+        "woman",
+        "performing",
+        "acro",
+        "yoga",
+        "handstand",
+        "chair",
+        "indoor",
+        "showcasing",
+        "balance",
+        "strength",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "indoors",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "flexible",
+        "woman",
+        "performing",
+        "acro",
+        "yoga",
+        "handstand",
+        "chair",
+        "indoor",
+        "showcasing",
+        "balance",
+        "strength",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "indoors",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Flexible woman performing acro yoga handstand on a chair indoors, showcasing balance and strength."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "person getting up from chair quickly active demonstration or relevant physical phenomenon",
+        "savedAt": "2026-10-28T10:35:29.428Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "cottonbro studio",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-woman-in-beige-sportswear-5747935/"
+      }
+    },
+    {
+      "id": "saved-from-web_0337e93273aca023",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of hands using a smartphone with a blank screen on a wooden table indoors.",
+      "path": "images/saved-from-web/saved-from-web_0337e93273aca023.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "using",
+        "smartphone",
+        "blank",
+        "screen",
+        "wooden",
+        "table",
+        "indoor",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "close-up",
+        "hands",
+        "indoors",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "using",
+        "smartphone",
+        "blank",
+        "screen",
+        "wooden",
+        "table",
+        "indoor",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "close-up",
+        "hands",
+        "indoors",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of hands using a smartphone with a blank screen on a wooden table indoors."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "hand pushing off table to stand",
+        "savedAt": "2026-10-28T10:35:42.144Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "VAZHNIK",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/person-holding-mobile-phone-on-brown-wooden-table-7563459/"
+      }
+    },
+    {
+      "id": "saved-from-web_b60dabd307533c69",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of a couple's legs and feet intertwined on white bed sheets, conveying intimacy and comfort.",
+      "path": "images/saved-from-web/saved-from-web_b60dabd307533c69.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "couple",
+        "leg",
+        "feet",
+        "intertwined",
+        "white",
+        "bed",
+        "sheet",
+        "conveying",
+        "intimacy",
+        "comfort",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "close-up",
+        "legs",
+        "sheets"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "couple",
+        "leg",
+        "feet",
+        "intertwined",
+        "white",
+        "bed",
+        "sheet",
+        "conveying",
+        "intimacy",
+        "comfort",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "close-up",
+        "legs",
+        "sheets"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of a couple's legs and feet intertwined on white bed sheets, conveying intimacy and comfort."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "feet stepping forward from bed authentic real-world environment matching context",
+        "savedAt": "2026-10-28T10:35:52.993Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ron Lach",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-couple-close-to-each-other-9497933/"
+      }
+    },
+    {
+      "id": "saved-from-web_12c7768a328d21f1",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A close-up view of a person using a relaxation technique with hands in motion, in a bright, airy space.",
+      "path": "images/saved-from-web/saved-from-web_12c7768a328d21f1.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "deep",
+        "space",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "close",
+        "person",
+        "using",
+        "relaxation",
+        "technique",
+        "motion",
+        "bright",
+        "airy",
+        "close-up",
+        "view",
+        "hands",
+        "handshake",
+        "business meeting",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "deep",
+        "space",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "close",
+        "person",
+        "using",
+        "relaxation",
+        "technique",
+        "motion",
+        "bright",
+        "airy",
+        "close-up",
+        "view",
+        "hands",
+        "handshake",
+        "business meeting",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "people meeting, talking, or shaking hands in a business setting"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "deep space astronomical cosmos"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "hands in motion close up macro active demonstration or relevant physical phenomenon",
+        "savedAt": "2026-10-28T10:36:02.949Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Yan Krukau",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-therapist-hand-on-the-client-s-arm-5793704/"
+      }
+    },
+    {
+      "id": "saved-from-web_2f04de7814131082",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A creative overlay of a hand silhouette on a tranquil river view with a bridge in the background, evoking mystery.",
+      "path": "images/saved-from-web/saved-from-web_2f04de7814131082.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1759,
+      "aspectRatio": 1.4781,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "creative",
+        "overlay",
+        "hand",
+        "silhouette",
+        "tranquil",
+        "river",
+        "bridge",
+        "background",
+        "evoking",
+        "mystery",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "creative",
+        "overlay",
+        "hand",
+        "silhouette",
+        "tranquil",
+        "river",
+        "bridge",
+        "background",
+        "evoking",
+        "mystery",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A creative overlay of a hand silhouette on a tranquil river view with a bridge in the background, evoking mystery."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "neural overlay animation on hands peaceful nighttime landscape",
+        "savedAt": "2026-10-28T10:36:06.103Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "meomupmofilm",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/artistic-silhouette-of-hand-over-serene-river-scene-33181520/"
+      }
+    },
+    {
+      "id": "saved-from-web_710e80e267a3fbb3",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A tired woman with curly hair asleep at a desk with a laptop and glasses under warm lamp light in a dimly lit room.",
+      "path": "images/saved-from-web/saved-from-web_710e80e267a3fbb3.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "tired",
+        "woman",
+        "curly",
+        "hair",
+        "asleep",
+        "desk",
+        "laptop",
+        "glasse",
+        "under",
+        "warm",
+        "lamp",
+        "light",
+        "dimly",
+        "lit",
+        "room",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "glasses",
+        "office desk",
+        "computer or paperwork",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "tired",
+        "woman",
+        "curly",
+        "hair",
+        "asleep",
+        "desk",
+        "laptop",
+        "glasse",
+        "under",
+        "warm",
+        "lamp",
+        "light",
+        "dimly",
+        "lit",
+        "room",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "glasses",
+        "office desk",
+        "computer or paperwork",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A tired woman with curly hair asleep at a desk with a laptop and glasses under warm lamp light in a dimly lit room."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "woman sitting at desk with laptop warm lamp",
+        "savedAt": "2026-10-28T10:36:33.420Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "MART  PRODUCTION",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-woman-fall-asleep-on-a-desk-7606069/"
+      }
+    },
+    {
+      "id": "saved-from-web_090e01374df03a4a",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A contemporary workspace featuring a laptop with blank screen, coffee mug, and smartwatch on a table.",
+      "path": "images/saved-from-web/saved-from-web_090e01374df03a4a.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "contemporary",
+        "workspace",
+        "featuring",
+        "laptop",
+        "blank",
+        "screen",
+        "coffee",
+        "mug",
+        "smartwatch",
+        "table",
+        "deep",
+        "space",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "office desk",
+        "computer or paperwork",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "contemporary",
+        "workspace",
+        "featuring",
+        "laptop",
+        "blank",
+        "screen",
+        "coffee",
+        "mug",
+        "smartwatch",
+        "table",
+        "deep",
+        "space",
+        "astronomical",
+        "cosmo",
+        "static",
+        "presentation",
+        "office desk",
+        "computer or paperwork",
+        "cosmic stars",
+        "astronomical phenomena"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A contemporary workspace featuring a laptop with blank screen, coffee mug, and smartwatch on a table."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "deep space astronomical cosmos"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "blank page on laptop screen",
+        "savedAt": "2026-10-28T10:37:08.815Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "KATRIN  BOLOVTSOVA",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/laptop-displaying-a-blank-white-screen-6372949/"
+      }
+    },
+    {
+      "id": "saved-from-web_3e4d92cbfd054140",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A stack of colorful spiral notebooks and pencils on a wooden desk. Perfect for back-to-school themes.",
+      "path": "images/saved-from-web/saved-from-web_3e4d92cbfd054140.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1465,
+      "aspectRatio": 1.7747,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "stack",
+        "colorful",
+        "spiral",
+        "notebook",
+        "pencil",
+        "wooden",
+        "desk",
+        "perfect",
+        "back",
+        "school",
+        "theme",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "notebooks",
+        "pencils",
+        "back-to-school",
+        "themes",
+        "paperwork",
+        "documents",
+        "contract",
+        "office desk",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "stack",
+        "colorful",
+        "spiral",
+        "notebook",
+        "pencil",
+        "wooden",
+        "desk",
+        "perfect",
+        "back",
+        "school",
+        "theme",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "notebooks",
+        "pencils",
+        "back-to-school",
+        "themes",
+        "paperwork",
+        "documents",
+        "contract",
+        "office desk",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A stack of colorful spiral notebooks and pencils on a wooden desk. Perfect for back-to-school themes."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "stack of filled notebooks on desk",
+        "savedAt": "2026-10-28T10:37:18.930Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Kindel Media",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-stack-of-notebooks-7054755/"
+      }
+    },
+    {
+      "id": "saved-from-web_d7783d3c82d891d0",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of hands writing in a leather journal, showcasing creativity and planning.",
+      "path": "images/saved-from-web/saved-from-web_d7783d3c82d891d0.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1736,
+      "aspectRatio": 1.4977,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "writing",
+        "leather",
+        "journal",
+        "showcasing",
+        "creativity",
+        "planning",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "close-up",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "writing",
+        "leather",
+        "journal",
+        "showcasing",
+        "creativity",
+        "planning",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "close-up",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of hands writing in a leather journal, showcasing creativity and planning."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "hand writing quickly on paper",
+        "savedAt": "2026-10-28T10:37:27.029Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Luis Alberto Cardenas Otaya",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/person-holding-red-planner-3990443/"
+      }
+    },
+    {
+      "id": "saved-from-web_a924511804854461",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Silhouette of a person at sunset with Anzac Bridge in the background, Pyrmont, Sydney.",
+      "path": "images/saved-from-web/saved-from-web_a924511804854461.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 2080,
+      "aspectRatio": 1.25,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "silhouette",
+        "person",
+        "sunset",
+        "anzac",
+        "bridge",
+        "background",
+        "pyrmont",
+        "sydney",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "silhouette",
+        "person",
+        "sunset",
+        "anzac",
+        "bridge",
+        "background",
+        "pyrmont",
+        "sydney",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Silhouette of a person at sunset with Anzac Bridge in the background, Pyrmont, Sydney."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "person stepping onto bridge at dawn silhouette",
+        "savedAt": "2026-10-28T10:37:48.332Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Federico Abis",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/silhouette-at-sunset-by-anzac-bridge-sydney-29826668/"
+      }
+    },
+    {
+      "id": "saved-from-web_c404a9a77fd8377b",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Dramatic silhouette of a young woman with backlighting highlighting her profile.",
+      "path": "images/saved-from-web/saved-from-web_c404a9a77fd8377b.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1730,
+      "aspectRatio": 1.5029,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "dramatic",
+        "silhouette",
+        "young",
+        "woman",
+        "backlighting",
+        "highlighting",
+        "her",
+        "profile",
+        "thoughtful",
+        "contemplative",
+        "setting",
+        "static",
+        "presentation"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "dramatic",
+        "silhouette",
+        "young",
+        "woman",
+        "backlighting",
+        "highlighting",
+        "her",
+        "profile",
+        "thoughtful",
+        "contemplative",
+        "setting",
+        "static",
+        "presentation"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Dramatic silhouette of a young woman with backlighting highlighting her profile."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "thoughtful or contemplative setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "close up determined face dramatic backlight",
+        "savedAt": "2026-10-28T10:38:03.531Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Andrea Musto",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/extreme-close-up-of-a-woman-26790963/"
+      }
+    },
+    {
+      "id": "saved-from-web_811feb87bfba2665",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A hand reaches out to turn off an analogue alarm clock in the early morning.",
+      "path": "images/saved-from-web/saved-from-web_811feb87bfba2665.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "vintage",
+        "mechanical",
+        "pocket",
+        "watch",
+        "clock",
+        "gear",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "hand",
+        "reache",
+        "out",
+        "turn",
+        "off",
+        "analogue",
+        "alarm",
+        "early",
+        "morning",
+        "reaches"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "vintage",
+        "mechanical",
+        "pocket",
+        "watch",
+        "clock",
+        "gear",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "hand",
+        "reache",
+        "out",
+        "turn",
+        "off",
+        "analogue",
+        "alarm",
+        "early",
+        "morning",
+        "reaches"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "vintage mechanical pocket watch or clock gears"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "hand pressing alarm clock button close up",
+        "savedAt": "2026-10-28T10:38:19.546Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Towfiqu barbhuiya",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-black-alarm-clock-11344545/"
+      }
+    },
+    {
+      "id": "saved-from-web_fa40023ff1a0add9",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A cozy bedroom setting with books and an alarm clock on a nightstand next to a bed.",
+      "path": "images/saved-from-web/saved-from-web_fa40023ff1a0add9.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "cozy",
+        "bedroom",
+        "setting",
+        "book",
+        "alarm",
+        "clock",
+        "nightstand",
+        "next",
+        "bed",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "books",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "cozy",
+        "bedroom",
+        "setting",
+        "book",
+        "alarm",
+        "clock",
+        "nightstand",
+        "next",
+        "bed",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "books",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A cozy bedroom setting with books and an alarm clock on a nightstand next to a bed."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "alarm clock 6:00 AM dark bedroom authentic real-world environment matching context",
+        "savedAt": "2026-10-28T10:38:31.277Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ron Lach",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/books-bed-stack-standing-9615255/"
+      }
+    },
+    {
+      "id": "saved-from-web_dafb67d4c2ea88f6",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength.",
+      "path": "images/saved-from-web/saved-from-web_dafb67d4c2ea88f6.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "steel",
+        "security",
+        "vault",
+        "door",
+        "attached",
+        "vintage",
+        "brick",
+        "wall",
+        "showcasing",
+        "industrial",
+        "strength",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "doors",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "steel",
+        "security",
+        "vault",
+        "door",
+        "attached",
+        "vintage",
+        "brick",
+        "wall",
+        "showcasing",
+        "industrial",
+        "strength",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "doors",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Two steel security vault doors attached to a vintage brick wall, showcasing industrial strength."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "empty bank vault interior",
+        "savedAt": "2026-10-28T16:27:50.897Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "wutthichai charoenburi",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/steel-heavy-doors-of-vault-19882101/"
+      }
+    },
+    {
+      "id": "saved-from-web_f79b6582e42dbff9",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of stacked gold and silver coins on various currency notes, symbolizing wealth and savings.",
+      "path": "images/saved-from-web/saved-from-web_f79b6582e42dbff9.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1735,
+      "aspectRatio": 1.4986,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "stacked",
+        "gold",
+        "silver",
+        "coin",
+        "variou",
+        "note",
+        "symbolizing",
+        "wealth",
+        "saving",
+        "close-up",
+        "coins",
+        "various",
+        "notes",
+        "savings",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "stacked",
+        "gold",
+        "silver",
+        "coin",
+        "variou",
+        "note",
+        "symbolizing",
+        "wealth",
+        "saving",
+        "close-up",
+        "coins",
+        "various",
+        "notes",
+        "savings",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "paper currency banknotes or cash bills"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "savings passbook stack of cash",
+        "savedAt": "2026-10-28T14:14:56.576Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Zucker Pop",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/stacks-of-silver-and-gold-coins-in-close-up-photography-10531120/"
+      }
+    },
+    {
+      "id": "saved-from-web_6266f45c217bbb65",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/",
+      "path": "video/saved-from-web/saved-from-web_6266f45c217bbb65.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "woman",
+        "typing",
+        "bank",
+        "card",
+        "information",
+        "6607112",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "https",
+        "pexels",
+        "video",
+        "woman-typing-bank-card-information-6607112",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "woman",
+        "typing",
+        "bank",
+        "card",
+        "information",
+        "6607112",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "https",
+        "pexels",
+        "video",
+        "woman-typing-bank-card-information-6607112",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/"
+      ],
+      "actions": [
+        "operating computer keyboard or workstation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "bank clerk typing keyboard",
+        "savedAt": "2026-10-28T14:15:22.312Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "ArtHouse Studio",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/"
+      }
+    },
+    {
+      "id": "saved-from-web_2319ac6d9eae651f",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Scenic Singapore city skyline at dusk featuring modern skyscrapers and urban architecture.",
+      "path": "images/saved-from-web/saved-from-web_2319ac6d9eae651f.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1735,
+      "aspectRatio": 1.4986,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "scenic",
+        "singapore",
+        "city",
+        "skyline",
+        "dusk",
+        "featuring",
+        "modern",
+        "skyscraper",
+        "urban",
+        "architecture",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "skyscrapers",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "scenic",
+        "singapore",
+        "city",
+        "skyline",
+        "dusk",
+        "featuring",
+        "modern",
+        "skyscraper",
+        "urban",
+        "architecture",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "skyscrapers",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Scenic Singapore city skyline at dusk featuring modern skyscrapers and urban architecture."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "city skyline dusk bank towers",
+        "savedAt": "2026-10-28T14:15:56.573Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ken Chuang",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/illuminated-city-at-dusk-12343402/"
+      }
+    },
+    {
+      "id": "saved-from-web_10da546bba798c5a",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Detailed loan agreement document close-up on a wooden table representing legal and financial concepts.",
+      "path": "images/saved-from-web/saved-from-web_10da546bba798c5a.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "loan",
+        "agreement",
+        "document",
+        "close",
+        "wooden",
+        "table",
+        "representing",
+        "legal",
+        "financial",
+        "concept",
+        "desk",
+        "study",
+        "static",
+        "presentation",
+        "close-up",
+        "concepts",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "loan",
+        "agreement",
+        "document",
+        "close",
+        "wooden",
+        "table",
+        "representing",
+        "legal",
+        "financial",
+        "concept",
+        "desk",
+        "study",
+        "static",
+        "presentation",
+        "close-up",
+        "concepts",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Detailed loan agreement document close-up on a wooden table representing legal and financial concepts."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "loan contract document close up",
+        "savedAt": "2026-10-28T14:16:03.978Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/close-up-photo-of-an-agreement-on-a-paper-7841821/"
+      }
+    },
+    {
+      "id": "saved-from-web_8f24a6301cebf5ce",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Fingers on a laptop keyboard with Arabic text, showcasing modern technology.",
+      "path": "images/saved-from-web/saved-from-web_8f24a6301cebf5ce.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1734,
+      "aspectRatio": 1.4994,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "finger",
+        "laptop",
+        "keyboard",
+        "arabic",
+        "text",
+        "showcasing",
+        "modern",
+        "technology",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "fingers",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "finger",
+        "laptop",
+        "keyboard",
+        "arabic",
+        "text",
+        "showcasing",
+        "modern",
+        "technology",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "fingers",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Fingers on a laptop keyboard with Arabic text, showcasing modern technology."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "fingers typing keyboard close up",
+        "savedAt": "2026-10-28T14:16:09.635Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Abdelrahman  Ahmed",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/close-up-of-hands-typing-on-laptop-keyboard-31421521/"
+      }
+    },
+    {
+      "id": "saved-from-web_0a49ddd92819fada",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Oglesby-Barnitz Bank and Trust Company Building (The Windamere), Main Street and Central Avenue, Middletown, OH - 53648219233.jpg",
+      "path": "images/saved-from-web/saved-from-web_0a49ddd92819fada.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1949,
+      "aspectRatio": 1.334,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "oglesby",
+        "barnitz",
+        "bank",
+        "trust",
+        "company",
+        "building",
+        "windamere",
+        "main",
+        "street",
+        "central",
+        "avenue",
+        "middletown",
+        "53648219233",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "oglesby-barnitz",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "oglesby",
+        "barnitz",
+        "bank",
+        "trust",
+        "company",
+        "building",
+        "windamere",
+        "main",
+        "street",
+        "central",
+        "avenue",
+        "middletown",
+        "53648219233",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "oglesby-barnitz",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Oglesby-Barnitz Bank and Trust Company Building (The Windamere), Main Street and Central Avenue, Middletown, OH - 53648219233.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "central bank building classical columns",
+        "savedAt": "2026-10-28T14:18:00.387Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 2.0",
+        "license_name": "CC BY-SA 2.0",
+        "url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "author": "w_lemay",
+        "creator": "w_lemay",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T14:13:57.558Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Oglesby-Barnitz_Bank_and_Trust_Company_Building_(The_Windamere),_Main_Street_and_Central_Avenue,_Middletown,_OH_-_53648219233.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_28057451ebae9dba",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Oglesby-Barnitz Bank and Trust Company Building (The Windamere), Main Street and Central Avenue, Middletown, OH.jpg",
+      "path": "images/saved-from-web/saved-from-web_28057451ebae9dba.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "oglesby",
+        "barnitz",
+        "bank",
+        "trust",
+        "company",
+        "building",
+        "windamere",
+        "main",
+        "street",
+        "central",
+        "avenue",
+        "middletown",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "oglesby-barnitz",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "oglesby",
+        "barnitz",
+        "bank",
+        "trust",
+        "company",
+        "building",
+        "windamere",
+        "main",
+        "street",
+        "central",
+        "avenue",
+        "middletown",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "file",
+        "oglesby-barnitz",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Oglesby-Barnitz Bank and Trust Company Building (The Windamere), Main Street and Central Avenue, Middletown, OH.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "central bank building classical columns",
+        "savedAt": "2026-10-28T14:18:14.155Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 2.0",
+        "license_name": "CC BY-SA 2.0",
+        "url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "author": "w_lemay",
+        "creator": "w_lemay",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T14:13:57.680Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Oglesby-Barnitz_Bank_and_Trust_Company_Building_(The_Windamere),_Main_Street_and_Central_Avenue,_Middletown,_OH.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_7236b50b7783becd",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Crane at construction site - geograph.org.uk - 7593527.jpg",
+      "path": "images/saved-from-web/saved-from-web_7236b50b7783becd.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "crane",
+        "construction",
+        "site",
+        "geograph",
+        "org",
+        "7593527",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "crane",
+        "construction",
+        "site",
+        "geograph",
+        "org",
+        "7593527",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "people meeting, talking, or shaking hands in a business setting"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "construction site cranes building",
+        "savedAt": "2026-10-28T14:24:41.684Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 2.0",
+        "license_name": "CC BY-SA 2.0",
+        "url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "author": "Kevin Waterhouse",
+        "creator": "Kevin Waterhouse",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T14:13:56.038Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Crane_at_construction_site_-_geograph.org.uk_-_7593527.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_7052d6c56f0ac281",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Drone view of suburban neighborhood with new housing developments and green surroundings.",
+      "path": "images/saved-from-web/saved-from-web_7052d6c56f0ac281.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1949,
+      "aspectRatio": 1.334,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "drone",
+        "suburban",
+        "neighborhood",
+        "housing",
+        "development",
+        "green",
+        "surrounding",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "new",
+        "developments",
+        "surroundings",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "drone",
+        "suburban",
+        "neighborhood",
+        "housing",
+        "development",
+        "green",
+        "surrounding",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "view",
+        "new",
+        "developments",
+        "surroundings",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Drone view of suburban neighborhood with new housing developments and green surroundings."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "suburban housing development aerial",
+        "savedAt": "2026-10-28T14:24:55.895Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Sean P. Twomey",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/houses-in-town-16781299/"
+      }
+    },
+    {
+      "id": "saved-from-web_fa3836c364762997",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Tablet displaying 2020 stock market crash amidst graphs and charts. Perfect for financial analysis themes.",
+      "path": "images/saved-from-web/saved-from-web_fa3836c364762997.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1736,
+      "aspectRatio": 1.4977,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "tablet",
+        "displaying",
+        "2020",
+        "stock",
+        "market",
+        "crash",
+        "amidst",
+        "graph",
+        "chart",
+        "perfect",
+        "financial",
+        "analysi",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "graphs",
+        "charts",
+        "analysis",
+        "themes"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "tablet",
+        "displaying",
+        "2020",
+        "stock",
+        "market",
+        "crash",
+        "amidst",
+        "graph",
+        "chart",
+        "perfect",
+        "financial",
+        "analysi",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "graphs",
+        "charts",
+        "analysis",
+        "themes"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Tablet displaying 2020 stock market crash amidst graphs and charts. Perfect for financial analysis themes."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "stock market crash graph",
+        "savedAt": "2026-10-28T14:25:10.330Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Leeloo The First",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/clipboard-with-statistical-data-and-digital-tablet-with-stock-market-display-on-screen-5561920/"
+      }
+    },
+    {
+      "id": "saved-from-web_0d8c65072bec6556",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Vibrant Tibetan prayer flags fluttering in the wind at Ladakh, India, symbolizing peace and compassi",
+      "path": "images/saved-from-web/saved-from-web_0d8c65072bec6556.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1732,
+      "aspectRatio": 1.5012,
+      "orientation": "landscape",
+      "tags": [
+        "tibetan",
+        "prayer flags",
+        "ladakh",
+        "india",
+        "mountains",
+        "peace",
+        "wind",
+        "colorful"
+      ],
+      "intrinsicTags": [
+        "tibetan",
+        "prayer flags",
+        "ladakh",
+        "india",
+        "mountains",
+        "peace",
+        "wind",
+        "colorful"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Tibetan prayer flags in Ladakh mountains"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "peaceful mountain landscape"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "bank statement paper close up",
+        "savedAt": "2026-10-28T14:25:21.295Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "pierre matile",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/colorful-tibetan-prayer-flags-in-wind-at-ladakh-36994960/"
+      }
+    },
+    {
+      "id": "saved-from-web_e4651e7a0c508999",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Stunning aerial shot of Panama City's vibrant skyline at night, a bustling urban landscape.",
+      "path": "images/saved-from-web/saved-from-web_e4651e7a0c508999.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1462,
+      "aspectRatio": 1.7784,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "aerial",
+        "panama",
+        "city",
+        "vibrant",
+        "skyline",
+        "night",
+        "bustling",
+        "urban",
+        "landscape",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "shot",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "stunning",
+        "aerial",
+        "panama",
+        "city",
+        "vibrant",
+        "skyline",
+        "night",
+        "bustling",
+        "urban",
+        "landscape",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "shot",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Stunning aerial shot of Panama City's vibrant skyline at night, a bustling urban landscape."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "aerial view financial district",
+        "savedAt": "2026-10-28T14:25:37.238Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "K",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/panama-city-night-skyline-aerial-view-33803478/"
+      }
+    },
+    {
+      "id": "saved-from-web_c073f0be3883570c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:\"Now with your hand, Pull the lever down\" poster, 1964 - DPLA - 41655ffb6e158a74060cfb2a0e9c9087.jpg",
+      "path": "images/saved-from-web/saved-from-web_c073f0be3883570c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 2021,
+      "aspectRatio": 1.2865,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "now",
+        "your",
+        "pull",
+        "lever",
+        "down",
+        "poster",
+        "1964",
+        "dpla",
+        "41655ffb6e158a74060cfb2a0e9c9087",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "now",
+        "your",
+        "pull",
+        "lever",
+        "down",
+        "poster",
+        "1964",
+        "dpla",
+        "41655ffb6e158a74060cfb2a0e9c9087",
+        "file",
+        "jpg",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "people meeting, talking, or shaking hands in a business setting"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "hand pulling lever machine",
+        "savedAt": "2026-10-28T14:28:17.921Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "No restrictions",
+        "license_name": "No restrictions",
+        "url": null,
+        "license_url": null,
+        "author": "Mississippi Freedom Democratic Party",
+        "creator": "Mississippi Freedom Democratic Party",
+        "attributionRequired": false,
+        "attribution_required": false,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T14:14:11.730Z",
+        "page": "https://commons.wikimedia.org/wiki/File:%22Now_with_your_hand,_Pull_the_lever_down%22_poster,_1964_-_DPLA_-_41655ffb6e158a74060cfb2a0e9c9087.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_3b562b586d79cf3d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Coin-operated binoculars with a view of the New York City skyline across the water.",
+      "path": "images/saved-from-web/saved-from-web_3b562b586d79cf3d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "coin",
+        "operated",
+        "binocular",
+        "york",
+        "city",
+        "skyline",
+        "acros",
+        "water",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "coin-operated",
+        "binoculars",
+        "view",
+        "new",
+        "across"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "coin",
+        "operated",
+        "binocular",
+        "york",
+        "city",
+        "skyline",
+        "acros",
+        "water",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "coin-operated",
+        "binoculars",
+        "view",
+        "new",
+        "across"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Coin-operated binoculars with a view of the New York City skyline across the water."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "city skyline reflection in coin",
+        "savedAt": "2026-10-28T14:28:47.725Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Floor November",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/binoculars-on-sea-shore-in-new-york-18251515/"
+      }
+    },
+    {
+      "id": "saved-from-web_053fe4a8144137a1",
+      "type": "image",
+      "mediaType": "image",
+      "title": "High angle of empty and full shelves in supermarket with price tags and cardboard boxes",
+      "path": "images/saved-from-web/saved-from-web_053fe4a8144137a1.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "empty",
+        "full",
+        "shelve",
+        "supermarket",
+        "price",
+        "tag",
+        "cardboard",
+        "boxe",
+        "grocery",
+        "store",
+        "aisle",
+        "static",
+        "presentation",
+        "shelves",
+        "tags",
+        "boxes",
+        "store shelves",
+        "food products or jars"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "empty",
+        "full",
+        "shelve",
+        "supermarket",
+        "price",
+        "tag",
+        "cardboard",
+        "boxe",
+        "grocery",
+        "store",
+        "aisle",
+        "static",
+        "presentation",
+        "shelves",
+        "tags",
+        "boxes",
+        "store shelves",
+        "food products or jars"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "High angle of empty and full shelves in supermarket with price tags and cardboard boxes"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "supermarket or grocery store aisle"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "empty bank vault shelves",
+        "savedAt": "2026-10-28T15:40:17.747Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Roy Broo",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/various-products-on-half-empty-store-shelves-4437145/"
+      }
+    },
+    {
+      "id": "saved-from-web_bf60b268684a2108",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Empty black shelves and racks placed in modern walk in closet with brown walls and mirror with reflection at home",
+      "path": "images/saved-from-web/saved-from-web_bf60b268684a2108.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1735,
+      "aspectRatio": 1.4986,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "server",
+        "rack",
+        "data",
+        "center",
+        "room",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "empty",
+        "black",
+        "shelve",
+        "placed",
+        "walk",
+        "closet",
+        "brown",
+        "wall",
+        "mirror",
+        "reflection",
+        "home",
+        "shelves",
+        "racks",
+        "walls"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "server",
+        "rack",
+        "data",
+        "center",
+        "room",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "empty",
+        "black",
+        "shelve",
+        "placed",
+        "walk",
+        "closet",
+        "brown",
+        "wall",
+        "mirror",
+        "reflection",
+        "home",
+        "shelves",
+        "racks",
+        "walls"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "modern server rack in data center room"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "empty bank vault shelves finance",
+        "savedAt": "2026-10-28T15:40:25.916Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Max Vakhtbovych",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/dressing-room-with-empty-shelves-7195887/"
+      }
+    },
+    {
+      "id": "saved-from-web_90f21689fd50a636",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A skyline with modern bridge and construction cranes at sunset over a city river.",
+      "path": "images/saved-from-web/saved-from-web_90f21689fd50a636.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "skyline",
+        "modern",
+        "bridge",
+        "construction",
+        "crane",
+        "sunset",
+        "over",
+        "city",
+        "river",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "cranes",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "skyline",
+        "modern",
+        "bridge",
+        "construction",
+        "crane",
+        "sunset",
+        "over",
+        "city",
+        "river",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "cranes",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A skyline with modern bridge and construction cranes at sunset over a city river."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "city skyline construction cranes dusk",
+        "savedAt": "2026-10-28T15:40:40.069Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Mike Cho",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/tower-cranes-on-riverside-near-bridge-10084627/"
+      }
+    },
+    {
+      "id": "saved-from-web_3b7c8230788712fa",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Tablet displaying 2020 stock market crash amidst graphs and charts. Perfect for financial analysis themes.",
+      "path": "images/saved-from-web/saved-from-web_3b7c8230788712fa.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1736,
+      "aspectRatio": 1.4977,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "tablet",
+        "displaying",
+        "2020",
+        "stock",
+        "market",
+        "crash",
+        "amidst",
+        "graph",
+        "chart",
+        "perfect",
+        "financial",
+        "analysi",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "graphs",
+        "charts",
+        "analysis",
+        "themes"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "tablet",
+        "displaying",
+        "2020",
+        "stock",
+        "market",
+        "crash",
+        "amidst",
+        "graph",
+        "chart",
+        "perfect",
+        "financial",
+        "analysi",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "graphs",
+        "charts",
+        "analysis",
+        "themes"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Tablet displaying 2020 stock market crash amidst graphs and charts. Perfect for financial analysis themes."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "newspaper headline stock market crash",
+        "savedAt": "2026-10-28T15:40:46.689Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Leeloo The First",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/clipboard-with-statistical-data-and-digital-tablet-with-stock-market-display-on-screen-5561920/"
+      }
+    },
+    {
+      "id": "saved-from-web_04f9fdaaad5b10e5",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of hands typing on a laptop with stock market graphs, ideal for finance or business themes.",
+      "path": "images/saved-from-web/saved-from-web_04f9fdaaad5b10e5.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "typing",
+        "laptop",
+        "stock",
+        "market",
+        "graph",
+        "ideal",
+        "finance",
+        "busines",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "close-up",
+        "hands",
+        "graphs",
+        "business",
+        "themes"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "hand",
+        "typing",
+        "laptop",
+        "stock",
+        "market",
+        "graph",
+        "ideal",
+        "finance",
+        "busines",
+        "theme",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "close-up",
+        "hands",
+        "graphs",
+        "business",
+        "themes"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of hands typing on a laptop with stock market graphs, ideal for finance or business themes."
+      ],
+      "actions": [
+        "operating computer keyboard or workstation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "bank teller typing keyboard",
+        "savedAt": "2026-10-28T15:40:52.365Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Alesia  Kozik",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/person-using-a-laptop-6771432/"
+      }
+    },
+    {
+      "id": "saved-from-web_5ad3811033428d13",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Detailed close-up of a financial graph on a computer screen showing data trends.",
+      "path": "images/saved-from-web/saved-from-web_5ad3811033428d13.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "close",
+        "financial",
+        "graph",
+        "computer",
+        "screen",
+        "data",
+        "trend",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "showing",
+        "trends",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "close",
+        "financial",
+        "graph",
+        "computer",
+        "screen",
+        "data",
+        "trend",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "showing",
+        "trends",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Detailed close-up of a financial graph on a computer screen showing data trends."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "computer screen financial data",
+        "savedAt": "2026-10-28T15:41:02.252Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Markus Winkler",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/close-up-shot-of-laptop-screen-4604639/"
+      }
+    },
+    {
+      "id": "saved-from-web_23551a6066509917",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Laptops on a desk displaying stock market charts and financial documents.",
+      "path": "images/saved-from-web/saved-from-web_23551a6066509917.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "laptop",
+        "desk",
+        "displaying",
+        "stock",
+        "market",
+        "chart",
+        "financial",
+        "document",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "laptops",
+        "charts",
+        "documents",
+        "office desk",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "laptop",
+        "desk",
+        "displaying",
+        "stock",
+        "market",
+        "chart",
+        "financial",
+        "document",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "laptops",
+        "charts",
+        "documents",
+        "office desk",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Laptops on a desk displaying stock market charts and financial documents."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "laptop screen financial ledger",
+        "savedAt": "2026-10-28T15:41:10.716Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Yan Krukau",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/gray-laptop-on-the-table-7693142/"
+      }
+    },
+    {
+      "id": "saved-from-web_805a9f8a595811ae",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A professional examines financial graphs on a laptop, indicating market trends.",
+      "path": "images/saved-from-web/saved-from-web_805a9f8a595811ae.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1463,
+      "aspectRatio": 1.7772,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "professional",
+        "examine",
+        "financial",
+        "graph",
+        "laptop",
+        "indicating",
+        "market",
+        "trend",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "examines",
+        "graphs",
+        "trends"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "professional",
+        "examine",
+        "financial",
+        "graph",
+        "laptop",
+        "indicating",
+        "market",
+        "trend",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "examines",
+        "graphs",
+        "trends"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A professional examines financial graphs on a laptop, indicating market trends."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "laptop screen financial ledger active demonstration or relevant physical phenomenon",
+        "savedAt": "2026-10-28T15:41:21.482Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "AlphaTradeZone",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-man-pointing-at-chart-on-a-laptop-screen-5831666/"
+      }
+    },
+    {
+      "id": "saved-from-web_466e52d459b23b6b",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/time-lapse-of-a-construction-site-in-the-city-of-trento-11967293/",
+      "path": "video/saved-from-web/saved-from-web_466e52d459b23b6b.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "time",
+        "lapse",
+        "construction",
+        "site",
+        "city",
+        "trento",
+        "11967293",
+        "https",
+        "pexels",
+        "video",
+        "time-lapse-of-a-construction-site-in-the-city-of-trento-11967293",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "people",
+        "meeting",
+        "talking",
+        "shaking",
+        "hand",
+        "busines",
+        "setting",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "time",
+        "lapse",
+        "construction",
+        "site",
+        "city",
+        "trento",
+        "11967293",
+        "https",
+        "pexels",
+        "video",
+        "time-lapse-of-a-construction-site-in-the-city-of-trento-11967293",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "people meeting, talking, or shaking hands in a business setting"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "city construction time lapse",
+        "savedAt": "2026-10-28T15:41:44.381Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Kmeel.com Videos",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/time-lapse-of-a-construction-site-in-the-city-of-trento-11967293/"
+      }
+    },
+    {
+      "id": "saved-from-web_ddb5d376ccae7953",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:HK Central Connaught Road C Hang Seng Bank Building a.jpg",
+      "path": "images/saved-from-web/saved-from-web_ddb5d376ccae7953.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1600,
+      "height": 1200,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "central",
+        "connaught",
+        "road",
+        "hang",
+        "seng",
+        "bank",
+        "building",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "corporate monument sign",
+        "signage"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "central",
+        "connaught",
+        "road",
+        "hang",
+        "seng",
+        "bank",
+        "building",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "corporate monument sign",
+        "signage"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:HK Central Connaught Road C Hang Seng Bank Building a.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "corporate office campus exterior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "central bank building exterior",
+        "savedAt": "2026-10-28T15:42:01.148Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 3.0",
+        "license_name": "CC BY-SA 3.0",
+        "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "author": "Simhang",
+        "creator": "Simhang",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T15:39:30.257Z",
+        "page": "https://commons.wikimedia.org/wiki/File:HK_Central_Connaught_Road_C_Hang_Seng_Bank_Building_a.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_2c77d836c3ff8006",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Hand adjusting the temperature dial on a modern stainless steel oven in a contemporary kitchen.",
+      "path": "images/saved-from-web/saved-from-web_2c77d836c3ff8006.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1730,
+      "aspectRatio": 1.5029,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "adjusting",
+        "temperature",
+        "dial",
+        "modern",
+        "stainles",
+        "steel",
+        "oven",
+        "contemporary",
+        "kitchen",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "stainless",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "adjusting",
+        "temperature",
+        "dial",
+        "modern",
+        "stainles",
+        "steel",
+        "oven",
+        "contemporary",
+        "kitchen",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "stainless",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Hand adjusting the temperature dial on a modern stainless steel oven in a contemporary kitchen."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "hand adjusting dial",
+        "savedAt": "2026-10-28T15:42:12.272Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "SHVETS production",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/hand-turning-on-oven-7525215/"
+      }
+    },
+    {
+      "id": "saved-from-web_3dfaa0c60363af8d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:NYC Lehman Brothers building.jpg",
+      "path": "images/saved-from-web/saved-from-web_3dfaa0c60363af8d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1950,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "nyc",
+        "lehman",
+        "brother",
+        "building",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "file",
+        "brothers",
+        "jpg",
+        "corporate monument sign",
+        "signage"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "nyc",
+        "lehman",
+        "brother",
+        "building",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "file",
+        "brothers",
+        "jpg",
+        "corporate monument sign",
+        "signage"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:NYC Lehman Brothers building.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "corporate office campus exterior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "Lehman Brothers",
+        "savedAt": "2026-10-28T15:43:03.496Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 3.0",
+        "license_name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "author": "Arnoldius",
+        "creator": "Arnoldius",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T15:39:36.150Z",
+        "page": "https://commons.wikimedia.org/wiki/File:NYC_Lehman_Brothers_building.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_0edb36390e8f179e",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of euro banknotes with a digital stock market chart displaying a downward trend, symbolizing financial volatility.",
+      "path": "images/saved-from-web/saved-from-web_0edb36390e8f179e.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1734,
+      "aspectRatio": 1.4994,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "euro",
+        "digital",
+        "stock",
+        "market",
+        "chart",
+        "displaying",
+        "downward",
+        "trend",
+        "symbolizing",
+        "volatility",
+        "close-up",
+        "banknotes",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "euro",
+        "digital",
+        "stock",
+        "market",
+        "chart",
+        "displaying",
+        "downward",
+        "trend",
+        "symbolizing",
+        "volatility",
+        "close-up",
+        "banknotes",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "paper currency banknotes or cash bills"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "recession graph downward",
+        "savedAt": "2026-10-28T15:43:12.939Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Jakub Zerdzicki",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/euro-currency-banknote-26841237/"
+      }
+    },
+    {
+      "id": "saved-from-web_19d957ef4c535d23",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Businessman in modern office setting with a stock market display, looking thoughtful and analytical.",
+      "path": "images/saved-from-web/saved-from-web_19d957ef4c535d23.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "businessman",
+        "modern",
+        "office",
+        "setting",
+        "stock",
+        "market",
+        "display",
+        "looking",
+        "thoughtful",
+        "analytical",
+        "corporate",
+        "interior",
+        "static",
+        "presentation",
+        "office desk",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "businessman",
+        "modern",
+        "office",
+        "setting",
+        "stock",
+        "market",
+        "display",
+        "looking",
+        "thoughtful",
+        "analytical",
+        "corporate",
+        "interior",
+        "static",
+        "presentation",
+        "office desk",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Businessman in modern office setting with a stock market display, looking thoughtful and analytical."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "thoughtful man looking at stock market",
+        "savedAt": "2026-10-28T15:43:22.753Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Tima Miroshnichenko",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/big-screen-with-stock-market-text-on-display-behind-a-man-in-white-dress-shirt-7567428/"
+      }
+    },
+    {
+      "id": "saved-from-web_711a9472fae1063c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A vibrant city street scene with people walking among urban architecture and buildings.",
+      "path": "images/saved-from-web/saved-from-web_711a9472fae1063c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1938,
+      "aspectRatio": 1.3416,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "vibrant",
+        "city",
+        "street",
+        "scene",
+        "people",
+        "walking",
+        "among",
+        "urban",
+        "architecture",
+        "building",
+        "municipal",
+        "dusk",
+        "static",
+        "presentation",
+        "buildings",
+        "garbage truck",
+        "waste bins"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "vibrant",
+        "city",
+        "street",
+        "scene",
+        "people",
+        "walking",
+        "among",
+        "urban",
+        "architecture",
+        "building",
+        "municipal",
+        "dusk",
+        "static",
+        "presentation",
+        "buildings",
+        "garbage truck",
+        "waste bins"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A vibrant city street scene with people walking among urban architecture and buildings."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "municipal city street at dusk"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "busy city street people walking finance",
+        "savedAt": "2026-10-28T15:43:52.127Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Sizwe Shabalala",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/photo-of-people-walking-near-buildings-2464890/"
+      }
+    },
+    {
+      "id": "saved-from-web_ebed0733e6a57585",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Confident bank employee standing with arms crossed at BBVA reception area, smiling warmly.",
+      "path": "images/saved-from-web/saved-from-web_ebed0733e6a57585.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 2006,
+      "aspectRatio": 1.2961,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "confident",
+        "bank",
+        "employee",
+        "standing",
+        "arm",
+        "crossed",
+        "bbva",
+        "reception",
+        "area",
+        "smiling",
+        "warmly",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "arms"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "confident",
+        "bank",
+        "employee",
+        "standing",
+        "arm",
+        "crossed",
+        "bbva",
+        "reception",
+        "area",
+        "smiling",
+        "warmly",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "arms"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Confident bank employee standing with arms crossed at BBVA reception area, smiling warmly."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "bank teller smiling",
+        "savedAt": "2026-10-28T15:44:05.684Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "David  Toledo",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/smiling-bank-employee-at-bbva-reception-desk-30719169/"
+      }
+    },
+    {
+      "id": "saved-from-web_ba48c3fd27478920",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Bouldering Project (old University National Bank) 31 - sauna (vault) area.jpg",
+      "path": "images/saved-from-web/saved-from-web_ba48c3fd27478920.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "bouldering",
+        "project",
+        "old",
+        "university",
+        "national",
+        "bank",
+        "sauna",
+        "vault",
+        "area",
+        "file",
+        "jpg",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "paper",
+        "currency",
+        "banknote",
+        "cash",
+        "bill",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "bouldering",
+        "project",
+        "old",
+        "university",
+        "national",
+        "bank",
+        "sauna",
+        "vault",
+        "area",
+        "file",
+        "jpg",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "paper currency banknotes or cash bills"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "bank vault door opening",
+        "savedAt": "2026-10-28T16:27:48.356Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 4.0",
+        "license_name": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Photo by Joe Mabel",
+        "creator": "Photo by Joe Mabel",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T16:26:52.860Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Bouldering_Project_(old_University_National_Bank)_31_-_sauna_(vault)_area.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_2edaeb2758aa0929",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A modern multi-story courthouse building in Antalya, showcasing contemporary architecture.",
+      "path": "images/saved-from-web/saved-from-web_2edaeb2758aa0929.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1739,
+      "aspectRatio": 1.4951,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "multi",
+        "story",
+        "courthouse",
+        "building",
+        "antalya",
+        "showcasing",
+        "contemporary",
+        "architecture",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "multi-story",
+        "corporate monument sign",
+        "signage"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "modern",
+        "multi",
+        "story",
+        "courthouse",
+        "building",
+        "antalya",
+        "showcasing",
+        "contemporary",
+        "architecture",
+        "corporate",
+        "office",
+        "campu",
+        "exterior",
+        "static",
+        "presentation",
+        "multi-story",
+        "corporate monument sign",
+        "signage"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A modern multi-story courthouse building in Antalya, showcasing contemporary architecture."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "corporate office campus exterior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "modern bank headquarters building exterior",
+        "savedAt": "2026-10-28T16:28:13.064Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ayşegül  Aytören",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/building-of-courthouse-in-antalya-turkey-17209785/"
+      }
+    },
+    {
+      "id": "saved-from-web_469f0812366556af",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Supermarket aisle featuring discounted snacks with visible sale tags and prices.",
+      "path": "images/saved-from-web/saved-from-web_469f0812366556af.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "supermarket",
+        "aisle",
+        "featuring",
+        "discounted",
+        "snack",
+        "visible",
+        "sale",
+        "tag",
+        "price",
+        "grocery",
+        "store",
+        "static",
+        "presentation",
+        "snacks",
+        "tags",
+        "prices",
+        "store shelves",
+        "food products or jars"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "supermarket",
+        "aisle",
+        "featuring",
+        "discounted",
+        "snack",
+        "visible",
+        "sale",
+        "tag",
+        "price",
+        "grocery",
+        "store",
+        "static",
+        "presentation",
+        "snacks",
+        "tags",
+        "prices",
+        "store shelves",
+        "food products or jars"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Supermarket aisle featuring discounted snacks with visible sale tags and prices."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "supermarket or grocery store aisle"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "rising grocery price tags supermarket shelf",
+        "savedAt": "2026-10-28T16:28:25.145Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Erik Mclean",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/assorted-labeled-boxes-on-white-shelf-9592528/"
+      }
+    },
+    {
+      "id": "saved-from-web_9827e4ddfb2205de",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A heavy steel door with iron bars in a concrete urban setting, exuding vintage charm.",
+      "path": "images/saved-from-web/saved-from-web_9827e4ddfb2205de.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1757,
+      "aspectRatio": 1.4798,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "heavy",
+        "steel",
+        "door",
+        "iron",
+        "bar",
+        "concrete",
+        "urban",
+        "setting",
+        "exuding",
+        "vintage",
+        "charm",
+        "portrait",
+        "educational",
+        "presentation",
+        "static",
+        "bars"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "heavy",
+        "steel",
+        "door",
+        "iron",
+        "bar",
+        "concrete",
+        "urban",
+        "setting",
+        "exuding",
+        "vintage",
+        "charm",
+        "portrait",
+        "educational",
+        "presentation",
+        "static",
+        "bars"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A heavy steel door with iron bars in a concrete urban setting, exuding vintage charm."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "heavy steel bank vault door security",
+        "savedAt": "2026-10-28T16:28:55.496Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Robert So",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/steel-doors-between-windows-blocked-by-iron-bars-15796464/"
+      }
+    },
+    {
+      "id": "saved-from-web_33af1429ecc8f606",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Hands typing on a laptop at a wooden table during a casual indoor setting with a relaxed atmosp",
+      "path": "images/saved-from-web/saved-from-web_33af1429ecc8f606.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1735,
+      "aspectRatio": 1.4986,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "typing",
+        "laptop",
+        "wooden",
+        "table",
+        "during",
+        "casual",
+        "indoor",
+        "setting",
+        "relaxed",
+        "atmosp",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "file",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "typing",
+        "laptop",
+        "wooden",
+        "table",
+        "during",
+        "casual",
+        "indoor",
+        "setting",
+        "relaxed",
+        "atmosp",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "operating",
+        "computer",
+        "keyboard",
+        "workstation",
+        "file",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Hands typing on a laptop at a wooden table during a casual indoor setting with a relaxed atmosp"
+      ],
+      "actions": [
+        "operating computer keyboard or workstation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "fingers typing on computer keyboard close up working calmly at office desk",
+        "savedAt": "2026-10-28T16:29:01.532Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY 2.0",
+        "license_name": "CC BY 2.0",
+        "url": "https://creativecommons.org/licenses/by/2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "author": "Shixart1985",
+        "creator": "Shixart1985",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-21T07:16:53.286Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Hands_typing_on_a_laptop_at_a_wooden_table_during_a_casual_indoor_setting_with_a_relaxed_atmosphere.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_3b60c8ff05d333ef",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of a balance sheet document on wooden surface with a magnifying glass held by a hand.",
+      "path": "images/saved-from-web/saved-from-web_3b60c8ff05d333ef.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "balance",
+        "sheet",
+        "document",
+        "wooden",
+        "surface",
+        "magnifying",
+        "glas",
+        "held",
+        "hand",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "close-up",
+        "glass",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "balance",
+        "sheet",
+        "document",
+        "wooden",
+        "surface",
+        "magnifying",
+        "glas",
+        "held",
+        "hand",
+        "desk",
+        "study",
+        "table",
+        "static",
+        "presentation",
+        "close-up",
+        "glass",
+        "paperwork",
+        "documents",
+        "contract"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of a balance sheet document on wooden surface with a magnifying glass held by a hand."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "desk or study table"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "balance sheet financial document",
+        "savedAt": "2026-10-28T16:29:07.304Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-hand-holding-a-magnifying-glass-near-wooden-table-7821689/"
+      }
+    },
+    {
+      "id": "saved-from-web_7607860219aa6c53",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Wachovia National Bank 1906 statement.jpg",
+      "path": "images/saved-from-web/saved-from-web_7607860219aa6c53.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1502,
+      "aspectRatio": 1.731,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "wachovia",
+        "national",
+        "bank",
+        "1906",
+        "statement",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "wachovia",
+        "national",
+        "bank",
+        "1906",
+        "statement",
+        "financial",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "file",
+        "jpg",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Wachovia National Bank 1906 statement.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "bank financial statement",
+        "savedAt": "2026-10-28T16:29:22.279Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "Public domain",
+        "license_name": "Public domain",
+        "url": null,
+        "license_url": null,
+        "author": "Wachovia National Bank, Winston, NC",
+        "creator": "Wachovia National Bank, Winston, NC",
+        "attributionRequired": false,
+        "attribution_required": false,
+        "nonFree": false,
+        "commercial_use": "allowed",
+        "verification_status": "verified",
+        "retrieved_at": "2026-10-28T16:27:08.159Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Wachovia_National_Bank_1906_statement.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_ba89c4ee42cfed59",
+      "type": "image",
+      "mediaType": "image",
+      "title": "An upward trend graph made from coins representing financial growth and success.",
+      "path": "images/saved-from-web/saved-from-web_ba89c4ee42cfed59.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "upward",
+        "trend",
+        "graph",
+        "made",
+        "from",
+        "coin",
+        "representing",
+        "financial",
+        "growth",
+        "succes",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "coins",
+        "success",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "upward",
+        "trend",
+        "graph",
+        "made",
+        "from",
+        "coin",
+        "representing",
+        "financial",
+        "growth",
+        "succes",
+        "macro",
+        "close",
+        "static",
+        "presentation",
+        "coins",
+        "success",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "An upward trend graph made from coins representing financial growth and success."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "cascading coins graphic",
+        "savedAt": "2026-10-28T16:29:40.556Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Aurelijus U.",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/creative-financial-growth-concept-with-coins-30711884/"
+      }
+    },
+    {
+      "id": "saved-from-web_6fe0932a13528d9d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Detailed close-up of bitcoin and euro coins representing cryptocurrency and traditional money in Erfurt.",
+      "path": "images/saved-from-web/saved-from-web_6fe0932a13528d9d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "close",
+        "bitcoin",
+        "euro",
+        "coin",
+        "representing",
+        "cryptocurrency",
+        "traditional",
+        "money",
+        "erfurt",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "coins",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "detailed",
+        "close",
+        "bitcoin",
+        "euro",
+        "coin",
+        "representing",
+        "cryptocurrency",
+        "traditional",
+        "money",
+        "erfurt",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "coins",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Detailed close-up of bitcoin and euro coins representing cryptocurrency and traditional money in Erfurt."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "cascading coins graphic active demonstration or relevant physical phenomenon",
+        "savedAt": "2026-10-28T16:29:50.453Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Alesia  Kozik",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/gold-coins-in-close-up-photography-6765367/"
+      }
+    },
+    {
+      "id": "saved-from-web_f521a7604bee8396",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Red and green bar chart depicting fluctuating financial data with lines on a dark background.",
+      "path": "images/saved-from-web/saved-from-web_f521a7604bee8396.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "red",
+        "green",
+        "bar",
+        "chart",
+        "depicting",
+        "fluctuating",
+        "financial",
+        "data",
+        "line",
+        "dark",
+        "background",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "lines",
+        "handshake",
+        "business meeting"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "red",
+        "green",
+        "bar",
+        "chart",
+        "depicting",
+        "fluctuating",
+        "financial",
+        "data",
+        "line",
+        "dark",
+        "background",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "lines",
+        "handshake",
+        "business meeting"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Red and green bar chart depicting fluctuating financial data with lines on a dark background."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "bar chart shrinking animation",
+        "savedAt": "2026-10-28T16:30:10.756Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Rafael Minguet Delgado",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/vibrant-financial-data-visualization-chart-38933571/"
+      }
+    },
+    {
+      "id": "saved-from-web_a11f41566352a464",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Hands writing on a consumer loan credit application form on a wooden table.",
+      "path": "images/saved-from-web/saved-from-web_a11f41566352a464.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "writing",
+        "consumer",
+        "loan",
+        "credit",
+        "application",
+        "form",
+        "wooden",
+        "table",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "hand",
+        "writing",
+        "consumer",
+        "loan",
+        "credit",
+        "application",
+        "form",
+        "wooden",
+        "table",
+        "modern",
+        "office",
+        "interior",
+        "home",
+        "workspace",
+        "static",
+        "presentation",
+        "hands",
+        "office desk",
+        "computer or paperwork"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Hands writing on a consumer loan credit application form on a wooden table."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern office interior or home workspace"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "loan application forms on desk",
+        "savedAt": "2026-10-28T16:30:19.124Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/person-writing-on-white-paper-7821513/"
+      }
+    },
+    {
+      "id": "saved-from-web_7e8c2b328f9bba6d",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Graphic showing stock market trends with rising and falling bars and line graph indicators.",
+      "path": "images/saved-from-web/saved-from-web_7e8c2b328f9bba6d.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1733,
+      "aspectRatio": 1.5003,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "graphic",
+        "stock",
+        "market",
+        "trend",
+        "rising",
+        "falling",
+        "bar",
+        "line",
+        "graph",
+        "indicator",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "showing",
+        "trends",
+        "bars",
+        "indicators"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "graphic",
+        "stock",
+        "market",
+        "trend",
+        "rising",
+        "falling",
+        "bar",
+        "line",
+        "graph",
+        "indicator",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "showing",
+        "trends",
+        "bars",
+        "indicators"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Graphic showing stock market trends with rising and falling bars and line graph indicators."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "chart falling",
+        "savedAt": "2026-10-28T16:30:22.095Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Rafael Minguet Delgado",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/stock-market-chart-with-trend-analysis-data-39494586/"
+      }
+    },
+    {
+      "id": "saved-from-web_d789018a0e2f84ee",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A close-up view of a large pile of gold and silver cryptocurrency coins indicating financial wealth.",
+      "path": "images/saved-from-web/saved-from-web_d789018a0e2f84ee.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2600,
+      "height": 1820,
+      "aspectRatio": 1.4286,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "large",
+        "pile",
+        "gold",
+        "silver",
+        "cryptocurrency",
+        "coin",
+        "indicating",
+        "financial",
+        "wealth",
+        "macro",
+        "static",
+        "presentation",
+        "close-up",
+        "view",
+        "coins",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "large",
+        "pile",
+        "gold",
+        "silver",
+        "cryptocurrency",
+        "coin",
+        "indicating",
+        "financial",
+        "wealth",
+        "macro",
+        "static",
+        "presentation",
+        "close-up",
+        "view",
+        "coins",
+        "banknote",
+        "currency denomination",
+        "paper money"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A close-up view of a large pile of gold and silver cryptocurrency coins indicating financial wealth."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "financial macro close-up"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "pile of gold coins",
+        "savedAt": "2026-10-28T16:30:49.937Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Dash Cryptocurrency",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-pile-of-silver-and-gold-round-coins-7584353/"
+      }
+    },
+    {
+      "id": "saved-from-web_53343b7661c6202b",
+      "type": "image",
+      "mediaType": "image",
+      "title": "File:Digital Display on a Line 4 train heading towards JuHua station.jpg",
+      "path": "images/saved-from-web/saved-from-web_53343b7661c6202b.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 2000,
+      "height": 1500,
+      "aspectRatio": 1.3333,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "digital",
+        "display",
+        "line",
+        "train",
+        "heading",
+        "toward",
+        "juhua",
+        "station",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "file",
+        "towards",
+        "jpg"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "digital",
+        "display",
+        "line",
+        "train",
+        "heading",
+        "toward",
+        "juhua",
+        "station",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "file",
+        "towards",
+        "jpg"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "File:Digital Display on a Line 4 train heading towards JuHua station.jpg"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "commons",
+        "originalQuery": "digital credit line",
+        "savedAt": "2026-10-28T16:30:54.406Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "CC BY-SA 4.0",
+        "license_name": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Fugastra",
+        "creator": "Fugastra",
+        "attributionRequired": true,
+        "attribution_required": true,
+        "nonFree": false,
+        "commercial_use": "editorial_only",
+        "verification_status": "editorial_only",
+        "retrieved_at": "2026-10-28T16:27:33.716Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Digital_Display_on_a_Line_4_train_heading_towards_JuHua_station.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_a8eab7739d5c4c95",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/silhouette-of-man-watching-sunset-over-ocean-34375634/",
+      "path": "video/saved-from-web/saved-from-web_a8eab7739d5c4c95.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7778,
+      "orientation": "landscape",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "silhouette",
+        "man",
+        "watching",
+        "sunset",
+        "over",
+        "ocean",
+        "34375634",
+        "seabed",
+        "marine",
+        "underwater",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "silhouette-of-man-watching-sunset-over-ocean-34375634",
+        "undersea environment"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "silhouette",
+        "man",
+        "watching",
+        "sunset",
+        "over",
+        "ocean",
+        "34375634",
+        "seabed",
+        "marine",
+        "underwater",
+        "static",
+        "presentation",
+        "https",
+        "pexels",
+        "video",
+        "silhouette-of-man-watching-sunset-over-ocean-34375634",
+        "undersea environment"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "https://www.pexels.com/video/silhouette-of-man-watching-sunset-over-ocean-34375634/"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "ocean seabed or marine underwater"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "silhouette watching rollercoaster",
+        "savedAt": "2026-10-28T16:31:06.895Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Nothing Ahead",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/silhouette-of-man-watching-sunset-over-ocean-34375634/"
       }
     }
   ]

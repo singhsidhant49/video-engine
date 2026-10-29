@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_2edaeb2758aa0929",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A modern multi-story courthouse building in Antalya, showcasing contemporary architecture.",
+  "path": "images/saved-from-web/saved-from-web_2edaeb2758aa0929.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1739,
+  "aspectRatio": 1.4951,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "multi",
+    "story",
+    "courthouse",
+    "building",
+    "antalya",
+    "showcasing",
+    "contemporary",
+    "architecture",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "multi-story",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "multi",
+    "story",
+    "courthouse",
+    "building",
+    "antalya",
+    "showcasing",
+    "contemporary",
+    "architecture",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "multi-story",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A modern multi-story courthouse building in Antalya, showcasing contemporary architecture."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "modern bank headquarters building exterior",
+    "savedAt": "2026-10-28T16:28:13.064Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ayşegül  Aytören",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/building-of-courthouse-in-antalya-turkey-17209785/"
+  }
+}

@@ -190,6 +190,7 @@ export async function createFacelessVideo({
     baseSpeed: config.kokoro.speed,
     meditationSpeed: config.kokoro.meditationSpeed,
   });
+  const requestedMusic = normalizedBrief?.music || normalizedBrief?.bgm || channelProfile?.music || channelProfile?.bgm;
 
   if (resume) {
     console.log(`\n🔄 Resuming run: ${resume}`);
@@ -635,7 +636,16 @@ export async function createFacelessVideo({
     assetReport = assetsData;
     assets = assetsData.assets || assetsData.scenes || {};
 
-    const [sfxSources, bgmSource] = await Promise.all([ensureSoundEffects(), ensureBackgroundMusic(plan.style)]);
+    const [sfxSources, bgmSource] = await Promise.all([
+      ensureSoundEffects(),
+      ensureBackgroundMusic({
+        style: plan.style,
+        contentType: productionProfile.contentType || plan.niche,
+        topic: topic || plan.title,
+        videoId,
+        requestedTrack: requestedMusic,
+      }),
+    ]);
     sfx = Object.fromEntries(await Promise.all(Object.entries(sfxSources).map(async ([k, rel]) => [k, await copyIn(rel)])));
     bgm = { ...bgmSource, src: await copyIn(bgmSource.src) };
   } else {
@@ -740,7 +750,16 @@ export async function createFacelessVideo({
     const recasts = specs.flatMap((s) => s.recasts.map((r) => `${s.sceneId}: ${r}`));
     if (recasts.length) console.log(`   ↳ recast:\n     ${recasts.join('\n     ')}`);
     await calibrateSfxAssets(path.join(config.publicDir, 'audio', 'sfx')).catch(() => {});
-    const [sfxSources, bgmSource] = await Promise.all([ensureSoundEffects(), ensureBackgroundMusic(plan.style)]);
+    const [sfxSources, bgmSource] = await Promise.all([
+      ensureSoundEffects(),
+      ensureBackgroundMusic({
+        style: plan.style,
+        contentType: productionProfile.contentType || plan.niche,
+        topic: topic || plan.title,
+        videoId,
+        requestedTrack: requestedMusic,
+      }),
+    ]);
     sfx = Object.fromEntries(await Promise.all(Object.entries(sfxSources).map(async ([k, rel]) => [k, await copyIn(rel)])));
     bgm = { ...bgmSource, src: await copyIn(bgmSource.src) };
     await job.completeStage('assets', [

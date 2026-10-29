@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_56daab3c4cf8012d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A modern gym with equipment, punching bags, and open space for workouts.",
+  "path": "images/saved-from-web/saved-from-web_56daab3c4cf8012d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "gym",
+    "equipment",
+    "punching",
+    "bag",
+    "open",
+    "space",
+    "workout",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "bags",
+    "workouts",
+    "handshake",
+    "business meeting",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "modern",
+    "gym",
+    "equipment",
+    "punching",
+    "bag",
+    "open",
+    "space",
+    "workout",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "bags",
+    "workouts",
+    "handshake",
+    "business meeting",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A modern gym with equipment, punching bags, and open space for workouts."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "gym bag on floor by door",
+    "savedAt": "2026-10-28T10:33:27.359Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-spacious-gym-with-tools-and-equipments-6739958/"
+  }
+}

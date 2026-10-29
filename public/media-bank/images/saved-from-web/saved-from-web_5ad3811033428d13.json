@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_5ad3811033428d13",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed close-up of a financial graph on a computer screen showing data trends.",
+  "path": "images/saved-from-web/saved-from-web_5ad3811033428d13.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "financial",
+    "graph",
+    "computer",
+    "screen",
+    "data",
+    "trend",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "showing",
+    "trends",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "financial",
+    "graph",
+    "computer",
+    "screen",
+    "data",
+    "trend",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "showing",
+    "trends",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed close-up of a financial graph on a computer screen showing data trends."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "computer screen financial data",
+    "savedAt": "2026-10-28T15:41:02.252Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Markus Winkler",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-shot-of-laptop-screen-4604639/"
+  }
+}

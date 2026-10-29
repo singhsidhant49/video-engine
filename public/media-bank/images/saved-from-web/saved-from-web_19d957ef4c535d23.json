@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_19d957ef4c535d23",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Businessman in modern office setting with a stock market display, looking thoughtful and analytical.",
+  "path": "images/saved-from-web/saved-from-web_19d957ef4c535d23.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "businessman",
+    "modern",
+    "office",
+    "setting",
+    "stock",
+    "market",
+    "display",
+    "looking",
+    "thoughtful",
+    "analytical",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "office desk",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "businessman",
+    "modern",
+    "office",
+    "setting",
+    "stock",
+    "market",
+    "display",
+    "looking",
+    "thoughtful",
+    "analytical",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "office desk",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Businessman in modern office setting with a stock market display, looking thoughtful and analytical."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "thoughtful man looking at stock market",
+    "savedAt": "2026-10-28T15:43:22.753Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Tima Miroshnichenko",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/big-screen-with-stock-market-text-on-display-behind-a-man-in-white-dress-shirt-7567428/"
+  }
+}

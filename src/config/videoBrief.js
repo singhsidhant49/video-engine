@@ -34,6 +34,8 @@ export const ChannelProfileSchema = z.object({
   language: z.literal('en').default('en'),
   style: z.string().optional(),
   voice: z.string().optional(),
+  music: z.string().optional(),
+  bgm: z.string().optional(),
   captions: z.literal('subtitles').default('subtitles'),
 }).passthrough();
 
@@ -46,11 +48,13 @@ export const VideoBriefSchema = z.object({
   durationSec: z.number().positive().optional(),
   style: z.string().optional(),
   voice: z.string().optional(),
+  music: z.string().optional(),
+  bgm: z.string().optional(),
   channel: ChannelProfileSchema.default({}),
 }).passthrough();
 
 const BASE_PACING = Object.freeze({
-  contemplative: { minimumShotSeconds: 9.5, maximumStillSeconds: 18.0, maximumCutsPer10Seconds: 1, targetAverageShotSeconds: 12.0 },
+  contemplative: { minimumShotSeconds: 8.5, maximumStillSeconds: 18.0, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 11.0 },
   cinematic: { minimumShotSeconds: 5.5, maximumStillSeconds: 9.0, maximumCutsPer10Seconds: 3, targetAverageShotSeconds: 6.5 },
   balanced: { minimumShotSeconds: 4.8, maximumStillSeconds: 8.0, maximumCutsPer10Seconds: 4, targetAverageShotSeconds: 5.7 },
   energetic: { minimumShotSeconds: 3.4, maximumStillSeconds: 6.0, maximumCutsPer10Seconds: 5, targetAverageShotSeconds: 4.2 },

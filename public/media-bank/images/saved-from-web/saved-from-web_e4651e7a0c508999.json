@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_e4651e7a0c508999",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial shot of Panama City's vibrant skyline at night, a bustling urban landscape.",
+  "path": "images/saved-from-web/saved-from-web_e4651e7a0c508999.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "panama",
+    "city",
+    "vibrant",
+    "skyline",
+    "night",
+    "bustling",
+    "urban",
+    "landscape",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "shot",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "panama",
+    "city",
+    "vibrant",
+    "skyline",
+    "night",
+    "bustling",
+    "urban",
+    "landscape",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "shot",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial shot of Panama City's vibrant skyline at night, a bustling urban landscape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "aerial view financial district",
+    "savedAt": "2026-10-28T14:25:37.238Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "K",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/panama-city-night-skyline-aerial-view-33803478/"
+  }
+}

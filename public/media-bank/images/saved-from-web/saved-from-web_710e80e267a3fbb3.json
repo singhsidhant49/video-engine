@@ -1,0 +1,102 @@
+{
+  "id": "saved-from-web_710e80e267a3fbb3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tired woman with curly hair asleep at a desk with a laptop and glasses under warm lamp light in a dimly lit room.",
+  "path": "images/saved-from-web/saved-from-web_710e80e267a3fbb3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "woman",
+    "curly",
+    "hair",
+    "asleep",
+    "desk",
+    "laptop",
+    "glasse",
+    "under",
+    "warm",
+    "lamp",
+    "light",
+    "dimly",
+    "lit",
+    "room",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "glasses",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "woman",
+    "curly",
+    "hair",
+    "asleep",
+    "desk",
+    "laptop",
+    "glasse",
+    "under",
+    "warm",
+    "lamp",
+    "light",
+    "dimly",
+    "lit",
+    "room",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "glasses",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tired woman with curly hair asleep at a desk with a laptop and glasses under warm lamp light in a dimly lit room."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "woman sitting at desk with laptop warm lamp",
+    "savedAt": "2026-10-28T10:36:33.420Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "MART  PRODUCTION",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-fall-asleep-on-a-desk-7606069/"
+  }
+}

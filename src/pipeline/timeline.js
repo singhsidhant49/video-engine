@@ -993,8 +993,11 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   const bgmConfig = bgm ? {
     src: bgm.src,
     synthetic: bgm.synthetic,
-    base: bgm.synthetic ? 0.12 : 0.18,
-    ducked: bgm.synthetic ? 0.04 : 0.06,
+    base: bgm.baseVolume ?? (bgm.synthetic ? 0.12 : 0.18),
+    ducked: bgm.duckedVolume ?? (bgm.synthetic ? 0.04 : 0.06),
+    title: bgm.title,
+    artist: bgm.artist,
+    category: bgm.category,
   } : null;
 
   const duckingResult = generateDuckingEnvelope({

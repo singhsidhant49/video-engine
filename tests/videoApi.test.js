@@ -183,6 +183,7 @@ test('HTTP v1 routes require a bearer key and return asynchronous creation contr
       reused: false,
       job: { id: 'vid_http_test', status: 'queued', stage: 'queued', progress: 0, createdAt: new Date().toISOString(), ownerId },
     }),
+    list: async () => [],
   };
   const app = express();
   app.use(express.json());
@@ -205,6 +206,11 @@ test('HTTP v1 routes require a bearer key and return asynchronous creation contr
   const payload = await accepted.json();
   assert.equal(payload.id, 'vid_http_test');
   assert.equal(payload.statusUrl, '/v1/videos/vid_http_test');
+
+  const queryAccepted = await fetch(`http://127.0.0.1:${port}/v1/videos?token=${apiKey}`, {
+    method: 'GET',
+  });
+  assert.equal(queryAccepted.status, 200);
 });
 
 test('production auth rejects placeholder and short API keys', () => {

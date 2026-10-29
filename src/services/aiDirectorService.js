@@ -119,7 +119,14 @@ EDITORIAL & PACING RULES:
     b. Your "imageQueries" MUST contain 2–3 tangible real-world photography and footage searches for that exact place, era, or landmark.
        - If talking about Dubai: imageQueries MUST search for Dubai's real landmarks and skyline (e.g., ["Dubai Burj Khalifa skyline", "Dubai Marina aerial skyscraper view", "Downtown Dubai modern city"]).
        - If talking about Ancient Rome / Roman Empire: imageQueries MUST search for real Roman architecture, ruins, and artifacts (e.g., ["Roman Colosseum ancient ruins Rome", "Roman Forum ancient marble architecture", "Ancient Roman mosaic archeological artifact"]).
-    c. NEVER show unrelated generic corporate stock, modern office meetings, or abstract metaphorical art when a real place, civilization, or entity is spoken in narration. Show the real thing!`;
+    c. NEVER show unrelated generic corporate stock, modern office meetings, or abstract metaphorical art when a real place, civilization, or entity is spoken in narration. Show the real thing!
+14. STRICT LITERAL RELEVANCE & NO METAPHORS MANDATE:
+    a. All imageQueries MUST search for what the scene is LITERALLY about in the real physical world. NEVER search for figurative metaphors, symbolic idioms, or clichés!
+       - Central banks & interest rates: search "Federal Reserve headquarters building", "central bank trading floor screen", "financial market ticker red chart", "central bank press briefing". NEVER search "hand adjusting dial" or "levers" or "scales of balance" (which returns kitchen ovens or toy scales).
+       - Banking, credit, & mortgages: search "bank vault steel door heavy security", "signing mortgage loan agreement table", "bank teller service counter", "bank deposit ledger screen". NEVER search "empty shelves" or "closet racks" or "puzzle pieces".
+       - Economic recession & debt: search "New York Stock Exchange trading floor red charts", "closed retail store financial crisis", "financial news broadcast screen". NEVER search "coin spinning on table" or "falling dominoes".
+       - Real cities, empires, and countries: search the authentic real landmarks, skyline, and archaeological sites.
+    b. Priority is ALWAYS authentic, real, tangible photography and footage of the actual topic.`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -168,7 +175,12 @@ async function callJson(llm, messages, { temperature = 0.6, retries = 2, timeout
       }
 
       const data = await res.json();
-      const raw = (data.choices?.[0]?.message?.content || '').replace(/```json|```/g, '').trim();
+      let raw = (data.choices?.[0]?.message?.content || '').replace(/```json|```/g, '').trim();
+      const firstBrace = raw.indexOf('{');
+      const lastBrace = raw.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace > firstBrace) {
+        raw = raw.slice(firstBrace, lastBrace + 1);
+      }
       try {
         return JSON.parse(raw);
       } catch (parseErr) {
@@ -557,7 +569,13 @@ const tokensOf = (text) => tokenizeScript(text).flatMap((w) => w.norm);
 
 const NUMBER_WORD = 'one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve';
 const SPOKEN_CHAPTER_RE = new RegExp(`^\\s*chapter\\s+(?:\\d+|${NUMBER_WORD})\\s*:\\s*`, 'i');
-const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|of|to|for|with|than|into|from|by|as|which|who|whose|when|while|if|because|although|since|until|where|after|before|during|so|that|whether|like|about|between|through|under|over|without|upon|against|among|toward|towards|represents|deposited|stretched|define|shape)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
+// A sentence ending is truly dangling if it terminates on an article, a coordinating conjunction,
+// a comparative particle, a subordinating conjunction without its clause, or an unstranded preposition
+// requiring an immediate object.
+// Legitimate terminal particles, phrasal verbs, and stranded prepositions in questions or relative clauses
+// (e.g. "where does it come from?", "what is this for?", "he had nothing to work with.", "what it is made of.")
+// are completely valid English and must NOT be flagged as incomplete.
+const DANGLING_END_RE = /(?:\b(?:and|or|but|the|a|an|than|into|onto|upon|toward|towards|during|because|although|since|until|while|unless|whereas|whether|which|whose)\s*[.!?]?|[,;:]\s*[.!?]?)$/i;
 
 export const META_NARRATION_RE = /(?:^|\b)(?:(?:the\s+)?narration\s+(?:for\s+this\s+segment\s+)?(?:is|in|was|remains)?\s*incomplete|(?:the\s+)?narration\s+for\s+this\s+(?:segment|scene|part|section)\s+(?:is|in|was|remains)?\s*incomplete|this\s+(?:segment|scene|part|section)\s+(?:is|in|was)?\s*incomplete|incomplete\s+narration|incomplete\s+segment|incomplete\s+sentence|narration\s+(?:is\s+)?missing|placeholder\s+narration|to\s+be\s+completed|tbd\b|\[incomplete\]|\[to\s+be\s+completed\]|as\s+an\s+ai\b|i\s+cannot\s+(?:complete|generate|fulfill)|narration\s+truncated|segment\s+truncated)(?:$|\b)/i;
 

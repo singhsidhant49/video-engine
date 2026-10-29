@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_a924511804854461",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Silhouette of a person at sunset with Anzac Bridge in the background, Pyrmont, Sydney.",
+  "path": "images/saved-from-web/saved-from-web_a924511804854461.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2080,
+  "aspectRatio": 1.25,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "person",
+    "sunset",
+    "anzac",
+    "bridge",
+    "background",
+    "pyrmont",
+    "sydney",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "person",
+    "sunset",
+    "anzac",
+    "bridge",
+    "background",
+    "pyrmont",
+    "sydney",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Silhouette of a person at sunset with Anzac Bridge in the background, Pyrmont, Sydney."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person stepping onto bridge at dawn silhouette",
+    "savedAt": "2026-10-28T10:37:48.332Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Federico Abis",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-at-sunset-by-anzac-bridge-sydney-29826668/"
+  }
+}

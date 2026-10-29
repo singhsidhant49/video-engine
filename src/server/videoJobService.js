@@ -346,6 +346,7 @@ export class VideoJobService {
   #publicResult(job) {
     return {
       videoUrl: `/v1/videos/${job.id}/download`,
+      thumbnailUrl: `/v1/videos/${job.id}/thumbnail`,
       filename: job.result?.outputFilename,
       durationSeconds: job.result?.durationSeconds,
       title: job.result?.title,

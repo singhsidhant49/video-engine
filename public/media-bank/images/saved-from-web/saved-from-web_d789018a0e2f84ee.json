@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_d789018a0e2f84ee",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A close-up view of a large pile of gold and silver cryptocurrency coins indicating financial wealth.",
+  "path": "images/saved-from-web/saved-from-web_d789018a0e2f84ee.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1820,
+  "aspectRatio": 1.4286,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "large",
+    "pile",
+    "gold",
+    "silver",
+    "cryptocurrency",
+    "coin",
+    "indicating",
+    "financial",
+    "wealth",
+    "macro",
+    "static",
+    "presentation",
+    "close-up",
+    "view",
+    "coins",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "large",
+    "pile",
+    "gold",
+    "silver",
+    "cryptocurrency",
+    "coin",
+    "indicating",
+    "financial",
+    "wealth",
+    "macro",
+    "static",
+    "presentation",
+    "close-up",
+    "view",
+    "coins",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A close-up view of a large pile of gold and silver cryptocurrency coins indicating financial wealth."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "pile of gold coins",
+    "savedAt": "2026-10-28T16:30:49.937Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Dash Cryptocurrency",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-pile-of-silver-and-gold-round-coins-7584353/"
+  }
+}

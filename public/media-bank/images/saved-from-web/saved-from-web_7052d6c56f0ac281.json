@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_7052d6c56f0ac281",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Drone view of suburban neighborhood with new housing developments and green surroundings.",
+  "path": "images/saved-from-web/saved-from-web_7052d6c56f0ac281.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1949,
+  "aspectRatio": 1.334,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "drone",
+    "suburban",
+    "neighborhood",
+    "housing",
+    "development",
+    "green",
+    "surrounding",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "new",
+    "developments",
+    "surroundings",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "drone",
+    "suburban",
+    "neighborhood",
+    "housing",
+    "development",
+    "green",
+    "surrounding",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "new",
+    "developments",
+    "surroundings",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Drone view of suburban neighborhood with new housing developments and green surroundings."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "suburban housing development aerial",
+    "savedAt": "2026-10-28T14:24:55.895Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sean P. Twomey",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/houses-in-town-16781299/"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_a2e9a9958aaed120",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/",
+  "path": "video/saved-from-web/saved-from-web_a2e9a9958aaed120.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "dolly",
+    "package",
+    "paper",
+    "bag",
+    "left",
+    "door",
+    "7362603",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "dolly",
+    "package",
+    "paper",
+    "bag",
+    "left",
+    "door",
+    "7362603",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "gym bag on floor by door",
+    "savedAt": "2026-10-28T10:34:02.969Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/dolly-shot-of-a-package-in-paper-bag-left-by-the-door-7362603/"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_3b562b586d79cf3d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Coin-operated binoculars with a view of the New York City skyline across the water.",
+  "path": "images/saved-from-web/saved-from-web_3b562b586d79cf3d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "coin",
+    "operated",
+    "binocular",
+    "york",
+    "city",
+    "skyline",
+    "acros",
+    "water",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "coin-operated",
+    "binoculars",
+    "view",
+    "new",
+    "across"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "coin",
+    "operated",
+    "binocular",
+    "york",
+    "city",
+    "skyline",
+    "acros",
+    "water",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "coin-operated",
+    "binoculars",
+    "view",
+    "new",
+    "across"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Coin-operated binoculars with a view of the New York City skyline across the water."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "city skyline reflection in coin",
+    "savedAt": "2026-10-28T14:28:47.725Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Floor November",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/binoculars-on-sea-shore-in-new-york-18251515/"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_ddb5d376ccae7953",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:HK Central Connaught Road C Hang Seng Bank Building a.jpg",
+  "path": "images/saved-from-web/saved-from-web_ddb5d376ccae7953.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1600,
+  "height": 1200,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "central",
+    "connaught",
+    "road",
+    "hang",
+    "seng",
+    "bank",
+    "building",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "central",
+    "connaught",
+    "road",
+    "hang",
+    "seng",
+    "bank",
+    "building",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:HK Central Connaught Road C Hang Seng Bank Building a.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "central bank building exterior",
+    "savedAt": "2026-10-28T15:42:01.148Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "author": "Simhang",
+    "creator": "Simhang",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T15:39:30.257Z",
+    "page": "https://commons.wikimedia.org/wiki/File:HK_Central_Connaught_Road_C_Hang_Seng_Bank_Building_a.jpg"
+  }
+}
