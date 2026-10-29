@@ -24,6 +24,25 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
+function formatArtistName(raw) {
+  if (!raw) return 'YouTube Audio Library';
+  if (raw.startsWith('u_')) return 'Audio Library';
+  if (raw === 'the_mountain') return 'The Mountain';
+  if (raw === 'atlasaudio') return 'Atlas Audio';
+  if (raw === 'lnplusmusic') return 'LN Plus Music';
+  if (raw === 'musicword') return 'Music Word';
+  if (raw === 'tatamusic') return 'Tata Music';
+  if (raw === 'solarflex') return 'Solarflex';
+  if (raw === 'velariomusic') return 'Velario Music';
+  if (raw === 'verclub_music') return 'Verclub Music';
+  if (raw === 'alex-morgan' || raw === 'alex_morgan') return 'Alex Morgan';
+  if (raw === 'vadim_makes_sound') return 'Vadim Makes Sound';
+  if (raw === 'jorisvermeer') return 'Joris Vermeer';
+  if (raw === 'viacheslavstarostin') return 'Viacheslav Starostin';
+  if (raw === 'sigmamusicart') return 'Sigma Music Art';
+  return raw.charAt(0).toUpperCase() + raw.slice(1).replace(/_/g, ' ');
+}
+
 export function parseTrackFilename(filename) {
   const baseName = filename.replace(/\.[^/.]+$/, '').trim();
   let title = baseName;
@@ -36,6 +55,18 @@ export function parseTrackFilename(filename) {
   } else if (/^rain\b/i.test(baseName)) {
     title = baseName;
     artist = 'Nature Ambient';
+  } else if (/^[a-z0-9_]+-[a-z0-9_(). -]+-\d+(\s*\(\d+\))?$/i.test(baseName)) {
+    const clean = baseName.replace(/\s*\(\d+\)$/, '');
+    const parts = clean.split('-');
+    artist = formatArtistName(parts[0]);
+    const words = parts.slice(1, -1);
+    const deduped = [];
+    for (const w of words) {
+      if (deduped.length === 0 || deduped[deduped.length - 1].toLowerCase() !== w.toLowerCase()) {
+        deduped.push(w);
+      }
+    }
+    title = deduped.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   }
 
   return { title, artist };
