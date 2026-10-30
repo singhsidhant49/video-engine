@@ -14,6 +14,7 @@ import { buildMediaCompositionDiagnostics } from '../qc/mediaCompositionDiagnost
 import { createFormatLayoutContext } from '../composition/layout/formatContext.js';
 import { continuityCompatibility } from '../qc/editorialVisualQualityGate.js';
 import { resolveVisualPolicy } from '../config/visualMode.js';
+import { getContentVisualProfile } from '../config/contentVisualProfiles.js';
 import { createEditorialVisualBeat, createMediaShotPlan } from './mediaEditorialPlanner.js';
 import { analyzeSubtitleContrast } from '../composition/mediaSceneSpec.js';
 
@@ -183,7 +184,9 @@ const SOLVED_COMPILERS = Object.freeze({
 function solvedRepresentationFor(presentation, editorialPlan, visualPolicy = null) {
   const selected = editorialPlan?.selectedRepresentation;
   const isProductionFallback = editorialPlan?.coverage?.representationDecision?.fallbackApplied === true;
-  if ((visualPolicy?.enableProceduralGraphics === false || visualPolicy?.useMediaEditorial) && !isProductionFallback) {
+  const mediaOnly = visualPolicy?.visualMode === 'MEDIA_EDITORIAL'
+    || (visualPolicy?.useMediaEditorial === true && visualPolicy?.allowHybridRepresentations !== true);
+  if ((visualPolicy?.enableProceduralGraphics === false || mediaOnly) && !isProductionFallback) {
     return 'media';
   }
   if (selected === 'comparison' || selected === 'compare') return 'comparison';
@@ -467,8 +470,10 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
   const minutes = totalFrames / fps / 60;
   const semanticRate = 3.5;
   let budget = Math.max(1, Math.ceil(Math.min(3.5, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
-  // Uniform transition balance across all content types: 20%–25% cross-dissolve, 75%–80% clean cut
-  const designedShare = 0.22;
+  const transitionProfile = productionProfile?.contentType
+    ? getContentVisualProfile(productionProfile.contentType).dissolveShare
+    : { target: 0.22 };
+  const designedShare = transitionProfile.target;
   budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
@@ -544,11 +549,17 @@ function synchronizeShotTransition(shot, previous, { type, frames, policy, reaso
 }
 
 /** Direct every visual boundary after assets, focal points, and camera paths exist. */
-export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, mediaSceneSpecs = {}, mediaShotPlans = {}, visualPolicy = null }) {
+export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, mediaSceneSpecs = {}, mediaShotPlans = {}, visualPolicy = null, productionProfile = null }) {
   const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
   const entries = clips.flatMap((clip, clipIndex) => (clip.shots || []).map((shot, shotIndex) => ({ clip, clipIndex, shot, shotIndex })));
-  // Standardized across all content types: 20-25% cross-dissolve, 75-80% clean cut
-  const maximumDissolves = Math.max(1, Math.floor(Math.max(0, entries.length - 1) * 0.25));
+  const transitionProfile = productionProfile?.contentType
+    ? getContentVisualProfile(productionProfile.contentType).dissolveShare
+    : { min: 0, target: 0.22, max: 0.25 };
+  const boundaryCount = Math.max(0, entries.length - 1);
+  const minimumDissolves = Math.ceil(boundaryCount * transitionProfile.min);
+  const maximumDissolves = productionProfile?.contentType
+    ? Math.max(minimumDissolves, Math.floor(boundaryCount * transitionProfile.max))
+    : Math.max(1, Math.floor(boundaryCount * transitionProfile.max));
   let remainingDissolves = maximumDissolves;
   let previousWasDissolve = false;
   let shotsSinceDissolve = 99;
@@ -600,6 +611,31 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     }
     previousWasDissolve = useDissolve;
   });
+  let usedDissolves = entries.slice(1).filter(({ shot }) => shot.enter?.type === 'dissolve').length;
+  if (usedDissolves < minimumDissolves) {
+    const candidates = entries.map((entry, index) => ({ entry, index })).filter(({ entry, index }) => {
+      if (index === 0 || entry.shot.enter?.type === 'dissolve') return false;
+      const previousEntry = entries[index - 1];
+      const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
+      const bothImages = previousEntry.shot.asset?.type !== 'video' && entry.shot.asset?.type !== 'video';
+      return sceneBoundary || bothImages;
+    });
+    for (const { entry, index } of candidates) {
+      if (usedDissolves >= minimumDissolves || usedDissolves >= maximumDissolves) break;
+      const previousEntry = entries[index - 1];
+      if (entries[index - 1]?.shot.enter?.type === 'dissolve' || entries[index + 1]?.shot.enter?.type === 'dissolve') continue;
+      const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
+      const reason = sceneBoundary ? TRANSITION_REASON.SECTION_CHANGE : TRANSITION_REASON.CONTINUATION;
+      synchronizeShotTransition(entry.shot, previousEntry.shot, {
+        type: 'dissolve', frames: dissolveFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null,
+      }, mediaSceneSpecs, mediaShotPlans);
+      if (sceneBoundary) {
+        entry.clip.enter = { type: 'dissolve', frames: dissolveFrames };
+        entry.clip.transitionPolicy = 'SHORT_DISSOLVE';
+      }
+      usedDissolves++;
+    }
+  }
   return clips;
 }
 
@@ -965,7 +1001,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   });
 
   if (visualPolicy.useMediaEditorial) {
-    directSolvedShotTransitions({ clips, scenes: plan.scenes, fps, mediaSceneSpecs, mediaShotPlans, visualPolicy });
+    directSolvedShotTransitions({ clips, scenes: plan.scenes, fps, mediaSceneSpecs, mediaShotPlans, visualPolicy, productionProfile });
   }
   const allRealizedShots = clips.flatMap((clip) => clip.shots);
   allRealizedShots.forEach((shot, index) => {

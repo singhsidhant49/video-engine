@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_03157cfb9e397680",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Serene close-up of autumn leaves drifting on water. Perfect for seasonal themes.",
+  "path": "images/saved-from-web/saved-from-web_03157cfb9e397680.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "close",
+    "autumn",
+    "leave",
+    "drifting",
+    "water",
+    "perfect",
+    "seasonal",
+    "theme",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "close-up",
+    "leaves",
+    "themes",
+    "tree twigs",
+    "bare branches",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "close",
+    "autumn",
+    "leave",
+    "drifting",
+    "water",
+    "perfect",
+    "seasonal",
+    "theme",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "close-up",
+    "leaves",
+    "themes",
+    "tree twigs",
+    "bare branches",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Serene close-up of autumn leaves drifting on water. Perfect for seasonal themes."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "autumn leaf drifting on calm water close up",
+    "savedAt": "2026-10-29T15:26:28.866Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ilo Frey",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photo-of-brown-leaves-on-the-water-13719483/"
+  }
+}

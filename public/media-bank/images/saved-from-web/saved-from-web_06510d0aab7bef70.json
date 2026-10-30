@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_06510d0aab7bef70",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Endurance",
+  "path": "images/saved-from-web/saved-from-web_06510d0aab7bef70.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1024,
+  "height": 683,
+  "aspectRatio": 1.4993,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Endurance"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Endurance",
+    "savedAt": "2026-10-29T12:43:15.063Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Virender Singh Malik",
+    "creator": "Virender Singh Malik",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T09:51:53.813Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Endurance_training_for_Mt_Carstensz_Pyramid.JPG"
+  }
+}

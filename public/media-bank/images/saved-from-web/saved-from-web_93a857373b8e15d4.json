@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_93a857373b8e15d4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Portrait of an astronaut in a spacesuit helmet against a soft sky, evoking the mystery of space.",
+  "path": "images/saved-from-web/saved-from-web_93a857373b8e15d4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "astronaut",
+    "spacesuit",
+    "helmet",
+    "against",
+    "soft",
+    "sky",
+    "evoking",
+    "mystery",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "astronaut",
+    "spacesuit",
+    "helmet",
+    "against",
+    "soft",
+    "sky",
+    "evoking",
+    "mystery",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Portrait of an astronaut in a spacesuit helmet against a soft sky, evoking the mystery of space."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "soft warm light astronaut face",
+    "savedAt": "2026-10-29T14:06:21.859Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-wearing-a-space-suit-and-helmet-7170773/"
+  }
+}

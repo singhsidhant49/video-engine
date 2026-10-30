@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_89e3c16cafae7abb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:The 'Endurance', The pink glow of the rising sun shining on a pressure ridge, 1915 - photograph",
+  "path": "images/saved-from-web/saved-from-web_89e3c16cafae7abb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "pink",
+    "glow",
+    "rising",
+    "sun",
+    "shining",
+    "pressure",
+    "ridge",
+    "1915",
+    "photograph",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "file",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "pink",
+    "glow",
+    "rising",
+    "sun",
+    "shining",
+    "pressure",
+    "ridge",
+    "1915",
+    "photograph",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "file",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:The 'Endurance', The pink glow of the rising sun shining on a pressure ridge, 1915 - photograph"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Endurance ship crushed in Antarctic pack ice 1915",
+    "savedAt": "2026-10-29T12:43:25.386Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Frank Hurley",
+    "creator": "Frank Hurley",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:05.585Z",
+    "page": "https://commons.wikimedia.org/wiki/File:The_%27Endurance%27,_The_pink_glow_of_the_rising_sun_shining_on_a_pressure_ridge,_1915_-_photographed_by_Frank_Hurley_(3534602329).jpg"
+  }
+}

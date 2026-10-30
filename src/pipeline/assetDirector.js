@@ -44,6 +44,13 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
     retrievalScore: item.score,
     editorialMode: visibleNeed?.editorialMode,
   });
+  if (request.nativeMotionRequired && item.candidate.type !== 'video') {
+    judgment.accepted = false;
+    judgment.rejected = true;
+    judgment.finalEditorialScore = 0;
+    judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'native_motion_required'])];
+    judgment.selectionReason = 'Rejected: this content beat requires authentic native motion, not a still image';
+  }
   if (filePath && item.candidate.type === 'video') {
     item.videoWindowSelection = await selectVideoWindow({
       videoPath: filePath,
@@ -171,6 +178,11 @@ function scoredCandidates(pool, memory, usedIdentities) {
       score.resolutionStatus = 'unusable';
       score.qualityRank = 0;
       score.gates.push('exact_asset_reuse');
+    }
+    if (pool.request.nativeMotionRequired && candidate.type !== 'video') {
+      score.resolutionStatus = 'unusable';
+      score.qualityRank = 0;
+      score.gates.push('native_motion_required');
     }
     return { candidate, score };
   }).sort(compareCandidateScores);

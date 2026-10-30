@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_7940f6c606819160",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Endurance (IMO 9312200) Tilbury 2023.jpg",
+  "path": "images/saved-from-web/saved-from-web_7940f6c606819160.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "imo",
+    "9312200",
+    "tilbury",
+    "2023",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "imo",
+    "9312200",
+    "tilbury",
+    "2023",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Endurance (IMO 9312200) Tilbury 2023.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Endurance",
+    "savedAt": "2026-10-29T12:44:55.632Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Niels Johannes",
+    "creator": "Niels Johannes",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T08:35:05.585Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Endurance_(IMO_9312200)_Tilbury_2023.jpg"
+  }
+}

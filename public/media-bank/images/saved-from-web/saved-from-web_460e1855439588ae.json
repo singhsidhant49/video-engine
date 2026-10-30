@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_460e1855439588ae",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A woman stands in a greenhouse surrounded by floating books, creating a magical scene.",
+  "path": "images/saved-from-web/saved-from-web_460e1855439588ae.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1557,
+  "aspectRatio": 1.6699,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "stand",
+    "greenhouse",
+    "surrounded",
+    "floating",
+    "book",
+    "creating",
+    "magical",
+    "scene",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "stands",
+    "books"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "stand",
+    "greenhouse",
+    "surrounded",
+    "floating",
+    "book",
+    "creating",
+    "magical",
+    "scene",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "stands",
+    "books"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A woman stands in a greenhouse surrounded by floating books, creating a magical scene."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "books floating into darkness",
+    "savedAt": "2026-10-29T14:45:42.668Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Loannes Marc",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-pretty-woman-in-black-shirt-looking-at-camera-4157752/"
+  }
+}

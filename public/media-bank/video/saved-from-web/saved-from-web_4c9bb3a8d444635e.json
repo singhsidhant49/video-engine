@@ -1,0 +1,102 @@
+{
+  "id": "saved-from-web_4c9bb3a8d444635e",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/red-cargo-ship-navigates-ice-covered-ocean-waters-40302721/",
+  "path": "video/saved-from-web/saved-from-web_4c9bb3a8d444635e.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "red",
+    "cargo",
+    "ship",
+    "navigate",
+    "ice",
+    "covered",
+    "ocean",
+    "water",
+    "40302721",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "red-cargo-ship-navigates-ice-covered-ocean-waters-40302721",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "red",
+    "cargo",
+    "ship",
+    "navigate",
+    "ice",
+    "covered",
+    "ocean",
+    "water",
+    "40302721",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "red-cargo-ship-navigates-ice-covered-ocean-waters-40302721",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/red-cargo-ship-navigates-ice-covered-ocean-waters-40302721/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "ship wheel covered in ice",
+    "savedAt": "2026-10-29T09:59:31.096Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sergei Starostin",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/red-cargo-ship-navigates-ice-covered-ocean-waters-40302721/"
+  }
+}

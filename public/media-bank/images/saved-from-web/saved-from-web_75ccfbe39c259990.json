@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_75ccfbe39c259990",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Imperial Trans-Antarctic Expedition",
+  "path": "images/saved-from-web/saved-from-web_75ccfbe39c259990.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1880,
+  "height": 2600,
+  "aspectRatio": 0.7231,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "imperial",
+    "tran",
+    "antarctic",
+    "expedition",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "trans-antarctic"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "imperial",
+    "tran",
+    "antarctic",
+    "expedition",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "trans-antarctic"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Imperial Trans-Antarctic Expedition"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Imperial Trans-Antarctic Expedition",
+    "savedAt": "2026-10-29T12:45:56.698Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Frank Hurley",
+    "creator": "Frank Hurley",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T12:42:46.887Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Endurance_under_full_sail_Frank_Hurley_State_Library_NSW_a090012h.jpg"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_1b8396b9bd34027a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:The Robert Falcon Scott statue, Christchurch, NZ (4279300901).jpg",
+  "path": "images/saved-from-web/saved-from-web_1b8396b9bd34027a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1536,
+  "height": 2048,
+  "aspectRatio": 0.75,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "robert",
+    "falcon",
+    "scott",
+    "statue",
+    "christchurch",
+    "4279300901",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "robert",
+    "falcon",
+    "scott",
+    "statue",
+    "christchurch",
+    "4279300901",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:The Robert Falcon Scott statue, Christchurch, NZ (4279300901).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Robert Falcon Scott team",
+    "savedAt": "2026-10-29T13:27:58.799Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "Robert Cutts from Bristol, England, UK",
+    "creator": "Robert Cutts from Bristol, England, UK",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T13:24:19.513Z",
+    "page": "https://commons.wikimedia.org/wiki/File:The_Robert_Falcon_Scott_statue,_Christchurch,_NZ_(4279300901).jpg"
+  }
+}

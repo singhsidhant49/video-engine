@@ -79,6 +79,28 @@ test('production QC blocks an edit that violates its channel pacing profile', ()
   assert.equal(qc.ok, false);
 });
 
+test('production QC blocks still-image meditation and missing calm transitions', () => {
+  const fps = 30;
+  const shots = Array.from({ length: 4 }, (_, index) => ({
+    id: `calm${index + 1}`, storyboardShotId: `calm${index + 1}`, sceneId: 'calm-scene', sectionId: 'calm-section',
+    from: index * 240, durationInFrames: 240, family: 'image', asset: { type: 'image', src: `calm-${index}.jpg` },
+    enter: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT', presentation: { layout: 'full' },
+  }));
+  const timeline = {
+    fps, durationInFrames: 960, style: 'minimal_premium', visualMode: 'HYBRID_EDITORIAL',
+    productionProfile: {
+      contentType: 'meditation',
+      pacing: { mode: 'contemplative', minimumShotSeconds: 7, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 8 },
+    },
+    clips: [{ id: 'calm-scene', sceneId: 'calm-scene', from: 0, durationInFrames: 960, shots }],
+    realizedShots: shots,
+  };
+  const qc = runTimelineQc(timeline, { publishMode: 'PRODUCTION_RENDER' });
+  assert.equal(qc.checks.find((check) => check.id === 'content-profile-video-share')?.ok, false);
+  assert.equal(qc.checks.find((check) => check.id === 'content-profile-transition-share')?.ok, false);
+  assert.equal(qc.ok, false);
+});
+
 test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole whisper', () => {
   assert.deepEqual([...ALLOWED_VOICES].sort(), ['af_bella', 'af_heart', 'af_nicole', 'am_puck']);
   assert.ok(!ALLOWED_VOICES.includes('bm_george'), 'george must be removed');

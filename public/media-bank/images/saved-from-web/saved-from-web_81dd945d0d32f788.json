@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_81dd945d0d32f788",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Vintage monitors displayed with static screens in a dark studio setting.",
+  "path": "images/saved-from-web/saved-from-web_81dd945d0d32f788.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1776,
+  "aspectRatio": 1.464,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "monitor",
+    "displayed",
+    "static",
+    "screen",
+    "dark",
+    "studio",
+    "setting",
+    "general",
+    "neutral",
+    "backdrop",
+    "presentation",
+    "monitors",
+    "screens"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "monitor",
+    "displayed",
+    "static",
+    "screen",
+    "dark",
+    "studio",
+    "setting",
+    "general",
+    "neutral",
+    "backdrop",
+    "presentation",
+    "monitors",
+    "screens"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Vintage monitors displayed with static screens in a dark studio setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "satellite trilateration screen monitor",
+    "savedAt": "2026-10-29T14:29:13.437Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/computer-monitors-in-a-laboratory-8875499/"
+  }
+}

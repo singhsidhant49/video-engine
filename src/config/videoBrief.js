@@ -64,11 +64,18 @@ const BASE_PACING = Object.freeze({
 function inferContentType(topic = '', niche = '') {
   const text = `${niche} ${topic}`.toLowerCase();
   if (isMeditationNarration({ topic, niche }) || /\b(?:sleep|bedtime story|asmr|whisper)\b/.test(text)) return 'meditation';
-  if (/\b(?:audiobook|narrated book|book summary)\b/.test(text)) return 'audiobook';
-  if (/\b(?:history|historical|documentary|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat|scandal|unsolved)\b/.test(text)) return 'documentary';
-  if (/\b(?:motivation|self improvement|discipline|mindset|inspiration)\b/.test(text)) return 'motivational';
-  if (/\b(?:story|tale|narrative)\b/.test(text)) return 'story';
-  return 'explainer';
+  const scores = {
+    documentary: 0, explainer: 0, motivational: 0, story: 0, audiobook: 0,
+  };
+  const add = (type, regex, weight) => { if (regex.test(text)) scores[type] += weight; };
+  add('audiobook', /\b(?:audiobook|narrated book|read aloud|book reading)\b/, 6);
+  add('documentary', /\b(?:documentary|investigative documentary|true crime|historical account)\b/, 6);
+  add('documentary', /\b(?:history|historical|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat\w*|scandal|unsolved|archive|archival)\b/, 2);
+  add('motivational', /\b(?:motivational|motivation|self improvement|discipline|mindset|inspiration|overcome|resilience)\b/, 4);
+  add('story', /\b(?:fiction|short story|dramatic story|tale|character arc|narrative fiction)\b/, 4);
+  add('explainer', /\b(?:explain|explainer|how .{0,30} works?|why .{0,30}|tutorial|lesson|breakdown|mechanism|science of)\b/, 3);
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  return ranked[0][1] > 0 ? ranked[0][0] : 'explainer';
 }
 
 function defaultPacingMode(contentType, format) {

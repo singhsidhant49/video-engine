@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_f10a8b7923eac8af",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Captivating black and white image of a runner's shadow casting on the pavement in motion.",
+  "path": "images/saved-from-web/saved-from-web_f10a8b7923eac8af.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "black",
+    "white",
+    "runner",
+    "shadow",
+    "casting",
+    "pavement",
+    "motion",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "black",
+    "white",
+    "runner",
+    "shadow",
+    "casting",
+    "pavement",
+    "motion",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Captivating black and white image of a runner's shadow casting on the pavement in motion."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "long shadows runner dawn cold morning",
+    "savedAt": "2026-10-29T13:45:37.946Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mathias Reding",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/runner-s-shadow-silhouette-in-black-and-white-33995259/"
+  }
+}

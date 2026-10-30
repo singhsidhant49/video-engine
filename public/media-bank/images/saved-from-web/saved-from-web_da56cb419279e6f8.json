@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_da56cb419279e6f8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Explore the rugged coast of South Georgia Island with penguins and seals amidst icy landscapes.",
+  "path": "images/saved-from-web/saved-from-web_da56cb419279e6f8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "rugged",
+    "coast",
+    "south",
+    "georgia",
+    "island",
+    "penguin",
+    "seal",
+    "amidst",
+    "icy",
+    "landscape",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "penguins",
+    "seals",
+    "landscapes",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "rugged",
+    "coast",
+    "south",
+    "georgia",
+    "island",
+    "penguin",
+    "seal",
+    "amidst",
+    "icy",
+    "landscape",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "penguins",
+    "seals",
+    "landscapes",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Explore the rugged coast of South Georgia Island with penguins and seals amidst icy landscapes."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "South Georgia and the South Sandwich Islands",
+    "savedAt": "2026-10-29T10:17:38.900Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "ArcticDesire.com Polarreisen",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/wildlife-on-south-georgia-s-shores-with-penguins-and-seals-31308021/"
+  }
+}

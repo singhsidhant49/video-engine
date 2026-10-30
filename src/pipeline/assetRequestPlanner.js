@@ -3,6 +3,7 @@ import { buildVisibleNeed } from '../storyboard/visibleNeed.js';
 import { buildVisualProposition } from '../storyboard/visualProposition.js';
 import { routeRepresentation } from '../storyboard/representationRouter.js';
 import { isAbstractEventEntity } from '../storyboard/shotPlanner.js';
+import { normalizeContentType, requiresNativeMotion } from '../config/contentVisualProfiles.js';
 
 const unique = (items) => [...new Set(items.map((item) => String(item || '').replace(/\s+/g, ' ').trim()).filter(Boolean))];
 
@@ -23,7 +24,7 @@ function normalizeHistoricalEventShot(shot, scene) {
   };
 }
 
-function preferredSource(shot, mediaEditorial = false, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER') {
+function preferredSource(shot, mediaEditorial = false, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER', contentType = 'explainer') {
   const motionFriendly = ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.assetIntent)
     || ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.role);
   const isStaticEvidence = shot.motionPreference === 'stable'
@@ -31,6 +32,7 @@ function preferredSource(shot, mediaEditorial = false, representationDecision = 
     || (shot.assetIntent === 'historical' && (shot.entities || []).length > 0);
 
   if (representationDecision?.preferredSource) {
+    if (representationDecision.preferredSource === 'image' && requiresNativeMotion({ contentType, shot })) return 'video';
     if (representationDecision.preferredSource === 'image' && (motionFriendly || !isStaticEvidence)) return 'auto';
     return representationDecision.preferredSource;
   }
@@ -366,8 +368,9 @@ function stagedQueries(shot, concept, mediaEditorial = false, visibleNeed = null
 }
 
 /** Compile one provider-independent request for every canonical storyboard shot. */
-export function planAssetRequests(storyboard, { format = storyboard.format, visualPolicy = null, coveragePlan = [], editorialMode = 'TECHNICAL_EXPLAINER' } = {}) {
+export function planAssetRequests(storyboard, { format = storyboard.format, visualPolicy = null, coveragePlan = [], editorialMode = 'TECHNICAL_EXPLAINER', contentType = 'explainer' } = {}) {
   const orientation = format === 'shorts' ? 'portrait' : 'landscape';
+  const normalizedContentType = normalizeContentType(contentType);
   const requests = [];
   const coverageByShot = new Map((coveragePlan || []).map((item) => [item.shotId, item]));
   for (const section of storyboard.sections) {
@@ -398,13 +401,18 @@ export function planAssetRequests(storyboard, { format = storyboard.format, visu
           videoTopic,
         });
         const queryResult = stagedQueries(requestShot, concept, visualPolicy?.useMediaEditorial === true, visibleNeed, visualProposition);
+        const nativeMotionRequired = representationDecision.selectedRepresentation === 'media'
+          && requiresNativeMotion({ contentType: normalizedContentType, shot: requestShot });
         requests.push({
           id: `asset_${shot.id}`,
           storyboardShotId: shot.id,
           sceneId: scene.id,
           concept,
           searchConcepts: unique(requestShot.searchConcepts || []),
-          preferredSource: preferredSource(requestShot, visualPolicy?.useMediaEditorial === true, representationDecision, editorialMode),
+          preferredSource: preferredSource(requestShot, visualPolicy?.useMediaEditorial === true, representationDecision, editorialMode, normalizedContentType),
+          preferredMediaType: nativeMotionRequired ? 'video' : (representationDecision.preferredSource === 'image' ? 'image' : 'either'),
+          nativeMotionRequired,
+          contentType: normalizedContentType,
           evidenceRequired: (requestShot.evidenceRequirement === 'required' || visibleNeed.evidenceRequirement === 'required')
             && requestShot.role === 'evidence'
             && requestShot.assetIntent !== 'concept'

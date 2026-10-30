@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_259782cb847ae822",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Ernest Shackleton, portrait photo by Frank Hurley, 1916.jpg",
+  "path": "images/saved-from-web/saved-from-web_259782cb847ae822.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1303,
+  "height": 1600,
+  "aspectRatio": 0.8144,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "portrait",
+    "frank",
+    "hurley",
+    "1916",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "photo",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "portrait",
+    "frank",
+    "hurley",
+    "1916",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "photo",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Ernest Shackleton, portrait photo by Frank Hurley, 1916.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Ernest Shackleton",
+    "savedAt": "2026-10-29T12:46:11.812Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Frank Hurley",
+    "creator": "Frank Hurley",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:05.228Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Ernest_Shackleton,_portrait_photo_by_Frank_Hurley,_1916.jpg"
+  }
+}

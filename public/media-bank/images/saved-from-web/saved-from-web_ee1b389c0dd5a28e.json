@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_ee1b389c0dd5a28e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "White taxi parked on a city street at night, showcasing urban life and transportation.",
+  "path": "images/saved-from-web/saved-from-web_ee1b389c0dd5a28e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "passenger",
+    "car",
+    "sedan",
+    "automobile",
+    "vehicle",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "white",
+    "taxi",
+    "parked",
+    "city",
+    "street",
+    "night",
+    "showcasing",
+    "urban",
+    "life",
+    "transportation",
+    "automobile sedan"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "passenger",
+    "car",
+    "sedan",
+    "automobile",
+    "vehicle",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "white",
+    "taxi",
+    "parked",
+    "city",
+    "street",
+    "night",
+    "showcasing",
+    "urban",
+    "life",
+    "transportation",
+    "automobile sedan"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "passenger car or sedan automobile vehicle"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "night city street taxi cab quiet forest or woodland at night",
+    "savedAt": "2026-10-29T14:27:57.137Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Erik Mclean",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-white-taxi-on-the-road-12973616/"
+  }
+}

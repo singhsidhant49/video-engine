@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_4e000802cb206993",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A Shetland pony grazes on snow in a beautiful winter landscape, captured in warm light.",
+  "path": "images/saved-from-web/saved-from-web_4e000802cb206993.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "shetland",
+    "pony",
+    "graze",
+    "snow",
+    "beautiful",
+    "winter",
+    "landscape",
+    "captured",
+    "warm",
+    "light",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "grazes"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "shetland",
+    "pony",
+    "graze",
+    "snow",
+    "beautiful",
+    "winter",
+    "landscape",
+    "captured",
+    "warm",
+    "light",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "grazes"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A Shetland pony grazes on snow in a beautiful winter landscape, captured in warm light."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dead pony snow",
+    "savedAt": "2026-10-29T13:25:50.849Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Александр Велигура",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-shetland-pony-on-a-snow-covered-field-10045597/"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_6c20259b31c25bcc",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Weddell Sea",
+  "path": "images/saved-from-web/saved-from-web_6c20259b31c25bcc.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1280,
+  "height": 923,
+  "aspectRatio": 1.3868,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "weddell",
+    "sea",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "weddell",
+    "sea",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Weddell Sea"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Weddell Sea",
+    "savedAt": "2026-10-29T10:49:59.570Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Rooiratel",
+    "creator": "Rooiratel",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T09:51:19.269Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Antarctic-seas-en.svg"
+  }
+}

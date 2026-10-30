@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_5cf1ef7195e93873",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Voyage of the James Caird",
+  "path": "images/saved-from-web/saved-from-web_5cf1ef7195e93873.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1332,
+  "height": 822,
+  "aspectRatio": 1.6204,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "voyage",
+    "jame",
+    "caird",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "james",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "voyage",
+    "jame",
+    "caird",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "james",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Voyage of the James Caird"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "James Caird (boat)",
+    "savedAt": "2026-10-29T12:45:29.230Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Probably Frank Hurley, the expedition's photographer",
+    "creator": "Probably Frank Hurley, the expedition's photographer",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T11:57:26.067Z",
+    "page": "https://commons.wikimedia.org/wiki/File:LaunchingTheJamesCaird2.jpg"
+  }
+}

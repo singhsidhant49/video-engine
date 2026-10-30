@@ -1,0 +1,104 @@
+{
+  "id": "saved-from-web_16dc00a49d17c355",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/futuristic-spaceship-approaching-space-station-38461260/",
+  "path": "video/saved-from-web/saved-from-web_16dc00a49d17c355.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "futuristic",
+    "spaceship",
+    "approaching",
+    "station",
+    "38461260",
+    "https",
+    "pexels",
+    "video",
+    "futuristic-spaceship-approaching-space-station-38461260",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "futuristic",
+    "spaceship",
+    "approaching",
+    "station",
+    "38461260",
+    "https",
+    "pexels",
+    "video",
+    "futuristic-spaceship-approaching-space-station-38461260",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "rescue spaceship approaching space station",
+    "savedAt": "2026-10-29T14:08:30.025Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Adis Resic",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/futuristic-spaceship-approaching-space-station-38461260/"
+  }
+}

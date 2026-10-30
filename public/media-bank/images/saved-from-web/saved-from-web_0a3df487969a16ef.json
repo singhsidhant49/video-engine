@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_0a3df487969a16ef",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Wide View of Endurance Glacier south side Elephant Island Antarctica.jpg",
+  "path": "images/saved-from-web/saved-from-web_0a3df487969a16ef.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "wide",
+    "endurance",
+    "glacier",
+    "south",
+    "side",
+    "elephant",
+    "island",
+    "antarctica",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "view",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "wide",
+    "endurance",
+    "glacier",
+    "south",
+    "side",
+    "elephant",
+    "island",
+    "antarctica",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "view",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Wide View of Endurance Glacier south side Elephant Island Antarctica.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Elephant Island",
+    "savedAt": "2026-10-29T10:15:38.673Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "amanderson2",
+    "creator": "amanderson2",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T08:35:07.914Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Wide_View_of_Endurance_Glacier_south_side_Elephant_Island_Antarctica.jpg"
+  }
+}

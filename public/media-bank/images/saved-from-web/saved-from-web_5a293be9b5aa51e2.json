@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_5a293be9b5aa51e2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A woman with glasses intently focusing on her laptop screen at a dining table indoors.",
+  "path": "images/saved-from-web/saved-from-web_5a293be9b5aa51e2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "glasse",
+    "intently",
+    "focusing",
+    "her",
+    "laptop",
+    "screen",
+    "dining",
+    "table",
+    "indoor",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "glasses",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "glasse",
+    "intently",
+    "focusing",
+    "her",
+    "laptop",
+    "screen",
+    "dining",
+    "table",
+    "indoor",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "glasses",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A woman with glasses intently focusing on her laptop screen at a dining table indoors."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "fingers opening laptop screen morning",
+    "savedAt": "2026-10-29T13:46:24.473Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Helena Lopes",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/frustrated-woman-using-laptop-at-home-table-27177840/"
+  }
+}

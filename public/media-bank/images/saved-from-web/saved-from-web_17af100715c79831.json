@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_17af100715c79831",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Ernest Shackleton studio portrait.jpg",
+  "path": "images/saved-from-web/saved-from-web_17af100715c79831.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2192,
+  "height": 2600,
+  "aspectRatio": 0.8431,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "studio",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "studio",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Ernest Shackleton studio portrait.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Ernest Shackleton portrait",
+    "savedAt": "2026-10-29T10:18:16.808Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "unattributed",
+    "creator": "unattributed",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:14.015Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Ernest_Shackleton_studio_portrait.jpg"
+  }
+}

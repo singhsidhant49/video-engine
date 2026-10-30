@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_e78769a2c116c0de",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A satellite orbiting Earth showcasing contrasts between ocean and land from space.",
+  "path": "images/saved-from-web/saved-from-web_e78769a2c116c0de.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "satellite",
+    "orbiting",
+    "earth",
+    "showcasing",
+    "contrast",
+    "between",
+    "ocean",
+    "land",
+    "from",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "contrasts",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "satellite",
+    "orbiting",
+    "earth",
+    "showcasing",
+    "contrast",
+    "between",
+    "ocean",
+    "land",
+    "from",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "contrasts",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A satellite orbiting Earth showcasing contrasts between ocean and land from space."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "GPS satellite orbiting Earth animation",
+    "savedAt": "2026-10-29T14:29:04.722Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zelch Csaba",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/satellite-orbiting-earth-with-cloudy-atmosphere-30596892/"
+  }
+}

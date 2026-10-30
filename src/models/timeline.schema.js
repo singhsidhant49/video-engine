@@ -106,9 +106,10 @@ export const TimelineSchema = z.object({
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   durationInFrames: z.number().int().positive(),
-  visualMode: z.enum(['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']).default('MEDIA_EDITORIAL'),
+  visualMode: z.enum(['HYBRID_EDITORIAL', 'MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']).default('HYBRID_EDITORIAL'),
   visualPolicy: z.object({
-    visualMode: z.enum(['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']), useMediaEditorial: z.boolean(), enableProceduralGraphics: z.boolean(),
+    visualMode: z.enum(['HYBRID_EDITORIAL', 'MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']), useMediaEditorial: z.boolean(), enableProceduralGraphics: z.boolean(),
+    allowHybridRepresentations: z.boolean().optional(), preferAuthenticMedia: z.boolean().optional(),
     enableLegacyVisualFamilies: z.boolean(), allowGeneratedMedia: z.literal(false), allowSplitLayout: z.boolean().default(false), defaultTransition: z.literal('CUT'), defaultCamera: z.literal('STATIC'),
     motionPreset: z.enum(['minimal', 'standard']).default('standard'),
   }).strict(),

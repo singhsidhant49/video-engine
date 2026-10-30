@@ -1,5 +1,6 @@
 import { getStyle } from '../shared/styles.js';
 import { buildVisualRealizationDiagnostics } from '../pipeline/visualRealizationDiagnostics.js';
+import { getContentVisualProfile } from '../config/contentVisualProfiles.js';
 
 const STRUCTURED = new Set(['stat', 'compare', 'list', 'process', 'timeline', 'chart', 'quote', 'document', 'ui', 'code', 'statement', 'chapter']);
 
@@ -76,6 +77,9 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const cutLimit = Number(pacingPolicy?.maximumCutsPer10Seconds || 5);
   const pacingProfileName = pacingPolicy?.mode || 'legacy';
   const productionPacing = publishMode === 'PRODUCTION_RENDER' && Boolean(pacingPolicy);
+  const contentVisualProfile = timeline.productionProfile?.contentType
+    ? getContentVisualProfile(timeline.productionProfile.contentType)
+    : null;
   add('pacing-average-shot', avgShotSec >= targetAverageShotSeconds * 0.82, productionPacing ? 'error' : 'warn', `average shot duration ${avgShotSec.toFixed(2)}s (profile ${pacingProfileName}, target: ≥ ${(targetAverageShotSeconds * 0.82).toFixed(2)}s)`);
 
   const rushedProfileShots = minimumShotSeconds > 0
@@ -111,7 +115,7 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   add('motion-repetition', diagnostics.cameraMoveRepetitionRate <= 0.55, 'warn', `${(diagnostics.cameraMoveRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('asset-reuse', diagnostics.assetReuseRate <= 0.35, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
   add('asset-reuse-hard-limit', diagnostics.assetReuseRate <= 0.60, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (production hard limit: 60%)`);
-  const photoRunLimit = mediaOnly ? 10 : 4;
+  const photoRunLimit = contentVisualProfile?.maxPhotoRun ?? (mediaOnly ? 10 : 4);
   const excessivePhotoRun = diagnostics.consecutivePhotoCount > photoRunLimit;
   // A lack of third-party stock footage must not make an otherwise valid
   // media-only render impossible. Keep this visible as an editorial warning;
@@ -160,6 +164,21 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   for (const family of familyFrames.values()) familyRuntime[family] = (familyRuntime[family] || 0) + 1 / total;
   const dominant = Object.entries(familyRuntime).filter(([family, share]) => share > (family === 'image' ? 0.75 : 0.42));
   add('family-share', dominant.length === 0, 'warn', Object.entries(familyRuntime).map(([family, share]) => `${family} ${(share * 100).toFixed(0)}%`).join(', '));
+  if (contentVisualProfile && publishMode === 'PRODUCTION_RENDER') {
+    const imageShare = familyRuntime.image || 0;
+    const videoShare = familyRuntime.video || 0;
+    const structuredShare = Object.entries(familyRuntime)
+      .filter(([family]) => STRUCTURED.has(family))
+      .reduce((sum, [, share]) => sum + share, 0);
+    add('content-profile-image-share', imageShare <= contentVisualProfile.maxImageShare, 'error',
+      `${contentVisualProfile.id}: image ${(imageShare * 100).toFixed(0)}% (maximum ${(contentVisualProfile.maxImageShare * 100).toFixed(0)}%)`);
+    add('content-profile-video-share', videoShare + 0.001 >= contentVisualProfile.minVideoShare, 'error',
+      `${contentVisualProfile.id}: video ${(videoShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minVideoShare * 100).toFixed(0)}%)`);
+    add('content-profile-structured-share', structuredShare + 0.001 >= contentVisualProfile.minStructuredShare, 'error',
+      `${contentVisualProfile.id}: structured ${(structuredShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minStructuredShare * 100).toFixed(0)}%)`);
+    add('content-profile-photo-run', !excessivePhotoRun, 'error',
+      `${contentVisualProfile.id}: longest photo run ${diagnostics.consecutivePhotoCount} (maximum ${photoRunLimit})`);
+  }
 
   const baselineTransitions = new Set(['CUT', 'MATCH_MOVE', 'SMOOTH_CUT']);
   const designed = clips.filter((clip, index) => index > 0 && !baselineTransitions.has(clip.transitionPolicy || 'CUT')).length
@@ -168,6 +187,14 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     + (timeline.cutOverlays || []).filter((overlay) => overlay.type === 'dip' || overlay.type === 'flash').length;
   const allowed = Math.ceil(style.transitions.perMinute * Math.max(0.5, total / fps / 60)) + 1;
   add('transition-budget', designed <= allowed, 'warn', `${designed} designed transitions (budget ${allowed})`);
+  if (contentVisualProfile && publishMode === 'PRODUCTION_RENDER') {
+    const boundaries = Math.max(0, shots.length - 1);
+    const dissolves = shots.slice(1).filter((shot) => shot.enter?.type === 'dissolve').length;
+    const share = boundaries ? dissolves / boundaries : 0;
+    const { min, max } = contentVisualProfile.dissolveShare;
+    add('content-profile-transition-share', share + 0.001 >= min && share <= max + 0.001, 'error',
+      `${contentVisualProfile.id}: ${(share * 100).toFixed(0)}% dissolves (required ${(min * 100).toFixed(0)}–${(max * 100).toFixed(0)}%)`);
+  }
 
   const verbose = shots.filter((shot) => shot.overlay?.headline?.split(/\s+/).length > 7).map((shot) => shot.storyboardShotId);
   add('text-budget', verbose.length === 0, 'warn', verbose.length ? `headlines over seven words: ${verbose.join(', ')}` : 'ok');

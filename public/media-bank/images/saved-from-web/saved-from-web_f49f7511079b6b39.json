@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_f49f7511079b6b39",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A man guides reindeer pulling a sledge through a snowy winter landscape, showcasing traditional life.",
+  "path": "images/saved-from-web/saved-from-web_f49f7511079b6b39.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1867,
+  "aspectRatio": 1.3926,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "guide",
+    "reindeer",
+    "pulling",
+    "sledge",
+    "through",
+    "snowy",
+    "winter",
+    "landscape",
+    "showcasing",
+    "traditional",
+    "life",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "guides"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "guide",
+    "reindeer",
+    "pulling",
+    "sledge",
+    "through",
+    "snowy",
+    "winter",
+    "landscape",
+    "showcasing",
+    "traditional",
+    "life",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "guides"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A man guides reindeer pulling a sledge through a snowy winter landscape, showcasing traditional life."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "man hauling sledge Antarctic",
+    "savedAt": "2026-10-29T13:26:09.486Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Aleksandr Unikovskiy",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-winter-jacket-holding-brown-and-white-pony-on-snow-covered-ground-10535427/"
+  }
+}

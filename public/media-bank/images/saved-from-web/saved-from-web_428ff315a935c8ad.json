@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_428ff315a935c8ad",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of an antique book showing handwritten text on aged pages.",
+  "path": "images/saved-from-web/saved-from-web_428ff315a935c8ad.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1870,
+  "aspectRatio": 1.3904,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "antique",
+    "book",
+    "handwritten",
+    "text",
+    "aged",
+    "page",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "showing",
+    "pages",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "antique",
+    "book",
+    "handwritten",
+    "text",
+    "aged",
+    "page",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "showing",
+    "pages",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of an antique book showing handwritten text on aged pages."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "trembling handwritten warning parchment",
+    "savedAt": "2026-10-29T14:45:21.123Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pixabay",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/book-page-235976/"
+  }
+}

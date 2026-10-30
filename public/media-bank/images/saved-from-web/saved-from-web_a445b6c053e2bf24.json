@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_a445b6c053e2bf24",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A solitary astronaut in a space suit stands amidst swirling smoke and orange light.",
+  "path": "images/saved-from-web/saved-from-web_a445b6c053e2bf24.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "solitary",
+    "astronaut",
+    "space",
+    "suit",
+    "stand",
+    "amidst",
+    "swirling",
+    "smoke",
+    "orange",
+    "light",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "stands",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "solitary",
+    "astronaut",
+    "space",
+    "suit",
+    "stand",
+    "amidst",
+    "swirling",
+    "smoke",
+    "orange",
+    "light",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "stands",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A solitary astronaut in a space suit stands amidst swirling smoke and orange light."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "astronaut close up face speaking recorder dim light deep space, astrophysical cosmos, or orbit",
+    "savedAt": "2026-10-29T14:03:24.810Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-in-gray-space-suit-and-white-helmet-with-orange-light-7169851/"
+  }
+}

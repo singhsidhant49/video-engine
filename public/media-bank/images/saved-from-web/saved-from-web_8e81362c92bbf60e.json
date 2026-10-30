@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_8e81362c92bbf60e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Aerial shot of a small circular boat with two people rowing on a vast ocean.",
+  "path": "images/saved-from-web/saved-from-web_8e81362c92bbf60e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "aerial",
+    "small",
+    "circular",
+    "boat",
+    "two",
+    "people",
+    "rowing",
+    "vast",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "shot",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "aerial",
+    "small",
+    "circular",
+    "boat",
+    "two",
+    "people",
+    "rowing",
+    "vast",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "shot",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Aerial shot of a small circular boat with two people rowing on a vast ocean."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "small boat rowing stormy ocean",
+    "savedAt": "2026-10-29T10:51:45.964Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Hữu Thịnh 79",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-people-rowing-circular-boat-on-ocean-37114155/"
+  }
+}

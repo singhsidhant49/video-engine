@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_f927e3d28420289e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Dusk sky and volcanic dust 74 Sunbury St Geebung L1000761.jpg",
+  "path": "images/saved-from-web/saved-from-web_f927e3d28420289e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dusk",
+    "sky",
+    "volcanic",
+    "dust",
+    "sunbury",
+    "geebung",
+    "l1000761",
+    "municipal",
+    "city",
+    "street",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dusk",
+    "sky",
+    "volcanic",
+    "dust",
+    "sunbury",
+    "geebung",
+    "l1000761",
+    "municipal",
+    "city",
+    "street",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Dusk sky and volcanic dust 74 Sunbury St Geebung L1000761.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "dust dusk",
+    "savedAt": "2026-10-29T13:45:28.124Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "John Robert McPherson",
+    "creator": "John Robert McPherson",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T13:43:16.448Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Dusk_sky_and_volcanic_dust_74_Sunbury_St_Geebung_L1000761.jpg"
+  }
+}

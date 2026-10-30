@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_1dcad787aad8a9af",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Tranquil beach scene with gentle waves lapping the shore, perfect for nature-themed content.",
+  "path": "images/saved-from-web/saved-from-web_1dcad787aad8a9af.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1589,
+  "aspectRatio": 1.6362,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "beach",
+    "scene",
+    "gentle",
+    "wave",
+    "lapping",
+    "shore",
+    "perfect",
+    "nature",
+    "themed",
+    "content",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "waves",
+    "nature-themed"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "beach",
+    "scene",
+    "gentle",
+    "wave",
+    "lapping",
+    "shore",
+    "perfect",
+    "nature",
+    "themed",
+    "content",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "waves",
+    "nature-themed"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Tranquil beach scene with gentle waves lapping the shore, perfect for nature-themed content."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "gentle waves lapping lake shore forest active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-30T02:29:03.772Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Duygu Kamar",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/wave-on-sea-shore-18188228/"
+  }
+}

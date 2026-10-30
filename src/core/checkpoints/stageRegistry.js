@@ -59,7 +59,7 @@ export const STAGE_DEFINITIONS = {
         format: context.format,
         durationSec: context.durationSec,
         style: context.style,
-        visualMode: context.visualMode || 'MEDIA_EDITORIAL',
+        visualMode: context.visualMode || 'HYBRID_EDITORIAL',
         productionProfile: context.productionProfile || null,
         sourceData: context.sourceData || null,
       });
@@ -220,7 +220,7 @@ export const STAGE_DEFINITIONS = {
         fps: context.fps || 30,
         format: context.format,
         style: context.style,
-        visualMode: context.visualMode || 'MEDIA_EDITORIAL',
+        visualMode: context.visualMode || 'HYBRID_EDITORIAL',
       });
     },
   },

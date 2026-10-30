@@ -145,9 +145,7 @@ export function buildVisualCoveragePlan(storyboard, { visualPolicy = null } = {}
     ? storyboard.sections.flatMap((section) => section.scenes.map((scene) => [scene.id, section.id]))
     : scenes.map((scene) => [scene.id, scene.sectionId || 'legacy']));
 
-  const allowProcedural = visualPolicy
-    ? (visualPolicy.enableProceduralGraphics === true && !visualPolicy.useMediaEditorial)
-    : true;
+  const allowProcedural = visualPolicy ? visualPolicy.enableProceduralGraphics === true : true;
 
   for (const scene of scenes) {
     const shots = scene.shots || [scene];

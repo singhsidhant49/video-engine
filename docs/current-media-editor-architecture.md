@@ -11,7 +11,7 @@
 
 The video engine today operates primarily as a **media-first, editorial video assembly system** targeting YouTube Shorts (9:16, 1080x1920) and Landscape videos (16:9, 1920x1080).
 
-Historically, the engine was built around procedural Remotion React components (such as `PhotoShot`, `ProcessShot`, `CompareShot`, `ChartShot`, `StatementShot`, and `DiagramShot`). Following recent architecture milestones (Milestones 15–20), the engine has shifted its default production path to **`MEDIA_EDITORIAL`**, an asset-first compilation pipeline. 
+Historically, the engine was built around procedural Remotion React components (such as `PhotoShot`, `ProcessShot`, `CompareShot`, `ChartShot`, `StatementShot`, and `DiagramShot`). The default production path is now **`HYBRID_EDITORIAL`**: an asset-first compilation pipeline for concrete real-world visuals with structured representations retained for mechanisms, comparisons, timelines, data, UI, and code.
 
 Under `MEDIA_EDITORIAL`:
 1. Narration audio is synthesized via a local Kokoro TTS neural service and aligned to word timestamps via Whisper-base.en.
@@ -34,7 +34,7 @@ Legacy procedural graphic shot families remain in the codebase but are **disable
 * **Default Mode Today:** **`MEDIA_EDITORIAL`**
 * **Active by Default:** **YES**. Controlled by `src/config/visualMode.js: resolveVisualPolicy()` and `DEFAULT_VISUAL_POLICY`.
 * **Environment / CLI Flags Controlling Visual Routing:**
-  * `--visual-mode <mode>` (CLI): Accepts `MEDIA_EDITORIAL`, `HYBRID`, or `LEGACY_PROCEDURAL`.
+  * `--visual-mode <mode>` (CLI): Accepts `HYBRID_EDITORIAL`, `MEDIA_EDITORIAL`, or `LEGACY_PROCEDURAL`.
   * Defaults to `MEDIA_EDITORIAL` when omitted.
   * In `src/config/visualMode.js`:
     ```javascript
@@ -50,7 +50,7 @@ Legacy procedural graphic shot families remain in the codebase but are **disable
     ```
 
 ### Reachability of Legacy Procedural / Template Families
-* **Reachability:** Reachable **only** if explicitly requested via `--visual-mode LEGACY_PROCEDURAL` or in isolated unit test suites (e.g., `tests/diagrams/`, `tests/composition/`).
+* **Reachability:** Structured families are reachable through semantic representation routing in `HYBRID_EDITORIAL`, or explicitly through `LEGACY_PROCEDURAL` for compatibility and isolated test suites.
 * **Condition in Production:** When `--visual-mode` is omitted or set to `MEDIA_EDITORIAL`:
   * `enableProceduralGraphics` is `false`.
   * `enableLegacyVisualFamilies` is `false`.
@@ -956,7 +956,7 @@ If a rendered shot looks incorrect, inspect artifacts in the following sequence:
 | `diagramQaDirector.js` | **ACTIVE FALLBACK** | Used only during diagram repair in legacy/diagram mode. |
 | `visualCoveragePlan.js` | **REGRESSION / DIAGNOSTIC** | Runs during pipeline stage 4, but `MEDIA_EDITORIAL` bypasses its procedural outputs. |
 | `families/photo.jsx` | **DEAD / UNUSED** | Superseded by `GenericSceneRenderer` in production. |
-| `families/structured.jsx` | **DEAD / UNUSED** | Unreachable unless `--visual-mode LEGACY_PROCEDURAL` is passed. |
+| `families/structured.jsx` | **ACTIVE / COMPATIBILITY** | Reachable for structured hybrid representations that do not yet use a solved compiler, and in `LEGACY_PROCEDURAL`. |
 | `families/diagrams.jsx` | **DEAD / UNUSED** | Unreachable in default production runs. |
 | `families/montage.jsx` | **DEAD / UNUSED** | Replaced by single-shot media compilation. |
 

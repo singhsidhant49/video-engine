@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_9b320fa517a89d8d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Ernest Shackleton (1921 portrait-2).jpg",
+  "path": "images/saved-from-web/saved-from-web_9b320fa517a89d8d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1200,
+  "height": 1447,
+  "aspectRatio": 0.8293,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "1921",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "portrait-2",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "ernest",
+    "shackleton",
+    "1921",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "portrait-2",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Ernest Shackleton (1921 portrait-2).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Ernest Shackleton portrait",
+    "savedAt": "2026-10-29T10:14:29.915Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Reginald Grenville Eves",
+    "creator": "Reginald Grenville Eves",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:14.015Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Ernest_Shackleton_(1921_portrait-2).jpg"
+  }
+}

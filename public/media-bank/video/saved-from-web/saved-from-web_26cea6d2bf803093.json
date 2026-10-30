@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_26cea6d2bf803093",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/spacecraft-orbiting-saturn-s-rings-in-space-34845630/",
+  "path": "video/saved-from-web/saved-from-web_26cea6d2bf803093.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "spacecraft",
+    "orbiting",
+    "saturn",
+    "ring",
+    "space",
+    "34845630",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "spacecraft-orbiting-saturn-s-rings-in-space-34845630",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "spacecraft",
+    "orbiting",
+    "saturn",
+    "ring",
+    "space",
+    "34845630",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "spacecraft-orbiting-saturn-s-rings-in-space-34845630",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/spacecraft-orbiting-saturn-s-rings-in-space-34845630/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "Saturn rings from space station viewport",
+    "savedAt": "2026-10-29T14:02:01.080Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Adis Resic",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/spacecraft-orbiting-saturn-s-rings-in-space-34845630/"
+  }
+}

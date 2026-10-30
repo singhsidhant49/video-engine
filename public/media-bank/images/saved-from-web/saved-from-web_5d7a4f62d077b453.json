@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_5d7a4f62d077b453",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up image showing the intricate details of cracked wooden texture.",
+  "path": "images/saved-from-web/saved-from-web_5d7a4f62d077b453.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "intricate",
+    "detail",
+    "cracked",
+    "wooden",
+    "texture",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "close-up",
+    "image",
+    "showing",
+    "details",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "intricate",
+    "detail",
+    "cracked",
+    "wooden",
+    "texture",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "close-up",
+    "image",
+    "showing",
+    "details",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up image showing the intricate details of cracked wooden texture."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "cracked wooden ship timbers close up",
+    "savedAt": "2026-10-29T10:51:09.242Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Engin Akyurt",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-shot-of-a-wood-9756370/"
+  }
+}

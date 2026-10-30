@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_551509307f4fc38c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A small boat navigates near a cargo ship with rocky shore, evoking a maritime theme in warm tones.",
+  "path": "images/saved-from-web/saved-from-web_551509307f4fc38c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "small",
+    "boat",
+    "navigate",
+    "near",
+    "cargo",
+    "ship",
+    "rocky",
+    "shore",
+    "evoking",
+    "maritime",
+    "theme",
+    "warm",
+    "tone",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "navigates",
+    "tones",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "small",
+    "boat",
+    "navigate",
+    "near",
+    "cargo",
+    "ship",
+    "rocky",
+    "shore",
+    "evoking",
+    "maritime",
+    "theme",
+    "warm",
+    "tone",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "navigates",
+    "tones",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A small boat navigates near a cargo ship with rocky shore, evoking a maritime theme in warm tones."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "small boat launching from rocky shore",
+    "savedAt": "2026-10-29T10:52:02.130Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Rahime Gül",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/small-boat-and-cargo-ship-at-sea-in-warm-light-40352654/"
+  }
+}

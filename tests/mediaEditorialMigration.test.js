@@ -12,12 +12,16 @@ import { buildMaterializationQueue, hasReliableSearchResult, materializedMinimum
 
 const asset = { id: 'factory', type: 'image', src: 'assets/s01_d.jpg', width: 2400, height: 1350, focal: { x: .72, y: .45 }, subjectBounds: { x: .58, y: .15, width: .3, height: .7 }, cropFitness: .92, tier: 'verified', safeTextRegions: ['center_left'] };
 
-test('production visual policy defaults to media editorial and keeps legacy explicit', () => {
+test('production visual policy defaults to hybrid editorial and keeps media-only and legacy explicit', () => {
   const current = resolveVisualPolicy({ visualMode: undefined });
-  assert.equal(current.visualMode, 'MEDIA_EDITORIAL');
-  assert.equal(current.enableProceduralGraphics, false);
-  assert.equal(current.enableLegacyVisualFamilies, false);
+  assert.equal(current.visualMode, 'HYBRID_EDITORIAL');
+  assert.equal(current.enableProceduralGraphics, true);
+  assert.equal(current.allowHybridRepresentations, true);
+  assert.equal(current.enableLegacyVisualFamilies, true);
   assert.equal(current.defaultTransition, 'CUT');
+  const mediaOnly = resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' });
+  assert.equal(mediaOnly.enableProceduralGraphics, false);
+  assert.equal(mediaOnly.allowHybridRepresentations, false);
   const legacy = resolveVisualPolicy({ visualMode: 'LEGACY_PROCEDURAL' });
   assert.equal(legacy.enableProceduralGraphics, true);
 });

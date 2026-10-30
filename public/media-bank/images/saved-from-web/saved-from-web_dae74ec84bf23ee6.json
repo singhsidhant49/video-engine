@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_dae74ec84bf23ee6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Tall trees with dappled sunlight creating a serene forest atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_dae74ec84bf23ee6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1796,
+  "aspectRatio": 1.4477,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tall",
+    "tree",
+    "dappled",
+    "sunlight",
+    "creating",
+    "serene",
+    "forest",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tall",
+    "tree",
+    "dappled",
+    "sunlight",
+    "creating",
+    "serene",
+    "forest",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Tall trees with dappled sunlight creating a serene forest atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "still forest tall trees dappled sunlight",
+    "savedAt": "2026-10-30T02:30:47.425Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lana Kravchenko",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/sunlit-forest-trees-in-tranquil-setting-33184300/"
+  }
+}

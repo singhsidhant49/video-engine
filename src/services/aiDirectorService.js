@@ -106,8 +106,8 @@ EDITORIAL & PACING RULES:
 2. VARY HOLD TIMES: Simple atmospheric photos hold 3–5s; complex diagrams/processes hold 4–7s. Give ideas room to breathe.
 3. SPECIFIC HOOKS: Start with a concrete contradiction or high-stakes fact. Never open with "Have you ever wondered..." or "In this video...".
 4. PAYOFF MANDATE: Every question or mystery opened in the hook must be explicitly answered in the payoff scene.
-5. CINEMATIC FOOTAGE FIRST & REAL-IMAGE PRIORITY: 75% to 85% of all scenes MUST be "atmosphere" or "subject" with rich, concrete imageQueries for 4K video and photography. Prioritize real, tangible photography and authentic footage over abstract art or synthetic graphics across ALL content types. Provide 2–3 diverse physical queries per scene (e.g. 1 wide environmental context, 1 specific physical subject, 1 macro texture/detail). Never output abstract conceptual queries.
-6. USE GRAPHICS SPARINGLY: Use "chart", "process", "quote", "statement", or "comparison" ONLY for 1 or 2 high-impact anchor moments in the entire video. Never use graphic/data kinds in consecutive scenes or in more than 20% of total scenes.
+5. AUTHENTIC MEDIA FIRST, REPRESENTATION CORRECTNESS ALWAYS: Use real photography, archival evidence, or authentic footage whenever the beat concerns a visible person, place, object, event, environment, or physical action. For documentary, history, motivation, meditation, and real-world story beats, real media is the default. Provide 2–3 diverse physical queries per media scene: wide context, exact subject/action, and useful detail. Never output abstract conceptual queries.
+6. EXPLAIN INSTEAD OF DECORATE: When the viewer must understand a mechanism, causal relationship, comparison, timeline, numeric trend, software interface, or code path, choose the matching process/comparison/timeline/chart/ui/code kind. Do not replace an explanatory structure with vaguely related stock footage. Structured visuals must be narration-grounded, simple, and limited to the information actually spoken.
 7. On-screen text supports, never transcribes. "kicker" = a label such as a place/date/name ("NEW YORK · 2008"). "headline" = ≤6 words, a claim or keyword that is NOT a paraphrase of the whole sentence. Most photo scenes need no text at all.
 8. Truth: every number, date, quote, historical superlative, name and document must be real. For a checkable factual claim, provide a direct source URL in scene.source. Never invent a source; if you cannot cite it, rewrite the sentence without the unsupported exact claim.
 9. "emphasis" must be copied verbatim from that scene's narration.
@@ -132,7 +132,29 @@ EDITORIAL & PACING RULES:
     b. For Motivational: direct raw athletic discipline, intense training in rain, climbers ascending frozen ridges, runners at dawn, heavy work. NEVER generic business meetings, handshakes, or corporate people smiling at laptops!
     c. For Story/Audiobook: direct cinematic narrative b-roll of authentic environments, stormy seas, moody historical streets, atmospheric interiors, period objects.
     d. For Meditation/Sleep: direct tranquil, slow-motion nature b-roll (pine forest mist, gentle rain on leaves, slow twilight ocean tide, moonlight).
-    e. NEVER generate abstract clichés like "concept", "handshake", "business team", "growth arrows", "lightbulb", or "puzzle pieces".`;
+    e. NEVER generate abstract clichés like "concept", "handshake", "business team", "growth arrows", "lightbulb", or "puzzle pieces".
+16. RETENTION WITHOUT CLICKBAIT:
+    a. The first spoken sentence must create a concrete unanswered tension within 8 seconds. It must name the subject, stakes, or contradiction.
+    b. Every 10–18 seconds introduce one meaningful development: new evidence, reversal, consequence, mechanism, escalation, or answer. Do not use empty teaser phrases.
+    c. Open no more than two curiosity gaps at once. Close each gap with a clear answer before the ending.
+    d. Use causal bridges between beats (because, but, therefore, meanwhile, until) so the video feels like one story rather than a list of facts.
+    e. Escalation must come from stronger information or stakes, never louder adjectives.
+17. SCENE-TO-SCENE VISUAL EDITING:
+    a. Each scene must contain one dominant visual proposition that can be shown accurately for its full narration span.
+    b. Change the visual only at a new action, entity, location, evidence item, causal step, emotional turn, or section boundary.
+    c. Do not request a cut merely because a sentence ends. Do not hold an irrelevant image while narration moves to a different subject.
+    d. Alternate useful shot scale—wide context, medium action, close evidence, detail payoff—without mechanically repeating the same pattern.
+    e. Queries must include the visible action and environment when either matters. A topic keyword alone is not a usable query.
+18. PROFESSIONAL SPOKEN WRITING:
+    a. Prefer precise verbs and concrete nouns. Remove throat-clearing, repetition, generic inspiration, and summary-before-explanation.
+    b. Vary sentence length for cadence, but keep every sentence easy to understand when heard once.
+    c. Never read section headings, timestamps, visual instructions, citations, or production notes aloud.
+    d. End on a resolved insight or image that transforms the opening idea; never end with a generic subscribe request.
+19. CONTINUITY:
+    a. Recurring real entities must keep the same name and visual identity.
+    b. Story/audiobook scenes must preserve character appearance, wardrobe, location, time of day, and important props in the visual description and queries.
+    c. Documentary scenes must preserve chronology and period accuracy; never mix modern objects into historical scenes.
+20. HONEST ENGAGEMENT: Never invent facts, danger, certainty, quotations, or emotional stakes to improve retention.`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -489,7 +511,7 @@ export function getGenreDirectingInstructions(contentType = 'explainer') {
           `- Core Mechanism: 3–4 scenes (foundational step-by-step physical breakdown)\n` +
           `- Real-World Evidence: 2 scenes (concrete examples, actual machines, verified data)\n` +
           `- Payoff / Conclusion: 1–2 scenes (direct resolution of the open question, lasting insight)\n`,
-        visualGuidance: `MANDATORY VISUAL DIRECTION: Prioritize real tangible photography and authentic b-roll footage of actual machines, facilities, laboratories, and physical operations. Never search for abstract buzzwords or generic corporate meetings.`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Use real tangible photography and authentic b-roll for machines, facilities, laboratories, physical operations, and evidence. For mechanisms, causal flows, comparisons, timelines, UI, code, or data, choose the exact structured visual kind instead of decorative stock. Never search for abstract buzzwords or generic corporate meetings.`,
         toneGuidance: `Write with clarity, intellect, momentum, vivid concrete nouns, and clear logical progression.`,
       };
   }
@@ -539,7 +561,9 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
           `Design a beat outline with EXACTLY ${budget.targetSceneCount} content beats conforming to these section targets:\n` +
           genre.structureGuidance +
           `\n${genre.visualGuidance}\n` +
-          `Return {"title": string, "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "targetWords": number, "visualType": string}]}`,
+          `Retention contract: the hook opens one concrete question; every 10–18 seconds adds evidence, reversal, consequence, mechanism, escalation, or resolution; every open question is closed by the payoff. No empty teasers or repeated ideas.\n` +
+          `For every beat choose the representation that communicates it most directly. Real media is preferred for visible reality; process/comparison/timeline/chart/ui/code is required when relationships or mechanisms must be understood.\n` +
+          `Return {"title": string, "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "retentionFunction": string, "openQuestion": string|null, "answerToQuestion": string|null, "targetWords": number, "visualType": string, "visualProof": string, "changeReason": string}]}`,
       },
     ]);
 

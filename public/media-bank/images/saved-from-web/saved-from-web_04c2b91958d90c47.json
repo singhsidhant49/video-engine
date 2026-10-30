@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_04c2b91958d90c47",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A woman astronaut wearing a spacesuit in a control room lit by red lights, looks focused.",
+  "path": "images/saved-from-web/saved-from-web_04c2b91958d90c47.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "astronaut",
+    "wearing",
+    "spacesuit",
+    "control",
+    "room",
+    "lit",
+    "red",
+    "light",
+    "look",
+    "focused",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "lights",
+    "looks",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "astronaut",
+    "wearing",
+    "spacesuit",
+    "control",
+    "room",
+    "lit",
+    "red",
+    "light",
+    "look",
+    "focused",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "lights",
+    "looks",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A woman astronaut wearing a spacesuit in a control room lit by red lights, looks focused."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "space station control room red emergency lights",
+    "savedAt": "2026-10-29T14:06:18.914Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-in-spacesuit-looking-worried-7660832/"
+  }
+}

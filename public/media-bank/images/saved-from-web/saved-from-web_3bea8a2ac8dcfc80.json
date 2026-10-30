@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_3bea8a2ac8dcfc80",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Tranquil mountain landscape with lake reflection during sunrise, capturing serene nature and misty atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_3bea8a2ac8dcfc80.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "mountain",
+    "landscape",
+    "lake",
+    "reflection",
+    "during",
+    "sunrise",
+    "capturing",
+    "serene",
+    "nature",
+    "misty",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tranquil",
+    "mountain",
+    "landscape",
+    "lake",
+    "reflection",
+    "during",
+    "sunrise",
+    "capturing",
+    "serene",
+    "nature",
+    "misty",
+    "atmosphere",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Tranquil mountain landscape with lake reflection during sunrise, capturing serene nature and misty atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "still mountain lake sunrise mist",
+    "savedAt": "2026-10-29T15:19:27.873Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Johannes Plenio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/calm-body-of-water-2868482/"
+  }
+}

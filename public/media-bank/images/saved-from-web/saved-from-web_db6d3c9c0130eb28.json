@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_db6d3c9c0130eb28",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Penguins gather on snowy Antarctic coast with a cruise ship on icy waters.",
+  "path": "images/saved-from-web/saved-from-web_db6d3c9c0130eb28.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "penguin",
+    "gather",
+    "snowy",
+    "antarctic",
+    "coast",
+    "cruise",
+    "ship",
+    "icy",
+    "water",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "penguins",
+    "waters",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "penguin",
+    "gather",
+    "snowy",
+    "antarctic",
+    "coast",
+    "cruise",
+    "ship",
+    "icy",
+    "water",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "penguins",
+    "waters",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Penguins gather on snowy Antarctic coast with a cruise ship on icy waters."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Endurance ship Antarctic ice archival photo",
+    "savedAt": "2026-10-29T09:54:29.690Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jan Tang",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/penguins-and-cruise-ship-in-antarctic-landscape-35705734/"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_57ae4bb5d87b5ea4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tired athlete lies on the track, recovering after a race in sportswear.",
+  "path": "images/saved-from-web/saved-from-web_57ae4bb5d87b5ea4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "athlete",
+    "lie",
+    "track",
+    "recovering",
+    "after",
+    "race",
+    "sportswear",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "lies"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "athlete",
+    "lie",
+    "track",
+    "recovering",
+    "after",
+    "race",
+    "sportswear",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "lies"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tired athlete lies on the track, recovering after a race in sportswear."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "running track stadium athlete",
+    "savedAt": "2026-10-29T13:45:46.557Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RUN 4 FFWPU",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-red-shorts-lying-on-red-carpet-12698213/"
+  }
+}

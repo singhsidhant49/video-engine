@@ -1,4 +1,5 @@
 export const VISUAL_MODES = Object.freeze({
+  HYBRID_EDITORIAL: 'HYBRID_EDITORIAL',
   MEDIA_EDITORIAL: 'MEDIA_EDITORIAL',
   LEGACY_PROCEDURAL: 'LEGACY_PROCEDURAL',
 });
@@ -15,7 +16,8 @@ function envBoolean(value, fallback) {
 }
 
 export function normalizeVisualMode(value = process.env.VISUAL_MODE) {
-  const normalized = String(value || VISUAL_MODES.MEDIA_EDITORIAL).trim().toUpperCase();
+  const normalized = String(value || VISUAL_MODES.HYBRID_EDITORIAL).trim().toUpperCase();
+  if (normalized === VISUAL_MODES.HYBRID_EDITORIAL) return VISUAL_MODES.HYBRID_EDITORIAL;
   if (normalized === VISUAL_MODES.LEGACY_PROCEDURAL) return VISUAL_MODES.LEGACY_PROCEDURAL;
   return VISUAL_MODES.MEDIA_EDITORIAL;
 }
@@ -24,9 +26,10 @@ export function normalizeVisualMode(value = process.env.VISUAL_MODE) {
 export function resolveVisualPolicy(overrides = {}) {
   const requestedMode = overrides.visualMode || process.env.VISUAL_MODE;
   const mode = normalizeVisualMode(requestedMode);
-  const mediaEditorial = mode === VISUAL_MODES.MEDIA_EDITORIAL
+  const hybridEditorial = mode === VISUAL_MODES.HYBRID_EDITORIAL;
+  const mediaEditorial = (mode === VISUAL_MODES.MEDIA_EDITORIAL || hybridEditorial)
     && envBoolean(overrides.useMediaEditorial ?? process.env.USE_MEDIA_EDITORIAL, true);
-  const proceduralEnabled = mode === VISUAL_MODES.LEGACY_PROCEDURAL
+  const proceduralEnabled = (mode === VISUAL_MODES.LEGACY_PROCEDURAL || hybridEditorial)
     && envBoolean(overrides.enableProceduralGraphics ?? process.env.ENABLE_PROCEDURAL_GRAPHICS, true)
     && envBoolean(overrides.enableLegacyVisualFamilies ?? process.env.ENABLE_LEGACY_VISUAL_FAMILIES, true);
   const allowSplitLayout = envBoolean(overrides.allowSplitLayout ?? process.env.ALLOW_SPLIT_LAYOUT, false);
@@ -34,10 +37,14 @@ export function resolveVisualPolicy(overrides = {}) {
     ? 'minimal'
     : 'standard';
   return Object.freeze({
-    visualMode: mediaEditorial ? VISUAL_MODES.MEDIA_EDITORIAL : VISUAL_MODES.LEGACY_PROCEDURAL,
+    visualMode: hybridEditorial
+      ? VISUAL_MODES.HYBRID_EDITORIAL
+      : mediaEditorial ? VISUAL_MODES.MEDIA_EDITORIAL : VISUAL_MODES.LEGACY_PROCEDURAL,
     useMediaEditorial: mediaEditorial,
     enableProceduralGraphics: proceduralEnabled,
     enableLegacyVisualFamilies: proceduralEnabled,
+    allowHybridRepresentations: hybridEditorial,
+    preferAuthenticMedia: mode !== VISUAL_MODES.LEGACY_PROCEDURAL,
     allowGeneratedMedia: false,
     allowSplitLayout,
     motionPreset,

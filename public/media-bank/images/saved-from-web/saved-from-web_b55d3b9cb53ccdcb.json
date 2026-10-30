@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_b55d3b9cb53ccdcb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Navigation sextant in Museum of the World Ocean - p8.jpg",
+  "path": "images/saved-from-web/saved-from-web_b55d3b9cb53ccdcb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2009,
+  "aspectRatio": 1.2942,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "navigation",
+    "sextant",
+    "museum",
+    "world",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "navigation",
+    "sextant",
+    "museum",
+    "world",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Navigation sextant in Museum of the World Ocean - p8.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "sextant navigation",
+    "savedAt": "2026-10-29T08:40:10.882Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC0",
+    "license_name": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Александр Сигачёв",
+    "creator": "Александр Сигачёв",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:13.238Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Navigation_sextant_in_Museum_of_the_World_Ocean_-_p8.jpg"
+  }
+}

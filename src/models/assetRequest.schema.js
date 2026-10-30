@@ -7,6 +7,9 @@ export const AssetRequestSchema = z.object({
   concept: z.string().min(1),
   searchConcepts: z.array(z.string().min(1)).max(12).default([]),
   preferredSource: z.enum(['video', 'image', 'procedural', 'generated', 'auto']).default('auto'),
+  preferredMediaType: z.enum(['video', 'image', 'either']).default('either'),
+  nativeMotionRequired: z.boolean().default(false),
+  contentType: z.enum(['documentary', 'explainer', 'meditation', 'motivational', 'audiobook', 'story']).default('explainer'),
   evidenceRequired: z.boolean().default(false),
   entities: z.array(z.string().min(1)).max(12).default([]),
   stagedQueries: z.object({

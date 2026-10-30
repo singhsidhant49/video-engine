@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_da5bc56c9f3e80ae",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of polar ice and colorful sunset sky over the ocean, capturing nature's beauty.",
+  "path": "images/saved-from-web/saved-from-web_da5bc56c9f3e80ae.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1727,
+  "aspectRatio": 1.5055,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "polar",
+    "ice",
+    "colorful",
+    "sunset",
+    "sky",
+    "over",
+    "ocean",
+    "capturing",
+    "nature",
+    "beauty",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "polar",
+    "ice",
+    "colorful",
+    "sunset",
+    "sky",
+    "over",
+    "ocean",
+    "capturing",
+    "nature",
+    "beauty",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking view of polar ice and colorful sunset sky over the ocean, capturing nature's beauty."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunset over Antarctic ice",
+    "savedAt": "2026-10-29T11:58:59.539Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pixabay",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/water-freezes-on-daytime-69402/"
+  }
+}

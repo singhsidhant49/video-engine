@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_7323d03f2c281cfb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Woman capturing scenic mountain view with smartphone while hiking on a trail.",
+  "path": "images/saved-from-web/saved-from-web_7323d03f2c281cfb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1729,
+  "aspectRatio": 1.5038,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "capturing",
+    "scenic",
+    "mountain",
+    "smartphone",
+    "while",
+    "hiking",
+    "trail",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "view"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "capturing",
+    "scenic",
+    "mountain",
+    "smartphone",
+    "while",
+    "hiking",
+    "trail",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "view"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Woman capturing scenic mountain view with smartphone while hiking on a trail."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hiker holding smartphone mountain trail",
+    "savedAt": "2026-10-29T14:24:43.366Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Gotta Be Worth It",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-taking-photo-of-mountain-1431606/"
+  }
+}

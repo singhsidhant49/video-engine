@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_93c5110898f102a5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Endurance Buinen 2024 5718.jpg",
+  "path": "images/saved-from-web/saved-from-web_93c5110898f102a5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1920,
+  "height": 1280,
+  "aspectRatio": 1.5,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "buinen",
+    "2024",
+    "5718",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "buinen",
+    "2024",
+    "5718",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Endurance Buinen 2024 5718.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Endurance",
+    "savedAt": "2026-10-29T10:15:20.079Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Ruud Overes",
+    "creator": "Ruud Overes",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T08:35:05.585Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Endurance_Buinen_2024_5718.jpg"
+  }
+}

@@ -91,7 +91,7 @@ function buildClaimEvidenceDiagnostics(plan) {
  * @param {boolean} [o.contactSheetOnly] stop after preflight contact sheet
  * @param {boolean} [o.noTts]        reuse narration audio without TTS re-synthesis
  * @param {boolean} [o.offline]      use cached/local media only
- * @param {'MEDIA_EDITORIAL'|'LEGACY_PROCEDURAL'} [o.visualMode] centralized visual routing mode
+ * @param {'HYBRID_EDITORIAL'|'MEDIA_EDITORIAL'|'LEGACY_PROCEDURAL'} [o.visualMode] centralized visual routing mode
  * @param {object} [o.brief] normalized prompt/data request for application integrations
  * @param {object} [o.channelProfile] channel-level audience, tone and pacing defaults
  * @param {string} [o.videoId] caller-assigned stable video identifier
@@ -660,9 +660,8 @@ export async function createFacelessVideo({
     sfx = Object.fromEntries(await Promise.all(Object.entries(sfxSources).map(async ([k, rel]) => [k, await copyIn(rel)])));
     bgm = { ...bgmSource, src: await copyIn(bgmSource.src) };
   } else {
-    // Coverage may have been mutated by an older resumed run that allowed a
-    // procedural production fallback. Rebuild it at the asset boundary so
-    // MEDIA_EDITORIAL remains strictly image/video-only.
+    // Rebuild coverage at the asset boundary so resumed runs use the current
+    // content-aware representation policy.
     visualCoveragePlan = buildVisualCoveragePlan(storyboard, { visualPolicy });
     await save('visual-coverage-plan.json', visualCoveragePlan, { schema: VisualCoveragePlanSchema });
     const rawSpecs = directScenes(storyboard, { format, rng: rngFrom(`${videoId}:visual`) });
@@ -675,7 +674,10 @@ export async function createFacelessVideo({
     await job.startStage('assets');
     throwIfCancelled();
     assetEditorialMode = resolveEditorialMode(productionProfile?.contentType, plan.niche);
-    const assetRequests = planAssetRequests(storyboard, { format, visualPolicy, coveragePlan: visualCoveragePlan, editorialMode: assetEditorialMode });
+    const assetRequests = planAssetRequests(storyboard, {
+      format, visualPolicy, coveragePlan: visualCoveragePlan, editorialMode: assetEditorialMode,
+      contentType: productionProfile?.contentType || 'explainer',
+    });
     await save('asset-requests.json', assetRequests, { schema: AssetRequestListSchema });
     await save('visual-propositions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.visualProposition])));
     await save('representation-decisions.json', Object.fromEntries(assetRequests.map((request) => [request.storyboardShotId, request.representationDecision])));

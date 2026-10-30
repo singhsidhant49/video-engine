@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_6445fb6dcdde454e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking sunrise over Antarctic icebergs with a clear sky and serene atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_6445fb6dcdde454e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2560,
+  "height": 1920,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "sunrise",
+    "over",
+    "antarctic",
+    "iceberg",
+    "clear",
+    "sky",
+    "serene",
+    "atmosphere",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "icebergs"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "sunrise",
+    "over",
+    "antarctic",
+    "iceberg",
+    "clear",
+    "sky",
+    "serene",
+    "atmosphere",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "icebergs"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking sunrise over Antarctic icebergs with a clear sky and serene atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Antarctic ice landscape",
+    "savedAt": "2026-10-29T10:18:31.937Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pixabay",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-of-mountain-beside-body-of-water-during-sunrise-48885/"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_72c828eaa11bad05",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:CryoSat sea ice Weddell Sea D7000 DSC0781 (6245410446).jpg",
+  "path": "images/saved-from-web/saved-from-web_72c828eaa11bad05.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1200,
+  "height": 758,
+  "aspectRatio": 1.5831,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "cryosat",
+    "sea",
+    "ice",
+    "weddell",
+    "d7000",
+    "dsc0781",
+    "6245410446",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "cryosat",
+    "sea",
+    "ice",
+    "weddell",
+    "d7000",
+    "dsc0781",
+    "6245410446",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:CryoSat sea ice Weddell Sea D7000 DSC0781 (6245410446).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Weddell Sea",
+    "savedAt": "2026-10-29T09:56:19.493Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "NASA ICE",
+    "creator": "NASA ICE",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T09:51:21.052Z",
+    "page": "https://commons.wikimedia.org/wiki/File:CryoSat_sea_ice_Weddell_Sea_D7000_DSC0781_(6245410446).jpg"
+  }
+}

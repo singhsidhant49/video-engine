@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_20daed9ce71545d7",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of snowy mountains and blue waters in South Georgia.",
+  "path": "images/saved-from-web/saved-from-web_20daed9ce71545d7.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snowy",
+    "mountain",
+    "blue",
+    "water",
+    "south",
+    "georgia",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains",
+    "waters"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snowy",
+    "mountain",
+    "blue",
+    "water",
+    "south",
+    "georgia",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains",
+    "waters"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking view of snowy mountains and blue waters in South Georgia."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "South Georgia snowy mountains glaciers",
+    "savedAt": "2026-10-29T10:52:44.830Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "ArcticDesire.com Polarreisen",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scenic-view-of-snowy-mountains-in-south-georgia-31308012/"
+  }
+}

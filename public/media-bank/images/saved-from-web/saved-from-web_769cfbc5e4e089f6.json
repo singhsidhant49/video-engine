@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_769cfbc5e4e089f6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Heroic Age of Antarctic Exploration",
+  "path": "images/saved-from-web/saved-from-web_769cfbc5e4e089f6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "heroic",
+    "age",
+    "antarctic",
+    "exploration",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "heroic",
+    "age",
+    "antarctic",
+    "exploration",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Heroic Age of Antarctic Exploration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Heroic Age of Antarctic Exploration",
+    "savedAt": "2026-10-29T12:44:36.816Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "PD-US",
+    "license_name": "PD-US",
+    "url": null,
+    "license_url": null,
+    "author": "Olav Bjaaland (1863-1961)[1]",
+    "creator": "Olav Bjaaland (1863-1961)[1]",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T12:42:35.982Z",
+    "page": "https://en.wikipedia.org/wiki/File:At_the_South_Pole,_December_1911.jpg"
+  }
+}

@@ -185,7 +185,7 @@ mimages/
   objects/
 # Production visual mode
 
-Production generation defaults to `MEDIA_EDITORIAL`: real image/video media is composition-solved before Remotion renders it, while procedural chart/process/diagram/statement families are disabled. Use `--visual-mode LEGACY_PROCEDURAL` only for regression, debugging, or compatibility.
+Production generation defaults to `HYBRID_EDITORIAL`: authentic real image/video media remains the first choice for concrete people, places, objects, actions, environments, and evidence, while chart/process/diagram/comparison/timeline/UI/code families remain available when they explain the narration more directly. Use `--visual-mode MEDIA_EDITORIAL` for an explicit documentary-style media-only edit, or `--visual-mode LEGACY_PROCEDURAL` for regression and compatibility.
 
 Useful validation commands:
 

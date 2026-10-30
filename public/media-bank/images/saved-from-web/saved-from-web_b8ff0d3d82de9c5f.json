@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_b8ff0d3d82de9c5f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene silhouette of a person walking on a Mombasa beach at sunrise.",
+  "path": "images/saved-from-web/saved-from-web_b8ff0d3d82de9c5f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "silhouette",
+    "person",
+    "walking",
+    "mombasa",
+    "beach",
+    "sunrise",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "silhouette",
+    "person",
+    "walking",
+    "mombasa",
+    "beach",
+    "sunrise",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene silhouette of a person walking on a Mombasa beach at sunrise."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "silhouette walking toward sunrise empty road",
+    "savedAt": "2026-10-29T13:47:34.572Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zebari  Visuals",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-of-a-person-walking-on-a-beach-at-sunrise-37476354/"
+  }
+}

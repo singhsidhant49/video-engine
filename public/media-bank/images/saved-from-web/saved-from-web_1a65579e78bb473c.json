@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_1a65579e78bb473c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed close-up of a vintage book cover featuring the name Keats embossed in gold.",
+  "path": "images/saved-from-web/saved-from-web_1a65579e78bb473c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1519,
+  "aspectRatio": 1.7117,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "vintage",
+    "book",
+    "cover",
+    "featuring",
+    "name",
+    "keat",
+    "embossed",
+    "gold",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "keats",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "vintage",
+    "book",
+    "cover",
+    "featuring",
+    "name",
+    "keat",
+    "embossed",
+    "gold",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "keats",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed close-up of a vintage book cover featuring the name Keats embossed in gold."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "silver embossed name on book cover",
+    "savedAt": "2026-10-29T14:45:11.612Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Suzy Hazelwood",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/keats-4079272/"
+  }
+}

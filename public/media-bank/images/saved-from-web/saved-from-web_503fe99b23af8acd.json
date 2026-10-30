@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_503fe99b23af8acd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Travelers ride a horse sledge across a snowy field against a dramatic mountain backdrop.",
+  "path": "images/saved-from-web/saved-from-web_503fe99b23af8acd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "traveler",
+    "ride",
+    "horse",
+    "sledge",
+    "acros",
+    "snowy",
+    "field",
+    "against",
+    "dramatic",
+    "mountain",
+    "backdrop",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "travelers",
+    "across",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "traveler",
+    "ride",
+    "horse",
+    "sledge",
+    "acros",
+    "snowy",
+    "field",
+    "against",
+    "dramatic",
+    "mountain",
+    "backdrop",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "travelers",
+    "across",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Travelers ride a horse sledge across a snowy field against a dramatic mountain backdrop."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "men hauling sledges across Antarctic ice",
+    "savedAt": "2026-10-29T10:51:23.739Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mehmet Turgut  Kirkgoz",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/horse-sledge-in-winter-scenery-14720552/"
+  }
+}

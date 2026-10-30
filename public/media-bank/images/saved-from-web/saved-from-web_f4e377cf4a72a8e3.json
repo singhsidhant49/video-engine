@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_f4e377cf4a72a8e3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Endurance-shagya.JPG",
+  "path": "images/saved-from-web/saved-from-web_f4e377cf4a72a8e3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2147,
+  "height": 1521,
+  "aspectRatio": 1.4116,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "shagya",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "endurance-shagya",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "endurance",
+    "shagya",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "endurance-shagya",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Endurance-shagya.JPG"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Endurance in action",
+    "savedAt": "2026-10-29T12:46:19.720Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Véronique Mestre Gibaud (Association française du Cheval Arabe-Shagya)",
+    "creator": "Véronique Mestre Gibaud (Association française du Cheval Arabe-Shagya)",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T08:35:06.582Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Endurance-shagya.JPG"
+  }
+}

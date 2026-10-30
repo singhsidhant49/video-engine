@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_1362e0591ae29534",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:South Georgia and South Sandwich Islands (32750840135) (cropped).jpg",
+  "path": "images/saved-from-web/saved-from-web_1362e0591ae29534.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1454,
+  "height": 1037,
+  "aspectRatio": 1.4021,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "south",
+    "georgia",
+    "sandwich",
+    "island",
+    "32750840135",
+    "cropped",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "islands",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "south",
+    "georgia",
+    "sandwich",
+    "island",
+    "32750840135",
+    "cropped",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "islands",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:South Georgia and South Sandwich Islands (32750840135) (cropped).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "South Georgia",
+    "savedAt": "2026-10-29T11:58:35.721Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "NASA image by Jeff Schmaltz, LANCE/EOSDIS Rapid Response",
+    "creator": "NASA image by Jeff Schmaltz, LANCE/EOSDIS Rapid Response",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:10.753Z",
+    "page": "https://commons.wikimedia.org/wiki/File:South_Georgia_and_South_Sandwich_Islands_(32750840135)_(cropped).jpg"
+  }
+}

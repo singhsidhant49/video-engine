@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_45dc5ce8c83c0939",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Explore a mysterious shipwreck underwater with scuba divers capturing the serene beauty of the deep blue sea.",
+  "path": "images/saved-from-web/saved-from-web_45dc5ce8c83c0939.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1737,
+  "aspectRatio": 1.4968,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "mysteriou",
+    "shipwreck",
+    "underwater",
+    "scuba",
+    "diver",
+    "capturing",
+    "serene",
+    "beauty",
+    "deep",
+    "blue",
+    "sea",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "mysterious",
+    "divers",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "mysteriou",
+    "shipwreck",
+    "underwater",
+    "scuba",
+    "diver",
+    "capturing",
+    "serene",
+    "beauty",
+    "deep",
+    "blue",
+    "sea",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "mysterious",
+    "divers",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Explore a mysterious shipwreck underwater with scuba divers capturing the serene beauty of the deep blue sea."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Endurance shipwreck underwater ROV",
+    "savedAt": "2026-10-29T11:59:17.541Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "adiprayogo liemena",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/underwater-photo-of-ship-wreck-13478691/"
+  }
+}

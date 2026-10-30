@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_3e75b7aaa5978d11",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/serene-sunrise-over-calm-misty-lake-30560885/",
+  "path": "video/saved-from-web/saved-from-web_3e75b7aaa5978d11.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "serene",
+    "sunrise",
+    "over",
+    "calm",
+    "misty",
+    "lake",
+    "30560885",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "serene-sunrise-over-calm-misty-lake-30560885"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "serene",
+    "sunrise",
+    "over",
+    "calm",
+    "misty",
+    "lake",
+    "30560885",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "serene-sunrise-over-calm-misty-lake-30560885"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/serene-sunrise-over-calm-misty-lake-30560885/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "calm lake water mist moving sunrise",
+    "savedAt": "2026-10-30T02:32:48.805Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "TimePRO TV",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/serene-sunrise-over-calm-misty-lake-30560885/"
+  }
+}

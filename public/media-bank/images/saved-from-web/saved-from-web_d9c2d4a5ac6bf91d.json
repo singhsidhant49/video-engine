@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_d9c2d4a5ac6bf91d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Blurred commuters rushing through Cannon Street underground station, London.",
+  "path": "images/saved-from-web/saved-from-web_d9c2d4a5ac6bf91d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "blurred",
+    "commuter",
+    "rushing",
+    "through",
+    "cannon",
+    "street",
+    "underground",
+    "station",
+    "london",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "commuters",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "blurred",
+    "commuter",
+    "rushing",
+    "through",
+    "cannon",
+    "street",
+    "underground",
+    "station",
+    "london",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "commuters",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Blurred commuters rushing through Cannon Street underground station, London."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "blurred commuters rushing city street motion manufacturing, fabricating, or constructing",
+    "savedAt": "2026-10-29T13:44:11.641Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nathan J Hilton",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/cinematic-motion-blur-in-london-underground-station-30692025/"
+  }
+}

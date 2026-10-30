@@ -41,7 +41,7 @@ const stillRequest = (request) => mediaRequest(request) && request.preferredSour
 
 export const localAssetProvider = createProvider({
   id: 'local-bank',
-  supports: mediaRequest,
+  supports: stillRequest,
   search: async (request) => searchQueries(request, (query) => searchImageBank(query, { limit: 2 }), 'local-bank'),
 });
 
@@ -111,8 +111,8 @@ const ROUTES = {
   CONCEPT: ['pexels-image', 'pexels-video', 'commons', 'brave-image', 'pixabay-image', 'local-bank', 'generic-library'],
   ATMOSPHERE: ['pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'local-bank', 'generic-library'],
   // DATA requests are procedural only when the request itself says so. In
-  // MEDIA_EDITORIAL the request planner deliberately changes those shots to
-  // `auto`, so route them through real-media providers like other concepts.
+  // Media-only mode may deliberately change these shots to `auto`; hybrid
+  // production routes explanatory data to a structured representation.
   DATA: ['commons', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'generic-library'],
 };
 

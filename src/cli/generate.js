@@ -34,7 +34,7 @@ Core Options:
   --tts <engine>           kokoro (default) | say (macOS dev narration)
   --no-render              stop after timeline + QC
   --render-scale <n>       render scale (default 1; use 0.5 for benchmark previews)
-  --visual-mode <mode>     MEDIA_EDITORIAL (default) | LEGACY_PROCEDURAL
+  --visual-mode <mode>     HYBRID_EDITORIAL (default) | MEDIA_EDITORIAL | LEGACY_PROCEDURAL
   --dev                    permit unresolved placeholders; never publishable
 
 Resumability & Iteration (Milestone 12):
@@ -69,7 +69,7 @@ async function main() {
   const requestedDuration = getArg(['--duration', '--durationSec', '--duration-sec']);
   const requestedVisualMode = getArg(['--visual-mode', '--visualMode']);
   requireValidChoice(requestedFormat, '--format', ['shorts', 'landscape']);
-  requireValidChoice(requestedVisualMode, '--visual-mode', ['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']);
+  requireValidChoice(requestedVisualMode, '--visual-mode', ['HYBRID_EDITORIAL', 'MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']);
   if (requestedDuration != null && (!Number.isFinite(Number(requestedDuration)) || Number(requestedDuration) <= 0)) {
     throw new Error('--duration must be a positive number of seconds');
   }

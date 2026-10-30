@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_b4ac298d8ae8315a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene view of white clouds scattered across a vivid blue sky, evoking calm and tranquility.",
+  "path": "images/saved-from-web/saved-from-web_b4ac298d8ae8315a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "white",
+    "cloud",
+    "scattered",
+    "acros",
+    "vivid",
+    "blue",
+    "sky",
+    "evoking",
+    "calm",
+    "tranquility",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "across",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "white",
+    "cloud",
+    "scattered",
+    "acros",
+    "vivid",
+    "blue",
+    "sky",
+    "evoking",
+    "calm",
+    "tranquility",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "across",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene view of white clouds scattered across a vivid blue sky, evoking calm and tranquility."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "soft white clouds moving across sky time lapse",
+    "savedAt": "2026-10-29T15:25:32.058Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Magda Ehlers",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/white-clouds-and-blue-sky-5312873/"
+  }
+}

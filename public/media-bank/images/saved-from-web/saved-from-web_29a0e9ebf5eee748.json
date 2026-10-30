@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_29a0e9ebf5eee748",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Serene close-up of gentle ocean waves reflecting soft dusk light, creating a tranquil scene.",
+  "path": "images/saved-from-web/saved-from-web_29a0e9ebf5eee748.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "close",
+    "gentle",
+    "ocean",
+    "wave",
+    "reflecting",
+    "soft",
+    "dusk",
+    "light",
+    "creating",
+    "tranquil",
+    "scene",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "close-up",
+    "waves",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "close",
+    "gentle",
+    "ocean",
+    "wave",
+    "reflecting",
+    "soft",
+    "dusk",
+    "light",
+    "creating",
+    "tranquil",
+    "scene",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "close-up",
+    "waves",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Serene close-up of gentle ocean waves reflecting soft dusk light, creating a tranquil scene."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "gentle close up water surface soft light",
+    "savedAt": "2026-10-30T02:34:59.122Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Michaela St",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/closeup-of-a-water-surface-with-waves-20520302/"
+  }
+}

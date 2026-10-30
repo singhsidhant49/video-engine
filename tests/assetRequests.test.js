@@ -100,3 +100,18 @@ test('provider routing honors supports and never routes procedural shots', async
   assert.equal(result.candidates.length, 0);
   assert.equal(calls, 0);
 });
+
+test('meditation atmosphere requires authentic native-motion video', () => {
+  const calmStoryboard = structuredClone(storyboard);
+  calmStoryboard.sections[0].scenes[0].shots = [shot('calm-water', {
+    role: 'atmosphere', visualConcept: 'gentle rain falling on a calm lake',
+    searchConcepts: ['gentle rain calm lake slow motion'], assetIntent: 'atmosphere',
+    mediaPreference: 'real', motionPreference: 'slow', entities: [], evidenceRequirement: 'preferred',
+  })];
+  const [request] = planAssetRequests(calmStoryboard, {
+    contentType: 'meditation', visualPolicy: resolveVisualPolicy(),
+  });
+  assert.equal(request.preferredSource, 'video');
+  assert.equal(request.preferredMediaType, 'video');
+  assert.equal(request.nativeMotionRequired, true);
+});

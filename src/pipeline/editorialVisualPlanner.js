@@ -36,7 +36,7 @@ export function buildEditorialVisualPlan({ storyboard, coveragePlan, specs = [],
     for (const shot of scene.shots) {
       const coverage = coverageByShot.get(shot.id);
       if (!coverage) throw new Error(`EditorialVisualPlan missing coverage for ${shot.id}`);
-      const allowProcedural = visualPolicy?.enableProceduralGraphics === true && !visualPolicy?.useMediaEditorial;
+      const allowProcedural = visualPolicy?.enableProceduralGraphics === true;
       const productionFallbackApplied = coverage.representationDecision?.fallbackApplied === true;
       const selectedRepresentation = (allowProcedural || productionFallbackApplied)
         ? (coverage.representationDecision?.selectedRepresentation || coverage.primaryRepresentation)

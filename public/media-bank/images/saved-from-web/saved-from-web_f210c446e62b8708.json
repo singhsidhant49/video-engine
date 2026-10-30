@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_f210c446e62b8708",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Penguins gather on snowy Antarctic coast with a cruise ship on icy waters.",
+  "path": "images/saved-from-web/saved-from-web_f210c446e62b8708.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "penguin",
+    "gather",
+    "snowy",
+    "antarctic",
+    "coast",
+    "cruise",
+    "ship",
+    "icy",
+    "water",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "penguins",
+    "waters",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "penguin",
+    "gather",
+    "snowy",
+    "antarctic",
+    "coast",
+    "cruise",
+    "ship",
+    "icy",
+    "water",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "penguins",
+    "waters",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Penguins gather on snowy Antarctic coast with a cruise ship on icy waters."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "ship sinking in Antarctic ice",
+    "savedAt": "2026-10-29T11:58:20.688Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jan Tang",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/penguins-and-cruise-ship-in-antarctic-landscape-35705734/"
+  }
+}

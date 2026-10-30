@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_c6c8234765585991",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Portrait of a man in a sailor cap with a vintage clock outdoors.",
+  "path": "images/saved-from-web/saved-from-web_c6c8234765585991.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2085,
+  "aspectRatio": 1.247,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "man",
+    "sailor",
+    "cap",
+    "vintage",
+    "clock",
+    "outdoor",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "outdoors"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "portrait",
+    "man",
+    "sailor",
+    "cap",
+    "vintage",
+    "clock",
+    "outdoor",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "outdoors"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Portrait of a man in a sailor cap with a vintage clock outdoors."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sailors smiling vintage portrait",
+    "savedAt": "2026-10-29T09:57:54.857Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Вячеслав Ткачёв",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-holding-a-vintage-clock-12404084/"
+  }
+}

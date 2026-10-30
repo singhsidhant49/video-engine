@@ -136,7 +136,7 @@ export function LegacyFamilyAdapter({ shot, clip }) {
 }
 
 function MultiShotClip({ clip, timeline }) {
-  const mediaEditorial = timeline.visualMode === 'MEDIA_EDITORIAL';
+  const mediaEditorial = timeline.visualMode === 'MEDIA_EDITORIAL' || timeline.visualMode === 'HYBRID_EDITORIAL';
   return (
     <AbsoluteFill>
       {clip.shots.map((shot, idx) => {

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_ed48e27de779d83c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A man and woman in a futuristic lab setting with vintage monitors, evoking a sci-fi atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_ed48e27de779d83c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "woman",
+    "futuristic",
+    "lab",
+    "setting",
+    "vintage",
+    "monitor",
+    "evoking",
+    "sci",
+    "atmosphere",
+    "scientific",
+    "research",
+    "laboratory",
+    "static",
+    "presentation",
+    "monitors",
+    "sci-fi",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "man",
+    "woman",
+    "futuristic",
+    "lab",
+    "setting",
+    "vintage",
+    "monitor",
+    "evoking",
+    "sci",
+    "atmosphere",
+    "scientific",
+    "research",
+    "laboratory",
+    "static",
+    "presentation",
+    "monitors",
+    "sci-fi",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A man and woman in a futuristic lab setting with vintage monitors, evoking a sci-fi atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "futuristic monitor date timestamp",
+    "savedAt": "2026-10-29T14:04:58.161Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-standing-in-front-of-a-computer-8875494/"
+  }
+}

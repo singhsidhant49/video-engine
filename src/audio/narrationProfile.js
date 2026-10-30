@@ -76,7 +76,7 @@ export function resolveNarrationProfile({
     speed = Math.min(normalSpeed, finitePositive(targetMedSpeed, 0.76));
     // Articulation suffers below 0.72x on Kokoro; tranquility comes from silence pauses
     minimumRepairSpeed = 0.72;
-  } else if (contentType && CONTENT_TYPE_DEFAULT_SPEEDS[contentType] && baseSpeed === 0.9) {
+  } else if (contentType && CONTENT_TYPE_DEFAULT_SPEEDS[contentType]) {
     id = contentType;
     const mapped = CONTENT_TYPE_DEFAULT_SPEEDS[contentType];
     speed = typeof mapped === 'function' ? mapped(format) : mapped;

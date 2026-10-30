@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_f8cf5853aeeb3b26",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of an open book with pages turning in warm, soft light.",
+  "path": "images/saved-from-web/saved-from-web_f8cf5853aeeb3b26.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "open",
+    "book",
+    "page",
+    "turning",
+    "warm",
+    "soft",
+    "light",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "pages",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "open",
+    "book",
+    "page",
+    "turning",
+    "warm",
+    "soft",
+    "light",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "pages",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of an open book with pages turning in warm, soft light."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "single page turning midair candlelight",
+    "savedAt": "2026-10-29T14:46:11.110Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Pramod  Tiwari",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-shot-of-a-book-13288524/"
+  }
+}
