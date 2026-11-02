@@ -45,7 +45,8 @@ export class BullVideoQueue {
       });
       this.worker.on('failed', async (job, error) => {
         console.error(`BullMQ job ${job?.id || 'unknown'} failed:`, error);
-        if (job?.name === 'generate' && job?.data?.videoId && typeof onFailed === 'function') {
+        const exhausted = Number(job?.attemptsMade || 0) >= Number(job?.opts?.attempts || 1);
+        if (exhausted && job?.name === 'generate' && job?.data?.videoId && typeof onFailed === 'function') {
           await onFailed(job.data.videoId, error).catch(() => {});
         }
       });
@@ -56,7 +57,7 @@ export class BullVideoQueue {
   async enqueueGeneration(videoId, attempt = 0) {
     const jobId = `video-${videoId}-${attempt}-${Date.now()}`;
     return this.queue.add('generate', { videoId, attempt }, {
-      jobId, attempts: 1,
+      jobId, attempts: 3, backoff: { type: 'exponential', delay: 5_000 },
       removeOnComplete: { age: 86_400, count: 1_000 }, removeOnFail: { age: 604_800, count: 2_000 },
     });
   }

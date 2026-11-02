@@ -126,8 +126,8 @@ export function solveMediaLayout(composition, mediaSceneSpec, ctx) {
       : (asset.focalPoint || { x: .5, y: .5 });
     const behavior = asset.type === 'video' && asset.motionPresent !== false ? 'STATIC' : mediaSceneSpec.cameraIntent;
     const baseScale = isDetailReframe ? 1.25 : 1.0;
-    const scales = behavior === 'SUBTLE_PUSH' ? [baseScale, Number((baseScale * 1.06).toFixed(4))]
-      : behavior === 'SUBTLE_PULL' ? [Number((baseScale * 1.06).toFixed(4)), baseScale]
+    const scales = behavior === 'SUBTLE_PUSH' ? [baseScale, Number((baseScale * 1.04).toFixed(4))]
+      : behavior === 'SUBTLE_PULL' ? [Number((baseScale * 1.04).toFixed(4)), baseScale]
         : ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? [Number((baseScale * 1.04).toFixed(4)), Number((baseScale * 1.04).toFixed(4))] : [baseScale, baseScale];
     const travel = .03;
     const startX = behavior === 'PAN_LEFT' ? focus.x + travel

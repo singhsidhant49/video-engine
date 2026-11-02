@@ -6,7 +6,18 @@ import { config } from '../config/index.js';
 import { keywords } from './freeMediaService.js';
 import { terms } from '../assets/assetSearchContext.js';
 
-const defaultMediaBankDir = path.join(config.rootDir, 'public', 'media-bank');
+function getEffectiveMediaBankDir() {
+  if (process.env.MEDIA_BANK_DIR) return path.resolve(process.env.MEDIA_BANK_DIR);
+  const defaultDir = path.join(config.rootDir, 'public', 'media-bank');
+  try {
+    fs.accessSync(path.join(config.rootDir, 'public'), fs.constants.W_OK);
+    return defaultDir;
+  } catch {
+    return path.join(config.rendersDir, 'media-bank');
+  }
+}
+
+const defaultMediaBankDir = getEffectiveMediaBankDir();
 let mediaBankDir = process.env.MEDIA_BANK_DIR ? path.resolve(process.env.MEDIA_BANK_DIR) : defaultMediaBankDir;
 let catalogFile = path.join(mediaBankDir, 'catalog.json');
 let catalogLockFile = path.join(mediaBankDir, '.catalog.lock');

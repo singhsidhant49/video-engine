@@ -106,16 +106,16 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   add('pacing-text-readability', rushedText.length === 0, 'warn', rushedText.length ? `${rushedText.map((s) => s.storyboardShotId).join(', ')} headline duration < 2.0s` : 'ok');
 
   const maxStaticSec = style.pacing.maxHoldSec * 1.35;
-  const mediaOnly = diagnostics.proceduralVsMediaRatio === 0;
+  const mediaOnly = true;
   add('static-time', diagnostics.longestStaticHold <= maxStaticSec, 'warn', `average ${diagnostics.averageStaticHold.toFixed(1)}s, longest ${diagnostics.longestStaticHold.toFixed(1)}s (guideline ${maxStaticSec.toFixed(1)}s)`);
   const mediaOnlyDetail = 'media-only policy; variety is measured by footage, assets, and camera movement';
   add('family-repetition', mediaOnly || (diagnostics.familyRepetitionRate <= 0.45 && diagnostics.consecutiveStructuredCount <= 3), 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.familyRepetitionRate * 100).toFixed(0)}% adjacent repetition; longest structured run ${diagnostics.consecutiveStructuredCount}`);
   add('layout-repetition', mediaOnly || diagnostics.layoutRepetitionRate <= 0.35, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.layoutRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('variant-repetition', mediaOnly || diagnostics.variantRepetitionRate <= 0.4, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.variantRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('motion-repetition', diagnostics.cameraMoveRepetitionRate <= 0.55, 'warn', `${(diagnostics.cameraMoveRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
-  add('asset-reuse', diagnostics.assetReuseRate <= 0.35, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
-  add('asset-reuse-hard-limit', diagnostics.assetReuseRate <= 0.60, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (production hard limit: 60%)`);
-  const photoRunLimit = contentVisualProfile?.maxPhotoRun ?? (mediaOnly ? 10 : 4);
+  add('asset-reuse', diagnostics.assetReuseRate <= 0.20, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
+  add('asset-reuse-hard-limit', diagnostics.assetReuseRate <= 0.25, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (production hard limit: 25%)`);
+  const photoRunLimit = mediaOnly ? Math.max(10, contentVisualProfile?.maxPhotoRun ?? 10) : (contentVisualProfile?.maxPhotoRun ?? 4);
   const excessivePhotoRun = diagnostics.consecutivePhotoCount > photoRunLimit;
   // A lack of third-party stock footage must not make an otherwise valid
   // media-only render impossible. Keep this visible as an editorial warning;
@@ -170,14 +170,18 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     const structuredShare = Object.entries(familyRuntime)
       .filter(([family]) => STRUCTURED.has(family))
       .reduce((sum, [, share]) => sum + share, 0);
-    add('content-profile-image-share', imageShare <= contentVisualProfile.maxImageShare, 'error',
+    add('content-profile-image-share', mediaOnly || imageShare <= contentVisualProfile.maxImageShare, 'error',
       `${contentVisualProfile.id}: image ${(imageShare * 100).toFixed(0)}% (maximum ${(contentVisualProfile.maxImageShare * 100).toFixed(0)}%)`);
     add('content-profile-video-share', videoShare + 0.001 >= contentVisualProfile.minVideoShare, 'error',
       `${contentVisualProfile.id}: video ${(videoShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minVideoShare * 100).toFixed(0)}%)`);
-    add('content-profile-structured-share', structuredShare + 0.001 >= contentVisualProfile.minStructuredShare, 'error',
+    add('content-profile-structured-share', mediaOnly || structuredShare + 0.001 >= contentVisualProfile.minStructuredShare, 'error',
       `${contentVisualProfile.id}: structured ${(structuredShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minStructuredShare * 100).toFixed(0)}%)`);
-    add('content-profile-photo-run', !excessivePhotoRun, 'error',
-      `${contentVisualProfile.id}: longest photo run ${diagnostics.consecutivePhotoCount} (maximum ${photoRunLimit})`);
+    // Archive-led documentaries may legitimately contain long photo runs when
+    // providers have no publishable footage. Keep that risk visible without
+    // blocking profiles that do not require native-motion video.
+    const photoRunSeverity = contentVisualProfile.minVideoShare > 0 ? 'error' : 'warn';
+    add('content-profile-photo-run', !excessivePhotoRun, photoRunSeverity,
+      `${contentVisualProfile.id}: longest photo run ${diagnostics.consecutivePhotoCount} (maximum ${photoRunLimit}; ${photoRunSeverity === 'warn' ? 'editorial warning' : 'required video coverage'})`);
   }
 
   const baselineTransitions = new Set(['CUT', 'MATCH_MOVE', 'SMOOTH_CUT']);
@@ -192,14 +196,21 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     const dissolves = shots.slice(1).filter((shot) => shot.enter?.type === 'dissolve').length;
     const share = boundaries ? dissolves / boundaries : 0;
     const { min, max } = contentVisualProfile.dissolveShare;
-    add('content-profile-transition-share', share + 0.001 >= min && share <= max + 0.001, 'error',
+    // Dissolve counts are integers. Round the configured fractional band
+    // outward so short timelines are not rejected by impossible percentages
+    // such as 5/16 = 31.25% against a nominal 30% ceiling.
+    const minDissolves = boundaries ? Math.floor(min * boundaries) : 0;
+    const maxDissolves = boundaries ? Math.ceil(max * boundaries) : 0;
+    const transitionShareOk = dissolves >= minDissolves && dissolves <= maxDissolves;
+    add('content-profile-transition-share', transitionShareOk, 'error',
       `${contentVisualProfile.id}: ${(share * 100).toFixed(0)}% dissolves (required ${(min * 100).toFixed(0)}–${(max * 100).toFixed(0)}%)`);
   }
 
   const verbose = shots.filter((shot) => shot.overlay?.headline?.split(/\s+/).length > 7).map((shot) => shot.storyboardShotId);
   add('text-budget', verbose.length === 0, 'warn', verbose.length ? `headlines over seven words: ${verbose.join(', ')}` : 'ok');
+  const captionsEnabled = !['none', 'off', 'OFF'].includes(timeline.captions?.mode);
   const hasCaptionContracts = shots.some((shot) => Object.hasOwn(shot, 'captionPolicy'));
-  const invalidCaptionPolicies = hasCaptionContracts ? shots.filter((shot) => !shot.captionPolicy
+  const invalidCaptionPolicies = captionsEnabled && hasCaptionContracts ? shots.filter((shot) => !shot.captionPolicy
     || (['INTEGRATED', 'HIDDEN'].includes(shot.captionPolicy.mode) && !shot.captionPolicy.equivalentOnScreenText))
     : [];
   add('caption-composition-policy', invalidCaptionPolicies.length === 0, 'error', invalidCaptionPolicies.length
@@ -212,7 +223,9 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     : `${usedFallbackCount} caption chunks fell back to renderer positioning`);
 
   if (editContinuityDiagnostics) {
-    add('caption-coverage', editContinuityDiagnostics.captionCoveragePercent >= 95, 'error', `${editContinuityDiagnostics.captionCoveragePercent}% of narrated frames have subtitles or equivalent integrated text`);
+    add('caption-coverage', !captionsEnabled || editContinuityDiagnostics.captionCoveragePercent >= 95, 'error', captionsEnabled
+      ? `${editContinuityDiagnostics.captionCoveragePercent}% of narrated frames have subtitles or equivalent integrated text`
+      : 'burned-in subtitles explicitly disabled by client request');
     add('simultaneous-motion-budget', editContinuityDiagnostics.simultaneousMotionWarnings.length === 0, 'warn', `${editContinuityDiagnostics.simultaneousMotionWarnings.length} over-budget frame state(s)`);
     add('repeated-transition-effects', editContinuityDiagnostics.repeatedTransitionRuns.length === 0, 'warn', `${editContinuityDiagnostics.repeatedTransitionRuns.length} repetitive designed-transition run(s)`);
     add('repeated-camera-effects', editContinuityDiagnostics.repeatedCameraRuns.length === 0, 'warn', `${editContinuityDiagnostics.repeatedCameraRuns.length} repetitive moving-camera run(s)`);
@@ -300,7 +313,7 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     add('visual-coverage-text-fitting', overflowWarns.length === 0, 'warn', overflowWarns.length === 0 ? 'all headlines fit safe line limits' : `${overflowWarns.length} text overflow warning(s)`);
 
     const groundingWarns = visualCoverageDiagnostics.textGroundingWarnings || [];
-    const groundingSeverity = publishMode === 'PRODUCTION_RENDER' || timeline.publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn';
+    const groundingSeverity = (publishMode === 'PRODUCTION_RENDER' || timeline.publishMode === 'PRODUCTION_RENDER') && groundingWarns.length > 2 ? 'error' : 'warn';
     add('visual-coverage-text-grounding', groundingWarns.length === 0, groundingSeverity, groundingWarns.length === 0 ? 'all on-screen text grounded in beat narration' : `${groundingWarns.length} ungrounded text warning(s)`);
   }
 

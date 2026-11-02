@@ -6,8 +6,7 @@ export const InformationTypeSchema = z.enum([
 ]);
 
 export const VisualRepresentationSchema = z.enum([
-  'media', 'code', 'ui', 'process', 'diagram', 'comparison', 'timeline',
-  'map', 'chart', 'document', 'typography',
+  'media',
 ]);
 
 export const VisualCoverageItemSchema = z.object({
@@ -28,7 +27,7 @@ export const VisualCoverageItemSchema = z.object({
     authenticSourceRequired: z.boolean(),
   }),
   mediaConstraints: z.object({
-    preference: z.enum(['real', 'procedural', 'auto']),
+    preference: z.enum(['real', 'auto']),
     orientation: z.enum(['portrait', 'landscape']),
     focalPointHint: z.string().nullable(),
     motionPreference: z.string().nullable(),

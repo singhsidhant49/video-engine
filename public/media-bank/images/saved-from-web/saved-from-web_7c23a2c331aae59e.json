@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_7c23a2c331aae59e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Blue gloved hand holding a petri dish with bacterial cultures.",
+  "path": "images/saved-from-web/saved-from-web_7c23a2c331aae59e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "blue",
+    "gloved",
+    "hand",
+    "holding",
+    "bacterial",
+    "culture",
+    "cultures",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "blue",
+    "gloved",
+    "hand",
+    "holding",
+    "bacterial",
+    "culture",
+    "cultures",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "scientific laboratory glassware, petri dish, or microscope"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory or cleanroom"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "pre-antibiotic era wound infection",
+    "savedAt": "2026-11-02T09:39:27.962Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Anna Shvets",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-petri-dish-3786248/"
+  }
+}

@@ -5,19 +5,8 @@ import { ThemeProvider, useTheme } from './theme.js';
 import { progress, ease } from './motion.js';
 import { Captions } from './Captions.jsx';
 import { Letterbox } from './accents.jsx';
-import { StatShot, StatementShot, ChapterShot, QuoteShot, DocumentShot } from '../families/editorial.jsx';
 import { PhotoShot } from '../families/photo.jsx';
-import { ListShot, ProcessShot, TimelineShot, ChartShot, CompareShot, GroundShot } from '../families/structured.jsx';
-import { DiagramShot, MapShot, ModernCodeShot, ModernUiShot } from '../families/diagrams.jsx';
-import { DynamicMontage } from '../families/montage.jsx';
-import { GenericSceneRenderer } from './GenericSceneRenderer.jsx';
-
-const FAMILIES = {
-  image: PhotoShot, stat: StatShot, statement: StatementShot, chapter: ChapterShot, quote: QuoteShot, document: DocumentShot,
-  list: ListShot, process: ProcessShot, timeline: TimelineShot, chart: ChartShot, compare: CompareShot,
-  ui: ModernUiShot, code: ModernCodeShot, diagram: DiagramShot, map: MapShot, ground: GroundShot,
-  montage: DynamicMontage,
-};
+import { MediaSceneRenderer } from './MediaSceneRenderer.jsx';
 
 /**
  * Applies a clip's enter/exit transitions. Overlaps were already compensated
@@ -110,33 +99,7 @@ function Soundtrack({ audio, total }) {
   );
 }
 
-export function LegacyFamilyAdapter({ shot, clip }) {
-  const ShotFamily = FAMILIES[shot.family] || FAMILIES.image;
-  const assetRef = shot.asset || clip.asset || (clip.assets && clip.assets[0]);
-  const subClip = {
-    ...clip,
-    family: shot.family,
-    variant: shot.variant || clip.variant,
-    durationInFrames: shot.durationInFrames,
-    overlay: shot.overlay || {},
-    presentation: shot.presentation,
-    assets: shot.assets || [],
-    texture: shot.family === 'image' || shot.family === 'montage'
-      ? null
-      : (assetRef ? {
-        src: assetRef.src,
-        type: assetRef.type,
-        width: assetRef.width,
-        height: assetRef.height,
-        focal: assetRef.focal,
-      } : clip.texture),
-    bed: shot.asset ? [{ ...shot.asset, from: 0, durationInFrames: shot.durationInFrames, move: shot.move }] : null,
-  };
-  return <ShotFamily clip={subClip} />;
-}
-
 function MultiShotClip({ clip, timeline }) {
-  const mediaEditorial = timeline.visualMode === 'MEDIA_EDITORIAL' || timeline.visualMode === 'HYBRID_EDITORIAL';
   return (
     <AbsoluteFill>
       {clip.shots.map((shot, idx) => {
@@ -154,10 +117,10 @@ function MultiShotClip({ clip, timeline }) {
           <Sequence key={shot.id || idx} from={sequenceFrom} durationInFrames={sequenceDuration} name={shot.id}>
             <ShotTransitionFrame enter={internalEnter} exit={internalExit} durationInFrames={sequenceDuration}>
               {solvedScene && motionPlan
-                ? <GenericSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} frameOffset={frameOffset} />
-                : mediaEditorial && ['image', 'montage'].includes(shot.family)
-                  ? <AbsoluteFill style={{ background: '#000', color: '#fff', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>MEDIA_EDITORIAL preflight failure: {shot.id}</AbsoluteFill>
-                  : <LegacyFamilyAdapter shot={shot} clip={clip} />}
+                ? <MediaSceneRenderer solvedScene={solvedScene} motionPlan={motionPlan} frameOffset={frameOffset} />
+                : shot.asset
+                  ? <PhotoShot clip={{ ...clip, ...shot, family: 'image', texture: null, bed: [{ ...shot.asset, from: 0, durationInFrames: shot.durationInFrames, move: shot.move }] }} />
+                  : <AbsoluteFill style={{ background: '#000' }} />}
             </ShotTransitionFrame>
           </Sequence>
         );
@@ -175,14 +138,13 @@ export const Video = ({ timeline }) => {
     <ThemeProvider timeline={timeline}>
       <AbsoluteFill style={{ background: timeline.palette.bg, overflow: 'hidden' }}>
         {timeline.clips.map((clip) => {
-          const Family = FAMILIES[clip.family] || GroundShot;
           return (
             <Sequence key={clip.id} from={clip.from} durationInFrames={clip.durationInFrames} name={`${clip.id} ${clip.family}`}>
               <ClipFrame clip={clip}>
                 {clip.shots?.length ? (
                   <MultiShotClip clip={clip} timeline={timeline} />
                 ) : (
-                  <Family clip={clip} />
+                  <PhotoShot clip={clip} />
                 )}
               </ClipFrame>
             </Sequence>

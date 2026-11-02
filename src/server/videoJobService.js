@@ -234,6 +234,13 @@ export class VideoJobService {
     }));
   }
 
+  async listPage(ownerId, { limit = 50, cursor = null } = {}) {
+    const all = await this.list(ownerId);
+    const eligible = cursor ? all.filter((job) => job.createdAt < cursor) : all;
+    const videos = eligible.slice(0, limit);
+    return { videos, nextCursor: eligible.length > limit ? videos.at(-1)?.createdAt || null : null };
+  }
+
   async result(ownerId, id) {
     const job = await this.store.getJob(id);
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
@@ -334,10 +341,12 @@ export class VideoJobService {
     job.updatedAt = now();
     job.retryCount = (job.retryCount || 0) + 1;
     job.resumeExisting = true;
-    // A failed timeline/QC checkpoint is not reusable. Rebuild it and every
-    // downstream artifact while preserving expensive script, audio and asset
-    // work from the same video ID.
-    job.resumeFrom = failedCode === 'TIMELINE_QC_FAILED' ? 'timeline' : null;
+    // A failed timeline/QC checkpoint is not reusable. If timeline QC failed,
+    // re-resolve assets to fix video share or coverage shortfalls. If post-render
+    // QC failed, recompile the timeline from approved assets.
+    job.resumeFrom = failedCode === 'POST_RENDER_QC_FAILED'
+      ? 'timeline'
+      : (failedCode === 'TIMELINE_QC_FAILED' ? 'assets' : null);
     await this.store.putJob(job);
     if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount);
     else { this.queue.push(id); this.#pump(); }
@@ -351,6 +360,10 @@ export class VideoJobService {
       filename: job.result?.outputFilename,
       durationSeconds: job.result?.durationSeconds,
       title: job.result?.title,
+      sha256: job.result?.delivery?.sha256,
+      bytes: job.result?.delivery?.bytes,
+      manifestUrl: `/v1/videos/${job.id}/manifest`,
+      creditsUrl: `/v1/videos/${job.id}/credits`,
     };
   }
 
@@ -377,6 +390,17 @@ export class VideoJobService {
     } catch {
       throw apiError(404, 'THUMBNAIL_NOT_FOUND', 'Thumbnail not found on disk');
     }
+    return file;
+  }
+
+  async deliveryArtifact(ownerId, id, kind) {
+    const job = await this.store.getJob(id);
+    if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
+    if (job.status !== 'completed') throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
+    const suffix = kind === 'manifest' ? 'delivery.json' : kind === 'credits' ? 'credits.txt' : null;
+    if (!suffix) throw apiError(404, 'ARTIFACT_NOT_FOUND', 'Artifact not found');
+    const file = safeOwnedPath(this.rendersDir, path.join(this.rendersDir, `${job.id}.${suffix}`));
+    try { await fs.access(file); } catch { throw apiError(404, 'ARTIFACT_NOT_FOUND', 'Artifact not found'); }
     return file;
   }
 
@@ -429,6 +453,9 @@ export class VideoJobService {
     job.status = 'processing'; job.stage = 'preparing'; job.startedAt ||= now(); job.updatedAt = now();
     await this.store.putJob(job);
     let progressWrites = Promise.resolve();
+    let timedOut = false;
+    const jobTimeoutMs = Math.max(60_000, Number(process.env.VIDEO_JOB_TIMEOUT_MS || 90 * 60_000));
+    const jobTimeout = setTimeout(() => { timedOut = true; controller.abort(); }, jobTimeoutMs);
     const cancelPoll = this.taskQueue ? setInterval(() => {
       void this.store.getJob(id).then((current) => {
         if (['cancel_requested', 'delete_requested'].includes(current?.status)) controller.abort();
@@ -436,7 +463,9 @@ export class VideoJobService {
     }, 1_000) : null;
     try {
       const result = await this.generator({
-        videoId: id, resume: job.resumeExisting ? id : null, from: job.resumeFrom || null, force: Boolean(job.resumeExisting), brief: job.pipelineBrief, signal: controller.signal,
+        // Resume checkpoints, but never force-break a live run-directory lock.
+        // Stale locks are detected by PID/host/heartbeat in the lock manager.
+        videoId: id, resume: job.resumeExisting ? id : null, from: job.resumeFrom || null, force: false, brief: job.pipelineBrief, signal: controller.signal,
         renderScale: job.request.output.resolution === '720p' ? 2 / 3 : 1,
         onProgress: (event) => {
           const step = Math.max(0, Number(event.step) || 0);
@@ -445,7 +474,9 @@ export class VideoJobService {
           job.progress = Math.min(99, Math.round((step / 8) * 100 + renderFraction * 10));
           job.updatedAt = now();
           const snapshot = JSON.parse(JSON.stringify(job));
-          progressWrites = progressWrites.then(() => this.store.putJob(snapshot)).catch(() => {});
+          progressWrites = progressWrites.then(() => this.store.putJob(snapshot)).catch((error) => {
+            console.error(`Failed to persist progress for ${id}:`, error?.message || error);
+          });
         },
       });
       await progressWrites;
@@ -460,24 +491,27 @@ export class VideoJobService {
       job.result = {
         outputPath: result.outputPath, outputFilename: result.outputFilename,
         durationSeconds: result.durationSeconds, title: result.title, runDir: result.runDir,
+        delivery: result.delivery || null,
       };
       job.resumeExisting = false;
       job.resumeFrom = null;
       await this.store.putJob(job);
     } catch (error) {
+      console.error(`❌ [Job ${id}] Video generation error:`, error);
       await progressWrites;
       const latest = await this.store.getJob(id);
       if (latest?.status === 'delete_requested') return;
-      const cancelled = controller.signal.aborted || error?.name === 'AbortError' || error?.code === 'VIDEO_GENERATION_CANCELLED';
+      const cancelled = !timedOut && (controller.signal.aborted || error?.name === 'AbortError' || error?.code === 'VIDEO_GENERATION_CANCELLED');
       const interruptedForShutdown = cancelled && this.shuttingDown;
       job.status = interruptedForShutdown ? 'queued' : cancelled ? 'cancelled' : 'failed';
       job.stage = job.status; job.completedAt = now(); job.updatedAt = job.completedAt;
       job.progress = interruptedForShutdown ? 0 : job.progress;
       job.completedAt = interruptedForShutdown ? null : job.completedAt;
-      job.error = cancelled ? null : safeGenerationFailure(error);
+      job.error = timedOut ? { code: 'VIDEO_JOB_TIMEOUT', message: `Video generation exceeded ${Math.round(jobTimeoutMs / 60_000)} minutes` } : cancelled ? null : safeGenerationFailure(error);
       await this.store.putJob(job);
     } finally {
       if (cancelPoll) clearInterval(cancelPoll);
+      clearTimeout(jobTimeout);
     }
   }
 
@@ -528,7 +562,7 @@ export class VideoJobService {
     }
     const rootEntries = await fs.readdir(this.rendersDir, { withFileTypes: true }).catch(() => []);
     for (const entry of rootEntries) {
-      if (entry.isFile() && entry.name.startsWith(`${job.id}-`)) {
+      if (entry.isFile() && (entry.name.startsWith(`${job.id}-`) || entry.name === `${job.id}.credits.txt` || entry.name === `${job.id}.delivery.json`)) {
         targets.add(safeOwnedPath(this.rendersDir, path.join(this.rendersDir, entry.name)));
       }
     }

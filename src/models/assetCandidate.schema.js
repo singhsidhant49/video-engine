@@ -4,7 +4,7 @@ export const AssetCandidateSchema = z.object({
   id: z.string().min(1),
   providerId: z.string().min(1),
   providerAssetId: z.string().optional(),
-  type: z.enum(['image', 'video', 'document', 'screenshot', 'procedural']),
+  type: z.enum(['image', 'video', 'document', 'screenshot']),
   sourceUrl: z.string().optional(),
   localPath: z.string().optional(),
   width: z.number().int().positive().optional(),
@@ -40,6 +40,6 @@ export const AssetCandidateSchema = z.object({
     technicalQuality: z.number().min(0).max(1),
   }).optional(),
   stockClichePenalty: z.number().min(0).max(1).default(0),
-}).passthrough().refine((candidate) => candidate.sourceUrl || candidate.localPath || candidate.type === 'procedural', {
-  message: 'A candidate needs sourceUrl, localPath, or procedural media',
+}).passthrough().refine((candidate) => candidate.sourceUrl || candidate.localPath, {
+  message: 'A candidate needs sourceUrl or localPath',
 });

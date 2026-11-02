@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_6418c0f1976541bd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "High-angle view of glass bottle production line in a factory with glowing bottles.",
+  "path": "images/saved-from-web/saved-from-web_6418c0f1976541bd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "glas",
+    "bottle",
+    "production",
+    "line",
+    "factory",
+    "glowing",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "view",
+    "glass",
+    "bottles",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "glas",
+    "bottle",
+    "production",
+    "line",
+    "factory",
+    "glowing",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "view",
+    "glass",
+    "bottles",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "High-angle view of glass bottle production line in a factory with glowing bottles."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "World War II penicillin factory production line",
+    "savedAt": "2026-11-02T09:39:43.063Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Keegan Checks",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/industrial-glass-bottles-manufacturing-process-36423804/"
+  }
+}

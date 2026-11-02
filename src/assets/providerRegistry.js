@@ -36,7 +36,7 @@ const searchQueries = async (request, fn, providerId = 'default', max = 5) => {
   return results.flat();
 };
 
-const mediaRequest = (request) => !['procedural', 'generated'].includes(request.preferredSource);
+const mediaRequest = () => true;
 const stillRequest = (request) => mediaRequest(request) && request.preferredSource !== 'video';
 
 export const localAssetProvider = createProvider({
@@ -110,14 +110,14 @@ const ROUTES = {
   ACTION: ['pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'local-bank'],
   CONCEPT: ['pexels-image', 'pexels-video', 'commons', 'brave-image', 'pixabay-image', 'local-bank', 'generic-library'],
   ATMOSPHERE: ['pexels-video', 'pexels-image', 'pixabay-image', 'brave-image', 'local-bank', 'generic-library'],
-  // DATA requests are procedural only when the request itself says so. In
+  // Data-oriented narration still requires concrete searchable media. In
   // Media-only mode may deliberately change these shots to `auto`; hybrid
   // production routes explanatory data to a structured representation.
   DATA: ['commons', 'brave-image', 'pexels-image', 'pixabay-image', 'local-bank', 'generic-library'],
 };
 
 export function routeAssetProviders(request, context, providers = defaultAssetProviders, queryStage = 'EXACT') {
-  if (request.preferredSource === 'procedural' || request.representationDecision?.searchable === false) return [];
+  if (request.representationDecision?.searchable === false) return [];
   const route = ROUTES[context.requestClass] || ROUTES.CONCEPT;
   const eligible = providers.filter((provider) => provider.supports(request));
   return route
@@ -129,19 +129,22 @@ export function routeAssetProviders(request, context, providers = defaultAssetPr
 export async function searchAssetProviderStage(request, context, stage, providers = defaultAssetProviders) {
   const routed = routeAssetProviders(request, context, providers, stage.id);
   const activeRequest = { ...request, activeQueries: stage.queries, activeQueryStage: stage.id };
-  const calls = [];
-  const candidates = [];
-  for (const { provider, priority } of routed) {
+  const batches = await Promise.all(routed.map(async ({ provider, priority }) => {
     const started = Date.now();
     try {
       const found = await provider.search(activeRequest);
-      candidates.push(...found.map((candidate) => ({ ...candidate, providerPriority: priority })));
-      calls.push({ providerId: provider.id, priority, queryStage: stage.id, queries: stage.queries, candidateCount: found.length, durationMs: Date.now() - started, status: 'ok' });
+      return {
+        candidates: found.map((candidate) => ({ ...candidate, providerPriority: priority })),
+        call: { providerId: provider.id, priority, queryStage: stage.id, queries: stage.queries, candidateCount: found.length, durationMs: Date.now() - started, status: 'ok' },
+      };
     } catch (error) {
-      calls.push({ providerId: provider.id, priority, queryStage: stage.id, queries: stage.queries, candidateCount: 0, durationMs: Date.now() - started, status: 'error', error: error.message });
+      return {
+        candidates: [],
+        call: { providerId: provider.id, priority, queryStage: stage.id, queries: stage.queries, candidateCount: 0, durationMs: Date.now() - started, status: 'error', error: error.message },
+      };
     }
-  }
-  return { candidates, calls };
+  }));
+  return { candidates: batches.flatMap((batch) => batch.candidates), calls: batches.map((batch) => batch.call) };
 }
 
 export async function searchAssetProviders(request, providers = defaultAssetProviders) {

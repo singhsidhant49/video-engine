@@ -18,7 +18,8 @@ export const COVERAGE_STATUS = {
 const groundingToken = (word) => String(word || '')
   .toLowerCase()
   .replace(/ies$/, 'y')
-  .replace(/(ing|ers|ed|es|s)$/, '');
+  .replace(/(?:ing|ers|ed|es|s)$/, '')
+  .replace(/e$/, '');
 
 /**
  * Evaluates the visual coverage quality of every clip and shot in the timeline.
@@ -158,6 +159,16 @@ export function buildVisualCoverageDiagnostics(timeline, coveragePlan = []) {
     const narrationText = (clip.narration || coverageItem?.narration || '').toLowerCase();
     const isChapterOrSectionTitle = overlay.chapter === true
       || Boolean(overlay.section)
+      || Boolean(overlay.isSectionHeader)
+      || Boolean(clip.section)
+      || Boolean(clip.startsSection)
+      || Boolean(coverageItem?.section)
+      || Boolean(coverageItem?.startsSection)
+      || overlay.type === 'title'
+      || overlay.variant === 'title'
+      || clip.variant === 'title'
+      || clip.variant === 'words'
+      || clip.shots?.[0]?.role === 'title'
       || /chapter|part\s+\d+|section\b/i.test(overlay.kicker || '')
       || clip.purpose === 'chapter'
       || coverageItem?.purpose === 'chapter'
@@ -165,13 +176,17 @@ export function buildVisualCoverageDiagnostics(timeline, coveragePlan = []) {
       || clip.conceptSense === 'CHAPTER'
       || clip.shots?.[0]?.visibleNeed?.visualProposition?.conceptSense === 'CHAPTER';
 
-    if (onScreenText && narrationText && !isChapterOrSectionTitle) {
+    const topicText = `${timeline?.title || ''} ${timeline?.topic || ''} ${timeline?.plan?.topic || ''}`.toLowerCase();
+    if (onScreenText && (narrationText || topicText) && !isChapterOrSectionTitle) {
       const textWords = onScreenText.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter((w) => w.length > 3);
       if (textWords.length > 0) {
-        const narrationWords = new Set(narrationText.replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean).map(groundingToken));
+        const narrationWords = new Set([
+          ...narrationText.replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean).map(groundingToken),
+          ...topicText.replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean).map(groundingToken),
+        ]);
         const matches = textWords.filter((word) => narrationWords.has(groundingToken(word)));
-        // If none of the substantial words match narration text, flag for review
-        if (matches.length === 0 && !narrationText.includes(onScreenText.toLowerCase())) {
+        // If none of the substantial words match narration or topic text, flag for review
+        if (matches.length === 0 && !narrationText.includes(onScreenText.toLowerCase()) && !topicText.includes(onScreenText.toLowerCase())) {
           textGroundingWarnings.push({
             sceneId: clip.sceneId,
             onScreenText,

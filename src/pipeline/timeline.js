@@ -5,10 +5,6 @@ import { resolveShotTiming } from './shotTimingResolver.js';
 import { createPresentationMemory, realizeSceneShots } from './visualRealizationDirector.js';
 import { generateDuckingEnvelope } from '../audio/duckingEngine.js';
 import { authorSoundDesign } from '../audio/soundDesign.js';
-import { synthesizeProceduralData } from '../storyboard/visualCoveragePlan.js';
-import { compileSolvedProcessShot } from '../composition/compileSolvedProcessShot.js';
-import { compileSolvedComparisonShot } from '../composition/compileSolvedComparisonShot.js';
-import { compileSolvedChartShot } from '../composition/compileSolvedChartShot.js';
 import { compileSolvedMediaShot } from '../composition/compileSolvedMediaShot.js';
 import { buildMediaCompositionDiagnostics } from '../qc/mediaCompositionDiagnostics.js';
 import { createFormatLayoutContext } from '../composition/layout/formatContext.js';
@@ -45,34 +41,6 @@ const CAPTION_YIELD = new Set(['statement', 'chapter', 'quote', 'stat', 'process
 const TRANSITION_FRAMES = { cut: 0, dissolve: 16 };
 const OVERLAY_TRANSITIONS = new Set();
 const STOPWORDS = new Set(['the', 'a', 'an', 'of', 'to', 'and', 'in', 'on', 'for', 'with', 'at', 'by', 'or', 'is', 'are', 'was', 'its', 'it', 'this', 'that']);
-const STRUCTURED_STOPWORDS = new Set([...STOPWORDS, 'source', 'process', 'result', 'phase', 'step', 'title', 'flow', 'system']);
-
-function groundingToken(token) {
-  return token
-    .replace(/ies$/, 'y')
-    .replace(/(ing|ers|ed|es|s)$/, '');
-}
-
-function structuredDataGrounded(data, narration = '') {
-  if (!data) return false;
-  const narrationTokens = new Set(String(narration).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((token) => token.length > 3 && !STRUCTURED_STOPWORDS.has(token)).map(groundingToken));
-  const dataTokens = String(JSON.stringify(data)).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((token) => token.length > 3 && !STRUCTURED_STOPWORDS.has(token)).map(groundingToken);
-  if (!narrationTokens.size || !dataTokens.length) return false;
-  return dataTokens.some((token) => narrationTokens.has(token));
-}
-
-function safeSceneData(scene, representation, shapeIsValid) {
-  const groundingContext = [scene.narration, scene.visual, scene.emphasis, scene.focus, scene.text?.headline, scene.text?.kicker]
-    .filter(Boolean)
-    .join(' ');
-  if (shapeIsValid(scene.data) && structuredDataGrounded(scene.data, groundingContext)) return scene.data;
-  // Preserve a compact authored title while discarding an incompatible data
-  // shape. A list-to-diagram production fallback needs to synthesize nodes,
-  // but its grounded list title is still valid and should not be replaced by
-  // a looser editorial headline.
-  const groundedTitle = typeof scene.data?.title === 'string' ? scene.data.title : null;
-  return synthesizeProceduralData({ ...scene, data: groundedTitle ? { title: groundedTitle } : {} }, representation);
-}
 
 const TRANSITION_REASON = Object.freeze({
   NEW_IDEA: 'newIdea', NEW_EVIDENCE: 'newEvidence', NEW_ENTITY: 'newEntity', COMPARISON_PIVOT: 'comparisonPivot',
@@ -168,45 +136,25 @@ function captionPolicyFor(shot, captionGeometry, viewport) {
   let raisedY = captionGeometry.y - Math.round(captionGeometry.height * 0.72);
   if (lowerSubject) raisedY = Math.min(raisedY, shot.asset.focal.y * viewport.height - captionGeometry.height - 24);
   const geometry = raised ? { ...captionGeometry, y: Math.max(0, Math.round(raisedY)) } : captionGeometry;
-  return { mode, geometry, equivalentOnScreenText: integrated, reason: integrated
-    ? 'Process labels and support copy express the narrated semantic stages.'
-    : busy ? 'Compact subtitles preserve narration without covering dense visual content.'
-      : lowerSubject ? 'Caption raised to avoid a lower-frame focal subject.' : 'Standard phrase subtitle.' };
+  return {
+    mode, geometry, equivalentOnScreenText: integrated, reason: integrated
+      ? 'Process labels and support copy express the narrated semantic stages.'
+      : busy ? 'Compact subtitles preserve narration without covering dense visual content.'
+        : lowerSubject ? 'Caption raised to avoid a lower-frame focal subject.' : 'Standard phrase subtitle.'
+  };
 }
 
-const SOLVED_COMPILERS = Object.freeze({
-  process: compileSolvedProcessShot,
-  comparison: compileSolvedComparisonShot,
-  chart: compileSolvedChartShot,
-  media: compileSolvedMediaShot,
-});
+const SOLVED_COMPILERS = Object.freeze({ media: compileSolvedMediaShot });
 
-function solvedRepresentationFor(presentation, editorialPlan, visualPolicy = null) {
-  const selected = editorialPlan?.selectedRepresentation;
-  const isProductionFallback = editorialPlan?.coverage?.representationDecision?.fallbackApplied === true;
-  const mediaOnly = visualPolicy?.visualMode === 'MEDIA_EDITORIAL'
-    || (visualPolicy?.useMediaEditorial === true && visualPolicy?.allowHybridRepresentations !== true);
-  if ((visualPolicy?.enableProceduralGraphics === false || mediaOnly) && !isProductionFallback) {
-    return 'media';
-  }
-  if (selected === 'comparison' || selected === 'compare') return 'comparison';
-  if (selected === 'chart' || selected === 'process') return selected;
-  if (presentation.family === 'compare') return 'comparison';
-  if (presentation.family === 'chart' || presentation.family === 'process') return presentation.family;
-  if (presentation.family === 'image' || presentation.family === 'montage') return 'media';
-  return null;
-}
+function solvedRepresentationFor() { return 'media'; }
 
 function solvedFamilyEnabled(representation) {
   if (process.env.USE_SOLVED_COMPOSITION === 'false') return false;
-  const key = `USE_SOLVED_${representation.toUpperCase()}_COMPOSITION`;
-  return process.env[key] !== 'false';
+  return representation === 'media' && process.env.USE_SOLVED_MEDIA_COMPOSITION !== 'false';
 }
 
 function backgroundForSolvedFamily(representation, recent) {
-  const choices = representation === 'comparison' ? ['softRadial', 'charcoal']
-    : representation === 'chart' ? ['neutralDark', 'subtleTexture']
-      : representation === 'media' ? ['charcoal', 'neutralDark'] : ['technicalGrid', 'charcoal'];
+  const choices = ['charcoal', 'neutralDark'];
   return recent.slice(-2).every((item) => item === choices[0]) ? choices[1] : choices[0];
 }
 
@@ -338,125 +286,25 @@ function planBedShots({ clipFrom, clipDur, words, assets, spec, style, rng, stat
 
 // ─── Family-specific overlay props (reveal frames relative to clip start) ──
 
-function overlayFor(family, scene, ctx) {
-  const { words, clipFrom, clipDur, fps, assets } = ctx;
-  const rel = (abs) => Math.max(0, Math.min(clipDur - 1, abs - clipFrom));
+function overlayFor(_family, scene, ctx) {
+  const { words, clipFrom, clipDur, fps } = ctx;
+  const rel = (absoluteFrame) => Math.max(0, Math.min(clipDur - 1, absoluteFrame - clipFrom));
   const emphasisAt = scene.emphasis ? anchorFrame(words, scene.emphasis) : null;
+  const focusAt = scene.focus ? anchorFrame(words, scene.focus) : null;
   const settle = Math.round(fps * 0.35);
-
-  const sequential = (texts, lockToVoice = false) => {
-    // Reveal each item when it is spoken; otherwise distribute across the first 70% of the clip.
-    let after = 0;
-    const found = texts.map((t) => {
-      const a = anchorFrame(words, t, after);
-      if (a) after = a.index + 1;
-      return a ? rel(a.frame) - 3 : null;
-    });
-    // Function words ("the", "a") have nothing to anchor to: they arrive with the next anchored word.
-    for (let k = found.length - 2; k >= 0; k--) {
-      if (found[k] == null && !significantTokens(texts[k]).length && found[k + 1] != null) found[k] = found[k + 1];
-    }
-    const n = texts.length;
-    const lo = settle, hi = Math.max(lo + n, Math.round(clipDur * 0.7));
-    let last = -Infinity;
-    return found.map((f, i) => {
-      const fallback = Math.round(lo + ((hi - lo) * i) / Math.max(1, n - 1 || 1));
-      // The first item is on screen almost immediately so a graphic never opens empty.
-      // Lists/processes open with their first item on screen; kinetic statements stay locked to the voice.
-      const at = i === 0 && !lockToVoice ? Math.min(f ?? settle, settle + 6) : Math.max(f ?? fallback, i === 0 ? 0 : last + (found[i] === found[i - 1] && f != null ? 0 : Math.round(fps * 0.3)));
-      last = at;
-      return at;
-    });
-  };
-
   const entityLabel = scene.entity?.name && scene.kind === 'subject' ? scene.entity.name : null;
-  switch (family) {
-    case 'image': {
-      const focusAt = scene.focus ? anchorFrame(words, scene.focus) : null;
-      return {
-        variant: ctx.spec.variant,
-        kicker: scene.text?.kicker || entityLabel || null,
-        headline: ctx.spec.treatment === 'quiet' ? null : scene.text?.headline || null,
-        kickerAt: settle,
-        headlineAt: emphasisAt ? rel(emphasisAt.frame) : settle + 8,
-        // Annotated variant: ring the focal subject when it is named (or shortly after the cut).
-        label: ctx.spec.label,
-        annotateAt: focusAt ? rel(focusAt.frame) : settle + Math.round(fps * 0.5),
-        secondAt: Math.round(clipDur * 0.42),
-        // Photo stack: each print lands on a phrase boundary where possible.
-        stackAts: [settle, ...[0.34, 0.62].map((f) => {
-          const target = clipFrom + clipDur * f;
-          const w = words.find((x, k) => k > 0 && words[k - 1].endsPhrase && Math.abs(x.startFrame - target) < fps * 0.8);
-          return rel(w ? w.startFrame : target);
-        })],
-      };
-    }
-    case 'stat': {
-      const data = scene.data?.value ? scene.data : synthesizeProceduralData(scene, 'chart');
-      const numAt = data.value ? anchorFrame(words, String(data.value)) : null;
-      const at = rel((numAt || emphasisAt)?.frame ?? clipFrom + settle) - 4;
-      return { ...data, variant: ctx.spec.variant, at: Math.max(4, at), countFrames: Math.round(fps * 0.9), kicker: scene.text?.kicker || null };
-    }
-    case 'statement': {
-      const rawText = scene.text?.headline || scene.emphasis || scene.entity?.name || '';
-      const tokens = rawText.split(/\s+/).filter(Boolean).slice(0, 7);
-      const ats = sequential(tokens, true);
-      return { words: tokens, ats, kicker: scene.text?.kicker || null };
-    }
-    case 'list': {
-      const data = scene.data?.items ? scene.data : { title: scene.text?.headline || 'Key Principles', items: ['Analysis', 'Execution', 'Verification'] };
-      return { title: data.title, items: data.items, ats: sequential(data.items, true) };
-    }
-    case 'process': {
-      const data = safeSceneData(scene, 'process', (value) => Array.isArray(value?.steps));
-      return { steps: data.steps, ats: sequential(data.steps.map((s) => s.title), true) };
-    }
-    case 'timeline': {
-      const data = scene.data?.events ? scene.data : { events: [{ date: 'Phase 1', label: 'Initiation' }, { date: 'Phase 2', label: 'Scale' }] };
-      return { events: data.events, ats: sequential(data.events.map((e) => `${e.date} ${e.label}`)) };
-    }
-    case 'chart': {
-      const data = safeSceneData(scene, 'chart', (value) => Array.isArray(value?.values));
-      const arrive = emphasisAt ? rel(emphasisAt.frame) + 6 : Math.round(clipDur * 0.6);
-      const drawFrames = Math.round(Math.max(fps * 1.2, Math.min(arrive - settle, clipDur * 0.75)));
-      return { ...data, at: settle, drawFrames };
-    }
-    case 'compare': {
-      const data = safeSceneData(scene, 'comparison', (value) => Boolean(value?.left && value?.right));
-      const rightAt = data.right?.title ? anchorFrame(words, data.right.title) : null;
-      return { ...data, leftAt: 2, rightAt: rightAt ? Math.max(14, rel(rightAt.frame) - 3) : Math.round(clipDur * 0.4), withImage: Boolean(assets?.primary) };
-    }
-    case 'quote': {
-      const wordsArr = (scene.data?.quote || scene.narration || '').split(/\s+/).slice(0, 14);
-      return { ...scene.data, at: settle, authorAt: settle + Math.round(fps * 0.8), words: wordsArr, wordAts: sequential(wordsArr, true) };
-    }
-    case 'document': {
-      const data = safeSceneData(scene, 'document', (value) => Boolean(value?.headline));
-      return { ...data, at: 0, highlightAt: emphasisAt ? rel(emphasisAt.frame) : Math.round(clipDur * 0.35) };
-    }
-    case 'chapter':
-      return { ...scene.data, at: settle };
-    case 'ui': {
-      const data = safeSceneData(scene, 'ui', (value) => Array.isArray(value?.fileTree));
-      return { ...data, at: settle };
-    }
-    case 'code': {
-      const data = safeSceneData(scene, 'code', (value) => Boolean(value?.code));
-      return { ...data, at: settle, from: settle, to: Math.round(clipDur * 0.75) };
-    }
-    case 'diagram': {
-      const data = safeSceneData(scene, 'diagram', (value) => Array.isArray(value?.nodes));
-      return { ...data, at: settle };
-    }
-    case 'map': {
-      const data = safeSceneData(scene, 'map', (value) => Array.isArray(value?.regions));
-      return { ...data, at: settle };
-    }
-    default:
-      return {};
-  }
+  return {
+    variant: ctx.spec.variant,
+    kicker: scene.text?.kicker || entityLabel || null,
+    headline: ctx.spec.treatment === 'quiet' ? null : scene.text?.headline || null,
+    kickerAt: settle,
+    headlineAt: emphasisAt ? rel(emphasisAt.frame) : settle + 8,
+    label: ctx.spec.label,
+    annotateAt: focusAt ? rel(focusAt.frame) : settle + Math.round(fps * 0.5),
+    secondAt: Math.round(clipDur * 0.42),
+    stackAts: [settle, ...[0.34, 0.62].map((fraction) => Math.round(clipDur * fraction))],
+  };
 }
-
 /** Typographic recast of a photo scene that had no acceptable image. */
 function titleOverlay(scene) {
   const text = scene.text?.headline || scene.entity?.name || scene.text?.kicker || scene.emphasis || '';
@@ -593,9 +441,19 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     const semanticDissolve = sceneBoundary
       ? clip.enter?.type === 'dissolve' || reason === TRANSITION_REASON.SECTION_CHANGE || (calm && reason === TRANSITION_REASON.CONTINUATION)
       : bothImages && (detailChange || calm);
-    const useDissolve = isSameAsset ? true : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= 2 && semanticDissolve);
+    // A dissolve between two instances of the same still exposes the camera
+    // reset as a ghosted jump. Repeated assets use a stitched camera state and
+    // a clean continuity cut. Scene-boundary dissolves may only use the edit
+    // handle allocated before clip positions were compiled.
+    const allocatedSceneDissolve = sceneBoundary && clip.enter?.type === 'dissolve' && clip.enter.frames > 0;
+    const useDissolve = isSameAsset
+      ? false
+      : sceneBoundary
+        ? allocatedSceneDissolve
+        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= 2 && semanticDissolve);
+    const appliedFrames = useDissolve && sceneBoundary ? clip.enter.frames : useDissolve ? dissolveFrames : 0;
     const decision = useDissolve
-      ? { type: 'dissolve', frames: dissolveFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
+      ? { type: 'dissolve', frames: appliedFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
       : { type: 'cut', frames: 0, policy: 'CUT', reason, anchor: null };
     synchronizeShotTransition(shot, previous, decision, mediaSceneSpecs, mediaShotPlans);
     if (sceneBoundary) {
@@ -618,7 +476,9 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       const previousEntry = entries[index - 1];
       const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
       const bothImages = previousEntry.shot.asset?.type !== 'video' && entry.shot.asset?.type !== 'video';
-      return sceneBoundary || bothImages;
+      const sameAsset = previousEntry.shot.asset?.src && previousEntry.shot.asset.src === entry.shot.asset?.src;
+      // A new scene cannot acquire a dissolve after clip positions are fixed.
+      return !sameAsset && (sceneBoundary ? entry.clip.enter?.type === 'dissolve' : bothImages);
     });
     for (const { entry, index } of candidates) {
       if (usedDissolves >= minimumDissolves || usedDissolves >= maximumDissolves) break;
@@ -639,23 +499,103 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
   return clips;
 }
 
+/**
+ * Preserve camera continuity when editorially necessary reuse places the same
+ * still in adjacent shots. Without this pass each compiled shot starts at its
+ * own frame-zero state, which looks like the image snaps backwards and begins
+ * animating again. Only compatible full-frame reframes are stitched; deliberate
+ * detail crops remain independent and should be separated by a clean cut.
+ */
+export function stitchRepeatedAssetMotion({ clips = [], solvedScenes = {}, motionPlans = {}, mediaSceneSpecs = {}, fps = 30 } = {}) {
+  const shots = clips.flatMap((clip) => clip.shots || []);
+  for (let index = 1; index < shots.length; index++) {
+    const previous = shots[index - 1], current = shots[index];
+    if (!previous.asset?.src || previous.asset.src !== current.asset?.src) continue;
+    const previousScene = solvedScenes[previous.solvedSceneId], currentScene = solvedScenes[current.solvedSceneId];
+    const previousPlan = motionPlans[previous.motionPlanId], currentPlan = motionPlans[current.motionPlanId];
+    const previousGeometry = previousScene?.mediaGeometry?.media_primary;
+    const currentGeometry = currentScene?.mediaGeometry?.media_primary;
+
+    // Consecutive shots using the same video must continue through the source
+    // instead of restarting the approved window. A restart creates a visible
+    // jump at the edit even though both shots reference identical footage.
+    if (previous.asset.type === 'video' && current.asset.type === 'video') {
+      const previousStart = Number(previous.asset.videoTrim?.startTime || 0);
+      const previousPlayback = Number(previous.durationInFrames || 0) / Math.max(1, fps);
+      const currentPlayback = Number(current.durationInFrames || 0) / Math.max(1, fps);
+      const sourceDuration = Number(current.asset.duration || previous.asset.duration || 0);
+      const continuedStart = previousStart + previousPlayback;
+      const continuedEnd = continuedStart + currentPlayback + 0.1;
+      if (sourceDuration > 0 && continuedEnd <= sourceDuration + 0.001) {
+        const videoTrim = {
+          ...(current.asset.videoTrim || {}),
+          startTime: Number(continuedStart.toFixed(3)),
+          endTime: Number(Math.min(sourceDuration, continuedEnd).toFixed(3)),
+          reason: `Continuous playback after ${previous.id}`,
+        };
+        current.asset.videoTrim = videoTrim;
+        if (currentGeometry) currentGeometry.videoTrim = { ...videoTrim };
+        const mediaSpec = mediaSceneSpecs[current.mediaSceneSpecId];
+        const specAsset = mediaSpec?.assets?.find((asset) => asset.src === current.asset.src) || mediaSpec?.assets?.[0];
+        if (specAsset) specAsset.videoTrim = { ...videoTrim };
+        current.videoContinuity = {
+          continuedFromShotId: previous.id,
+          assetSrc: current.asset.src,
+          startTime: videoTrim.startTime,
+        };
+      }
+      continue;
+    }
+
+    const previousPath = previousScene?.cameraPaths?.media_primary;
+    const currentPath = currentScene?.cameraPaths?.media_primary;
+    if (!previousGeometry || !currentGeometry || !previousPath || !currentPath || !previousPlan || !currentPlan) continue;
+    const rectDelta = Math.max(
+      Math.abs(previousGeometry.rect.x - currentGeometry.rect.x) / Math.max(1, currentGeometry.rect.width),
+      Math.abs(previousGeometry.rect.y - currentGeometry.rect.y) / Math.max(1, currentGeometry.rect.height),
+      Math.abs(previousGeometry.rect.width - currentGeometry.rect.width) / Math.max(1, currentGeometry.rect.width),
+      Math.abs(previousGeometry.rect.height - currentGeometry.rect.height) / Math.max(1, currentGeometry.rect.height),
+    );
+    const scaleDelta = Math.abs(previousPath.end.scale - currentPath.start.scale);
+    if (rectDelta > .08 || scaleDelta > .08) continue;
+
+    const stitched = {
+      scale: previousPath.end.scale,
+      focusX: previousPath.end.focusX,
+      focusY: previousPath.end.focusY,
+    };
+    currentPath.start = { ...stitched };
+    currentPlan.frame0State.media_primary = {
+      ...(currentPlan.frame0State.media_primary || {}),
+      cameraScale: stitched.scale,
+      cameraFocusX: stitched.focusX,
+      cameraFocusY: stitched.focusY,
+    };
+    const values = { cameraScale: stitched.scale, cameraFocusX: stitched.focusX, cameraFocusY: stitched.focusY };
+    for (const track of currentPlan.tracks) {
+      if (track.targetId === 'media_primary' && Object.hasOwn(values, track.property)) track.from = values[track.property];
+    }
+    current.cameraContinuity = { stitchedFromShotId: previous.id, assetSrc: current.asset.src };
+  }
+  return clips;
+}
+
 export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc, coveragePlan = [], editorialVisualPlan = [], visualPolicy: suppliedVisualPolicy = null, productionProfile = null }) {
   const timelineStartedAt = performance.now();
   // Direct compiler callers retain the regression-compatible path; the production
   // pipeline always passes its centrally resolved (MEDIA_EDITORIAL by default) policy.
-  const visualPolicy = suppliedVisualPolicy || resolveVisualPolicy({ visualMode: 'LEGACY_PROCEDURAL' });
+  const visualPolicy = suppliedVisualPolicy || resolveVisualPolicy({ visualMode: '' });
   const style = getStyle(plan.style);
   const palette = buildPalette(plan.style, plan.hue);
   const durationSec = narration.durationInSeconds ?? narration.duration ?? narration.durationSec ?? (narration.words?.[narration.words.length - 1]?.end || 0);
   const totalFrames = narration.totalFrames ?? Math.ceil(durationSec * fps);
   const width = format === 'shorts' ? 1080 : 1920;
   const height = format === 'shorts' ? 1920 : 1080;
-  const formatLayout = createFormatLayoutContext({ width, height, format, captionsEnabled: true });
+  const captionsEnabled = productionProfile?.captions !== 'none';
+  const formatLayout = createFormatLayoutContext({ width, height, format, captionsEnabled });
   const coverageByShot = new Map(coveragePlan.map((item) => [item.shotId, item]));
   const editorialByShot = new Map(editorialVisualPlan.map((item) => [item.shotId, item]));
   const sceneCompositions = {};
-  const comparisonSpecs = {};
-  const chartSpecs = {};
   const mediaSceneSpecs = {};
   const editorialVisualBeats = {};
   const mediaShotPlans = {};
@@ -760,6 +700,27 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             assets: sceneAssets,
             spec: { ...spec, variant: presentation.variant },
           });
+      if (asset?.type === 'video') {
+        asset = { ...asset };
+        const shotDurationSec = timing.durationInFrames / fps;
+        const startTime = Number(asset.videoTrim?.startTime || 0);
+        const endTime = Number(asset.videoTrim?.endTime || 0);
+        const sourceDur = Number(asset.duration) || 0;
+        const currentTrimDur = endTime - startTime;
+        if (currentTrimDur < shotDurationSec) {
+          if (sourceDur > 0 && sourceDur >= shotDurationSec) {
+            const newStartTime = Math.min(startTime, Math.max(0, sourceDur - shotDurationSec));
+            const newEndTime = Math.min(sourceDur, newStartTime + shotDurationSec + 0.1);
+            asset.videoTrim = {
+              ...(asset.videoTrim || {}),
+              startTime: Number(newStartTime.toFixed(3)),
+              endTime: Number(newEndTime.toFixed(3)),
+            };
+          } else if (sourceDur > 0 && sourceDur < shotDurationSec) {
+            asset.loopSafe = true;
+          }
+        }
+      }
       const timelineShot = {
         id: realizedShot.storyboardShotId,
         storyboardShotId: realizedShot.storyboardShotId,
@@ -782,7 +743,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
         assets: realizedShot.assets,
         move: realizedShot.move,
         overlay,
-        renderMode: 'legacy',
+        renderMode: 'mediaFallback',
         solvedSceneId: null,
         motionPlanId: null,
         visualQualityReviewId: null,
@@ -855,7 +816,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             width,
             height,
             styleId: plan.style,
-            captionsEnabled: true,
+            captionsEnabled,
             shot: timelineShot,
             asset,
             supportingAssets: realizedShot.assets || [],
@@ -866,8 +827,6 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
           compiled.solvedScene.backgroundSelection = backgroundForSolvedFamily(solvedRepresentation, recentSolvedBackgrounds);
           recentSolvedBackgrounds.push(compiled.solvedScene.backgroundSelection);
           sceneCompositions[compiled.composition.shotId] = compiled.composition;
-          if (compiled.comparisonSpec) comparisonSpecs[compiled.comparisonSpec.shotId] = compiled.comparisonSpec;
-          if (compiled.chartSpec) chartSpecs[compiled.chartSpec.shotId] = compiled.chartSpec;
           if (compiled.mediaSceneSpec) mediaSceneSpecs[compiled.mediaSceneSpec.shotId] = compiled.mediaSceneSpec;
           solvedScenes[compiled.solvedScene.id] = compiled.solvedScene;
           motionPlans[compiled.motionPlan.id] = compiled.motionPlan;
@@ -894,14 +853,14 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
               representation: solvedRepresentation,
               failureStage,
               constraint: first.code,
-              fallbackRenderer: solvedRepresentation === 'media' ? 'PhotoShot' : presentation.family === 'compare' ? 'CompareShot' : presentation.family === 'chart' ? 'ChartShot' : 'ProcessShot',
+              fallbackRenderer: 'PhotoShot',
               reason: first.detail || (compiled.preflight.passed
                 ? `Solved ${solvedRepresentation} failed editorial publishability: ${first.code}`
                 : `Solved ${solvedRepresentation} failed hard preflight: ${first.code}`),
             };
             timelineShot.compositionFallback = fallback;
             compositionFallbacks.push(fallback);
-            frameStatePreflight[compiled.preflight.shotId].legacyFallbackUsed = true;
+            frameStatePreflight[compiled.preflight.shotId].mediaFallbackUsed = true;
             if (visualPolicy.useMediaEditorial && requiresMediaAsset) {
               if (!asset || asset.unresolved) {
                 timelineShot.unresolvedMedia = true;
@@ -920,7 +879,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             representation: solvedRepresentation,
             failureStage,
             constraint: error?.issues?.[0]?.path?.join('.') || 'composition_compile_failure',
-            fallbackRenderer: solvedRepresentation === 'media' ? 'PhotoShot' : presentation.family === 'compare' ? 'CompareShot' : presentation.family === 'chart' ? 'ChartShot' : 'ProcessShot',
+            fallbackRenderer: 'PhotoShot',
             reason: error.message,
           };
           timelineShot.compositionFallback = fallback;
@@ -930,7 +889,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
             passed: false,
             hardFailures: [{ code: 'composition_compile_failure', severity: 'hard', detail: error.message }],
             issues: [{ code: 'composition_compile_failure', severity: 'hard', detail: error.message }],
-            legacyFallbackUsed: true,
+            mediaFallbackUsed: true,
             fallback,
           };
           if (visualPolicy.useMediaEditorial && requiresMediaAsset && (!asset || asset.unresolved)) {
@@ -1002,6 +961,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
 
   if (visualPolicy.useMediaEditorial) {
     directSolvedShotTransitions({ clips, scenes: plan.scenes, fps, mediaSceneSpecs, mediaShotPlans, visualPolicy, productionProfile });
+    stitchRepeatedAssetMotion({ clips, solvedScenes, motionPlans, mediaSceneSpecs, fps });
   }
   const allRealizedShots = clips.flatMap((clip) => clip.shots);
   allRealizedShots.forEach((shot, index) => {
@@ -1009,12 +969,12 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   });
 
   // Captions.
-  const captionMode = visualPolicy.useMediaEditorial ? 'phrase' : format === 'landscape' && style.captions.mode === 'highlight' ? 'phrase' : style.captions.mode;
+  const captionMode = !captionsEnabled ? 'none' : visualPolicy.useMediaEditorial ? 'phrase' : format === 'landscape' && style.captions.mode === 'highlight' ? 'phrase' : style.captions.mode;
   const captionEmphasisMode = format === 'shorts' ? (style.captions?.emphasis || 'KEYWORD') : (style.captions?.emphasis || 'NONE');
   const capLimits = format === 'shorts'
     ? (captionMode === 'highlight' || captionEmphasisMode === 'ACTIVE_WORD' ? { maxWords: 3, maxChars: 22 } : { maxWords: 4, maxChars: 26 })
     : { maxWords: 7, maxChars: 42 };
-  const chunks = buildCaptionChunks(words, fps, capLimits).map((c) => ({ ...c, endFrame: Math.min(c.endFrame, totalFrames) }));
+  const chunks = captionsEnabled ? buildCaptionChunks(words, fps, capLimits).map((c) => ({ ...c, endFrame: Math.min(c.endFrame, totalFrames) })) : [];
   const captionPolicies = clips.flatMap((clip) => clip.shots.map((shot) => ({
     shotId: shot.storyboardShotId,
     startFrame: clip.from + shot.from,
@@ -1135,7 +1095,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
   };
   Object.defineProperty(timeline, '_compositionArtifacts', {
     enumerable: false,
-    value: { sceneCompositions, comparisonSpecs, chartSpecs, mediaSceneSpecs, editorialVisualBeats, mediaShotPlans, solvedScenes, motionPlans, visualQualityReviews, frameStatePreflight, compositionFallbacks, mediaCompositionDiagnostics: timeline.mediaCompositionDiagnostics },
+    value: { sceneCompositions, mediaSceneSpecs, editorialVisualBeats, mediaShotPlans, solvedScenes, motionPlans, visualQualityReviews, frameStatePreflight, compositionFallbacks, mediaCompositionDiagnostics: timeline.mediaCompositionDiagnostics },
   });
   return timeline;
 }

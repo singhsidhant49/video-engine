@@ -2,11 +2,11 @@ name: videoforge
 
 x-app-environment: &app-environment
   NODE_ENV: production
-  DATABASE_URL: postgresql://video:${POSTGRES_PASSWORD:-video_dev_password}@postgres:5432/videogenerator
+  DATABASE_URL: postgresql://video:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}@postgres:5432/videogenerator
   REDIS_URL: redis://redis:6379/0
   VIDEO_JOB_STORE: postgres
   VIDEO_QUEUE_BACKEND: bullmq
-  VIDEO_API_KEYS: ${VIDEO_API_KEYS:-replace-this-before-exposing-the-api}
+  VIDEO_API_KEYS: ${VIDEO_API_KEYS:?VIDEO_API_KEYS must be set to a 32+ character random secret}
   VIDEO_WORKER_CONCURRENCY: ${VIDEO_WORKER_CONCURRENCY:-1}
   VIDEO_QUEUE_LOCK_MS: ${VIDEO_QUEUE_LOCK_MS:-600000}
   VIDEO_QUEUE_LOCK_RENEW_MS: ${VIDEO_QUEUE_LOCK_RENEW_MS:-30000}
@@ -15,11 +15,15 @@ x-app-environment: &app-environment
   REMOTION_CONCURRENCY: ${REMOTION_CONCURRENCY:-1}
   RUNS_RETENTION_DAYS: ${RUNS_RETENTION_DAYS:-7}
   RUNS_CLEANUP_INTERVAL_HOURS: ${RUNS_CLEANUP_INTERVAL_HOURS:-12}
+  CACHE_RETENTION_DAYS: ${CACHE_RETENTION_DAYS:-14}
   VIDEO_MOTION_PRESET: ${VIDEO_MOTION_PRESET:-standard}
   VIDEO_MAX_QUEUED_JOBS: ${VIDEO_MAX_QUEUED_JOBS:-25}
   VIDEO_MAX_OWNER_PENDING_JOBS: ${VIDEO_MAX_OWNER_PENDING_JOBS:-5}
   VIDEO_SHUTDOWN_TIMEOUT_MS: ${VIDEO_SHUTDOWN_TIMEOUT_MS:-30000}
+  VIDEO_JOB_TIMEOUT_MS: ${VIDEO_JOB_TIMEOUT_MS:-5400000}
   VIDEO_API_MAX_REQUEST_BYTES: ${VIDEO_API_MAX_REQUEST_BYTES:-1mb}
+  VIDEO_API_RATE_LIMIT_PER_MINUTE: ${VIDEO_API_RATE_LIMIT_PER_MINUTE:-120}
+  VIDEO_SHARED_SENSITIVE_CACHE: ${VIDEO_SHARED_SENSITIVE_CACHE:-false}
   KOKORO_TTS_URL: http://kokoro:8880/v1/audio/speech
   KOKORO_VOICE: ${KOKORO_VOICE:-af_bella}
   KOKORO_SPEED: ${KOKORO_SPEED:-0.9}
@@ -42,7 +46,7 @@ services:
     environment:
       POSTGRES_DB: videogenerator
       POSTGRES_USER: video
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-video_dev_password}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -68,7 +72,7 @@ services:
       retries: 20
 
   kokoro:
-    image: ghcr.io/remsky/kokoro-fastapi-cpu:latest
+    image: ${KOKORO_IMAGE:?KOKORO_IMAGE must be pinned to an approved immutable digest}
     restart: unless-stopped
     ports:
       # Keep localhost as the safe default. Set KOKORO_BIND_IP to a trusted LAN
@@ -84,15 +88,17 @@ services:
       start_period: 20s
 
   storage-init:
-    image: videoforge-worker
+    image: videoforge-app:latest
     user: root
     command: ["sh", "-c", "chown -R node:node /app/renders /app/.cache"]
     restart: "no"
     volumes:
       - video_data:/app/renders
       - engine_cache:/app/.cache
+      - webpack_cache:/app/node_modules/.cache
 
   api:
+    image: videoforge-app:latest
     build: .
     restart: unless-stopped
     init: true
@@ -106,24 +112,30 @@ services:
     ports:
       # The authenticated API is reachable from trusted devices on the LAN.
       # PostgreSQL and Redis remain local; Kokoro is local unless explicitly LAN-bound.
-      - "${VIDEO_API_BIND_IP:-0.0.0.0}:${VIDEO_API_PORT:-3000}:3000"
+      - "${VIDEO_API_BIND_IP:-127.0.0.1}:${VIDEO_API_PORT:-3000}:3000"
     volumes:
       - video_data:/app/renders
       - engine_cache:/app/.cache
-      - ./public:/app/public
-      - ./src:/app/src
+    read_only: true
+    tmpfs:
+      - /tmp:size=512m,mode=1777
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: ${VIDEO_API_MEMORY_LIMIT:-1g}
+    cpus: ${VIDEO_API_CPU_LIMIT:-1.0}
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
       worker: { condition: service_started }
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 20
       start_period: 20s
 
   worker:
+    image: videoforge-app:latest
     build: .
     restart: unless-stopped
     init: true
@@ -138,8 +150,14 @@ services:
     volumes:
       - video_data:/app/renders
       - engine_cache:/app/.cache
-      - ./public:/app/public
-      - ./src:/app/src
+      - webpack_cache:/app/node_modules/.cache
+    read_only: true
+    tmpfs:
+      - /tmp:size=2g,mode=1777
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: ${VIDEO_WORKER_MEMORY_LIMIT:-6g}
+    cpus: ${VIDEO_WORKER_CPU_LIMIT:-4.0}
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
@@ -151,3 +169,4 @@ volumes:
   redis_data:
   video_data:
   engine_cache:
+  webpack_cache:

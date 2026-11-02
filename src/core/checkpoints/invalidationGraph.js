@@ -139,7 +139,7 @@ export async function evaluateRunValidity({
   // Visual-mode changes preserve script/audio but invalidate media selection and every visual artifact.
   try {
     const oldReq = JSON.parse(await fs.readFile(path.join(runDir, 'request.json'), 'utf8'));
-    if (currentContext.visualMode && (oldReq.visualMode || 'LEGACY_PROCEDURAL') !== currentContext.visualMode) {
+    if (currentContext.visualMode && (oldReq.visualMode || 'MEDIA_EDITORIAL') !== currentContext.visualMode) {
       for (const stage of ['visualStrategy', 'storyboard', 'assets', 'timeline', 'package', 'preRenderQa', 'render', 'postRenderQa']) forcedInvalidation.add(stage);
     }
   } catch {

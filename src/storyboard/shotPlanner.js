@@ -121,18 +121,8 @@ export function segmentVisualBeats(narration = '', entities = []) {
 
 /** Content-aware visual beat demand derived from narration semantics rather than duration thresholds alone. */
 export function estimateShotDemand(scene, strategy) {
-  const isMediaEditorial = Boolean(strategy?.useMediaEditorial || strategy?.mediaEditorial || scene.mediaEditorial);
   const primaryKind = scene.preferredPresentation;
   const isShorts = strategy?.format === 'shorts' || scene.format === 'shorts';
-
-  // Complex graphics and data kinds MUST hold stable for the whole explanation in procedural mode
-  if (!isMediaEditorial) {
-    if (['statistic', 'chart', 'process', 'timeline', 'comparison', 'quote', 'document', 'code', 'ui'].includes(primaryKind)) {
-      return 1;
-    }
-    if (scene.visualIntent === 'quantify' || scene.visualIntent === 'emphasize') return 1;
-    if (scene.visualChangeTolerance === 'low') return 1;
-  }
 
   const narration = scene.narration || scene.sourceScenes?.[0]?.narration || '';
   const beats = segmentVisualBeats(narration, scene.entities || []);
@@ -149,7 +139,7 @@ export function estimateShotDemand(scene, strategy) {
     repairOptions: ['new_semantic_asset', 'detail_crop', 'annotation', 'camera_adjustment', 'keep_static'],
   } : null;
 
-  if (isMediaEditorial) {
+  {
     const configuredMinHold = Number(strategy?.pacing?.minimumShotSeconds);
     const configuredMaxHold = Number(strategy?.pacing?.maximumStillSeconds);
     const profileMinHold = Number.isFinite(configuredMinHold) ? configuredMinHold : (isShorts ? 2.8 : 4.2);
@@ -182,16 +172,6 @@ export function estimateShotDemand(scene, strategy) {
     return clamp(meaningfulShots, 1, isShorts ? 4 : 3);
   }
 
-  // Legacy procedural path fallback
-  if (duration >= 4.8 && duration < 8.0) {
-    if ((scene.purpose === 'hook' || scene.purpose === 'contrast') && scene.energy >= 4) return 2;
-    if (scene.informationDensity >= 4 && strategy?.visualDensity >= 0.7) return 2;
-    return 1;
-  }
-  if (duration >= 8.0) {
-    return duration >= 11.0 ? 3 : 2;
-  }
-  return 1;
 }
 
 const ROLE_SEQUENCES = {
@@ -341,7 +321,6 @@ function durationWeights(count, scene) {
 }
 
 export function authorShots(scene, strategy, topic) {
-  const isMediaEditorial = Boolean(strategy?.useMediaEditorial || strategy?.mediaEditorial || scene.mediaEditorial);
   const count = estimateShotDemand(scene, strategy);
   const roles = ROLE_SEQUENCES[scene.visualIntent] || ROLE_SEQUENCES.establish;
   const concepts = sourceConcepts(scene, topic);
@@ -355,11 +334,8 @@ export function authorShots(scene, strategy, topic) {
     !isAbstractEventEntity(entity) && (scene.evidenceRequirement === 'required' || entityMentioned(narration, entity)));
   const hasAbstractHistoricalEntity = (scene.entities || []).some(isAbstractEventEntity);
   const beats = segmentVisualBeats(narration, searchableEntities);
-  const sceneOrdinal = Number(String(scene.id || '').match(/(\d+)(?!.*\d)/)?.[1] || 1);
-
   return Array.from({ length: count }, (_, index) => {
     const role = roles[index] || roles[roles.length - 1];
-    const procedural = !isMediaEditorial && (role === 'graphic' || ['statistic', 'comparison', 'list', 'process', 'timeline', 'chart', 'ui', 'code'].includes(primaryKind));
     const beat = beats[index];
     let visualConcept = concepts[Math.min(index, concepts.length - 1)];
 
@@ -396,7 +372,7 @@ export function authorShots(scene, strategy, topic) {
         TCP_HANDSHAKE: 'datacenter network equipment',
       };
       visualConcept = labelMap[beat.label] || concepts[Math.min(index, concepts.length - 1)];
-    } else if (isMediaEditorial && index > 0 && visualConcept === concepts[0]) {
+    } else if (index > 0 && visualConcept === concepts[0]) {
       if (role === 'detail') visualConcept = `${visualConcept} closeup detail`;
       else if (role === 'action' || role === 'reaction') visualConcept = `${visualConcept} screen interaction`;
       else visualConcept = `${visualConcept} detail`;
@@ -424,13 +400,9 @@ export function authorShots(scene, strategy, topic) {
     // Media motion is selected only after the real asset, its focal point,
     // orientation, duration, and neighbouring shots are known. Persisting a
     // blind push/pull alternation here made unrelated shots move identically
-    // and prevented subject-aware pans. Legacy procedural rendering keeps its
+    // and prevented subject-aware pans. Imported timelines keep their
     // deterministic hint for backwards compatibility.
-    const cameraMove = isMediaEditorial
-      ? 'auto'
-      : (count === 1
-        ? (sceneOrdinal % 2 === 0 ? 'subtlePull' : 'subtlePush')
-        : (role === 'detail' ? 'detailCrop' : (index % 2 === 0 ? 'subtlePush' : 'static')));
+    const cameraMove = 'auto';
 
     return {
       id: `${scene.id}_shot_${String(index + 1).padStart(2, '0')}`,
@@ -439,7 +411,7 @@ export function authorShots(scene, strategy, topic) {
       visualConcept,
       assetIntent,
       changeReason,
-      mediaPreference: procedural ? 'procedural' : scene.evidenceRequirement === 'required' ? 'real' : 'auto',
+      mediaPreference: scene.evidenceRequirement === 'required' ? 'real' : 'auto',
       searchConcepts: [...new Set([visualConcept, ...shotEntities, ...concepts.slice(index, index + 2)])].slice(0, 6),
       entities: shotEntities,
       motionPreference: primaryKind === 'quote' || primaryKind === 'statistic' ? 'stable' : scene.energy >= 4 ? 'active' : 'slow',

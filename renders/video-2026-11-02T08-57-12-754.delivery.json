@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "videoId": "video-2026-11-02T08-57-12-754",
+  "title": "The Accidental Cure: How Penicillin Changed Everything",
+  "createdAt": "2026-11-02T10:22:41.419Z",
+  "file": {
+    "name": "video-2026-11-02T08-57-12-754-shorts.mp4",
+    "bytes": 20727635,
+    "sha256": "18587a4a5335896084bfa0b00a3830bdc5251ffafbf16874b63e29851218ead4",
+    "codec": "h264",
+    "colorSpace": "bt709",
+    "audioBitrate": "192k"
+  },
+  "durationSeconds": 42.9,
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "artifacts": {
+    "credits": "video-2026-11-02T08-57-12-754.credits.txt",
+    "qualityReport": "runs/video-2026-11-02T08-57-12-754/qc.json"
+  },
+  "quality": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "42.90s (timeline 42.90s)"
+      },
+      {
+        "id": "audio-stream",
+        "ok": true,
+        "severity": "error",
+        "detail": "audio stream present"
+      },
+      {
+        "id": "audio-duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "42.90s audio vs 42.90s video"
+      },
+      {
+        "id": "blank-frames",
+        "ok": true,
+        "severity": "error",
+        "detail": "none"
+      },
+      {
+        "id": "frozen-motion",
+        "ok": true,
+        "severity": "error",
+        "detail": "all planned/native motion is visible"
+      },
+      {
+        "id": "edit-boundary-continuity",
+        "ok": true,
+        "severity": "error",
+        "detail": "12 edit boundaries inspected"
+      },
+      {
+        "id": "dissolve-luminance-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "dissolve boundaries are smooth"
+      },
+      {
+        "id": "video-loop-seams",
+        "ok": true,
+        "severity": "error",
+        "detail": "no unsafe clip loops"
+      },
+      {
+        "id": "intentional-static-holds",
+        "ok": true,
+        "severity": "warn",
+        "detail": "5 intentional static shot(s)"
+      },
+      {
+        "id": "brightness",
+        "ok": true,
+        "severity": "warn",
+        "detail": "photo clips median luma 53%"
+      }
+    ]
+  }
+}

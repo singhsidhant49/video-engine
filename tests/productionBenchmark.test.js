@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyRenderedMotion, pixelDifferenceExcludingRect, renderedMotionThreshold } from '../src/qc/renderQc.js';
+import { classifyEditBoundary, classifyRenderedMotion, pixelDifferenceExcludingRect, renderedMotionThreshold } from '../src/qc/renderQc.js';
+
+test('render QC identifies repeated-image camera resets at edit boundaries', () => {
+  const stable = { data: new Uint8Array(72 * 128).fill(100), mean: 100, stdev: 10 };
+  const reset = { data: new Uint8Array(72 * 128).fill(140), mean: 140, stdev: 10 };
+  assert.equal(classifyEditBoundary({ before: stable, after: reset, sameAsset: true }).repeatedAssetReset, true);
+  assert.equal(classifyEditBoundary({ before: stable, after: stable, sameAsset: true }).repeatedAssetReset, false);
+});
 import { classifyBenchmarkFailure, evaluateProductionBenchmark } from '../src/benchmark/productionBenchmark.js';
 import { resolvedCameraPresentation } from '../src/pipeline/timeline.js';
 

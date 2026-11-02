@@ -182,10 +182,22 @@ const AMBIGUITY_RULES = [
  */
 function extractAction(text = '') {
   const lower = text.toLowerCase();
+  // Physical/narrative actions must be resolved before overloaded technical
+  // verbs.  A person who "runs" from an earthquake is not executing code.
+  if (/\b(?:earthquake|quake|tremor|aftershock|seismic)\b/i.test(lower)) {
+    if (/\b(?:collapse|collapsed|collapsing|crack|cracked|split|splits|shake|shaking|rupture|destroy|destroyed)\b/i.test(lower)) {
+      return 'earthquake shaking, ground rupture, and structural collapse';
+    }
+    return 'seismic ground movement and earthquake impact';
+  }
+  if (/\b(?:tsunami|tidal wave|storm surge)\b/i.test(lower)) return 'tsunami waves inundating the coastline';
   if (/\b(?:send|sending|request|fetch|retrieve|get|ping)\b/i.test(lower)) return 'sending or requesting data';
   if (/\b(?:return|response|serve|serving|reply|deliver)\b/i.test(lower)) return 'returning data or response';
   if (/\b(?:parse|parsing|read|reading|inspect|analyze)\b/i.test(lower)) return 'parsing or inspecting structure';
-  if (/\b(?:execute|executing|run|running|compute|calculat\w*)\b/i.test(lower)) return 'executing instructions or compute';
+  if (/\b(?:execute|executing|compute|calculat\w*)\b/i.test(lower)
+    || (/\b(?:run|running)\b/i.test(lower) && /\b(?:code|program|software|process|runtime|algorithm|instruction|computer|server|cpu|gpu)\b/i.test(lower))) {
+    return 'executing instructions or compute';
+  }
   if (/\b(?:render|rendering|paint|composite|draw|display)\b/i.test(lower)) return 'rendering or painting visuals';
   if (/\b(?:connect|connecting|link|transmit|flow|travel)\b/i.test(lower)) return 'connecting or transmitting';
   if (/\b(?:lay|laying|install|installing|bury|stretch)\b/i.test(lower)) return 'installing or stretching infrastructure';
@@ -200,6 +212,8 @@ function extractAction(text = '') {
   if (/\b(?:branch|split|diverg\w*|fork)\b/i.test(lower)) return 'branching or diverging paths';
   if (/\b(?:work|working|type|typing|write|writing|desk|office)\b/i.test(lower)) return 'working calmly at office desk';
   if (/\b(?:choose|choosing|choice|choices|decide|deciding|option|options|offer|offers|select|compare)\b/i.test(lower)) return 'evaluating, comparing, or choosing options';
+  if (/\b(?:grow|growing|growth|multiply|multiplying|spread|spreading|inhibit|inhibiting|culture|culturing)\b/i.test(lower)) return 'biological growth, culture development, or zone of inhibition';
+  if (/\b(?:microscop\w*|magnif\w*|petri|dish|culture)\b/i.test(lower)) return 'microscopic observation or laboratory culture examination';
   return 'active demonstration or relevant physical phenomenon';
 }
 
@@ -208,18 +222,21 @@ function extractAction(text = '') {
  */
 function extractEnvironment(text = '') {
   const lower = text.toLowerCase();
-  if (/ocean|sea|underwater|deep\s+sea|seabed|ocean\s+floor/i.test(lower)) return 'deep ocean seabed or underwater marine';
-  if (/garden|jasmine|flowers?|leaves|moonlight/i.test(lower)) return 'peaceful natural garden at night';
-  if (/forest|woods?|trees?|cabin/i.test(lower)) return 'quiet forest or woodland at night';
-  if (/night|stars?|moon|evening|darkness/i.test(lower)) return 'peaceful nighttime landscape';
-  if (/datacenter|data\s+center|server\s+room|rack/i.test(lower)) return 'modern datacenter, server hall, or clean server racks';
-  if (/browser|devtools|screen|computer|desktop|laptop/i.test(lower)) return 'computer screen or web browser devtools interface';
-  if (/wall\s+street|stock\s+exchange|trading\s+floor/i.test(lower)) return 'stock exchange trading floor';
-  if (/factory|foundry|cleanroom|assembly|semiconductor/i.test(lower)) return 'semiconductor cleanroom or precision factory';
-  if (/space|orbit|cosmos|universe|galaxy/i.test(lower)) return 'deep space, astrophysical cosmos, or orbit';
-  if (/laboratory|lab|microscope|test rig|bench/i.test(lower)) return 'scientific laboratory or engineering test facility';
-  if (/jet\s+engine|turbine|combustor|cockpit|aircraft|airplane/i.test(lower)) return 'aerospace engineering facility or aircraft in flight';
-  if (/phone|smartphone|mobile|pocket/i.test(lower)) return 'smartphone device in use or silicon chip interior';
+  if (/\b(?:earthquake|quake|tremor|aftershock|seismic|collapsed? buildings?|ground rupture)\b/i.test(lower)) return 'earthquake-affected streets, buildings, or documented disaster zone';
+  if (/\b(?:tsunami|tidal wave|coastal flooding|inundation)\b/i.test(lower)) return 'coastline or populated area affected by tsunami inundation';
+  if (/\b(?:ocean|sea|underwater|deep\s+sea|seabed|ocean\s+floor)\b/i.test(lower)) return 'deep ocean seabed or underwater marine';
+  if (/\b(?:bacteria|bacterial|mold|mould|fungus|fungal|petri|culture|specimen|cell|cellular|microscopic|penicillin|antibiotic|microbe|spore|spores)\b/i.test(lower)) return 'scientific laboratory or microbiological petri dish';
+  if (/\b(?:garden|jasmine|flowers?|leaves|moonlight)\b/i.test(lower)) return 'peaceful natural garden at night';
+  if (/\b(?:forest|woods?|trees?|cabin)\b/i.test(lower)) return 'quiet forest or woodland at night';
+  if (/\b(?:night|stars?|moon|evening|darkness)\b/i.test(lower)) return 'peaceful nighttime landscape';
+  if (/\b(?:datacenter|data\s+center|server\s+room)\b|\bracks?\b/i.test(lower)) return 'modern datacenter, server hall, or clean server racks';
+  if (/\b(?:browser|devtools|screen|computer|desktop|laptop)\b/i.test(lower)) return 'computer screen or web browser devtools interface';
+  if (/\b(?:wall\s+street|stock\s+exchange|trading\s+floor)\b/i.test(lower)) return 'stock exchange trading floor';
+  if (/\b(?:factory|foundry|cleanroom|assembly|semiconductor)\b/i.test(lower)) return 'semiconductor cleanroom or precision factory';
+  if (/\b(?:space|orbit|cosmos|universe|galaxy)\b/i.test(lower)) return 'deep space, astrophysical cosmos, or orbit';
+  if (/\b(?:laboratory|lab|microscope|test\s+rig|bench)\b/i.test(lower)) return 'scientific laboratory or engineering test facility';
+  if (/\b(?:jet\s+engine|turbine|combustor|cockpit|aircraft|airplane)\b/i.test(lower)) return 'aerospace engineering facility or aircraft in flight';
+  if (/\b(?:phone|smartphone|mobile|pocket)\b/i.test(lower)) return 'smartphone device in use or silicon chip interior';
   return 'authentic real-world environment matching context';
 }
 
@@ -229,19 +246,19 @@ function extractEnvironment(text = '') {
 function extractSubject(text = '', entities = []) {
   if (entities.length > 0) return entities.join(' and ');
   const lower = text.toLowerCase();
-  if (/undersea\s+cables?|submarine\s+cables?|fiber\s+optic/i.test(lower)) return 'undersea fiber optic cable';
-  if (/jet\s+engine|combustor|turbine\s+blade/i.test(lower)) return 'jet engine turbine blade and combustor';
-  if (/quantum\s+tunneling|electron|barrier/i.test(lower)) return 'quantum electron tunneling through barrier';
-  if (/memory\s+leak|ram|heap|allocation/i.test(lower)) return 'computer memory RAM allocation and consumption';
-  if (/cloud\s+computing|servers?|aws|azure/i.test(lower)) return 'cloud computing server architecture';
-  if (/packet\s+loss|tcp|router|network/i.test(lower)) return 'network data packet transmission';
-  if (/branch\s+prediction|cpu|pipeline/i.test(lower)) return 'CPU branch prediction execution pipeline';
-  if (/parallel\s+universe|multiverse|many\s+worlds/i.test(lower)) return 'branching parallel universes or multiverse cosmos';
-  if (/browser|devtools/i.test(lower) && /server/i.test(lower)) return 'web browser and server communication';
-  if (/browser|chrome|firefox|safari/i.test(lower)) return 'web browser interface';
-  if (/server|datacenter/i.test(lower)) return 'datacenter server hardware';
-  if (/gpu|graphics\s+card|microchip/i.test(lower)) return 'semiconductor microchip GPU';
-  if (/transistor|gate|die|silicon/i.test(lower)) return 'nanometer silicon transistor gate';
+  if (/\b(?:undersea\s+cables?|submarine\s+cables?|fiber\s+optic)\b/i.test(lower)) return 'undersea fiber optic cable';
+  if (/\b(?:jet\s+engine|combustor|turbine\s+blade)\b/i.test(lower)) return 'jet engine turbine blade and combustor';
+  if (/\b(?:quantum\s+tunneling|electron|barrier)\b/i.test(lower)) return 'quantum electron tunneling through barrier';
+  if (/\b(?:memory\s+leak|heap\s+allocation)\b|\b(?:ram|heap)\b/i.test(lower)) return 'computer memory RAM allocation and consumption';
+  if (/\b(?:cloud\s+computing|aws|azure)\b|\bservers?\b/i.test(lower)) return 'cloud computing server architecture';
+  if (/\b(?:packet\s+loss|tcp|router|network)\b/i.test(lower)) return 'network data packet transmission';
+  if (/\b(?:branch\s+prediction|cpu|pipeline)\b/i.test(lower)) return 'CPU branch prediction execution pipeline';
+  if (/\b(?:parallel\s+universe|multiverse|many\s+worlds)\b/i.test(lower)) return 'branching parallel universes or multiverse cosmos';
+  if (/\b(?:browser|devtools)\b/i.test(lower) && /\b(?:server|servers)\b/i.test(lower)) return 'web browser and server communication';
+  if (/\b(?:browser|chrome|firefox|safari)\b/i.test(lower)) return 'web browser interface';
+  if (/\b(?:servers?|datacenter)\b/i.test(lower)) return 'datacenter server hardware';
+  if (/\b(?:gpu|graphics\s+card|microchip)\b/i.test(lower)) return 'semiconductor microchip GPU';
+  if (/\b(?:transistor|silicon\s+gate)\b/i.test(lower)) return 'nanometer silicon transistor gate';
   return text.split(/\s+/).filter((w) => !STOP_WORDS.has(w.toLowerCase())).slice(0, 3).join(' ') || 'core concept';
 }
 
@@ -377,6 +394,14 @@ export function deriveSemanticAlternatives(primaryConcept = '', subject = '', ac
       'moonlight reflecting on still lake water',
       'bamboo stalks swaying in gentle breeze'
     );
+  } else if (/penicillin|fleming|antibiotic|bacteri|mold\b|mould\b|petri|staphylococcus/i.test(text)) {
+    alternatives.push(
+      'petri dish with bacterial culture and clear inhibition zone',
+      'microscopic view of fungal mold filaments growing',
+      'scientific laboratory researcher examining petri dish',
+      'close up of penicillium mold culture on agar plate',
+      'vintage scientific laboratory with microscope and test tubes'
+    );
   }
 
   if (subject) {
@@ -454,7 +479,14 @@ export function buildVisibleNeed(firstArg = {}, secondArg = {}) {
   let literalnessRequirement = 'DIRECT';
   if (visualRole === 'ATMOSPHERE' || /abstract|ambient|background|texture/i.test(primaryConcept)) {
     literalnessRequirement = 'METAPHOR_ALLOWED';
-  } else if (['TECHNICAL_EXPLAINER', 'TUTORIAL', 'DOCUMENTARY'].includes(editorialMode)) {
+  } else if (editorialMode === 'DOCUMENTARY') {
+    // Documentary shots must depict the authored subject, place, action or
+    // evidence. Broadly thematic stock is only acceptable for explicitly
+    // authored atmosphere/transition beats.
+    literalnessRequirement = ['ATMOSPHERE', 'TRANSITION'].includes(visualRole)
+      ? 'CONTEXTUAL_ALLOWED'
+      : 'DIRECT';
+  } else if (['TECHNICAL_EXPLAINER', 'TUTORIAL'].includes(editorialMode)) {
     if ((visualRole === 'EVIDENCE' || visualRole === 'ACTION' || visualRole === 'DETAIL' || visualRole === 'HOOK') && shot.assetIntent !== 'concept' && shot.role !== 'graphic') {
       literalnessRequirement = 'DIRECT';
     } else {
@@ -526,7 +558,7 @@ export function buildVisibleNeed(firstArg = {}, secondArg = {}) {
     ...(visualProposition?.negativeConfusers || []),
   ];
 
-  if (/machine|equipment|hardware|chip|cable|server|blade|engine|database|software|tech|cloud|datacenter|network/i.test(subject) || /server|datacenter|cloud|software|tech|database/i.test(primaryConcept)) {
+  if (/\b(?:machine|equipment|hardware|chip|cable|servers?|blade|engine|database|software|tech|cloud|datacenter|network)\b/i.test(subject) || /\b(?:servers?|datacenter|cloud|software|tech|database)\b/i.test(primaryConcept)) {
     avoidVisuals.push(
       'corporate headquarters exterior glass building',
       'executive portrait in business suit',

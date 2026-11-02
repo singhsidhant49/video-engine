@@ -101,6 +101,46 @@ test('production QC blocks still-image meditation and missing calm transitions',
   assert.equal(qc.ok, false);
 });
 
+test('documentary QC warns instead of failing on archival photo runs and quantized dissolve share', () => {
+  const fps = 30;
+  const shotFrames = 210;
+  const shots = Array.from({ length: 17 }, (_, index) => ({
+    id: `doc${index + 1}`,
+    storyboardShotId: `doc${index + 1}`,
+    sceneId: 'documentary-scene',
+    sectionId: 'documentary-section',
+    from: index * shotFrames,
+    durationInFrames: shotFrames,
+    family: 'image',
+    asset: { type: 'image', src: `archive-${index}.jpg` },
+    enter: { type: index > 0 && index <= 5 ? 'dissolve' : 'cut', frames: index > 0 && index <= 5 ? 12 : 0 },
+    transitionPolicy: index > 0 && index <= 5 ? 'SHORT_DISSOLVE' : 'CUT',
+    presentation: { layout: 'image:full' },
+  }));
+  const durationInFrames = shots.length * shotFrames;
+  const timeline = {
+    fps,
+    durationInFrames,
+    style: 'cinematic_documentary',
+    visualMode: 'MEDIA_EDITORIAL',
+    productionProfile: {
+      contentType: 'documentary',
+      pacing: { mode: 'cinematic', minimumShotSeconds: 5, maximumCutsPer10Seconds: 3, targetAverageShotSeconds: 6.5 },
+    },
+    clips: [{ id: 'documentary-scene', sceneId: 'documentary-scene', from: 0, durationInFrames, shots }],
+    realizedShots: shots,
+  };
+
+  const qc = runTimelineQc(timeline, { publishMode: 'PRODUCTION_RENDER' });
+  const photoRun = qc.checks.find((check) => check.id === 'content-profile-photo-run');
+  const transitions = qc.checks.find((check) => check.id === 'content-profile-transition-share');
+  assert.equal(photoRun.ok, false);
+  assert.equal(photoRun.severity, 'warn');
+  assert.equal(transitions.ok, true);
+  assert.equal(qc.checks.filter((check) => !check.ok && check.severity === 'error').length, 0);
+  assert.equal(qc.ok, true);
+});
+
 test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole whisper', () => {
   assert.deepEqual([...ALLOWED_VOICES].sort(), ['af_bella', 'af_heart', 'af_nicole', 'am_puck']);
   assert.ok(!ALLOWED_VOICES.includes('bm_george'), 'george must be removed');

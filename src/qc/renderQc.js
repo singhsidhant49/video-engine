@@ -84,14 +84,37 @@ export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], dura
   return meanLuminance < 12 ? 0.15 : 0.35;
 }
 
+export function classifyEditBoundary({ before, after, sameAsset = false, transitionType = 'cut' } = {}) {
+  const difference = before?.data && after?.data ? pixelDifferenceExcludingRect(before, after) : 0;
+  const lumaJump = before && after && Number.isFinite(before.mean) && Number.isFinite(after.mean) ? Math.abs(before.mean - after.mean) : 0;
+  const blank = [before, after].some((frame) => frame && frame.mean < 8 && frame.stdev < 4);
+  return {
+    difference: Number(difference.toFixed(3)),
+    lumaJump: Number(lumaJump.toFixed(3)),
+    blank,
+    // The identical source should remain visually continuous. A large delta
+    // here indicates a crop/camera reset rather than a purposeful new image.
+    repeatedAssetReset: Boolean(sameAsset && difference > 18),
+    harshDissolve: Boolean(transitionType === 'dissolve' && lumaJump > 85),
+  };
+}
+
 function shotMotionExpectation(shot, timeline) {
   const motionPlan = timeline.motionPlans?.[shot.motionPlanId];
   const tracks = motionPlan?.tracks || [];
-  const changingTrack = tracks.some((track) =>
-    ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
-    && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
+  const duration = motionPlan?.durationInFrames || shot.durationInFrames || 0;
+  const firstSampleFrame = Math.round(duration * 0.15);
+  const changingTrack = tracks.some((track) => {
+    const delta = Math.abs(Number(track.to) - Number(track.from));
+    if (delta <= 0.0001) return false;
+    if (['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property)) return true;
+    if (['reveal', 'draw'].includes(track.property)) {
+      return (track.endFrame || 0) > firstSampleFrame;
+    }
+    return false;
+  });
   const nativeMotion = shot.asset?.type === 'video';
-  return { nativeMotion, expectedMotion: nativeMotion || changingTrack, tracks, durationInFrames: motionPlan?.durationInFrames || shot.durationInFrames || 0 };
+  return { nativeMotion, expectedMotion: nativeMotion || changingTrack, tracks, durationInFrames: duration };
 }
 
 export async function runRenderQc(videoFile, timeline) {
@@ -113,8 +136,9 @@ export async function runRenderQc(videoFile, timeline) {
     add('audio-duration', Boolean(audioStream) && Number.isFinite(audioDuration) && Math.abs(audioDuration - duration) <= 0.25,
       'error', Number.isFinite(audioDuration) ? `${audioDuration.toFixed(2)}s audio vs ${duration.toFixed(2)}s video` : 'audio duration unavailable');
 
-    const blank = [], frozen = [], lumas = [], motionSamples = [];
+    const blank = [], frozen = [], lumas = [], motionSamples = [], boundarySamples = [], repeatedAssetResets = [], harshDissolves = [], unsafeLoops = [];
     let k = 0;
+    let previousShot = null;
     for (const c of timeline.clips) {
       for (const shot of c.shots || []) {
         const start = Number.isFinite(shot.startFrame) ? shot.startFrame : c.from + shot.from;
@@ -141,6 +165,27 @@ export async function runRenderQc(videoFile, timeline) {
         });
         motionSamples.push({ shotId: shot.id, ...classification });
         if (classification.frozen) frozen.push(shot.id);
+        if (previousShot && start >= 2) {
+          const boundaryBefore = await grabFrame(videoFile, Math.max(0, start - 2) / fps, tmpDir, k++);
+          const boundaryAfter = await grabFrame(videoFile, Math.min(timeline.durationInFrames - 1, start + 2) / fps, tmpDir, k++);
+          const boundary = classifyEditBoundary({
+            before: boundaryBefore,
+            after: boundaryAfter,
+            sameAsset: Boolean(previousShot.asset?.src && previousShot.asset.src === shot.asset?.src),
+            transitionType: shot.enter?.type || 'cut',
+          });
+          boundarySamples.push({ fromShotId: previousShot.id, toShotId: shot.id, ...boundary });
+          if (boundary.blank) blank.push(`boundary:${previousShot.id}->${shot.id}`);
+          if (boundary.repeatedAssetReset) repeatedAssetResets.push(`${previousShot.id}->${shot.id}`);
+          if (boundary.harshDissolve) harshDissolves.push(`${previousShot.id}->${shot.id}`);
+        }
+        if (shot.asset?.type === 'video') {
+          const startTime = Number(shot.asset?.videoTrim?.startTime || 0);
+          const endTime = Number(shot.asset?.videoTrim?.endTime);
+          const approvedFrames = Number.isFinite(endTime) && endTime > startTime ? Math.round((endTime - startTime) * fps) : 0;
+          if (approvedFrames && shot.durationInFrames > approvedFrames + 1 && shot.asset?.loopSafe !== true) unsafeLoops.push(shot.id);
+        }
+        previousShot = shot;
       }
     }
     // Tail: the last half-second before the fade-out.
@@ -149,6 +194,9 @@ export async function runRenderQc(videoFile, timeline) {
 
     add('blank-frames', blank.length === 0, 'error', blank.length ? `blank frames in ${[...new Set(blank)].join(', ')}` : 'none');
     add('frozen-motion', frozen.length === 0, 'error', frozen.length ? `planned/native motion is not visible in ${frozen.join(', ')}` : 'all planned/native motion is visible');
+    add('edit-boundary-continuity', repeatedAssetResets.length === 0, 'error', repeatedAssetResets.length ? `repeated media resets at ${repeatedAssetResets.join(', ')}` : `${boundarySamples.length} edit boundaries inspected`);
+    add('dissolve-luminance-continuity', harshDissolves.length === 0, 'warn', harshDissolves.length ? `harsh dissolve luminance jumps at ${harshDissolves.join(', ')}` : 'dissolve boundaries are smooth');
+    add('video-loop-seams', unsafeLoops.length === 0, 'error', unsafeLoops.length ? `non-loop-safe clips repeat in ${unsafeLoops.join(', ')}` : 'no unsafe clip loops');
     add('intentional-static-holds', true, 'warn', `${motionSamples.filter((sample) => sample.intentionalStatic).length} intentional static shot(s)`);
     const sortedL = [...lumas].sort((x, y) => x - y);
     const median = sortedL[Math.floor(sortedL.length / 2)] || 0;

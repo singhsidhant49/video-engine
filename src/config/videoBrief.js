@@ -36,7 +36,7 @@ export const ChannelProfileSchema = z.object({
   voice: z.string().optional(),
   music: z.string().optional(),
   bgm: z.string().optional(),
-  captions: z.literal('subtitles').default('subtitles'),
+  captions: z.enum(['subtitles', 'none']).default('subtitles'),
 }).passthrough();
 
 export const VideoBriefSchema = z.object({

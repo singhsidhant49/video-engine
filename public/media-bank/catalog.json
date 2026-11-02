@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedAt": "2026-10-26T08:27:15.797Z",
-  "totalAssets": 671,
+  "totalAssets": 693,
   "categories": {
     "business": {
       "mediaType": "images",
@@ -55510,6 +55510,1956 @@
         "attributionRequired": false,
         "nonFree": false,
         "page": "https://www.pexels.com/photo/closeup-of-a-water-surface-with-waves-20520302/"
+      }
+    },
+    {
+      "id": "saved-from-web_6934e59943a27dc0",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Alexander Fleming",
+      "path": "images/saved-from-web/saved-from-web_6934e59943a27dc0.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1831,
+      "height": 2600,
+      "aspectRatio": 0.7042,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "alexander",
+        "fleming",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "alexander",
+        "fleming",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Alexander Fleming"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "wikipedia",
+        "originalQuery": "Alexander Fleming",
+        "savedAt": "2026-11-02T10:14:21.046Z"
+      },
+      "license": {
+        "provider": "wikipedia",
+        "name": "Public domain",
+        "license_name": "Public domain",
+        "url": null,
+        "license_url": null,
+        "author": "Official photographer",
+        "creator": "Official photographer",
+        "attributionRequired": false,
+        "attribution_required": false,
+        "nonFree": false,
+        "commercial_use": "allowed",
+        "verification_status": "verified",
+        "retrieved_at": "2026-11-02T09:00:07.945Z",
+        "page": "https://commons.wikimedia.org/wiki/File:Synthetic_Production_of_Penicillin_TR1468.jpg"
+      }
+    },
+    {
+      "id": "saved-from-web_b06f584fdf31c3b8",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning.",
+      "path": "images/saved-from-web/saved-from-web_b06f584fdf31c3b8.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "nurse",
+        "attend",
+        "patient",
+        "hospital",
+        "room",
+        "ensuring",
+        "medical",
+        "equipment",
+        "functioning",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "attends"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "nurse",
+        "attend",
+        "patient",
+        "hospital",
+        "room",
+        "ensuring",
+        "medical",
+        "equipment",
+        "functioning",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "attends"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "historical hospital ward infection patients",
+        "savedAt": "2026-11-02T09:07:40.976Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/nurse-checking-the-dextrose-of-a-patient-6129677/"
+      }
+    },
+    {
+      "id": "saved-from-web_16857459a14b858a",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of a scientist writing notes in a notebook with a blue pen on a wooden desk.",
+      "path": "images/saved-from-web/saved-from-web_16857459a14b858a.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "scientist",
+        "writing",
+        "note",
+        "notebook",
+        "blue",
+        "pen",
+        "wooden",
+        "desk",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "notes",
+        "office desk",
+        "computer or paperwork",
+        "conference table"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "close",
+        "scientist",
+        "writing",
+        "note",
+        "notebook",
+        "blue",
+        "pen",
+        "wooden",
+        "desk",
+        "modern",
+        "corporate",
+        "office",
+        "interior",
+        "static",
+        "presentation",
+        "close-up",
+        "notes",
+        "office desk",
+        "computer or paperwork",
+        "conference table"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Close-up of a scientist writing notes in a notebook with a blue pen on a wooden desk."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "modern corporate office interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "scientist lab notebook penicillin",
+        "savedAt": "2026-11-02T09:23:25.567Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "olia danilevich",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/scientist-making-notes-8531357/"
+      }
+    },
+    {
+      "id": "saved-from-web_69e3f172e94ccd2c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A female scientist wearing a lab coat and goggles in a laboratory environment.",
+      "path": "images/saved-from-web/saved-from-web_69e3f172e94ccd2c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1463,
+      "height": 2600,
+      "aspectRatio": 0.5627,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "wearing",
+        "lab",
+        "coat",
+        "goggle",
+        "laboratory",
+        "environment",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "goggles",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "wearing",
+        "lab",
+        "coat",
+        "goggle",
+        "laboratory",
+        "environment",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "goggles",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A female scientist wearing a lab coat and goggles in a laboratory environment."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "scientist lab notebook penicillin manufacturing, fabricating, or constructing",
+        "savedAt": "2026-11-02T09:09:10.871Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Artem Podrez",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-woman-in-white-button-up-shirt-wearing-medical-goggles-with-id-pinned-on-shirt-8532864/"
+      }
+    },
+    {
+      "id": "saved-from-web_b7c089bdefde77d6",
+      "type": "image",
+      "mediaType": "image",
+      "title": "High-angle view of glass bottle production line in a factory with glowing bottles.",
+      "path": "images/saved-from-web/saved-from-web_b7c089bdefde77d6.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "glas",
+        "bottle",
+        "production",
+        "line",
+        "factory",
+        "glowing",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "high-angle",
+        "view",
+        "glass",
+        "bottles",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "glas",
+        "bottle",
+        "production",
+        "line",
+        "factory",
+        "glowing",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "high-angle",
+        "view",
+        "glass",
+        "bottles",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "High-angle view of glass bottle production line in a factory with glowing bottles."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "World War II penicillin factory production line",
+        "savedAt": "2026-11-02T09:09:20.085Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Keegan Checks",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/industrial-glass-bottles-manufacturing-process-36423804/"
+      }
+    },
+    {
+      "id": "saved-from-web_c6f4e9f176e7a619",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Healthcare worker in protective gear handling vials in a laboratory setting.",
+      "path": "images/saved-from-web/saved-from-web_c6f4e9f176e7a619.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "healthcare",
+        "worker",
+        "protective",
+        "gear",
+        "handling",
+        "vial",
+        "laboratory",
+        "setting",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "vials",
+        "circuit board",
+        "semiconductor components",
+        "GPU",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "healthcare",
+        "worker",
+        "protective",
+        "gear",
+        "handling",
+        "vial",
+        "laboratory",
+        "setting",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "vials",
+        "circuit board",
+        "semiconductor components",
+        "GPU",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Healthcare worker in protective gear handling vials in a laboratory setting."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "workers filling penicillin vials 1940s",
+        "savedAt": "2026-11-02T09:09:28.912Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ron Lach",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/hands-in-gloves-holding-bottles-with-vaccines-9893834/"
+      }
+    },
+    {
+      "id": "saved-from-web_1b48837b30587ddc",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Two soldiers in period uniforms engaged in reenactment outside a tent.",
+      "path": "images/saved-from-web/saved-from-web_1b48837b30587ddc.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1734,
+      "height": 2600,
+      "aspectRatio": 0.6669,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "soldier",
+        "period",
+        "uniform",
+        "engaged",
+        "reenactment",
+        "outside",
+        "tent",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "soldiers",
+        "uniforms"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "soldier",
+        "period",
+        "uniform",
+        "engaged",
+        "reenactment",
+        "outside",
+        "tent",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "soldiers",
+        "uniforms"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Two soldiers in period uniforms engaged in reenactment outside a tent."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "medical tent D-Day wounded soldiers",
+        "savedAt": "2026-11-02T09:09:41.198Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Mikhail Nilov",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/two-soldiers-in-front-of-a-tent-9268593/"
+      }
+    },
+    {
+      "id": "saved-from-web_6217c283be1db86b",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning.",
+      "path": "images/saved-from-web/saved-from-web_6217c283be1db86b.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "nurse",
+        "attend",
+        "patient",
+        "hospital",
+        "room",
+        "ensuring",
+        "medical",
+        "equipment",
+        "functioning",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "attends"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "nurse",
+        "attend",
+        "patient",
+        "hospital",
+        "room",
+        "ensuring",
+        "medical",
+        "equipment",
+        "functioning",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "attends"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "historical hospital ward infection patients",
+        "savedAt": "2026-11-02T09:23:16.227Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "RDNE Stock project",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/nurse-checking-the-dextrose-of-a-patient-6129677/"
+      }
+    },
+    {
+      "id": "saved-from-web_370093d6b5ba4eca",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A female scientist wearing a lab coat and goggles in a laboratory environment.",
+      "path": "images/saved-from-web/saved-from-web_370093d6b5ba4eca.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1463,
+      "height": 2600,
+      "aspectRatio": 0.5627,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "wearing",
+        "lab",
+        "coat",
+        "goggle",
+        "laboratory",
+        "environment",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "goggles",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "wearing",
+        "lab",
+        "coat",
+        "goggle",
+        "laboratory",
+        "environment",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "goggles",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A female scientist wearing a lab coat and goggles in a laboratory environment."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "scientist lab notebook penicillin manufacturing, fabricating, or constructing",
+        "savedAt": "2026-11-02T10:14:26.709Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Artem Podrez",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-woman-in-white-button-up-shirt-wearing-medical-goggles-with-id-pinned-on-shirt-8532864/"
+      }
+    },
+    {
+      "id": "saved-from-web_7f72cd516dc3669e",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A somber hospital scene showcasing two patients, one in a wheelchair, highlighting themes of struggle and illness.",
+      "path": "images/saved-from-web/saved-from-web_7f72cd516dc3669e.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "somber",
+        "hospital",
+        "scene",
+        "showcasing",
+        "two",
+        "patient",
+        "one",
+        "wheelchair",
+        "highlighting",
+        "theme",
+        "struggle",
+        "illnes",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "patients",
+        "themes",
+        "illness"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "somber",
+        "hospital",
+        "scene",
+        "showcasing",
+        "two",
+        "patient",
+        "one",
+        "wheelchair",
+        "highlighting",
+        "theme",
+        "struggle",
+        "illnes",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "patients",
+        "themes",
+        "illness"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A somber hospital scene showcasing two patients, one in a wheelchair, highlighting themes of struggle and illness."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "historical hospital ward infection patients",
+        "savedAt": "2026-11-02T09:39:25.651Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Tima Miroshnichenko",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/man-behind-a-woman-on-a-wheelchair-6011574/"
+      }
+    },
+    {
+      "id": "saved-from-web_7c23a2c331aae59e",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Blue gloved hand holding a petri dish with bacterial cultures.",
+      "path": "images/saved-from-web/saved-from-web_7c23a2c331aae59e.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "blue",
+        "gloved",
+        "hand",
+        "holding",
+        "bacterial",
+        "culture",
+        "cultures",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "blue",
+        "gloved",
+        "hand",
+        "holding",
+        "bacterial",
+        "culture",
+        "cultures",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "scientific laboratory glassware, petri dish, or microscope"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory or cleanroom"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "pre-antibiotic era wound infection",
+        "savedAt": "2026-11-02T09:39:27.962Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Anna Shvets",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/person-holding-petri-dish-3786248/"
+      }
+    },
+    {
+      "id": "saved-from-web_113470d0fe7d1755",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of Petri dishes with mold cultures in a laboratory, showcasing biological research.",
+      "path": "images/saved-from-web/saved-from-web_113470d0fe7d1755.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1550,
+      "height": 2600,
+      "aspectRatio": 0.5962,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "static",
+        "presentation",
+        "close",
+        "dishe",
+        "mold",
+        "culture",
+        "showcasing",
+        "biological",
+        "close-up",
+        "dishes",
+        "cultures",
+        "laboratory equipment",
+        "petri dish or microscope",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "static",
+        "presentation",
+        "close",
+        "dishe",
+        "mold",
+        "culture",
+        "showcasing",
+        "biological",
+        "close-up",
+        "dishes",
+        "cultures",
+        "laboratory equipment",
+        "petri dish or microscope",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "scientific laboratory glassware, petri dish, or microscope"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "penicillin inhibition zone bacteria",
+        "savedAt": "2026-11-02T10:14:24.474Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Czapp Árpád",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/clear-plastic-containers-on-white-table-10419527/"
+      }
+    },
+    {
+      "id": "saved-from-web_e1ee1e06b8ae56a5",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Close-up of bacterial colonies in a petri dish held by a hand. Ideal for microbiology.",
+      "path": "images/saved-from-web/saved-from-web_e1ee1e06b8ae56a5.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1729,
+      "height": 2600,
+      "aspectRatio": 0.665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "close",
+        "bacterial",
+        "colonie",
+        "held",
+        "hand",
+        "ideal",
+        "microbiology",
+        "close-up",
+        "colonies",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "close",
+        "bacterial",
+        "colonie",
+        "held",
+        "hand",
+        "ideal",
+        "microbiology",
+        "close-up",
+        "colonies",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "scientific laboratory glassware, petri dish, or microscope"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory or cleanroom"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "penicillin inhibition zone bacteria",
+        "savedAt": "2026-11-02T09:39:32.192Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Katarzyna Modrzejewska",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/a-person-holding-a-petri-dish-6203349/"
+      }
+    },
+    {
+      "id": "saved-from-web_c8f6348aa7d1c75c",
+      "type": "image",
+      "mediaType": "image",
+      "title": "A female scientist carefully examines test tubes in a laboratory setting, showcasing scientific research and discovery.",
+      "path": "images/saved-from-web/saved-from-web_c8f6348aa7d1c75c.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "carefully",
+        "examine",
+        "test",
+        "tube",
+        "laboratory",
+        "setting",
+        "showcasing",
+        "scientific",
+        "research",
+        "discovery",
+        "static",
+        "presentation",
+        "examines",
+        "tubes",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "carefully",
+        "examine",
+        "test",
+        "tube",
+        "laboratory",
+        "setting",
+        "showcasing",
+        "scientific",
+        "research",
+        "discovery",
+        "static",
+        "presentation",
+        "examines",
+        "tubes",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "A female scientist carefully examines test tubes in a laboratory setting, showcasing scientific research and discovery."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "scientist lab notebook penicillin",
+        "savedAt": "2026-11-02T09:39:35.625Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "olia danilevich",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/scientist-working-with-test-tubes-in-laboratory-8531356/"
+      }
+    },
+    {
+      "id": "saved-from-web_6418c0f1976541bd",
+      "type": "image",
+      "mediaType": "image",
+      "title": "High-angle view of glass bottle production line in a factory with glowing bottles.",
+      "path": "images/saved-from-web/saved-from-web_6418c0f1976541bd.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "glas",
+        "bottle",
+        "production",
+        "line",
+        "factory",
+        "glowing",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "high-angle",
+        "view",
+        "glass",
+        "bottles",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "high",
+        "angle",
+        "glas",
+        "bottle",
+        "production",
+        "line",
+        "factory",
+        "glowing",
+        "electronic",
+        "hardware",
+        "interior",
+        "static",
+        "presentation",
+        "high-angle",
+        "view",
+        "glass",
+        "bottles",
+        "circuit board",
+        "semiconductor components",
+        "GPU"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "High-angle view of glass bottle production line in a factory with glowing bottles."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "electronics hardware interior"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "World War II penicillin factory production line",
+        "savedAt": "2026-11-02T09:39:43.063Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Keegan Checks",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/industrial-glass-bottles-manufacturing-process-36423804/"
+      }
+    },
+    {
+      "id": "saved-from-web_1eb230d7923e894f",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Healthcare worker in protective gear handling vials in a laboratory setting.",
+      "path": "images/saved-from-web/saved-from-web_1eb230d7923e894f.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "healthcare",
+        "worker",
+        "protective",
+        "gear",
+        "handling",
+        "vial",
+        "laboratory",
+        "setting",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "vials",
+        "laboratory equipment",
+        "petri dish or microscope",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "healthcare",
+        "worker",
+        "protective",
+        "gear",
+        "handling",
+        "vial",
+        "laboratory",
+        "setting",
+        "scientific",
+        "research",
+        "static",
+        "presentation",
+        "vials",
+        "laboratory equipment",
+        "petri dish or microscope",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Healthcare worker in protective gear handling vials in a laboratory setting."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "workers filling penicillin vials 1940s",
+        "savedAt": "2026-11-02T10:16:35.397Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Ron Lach",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/hands-in-gloves-holding-bottles-with-vaccines-9893834/"
+      }
+    },
+    {
+      "id": "saved-from-web_bf06cbe36dc415c4",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Two soldiers in period uniforms engaged in reenactment outside a tent.",
+      "path": "images/saved-from-web/saved-from-web_bf06cbe36dc415c4.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1734,
+      "height": 2600,
+      "aspectRatio": 0.6669,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "soldier",
+        "period",
+        "uniform",
+        "engaged",
+        "reenactment",
+        "outside",
+        "tent",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "soldiers",
+        "uniforms"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "two",
+        "soldier",
+        "period",
+        "uniform",
+        "engaged",
+        "reenactment",
+        "outside",
+        "tent",
+        "portrait",
+        "educational",
+        "presentation",
+        "setting",
+        "static",
+        "soldiers",
+        "uniforms"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Two soldiers in period uniforms engaged in reenactment outside a tent."
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "portrait or educational presentation setting"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "local-bank",
+        "originalQuery": "medical tent D-Day wounded soldiers",
+        "savedAt": "2026-11-02T10:17:03.227Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Mikhail Nilov",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/two-soldiers-in-front-of-a-tent-9268593/"
+      }
+    },
+    {
+      "id": "saved-from-web_65029b2b5ce291b7",
+      "type": "image",
+      "mediaType": "image",
+      "title": "Top view ampoules of COVID 19 vaccine with syringes filled with remedy placed on pink surface near scattered pills and capsules",
+      "path": "images/saved-from-web/saved-from-web_65029b2b5ce291b7.jpg",
+      "category": "saved-from-web",
+      "extension": ".jpg",
+      "width": 1733,
+      "height": 2600,
+      "aspectRatio": 0.6665,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "top",
+        "ampoule",
+        "covid",
+        "vaccine",
+        "syringe",
+        "filled",
+        "remedy",
+        "placed",
+        "pink",
+        "surface",
+        "near",
+        "scattered",
+        "pill",
+        "capsule",
+        "scientific",
+        "research",
+        "laboratory",
+        "cleanroom",
+        "static",
+        "presentation",
+        "view",
+        "ampoules",
+        "syringes",
+        "pills",
+        "capsules",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "top",
+        "ampoule",
+        "covid",
+        "vaccine",
+        "syringe",
+        "filled",
+        "remedy",
+        "placed",
+        "pink",
+        "surface",
+        "near",
+        "scattered",
+        "pill",
+        "capsule",
+        "scientific",
+        "research",
+        "laboratory",
+        "cleanroom",
+        "static",
+        "presentation",
+        "view",
+        "ampoules",
+        "syringes",
+        "pills",
+        "capsules",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "Top view ampoules of COVID 19 vaccine with syringes filled with remedy placed on pink surface near scattered pills and capsules"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory or cleanroom"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-image",
+        "originalQuery": "Historical photo of soldiers receiving penicillin injections in a medical tent, then a modern hospital scene with antibiotic pills.",
+        "savedAt": "2026-11-02T10:17:05.133Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Alena Shekhovtcova",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/photo/ampoules-and-syringes-of-covid-19-vaccine-arranged-with-drugs-and-vitamins-6074917/"
+      }
+    },
+    {
+      "id": "saved-from-web_a08f11edbedeabd0",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/a-cancer-patient-on-hospital-bed-6010964/",
+      "path": "video/saved-from-web/saved-from-web_a08f11edbedeabd0.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1080,
+      "height": 1920,
+      "aspectRatio": 0.5625,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "cancer",
+        "patient",
+        "hospital",
+        "bed",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "6010964"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "cancer",
+        "patient",
+        "hospital",
+        "bed",
+        "general",
+        "studio",
+        "neutral",
+        "backdrop",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "6010964"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "a cancer patient on hospital bed"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "general studio or neutral backdrop"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "historical hospital ward infection patients",
+        "savedAt": "2026-11-02T10:14:21.424Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Tima Miroshnichenko",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/a-cancer-patient-on-hospital-bed-6010964/"
+      }
+    },
+    {
+      "id": "saved-from-web_a44f64b52e585e59",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/spraying-colored-liquid-into-a-petri-dish-8392769/",
+      "path": "video/saved-from-web/saved-from-web_a44f64b52e585e59.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1080,
+      "height": 1920,
+      "aspectRatio": 0.5625,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "spraying",
+        "colored",
+        "liquid",
+        "into",
+        "8392769",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "scientific",
+        "laboratory",
+        "glassware",
+        "petri",
+        "dish",
+        "microscope",
+        "research",
+        "cleanroom",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "spraying",
+        "colored",
+        "liquid",
+        "into",
+        "8392769",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "scientific laboratory glassware, petri dish, or microscope"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory or cleanroom"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "penicillin inhibition zone bacteria",
+        "savedAt": "2026-11-02T10:14:22.407Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "Anna Tarazevich",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/spraying-colored-liquid-into-a-petri-dish-8392769/"
+      }
+    },
+    {
+      "id": "saved-from-web_57355d98c6e3460b",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/female-scientists-working-in-a-lab-8539785/",
+      "path": "video/saved-from-web/saved-from-web_57355d98c6e3460b.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1080,
+      "height": 2048,
+      "aspectRatio": 0.5273,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "working",
+        "lab",
+        "scientific",
+        "research",
+        "laboratory",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "8539785",
+        "scientists",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "female",
+        "scientist",
+        "working",
+        "lab",
+        "scientific",
+        "research",
+        "laboratory",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "8539785",
+        "scientists",
+        "office desk",
+        "computer or paperwork",
+        "laboratory equipment",
+        "scientific research facility"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "female scientists working in a lab"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "scientist lab notebook penicillin",
+        "savedAt": "2026-11-02T10:14:24.904Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "https://kaboompics.com/",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/female-scientists-working-in-a-lab-8539785/"
+      }
+    },
+    {
+      "id": "saved-from-web_f9aa928be28dc4b0",
+      "type": "video",
+      "mediaType": "video",
+      "title": "https://www.pexels.com/video/person-putting-a-bottle-with-medicine-on-the-counter-8666764/",
+      "path": "video/saved-from-web/saved-from-web_f9aa928be28dc4b0.mp4",
+      "category": "saved-from-web",
+      "extension": ".mp4",
+      "width": 1080,
+      "height": 2048,
+      "aspectRatio": 0.5273,
+      "orientation": "portrait",
+      "tags": [
+        "saved-from-web",
+        "show",
+        "person",
+        "putting",
+        "bottle",
+        "medicine",
+        "counter",
+        "scientific",
+        "research",
+        "laboratory",
+        "cleanroom",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "8666764",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "intrinsicTags": [
+        "saved-from-web",
+        "show",
+        "person",
+        "putting",
+        "bottle",
+        "medicine",
+        "counter",
+        "scientific",
+        "research",
+        "laboratory",
+        "cleanroom",
+        "static",
+        "presentation",
+        "http",
+        "www",
+        "pexel",
+        "com",
+        "8666764",
+        "laboratory equipment",
+        "petri dish or microscope"
+      ],
+      "concepts": [
+        "saved-from-web"
+      ],
+      "subjects": [
+        "person putting a bottle with medicine on the counter"
+      ],
+      "actions": [
+        "static presentation"
+      ],
+      "mood": [
+        "scientific research laboratory or cleanroom"
+      ],
+      "composition": {
+        "focalPoint": null,
+        "goodForFullBleed": true
+      },
+      "quality": "curated",
+      "verificationStatus": "verified",
+      "source": {
+        "provider": "pexels-video",
+        "originalQuery": "workers filling penicillin vials 1940s",
+        "savedAt": "2026-11-02T10:16:10.677Z"
+      },
+      "license": {
+        "name": "Pexels License",
+        "url": "https://www.pexels.com/license/",
+        "author": "cottonbro studio",
+        "attributionRequired": false,
+        "nonFree": false,
+        "page": "https://www.pexels.com/video/person-putting-a-bottle-with-medicine-on-the-counter-8666764/"
       }
     }
   ]

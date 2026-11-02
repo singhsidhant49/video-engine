@@ -17,7 +17,7 @@ export const ShotSchema = z.object({
   durationHint: z.number().positive(),
   visualConcept: z.string().min(1),
   assetIntent: z.enum(['entity', 'evidence', 'atmosphere', 'action', 'location', 'concept', 'product', 'historical', 'interface', 'document', 'data', 'background']),
-  mediaPreference: z.enum(['real', 'procedural', 'auto']),
+  mediaPreference: z.enum(['real', 'auto']),
   searchConcepts: z.array(z.string().min(1)).max(12).default([]),
   entities: z.array(z.string().min(1)).max(12).default([]),
   motionPreference: z.string().nullable().optional(),

@@ -59,7 +59,7 @@ export const STAGE_DEFINITIONS = {
         format: context.format,
         durationSec: context.durationSec,
         style: context.style,
-        visualMode: context.visualMode || 'HYBRID_EDITORIAL',
+        visualMode: context.visualMode || 'MEDIA_EDITORIAL',
         productionProfile: context.productionProfile || null,
         sourceData: context.sourceData || null,
       });
@@ -211,7 +211,7 @@ export const STAGE_DEFINITIONS = {
     inputs: ['direction.json', 'assets.json', 'words.json'],
     outputs: [
       'timeline.json', 'visual-realization-diagnostics.json', 'pacing-diagnostics.json',
-      'editorial-visual-plan.json', 'editorial-visual-beats.json', 'media-shot-plan.json', 'scene-compositions.json', 'comparison-specs.json', 'chart-specs.json', 'media-scene-specs.json', 'solved-scenes.json',
+      'editorial-visual-plan.json', 'editorial-visual-beats.json', 'media-shot-plan.json', 'scene-compositions.json', 'media-scene-specs.json', 'solved-scenes.json',
       'motion-plans.json', 'visual-quality-reviews.json', 'frame-state-preflight.json', 'composition-fallbacks.json', 'media-composition-diagnostics.json', 'edit-continuity-diagnostics.json',
     ],
     dependencies: ['direction', 'assets', 'alignment'],
@@ -220,7 +220,7 @@ export const STAGE_DEFINITIONS = {
         fps: context.fps || 30,
         format: context.format,
         style: context.style,
-        visualMode: context.visualMode || 'HYBRID_EDITORIAL',
+        visualMode: context.visualMode || 'MEDIA_EDITORIAL',
       });
     },
   },

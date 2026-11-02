@@ -3,6 +3,7 @@ import { createConfiguredVideoJobService } from './serviceFactory.js';
 
 import { loadMediaBankCatalog } from '../services/mediaBank.js';
 import { pruneRuns } from './runPruner.js';
+import { cleanCache } from '../core/cache/cacheManager.js';
 
 const service = createConfiguredVideoJobService({ role: 'worker' });
 await service.init();
@@ -16,10 +17,14 @@ const cleanupIntervalMs = Math.max(1, cleanupIntervalHours) * 60 * 60 * 1000;
 
 async function runWorkerPruner() {
   try {
-    const res = await pruneRuns({ olderThanDays: retentionDays, keepOutputs: true });
+    const [res, cache] = await Promise.all([
+      pruneRuns({ olderThanDays: retentionDays, keepOutputs: true }),
+      cleanCache({ olderThanDays: Number(process.env.CACHE_RETENTION_DAYS || 14) }),
+    ]);
     if (res.pruned > 0) {
       console.log(`🧹 [Worker Pruner] Cleaned ${res.pruned} old runs (${res.freedMb} MB freed).`);
     }
+    if (cache.removedCount > 0) console.log(`🧹 [Worker Pruner] Cleaned ${cache.removedCount} cache files (${cache.freedMb} MB freed).`);
   } catch (err) {
     console.warn(`[Worker Pruner] Run cleanup error:`, err?.message);
   }

@@ -12,42 +12,39 @@ import { buildMaterializationQueue, hasReliableSearchResult, materializedMinimum
 
 const asset = { id: 'factory', type: 'image', src: 'assets/s01_d.jpg', width: 2400, height: 1350, focal: { x: .72, y: .45 }, subjectBounds: { x: .58, y: .15, width: .3, height: .7 }, cropFitness: .92, tier: 'verified', safeTextRegions: ['center_left'] };
 
-test('production visual policy defaults to hybrid editorial and keeps media-only and legacy explicit', () => {
+test('production visual policy exposes only media editorial', () => {
   const current = resolveVisualPolicy({ visualMode: undefined });
-  assert.equal(current.visualMode, 'HYBRID_EDITORIAL');
-  assert.equal(current.enableProceduralGraphics, true);
-  assert.equal(current.allowHybridRepresentations, true);
-  assert.equal(current.enableLegacyVisualFamilies, true);
+  assert.equal(current.visualMode, 'MEDIA_EDITORIAL');
+  assert.equal(current.useMediaEditorial, true);
+  assert.equal(current.preferAuthenticMedia, true);
   assert.equal(current.defaultTransition, 'CUT');
   const mediaOnly = resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' });
-  assert.equal(mediaOnly.enableProceduralGraphics, false);
-  assert.equal(mediaOnly.allowHybridRepresentations, false);
-  const legacy = resolveVisualPolicy({ visualMode: 'LEGACY_PROCEDURAL' });
-  assert.equal(legacy.enableProceduralGraphics, true);
+  assert.equal(mediaOnly.visualMode, 'MEDIA_EDITORIAL');
+  assert.throws(() => resolveVisualPolicy({ visualMode: 'LEGACY_PROCEDURAL' }), /Only MEDIA_EDITORIAL/);
 });
 
-test('hybrid policy keeps explanatory data shots procedural', () => {
-  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'semiconductor factory floor', searchConcepts: ['chip factory'], mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'preferred', durationHint: 3 }] }] }] };
+test('data explanations request relevant real media', () => {
+  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'semiconductor factory floor', searchConcepts: ['chip factory'], mediaPreference: 'auto', assetIntent: 'data', entities: [], evidenceRequirement: 'preferred', durationHint: 3 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
-  assert.equal(request.preferredSource, 'procedural');
+  assert.ok(['image', 'auto', 'video'].includes(request.preferredSource));
   assert.deepEqual([request.constraints.minWidth, request.constraints.minHeight], [1920, 1080]);
 });
 
-test('procedural data requests bypass real-media providers', () => {
-  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'fast website loading', searchConcepts: ['website loading'], mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 3 }] }] }] };
+test('data requests route through real-media providers', () => {
+  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'fast website loading', searchConcepts: ['website loading'], mediaPreference: 'auto', assetIntent: 'data', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 3 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
   const provider = createProvider({ id: 'pexels-image', supports: () => true, search: async () => [] });
   const routed = routeAssetProviders(request, analyzeAssetRequest(request), [provider]);
-  assert.deepEqual(routed.map((entry) => entry.provider.id), []);
+  assert.deepEqual(routed.map((entry) => entry.provider.id), ['pexels-image']);
 });
 
-test('interface requests route to the UI family instead of generic stock fallbacks', () => {
-  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'browser address bar close up', searchConcepts: ['typing on laptop keyboard'], mediaPreference: 'procedural', assetIntent: 'interface', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 4 }] }] }] };
+test('interface requests route to authentic screen and action media', () => {
+  const storyboard = { format: 'landscape', sections: [{ id: 's', scenes: [{ id: 'scene', shots: [{ id: 'shot', visualConcept: 'browser address bar close up', searchConcepts: ['typing on laptop keyboard'], mediaPreference: 'auto', assetIntent: 'interface', entities: [], evidenceRequirement: 'conceptual_allowed', durationHint: 4 }] }] }] };
   const [request] = planAssetRequests(storyboard, { format: 'landscape', visualPolicy: resolveVisualPolicy() });
   const providers = ['pexels-image', 'generic-library'].map((id) => createProvider({ id, supports: () => true, search: async () => [] }));
   const context = analyzeAssetRequest(request);
   const routed = routeAssetProviders(request, context, providers, 'CONCEPTUAL_FALLBACK');
-  assert.deepEqual(routed.map((entry) => entry.provider.id), []);
+  assert.deepEqual(routed.map((entry) => entry.provider.id), ['pexels-image', 'generic-library']);
   assert.deepEqual(context.targetSubject, ['browser', 'address', 'bar']);
 });
 
@@ -81,11 +78,11 @@ test('static fallback-quality data media can use restrained editorial upscaling'
   assert.equal(result.preflight.issues.some((issue) => issue.code === 'camera_resolution_insufficient'), false);
 });
 
-test('hybrid editorial realization preserves a procedural family when it communicates the proposition better', () => {
-  const scene = { id: 'scene', kind: 'process', purpose: 'evidence', intensity: 3, informationDensity: 3, visualIntent: 'Show manufacturing evidence', storyboardShots: [{ id: 'shot', role: 'graphic', visualConcept: 'factory process', mediaPreference: 'procedural', assetIntent: 'data', entities: [], evidenceRequirement: 'required' }] };
+test('visual realization always preserves the media family', () => {
+  const scene = { id: 'scene', kind: 'process', purpose: 'evidence', intensity: 3, informationDensity: 3, visualIntent: 'Show manufacturing evidence', storyboardShots: [{ id: 'shot', role: 'graphic', visualConcept: 'factory process', mediaPreference: 'auto', assetIntent: 'data', entities: [], evidenceRequirement: 'required' }] };
   const [shot] = realizeSceneShots({ scene, spec: { family: 'process', variant: 'flow', treatment: 'editorial', camera: { magnitude: .05, baseScale: 1 } }, sceneAssets: { primary: asset, alternates: [] }, timings: [{ startFrame: 0, endFrame: 90, durationInFrames: 90 }], sectionId: 'section', memory: createPresentationMemory(), visualPolicy: resolveVisualPolicy(), format: 'landscape' });
-  assert.equal(shot.presentation.family, 'process');
-  assert.equal(shot.presentation.cameraMove, 'static');
+  assert.equal(shot.presentation.family, 'image');
+  assert.ok(['static', 'subtlePush', 'subtlePull', 'panLeft', 'panRight'].includes(shot.presentation.cameraMove));
 });
 
 test('editorial beat and media shot plan persist crop, camera reason, captions and cut rationale', () => {

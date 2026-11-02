@@ -147,6 +147,25 @@ export function calculateNarrationRepairSpeed({
 }
 
 /**
+ * Scale an overlong measured narration toward the requested final duration.
+ * The final timeline follows measured narration length, so using the smaller
+ * speech-only budget here can over-compress and make the next pass too short.
+ */
+export function calculateNarrationCompressionTargetWords({
+  currentWords,
+  actualDurationSec,
+  budget,
+} = {}) {
+  const words = Math.max(1, Number(currentWords) || 1);
+  const actual = Number(actualDurationSec);
+  const target = Number(budget?.targetDurationSec);
+  if (!Number.isFinite(actual) || actual <= 0 || !Number.isFinite(target) || target <= 0) {
+    return Math.max(10, Math.round(words));
+  }
+  return Math.max(10, Math.round(words * target / actual));
+}
+
+/**
  * Formats a duration diagnostic summary payload for persistence.
  */
 export function buildDurationDiagnostics({

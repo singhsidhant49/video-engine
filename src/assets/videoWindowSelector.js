@@ -36,7 +36,9 @@ export function generateCandidateWindows(totalDuration, requiredDuration) {
   }
 
   const windows = [];
-  const step = Math.max(1.0, requiredDuration * 0.5); // 50% overlap steps
+  const maxWindows = 6;
+  const calculatedStep = Math.max(1.0, (totalDuration - requiredDuration) / (maxWindows - 1));
+  const step = Math.max(requiredDuration * 0.5, calculatedStep);
   let start = 0.0;
 
   while (start + requiredDuration <= totalDuration + 0.1) {

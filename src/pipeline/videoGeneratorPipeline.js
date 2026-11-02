@@ -1,7 +1,8 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames } from '../tools/preview.js';
-import { bundle } from '@remotion/bundler';
+import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames, getRunBundle } from '../tools/preview.js';
 import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
 import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims } from '../services/aiDirectorService.js';
@@ -9,7 +10,7 @@ import { generateSpeech } from '../services/ttsService.js';
 import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
-import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../storyboard/durationBudget.js';
+import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords } from '../storyboard/durationBudget.js';
 import { resolveNarrationProfile } from '../audio/narrationProfile.js';
 import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
@@ -33,6 +34,12 @@ import { buildStoryboardDiagnostics, printStoryboardDiagnostics } from '../story
 import { storyboardToExecutionPlan } from './storyboardCompatibility.js';
 import { buildVisualRealizationDiagnostics } from './visualRealizationDiagnostics.js';
 import { planAssetRequests, buildAssetQueryDiagnostics } from './assetRequestPlanner.js';
+
+async function sha256File(file) {
+  const hash = createHash('sha256');
+  for await (const chunk of createReadStream(file)) hash.update(chunk);
+  return hash.digest('hex');
+}
 import { AssetRequestListSchema } from '../models/assetRequest.schema.js';
 import { buildVisualCoveragePlan } from '../storyboard/visualCoveragePlan.js';
 import { VisualCoveragePlanSchema } from '../models/visualCoveragePlan.schema.js';
@@ -41,7 +48,6 @@ import { evaluateVisualSequence } from '../storyboard/visualSequenceDirector.js'
 import { buildEditorialVisualPlan } from './editorialVisualPlanner.js';
 import { buildVisualCoverageDiagnostics } from '../qc/visualCoverageDiagnostics.js';
 import { runCreativeQaLoop, evaluateCreativeQa, applyCreativeRepairs } from '../qc/creativeQaDirector.js';
-import { buildDiagramQualityDiagnostics } from '../diagrams/diagramQaDirector.js';
 import { evaluateRunValidity } from '../core/checkpoints/invalidationGraph.js';
 import { canonicalStageName } from '../core/checkpoints/stageRegistry.js';
 import { metrics } from '../core/cache/cacheManager.js';
@@ -91,7 +97,7 @@ function buildClaimEvidenceDiagnostics(plan) {
  * @param {boolean} [o.contactSheetOnly] stop after preflight contact sheet
  * @param {boolean} [o.noTts]        reuse narration audio without TTS re-synthesis
  * @param {boolean} [o.offline]      use cached/local media only
- * @param {'HYBRID_EDITORIAL'|'MEDIA_EDITORIAL'|'LEGACY_PROCEDURAL'} [o.visualMode] centralized visual routing mode
+ * @param {'MEDIA_EDITORIAL'} [o.visualMode] retained for API compatibility; MEDIA_EDITORIAL is the only supported mode
  * @param {object} [o.brief] normalized prompt/data request for application integrations
  * @param {object} [o.channelProfile] channel-level audience, tone and pacing defaults
  * @param {string} [o.videoId] caller-assigned stable video identifier
@@ -519,12 +525,15 @@ export async function createFacelessVideo({
         break;
       }
 
-      if (actualSec > allowedMax && attempt === 0 && !audioFile) {
+      if (actualSec > allowedMax && attempt < 3 && !audioFile) {
         console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) exceeds target max (${allowedMax.toFixed(1)}s).`);
         console.log(`   Initiating post-TTS script compression and re-synthesis...`);
-        const ratio = durationBudget.targetNarrationSec / actualSec;
         const currentWords = plan.script.split(/\s+/).filter(Boolean).length;
-        const newTargetWords = Math.max(10, Math.round(currentWords * ratio));
+        const newTargetWords = calculateNarrationCompressionTargetWords({
+          currentWords,
+          actualDurationSec: actualSec,
+          budget: durationBudget,
+        });
         plan = await compressPlanScript(plan, newTargetWords, Math.round(newTargetWords * 1.05));
         compressionPasses++;
         await save('plan.json', plan);
@@ -693,28 +702,6 @@ export async function createFacelessVideo({
     });
     assets = dirResult.assets;
     assetReport = dirResult.report;
-    if (Object.keys(dirResult.representationFallbacks || {}).length) {
-      visualCoveragePlan = visualCoveragePlan.map((coverage) => {
-        const fallback = dirResult.representationFallbacks[coverage.shotId];
-        if (!fallback) return coverage;
-        return {
-          ...coverage,
-          primaryRepresentation: fallback.to,
-          coverageStatus: 'SUPPORTIVE',
-          rationale: `${coverage.rationale} Production fallback: ${fallback.reason}`,
-          representationDecision: {
-            ...coverage.representationDecision,
-            selectedRepresentation: fallback.to,
-            searchable: false,
-            preferredSource: 'procedural',
-            reason: fallback.reason,
-            fallbackApplied: true,
-          },
-        };
-      });
-      await save('visual-coverage-plan.json', visualCoveragePlan, { schema: VisualCoveragePlanSchema });
-      await save('representation-fallbacks.json', dirResult.representationFallbacks);
-    }
     if (Object.keys(dirResult.mediaReuseFallbacks || {}).length) {
       await save('media-reuse-fallbacks.json', dirResult.mediaReuseFallbacks);
     }
@@ -734,7 +721,7 @@ export async function createFacelessVideo({
     await save('video-window-semantics.json', dirResult.videoWindowSelections || {});
     await save('query-performance.json', dirResult.queryQualityFeedback || {});
 
-    if (visualPolicy.enableLegacyVisualFamilies) specs.forEach((spec, i) => recast(spec, executionPlan.scenes[i], assets[spec.sceneId], format, i > 0 ? specs[i - 1] : null));
+    specs.forEach((spec, i) => recast(spec, executionPlan.scenes[i], assets[spec.sceneId], format, i > 0 ? specs[i - 1] : null));
     await save('direction.json', specs);
     await save('assets.json', { assets, scenes: assetReport, search: assetReport.search, diagnostics: assetReport.diagnostics });
     const selectedAssets = Object.values(assets).flatMap((sceneAssets) => Object.entries(sceneAssets.byShot || {}).map(([shotId, asset]) => ({ shotId, asset })));
@@ -809,13 +796,12 @@ export async function createFacelessVideo({
   let audioDiagnostics;
   let visualCoverageDiagnostics;
   let realizationDiagnostics;
-  let diagramDiagnostics;
   let criticReview;
   let creativeQaResult;
   let editContinuityDiagnostics;
   let editorialVisualPlan;
   let editorialMediaQc = null;
-  let compositionArtifacts = { sceneCompositions: {}, comparisonSpecs: {}, chartSpecs: {}, mediaSceneSpecs: {}, editorialVisualBeats: {}, mediaShotPlans: {}, solvedScenes: {}, motionPlans: {}, visualQualityReviews: {}, frameStatePreflight: {}, compositionFallbacks: [], mediaCompositionDiagnostics: {} };
+  let compositionArtifacts = { sceneCompositions: {}, mediaSceneSpecs: {}, editorialVisualBeats: {}, mediaShotPlans: {}, solvedScenes: {}, motionPlans: {}, visualQualityReviews: {}, frameStatePreflight: {}, compositionFallbacks: [], mediaCompositionDiagnostics: {} };
 
   if (canReuse('timeline')) {
     console.log(`   ✓ [Reused] timeline.json`);
@@ -824,8 +810,6 @@ export async function createFacelessVideo({
       editorialVisualPlan = JSON.parse(await fs.readFile(path.join(runDir, 'editorial-visual-plan.json'), 'utf8'));
       compositionArtifacts = {
         sceneCompositions: JSON.parse(await fs.readFile(path.join(runDir, 'scene-compositions.json'), 'utf8')),
-        comparisonSpecs: await fs.readFile(path.join(runDir, 'comparison-specs.json'), 'utf8').then(JSON.parse).catch(() => ({})),
-        chartSpecs: await fs.readFile(path.join(runDir, 'chart-specs.json'), 'utf8').then(JSON.parse).catch(() => ({})),
         mediaSceneSpecs: await fs.readFile(path.join(runDir, 'media-scene-specs.json'), 'utf8').then(JSON.parse).catch(() => ({})),
         editorialVisualBeats: await fs.readFile(path.join(runDir, 'editorial-visual-beats.json'), 'utf8').then(JSON.parse).catch(() => ({})),
         mediaShotPlans: await fs.readFile(path.join(runDir, 'media-shot-plan.json'), 'utf8').then(JSON.parse).catch(() => ({})),
@@ -843,7 +827,6 @@ export async function createFacelessVideo({
       audioDiagnostics = JSON.parse(await fs.readFile(path.join(runDir, 'audio-diagnostics.json'), 'utf8'));
       visualCoverageDiagnostics = JSON.parse(await fs.readFile(path.join(runDir, 'visual-coverage-diagnostics.json'), 'utf8'));
       realizationDiagnostics = JSON.parse(await fs.readFile(path.join(runDir, 'visual-realization-diagnostics.json'), 'utf8'));
-      diagramDiagnostics = JSON.parse(await fs.readFile(path.join(runDir, 'diagram-quality-diagnostics.json'), 'utf8'));
       criticReview = JSON.parse(await fs.readFile(path.join(runDir, 'visual_critic.json'), 'utf8'));
       creativeQaResult = {
         creativeQaBefore: JSON.parse(await fs.readFile(path.join(runDir, 'creative-qa-before.json'), 'utf8')),
@@ -862,8 +845,6 @@ export async function createFacelessVideo({
     timeline = buildTimeline({ plan: executionPlan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc: path.basename(narrationFile), coveragePlan: visualCoveragePlan, editorialVisualPlan, visualPolicy, productionProfile });
     compositionArtifacts = timeline._compositionArtifacts || compositionArtifacts;
     await save('scene-compositions.json', compositionArtifacts.sceneCompositions);
-    await save('comparison-specs.json', compositionArtifacts.comparisonSpecs);
-    await save('chart-specs.json', compositionArtifacts.chartSpecs);
     await save('media-scene-specs.json', compositionArtifacts.mediaSceneSpecs);
     await save('editorial-visual-beats.json', compositionArtifacts.editorialVisualBeats);
     await save('media-shot-plan.json', compositionArtifacts.mediaShotPlans);
@@ -943,8 +924,6 @@ export async function createFacelessVideo({
     await save('audio-diagnostics.json', audioDiagnostics);
     await save('visual-coverage-diagnostics.json', visualCoverageDiagnostics);
 
-    diagramDiagnostics = buildDiagramQualityDiagnostics(timeline, { format });
-    await save('diagram-quality-diagnostics.json', diagramDiagnostics);
 
     // Milestone Whole-Video Visual Sequence Review & Editorial Media QC
     let judgments = dirResult?.editorialAssetJudgments;
@@ -987,7 +966,6 @@ export async function createFacelessVideo({
       'duration-budget.json',
       'audio-diagnostics.json',
       'visual-coverage-diagnostics.json',
-      'diagram-quality-diagnostics.json',
       'creative-qa-before.json',
       'creative-repairs.json',
       'creative-qa-after.json',
@@ -1150,7 +1128,6 @@ export async function createFacelessVideo({
     audioDiagnostics,
     visualCoveragePlan,
     visualCoverageDiagnostics,
-    diagramQualityDiagnostics: diagramDiagnostics,
     editContinuityDiagnostics,
     preflightContactSheet,
     preRepairContactSheet,
@@ -1181,15 +1158,7 @@ export async function createFacelessVideo({
   if (global.gc) { try { global.gc(); } catch {} }
   const renderStartedAt = Date.now();
   onProgress({ step: 6, message: 'Bundling compositions...' });
-  const serveUrl = await bundle({
-    entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
-    publicDir: runPublic,
-    ignoreRegisterRootWarning: true,
-    webpackOverride: (webpackConfig) => ({
-      ...webpackConfig,
-      cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
-    }),
-  });
+  const serveUrl = await getRunBundle(runDir);
   const inputProps = { timeline };
   const composition = await selectComposition({ serveUrl, id: format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer', inputProps });
 
@@ -1220,16 +1189,16 @@ export async function createFacelessVideo({
   }
 
   const outputPath = path.join(config.rendersDir, outputFilename);
+  const temporaryOutputPath = `${outputPath}.partial-${process.pid}-${Date.now()}.mp4`;
   let lastPct = -1;
   const renderCancellation = makeCancelSignal();
   const cancelRender = () => renderCancellation.cancel();
   signal?.addEventListener('abort', cancelRender, { once: true });
   const chromiumOptions = {
     args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
       '--disable-gpu',
+      ...(process.env.REMOTION_DISABLE_CHROMIUM_SANDBOX === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
     ],
   };
   try {
@@ -1242,7 +1211,7 @@ export async function createFacelessVideo({
     jpegQuality: 94,
     colorSpace: 'bt709',
     audioBitrate: '192k',
-    outputLocation: outputPath,
+    outputLocation: temporaryOutputPath,
     inputProps,
     scale: renderScale,
     concurrency: Number(process.env.REMOTION_CONCURRENCY || 1),
@@ -1258,8 +1227,12 @@ export async function createFacelessVideo({
       onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
     },
   });
+  // Publish only a complete encoder output. A crash or cancellation can leave
+  // the .partial file, but clients can never mistake it for the final MP4.
+  await fs.rename(temporaryOutputPath, outputPath);
   } finally {
     signal?.removeEventListener('abort', cancelRender);
+    await fs.rm(temporaryOutputPath, { force: true }).catch(() => {});
   }
   throwIfCancelled();
   await job.completeStage('render', [path.relative(runDir, outputPath).split(path.sep).join('/')]);
@@ -1307,6 +1280,24 @@ export async function createFacelessVideo({
   }
 
   await save('qc.json', result.qc);
+  const outputStat = await fs.stat(outputPath);
+  const outputSha256 = await sha256File(outputPath);
+  const persistentCreditsPath = path.join(config.rendersDir, `${videoId}.credits.txt`);
+  await fs.copyFile(path.join(runDir, 'credits.txt'), persistentCreditsPath);
+  const deliveryManifest = {
+    version: 1,
+    videoId,
+    title: executionPlan.title,
+    createdAt: new Date().toISOString(),
+    file: { name: outputFilename, bytes: outputStat.size, sha256: outputSha256, codec: 'h264', colorSpace: 'bt709', audioBitrate: '192k' },
+    durationSeconds: timeline.durationInFrames / timeline.fps,
+    format: { width: timeline.width, height: timeline.height, fps: timeline.fps },
+    artifacts: { credits: `${videoId}.credits.txt`, qualityReport: `runs/${videoId}/qc.json` },
+    quality: { passed: result.qc.render?.ok === true, checks: result.qc.render?.checks || [] },
+  };
+  const deliveryManifestPath = path.join(config.rendersDir, `${videoId}.delivery.json`);
+  await fs.writeFile(deliveryManifestPath, JSON.stringify(deliveryManifest, null, 2));
+  result.delivery = { manifestPath: deliveryManifestPath, creditsPath: persistentCreditsPath, sha256: outputSha256, bytes: outputStat.size };
   await job.completeStage('postRenderQa', ['qc.json', ...(result.qc.renderedCritic?.contactSheet ? [result.qc.renderedCritic.contactSheet] : [])]);
   await job.finish();
 

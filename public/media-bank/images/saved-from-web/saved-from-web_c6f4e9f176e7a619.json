@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_c6f4e9f176e7a619",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Healthcare worker in protective gear handling vials in a laboratory setting.",
+  "path": "images/saved-from-web/saved-from-web_c6f4e9f176e7a619.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "healthcare",
+    "worker",
+    "protective",
+    "gear",
+    "handling",
+    "vial",
+    "laboratory",
+    "setting",
+    "scientific",
+    "research",
+    "static",
+    "presentation",
+    "vials",
+    "circuit board",
+    "semiconductor components",
+    "GPU",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "healthcare",
+    "worker",
+    "protective",
+    "gear",
+    "handling",
+    "vial",
+    "laboratory",
+    "setting",
+    "scientific",
+    "research",
+    "static",
+    "presentation",
+    "vials",
+    "circuit board",
+    "semiconductor components",
+    "GPU",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Healthcare worker in protective gear handling vials in a laboratory setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "workers filling penicillin vials 1940s",
+    "savedAt": "2026-11-02T09:09:28.912Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ron Lach",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/hands-in-gloves-holding-bottles-with-vaccines-9893834/"
+  }
+}

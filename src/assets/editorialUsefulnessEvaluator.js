@@ -328,9 +328,12 @@ export function evaluateEditorialUsefulness({
   // --- 8. Determine Editorial Usefulness Verdict ---
   let verdict = 'USEFUL';
 
-  if (distractionRisk >= 0.60 || matchClass === 'WRONG' || matchClass === 'ACCIDENTAL') {
+  if (distractionRisk >= 0.60) {
     verdict = 'DISTRACTING';
-    reasons.push('distracting_asset: high distraction risk or wrong subject matter');
+    reasons.push('distracting_asset: high distraction risk or prominent unrelated text/branding');
+  } else if (matchClass === 'WRONG' || matchClass === 'ACCIDENTAL') {
+    verdict = 'WEAK';
+    reasons.push('weak_editorial_usefulness: visual content does not support narration beat');
   } else if (visualRole === 'ATMOSPHERE' && communicationValue >= 0.30) {
     verdict = 'ATMOSPHERIC';
   } else if (communicationValue < 0.45 || specificity < 0.30 || genericness >= 0.75) {
@@ -354,10 +357,20 @@ export function evaluateEditorialUsefulness({
 
   switch (visualRole) {
     case 'HOOK':
-      // communicationValue >= 0.65, specificity >= 0.45, DIRECT or strong CONTEXTUAL, EditorialUsefulness >= USEFUL/STRONG/ESSENTIAL
-      if (communicationValue < 0.65 || specificity < 0.45 || (verdict !== 'STRONG' && verdict !== 'ESSENTIAL' && verdict !== 'USEFUL') || distractionRisk >= 0.30) {
+      // Permit a narrow rounding margin for specific, low-distraction native
+      // footage. Pixel-inspected real B-roll can correctly be CONTEXTUAL when
+      // it establishes the hook setting without proving an invisible detail
+      // (for example, a canyon hiker cannot visibly prove "no signal"). Keep
+      // generic contextual media on the stricter threshold.
+      const isNativeVideo = candidate.type === 'video' || candidate.mediaType === 'video';
+      const specificRealHook = distractionRisk < 0.30 && (
+        (matchClass === 'DIRECT' && specificity >= 0.55)
+        || (matchClass === 'CONTEXTUAL' && isNativeVideo && specificity >= 0.55)
+      );
+      const minimumHookCommunication = specificRealHook ? 0.60 : 0.65;
+      if (communicationValue < minimumHookCommunication || specificity < 0.45 || (verdict !== 'STRONG' && verdict !== 'ESSENTIAL' && verdict !== 'USEFUL') || distractionRisk >= 0.30) {
         rolePass = false;
-        reasons.push(`hook_role_rejection: hook requires communicationValue >= 0.65 and specificity >= 0.45 with acceptable verdict (got comm:${communicationValue}, spec:${specificity}, verdict:${verdict})`);
+        reasons.push(`hook_role_rejection: hook requires communicationValue >= ${minimumHookCommunication.toFixed(2)} and specificity >= 0.45 with acceptable verdict (got comm:${communicationValue}, spec:${specificity}, verdict:${verdict})`);
       }
       break;
 

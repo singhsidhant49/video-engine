@@ -66,6 +66,11 @@ test('public API accepts detailed production briefs while retaining a bounded pr
   );
 });
 
+test('clients can explicitly disable burned-in subtitles', () => {
+  const request = CreateVideoRequestSchema.parse({ prompt: 'Create a clean client master', subtitles: { enabled: false } });
+  assert.equal(toPipelineBrief(request).channel.captions, 'none');
+});
+
 test('persistent video service generates asynchronously and reuses idempotent requests', async (t) => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-create-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
@@ -210,7 +215,7 @@ test('HTTP v1 routes require a bearer key and return asynchronous creation contr
   const queryAccepted = await fetch(`http://127.0.0.1:${port}/v1/videos?token=${apiKey}`, {
     method: 'GET',
   });
-  assert.equal(queryAccepted.status, 200);
+  assert.equal(queryAccepted.status, 401, 'credentials in query strings must be rejected');
 });
 
 test('production auth rejects placeholder and short API keys', () => {
@@ -222,6 +227,20 @@ test('production auth rejects placeholder and short API keys', () => {
     () => createApiAuth({ apiKeys: ['too-short'], production: true }),
     /non-placeholder keys of at least 32 characters/,
   );
+});
+
+test('named API credentials preserve tenant identity across key rotation', async (t) => {
+  const owners = [];
+  const service = { list: async (ownerId) => { owners.push(ownerId); return []; } };
+  const oldKey = 'old-rotation-key-000000000000000000000000';
+  const newKey = 'new-rotation-key-000000000000000000000000';
+  const app = express();
+  app.use('/v1', createApiAuth({ apiKeys: [`client-a:${oldKey}`, `client-a:${newKey}`], production: true }), createVideoApiRouter({ service }));
+  const server = await new Promise((resolve) => { const listener = app.listen(0, '127.0.0.1', () => resolve(listener)); });
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const { port } = server.address();
+  for (const key of [oldKey, newKey]) await fetch(`http://127.0.0.1:${port}/v1/videos`, { headers: { authorization: `Bearer ${key}` } });
+  assert.deepEqual(owners, ['acct_client-a', 'acct_client-a']);
 });
 
 test('HTTP API accepts the detailed-brief size used by production clients', async (t) => {
@@ -304,7 +323,7 @@ test('startup recovers an interrupted permanent deletion', async (t) => {
   await assert.rejects(fs.access(path.join(rendersDir, `${id}-landscape.mp4`)));
 });
 
-test('retry preserves the video ID and resumes its existing checkpoints', async (t) => {
+test('post-render QC retry preserves the video ID and recompiles the timeline', async (t) => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-retry-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const rendersDir = path.join(root, 'renders');
@@ -312,7 +331,7 @@ test('retry preserves the video ID and resumes its existing checkpoints', async 
   const calls = [];
   const generator = async (options) => {
     calls.push({ videoId: options.videoId, resume: options.resume, from: options.from });
-    if (calls.length === 1) throw new Error('Timeline QC failed — test fixture');
+    if (calls.length === 1) throw new Error('Post-render QC failed — test fixture');
     const outputPath = path.join(rendersDir, `${options.videoId}-landscape.mp4`);
     await fs.writeFile(outputPath, 'video');
     return { outputPath, outputFilename: path.basename(outputPath), runDir: path.join(rendersDir, 'runs', options.videoId), durationSeconds: 10, title: 'Retried' };
@@ -321,7 +340,7 @@ test('retry preserves the video ID and resumes its existing checkpoints', async 
   await service.init();
   const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'Retry this video safely' }));
   const failed = await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'failed');
-  assert.equal(failed.error.code, 'TIMELINE_QC_FAILED');
+  assert.equal(failed.error.code, 'POST_RENDER_QC_FAILED');
   const retried = await service.retry('account-a', created.job.id);
   assert.equal(retried.job.id, created.job.id);
   await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');

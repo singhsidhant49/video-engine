@@ -183,9 +183,9 @@ mimages/
   documents/
   devices/
   objects/
-# Production visual mode
+# Production visual engine
 
-Production generation defaults to `HYBRID_EDITORIAL`: authentic real image/video media remains the first choice for concrete people, places, objects, actions, environments, and evidence, while chart/process/diagram/comparison/timeline/UI/code families remain available when they explain the narration more directly. Use `--visual-mode MEDIA_EDITORIAL` for an explicit documentary-style media-only edit, or `--visual-mode LEGACY_PROCEDURAL` for regression and compatibility.
+Production generation uses one `MEDIA_EDITORIAL` engine. Every visual is relevant, licensed image/video media selected through semantic and pixel-level quality gates; no alternate rendering runtime exists.
 
 Useful validation commands:
 

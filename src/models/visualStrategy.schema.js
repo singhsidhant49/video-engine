@@ -5,11 +5,10 @@ const Density = z.number().min(0).max(1);
 export const VideoVisualStrategySchema = z.object({
   version: z.literal(1).default(1),
   continuityMode: z.enum(['topic', 'concept', 'mixed']).default('mixed'),
-  visualFlow: z.enum(['evidence', 'explanatory', 'cinematic', 'hybrid']).default('hybrid'),
+  visualFlow: z.enum(['evidence', 'explanatory', 'cinematic', 'editorial']).default('editorial'),
   assetPreference: z.object({
-    realMediaWeight: Density.default(0.7),
-    proceduralWeight: Density.default(0.3),
-  }).default({ realMediaWeight: 0.7, proceduralWeight: 0.3 }),
+    realMediaWeight: z.literal(1).default(1),
+  }).default({ realMediaWeight: 1 }),
   pacing: z.object({
     introEnergy: Density.default(0.8),
     bodyEnergy: Density.default(0.55),

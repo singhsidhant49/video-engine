@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_a08f11edbedeabd0",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/a-cancer-patient-on-hospital-bed-6010964/",
+  "path": "video/saved-from-web/saved-from-web_a08f11edbedeabd0.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1080,
+  "height": 1920,
+  "aspectRatio": 0.5625,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "cancer",
+    "patient",
+    "hospital",
+    "bed",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "6010964"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "cancer",
+    "patient",
+    "hospital",
+    "bed",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "6010964"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "a cancer patient on hospital bed"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "historical hospital ward infection patients",
+    "savedAt": "2026-11-02T10:14:21.424Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Tima Miroshnichenko",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/a-cancer-patient-on-hospital-bed-6010964/"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_69e3f172e94ccd2c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A female scientist wearing a lab coat and goggles in a laboratory environment.",
+  "path": "images/saved-from-web/saved-from-web_69e3f172e94ccd2c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1463,
+  "height": 2600,
+  "aspectRatio": 0.5627,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "wearing",
+    "lab",
+    "coat",
+    "goggle",
+    "laboratory",
+    "environment",
+    "scientific",
+    "research",
+    "static",
+    "presentation",
+    "goggles",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "wearing",
+    "lab",
+    "coat",
+    "goggle",
+    "laboratory",
+    "environment",
+    "scientific",
+    "research",
+    "static",
+    "presentation",
+    "goggles",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A female scientist wearing a lab coat and goggles in a laboratory environment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "scientist lab notebook penicillin manufacturing, fabricating, or constructing",
+    "savedAt": "2026-11-02T09:09:10.871Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Artem Podrez",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-in-white-button-up-shirt-wearing-medical-goggles-with-id-pinned-on-shirt-8532864/"
+  }
+}

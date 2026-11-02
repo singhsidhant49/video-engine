@@ -79,12 +79,16 @@ export function staticVisualCritic(timeline, { plan, storyboard, continuityRepor
       2,
     );
     if (!isContemplative && durationSec > staleThreshold && shots.length <= 1 && shots[0]?.family === 'image') {
-      const splitPreservesPacing = durationSec / 2 >= minimumSplitHold;
+      const cameraMove = shots[0]?.presentation?.cameraMove || shots[0]?.move?.type || 'static';
+      const hasContinuousMotion = cameraMove !== 'static';
+      const splitPreservesPacing = !hasContinuousMotion && durationSec / 2 >= minimumSplitHold;
       issues.push({
         sceneId,
         type: splitPreservesPacing ? 'single_shot_hold' : 'paced_long_hold',
         severity: 'medium',
-        message: splitPreservesPacing
+        message: hasContinuousMotion
+          ? `Scene "${sceneId}" uses a continuous ${cameraMove} over a ${durationSec.toFixed(1)}s still hold.`
+          : splitPreservesPacing
           ? `Scene "${sceneId}" is ${durationSec.toFixed(1)}s long with only one visual shot.`
           : `Scene "${sceneId}" exceeds the ${staleThreshold.toFixed(1)}s still guideline, but splitting it would violate the ${minimumSplitHold.toFixed(1)}s pacing floor.`,
       });
@@ -93,7 +97,9 @@ export function staticVisualCritic(timeline, { plan, storyboard, continuityRepor
         sceneRepairs.push({ sceneId, action: 'split_long_hold' });
         deduction += 0.4;
       } else {
-        recommendedActions.push(`Keep ${sceneId} as one paced shot; prefer native-motion footage or a restrained camera move when available.`);
+        recommendedActions.push(hasContinuousMotion
+          ? `Keep ${sceneId} as one continuous paced shot with restrained ${cameraMove}.`
+          : `Keep ${sceneId} as one paced shot; prefer native-motion footage or a restrained camera move when available.`);
         deduction += 0.1;
       }
     }
@@ -132,41 +138,17 @@ export function applySceneRepairs(timeline, repairs = []) {
     }
     if (repair.action === 'split_long_hold' && (clip.shots || []).length === 1) {
       const original = clip.shots[0];
-      const firstDuration = Math.floor(clip.durationInFrames / 2);
-      const secondDuration = clip.durationInFrames - firstDuration;
-      if (firstDuration > 0 && secondDuration > 0) {
-        original.durationInFrames = firstDuration;
-        original.exit = { type: 'dissolve', frames: 12 };
-        const clone = JSON.parse(JSON.stringify(original));
-        clone.id = `${original.id || original.storyboardShotId}_repair_detail`;
-        clone.storyboardShotId = `${original.storyboardShotId}_repair_detail`;
-        if (clone.asset?.assetIdentityChain) {
-          clone.asset.assetIdentityChain.timelineAssetId = clone.storyboardShotId;
-          clone.asset.assetIdentityChain.rendererAssetId = clone.asset.src || clone.asset.assetIdentityChain.rendererAssetId;
-        }
-        clone.from = firstDuration;
-        clone.startFrame = firstDuration;
-        clone.endFrame = clip.durationInFrames;
-        clone.durationInFrames = secondDuration;
-        clone.role = 'detail';
-        clone.variant = 'detail';
-        clone.layout = `${clone.family}:detail`;
-        const nextCamera = (original.presentation?.cameraMove === 'subtlePush') ? 'subtlePull' : 'subtlePush';
-        clone.presentation = {
-          ...(clone.presentation || {}),
-          variant: 'detail',
-          layout: `${clone.family}:detail`,
-          cameraMove: nextCamera,
-          movementState: 'SUBTLE',
-          transitionIn: 'dissolve',
-        };
-        clone.imageBehavior = nextCamera === 'subtlePush' ? 'SUBTLE_PUSH' : 'SUBTLE_PULL';
-        // Never hard-cut to identical same image; dissolve smoothly to prevent jump-cut
-        clone.enter = { type: 'dissolve', frames: 12 };
-        clone.exit = { type: 'cut', frames: 0 };
-        clone.transitionPolicy = 'SHORT_DISSOLVE';
-        clip.shots.push(clone);
-      }
+      // A cloned shot restarts the same pixels and camera transform, producing
+      // the visible "same image starts again" jump. Keep one continuous hold
+      // and introduce restrained motion unless a genuinely different asset is
+      // authored upstream.
+      const nextCamera = original.presentation?.cameraMove === 'subtlePull' ? 'subtlePull' : 'subtlePush';
+      original.presentation = {
+        ...(original.presentation || {}),
+        cameraMove: nextCamera,
+        movementState: 'SUBTLE',
+      };
+      original.imageBehavior = nextCamera === 'subtlePull' ? 'SUBTLE_PULL' : 'SUBTLE_PUSH';
     }
   }
 

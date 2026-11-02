@@ -3,10 +3,59 @@ import test from 'node:test';
 
 import { resolveShotTiming } from '../src/pipeline/shotTimingResolver.js';
 import { createPresentationMemory, realizeSceneShots } from '../src/pipeline/visualRealizationDirector.js';
-import { chooseTransitions, directSolvedShotTransitions } from '../src/pipeline/timeline.js';
+import { chooseTransitions, directSolvedShotTransitions, stitchRepeatedAssetMotion } from '../src/pipeline/timeline.js';
 import { resolveVisualPolicy } from '../src/config/visualMode.js';
 import { buildVisualRealizationDiagnostics } from '../src/pipeline/visualRealizationDiagnostics.js';
 import { authorShots, isAbstractEventEntity } from '../src/storyboard/shotPlanner.js';
+
+test('adjacent reuse of the same image continues camera state instead of restarting', () => {
+  const clips = [{ shots: [
+    { id: 'a', asset: { src: 'same.jpg' }, solvedSceneId: 'sa', motionPlanId: 'ma' },
+    { id: 'b', asset: { src: 'same.jpg' }, solvedSceneId: 'sb', motionPlanId: 'mb' },
+  ] }];
+  const geometry = { rect: { x: 0, y: 0, width: 1920, height: 900 } };
+  const solvedScenes = {
+    sa: { mediaGeometry: { media_primary: geometry }, cameraPaths: { media_primary: { start: { scale: 1, focusX: .5, focusY: .5 }, end: { scale: 1.04, focusX: .52, focusY: .48 } } } },
+    sb: { mediaGeometry: { media_primary: geometry }, cameraPaths: { media_primary: { start: { scale: 1, focusX: .5, focusY: .5 }, end: { scale: 1.04, focusX: .5, focusY: .5 } } } },
+  };
+  const motionPlans = {
+    ma: { frame0State: { media_primary: {} }, tracks: [] },
+    mb: { frame0State: { media_primary: {} }, tracks: [{ targetId: 'media_primary', property: 'cameraScale', from: 1, to: 1.04 }] },
+  };
+  stitchRepeatedAssetMotion({ clips, solvedScenes, motionPlans });
+  assert.equal(solvedScenes.sb.cameraPaths.media_primary.start.scale, 1.04);
+  assert.equal(motionPlans.mb.frame0State.media_primary.cameraFocusY, .48);
+  assert.equal(motionPlans.mb.tracks[0].from, 1.04);
+  assert.equal(clips[0].shots[1].cameraContinuity.stitchedFromShotId, 'a');
+});
+
+test('adjacent reuse of the same video continues its playback window', () => {
+  const clips = [{ shots: [
+    {
+      id: 'video-a', durationInFrames: 222, solvedSceneId: 'sa', mediaSceneSpecId: 'spec-a',
+      asset: { type: 'video', src: 'same.mp4', duration: 24, videoTrim: { startTime: 3.5, endTime: 11 } },
+    },
+    {
+      id: 'video-b', durationInFrames: 174, solvedSceneId: 'sb', mediaSceneSpecId: 'spec-b',
+      asset: { type: 'video', src: 'same.mp4', duration: 24, videoTrim: { startTime: 3.5, endTime: 10.5 } },
+    },
+  ] }];
+  const solvedScenes = {
+    sa: { mediaGeometry: { media_primary: { videoTrim: { startTime: 3.5, endTime: 11 } } } },
+    sb: { mediaGeometry: { media_primary: { videoTrim: { startTime: 3.5, endTime: 10.5 } } } },
+  };
+  const mediaSceneSpecs = {
+    'spec-b': { assets: [{ src: 'same.mp4', videoTrim: { startTime: 3.5, endTime: 10.5 } }] },
+  };
+
+  stitchRepeatedAssetMotion({ clips, solvedScenes, mediaSceneSpecs, fps: 30 });
+
+  assert.equal(clips[0].shots[1].asset.videoTrim.startTime, 10.9);
+  assert.equal(clips[0].shots[1].asset.videoTrim.endTime, 16.8);
+  assert.equal(solvedScenes.sb.mediaGeometry.media_primary.videoTrim.startTime, 10.9);
+  assert.equal(mediaSceneSpecs['spec-b'].assets[0].videoTrim.startTime, 10.9);
+  assert.equal(clips[0].shots[1].videoContinuity.continuedFromShotId, 'video-a');
+});
 
 test('shot timing preserves authored order with aligned, gap-free coverage', () => {
   const shots = [
@@ -52,9 +101,9 @@ test('shot realization selects families per authored shot and records presentati
     sectionId: 'section-1',
     memory,
   });
-  assert.deepEqual(result.map((shot) => shot.presentation.family), ['image', 'stat']);
+  assert.deepEqual(result.map((shot) => shot.presentation.family), ['image', 'image']);
   assert.deepEqual(result.map((shot) => shot.storyboardShotId), ['real', 'data']);
-  assert.deepEqual(memory.recentFamilies, ['image', 'stat']);
+  assert.deepEqual(memory.recentFamilies, ['image', 'image']);
   assert.ok(result.every((shot) => shot.presentation.cameraMove));
 });
 

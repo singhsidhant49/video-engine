@@ -2,7 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { config } from '../config/index.js';
 
-const STALE_LOCK_MAX_AGE_MS = 2 * 60 * 60 * 1000; // 2 hours
+// Active locks heartbeat every minute. A lock is stale only after missing
+// heartbeats for long enough to survive temporary I/O stalls.
+const STALE_LOCK_MAX_AGE_MS = 10 * 60 * 1000;
 
 /**
  * Calculates directory size in bytes recursively.

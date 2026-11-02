@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
+import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords } from '../src/storyboard/durationBudget.js';
 import { compressPlanScript, validateCompressionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
@@ -36,6 +36,18 @@ test('estimateScriptDuration computes word count and estimated speech seconds', 
   assert.equal(est.wordCount, 17);
   assert.ok(Math.abs(est.estimatedSpeechSec - (17 / 2.6)) < 0.05);
   assert.ok(Math.abs(est.estimatedTotalSec - (17 / 2.6 + 0.5)) < 0.05);
+});
+
+test('overlong narration compression targets final duration rather than the smaller speech budget', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 60, format: 'landscape' });
+  const targetWords = calculateNarrationCompressionTargetWords({
+    currentWords: 145,
+    actualDurationSec: 64.38,
+    budget,
+  });
+
+  assert.equal(targetWords, 135);
+  assert.ok(targetWords > Math.round(145 * budget.targetNarrationSec / 64.38));
 });
 
 test('narration duration repair aims safely inside the accepted range', () => {

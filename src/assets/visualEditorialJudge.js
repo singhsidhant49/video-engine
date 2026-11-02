@@ -24,10 +24,62 @@ import { compareVisualToNeed } from './visualInspectionService.js';
 import { evaluateFormatFitness } from './formatFitnessScorer.js';
 import { evaluateEditorialUsefulness } from './editorialUsefulnessEvaluator.js';
 
-export const SEMANTIC_MATCH_POLICY_VERSION = '2.1.0';
-export const EDITORIAL_USEFULNESS_POLICY_VERSION = '2.1.0';
-export const SEARCH_CONCEPT_POLICY_VERSION = '2.1.0';
-export const SEQUENCE_POLICY_VERSION = '2.1.0';
+export const SEMANTIC_MATCH_POLICY_VERSION = '2.4.0';
+export const EDITORIAL_USEFULNESS_POLICY_VERSION = '2.4.0';
+export const SEARCH_CONCEPT_POLICY_VERSION = '2.4.0';
+export const SEQUENCE_POLICY_VERSION = '2.4.0';
+
+const DOCUMENTARY_GENERIC_TOKENS = new Set([
+  'authentic', 'real', 'visual', 'footage', 'photo', 'image', 'video', 'modern',
+  'historical', 'history', 'today', 'city', 'view', 'scene', 'record', 'aftermath',
+]);
+
+const COUNTRY_ALIASES = Object.freeze({
+  argentina: ['argentina'], australia: ['australia'], austria: ['austria'], belgium: ['belgium'],
+  brazil: ['brazil', 'brasil'], canada: ['canada'], chile: ['chile', 'chilean', 'valdivia', 'mariquina'], china: ['china', 'chinese'],
+  colombia: ['colombia'], croatia: ['croatia'], egypt: ['egypt', 'egyptian'], france: ['france', 'french'],
+  germany: ['germany', 'german'], greece: ['greece', 'greek'], india: ['india', 'indian'], indonesia: ['indonesia'],
+  iran: ['iran', 'iranian'], iraq: ['iraq', 'iraqi'], ireland: ['ireland', 'irish'], israel: ['israel', 'israeli'],
+  italy: ['italy', 'italian'], japan: ['japan', 'japanese'], mexico: ['mexico', 'mexican'], morocco: ['morocco'],
+  nepal: ['nepal', 'nepalese', 'bhaktapur', 'kathmandu'], netherlands: ['netherlands', 'dutch'], norway: ['norway', 'norwegian'],
+  pakistan: ['pakistan'], peru: ['peru', 'peruvian'], philippines: ['philippines'], poland: ['poland', 'polish'],
+  portugal: ['portugal', 'portuguese'], russia: ['russia', 'russian'], spain: ['spain', 'spanish'],
+  sweden: ['sweden', 'swedish'], switzerland: ['switzerland', 'swiss'], thailand: ['thailand'],
+  turkey: ['turkey', 'turkish', 'turkiye', 'türkiye'], ukraine: ['ukraine', 'ukrainian'],
+  'united kingdom': ['united kingdom', 'britain', 'british', 'england', 'scotland', 'wales'],
+  'united states': ['united states', 'usa', 'u.s.', 'american', 'hawaii', 'hilo'], vietnam: ['vietnam'],
+});
+
+function countriesMentioned(value = '') {
+  const text = ` ${String(value).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z.]+/g, ' ')} `;
+  return Object.entries(COUNTRY_ALIASES)
+    .filter(([, aliases]) => aliases.some((alias) => text.includes(` ${alias} `)))
+    .map(([country]) => country);
+}
+
+function humanizeProviderLabel(value = '') {
+  const raw = String(value || '').trim();
+  if (!/^https?:\/\//i.test(raw)) return raw;
+  try {
+    const parsed = new URL(raw);
+    return decodeURIComponent(parsed.pathname.split('/').filter(Boolean).pop() || '')
+      .replace(/-?\d{5,}$/g, '')
+      .replace(/[-_]+/g, ' ')
+      .trim();
+  } catch {
+    return '';
+  }
+}
+
+function documentaryEvidenceText(candidate = {}) {
+  // Tags and search queries are deliberately excluded: retrieval words say
+  // what we asked for, not what the downloaded pixels actually depict.
+  return `${humanizeProviderLabel(candidate.label)} ${candidate.title || ''} ${candidate.description || ''}`.toLowerCase();
+}
+
+function discriminativeTokens(value = '') {
+  return String(value).toLowerCase().match(/[a-z][a-z-]{2,}/g)?.filter((token) => !DOCUMENTARY_GENERIC_TOKENS.has(token)) || [];
+}
 
 /**
  * Contextual Adversarial Collision & Accidental Match Patterns
@@ -41,6 +93,24 @@ const ACCIDENTAL_KEYWORD_PATTERNS = [
     classification: 'ACCIDENTAL',
     semanticDistance: 0.98,
     reason: 'accidental_keyword_match: guitar pedal named "Parallel Universe" does not represent quantum physics concept',
+  },
+  // 1b. Historical Explorer / Person vs Named Train Car / Vehicle / High School / Crater
+  {
+    topicRegex: /amundsen|scott\b|shackleton|polar\s+explorer|antarctic\s+expedition|historical\s+explorer|explorer\s+portrait/i,
+    literalExceptionRegex: /railroad|train|pullman|locomotive|station|school|crater|boulevard|avenue/i,
+    candidateRejectRegex: /pullman|railroad\s+car|railway\s+car|train\s+car|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|high\s+school|elementary\s+school|crater|boulevard|avenue|highway/i,
+    classification: 'ACCIDENTAL',
+    semanticDistance: 0.95,
+    reason: 'accidental_keyword_match: train car, school, or facility named after explorer does not represent the historical explorer or expedition',
+  },
+  // 1c. Polar / Antarctic Expedition vs Disjoint Warm / Tropical / Asian / Desert Geography
+  {
+    topicRegex: /antarctic|antarctica|south\s+pole|north\s+pole|arctic|polar|ice\s+shelf|blizzard/i,
+    literalExceptionRegex: /ladakh|india|tibet|nepal|baghdad|iraq|egypt|sahara|amazon|amsterdam/i,
+    candidateRejectRegex: /ladakh|india\b|indian\b|tibet|tibetan|himalayas?|nepal|baghdad|iraq|cairo|egypt|sahara|desert|amazon|brazil|tropical|rainforest|amsterdam/i,
+    classification: 'WRONG',
+    semanticDistance: 0.96,
+    reason: 'geographic_contradiction: visual is located in warm/tropical/desert/distant region which contradicts polar/Antarctic environment',
   },
   // 2. Data center / Cloud server vs Abandoned ruin / Bunker / Relic
   {
@@ -403,6 +473,94 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     candidateText,
   ].filter(Boolean).join(' ').toLowerCase();
 
+  // Explicit country contradictions are never contextual documentary B-roll.
+  // Search tags are excluded from candidate geography because they describe
+  // the request, not the downloaded asset.
+  const requiredCountries = countriesMentioned([
+    subject,
+    visibleNeed?.primaryConcept,
+    visibleNeed?.viewerNeedsToSee,
+    ...(visibleNeed?.requiredEntities || []),
+    ...(visibleNeed?.requiredConcepts || []),
+  ].filter(Boolean).join(' '));
+  const geographicIdentityText = [
+    subject,
+    visibleNeed?.primaryConcept,
+    ...(visibleNeed?.requiredConcepts || []),
+  ].filter(Boolean).join(' ').toLowerCase();
+  const isLocationDependentVisual = /\b(?:aftermath|destroyed|destruction|damage|damaged|collapsed|collapse|coast|coastline|city|village|town|street|memorial|landmark|today|aerial|site)\b/i.test(geographicIdentityText);
+  const isScientificContextVisual = /\b(?:seismograph|seismogram|instrument|scientist|research|data|record|laboratory|monitoring|warning\s+center)\b/i.test(geographicIdentityText);
+  const requiresVisibleGeographicEvidence = requiredCountries.length > 0
+    && (isLocationDependentVisual || !isScientificContextVisual);
+  const candidateCountries = countriesMentioned(`${documentaryEvidenceText(candidate)} ${inspection?.primarySubject || ''} ${inspection?.environment || ''} ${inspection?.sceneSummary || ''}`);
+  if (requiredCountries.length && candidateCountries.length
+    && !candidateCountries.some((country) => requiredCountries.includes(country))) {
+    return {
+      classification: 'WRONG',
+      subjectMatch: 0.05,
+      actionMatch: 0.15,
+      environmentMatch: 0.02,
+      objectMatch: 0.10,
+      meaningMatch: 0.08,
+      evidenceMatch: 0.05,
+      semanticDistance: 0.96,
+      confidence: 0.98,
+      reasons: [`geographic_contradiction: requested ${requiredCountries.join('/')} but asset depicts ${candidateCountries.join('/')}`],
+      accept: false,
+    };
+  }
+  if (editorialMode === 'DOCUMENTARY' && requiresVisibleGeographicEvidence && candidateCountries.length === 0) {
+    return {
+      classification: 'CONTEXTUAL',
+      subjectMatch: 0.45,
+      actionMatch: 0.55,
+      environmentMatch: 0.35,
+      objectMatch: 0.50,
+      meaningMatch: 0.45,
+      evidenceMatch: 0.10,
+      semanticDistance: 0.58,
+      confidence: 0.90,
+      reasons: [`geographic_evidence_missing: asset metadata and inspection do not establish requested location ${requiredCountries.join('/')}`],
+      accept: visibleNeed?.literalnessRequirement !== 'DIRECT',
+    };
+  }
+
+  const requiresMemorial = /\b(?:memorial|monument|commemorative|commemoration|plaque)\b/i.test(topicTarget);
+  const depictsMemorial = /\b(?:memorial|monument|commemorative|commemoration|commemoracion|conmemoracion|plaque|statue|survivors?|sobrevivientes?|anniversary|remembrance|ceremony)\b/i.test(inspectionText);
+  if (requiresMemorial && !depictsMemorial) {
+    return {
+      classification: 'WRONG',
+      subjectMatch: 0.20,
+      actionMatch: 0.10,
+      environmentMatch: 0.25,
+      objectMatch: 0.05,
+      meaningMatch: 0.10,
+      evidenceMatch: 0.05,
+      semanticDistance: 0.90,
+      confidence: 0.96,
+      reasons: ['representation_mismatch: the remembrance shot requires a memorial, monument, survivor, anniversary, or commemoration; generic event imagery is insufficient'],
+      accept: false,
+    };
+  }
+  const memorialEventEvidence = /\b(?:earthquake|terremoto|tsunami|seismic|sismico|sismo)\b/i.test(inspectionText);
+  const memorialGeographyMatches = requiredCountries.length === 0
+    || candidateCountries.some((country) => requiredCountries.includes(country));
+  if (requiresMemorial && depictsMemorial && memorialEventEvidence && memorialGeographyMatches) {
+    return {
+      classification: 'DIRECT',
+      subjectMatch: 0.95,
+      actionMatch: 0.75,
+      environmentMatch: 0.90,
+      objectMatch: 0.95,
+      meaningMatch: 0.95,
+      evidenceMatch: 0.95,
+      semanticDistance: 0.08,
+      confidence: 0.98,
+      reasons: ['verified remembrance representation directly depicts the requested earthquake memorial or commemoration'],
+      accept: true,
+    };
+  }
+
   // A poster/document is a distinct representation class, not generic stock.
   // Pixel-derived inspection wins over a coincidental title/query match.
   const candidateIsPoster = /movie\s+poster|film\s+poster|theatrical\s+poster|vintage\s+poster|lobby\s+card/.test(inspectionText);
@@ -517,23 +675,8 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
   // 4. Stage B comparison using actual VisualInspection
   const comparison = compareVisualToNeed(inspection, visibleNeed);
 
-  // Deliberate asset reuse from run memory (maintaining established narrative continuity)
-  if (candidate.isDeliberateReuse) {
-    return {
-      classification: 'CONTEXTUAL',
-      subjectMatch: Math.max(0.60, comparison.subjectMatch),
-      actionMatch: comparison.actionMatch,
-      environmentMatch: Math.max(0.60, comparison.environmentMatch),
-      objectMatch: comparison.objectMatch,
-      meaningMatch: 0.65,
-      evidenceMatch: 0.50,
-      semanticDistance: 0.30,
-      confidence: 0.80,
-      reasons: [candidate.deliberateReuseReason || 'deliberate asset reuse maintaining established narrative continuity'],
-      accept: true,
-      comparison,
-    };
-  }
+  // Reused media receives no semantic exemption. It must independently prove
+  // relevance to the new shot just like a newly downloaded candidate.
 
   // Recalibrate False DIRECT Examples (Sections 12-17, 26, 27, 49-56):
   // - clock for generic time travel -> CONTEXTUAL or METAPHORICAL
@@ -601,17 +744,29 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     ...(visibleNeed?.subject ? [visibleNeed.subject] : []),
     ...(visibleNeed?.primaryConcept ? [visibleNeed.primaryConcept] : []),
   ];
+  const evidenceText = documentaryEvidenceText(candidate);
   let matchedDocEntity = null;
   const matchesDocEntity = isRealPhotoOrVideoSource && docEntities.some((ent) => {
     if (!ent || typeof ent !== 'string') return false;
-    const eTokens = ent.toLowerCase().split(/\s+/).filter((t) => t.length > 2);
-    if (eTokens.length > 0 && eTokens.every((t) => candidateText.toLowerCase().includes(t))) {
+    const eTokens = discriminativeTokens(ent);
+    if (eTokens.length > 0 && eTokens.every((t) => evidenceText.includes(t))) {
       matchedDocEntity = ent;
       return true;
     }
     return false;
   });
-  if (isRealPhotoOrVideoSource && matchesDocEntity) {
+  const hasConflictingMetadata = /pullman|railroad\s+car|railway\s+car|train\s+car|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|high\s+school|elementary\s+school/i.test(`${candidate.title || ''} ${candidate.description || ''}`)
+    && !/railroad|train|car|bedroom|street|school/i.test(topicTarget);
+  const hasConflictingInspection = (inspection && (
+    (inspection.foreignEntities && inspection.foreignEntities.length > 0)
+    || (inspection.unsuitableUseCases && inspection.unsuitableUseCases.some((u) => topicTarget.includes(u)))
+    || (/garbage\s+truck|sanitation|aircraft|airplane|airbus|guitar\s+pedal|stompbox/i.test(inspection.primarySubject || '')
+        && !/garbage|sanitation|aircraft|airplane|airbus|guitar/i.test(visibleNeed?.subject || visibleNeed?.primaryConcept || ''))
+    || (/railroad\s+car|train\s+car|pullman|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|bedroom|parking\s+lot|city\s+street|high\s+school|elementary\s+school/i.test(`${inspection.primarySubject || ''} ${inspection.environment || ''}`)
+        && !/railroad|train|car|bedroom|street|school/i.test(topicTarget))
+  )) || hasConflictingMetadata;
+
+  if (isRealPhotoOrVideoSource && matchesDocEntity && !hasConflictingInspection) {
     const isPrimaryDoc = isDocEntitySource;
     return {
       classification: 'DIRECT',
@@ -712,13 +867,22 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
   // DIRECT means: the actual object, action, evidence, relationship, or structure required by narration is visibly shown.
   // Never assign DIRECT just because broad topic similarity is high!
   const isExcludedFromDirect = isClockForTimeTravel || isFiberForMultiverse || isGenericPhysicist || isLockForFailure || isTreeBranchForTimeline || isNoEntrySignForPhysics || isVideoEditorForTimeline;
+  const meetsDirectThreshold = comparison.overallVisualMatch >= 0.35
+    && (comparison.environmentMatch >= 0.30 || comparison.actionMatch >= 0.30 || comparison.subjectMatch >= 0.70);
   const hasExplicitSubjectMatch = comparison.subjectMatch >= 0.60;
   const hasExplicitActionMatch = comparison.actionMatch >= 0.65;
   const hasExplicitObjectMatch = comparison.objectMatch >= 0.60;
-  const hasExplicitEvidenceMatch = comparison.evidenceMatch >= 0.75;
-  const hasStrongCombinedMatch = comparison.overallVisualMatch >= 0.65 && comparison.subjectMatch >= 0.50;
+  const hasStrongCombinedMatch = comparison.overallVisualMatch >= 0.60 && comparison.subjectMatch >= 0.50;
+  const hasSubjectAndEnvMatch = comparison.subjectMatch >= 0.45 && comparison.environmentMatch >= 0.45 && comparison.objectMatch >= 0.45;
+  const hasExplicitEvidenceMatch = comparison.evidenceMatch >= 0.75 && visibleNeed?.evidenceRequirement === 'required' && comparison.subjectMatch >= 0.50;
+  const hasDirectCoreMatch = hasExplicitSubjectMatch
+    || (hasExplicitActionMatch && comparison.subjectMatch >= 0.40)
+    || (hasExplicitObjectMatch && comparison.subjectMatch >= 0.50)
+    || hasSubjectAndEnvMatch
+    || hasStrongCombinedMatch
+    || hasExplicitEvidenceMatch;
 
-  if (!isExcludedFromDirect && (hasExplicitSubjectMatch || hasExplicitActionMatch || hasExplicitObjectMatch || hasExplicitEvidenceMatch || hasStrongCombinedMatch)) {
+  if (!isExcludedFromDirect && meetsDirectThreshold && hasDirectCoreMatch) {
     return {
       classification: 'DIRECT',
       subjectMatch: comparison.subjectMatch,
@@ -840,6 +1004,11 @@ export function judgeAssetCandidate({
     rejectReasons.push(`insufficient_semantic_confidence_for_${role.toLowerCase()}: confidence ${matchVerdict.confidence} below threshold ${confidenceThreshold}`);
   }
 
+  if (visibleNeed?.literalnessRequirement === 'DIRECT' && matchVerdict.classification !== 'DIRECT') {
+    gate3Pass = false;
+    rejectReasons.push(`direct_visual_required_for_${role.toLowerCase()}: ${matchVerdict.classification} media cannot prove this shot`);
+  }
+
   // Shorts stricter semantic threshold (Section 30)
   if (targetFormat === 'shorts') {
     if (isImportantShot && matchVerdict.classification === 'METAPHORICAL') {
@@ -914,9 +1083,10 @@ export function judgeAssetCandidate({
     ? `Accepted as ${matchVerdict.classification} match (${editorialUsefulness.verdict}): ${editorialUsefulness.viewerGain || matchVerdict.reasons[0]}`
     : `Rejected: ${rejectReasons.join('; ')}`;
 
-  const visibleMeaning = inspection.sceneSummary || `Shows ${inspection.primarySubject} in ${inspection.environment}`;
+  const visibleMeaning = inspection?.sceneSummary
+    || (inspection?.primarySubject ? `Shows ${inspection.primarySubject} in ${inspection.environment || 'context'}` : (candidate.label || candidate.title || 'Visual asset'));
   const whyItMatchesNarration = isAccepted
-    ? (editorialUsefulness.viewerGain || `Visible subject "${inspection.primarySubject}" and action "${inspection.visibleAction}" directly corroborate narration requirement "${visibleNeed?.viewerNeedsToSee || visibleNeed?.primaryConcept}".`)
+    ? (editorialUsefulness.viewerGain || `Visible subject "${inspection?.primarySubject || candidate.label || 'content'}" directly corroborates narration requirement "${visibleNeed?.viewerNeedsToSee || visibleNeed?.primaryConcept || ''}".`)
     : `Visible content does not adequately support narration requirement.`;
 
   return {
@@ -942,7 +1112,7 @@ export function judgeAssetCandidate({
     distractionRisk: editorialUsefulness.distractionRisk,
     communicationValue: editorialUsefulness.communicationValue,
     isWeakSearchHit: editorialUsefulness.isWeakSearchHit,
-    inspectionSummary: inspection.sceneSummary || inspection.summary,
-    dominantSubject: inspection.primarySubject || inspection.dominantSubject,
+    inspectionSummary: inspection?.sceneSummary || inspection?.summary || null,
+    dominantSubject: inspection?.primarySubject || inspection?.dominantSubject || candidate.label || candidate.title || null,
   };
 }

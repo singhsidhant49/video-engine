@@ -7,6 +7,67 @@ import { judgeAssetCandidate, classifyVisualMatch } from '../src/assets/visualEd
 import { evaluateEditorialUsefulness } from '../src/assets/editorialUsefulnessEvaluator.js';
 import { evaluateVisualSequence } from '../src/storyboard/visualSequenceDirector.js';
 
+test('direct specific hook footage receives the narrow communication rounding margin', () => {
+  const result = evaluateEditorialUsefulness({
+    candidate: { label: 'Hiker exploring a scenic canyon trail while checking a phone' },
+    inspection: {
+      primarySubject: 'hiker in a canyon',
+      sceneSummary: 'A hiker follows a rocky canyon trail while using a smartphone',
+      visibleAction: 'checking a smartphone while hiking',
+      visibleObjects: ['hiker', 'smartphone'],
+      environment: 'rocky canyon trail',
+      communicatedMeanings: ['remote navigation'],
+    },
+    visibleNeed: {
+      visualRole: 'HOOK',
+      subject: 'hiker smartphone canyon no signal',
+      primaryConcept: 'hiker smartphone canyon no signal',
+      requiredConcepts: ['hiker smartphone canyon no signal'],
+      narrationText: 'Deep in a canyon with no cell signal, a hiker phone still pinpoints the location.',
+    },
+    editorialMatch: {
+      classification: 'DIRECT', subjectMatch: 0.95, actionMatch: 0.8,
+      environmentMatch: 0.9, objectMatch: 0.8, evidenceMatch: 0.75,
+    },
+  });
+
+  assert.ok(result.communicationValue >= 0.60);
+  assert.ok(result.specificity >= 0.55);
+  assert.equal(result.rolePass, true);
+});
+
+test('specific native contextual hook footage is not rejected for an invisible detail', () => {
+  const result = evaluateEditorialUsefulness({
+    candidate: {
+      type: 'video',
+      label: 'Hiker exploring a canyon trail while checking a smartphone',
+      tags: ['signal'],
+    },
+    inspection: {
+      primarySubject: 'hiker in a canyon',
+      sceneSummary: 'A hiker checks a smartphone on a rocky canyon trail',
+      visibleAction: 'checking a smartphone while hiking',
+      visibleObjects: ['hiker', 'smartphone'],
+      environment: 'rocky canyon trail',
+    },
+    visibleNeed: {
+      visualRole: 'HOOK',
+      subject: 'hiker smartphone canyon absent signal',
+      primaryConcept: 'hiker smartphone canyon absent signal',
+      requiredConcepts: ['hiker smartphone canyon absent signal'],
+      narrationText: 'Deep in a canyon without service, a hiker phone still pinpoints the location.',
+    },
+    editorialMatch: {
+      classification: 'CONTEXTUAL', subjectMatch: 0.55, actionMatch: 0.8,
+      environmentMatch: 0.9, objectMatch: 0.8, evidenceMatch: 0.72,
+    },
+  });
+
+  assert.ok(result.communicationValue >= 0.60 && result.communicationValue < 0.65);
+  assert.ok(result.specificity >= 0.55);
+  assert.equal(result.rolePass, true);
+});
+
 // =========================================================================
 // MILESTONE: Editorial Usefulness, Search Calibration & Human-Editor Gating
 // Tests for Sections 49-60

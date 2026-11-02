@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 import { config } from '../config/index.js';
 import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
 import { createConfiguredVideoJobService } from './serviceFactory.js';
-import { createApiAuth, createVideoApiRouter, videoApiErrorHandler } from './videoApiRouter.js';
+import { createApiAuth, createApiRateLimit, createVideoApiRouter, videoApiErrorHandler } from './videoApiRouter.js';
 import { getAudioCatalog } from '../audio/musicCatalog.js';
 
 const app = express();
@@ -26,13 +26,14 @@ app.use(express.json({ limit: config.server.maxRequestBytes }));
 const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all' });
 await videoJobService.init();
 const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production: process.env.NODE_ENV === 'production' });
+const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE_LIMIT_PER_MINUTE || 120) });
 
 app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
-app.get('/ready', async (req, res) => {
+app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
   const readiness = await videoJobService.readiness();
   res.status(readiness.ready ? 200 : 503).json({ status: readiness.ready ? 'ready' : 'not_ready', ...readiness });
 });
-app.use('/v1', apiAuth, createVideoApiRouter({ service: videoJobService }));
+app.use('/v1', apiAuth, apiRateLimit, createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
@@ -46,7 +47,12 @@ app.get('/api/audiotracks', (req, res) => {
 });
 
 app.get('/api/session-token', (req, res) => {
-  res.json({ token: config.server.apiKeys[0] || '' });
+  const first = (config.server.apiKeys[0] || '').trim();
+  const separator = first.indexOf(':');
+  const account = separator > 0 ? first.slice(0, separator) : '';
+  const named = /^[a-zA-Z0-9_-]{3,64}$/.test(account);
+  const token = named ? first.slice(separator + 1) : first;
+  res.json({ token });
 });
 
 // Endpoint: Trigger Video Generation
@@ -74,7 +80,6 @@ app.post('/api/generate', process.env.NODE_ENV === 'production' ? apiAuth : (req
       durationSec: input.durationSec ? Number(input.durationSec) : undefined,
       channelId: input.channelId || input.channel?.id,
       channelProfile,
-      visualMode: input.visualMode,
       onProgress: (progress) => {
         // Simple console logging for progress
       },

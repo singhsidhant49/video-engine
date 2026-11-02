@@ -17,7 +17,7 @@ const storyboard = {
   format: 'landscape',
   sections: [{
     id: 'section-1',
-    scenes: [{ id: 'scene-1', shots: [shot('shot-1'), shot('shot-2', { visualConcept: 'How EUV works', assetIntent: 'data', mediaPreference: 'procedural', entities: [], searchConcepts: [], evidenceRequirement: 'preferred' })] }],
+    scenes: [{ id: 'scene-1', shots: [shot('shot-1'), shot('shot-2', { visualConcept: 'How EUV works', assetIntent: 'data', mediaPreference: 'auto', entities: [], searchConcepts: [], evidenceRequirement: 'preferred' })] }],
   }],
 };
 
@@ -26,7 +26,7 @@ test('every canonical shot produces one validated provider-independent request',
   AssetRequestListSchema.parse(requests);
   assert.deepEqual(requests.map((request) => request.storyboardShotId), ['shot-1', 'shot-2']);
   assert.equal(requests[0].sceneId, 'scene-1');
-  assert.equal(requests[1].preferredSource, 'procedural');
+  assert.equal(requests[1].preferredSource, 'auto');
 });
 
 test('specific entity-product request preserves object semantics and exclusions', () => {
@@ -75,7 +75,7 @@ test('resume-time planning removes stale procedural fallback decisions', () => {
 test('provider adapter normalizes source-specific results into AssetCandidate', async () => {
   const provider = createProvider({
     id: 'fixture-provider',
-    supports: (request) => request.preferredSource === 'image',
+    supports: (request) => ['image', 'auto'].includes(request.preferredSource),
     search: async () => [{ type: 'image', url: 'https://example.test/asml.jpg', width: 1600, height: 900, tier: 'verified', label: 'ASML EUV system' }],
   });
   const request = planAssetRequests(storyboard)[0];
@@ -87,18 +87,18 @@ test('provider adapter normalizes source-specific results into AssetCandidate', 
   AssetCandidateSchema.parse(result.candidates[0]);
 });
 
-test('provider routing honors supports and never routes procedural shots', async () => {
+test('provider routing sends every authored shot through real-media providers', async () => {
   let calls = 0;
   const provider = createProvider({
     id: 'images-only',
-    supports: (request) => request.preferredSource === 'image',
+    supports: (request) => ['image', 'auto'].includes(request.preferredSource),
     search: async () => { calls++; return []; },
   });
-  const [, procedural] = planAssetRequests(storyboard);
-  const result = await searchAssetProviders(procedural, [provider]);
-  assert.deepEqual(result.providerIds, []);
+  const [, mediaRequest] = planAssetRequests(storyboard);
+  const result = await searchAssetProviders(mediaRequest, [provider]);
+  assert.deepEqual(result.providerIds, ['images-only']);
   assert.equal(result.candidates.length, 0);
-  assert.equal(calls, 0);
+  assert.equal(calls, 1);
 });
 
 test('meditation atmosphere requires authentic native-motion video', () => {

@@ -9,8 +9,6 @@ export * from './visualCoveragePlan.schema.js';
 export * from './sceneComposition.schema.js';
 export * from './solvedScene.schema.js';
 export * from './motionPlan.schema.js';
-export * from './comparisonSpec.schema.js';
-export * from './chartSpec.schema.js';
 export * from './mediaSceneSpec.schema.js';
 export * from './editorialVisualBeat.schema.js';
 export * from './mediaShotPlan.schema.js';

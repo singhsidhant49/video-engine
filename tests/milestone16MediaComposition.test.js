@@ -57,9 +57,9 @@ test('caption collision is solved by alternate caption geometry', () => {
 test('camera path is explicit, subtle, and swept during preflight', () => {
   const result = compile({ cameraMove: 'subtlePush' });
   assert.equal(result.mediaSceneSpec.cameraIntent, 'SUBTLE_PUSH');
-  assert.equal(result.solvedScene.cameraPaths.media_primary.end.scale, 1.06);
+  assert.equal(result.solvedScene.cameraPaths.media_primary.end.scale, 1.04);
   assert.ok(result.solvedScene.cameraPaths.media_primary.end.scale - result.solvedScene.cameraPaths.media_primary.start.scale >= 0.03);
-  assert.ok(result.solvedScene.cameraPaths.media_primary.end.scale - result.solvedScene.cameraPaths.media_primary.start.scale <= 0.08);
+  assert.ok(result.solvedScene.cameraPaths.media_primary.end.scale - result.solvedScene.cameraPaths.media_primary.start.scale <= 0.0401);
   assert.ok(result.motionPlan.tracks.some((track) => track.property === 'cameraScale'));
   assert.ok(result.preflight.sweptBounds.media_primary);
   assert.equal(result.preflight.issues.some((issue) => issue.code === 'insufficient_final_hold'), false);

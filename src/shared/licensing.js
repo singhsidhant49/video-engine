@@ -48,6 +48,9 @@ export function licenseAllowed(license, policy = process.env.LICENSE_POLICY || '
   if (!license?.name && !license?.license_name) return { ok: false, why: 'licence unknown' };
 
   const n = (license.license_name || license.name).toLowerCase();
+  if (policy === 'editorial' && (/brave search|search result|editorial/.test(n) || license.verification_status === 'discovery_only' || license.verification_status === 'editorial_only')) {
+    return { ok: true, status: 'editorial_only', commercial: false };
+  }
   if (license.verification_status === 'discovery_only' || license.commercial_use === 'unknown' || /brave search|search result/.test(n)) {
     return { ok: false, why: 'discovery result has no verified asset licence' };
   }

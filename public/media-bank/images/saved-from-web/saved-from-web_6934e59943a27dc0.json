@@ -1,0 +1,74 @@
+{
+  "id": "saved-from-web_6934e59943a27dc0",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Alexander Fleming",
+  "path": "images/saved-from-web/saved-from-web_6934e59943a27dc0.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1831,
+  "height": 2600,
+  "aspectRatio": 0.7042,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "alexander",
+    "fleming",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "alexander",
+    "fleming",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Alexander Fleming"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Alexander Fleming",
+    "savedAt": "2026-11-02T10:14:21.046Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Official photographer",
+    "creator": "Official photographer",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-11-02T09:00:07.945Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Synthetic_Production_of_Penicillin_TR1468.jpg"
+  }
+}

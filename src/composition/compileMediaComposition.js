@@ -1,5 +1,5 @@
 import { createSceneComposition } from './sceneComposition.js';
-import { phrasesFromAlignedWords } from './compileProcessComposition.js';
+import { phrasesFromAlignedWords } from './alignedPhrases.js';
 
 function element({ id, kind, role, importance, content, parentId = null, style = {}, binding = null, maxLines }) {
   return { id, kind, semanticRole: role, importance, content, intrinsic: {}, constraints: { parentId, protected: ['media', 'text', 'annotation'].includes(kind), ...(maxLines ? { maxLines } : {}) }, styleTokenRefs: style, semanticBinding: binding };

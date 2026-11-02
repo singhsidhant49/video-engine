@@ -13,6 +13,7 @@ import { VideoAssetMemory } from '../assets/videoAssetMemory.js';
 import { inspectVisualCandidate } from '../assets/visualInspectionService.js';
 import { judgeAssetCandidate } from '../assets/visualEditorialJudge.js';
 import { selectVideoWindow } from '../assets/videoWindowSelector.js';
+import { getContentVisualProfile } from '../config/contentVisualProfiles.js';
 
 async function computeFileSha256(filePath) {
   try {
@@ -127,9 +128,6 @@ const acceptable = (item) => item.score.qualityRank >= 2 && item.score.resolutio
 
 async function gather(request, providers) {
   const context = analyzeAssetRequest(request);
-  if (request.preferredSource === 'procedural') {
-    return { request, context, candidates: [], providerCalls: [], resolutionStatus: 'procedural' };
-  }
   if (request.preferredSource === 'generated') {
     return { request, context, candidates: [], providerCalls: [], resolutionStatus: 'unresolved', failureReason: 'generated_provider_disabled' };
   }
@@ -146,8 +144,11 @@ async function gather(request, providers) {
       seen.add(key);
       candidates.push(candidate);
     }
+    const licensePolicy = request.contentType === 'documentary'
+      ? (process.env.DOCUMENTARY_LICENSE_POLICY || 'editorial')
+      : (process.env.LICENSE_POLICY || 'commercial');
     const scored = candidates
-      .filter((candidate) => licenseAllowed(candidate.license).ok)
+      .filter((candidate) => licenseAllowed(candidate.license, licensePolicy).ok)
       .map((candidate) => ({ candidate, score: scoreAssetCandidate(candidate, request, context) }));
     const threshold = context.specificity >= 0.65 ? 3 : 2;
     if (hasReliableSearchResult(scored, threshold)) break;
@@ -165,8 +166,11 @@ export function hasReliableSearchResult(scored, threshold) {
 }
 
 function scoredCandidates(pool, memory, usedIdentities) {
+  const licensePolicy = pool.request?.contentType === 'documentary'
+    ? (process.env.DOCUMENTARY_LICENSE_POLICY || 'editorial')
+    : (process.env.LICENSE_POLICY || 'commercial');
   return pool.candidates.map((candidate) => {
-    const verdict = licenseAllowed(candidate.license);
+    const verdict = licenseAllowed(candidate.license, licensePolicy);
     const score = scoreAssetCandidate(candidate, pool.request, pool.context, memory);
     const identity = candidate.sourceUrl || candidate.localPath || candidate.id;
     if (!verdict.ok) {
@@ -193,10 +197,18 @@ function scoredCandidates(pool, memory, usedIdentities) {
  * materialization budget. Search metadata can look excellent even when every
  * URL returned by one provider is hotlink-blocked or not an image.
  */
-export function buildMaterializationQueue(ranked, maxAttempts = 16) {
+export function buildMaterializationQueue(ranked, maxAttempts = 10) {
   const viable = ranked.filter(acceptable);
   const queue = viable.slice(0, 4);
   const represented = new Set(queue.map((item) => item.candidate.providerId));
+
+  const hasVideo = queue.some((item) => item.candidate.type === 'video');
+  if (!hasVideo) {
+    const topVideo = viable.find((item) => item.candidate.type === 'video');
+    if (topVideo && !queue.includes(topVideo)) {
+      queue.splice(Math.min(1, queue.length), 0, topVideo);
+    }
+  }
 
   for (const item of viable) {
     if (queue.length >= maxAttempts) break;
@@ -343,7 +355,7 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
   let clichePenaltyCount = 0;
 
   const queryStageUsage = { EXACT: 0, SPECIFIC_VARIANT: 0, ENTITY_SUBJECT: 0, CONCEPTUAL_FALLBACK: 0 };
-  const mediaDistribution = { image: 0, video: 0, procedural: 0 };
+  const mediaDistribution = { image: 0, video: 0 };
   const providerDistribution = {};
   const providerCandidateCounts = {};
   let providerCalls = 0;
@@ -374,8 +386,6 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
       }
       mediaDistribution[sel.mediaType] = (mediaDistribution[sel.mediaType] || 0) + 1;
       providerDistribution[sel.provider] = (providerDistribution[sel.provider] || 0) + 1;
-    } else if (report.resolutionStatus === 'procedural') {
-      mediaDistribution.procedural++;
     }
 
     for (const rej of report.rejectedTopCandidates || []) {
@@ -423,7 +433,7 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
   };
 }
 
-/** Reuse approved media instead of introducing a procedural composition. */
+/** Reuse approved media when a request cannot produce another acceptable asset. */
 export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequests, sceneIds = [], format = 'landscape' }) {
   const sceneIndex = new Map(sceneIds.map((id, index) => [id, index]));
   const requestByShot = new Map(assetRequests.map((request) => [request.storyboardShotId, request]));
@@ -440,6 +450,8 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
   }
   if (!approved.length) return {};
 
+  const maxReuseCount = Math.max(3, Math.ceil(assetRequests.length / Math.max(1, approved.length)) + 1);
+
   const fallbacks = {};
   for (const report of requestReports) {
     if (!['unresolved', 'weak'].includes(report.resolutionStatus)) continue;
@@ -447,7 +459,7 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
     const target = assets[report.sceneId];
     if (!request || !target) continue;
     const targetIndex = sceneIndex.get(report.sceneId) ?? Number.MAX_SAFE_INTEGER;
-    const evaluatedSources = approved.filter((source) => (reuseCounts.get(source.asset.src) || 0) < 2).map((source) => {
+    const evaluatedSources = approved.filter((source) => (reuseCounts.get(source.asset.src) || 0) < maxReuseCount).map((source) => {
       const judgment = judgeAssetCandidate({
         candidate: {
           ...source.asset,
@@ -470,6 +482,9 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
       return { source, judgment, valid };
     }).filter((item) => item.valid)
       .sort((a, b) => {
+        const aCount = reuseCounts.get(a.source.asset.src) || 0;
+        const bCount = reuseCounts.get(b.source.asset.src) || 0;
+        if (aCount !== bCount) return aCount - bCount;
         const aAdjacent = Math.abs(a.source.index - targetIndex) <= 1 ? 1 : 0;
         const bAdjacent = Math.abs(b.source.index - targetIndex) <= 1 ? 1 : 0;
         if (aAdjacent !== bAdjacent) return aAdjacent - bAdjacent;
@@ -477,6 +492,9 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
           || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex);
       });
     const evaluated = evaluatedSources[0];
+    // Never fill an unresolved production shot with the nearest unrelated
+    // asset. Missing coverage must remain unresolved so production fails with
+    // an actionable media error instead of publishing misleading imagery.
     if (!evaluated) continue;
     const { source, judgment } = evaluated;
 
@@ -497,7 +515,7 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
     };
     target.byShot[report.storyboardShotId] = reusedAsset;
     reuseCounts.set(reusedAsset.src, (reuseCounts.get(reusedAsset.src) || 0) + 1);
-    if (!target.primary) target.primary = reusedAsset;
+    if (!target.primary || target.primary.unresolved) target.primary = reusedAsset;
     else if (!target.alternates.some((asset) => asset?.src === reusedAsset.src)) target.alternates.push(reusedAsset);
 
     report.resolutionStatus = 'media_reuse';
@@ -556,28 +574,25 @@ export async function directAssets(plan, specs, {
   const visualInspections = {};
   const videoWindowSelections = {};
   const formatFitnessEvaluations = {};
-  const representationFallbacks = {};
+
+  const totalPlannedDuration = assetRequests.reduce((sum, r) => sum + (Number(r.constraints?.durationHint) || 3.5), 0) || 45;
+  const targetContentType = assetRequests[0]?.contentType || 'explainer';
+  const targetProfile = getContentVisualProfile(targetContentType);
+  const minVideoShare = targetProfile?.minVideoShare || 0.10;
 
   for (const pool of pools) {
     const { request, context } = pool;
-    if (pool.resolutionStatus === 'procedural') {
-      requestReports.push({
-        requestId: request.id,
-        storyboardShotId: request.storyboardShotId,
-        sceneId: request.sceneId,
-        concept: request.concept,
-        requestClass: context.requestClass,
-        specificity: context.specificity,
-        requestQualityWarnings: context.requestQualityWarnings,
-        resolutionStatus: 'procedural',
-        providerCalls: [],
-        selectedCandidate: null,
-        rejectedTopCandidates: [],
-      });
-      continue;
-    }
+    console.log(`   [Shot ${request.storyboardShotId}] resolving "${request.concept}" (${request.preferredMediaType || 'any'})...`);
     const fallbackAuditTraces = [];
     const ranked = scoredCandidates(pool, memory, usedIdentities);
+
+    const currentVideoDuration = assetRequests
+      .filter((r) => assets[r.sceneId]?.byShot[r.storyboardShotId]?.type === 'video')
+      .reduce((sum, r) => sum + (Number(r.constraints?.durationHint) || 3.5), 0);
+    const videoShareDeficit = (currentVideoDuration / totalPlannedDuration) < (minVideoShare - 0.001);
+    const preferVideo = request.nativeMotionRequired
+      || request.preferredMediaType === 'video'
+      || (videoShareDeficit && request.preferredMediaType !== 'image');
 
     // Search metadata ranks the download shortlist only. It is not semantic proof.
     const viable = buildMaterializationQueue(ranked);
@@ -594,7 +609,8 @@ export async function directAssets(plan, specs, {
           materializationRejects.push({ candidateId: item.candidate.id, reason: judgment.rejectReasons.join('; ') });
         }
       } else materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
-      if (materialized.length >= 4) break;
+      const hasApprovedVideo = materialized.some((m) => m.candidate.type === 'video');
+      if (materialized.length >= (preferVideo && !hasApprovedVideo ? 3 : 2)) break;
     }
 
     if (!materialized.length) {
@@ -668,9 +684,8 @@ export async function directAssets(plan, specs, {
         const isSameConcept = sel.concept?.toLowerCase() === request.concept?.toLowerCase();
         return (isSameEntity || isSameConcept) && sel.usageCount < 2;
       });
-      if (!matchingPrevious) {
-        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
-      }
+      // Cross-concept reuse is forbidden. Only the same entity/concept may be
+      // reframed, and the editorial judge still revalidates it for this shot.
       if (matchingPrevious && matchingPrevious.candidate) {
         const reusedCandidate = {
           ...matchingPrevious.candidate,
@@ -707,6 +722,10 @@ export async function directAssets(plan, specs, {
     // Enforce Gate 2: only select candidates that passed Gate 2!
     const validApproved = materialized.filter((item) => item.editorialJudgment && item.editorialJudgment.accepted && !item.editorialJudgment.rejected);
     let selected = validApproved[0] || null;
+    if (preferVideo && validApproved.length > 1) {
+      const videoCandidate = validApproved.find((item) => item.candidate.type === 'video');
+      if (videoCandidate) selected = videoCandidate;
+    }
 
     // Step 6 of Unresolved Media Repair Ladder: Deliberate asset reuse if search candidates were unapproved
     if (!selected && memory.selections?.length > 0) {
@@ -845,6 +864,7 @@ export async function directAssets(plan, specs, {
           candidate: selected.candidate,
         });
       }
+      console.log(`   ✓ [Shot ${request.storyboardShotId}] selected ${selected.asset.type}: ${selected.asset.label || selected.asset.src}`);
     } else if (publishMode !== 'PRODUCTION_RENDER' && unresolvedMediaMode === 'ALLOW_DEV_PLACEHOLDER') {
       // Step 8: Unresolved media placeholder & audit tracking
       // Let publishability quality gates (timelineQc.js / mediaVisualQualityGate.js) enforce production policy
@@ -883,29 +903,13 @@ export async function directAssets(plan, specs, {
       const sceneAssets = assets[request.sceneId];
       sceneAssets.byShot[request.storyboardShotId] = unresolvedAsset;
       if (!sceneAssets.primary) sceneAssets.primary = unresolvedAsset;
+    } else {
+      console.log(`   ✗ [Shot ${request.storyboardShotId}] unresolved (0 approved candidates)`);
     }
 
-    if (!selected && publishMode === 'PRODUCTION_RENDER') {
-      const proceduralFallback = (request.representationDecision?.fallbackRepresentations || [])
-        .find((representation) => !['media', 'image', 'video'].includes(representation));
-      if (proceduralFallback) {
-        representationFallbacks[request.storyboardShotId] = {
-          from: request.representationDecision?.selectedRepresentation || 'media',
-          to: proceduralFallback,
-          reason: 'No licensed, pixel-inspected media candidate passed production semantic gates.',
-        };
-        fallbackAuditTraces.push({
-          fallbackType: 'representation_escalation',
-          whyTriggered: 'Media candidate set exhausted after materialization and semantic inspection',
-          candidateBefore: ranked[0]?.candidate?.id || null,
-          candidateAfter: null,
-          representationAfter: proceduralFallback,
-        });
-      }
-    }
     const top = ranked[0];
     const resolutionStatus = selected?.score.resolutionStatus
-      || (representationFallbacks[request.storyboardShotId] ? 'procedural_fallback' : (top?.score.qualityRank === 1 ? 'weak' : 'unresolved'));
+      || (top?.score.qualityRank === 1 ? 'weak' : 'unresolved');
 
     // Query Quality Feedback & Yield Tracking (Sections 32, 33)
     const poolJudgments = pool.candidates.map((c) => editorialAssetJudgments[`${request.storyboardShotId}:${c.id}`]).filter(Boolean);
@@ -1057,7 +1061,6 @@ export async function directAssets(plan, specs, {
     visualInspections,
     videoWindowSelections,
     formatFitnessEvaluations,
-    representationFallbacks,
     mediaReuseFallbacks,
   };
 }

@@ -266,7 +266,7 @@ test('media diagnostics classify native footage as video, not slideshow photogra
   assert.equal(diagnostics.consecutivePhotoCount, 1);
 });
 
-test('long-hold repair creates a traceable detail shot with complete coverage', () => {
+test('long-hold repair preserves continuous motion instead of restarting the same image', () => {
   const original = {
     id: 'shot_1', storyboardShotId: 'shot_1', sceneId: 'scene_1', sectionId: 'section_1',
     from: 0, durationInFrames: 300, family: 'image', variant: 'full', layout: 'image:full',
@@ -276,10 +276,12 @@ test('long-hold repair creates a traceable detail shot with complete coverage', 
   const repaired = applySceneRepairs({ fps: 30, clips: [{ id: 'c1', sceneId: 'scene_1', from: 0, durationInFrames: 300, shots: [original] }] }, [
     { sceneId: 'scene_1', action: 'split_long_hold' },
   ]);
-  assert.equal(repaired.clips[0].shots.length, 2);
-  assert.equal(repaired.clips[0].shots[0].durationInFrames + repaired.clips[0].shots[1].durationInFrames, 300);
-  assert.equal(repaired.clips[0].shots[1].asset.assetIdentityChain.timelineAssetId, repaired.clips[0].shots[1].storyboardShotId);
-  assert.equal(Object.hasOwn(repaired.clips[0].shots[1], 'timelineStartFrame'), false);
+  assert.equal(repaired.clips[0].shots.length, 1);
+  assert.equal(repaired.clips[0].shots[0].durationInFrames, 300);
+  assert.equal(repaired.clips[0].shots[0].presentation.cameraMove, 'subtlePush');
+  assert.equal(repaired.clips[0].shots[0].imageBehavior, 'SUBTLE_PUSH');
+  const rereview = reviewVisualPlan(repaired);
+  assert.equal(rereview.issues.some((issue) => issue.type === 'single_shot_hold'), false);
 });
 
 test('long-hold critic does not create cuts that violate the production pacing floor', () => {
@@ -296,7 +298,7 @@ test('long-hold critic does not create cuts that violate the production pacing f
   const review = reviewVisualPlan(timeline);
   assert.equal(review.sceneRepairs.length, 0);
   assert.equal(review.issues[0].type, 'paced_long_hold');
-  assert.match(review.issues[0].message, /splitting it would violate/);
+  assert.match(review.issues[0].message, /continuous subtlePush/);
 });
 
 // =========================================================================

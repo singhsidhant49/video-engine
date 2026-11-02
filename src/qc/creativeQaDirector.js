@@ -4,7 +4,7 @@
  * Evaluates the timeline holistically before rendering:
  * 1. Semantic relevance & domain appropriateness (e.g. flags software UI in psychology).
  * 2. Whole-video representation balance & fatigue (detects 3+ identical representations or layouts).
- * 3. Media vs. procedural quality trades (replaces weak generic stock with diagrams, or repetitive graphics with authentic B-roll).
+ * 3. Media quality trades (replaces weak or repetitive media with relevant alternatives).
  * 4. Composition QA (empty area ratio, meaningful content area, safe margins).
  * 5. Pacing, shot holds & micro-progression (shortens dead holds, adds progression to long shots, extends rushed graphics).
  * 6. Text fitting, safe areas, caption yielding, and hook/ending strength.
@@ -12,19 +12,6 @@
  * 
  * Executes bounded repairs in priority order (up to 2 passes maximum), preserving STRONG/GOOD shots.
  */
-
-import {
-  classifyInformationType,
-  synthesizeProceduralData,
-  INFORMATION_TYPES,
-  REPRESENTATIONS,
-} from '../storyboard/visualCoveragePlan.js';
-import {
-  evaluateDiagramQuality,
-  applyDiagramRepair,
-  DIAGRAM_REPAIR_ACTIONS,
-  DIAGRAM_QUALITY_STATE,
-} from '../diagrams/diagramQaDirector.js';
 
 export const SHOT_QUALITY_STATE = {
   STRONG: 'STRONG',
@@ -147,7 +134,6 @@ export function evaluateCreativeQa({
   const topicLower = topic.toLowerCase();
   const isPsychologyTopic = /\b(brain|gratification|psychology|impulse|behavior|dopamine|limbic|prefrontal)\b/i.test(topicLower);
   const isTechTopic = /\b(code|coding|software|agent|developer|api|repo|terminal|database|deadlock|transaction|concurrency|thread|mutex|sql)\b/i.test(topicLower);
-  const recentDiagramBackgrounds = [];
 
   const shotEvaluations = [];
   const repairsNeeded = [];
@@ -184,7 +170,8 @@ export function evaluateCreativeQa({
       repairCandidates.push({
         priority: REPAIR_PRIORITY.HARD_FAILURE,
         action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-        reason: 'Eliminate blank ground frame with topic-grounded procedural primitive',
+        targetFamily: 'image',
+        reason: 'Eliminate blank frame with topic-grounded media',
       });
     }
 
@@ -208,8 +195,8 @@ export function evaluateCreativeQa({
         repairCandidates.push({
           priority: REPAIR_PRIORITY.PERCEPTUAL_BLANKNESS,
           action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-          targetFamily: 'diagram',
-          reason: 'Replace nearly-empty screen with structured explanatory diagram',
+          targetFamily: 'image',
+          reason: 'Replan media search for the nearly-empty screen',
         });
       }
     }
@@ -247,10 +234,8 @@ export function evaluateCreativeQa({
         repairCandidates.push({
           priority: REPAIR_PRIORITY.SEMANTIC_MISMATCH,
           action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-          targetFamily: /timeline|history|year|date/i.test(sceneNarration) ? 'timeline'
-            : /versus|compare|choice|two/i.test(sceneNarration) ? 'compare'
-              : 'diagram',
-          reason: `Replace software ${shot.family} with domain-appropriate graphic in ${topic || 'non-technical'} video`,
+          targetFamily: 'image',
+          reason: `Replace software ${shot.family} with domain-appropriate media in ${topic || 'non-technical'} video`,
         });
       }
     } else if (isPsychologyTopic && shot.family === 'ui') {
@@ -261,13 +246,13 @@ export function evaluateCreativeQa({
       repairCandidates.push({
         priority: REPAIR_PRIORITY.SEMANTIC_MISMATCH,
         action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-        targetFamily: /compete|versus|choice|two/i.test(sceneNarration) ? 'compare' : 'diagram',
-        reason: 'Replace software repository UI with neural/behavioral diagram or comparison in psychology video',
+        targetFamily: 'image',
+        reason: 'Replace software repository UI with relevant behavioral footage',
       });
     }
 
     // 3. WHOLE-VIDEO REPRESENTATION FATIGUE
-    // Rule: Detect 3+ consecutive shots with identical procedural representation (e.g. CODE -> CODE -> CODE or DIAGRAM -> DIAGRAM -> DIAGRAM)
+    // Detect malformed imported timelines containing repeated unsupported families.
     // Authentic images and video footage do NOT suffer from representation fatigue in documentaries/explainers.
     const prevShot1 = allShots[i - 1];
     const prevShot2 = allShots[i - 2];
@@ -277,32 +262,12 @@ export function evaluateCreativeQa({
       severity = severity || ISSUE_SEVERITY.EDITORIAL;
       editorialWarningCount++;
 
-      // Suggest valid semantic alternatives based on narration context
-      let altFamily = 'diagram';
-      if (shot.family === 'code') {
-        if (/loop|step|cycle|read.*plan/i.test(sceneNarration)) altFamily = 'process';
-        else if (/file|search|context|repo/i.test(sceneNarration)) altFamily = 'ui';
-        else if (/compete|versus|different|human/i.test(sceneNarration)) altFamily = 'compare';
-        else altFamily = 'diagram';
-      } else if (shot.family === 'diagram') {
-        // Variety must not invent a comparison that the narration never makes.
-        // A causal/mechanistic beat can safely become a process; otherwise keep
-        // the diagram and let layout/background repair provide variation.
-        if (/\b(then|causes?|leads? to|results? in|wait|request|retry|flow|step|cycle|process|happen)\b/i.test(sceneNarration)) {
-          altFamily = 'process';
-        } else {
-          altFamily = null;
-        }
-      }
-
-      if (altFamily) {
-        repairCandidates.push({
-          priority: REPAIR_PRIORITY.REPRESENTATION_FATIGUE,
-          action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-          targetFamily: altFamily,
-          reason: `Break repetitive run of 3+ consecutive "${shot.family}" shots with semantic "${altFamily}"`,
-        });
-      }
+      repairCandidates.push({
+        priority: REPAIR_PRIORITY.REPRESENTATION_FATIGUE,
+        action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
+        targetFamily: 'image',
+        reason: `Replace repeated unsupported "${shot.family}" shots with relevant media`,
+      });
     }
 
     // Rule: Detect repetitive layout/variant inside same family (e.g. code:syntax -> code:syntax) if not already breaking family
@@ -337,13 +302,11 @@ export function evaluateCreativeQa({
             reason: `Replace low-scoring asset (${asset?.score || 0}) with higher-scoring alternate (${alternates[0].score})`,
           });
         } else {
-          const infoType = classifyInformationType({ narration: sceneNarration, visualConcept: shot.visualConcept });
-          const proceduralAlternative = ['code', 'ui', 'diagram', 'chart', 'compare', 'timeline'].includes(infoType) ? infoType : 'diagram';
           repairCandidates.push({
             priority: REPAIR_PRIORITY.SEMANTIC_MISMATCH,
-            action: REPAIR_ACTIONS.CHANGE_REPRESENTATION,
-            targetFamily: proceduralAlternative,
-            reason: `Replace generic stock photo with authentic procedural "${proceduralAlternative}"`,
+            action: REPAIR_ACTIONS.REPLAN_FALLBACK,
+            targetFamily: 'image',
+            reason: 'Search again for specific, authentic media instead of accepting generic stock',
           });
         }
       } else if (asset && asset.score && asset.score >= 80) {
@@ -377,44 +340,6 @@ export function evaluateCreativeQa({
         action: REPAIR_ACTIONS.EXTEND_HOLD,
         reason: `Extend cognitive graphic hold duration (${shotDurationSec.toFixed(1)}s is too fast to scan)`,
       });
-    }
-
-    // 6. DIAGRAM & INFORMATION-DESIGN QA (Milestone 13)
-    const isDiagramFamily = ['diagram', 'process', 'compare', 'timeline', 'list', 'chart'].includes(shot.family);
-    if (isDiagramFamily) {
-      const dEval = evaluateDiagramQuality(clip, {
-        format,
-        width: timeline.width || (format === 'shorts' ? 1080 : 1920),
-        height: timeline.height || (format === 'shorts' ? 1920 : 1080),
-        recentBackgrounds: recentDiagramBackgrounds,
-      });
-      if (dEval.backgroundMode) {
-        recentDiagramBackgrounds.push(dEval.backgroundMode);
-      }
-      for (const dIssue of dEval.issues) {
-        if (!issues.includes(dIssue)) {
-          issues.push(dIssue);
-        }
-      }
-      if (dEval.state === DIAGRAM_QUALITY_STATE.FAILED) {
-        state = SHOT_QUALITY_STATE.FAILED;
-        severity = ISSUE_SEVERITY.HARD;
-        hardFailureCount++;
-      } else if (dEval.state === DIAGRAM_QUALITY_STATE.WEAK) {
-        if (state !== SHOT_QUALITY_STATE.FAILED) state = SHOT_QUALITY_STATE.WEAK;
-        severity = severity || ISSUE_SEVERITY.EDITORIAL;
-        editorialWarningCount++;
-      }
-      for (const candidate of dEval.repairCandidates) {
-        repairCandidates.push({
-          priority: dEval.state === DIAGRAM_QUALITY_STATE.FAILED
-            ? REPAIR_PRIORITY.HARD_FAILURE
-            : candidate.action === DIAGRAM_REPAIR_ACTIONS.CHANGE_BACKGROUND
-              ? REPAIR_PRIORITY.STYLISTIC_REPETITION
-              : REPAIR_PRIORITY.TEXT_LAYOUT_PROBLEM,
-          ...candidate,
-        });
-      }
     }
 
     // 7. CAPTION YIELDING & READABILITY
@@ -591,44 +516,25 @@ export function applyCreativeRepairs(timeline, repairsNeeded = [], context = {})
       }
 
       case REPAIR_ACTIONS.CHANGE_REPRESENTATION: {
-        const targetFamily = candidate.targetFamily || 'diagram';
+        const targetFamily = 'image';
         shot.family = targetFamily;
-        shot.variant = targetFamily === 'image' ? (candidate.targetVariant || 'editorial')
-          : targetFamily === 'diagram' ? 'nodes'
-          : targetFamily === 'ui' ? 'workspace'
-          : targetFamily === 'compare' ? 'columns'
-          : 'default';
+        shot.variant = candidate.targetVariant || 'editorial';
         clip.family = targetFamily;
         clip.variant = shot.variant;
 
-        if (targetFamily === 'image') {
-          const assetToUse = candidate.targetAsset || shot.asset || clip.asset;
-          if (assetToUse) {
-            shot.asset = assetToUse;
-            clip.asset = assetToUse;
-          }
-          if (shot.presentation) {
-            shot.presentation.family = 'image';
-            shot.presentation.variant = shot.variant;
-            shot.presentation.layout = `image:${shot.variant}`;
-            shot.presentation.overlayMode = 'secondary';
-          }
-          // Never carry code/UI/diagram payload into an image renderer.
-          shot.overlay = {};
-          clip.overlay = {};
-        } else {
-          // Populate semantic procedural data so it renders immediately
-          const synth = synthesizeProceduralData({ narration: clip.narration, data: clip.overlay }, targetFamily);
-          shot.overlay = { ...synth, at: 4 };
-          clip.overlay = shot.overlay;
-
-          if (shot.presentation) {
-            shot.presentation.family = targetFamily;
-            shot.presentation.variant = shot.variant;
-            shot.presentation.layout = `${targetFamily}:${shot.variant}`;
-            shot.presentation.overlayMode = 'primary';
-          }
+        const assetToUse = candidate.targetAsset || shot.asset || clip.asset;
+        if (assetToUse) {
+          shot.asset = assetToUse;
+          clip.asset = assetToUse;
         }
+        if (shot.presentation) {
+          shot.presentation.family = 'image';
+          shot.presentation.variant = shot.variant;
+          shot.presentation.layout = `image:${shot.variant}`;
+          shot.presentation.overlayMode = 'secondary';
+        }
+        shot.overlay = {};
+        clip.overlay = {};
 
         appliedRepairs.push({
           shotId: item.shotId,
@@ -736,26 +642,6 @@ export function applyCreativeRepairs(timeline, repairsNeeded = [], context = {})
           reason: candidate.reason,
           before: { durationInFrames: shot.durationInFrames - extraFrames },
           after: { durationInFrames: shot.durationInFrames },
-        });
-        break;
-      }
-
-      case DIAGRAM_REPAIR_ACTIONS.REDUCE_NODES:
-      case DIAGRAM_REPAIR_ACTIONS.STACK_VERTICAL:
-      case DIAGRAM_REPAIR_ACTIONS.INCREASE_LABEL_SIZE:
-      case DIAGRAM_REPAIR_ACTIONS.REMOVE_METADATA:
-      case DIAGRAM_REPAIR_ACTIONS.CHANGE_BACKGROUND:
-      case DIAGRAM_REPAIR_ACTIONS.CHANGE_GRAMMAR:
-      case DIAGRAM_REPAIR_ACTIONS.SIMPLIFY_DIAGRAM: {
-        applyDiagramRepair(clip, candidate, { format: context.format || 'landscape' });
-        shot.overlay = clip.overlay;
-        appliedRepairs.push({
-          shotId: item.shotId,
-          sceneId: item.sceneId,
-          action: candidate.action,
-          reason: candidate.reason,
-          before: beforeState,
-          after: { overlay: clip.overlay },
         });
         break;
       }

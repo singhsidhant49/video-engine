@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_16857459a14b858a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a scientist writing notes in a notebook with a blue pen on a wooden desk.",
+  "path": "images/saved-from-web/saved-from-web_16857459a14b858a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "scientist",
+    "writing",
+    "note",
+    "notebook",
+    "blue",
+    "pen",
+    "wooden",
+    "desk",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "notes",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "scientist",
+    "writing",
+    "note",
+    "notebook",
+    "blue",
+    "pen",
+    "wooden",
+    "desk",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "notes",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a scientist writing notes in a notebook with a blue pen on a wooden desk."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "scientist lab notebook penicillin",
+    "savedAt": "2026-11-02T09:23:25.567Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "olia danilevich",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scientist-making-notes-8531357/"
+  }
+}

@@ -37,7 +37,7 @@ export const CreateVideoRequestSchema = z.object({
     voice: z.string().trim().regex(/^[a-zA-Z0-9_-]{1,80}$/).optional(),
     music: z.string().trim().max(120).optional(),
   }).strict().default({}),
-  subtitles: z.object({ enabled: z.literal(true).default(true) }).strict().default({ enabled: true }),
+  subtitles: z.object({ enabled: z.boolean().default(true) }).strict().default({ enabled: true }),
   metadata: z.record(z.string().max(100), z.union([z.string().max(500), z.number(), z.boolean(), z.null()])).optional(),
 }).strict();
 
@@ -59,7 +59,7 @@ export function toPipelineBrief(request) {
       audience: request.creative.audience,
       tone: request.creative.tone,
       language: 'en',
-      captions: 'subtitles',
+      captions: request.subtitles.enabled ? 'subtitles' : 'none',
       music: request.audio.music,
     },
   };

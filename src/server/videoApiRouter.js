@@ -14,24 +14,56 @@ export function createApiAuth({ apiKeys = [], production = false } = {}) {
     'replace-with-a-long-random-api-key',
     'replace-with-your-api-key',
   ]);
-  if (production && apiKeys.length === 0) throw new Error('VIDEO_API_KEYS is required when NODE_ENV=production');
-  if (production && apiKeys.some((key) => unsafeKeys.has(key.toLowerCase()) || key.length < 32)) {
+  const credentials = apiKeys.map((entry) => {
+    const value = String(entry).trim();
+    const separator = value.indexOf(':');
+    const account = separator > 0 ? value.slice(0, separator) : '';
+    const named = /^[a-zA-Z0-9_-]{3,64}$/.test(account);
+    const key = named ? value.slice(separator + 1) : value;
+    return { key, ownerId: named ? `acct_${account}` : ownerForKey(key) };
+  });
+  if (production && credentials.length === 0) throw new Error('VIDEO_API_KEYS is required when NODE_ENV=production');
+  if (production && credentials.some(({ key }) => unsafeKeys.has(key.toLowerCase()) || key.length < 32)) {
     throw new Error('VIDEO_API_KEYS must contain only non-placeholder keys of at least 32 characters in production');
   }
-  const allowed = apiKeys.map((key) => ({ key, ownerId: ownerForKey(key) }));
+  // Named entries (`client-id:secret`) decouple tenant identity from a key so
+  // credentials can rotate without orphaning that client's jobs.
+  const allowed = credentials;
   return (req, res, next) => {
     if (allowed.length === 0) {
       req.ownerId = 'acct_local';
       return next();
     }
     const authorization = req.get('authorization') || '';
+    // Credentials in URLs leak through browser history, reverse-proxy logs,
+    // analytics and referrer headers. Production API keys are header-only.
     const supplied = authorization.startsWith('Bearer ')
       ? authorization.slice(7).trim()
-      : (req.query?.token ? String(req.query.token).trim() : '');
+      : '';
     const suppliedHash = crypto.createHash('sha256').update(supplied).digest();
     const match = allowed.find(({ key }) => crypto.timingSafeEqual(suppliedHash, crypto.createHash('sha256').update(key).digest()));
     if (!match) return res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'A valid bearer API key is required' } });
     req.ownerId = match.ownerId;
+    return next();
+  };
+}
+
+export function createApiRateLimit({ windowMs = 60_000, max = 120 } = {}) {
+  const buckets = new Map();
+  return (req, res, next) => {
+    const key = req.ownerId || req.ip || 'anonymous';
+    const now = Date.now();
+    let bucket = buckets.get(key);
+    if (!bucket || now - bucket.startedAt >= windowMs) bucket = { startedAt: now, count: 0 };
+    bucket.count++;
+    buckets.set(key, bucket);
+    res.set('ratelimit-limit', String(max));
+    res.set('ratelimit-remaining', String(Math.max(0, max - bucket.count)));
+    if (bucket.count > max) {
+      res.set('retry-after', String(Math.max(1, Math.ceil((windowMs - (now - bucket.startedAt)) / 1000))));
+      return res.status(429).json({ error: { code: 'RATE_LIMITED', message: 'Too many API requests' } });
+    }
+    if (buckets.size > 10_000) for (const [id, value] of buckets) if (now - value.startedAt >= windowMs) buckets.delete(id);
     return next();
   };
 }
@@ -46,6 +78,10 @@ function operationView(operation) {
 
 export function createVideoApiRouter({ service }) {
   const router = express.Router();
+  router.param('id', (req, res, next, id) => {
+    if (!/^(?:vid|del)_[a-zA-Z0-9_-]{3,160}$/.test(id)) return res.status(400).json({ error: { code: 'INVALID_ID', message: 'Invalid resource ID' } });
+    return next();
+  });
 
   router.post('/videos', async (req, res, next) => {
     try {
@@ -60,7 +96,14 @@ export function createVideoApiRouter({ service }) {
   });
 
   router.get('/videos', async (req, res, next) => {
-    try { res.json({ videos: await service.list(req.ownerId) }); }
+    try {
+      const limit = Math.min(100, Math.max(1, Number.parseInt(String(req.query.limit || '50'), 10) || 50));
+      const cursor = req.query.cursor ? String(req.query.cursor) : null;
+      const page = typeof service.listPage === 'function'
+        ? await service.listPage(req.ownerId, { limit, cursor })
+        : { videos: await service.list(req.ownerId), nextCursor: null };
+      res.json(page);
+    }
     catch (error) { next(error); }
   });
 
@@ -81,6 +124,16 @@ export function createVideoApiRouter({ service }) {
 
   router.get('/videos/:id/thumbnail', async (req, res, next) => {
     try { res.sendFile(await service.thumbnail(req.ownerId, req.params.id)); }
+    catch (error) { next(error); }
+  });
+
+  router.get('/videos/:id/manifest', async (req, res, next) => {
+    try { res.sendFile(await service.deliveryArtifact(req.ownerId, req.params.id, 'manifest')); }
+    catch (error) { next(error); }
+  });
+
+  router.get('/videos/:id/credits', async (req, res, next) => {
+    try { res.sendFile(await service.deliveryArtifact(req.ownerId, req.params.id, 'credits')); }
     catch (error) { next(error); }
   });
 

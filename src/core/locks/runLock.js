@@ -11,6 +11,19 @@ import os from 'node:os';
 
 const LOCK_FILENAME = '.lock';
 
+function lockLease(runDir, lockPath) {
+  const heartbeat = setInterval(() => {
+    const now = new Date();
+    void fs.utimes(lockPath, now, now).catch(() => {});
+  }, 60_000);
+  heartbeat.unref?.();
+  return {
+    lockPath,
+    pid: process.pid,
+    release: async () => { clearInterval(heartbeat); await releaseRunLock(runDir); },
+  };
+}
+
 /**
  * Checks if a given PID is currently active as an independent process.
  */
@@ -67,7 +80,7 @@ export async function acquireRunLock(runDir, { force = false } = {}) {
     } else {
       // If locked by our own process, we re-enter safely
       if (existing.pid === process.pid && (!existing.host || existing.host === currentHost)) {
-        return { lockPath, pid: process.pid, release: () => releaseRunLock(runDir) };
+        return lockLease(runDir, lockPath);
       }
 
       // Container PIDs are commonly reused after a worker is recreated. A PID
@@ -106,8 +119,7 @@ export async function acquireRunLock(runDir, { force = false } = {}) {
     await handle?.close().catch(() => {});
   }
 
-  const release = () => releaseRunLock(runDir);
-  return { lockPath, pid: process.pid, release };
+  return lockLease(runDir, lockPath);
 }
 
 /**

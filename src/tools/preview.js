@@ -8,6 +8,30 @@ import { classifyRenderedMotion, renderedMotionThreshold } from '../qc/renderQc.
 
 export const isBlankRenderedFrame = ({ mean, deviation }) => mean < 3 && deviation < 1.5;
 
+const runBundles = new Map();
+
+/** Reuse one immutable Remotion bundle across previews and the final render. */
+export function getRunBundle(runDir) {
+  const key = path.resolve(runDir);
+  if (!runBundles.has(key)) {
+    const pending = bundle({
+      entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
+      publicDir: path.join(runDir, 'public'),
+      ignoreRegisterRootWarning: true,
+      webpackOverride: (webpackConfig) => ({
+        ...webpackConfig,
+        cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
+      }),
+    }).catch((error) => {
+      runBundles.delete(key);
+      throw error;
+    });
+    runBundles.set(key, pending);
+    if (runBundles.size > 8) runBundles.delete(runBundles.keys().next().value);
+  }
+  return runBundles.get(key);
+}
+
 /**
  * Render stills from a run's timeline.json at relative points of every clip
  * and tile them into <run>/preview/contact.png. Returns the contact sheet path.
@@ -25,28 +49,25 @@ export async function renderContactSheet(runDir, { scale = 0.4, ats = [0.2, 0.85
       await fs.rm(path.join(outDir, existing), { force: true });
     }
   }
-  const serveUrl = await bundle({
-    entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
-    publicDir: path.join(runDir, 'public'),
-    ignoreRegisterRootWarning: true,
-    webpackOverride: (webpackConfig) => ({
-      ...webpackConfig,
-      cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
-    }),
-  });
+  const serveUrl = await getRunBundle(runDir);
   const id = timeline.format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer';
   const composition = await selectComposition({ serveUrl, id, inputProps: { timeline } });
 
   const files = [];
+  const renderTasks = [];
   for (const c of timeline.clips) {
     const start = c.from + c.cutAt;
     const end = c.from + c.durationInFrames - (c.exit.frames || 0);
     for (const a of ats) {
       const frame = Math.min(timeline.durationInFrames - 1, Math.round(start + (end - start) * a));
       const file = path.join(outDir, `${prefix}_${String(frame).padStart(5, '0')}_${c.id}-${c.family}-${c.variant || ''}.png`);
-      await renderStill({ composition, serveUrl, inputProps: { timeline }, frame, output: file, scale });
       files.push(file);
+      renderTasks.push({ frame, output: file });
     }
+  }
+  for (let index = 0; index < renderTasks.length; index += 2) {
+    await Promise.all(renderTasks.slice(index, index + 2).map(({ frame, output }) =>
+      renderStill({ composition, serveUrl, inputProps: { timeline }, frame, output, scale })));
   }
   const meta = await sharp(files[0]).metadata();
   const n = cols ? Math.min(cols, files.length) : (timeline.format === 'shorts' ? Math.min(8, files.length) : Math.min(4, files.length));
@@ -205,10 +226,18 @@ export async function verifyRenderedContactFrames(runDir, { timeline, prefix = '
     differences.push(pixelDiff(samples[0].motionPixels, samples.at(-1).motionPixels));
     const nativeMotion = (clip.shots || []).some((shot) => shot.asset?.type === 'video');
     const motionPlans = (clip.shots || []).map((shot) => timeline.motionPlans?.[shot.motionPlanId]).filter(Boolean);
+    const clipDuration = clip.durationInFrames || 0;
+    const firstSampleFrame = Math.round(clipDuration * 0.18);
     const expectedMotion = nativeMotion || motionPlans.some((plan) => {
-      return (plan?.tracks || []).some((track) =>
-        ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
-        && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
+      return (plan?.tracks || []).some((track) => {
+        const delta = Math.abs(Number(track.to) - Number(track.from));
+        if (delta <= 0.0001) return false;
+        if (['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property)) return true;
+        if (['reveal', 'draw'].includes(track.property)) {
+          return (track.endFrame || 0) > firstSampleFrame;
+        }
+        return false;
+      });
     });
     const darkestMean = Math.min(...samples.map((sample) => sample.meanLuminance));
     const threshold = renderedMotionThreshold({

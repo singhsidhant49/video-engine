@@ -6,14 +6,11 @@
  *    and enforces dynamic editing rhythms (wide -> medium -> close -> graphic -> wide).
  * 2. Windowed Rhythm Detection: Evaluates windows of neighboring shots to detect:
  *    - photo -> photo -> photo -> photo (flags monotone photo layouts)
- *    - card -> card -> card (flags procedural fatigue)
  *    - zoom -> zoom -> zoom (flags continuous scaling AI slideshow look)
  *    - dark panel -> dark panel (flags repetitive dark void layouts)
  * 3. Camera Movement Harmony & Restraint: Inserts intentional static holds.
  * 4. Transition Restraint: Enforces default hard cuts; reserves dissolve/wipe for semantic beats.
  */
-
-const STRUCTURED_FAMILIES = new Set(['stat', 'compare', 'list', 'process', 'timeline', 'chart', 'document', 'ui', 'code']);
 
 /**
  * Evaluates continuity across a sliding window of scenes/shots.
@@ -39,18 +36,7 @@ export function evaluateWholeVideoRhythm(scenesOrShots) {
       }
     }
 
-    // 2. Check for 3+ consecutive procedural structured cards
-    const structuredCount = window.slice(0, 3).filter((s) => STRUCTURED_FAMILIES.has(s.family)).length;
-    if (structuredCount >= 3) {
-      flags.push({
-        type: 'procedural_fatigue_run',
-        startIndex: i,
-        count: 3,
-        message: '3 consecutive procedural graphics detected; recommend breaking up with media or kinetic headline.',
-      });
-    }
-
-    // 3. Check for 3+ consecutive zoom moves without an intentional static hold
+    // 2. Check for 3+ consecutive zoom moves without an intentional static hold
     const moves = window.slice(0, 3).map((s) => s.camera?.mode || s.presentation?.cameraMove || s.cameraMove || 'static');
     const zoomMoves = moves.filter((m) => m === 'push' || m === 'pull' || m === 'subtlePush' || m === 'subtlePull');
     if (zoomMoves.length >= 3) {
@@ -288,8 +274,6 @@ export function buildPacingDiagnostics(timeline, plan) {
 
   let currentPhotoRun = 0;
   let maxPhotoRun = 0;
-  let currentProcRun = 0;
-  let maxProcRun = 0;
   let currentTypoRun = 0;
   let maxTypoRun = 0;
 
@@ -299,10 +283,7 @@ export function buildPacingDiagnostics(timeline, plan) {
     if (isPhoto) {
       currentPhotoRun++;
       maxPhotoRun = Math.max(maxPhotoRun, currentPhotoRun);
-      currentProcRun = 0;
     } else {
-      currentProcRun++;
-      maxProcRun = Math.max(maxProcRun, currentProcRun);
       currentPhotoRun = 0;
     }
 
@@ -347,7 +328,6 @@ export function buildPacingDiagnostics(timeline, plan) {
     complexityVsHoldWarnings,
     maxPhotoRunLength: maxPhotoRun,
     maxTypographicRunLength: maxTypoRun,
-    maxProceduralRunLength: maxProcRun,
     hookDuration,
     payoffDuration,
   };

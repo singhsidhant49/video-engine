@@ -6,7 +6,7 @@ export const AssetRequestSchema = z.object({
   sceneId: z.string().min(1),
   concept: z.string().min(1),
   searchConcepts: z.array(z.string().min(1)).max(12).default([]),
-  preferredSource: z.enum(['video', 'image', 'procedural', 'generated', 'auto']).default('auto'),
+  preferredSource: z.enum(['video', 'image', 'auto']).default('auto'),
   preferredMediaType: z.enum(['video', 'image', 'either']).default('either'),
   nativeMotionRequired: z.boolean().default(false),
   contentType: z.enum(['documentary', 'explainer', 'meditation', 'motivational', 'audiobook', 'story']).default('explainer'),
@@ -30,7 +30,7 @@ export const AssetRequestSchema = z.object({
   representationDecision: z.any().optional(),
   queryLadder: z.any().optional(),
 }).strict().superRefine((request, ctx) => {
-  if (request.preferredSource !== 'procedural' && !request.stagedQueries.specific.length && !request.stagedQueries.fallback.length) {
+  if (!request.stagedQueries.specific.length && !request.stagedQueries.fallback.length) {
     ctx.addIssue({ code: 'custom', path: ['stagedQueries'], message: 'Media requests need at least one staged query' });
   }
 });

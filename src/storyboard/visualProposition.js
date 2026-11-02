@@ -36,7 +36,7 @@ function domainAndSense(text, kind) {
   }
   if (/\b(?:memory leak|heap|garbage collect(?:ion|or)?|retained reference|ram)\b/i.test(text)) return ['software engineering', 'SOFTWARE_MEMORY'];
   if (/\b(?:cloud comput(?:ing)?|aws|azure|server cluster|datacenter)\b/i.test(text)) return ['cloud computing', 'COMPUTING_CLOUD'];
-  if (/\b(?:dns|tcp|packet|network|http|server request)\b/i.test(text)) return ['computer networking', 'NETWORK_PROTOCOL'];
+  if (/\b(?:dns|tcp(?:\/ip)?|packet\s+routing|computer\s+network|http|server\s+request|server\s+response)\b/i.test(text)) return ['computer networking', 'NETWORK_PROTOCOL'];
   const sanitizedText = text
     .replace(/\bstock\s*(?:footage|photo|video|image|clip|media|asset|library)s?\b/gi, '')
     .replace(/\b(?:river|snow|image|media|memory)\s+bank\b/gi, '');
@@ -88,11 +88,6 @@ function confusersFor(sense) {
 
 function representationNeed(scene, shot, sense, text) {
   const kind = scene.preferredPresentation || scene.kind || scene.presentationSource?.kind;
-  if (shot.mediaPreference === 'procedural') {
-    if (shot.assetIntent === 'interface') return 'UI';
-    if (shot.assetIntent === 'data') return 'DIAGRAM';
-    return 'DIAGRAM';
-  }
   if (kind === 'code') return 'CODE';
   if (kind === 'ui') return 'UI';
   if (kind === 'chart' || kind === 'statistic') return kind === 'statistic' ? 'TEXT_STAT' : 'CHART';

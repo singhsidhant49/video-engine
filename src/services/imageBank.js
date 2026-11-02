@@ -192,6 +192,18 @@ import { searchMediaBank, recordMediaInBank } from './mediaBank.js';
 
 export { searchMediaBank, recordMediaInBank };
 
+const GENERIC_BANK_TOKENS = new Set([
+  'modern', 'today', 'historical', 'history', 'real', 'footage', 'photo', 'image', 'video',
+  'scene', 'view', 'exterior', 'interior', 'presentation', 'active', 'demonstration',
+  'relevant', 'physical', 'phenomenon', 'environment', 'context', 'matching', 'authentic',
+  'facility', 'test', 'clean', 'room', 'setting', 'detail', 'close', 'wide', 'aerial',
+  'shot', 'showing', 'show', 'shows', 'visual', 'visuals', 'year', 'years',
+  'portrait', 'portraits', 'team', 'teams', 'group', 'groups', 'man', 'men', 'woman', 'women',
+  'person', 'people', 'adult', 'adults', 'standing', 'posing', 'sitting', 'holding', 'walking',
+  'building', 'buildings', 'structure', 'concept', 'conceptual', 'stock', 'depicting', 'evoking',
+  'ancient', 'face', 'human', 'look', 'looking',
+]);
+
 /**
  * Search the local Image Bank (both curated public/media-bank and cached web assets).
  */
@@ -206,19 +218,25 @@ export async function searchImageBank(queryText, { minMatches = 2, limit = 4, me
   try {
     const idx = await loadIndex();
     const qTokens = keywords(queryText);
+    const discriminativeTokens = qTokens.filter((tk) => !GENERIC_BANK_TOKENS.has(tk) && !/^\d{4}$/.test(tk));
     if (qTokens.length) {
       const effectiveMinMatches = Math.min(minMatches, qTokens.length);
       const scored = [];
       for (const item of idx.images) {
         if (item.verificationStatus !== 'verified') continue;
-        const matchCount = qTokens.filter((tk) => (item.tokens || []).includes(tk)).length;
+        const itemTokens = item.tokens || [];
+        const discriminativeMatches = discriminativeTokens.filter((dt) => itemTokens.includes(dt)).length;
+        if (discriminativeTokens.length > 0 && discriminativeMatches === 0) {
+          continue;
+        }
+        const matchCount = qTokens.filter((tk) => itemTokens.includes(tk)).length;
         if (matchCount >= effectiveMinMatches) {
           const score = matchCount / Math.max(qTokens.length, 1);
-          scored.push({ item, score, matchCount });
+          scored.push({ item, score, matchCount, discriminativeMatches });
         }
       }
 
-      scored.sort((a, b) => b.matchCount - a.matchCount || b.score - a.score);
+      scored.sort((a, b) => (b.discriminativeMatches - a.discriminativeMatches) || (b.matchCount - a.matchCount) || (b.score - a.score));
 
       for (const { item } of scored.slice(0, limit)) {
         try {

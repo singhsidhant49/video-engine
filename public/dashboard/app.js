@@ -1,10 +1,10 @@
 const $ = (id) => document.getElementById(id);
-const DEFAULT_KEY = 'c770334094907ec4549a2ffe54db01a8d3dbc8ff994a8c682d6185786f80a6ae';
 const state = {
-  key: localStorage.getItem('videoApiKey') || sessionStorage.getItem('videoApiKey') || DEFAULT_KEY,
+  key: localStorage.getItem('videoApiKey') || sessionStorage.getItem('videoApiKey') || '',
   videos: [],
   poll: null,
   objectUrl: null,
+  thumbnailUrls: new Map(),
 };
 const headers = () => ({ Authorization: `Bearer ${state.key}`, 'Content-Type': 'application/json' });
 
@@ -34,10 +34,10 @@ function render() {
         ? `<button data-action="retry" data-id="${video.id}">Retry</button><button class="danger" data-action="delete" data-id="${video.id}">Delete</button>`
         : `<button data-action="cancel" data-id="${video.id}">Cancel</button>`;
     const isCompleted = video.status === 'completed';
-    const thumbUrl = isCompleted ? `/v1/videos/${video.id}/thumbnail?token=${encodeURIComponent(state.key)}` : '';
+    const thumbUrl = video.thumbnailObjectUrl || '';
     const posterStyle = thumbUrl ? `style="background-image: url('${thumbUrl}'); background-size: cover; background-position: center;"` : '';
     const formatBadge = video.output?.aspectRatio || video.metadata?.aspectRatio || '';
-    return `<article class="video-card"><div class="poster" ${posterStyle}><span class="status ${video.status}">${escapeHtml(video.status)}</span>${formatBadge ? `<span style="position:absolute;top:12px;right:12px;background:rgba(20,19,17,.82);color:#fff;border-radius:4px;padding:3px 7px;font-size:10px;font-weight:700;">${escapeHtml(formatBadge)}</span>` : ''}${!isCompleted ? `<strong>${escapeHtml(video.stage || 'QUEUED')}</strong>` : ''}</div><div class="card-body"><h3 class="card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${Math.round(video.result.durationSeconds)} sec` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${buttons}</div></div></article>`;
+    return `<article class="video-card"><div class="poster" data-poster-id="${video.id}" ${posterStyle}><span class="status ${video.status}">${escapeHtml(video.status)}</span>${formatBadge ? `<span style="position:absolute;top:12px;right:12px;background:rgba(20,19,17,.82);color:#fff;border-radius:4px;padding:3px 7px;font-size:10px;font-weight:700;">${escapeHtml(formatBadge)}</span>` : ''}${!isCompleted ? `<strong>${escapeHtml(video.stage || 'QUEUED')}</strong>` : ''}</div><div class="card-body"><h3 class="card-title" title="${escapeHtml(title)}">${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${Math.round(video.result.durationSeconds)} sec` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${buttons}</div></div></article>`;
   }).join('') : '<div class="empty">No videos yet. Your first production will appear here.</div>';
 }
 
@@ -45,34 +45,63 @@ async function loadVideos() {
   if (!state.key) {
     try {
       const res = await fetch('/api/session-token').then((r) => r.json());
-      if (res?.token) state.key = res.token;
+      if (res?.token) {
+        state.key = res.token;
+        localStorage.setItem('videoApiKey', state.key);
+        sessionStorage.setItem('videoApiKey', state.key);
+      }
     } catch {}
   }
-  if (!state.key) state.key = DEFAULT_KEY;
-  localStorage.setItem('videoApiKey', state.key);
+
+  if (!state.key) {
+    $('healthText').textContent = 'API key required';
+    const dialog = $('settingsDialog');
+    if (dialog && !dialog.open) dialog.showModal();
+    return;
+  }
 
   try {
-    const [ready, result] = await Promise.all([fetch('/ready').then((r) => r.json()), api('/v1/videos')]);
+    const [ready, result] = await Promise.all([api('/ready'), api('/v1/videos')]);
     state.videos = result.videos || [];
+    render(); // Immediate render so videos show without waiting for thumbnails
+
     $('healthDot').classList.toggle('ready', ready.ready);
     $('healthText').textContent = ready.ready ? `Ready · ${ready.queue?.workerCount ?? 1} worker` : 'Service not ready';
-    render();
+
+    const liveIds = new Set(state.videos.map((video) => video.id));
+    for (const [id, url] of state.thumbnailUrls) {
+      if (!liveIds.has(id)) { URL.revokeObjectURL(url); state.thumbnailUrls.delete(id); }
+    }
+
+    // Lazy load thumbnails in background
+    for (const video of state.videos.filter((v) => v.status === 'completed')) {
+      if (state.thumbnailUrls.has(video.id)) {
+        video.thumbnailObjectUrl = state.thumbnailUrls.get(video.id);
+        const posterEl = document.querySelector(`[data-poster-id="${video.id}"]`);
+        if (posterEl) posterEl.style.backgroundImage = `url('${video.thumbnailObjectUrl}')`;
+        continue;
+      }
+      fetch(`/v1/videos/${video.id}/thumbnail`, { headers: { Authorization: `Bearer ${state.key}` } })
+        .then(async (response) => {
+          if (response.ok) {
+            const url = URL.createObjectURL(await response.blob());
+            video.thumbnailObjectUrl = url;
+            state.thumbnailUrls.set(video.id, url);
+            const posterEl = document.querySelector(`[data-poster-id="${video.id}"]`);
+            if (posterEl) posterEl.style.backgroundImage = `url('${url}')`;
+          }
+        })
+        .catch(() => {});
+    }
   } catch (error) {
     if (/bearer|unauthorized/i.test(error.message)) {
-      try {
-        const res = await fetch('/api/session-token').then((r) => r.json());
-        if (res?.token && res.token !== state.key) {
-          state.key = res.token;
-          localStorage.setItem('videoApiKey', state.key);
-          const [ready, result] = await Promise.all([fetch('/ready').then((r) => r.json()), api('/v1/videos')]);
-          state.videos = result.videos || [];
-          $('healthDot').classList.toggle('ready', ready.ready);
-          $('healthText').textContent = ready.ready ? `Ready · ${ready.queue?.workerCount ?? 1} worker` : 'Service not ready';
-          render();
-          return;
-        }
-      } catch {}
-      $('settingsDialog').showModal();
+      state.key = '';
+      localStorage.removeItem('videoApiKey');
+      sessionStorage.removeItem('videoApiKey');
+      const dialog = $('settingsDialog');
+      if (dialog && !dialog.open) dialog.showModal();
+      const errEl = $('settingsError');
+      if (errEl) errEl.textContent = 'Invalid API key. Please check your VIDEO_API_KEYS configuration.';
     }
     $('healthText').textContent = error.message;
   }
@@ -136,14 +165,21 @@ $('videoGrid').addEventListener('click', async (event) => {
       $('formMessage').textContent = `Deleted ${id} and all video-owned files`;
     }
     if (action === 'download') {
-      const url = `/v1/videos/${id}/download?token=${encodeURIComponent(state.key)}`;
+      const response = await fetch(`/v1/videos/${id}/download`, { headers: { Authorization: `Bearer ${state.key}` } });
+      if (!response.ok) throw new Error(`Download failed (${response.status})`);
+      const url = URL.createObjectURL(await response.blob());
       const link = document.createElement('a');
       link.href = url;
       link.download = `${id}.mp4`;
       link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 30_000);
     }
     if (action === 'review') {
-      const url = `/v1/videos/${id}/download?token=${encodeURIComponent(state.key)}`;
+      const response = await fetch(`/v1/videos/${id}/download`, { headers: { Authorization: `Bearer ${state.key}` } });
+      if (!response.ok) throw new Error(`Review download failed (${response.status})`);
+      if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+      const url = URL.createObjectURL(await response.blob());
+      state.objectUrl = url;
       $('reviewVideo').src = url;
       $('reviewVideo').load();
       $('reviewDialog').showModal();
@@ -180,18 +216,49 @@ async function loadAudioTracks() {
   }
 }
 
-$('settingsButton').onclick = () => { $('apiKey').value = state.key; $('settingsDialog').showModal(); };
-$('saveKey').onclick = () => {
-  state.key = $('apiKey').value.trim() || DEFAULT_KEY;
-  localStorage.setItem('videoApiKey', state.key);
-  sessionStorage.setItem('videoApiKey', state.key);
-  setTimeout(loadVideos);
+const saveApiKey = () => {
+  const inputKey = $('apiKey').value.trim();
+  if (inputKey) {
+    state.key = inputKey;
+    localStorage.setItem('videoApiKey', state.key);
+    sessionStorage.setItem('videoApiKey', state.key);
+    const errEl = $('settingsError');
+    if (errEl) errEl.textContent = '';
+  }
+  const dialog = $('settingsDialog');
+  if (dialog && dialog.open) dialog.close();
+  loadVideos();
 };
+
+$('settingsButton').onclick = () => {
+  $('apiKey').value = state.key;
+  const errEl = $('settingsError');
+  if (errEl) errEl.textContent = '';
+  const dialog = $('settingsDialog');
+  if (dialog && !dialog.open) dialog.showModal();
+};
+
+const settingsForm = $('settingsDialog')?.querySelector('form');
+if (settingsForm) {
+  settingsForm.addEventListener('submit', (e) => {
+    if (e.submitter && e.submitter.value === 'cancel') return;
+    e.preventDefault();
+    saveApiKey();
+  });
+}
+
+$('saveKey').onclick = (e) => {
+  e.preventDefault();
+  saveApiKey();
+};
+
 $('refreshButton').onclick = loadVideos;
 $('closeReview').onclick = () => {
   $('reviewVideo').pause();
   $('reviewVideo').removeAttribute('src');
   $('reviewVideo').load();
+  if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+  state.objectUrl = null;
   $('reviewDialog').close();
 };
 loadVideos(); loadAudioTracks(); state.poll = setInterval(loadVideos, 8_000);

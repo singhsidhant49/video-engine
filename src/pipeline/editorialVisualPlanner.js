@@ -1,9 +1,4 @@
-const FAMILY_TO_REPRESENTATION = {
-  image: 'media', montage: 'media', code: 'code', ui: 'ui', process: 'process',
-  diagram: 'diagram', compare: 'comparison', timeline: 'timeline', map: 'map',
-  chart: 'chart', stat: 'chart', document: 'document', statement: 'typography',
-  chapter: 'typography', quote: 'typography', list: 'diagram', ground: 'typography',
-};
+const FAMILY_TO_REPRESENTATION = { image: 'media', montage: 'media' };
 
 function hierarchyFor(scene, shot, representation) {
   const data = scene.data || {};
@@ -36,11 +31,7 @@ export function buildEditorialVisualPlan({ storyboard, coveragePlan, specs = [],
     for (const shot of scene.shots) {
       const coverage = coverageByShot.get(shot.id);
       if (!coverage) throw new Error(`EditorialVisualPlan missing coverage for ${shot.id}`);
-      const allowProcedural = visualPolicy?.enableProceduralGraphics === true;
-      const productionFallbackApplied = coverage.representationDecision?.fallbackApplied === true;
-      const selectedRepresentation = (allowProcedural || productionFallbackApplied)
-        ? (coverage.representationDecision?.selectedRepresentation || coverage.primaryRepresentation)
-        : 'media';
+      const selectedRepresentation = 'media';
       const priorRepresentation = FAMILY_TO_REPRESENTATION[spec?.family] || selectedRepresentation;
       const override = priorRepresentation !== selectedRepresentation ? {
         originalRepresentation: priorRepresentation,
