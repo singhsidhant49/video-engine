@@ -46,6 +46,13 @@ Resumability & Iteration (Milestone 12):
   --contact-sheet-only     generate contact sheet preview without full video render
   --no-tts                 reuse cached audio without calling TTS
   --offline                run with cached provider queries and local assets only
+
+AI Image Generation Options:
+  --image-source <src>     stock (default) | ai (generate images via Ideogram API)
+  --image-style <style>    doodle_comic | storybook | anime (default) | 2d_animation | stickman | hyper_realistic | comic_book | watercolor | pixel_art | 3d_render | custom
+  --custom-style-prompt <s> custom style prompt when using --image-style custom
+  --image-model <model>    p-image-ideogram ($0.01) | ideogram-4-5 ($0.03-$0.10) | ideogram-4 ($0.06) | V_2_TURBO ($0.05)
+  --image-quality <q>      low | medium | high
 `);
   process.exit(0);
 }
@@ -101,6 +108,11 @@ async function main() {
     contactSheetOnly: hasFlag('--contact-sheet-only', '--contactSheetOnly'),
     noTts: hasFlag('--no-tts', '--noTts'),
     offline: hasFlag('--offline'),
+    imageSource: getArg(['--image-source', '--imageSource'], 'stock'),
+    imageStyle: getArg(['--image-style', '--imageStyle'], 'anime'),
+    customStylePrompt: getArg(['--custom-style-prompt', '--customStylePrompt'], ''),
+    imageModel: getArg(['--image-model', '--imageModel'], null),
+    imageQuality: getArg(['--image-quality', '--imageQuality'], null),
     visualMode: requestedVisualMode,
     publishMode: developmentMode ? 'DEV_RENDER' : 'PRODUCTION_RENDER',
     unresolvedMediaMode: developmentMode ? 'ALLOW_DEV_PLACEHOLDER' : 'FAIL_PRODUCTION_RENDER',

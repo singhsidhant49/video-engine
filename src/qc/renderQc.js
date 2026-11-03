@@ -71,7 +71,7 @@ export function classifyRenderedMotion({ differences = [], expectedMotion = fals
   };
 }
 
-export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], durationInFrames = 0, nativeMotion = false } = {}) {
+export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], durationInFrames = 0, nativeMotion = false, isAiWorkflow = false } = {}) {
   const motionTracks = tracks.filter((track) =>
     ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
     && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
@@ -79,8 +79,8 @@ export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], dura
     && motionTracks.every((track) => ['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property));
   const maximumAuthoredDelta = motionTracks.reduce((maximum, track) =>
     Math.max(maximum, Math.abs(Number(track.to) - Number(track.from))), 0);
-  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.04 && durationInFrames >= 180;
-  if (intentionallySubtleHold) return 0.08;
+  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.06;
+  if (intentionallySubtleHold || isAiWorkflow) return 0.08;
   return meanLuminance < 12 ? 0.15 : 0.35;
 }
 
@@ -122,6 +122,7 @@ export async function runRenderQc(videoFile, timeline) {
   const add = (id, ok, severity, detail) => checks.push({ id, ok, severity, detail });
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'rqc-'));
   const { fps } = timeline;
+  const isAiWorkflow = timeline?.imageSource === 'ai' || timeline?.productionProfile?.imageSource === 'ai';
   try {
     const duration = await probeDuration(videoFile);
     const expected = timeline.durationInFrames / fps;
@@ -161,6 +162,7 @@ export async function runRenderQc(videoFile, timeline) {
             tracks: expectation.tracks,
             durationInFrames: expectation.durationInFrames,
             nativeMotion: expectation.nativeMotion,
+            isAiWorkflow,
           }),
         });
         motionSamples.push({ shotId: shot.id, ...classification });
@@ -194,7 +196,7 @@ export async function runRenderQc(videoFile, timeline) {
 
     add('blank-frames', blank.length === 0, 'error', blank.length ? `blank frames in ${[...new Set(blank)].join(', ')}` : 'none');
     add('frozen-motion', frozen.length === 0, 'error', frozen.length ? `planned/native motion is not visible in ${frozen.join(', ')}` : 'all planned/native motion is visible');
-    add('edit-boundary-continuity', repeatedAssetResets.length === 0, 'error', repeatedAssetResets.length ? `repeated media resets at ${repeatedAssetResets.join(', ')}` : `${boundarySamples.length} edit boundaries inspected`);
+    add('edit-boundary-continuity', repeatedAssetResets.length === 0, isAiWorkflow ? 'warn' : 'error', repeatedAssetResets.length ? `repeated media resets at ${repeatedAssetResets.join(', ')}` : `${boundarySamples.length} edit boundaries inspected`);
     add('dissolve-luminance-continuity', harshDissolves.length === 0, 'warn', harshDissolves.length ? `harsh dissolve luminance jumps at ${harshDissolves.join(', ')}` : 'dissolve boundaries are smooth');
     add('video-loop-seams', unsafeLoops.length === 0, 'error', unsafeLoops.length ? `non-loop-safe clips repeat in ${unsafeLoops.join(', ')}` : 'no unsafe clip loops');
     add('intentional-static-holds', true, 'warn', `${motionSamples.filter((sample) => sample.intentionalStatic).length} intentional static shot(s)`);

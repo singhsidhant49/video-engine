@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "videoId": "video-2026-11-03T09-15-30-047",
+  "title": "Why They Judge You No Matter What",
+  "createdAt": "2026-11-03T09:21:57.376Z",
+  "file": {
+    "name": "video-2026-11-03T09-15-30-047-shorts.mp4",
+    "bytes": 12031262,
+    "sha256": "ab4e645b3130c269c8e1b6d2744eec2e2332c1e602084cb2990f8df7088d07eb",
+    "codec": "h264",
+    "colorSpace": "bt709",
+    "audioBitrate": "192k"
+  },
+  "durationSeconds": 46.5,
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "artifacts": {
+    "credits": "video-2026-11-03T09-15-30-047.credits.txt",
+    "qualityReport": "runs/video-2026-11-03T09-15-30-047/qc.json"
+  },
+  "quality": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "46.51s (timeline 46.50s)"
+      },
+      {
+        "id": "audio-stream",
+        "ok": true,
+        "severity": "error",
+        "detail": "audio stream present"
+      },
+      {
+        "id": "audio-duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "46.51s audio vs 46.51s video"
+      },
+      {
+        "id": "blank-frames",
+        "ok": true,
+        "severity": "error",
+        "detail": "none"
+      },
+      {
+        "id": "frozen-motion",
+        "ok": true,
+        "severity": "error",
+        "detail": "all planned/native motion is visible"
+      },
+      {
+        "id": "edit-boundary-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "13 edit boundaries inspected"
+      },
+      {
+        "id": "dissolve-luminance-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "dissolve boundaries are smooth"
+      },
+      {
+        "id": "video-loop-seams",
+        "ok": true,
+        "severity": "error",
+        "detail": "no unsafe clip loops"
+      },
+      {
+        "id": "intentional-static-holds",
+        "ok": true,
+        "severity": "warn",
+        "detail": "14 intentional static shot(s)"
+      },
+      {
+        "id": "brightness",
+        "ok": true,
+        "severity": "warn",
+        "detail": "photo clips median luma 69%"
+      }
+    ]
+  }
+}

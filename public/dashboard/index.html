@@ -80,6 +80,46 @@
             </select>
           </label>
           <label>Channel ID <input id="channel" value="default" maxlength="100"></label>
+          <label>Visual Media
+            <select id="imageSource">
+              <option value="stock" selected>🌐 Stock Media (Pexels, Wikipedia &amp; Web)</option>
+              <option value="ai">🎨 AI Generated (Ideogram API)</option>
+            </select>
+          </label>
+          <label id="styleField">Art Style
+            <select id="imageStyle">
+              <option value="doodle_comic">Doodle Comic (Human Deep Thinking Style)</option>
+              <option value="storybook">2D Storybook Animation (Wisdom of Hope Style)</option>
+              <option value="anime" selected>Anime (Studio Ghibli / Makoto Shinkai)</option>
+              <option value="2d_animation">2D Vector Animation (Modern Flat)</option>
+              <option value="stickman">Stickman Figure (xkcd / MinutePhysics)</option>
+              <option value="hyper_realistic">Hyper-Realistic (35mm Photography)</option>
+              <option value="comic_book">Comic Book (Classic Graphic Novel)</option>
+              <option value="watercolor">Watercolor Painting</option>
+              <option value="pixel_art">Pixel Art (16-Bit Retro)</option>
+              <option value="3d_render">3D Animation (Pixar/Disney)</option>
+              <option value="custom">Custom Style Prompt...</option>
+            </select>
+          </label>
+          <label id="modelField" style="display: none;">AI Model
+            <select id="imageModel">
+              <option value="p-image-ideogram" selected>⚡ P-Image-Ideogram (1 credit / $0.01 - Ultra Fast)</option>
+              <option value="ideogram-4-5">✨ Ideogram 4.5 (3-10 credits / $0.03-$0.10 - High Precision)</option>
+              <option value="ideogram-4">📐 Ideogram 4.0 (6 credits / $0.06 - Design &amp; Layout)</option>
+              <option value="V_2_TURBO">🚀 Ideogram V2 Turbo (5 credits / $0.05)</option>
+              <option value="V_2">🏛️ Ideogram V2 (8 credits / $0.08)</option>
+            </select>
+          </label>
+          <label id="qualityField" style="display: none;">Quality Tier
+            <select id="imageQuality">
+              <option value="low">Low (Fastest &amp; Lowest Cost - 3 credits on 4.5)</option>
+              <option value="medium" selected>Medium (Balanced - 6 credits on 4.5 / 1 credit on P-Image)</option>
+              <option value="high">High (Maximum Detail - 10 credits on 4.5)</option>
+            </select>
+          </label>
+          <label id="customStyleField" style="display: none; grid-column: 1 / -1;">Custom Art Style Prompt
+            <input id="customStylePrompt" placeholder="e.g., retro 1950s Soviet propaganda poster art with bold constructivist typography" maxlength="500">
+          </label>
           <label>Tone <input id="tone" value="cinematic, intriguing, accessible, and authoritative" maxlength="120"></label>
         </div>
         <button class="primary" type="submit"><span>Generate video</span><span aria-hidden="true">→</span></button>

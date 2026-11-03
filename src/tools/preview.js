@@ -184,6 +184,7 @@ export async function generateContactSheetDiagnostics(runDir, {
 
 /** Verify the actual rendered preview frames before an expensive full render. */
 export async function verifyRenderedContactFrames(runDir, { timeline, prefix = 'contact-post-repair', production = true } = {}) {
+  const isAiWorkflow = timeline?.imageSource === 'ai' || timeline?.productionProfile?.imageSource === 'ai';
   const outDir = path.join(runDir, 'preview');
   const names = (await fs.readdir(outDir)).filter((name) => name.startsWith(`${prefix}_`) && name.endsWith('.png'));
   const frames = [];
@@ -245,6 +246,7 @@ export async function verifyRenderedContactFrames(runDir, { timeline, prefix = '
       tracks: motionPlans.flatMap((plan) => plan.tracks || []),
       durationInFrames: Math.max(0, ...motionPlans.map((plan) => plan.durationInFrames || 0)),
       nativeMotion,
+      isAiWorkflow,
     });
     const review = { clipId: clip.id, ...classifyRenderedMotion({ differences, expectedMotion, nativeMotion, threshold }) };
     motionReviews.push(review);

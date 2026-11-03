@@ -2,6 +2,7 @@ import { config } from '../config/index.js';
 import { STYLES, STYLE_IDS, DEFAULT_STYLE, hexToHue } from '../shared/styles.js';
 import { normalizeToken, tokenizeScript } from './alignmentService.js';
 import { calculateDurationBudget, DEFAULT_SPEECH_RATE_WPS } from '../storyboard/durationBudget.js';
+import { getImageStyle } from '../config/imageStyles.js';
 
 const wordBudget = (seconds) => Math.round(Number(seconds || 0) * (DEFAULT_SPEECH_RATE_WPS || 2.60));
 const editableSceneId = (scene, index) => scene?.id || `__scene_${String(index + 1).padStart(3, '0')}`;
@@ -528,21 +529,47 @@ export function getGenreDirectingInstructions(contentType = 'explainer') {
 }
 
 /**
- * @param {{ topic: string, niche?: string, format?: 'shorts'|'landscape', durationSec?: number, style?: string, speechRateWps?: number, sourceData?: unknown, productionProfile?: object }} brief
+ * @param {{ topic: string, niche?: string, format?: 'shorts'|'landscape', durationSec?: number, style?: string, speechRateWps?: number, sourceData?: unknown, productionProfile?: object, imageSource?: string, imageStyle?: string, customStylePrompt?: string }} brief
  */
-export async function generateDirectorPlan({ topic, niche = '', format = 'shorts', durationSec, style, speechRateWps, sourceData, productionProfile }) {
+export async function generateDirectorPlan({
+  topic,
+  niche = '',
+  format = 'shorts',
+  durationSec,
+  style,
+  speechRateWps,
+  sourceData,
+  productionProfile,
+  imageSource = 'stock',
+  imageStyle = 'anime',
+  customStylePrompt = '',
+}) {
   const target = durationSec || (format === 'shorts' ? 45 : 75);
   const budget = calculateDurationBudget({ targetDurationSec: target, format, style, speechRateWps });
   const llm = llmConfig();
   if (!llm) {
     console.log('⚠️  No DEEPSEEK_API_KEY/OPENAI_API_KEY — using the built-in DEMO plan (2008 financial crisis), not your topic.');
-    const demo = normalizePlan(demoPlan(), { topic, niche, format, style });
+    const demo = normalizePlan(demoPlan(), { topic, niche, format, style, imageSource, imageStyle, customStylePrompt });
     demo.durationBudget = budget;
     return demo;
   }
 
+  const isAiWorkflow = imageSource === 'ai';
+  const styleConfig = isAiWorkflow ? getImageStyle(imageStyle) : null;
+  const styleName = styleConfig?.label || imageStyle || 'Anime';
+  const effectiveStyleAnchor = (imageStyle === 'custom' && customStylePrompt) ? customStylePrompt : styleConfig?.stylePromptAnchor;
+  const artDirectionGuidance = isAiWorkflow
+    ? `\n\n🎨 AI ART DIRECTION & VISUAL STYLE:\n` +
+      `- Medium: AI-Generated Illustrations (Ideogram API).\n` +
+      `- Visual Art Style: "${styleName}".\n` +
+      `- Style Prompt Anchor: "${effectiveStyleAnchor}".\n` +
+      `- Art Directing Rule: ${styleConfig?.llmGuidance || ''}\n` +
+      `- MANDATORY FIELD FOR EVERY SCENE: In addition to standard scene fields, each scene object MUST provide an "imagePrompt" field describing the visual composition, subject, character action, and setting in rich detail tailored specifically for an AI image generator in the ${styleName} visual style.\n` +
+      `- Visual Continuity: Ensure recurring characters, outfits, hair, facial features, and environments remain consistent across all scene image prompts.`
+    : '';
+
   const genre = getGenreDirectingInstructions(productionProfile?.contentType || niche);
-  console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats · Genre: ${productionProfile?.contentType || 'explainer'}`);
+  console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats · Genre: ${productionProfile?.contentType || 'explainer'}${isAiWorkflow ? ` · Art Style: ${styleName}` : ''}`);
   const styleHint = style && STYLES[style] ? `\nThe directing style is fixed: "${style}".` : '';
   const serializedSource = sourceData == null
     ? ''
@@ -572,7 +599,9 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
           genre.structureGuidance +
           `\n${genre.visualGuidance}\n` +
           `Retention contract: the hook opens one concrete question; every 10–18 seconds adds evidence, reversal, consequence, mechanism, escalation, or resolution; every open question is closed by the payoff. No empty teasers or repeated ideas.\n` +
-          `Every beat must use authentic real-world photography and video clips (kind: "subject" or "atmosphere"). Concrete physical queries are required for all scenes. Do not output charts, diagrams, or templates.\n` +
+          (isAiWorkflow
+            ? `Every beat will be rendered as an AI-generated image in the "${styleName}" style. Outline concrete visual scenes and character actions. Do not output charts or generic templates.\n`
+            : `Every beat must use authentic real-world photography and video clips (kind: "subject" or "atmosphere"). Concrete physical queries are required for all scenes. Do not output charts, diagrams, or templates.\n`) +
           `Return {"title": string, "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "retentionFunction": string, "openQuestion": string|null, "answerToQuestion": string|null, "targetWords": number, "visualType": string, "visualProof": string, "changeReason": string}]}`,
       },
     ]);
@@ -585,10 +614,11 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
       {
         role: 'user',
         content: `${brief}\nVideo Title: "${outline?.title || topic}". Style: "${outline?.style || style || 'minimal_premium'}".\n` +
-          `GENRE EDITORIAL GUIDANCE:\n${genre.toneGuidance}\n${genre.visualGuidance}\n\n` +
+          `GENRE EDITORIAL GUIDANCE:\n${genre.toneGuidance}\n${genre.visualGuidance}${artDirectionGuidance}\n\n` +
           `STRICT DURATION & WORD BUDGET:\n` +
           `- Total narration length: EXACTLY ${budget.targetWords} words (minimum ${budget.minWords} words, ABSOLUTE CEILING: ${budget.maxWords} words).\n` +
           `- Total scenes: EXACTLY ${budget.targetSceneCount} content beats.\n` +
+          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a detailed visual prompt for Ideogram matching the ${styleName} style).\n` : '') +
           (beatsContext ? `Follow this approved beat outline:\n${beatsContext}\n\n` : '') +
           `CRITICAL EDITORIAL RULE: Every word takes speaking time. Do not write filler. The sum of all scene narrations MUST be between ${budget.minWords} and ${budget.maxWords} words.\n` +
           `FINAL QUALITY GATE: Before answering, silently revise once. The opening sentence must create concrete tension; every scene must add new information, consequence, mechanism, choice, or payoff; causal transitions must connect the beats; every opened question must close; visuals must show the exact spoken subject/action; recurring people and places must remain identical; remove repetition, generic hype, vague stock queries, unsupported precision, and meta-commentary.\n` +
@@ -600,7 +630,13 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
     if (outline?.style && !plan.style) plan.style = outline.style;
     if (outline?.brandColor && !plan.brandColor) plan.brandColor = outline.brandColor;
   } else {
-    plan = await planLongForm(llm, brief, target, budget, genre, productionProfile);
+    plan = await planLongForm(llm, brief, target, budget, genre, productionProfile, { imageSource, imageStyle, customStylePrompt });
+  }
+
+  if (isAiWorkflow) {
+    plan.imageSource = 'ai';
+    plan.imageStyle = imageStyle;
+    plan.customStylePrompt = customStylePrompt;
   }
 
   // Pre-TTS Duration & Word Budget Validation
@@ -627,12 +663,26 @@ export async function generateDirectorPlan({ topic, niche = '', format = 'shorts
 }
 
 /** Long-form: outline first, then each chapter with the running story as context. */
-async function planLongForm(llm, brief, target, budget = null, genre = getGenreDirectingInstructions('explainer'), productionProfile = null) {
+async function planLongForm(llm, brief, target, budget = null, genre = getGenreDirectingInstructions('explainer'), productionProfile = null, { imageSource = 'stock', imageStyle = 'anime', customStylePrompt = '' } = {}) {
+  const isAiWorkflow = imageSource === 'ai';
+  const styleConfig = isAiWorkflow ? getImageStyle(imageStyle) : null;
+  const styleName = styleConfig?.label || imageStyle || 'Anime';
+  const effectiveStyleAnchor = (imageStyle === 'custom' && customStylePrompt) ? customStylePrompt : styleConfig?.stylePromptAnchor;
+  const artDirectionGuidance = isAiWorkflow
+    ? `\n\n🎨 AI ART DIRECTION & VISUAL STYLE:\n` +
+      `- Medium: AI-Generated Illustrations (Ideogram API).\n` +
+      `- Artistic Style: "${styleName}".\n` +
+      `- Style Prompt Anchor: "${effectiveStyleAnchor}".\n` +
+      `- Style Directing Guidance: ${styleConfig?.llmGuidance || ''}\n` +
+      `- MANDATORY FIELD FOR EVERY SCENE: In addition to standard scene fields, each scene object MUST provide an "imagePrompt" field describing the visual composition, subject, character action, and setting in rich detail tailored specifically for an AI image generator in the ${styleName} visual style.\n` +
+      `- Visual Continuity: Ensure recurring characters, outfits, hair, facial features, and environments remain consistent across all scene image prompts.`
+    : '';
+
   const outline = await callJson(llm, [
     { role: 'system', content: `${genre.roleDescription} You design coherent long-form spoken video with professional retention and continuity. Reply with JSON only.` },
     {
       role: 'user',
-      content: `${brief}\nTotal length: ~${Math.round(target / 60)} minutes.\n${genre.structureGuidance}\n${genre.toneGuidance}\n${genre.visualGuidance}\nDesign one causal spine: every chapter must change understanding or character state, and every question must have a planned answer. Return {"title": string, "style": one of ${JSON.stringify(STYLE_IDS)}, "brandColor": "#RRGGBB"|null, "premise": string, "centralQuestion": string, "promisedPayoff": string, "continuityBible": {"characters": [string], "locations": [string], "chronology": string, "recurringMotifs": [string]}, "chapters": [{"title": "≤5 words", "summary": "2–3 sentences", "newDevelopment": string, "questionOpened": string|null, "questionClosed": string|null, "shareOfRuntime": number}]} with 4–8 chapters; the first is a cold-open hook and the last delivers the promised payoff.`,
+      content: `${brief}\nTotal length: ~${Math.round(target / 60)} minutes.\n${genre.structureGuidance}\n${genre.toneGuidance}\n${genre.visualGuidance}${artDirectionGuidance}\nDesign one causal spine: every chapter must change understanding or character state, and every question must have a planned answer. Return {"title": string, "style": one of ${JSON.stringify(STYLE_IDS)}, "brandColor": "#RRGGBB"|null, "premise": string, "centralQuestion": string, "promisedPayoff": string, "continuityBible": {"characters": [string], "locations": [string], "chronology": string, "recurringMotifs": [string]}, "chapters": [{"title": "≤5 words", "summary": "2–3 sentences", "newDevelopment": string, "questionOpened": string|null, "questionClosed": string|null, "shareOfRuntime": number}]} with 4–8 chapters; the first is a cold-open hook and the last delivers the promised payoff.`,
     },
   ]);
   const chapters = Array.isArray(outline.chapters) ? outline.chapters : [];
@@ -650,15 +700,22 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
       { role: 'system', content: SYSTEM_PROMPT },
       {
         role: 'user',
-        content: `${brief}\nVideo title: "${outline.title}". Style: "${outline.style}".\nPremise: ${outline.premise || ''}\nCentral question: ${outline.centralQuestion || ''}\nPromised payoff: ${outline.promisedPayoff || ''}\nContinuity bible (immutable): ${JSON.stringify(outline.continuityBible || {})}\n${genre.toneGuidance}\n${genre.visualGuidance}\nWrite ONLY chapter ${i + 1} of ${chapters.length}: "${ch.title}" — ${ch.summary}\nRequired new development: ${ch.newDevelopment || ch.summary}\n` +
+        content: `${brief}\nVideo title: "${outline.title}". Style: "${outline.style}".\nPremise: ${outline.premise || ''}\nCentral question: ${outline.centralQuestion || ''}\nPromised payoff: ${outline.promisedPayoff || ''}\nContinuity bible (immutable): ${JSON.stringify(outline.continuityBible || {})}\n${genre.toneGuidance}\n${genre.visualGuidance}${artDirectionGuidance}\nWrite ONLY chapter ${i + 1} of ${chapters.length}: "${ch.title}" — ${ch.summary}\nRequired new development: ${ch.newDevelopment || ch.summary}\n` +
           `Chapter length: ${targetWords} words. ${i > 0 ? `Start with a "chapter" scene (section: true), but begin its narration naturally: never say "Chapter", a chapter number, or read the section title aloud. Preserve all established facts and state. The preceding narrative context is: "${soFar}"` : 'This is the cold open: begin in concrete action with a specific unresolved tension.'}\n` +
+          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a detailed visual prompt for Ideogram matching the ${styleName} style).\n` : '') +
           `Quality gate before answering: remove repeated ideas, generic transitions, unsupported exact claims, unrelated visuals, identity drift, and any scene that does not change knowledge, stakes, mechanism, relationship, or choice. Ensure this chapter opens and closes only the questions assigned in the outline.\n` +
           `Return {"scenes": [...]} only.`,
       },
     ]);
     scenes.push(...(Array.isArray(part.scenes) ? part.scenes : []));
   }
-  return { title: outline.title, style: outline.style, brandColor: outline.brandColor, scenes };
+  return {
+    title: outline.title,
+    style: outline.style,
+    brandColor: outline.brandColor,
+    scenes,
+    ...(isAiWorkflow ? { imageSource: 'ai', imageStyle, customStylePrompt } : {}),
+  };
 }
 
 // ─── Validation / normalisation ────────────────────────────────────────────
@@ -991,6 +1048,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
       purpose: PURPOSES.includes(s.purpose) ? s.purpose : 'explain',
       kind,
       visual: str(s.visual) || '',
+      imagePrompt: str(s.imagePrompt) || str(s.visual) || null,
       imageQueries: [...new Set(queries)].slice(0, 3),
       entity: resolvedEntity,
       source,
@@ -1086,6 +1144,9 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     scenes,
     claims,
     script: scenes.map((s) => s.narration).join(' '),
+    imageSource: raw?.imageSource || (raw?.creative?.imageSource) || 'stock',
+    imageStyle: raw?.imageStyle || (raw?.creative?.imageStyle) || null,
+    customStylePrompt: raw?.customStylePrompt || (raw?.creative?.customStylePrompt) || null,
     contentQuality,
     diagnostics: { ...diagnostics, downgrades, contentQualityIssues: contentQuality.issues.length },
   };

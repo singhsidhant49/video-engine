@@ -30,8 +30,13 @@ export const CreateVideoRequestSchema = z.object({
     audience: z.string().trim().max(200).default('general audience'),
     pacing: Pacing.default('auto'),
     style: z.string().trim().max(80).optional(),
+    imageSource: z.enum(['stock', 'ai']).default('stock'),
+    imageStyle: z.string().trim().max(80).optional(),
+    customStylePrompt: z.string().trim().max(500).optional(),
+    imageModel: z.string().trim().max(80).optional(),
+    imageQuality: z.string().trim().max(40).optional(),
   }).strict().default({
-    contentType: 'auto', tone: 'clear and engaging', audience: 'general audience', pacing: 'auto',
+    contentType: 'auto', tone: 'clear and engaging', audience: 'general audience', pacing: 'auto', imageSource: 'stock',
   }),
   audio: z.object({
     voice: z.string().trim().regex(/^[a-zA-Z0-9_-]{1,80}$/).optional(),
@@ -50,6 +55,12 @@ export function toPipelineBrief(request) {
     format: request.output.aspectRatio === '9:16' ? 'shorts' : 'landscape',
     durationSec: request.output.durationSeconds,
     style: request.creative.style,
+    imageSource: request.creative.imageSource || 'stock',
+    imageStyle: request.creative.imageStyle || 'anime',
+    customStylePrompt: request.creative.customStylePrompt || '',
+    imageModel: request.creative.imageModel || null,
+    imageQuality: request.creative.imageQuality || null,
+    creative: request.creative,
     voice: request.audio.voice,
     music: request.audio.music,
     channel: {

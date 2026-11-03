@@ -32,6 +32,18 @@ export const config = {
     };
   },
 
+  get ideogram() {
+    dotenv.config();
+    return {
+      apiKey: (process.env.IDEOGRAM_API_KEY || '').trim(),
+      apiUrl: process.env.IDEOGRAM_API_URL || '',
+      model: process.env.IDEOGRAM_MODEL || 'p-image-ideogram',
+      quality: (process.env.IDEOGRAM_QUALITY || 'medium').toLowerCase(),
+      resolution: (process.env.IDEOGRAM_RESOLUTION || '1k').toLowerCase(),
+      magicPrompt: process.env.IDEOGRAM_MAGIC_PROMPT || 'AUTO',
+    };
+  },
+
   kokoro: {
     url: process.env.KOKORO_TTS_URL || 'http://localhost:8880/v1/audio/speech',
     defaultVoice: process.env.KOKORO_VOICE || 'af_bella',

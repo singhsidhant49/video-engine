@@ -16,6 +16,7 @@ import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBr
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
 import { directScenes, recast } from './visualDirector.js';
 import { directAssets } from './assetDirector.js';
+import { directAiAssets } from './aiAssetDirector.js';
 import { buildStoryboard } from './visualStoryboardDirector.js';
 import { evaluateContinuity, buildPacingDiagnostics } from './continuityDirector.js';
 import { reviewVisualPlan, applySceneRepairs, reviewRenderedFrames } from '../services/visualCriticService.js';
@@ -143,6 +144,11 @@ export async function createFacelessVideo({
   videoId: requestedVideoId,
   signal,
   force = false,
+  imageSource = 'stock',
+  imageStyle = 'anime',
+  customStylePrompt = '',
+  imageModel = null,
+  imageQuality = null,
 }) {
   if (global.gc) { try { global.gc(); } catch {} }
   const throwIfCancelled = () => {
@@ -176,6 +182,11 @@ export async function createFacelessVideo({
     channelId = channelId || normalizedBrief.channel.id;
   }
   channelId = channelId || 'default';
+  let effectiveImageSource = (normalizedBrief?.imageSource || brief?.creative?.imageSource || brief?.imageSource || imageSource || 'stock').toLowerCase();
+  let effectiveImageStyle = normalizedBrief?.imageStyle || brief?.creative?.imageStyle || brief?.imageStyle || imageStyle || 'anime';
+  let effectiveCustomStylePrompt = normalizedBrief?.customStylePrompt || brief?.creative?.customStylePrompt || brief?.customStylePrompt || customStylePrompt || '';
+  let effectiveImageModel = normalizedBrief?.imageModel || brief?.creative?.imageModel || brief?.imageModel || imageModel || null;
+  let effectiveImageQuality = normalizedBrief?.imageQuality || brief?.creative?.imageQuality || brief?.imageQuality || imageQuality || null;
   let sourceData = normalizedBrief?.sourceData;
   // Production defaults to restrained documentary editing: mostly static
   // stills and hard cuts, with sparse motion reserved for major story beats.
@@ -228,6 +239,9 @@ export async function createFacelessVideo({
     channelProfile = channelProfile || savedRequest.channelProfile || job.project.config?.channelProfile || {};
     sourceData = sourceData ?? savedRequest.sourceData;
     channelId = channelId || savedRequest.channelId || job.project.channelId || 'default';
+    if (savedRequest.imageSource && effectiveImageSource === 'stock') effectiveImageSource = savedRequest.imageSource;
+    if (savedRequest.imageStyle && effectiveImageStyle === 'anime') effectiveImageStyle = savedRequest.imageStyle;
+    if (savedRequest.customStylePrompt && !effectiveCustomStylePrompt) effectiveCustomStylePrompt = savedRequest.customStylePrompt;
     productionProfile = resolveProductionProfile({ topic, niche, format, channelProfile });
     narrationProfile = resolveNarrationProfile({
       topic,
@@ -318,7 +332,7 @@ export async function createFacelessVideo({
     if (Number(reqData.durationSec) !== Number(targetDuration)) {
       console.warn(`   Repairing stale request duration ${reqData.durationSec}s -> ${targetDuration}s from project source of truth.`);
       await job.startStage('request');
-      await save('request.json', { ...reqData, topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || reqData.style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData });
+      await save('request.json', { ...reqData, topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || reqData.style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
       await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
       await job.completeStage('request', ['request.json', 'duration-budget.json']);
     }
@@ -329,7 +343,7 @@ export async function createFacelessVideo({
       ? narrationProfile.speechRateWps
       : undefined;
     durationBudget = calculateDurationBudget({ targetDurationSec: targetDuration, format, style, speechRateWps });
-    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData });
+    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
     await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
     await job.completeStage('request', ['request.json', 'duration-budget.json']);
   }
@@ -385,8 +399,14 @@ export async function createFacelessVideo({
       ? narrationProfile.speechRateWps
       : undefined;
     plan = planFile
-      ? normalizePlan(JSON.parse(await fs.readFile(planFile, 'utf8')), { topic, niche, format, style })
-      : await generateDirectorPlan({ topic, niche, format, durationSec: targetDuration, style, speechRateWps, sourceData, productionProfile });
+      ? normalizePlan(JSON.parse(await fs.readFile(planFile, 'utf8')), { topic, niche, format, style, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt })
+      : await generateDirectorPlan({
+          topic, niche, format, durationSec: targetDuration, style, speechRateWps, sourceData, productionProfile,
+          imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt,
+        });
+    plan.imageSource = effectiveImageSource;
+    plan.imageStyle = effectiveImageStyle;
+    plan.customStylePrompt = effectiveCustomStylePrompt;
     plan.format = format;
     plan.durationBudget = plan.durationBudget || durationBudget;
     await save('plan.json', plan);
@@ -697,9 +717,23 @@ export async function createFacelessVideo({
     const queryDiagnostics = buildAssetQueryDiagnostics(assetRequests);
     await save('asset-query-diagnostics.json', queryDiagnostics);
 
-    dirResult = await directAssets(executionPlan, specs, {
-      publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode,
-    });
+    const isAiWorkflow = (plan?.imageSource === 'ai' || executionPlan?.imageSource === 'ai' || effectiveImageSource === 'ai');
+    if (isAiWorkflow) {
+      dirResult = await directAiAssets(executionPlan, specs, {
+        publicDir: runPublic,
+        format,
+        assetRequests,
+        imageStyle: plan.imageStyle || effectiveImageStyle,
+        customStylePrompt: plan.customStylePrompt || effectiveCustomStylePrompt,
+        imageModel: plan.imageModel || effectiveImageModel,
+        imageQuality: plan.imageQuality || effectiveImageQuality,
+        offline,
+      });
+    } else {
+      dirResult = await directAssets(executionPlan, specs, {
+        publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode,
+      });
+    }
     assets = dirResult.assets;
     assetReport = dirResult.report;
     if (Object.keys(dirResult.mediaReuseFallbacks || {}).length) {
@@ -842,7 +876,9 @@ export async function createFacelessVideo({
     onProgress({ step: 5, message: 'Building the edit...' });
     editorialVisualPlan = buildEditorialVisualPlan({ storyboard, coveragePlan: visualCoveragePlan, specs, assets, format, visualPolicy });
     await save('editorial-visual-plan.json', editorialVisualPlan);
+    productionProfile.imageSource = effectiveImageSource;
     timeline = buildTimeline({ plan: executionPlan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc: path.basename(narrationFile), coveragePlan: visualCoveragePlan, editorialVisualPlan, visualPolicy, productionProfile });
+    timeline.imageSource = effectiveImageSource;
     compositionArtifacts = timeline._compositionArtifacts || compositionArtifacts;
     await save('scene-compositions.json', compositionArtifacts.sceneCompositions);
     await save('media-scene-specs.json', compositionArtifacts.mediaSceneSpecs);

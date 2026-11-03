@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "videoId": "video-2026-11-03T07-32-16-058",
+  "title": "Why Time Slows Near a Black Hole",
+  "createdAt": "2026-11-03T07:40:34.906Z",
+  "file": {
+    "name": "video-2026-11-03T07-32-16-058-shorts.mp4",
+    "bytes": 65785225,
+    "sha256": "7a07e576c6bcc8238128a93d9c12b3cbf7e62a6bd269d5192103f8f953023d2d",
+    "codec": "h264",
+    "colorSpace": "bt709",
+    "audioBitrate": "192k"
+  },
+  "durationSeconds": 45.7,
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "artifacts": {
+    "credits": "video-2026-11-03T07-32-16-058.credits.txt",
+    "qualityReport": "runs/video-2026-11-03T07-32-16-058/qc.json"
+  },
+  "quality": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "45.72s (timeline 45.70s)"
+      },
+      {
+        "id": "audio-stream",
+        "ok": true,
+        "severity": "error",
+        "detail": "audio stream present"
+      },
+      {
+        "id": "audio-duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "45.72s audio vs 45.72s video"
+      },
+      {
+        "id": "blank-frames",
+        "ok": true,
+        "severity": "error",
+        "detail": "none"
+      },
+      {
+        "id": "frozen-motion",
+        "ok": true,
+        "severity": "error",
+        "detail": "all planned/native motion is visible"
+      },
+      {
+        "id": "edit-boundary-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "13 edit boundaries inspected"
+      },
+      {
+        "id": "dissolve-luminance-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "dissolve boundaries are smooth"
+      },
+      {
+        "id": "video-loop-seams",
+        "ok": true,
+        "severity": "error",
+        "detail": "no unsafe clip loops"
+      },
+      {
+        "id": "intentional-static-holds",
+        "ok": true,
+        "severity": "warn",
+        "detail": "5 intentional static shot(s)"
+      },
+      {
+        "id": "brightness",
+        "ok": true,
+        "severity": "warn",
+        "detail": "photo clips median luma 89%"
+      }
+    ]
+  }
+}

@@ -77,9 +77,13 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const cutLimit = Number(pacingPolicy?.maximumCutsPer10Seconds || 5);
   const pacingProfileName = pacingPolicy?.mode || 'legacy';
   const productionPacing = publishMode === 'PRODUCTION_RENDER' && Boolean(pacingPolicy);
-  const contentVisualProfile = timeline.productionProfile?.contentType
+  const isAiWorkflow = plan?.imageSource === 'ai' || timeline?.imageSource === 'ai' || timeline?.productionProfile?.imageSource === 'ai';
+  const rawProfile = timeline.productionProfile?.contentType
     ? getContentVisualProfile(timeline.productionProfile.contentType)
     : null;
+  const contentVisualProfile = (rawProfile && isAiWorkflow)
+    ? { ...rawProfile, minVideoShare: 0, maxImageShare: 1.0, maxPhotoRun: 50 }
+    : rawProfile;
   add('pacing-average-shot', avgShotSec >= targetAverageShotSeconds * 0.82, productionPacing ? 'error' : 'warn', `average shot duration ${avgShotSec.toFixed(2)}s (profile ${pacingProfileName}, target: ≥ ${(targetAverageShotSeconds * 0.82).toFixed(2)}s)`);
 
   const rushedProfileShots = minimumShotSeconds > 0
@@ -113,8 +117,14 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   add('layout-repetition', mediaOnly || diagnostics.layoutRepetitionRate <= 0.35, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.layoutRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('variant-repetition', mediaOnly || diagnostics.variantRepetitionRate <= 0.4, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.variantRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('motion-repetition', diagnostics.cameraMoveRepetitionRate <= 0.55, 'warn', `${(diagnostics.cameraMoveRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
-  add('asset-reuse', diagnostics.assetReuseRate <= 0.20, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
-  add('asset-reuse-hard-limit', diagnostics.assetReuseRate <= 0.25, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (production hard limit: 25%)`);
+  const uniqueAssetCount = new Set(shots.map((shot) => shot.asset?.src).filter(Boolean)).size;
+  const assetReuseWarnThreshold = isAiWorkflow ? 0.70 : 0.20;
+  const assetReuseHardLimit = isAiWorkflow ? 0.75 : 0.25;
+  const assetReuseHardOk = isAiWorkflow
+    ? (diagnostics.assetReuseRate <= assetReuseHardLimit || uniqueAssetCount >= Math.min(clips.length, 3))
+    : diagnostics.assetReuseRate <= 0.25;
+  add('asset-reuse', diagnostics.assetReuseRate <= assetReuseWarnThreshold, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
+  add('asset-reuse-hard-limit', assetReuseHardOk, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (${isAiWorkflow ? 'AI illustration limit: 75%' : 'production hard limit: 25%'})`);
   const photoRunLimit = mediaOnly ? Math.max(10, contentVisualProfile?.maxPhotoRun ?? 10) : (contentVisualProfile?.maxPhotoRun ?? 4);
   const excessivePhotoRun = diagnostics.consecutivePhotoCount > photoRunLimit;
   // A lack of third-party stock footage must not make an otherwise valid

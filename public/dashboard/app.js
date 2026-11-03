@@ -119,6 +119,27 @@ $('aspect').addEventListener('change', () => {
   }
 });
 
+$('imageSource')?.addEventListener('change', () => {
+  const isAi = $('imageSource').value === 'ai';
+  if ($('styleField')) $('styleField').style.display = isAi ? '' : 'none';
+  if ($('modelField')) $('modelField').style.display = isAi ? '' : 'none';
+  if ($('qualityField')) $('qualityField').style.display = isAi ? '' : 'none';
+  if ($('customStyleField')) $('customStyleField').style.display = (isAi && $('imageStyle').value === 'custom') ? '' : 'none';
+});
+
+$('imageStyle')?.addEventListener('change', () => {
+  const isCustom = $('imageStyle').value === 'custom' && $('imageSource').value === 'ai';
+  if ($('customStyleField')) $('customStyleField').style.display = isCustom ? '' : 'none';
+});
+
+// Initial visibility sync
+if ($('imageSource')) {
+  const isAi = $('imageSource').value === 'ai';
+  if ($('styleField')) $('styleField').style.display = isAi ? '' : 'none';
+  if ($('modelField')) $('modelField').style.display = isAi ? '' : 'none';
+  if ($('qualityField')) $('qualityField').style.display = isAi ? '' : 'none';
+}
+
 $('createForm').addEventListener('submit', async (event) => {
   event.preventDefault();
   const button = event.currentTarget.querySelector('button[type=submit]');
@@ -130,10 +151,31 @@ $('createForm').addEventListener('submit', async (event) => {
     if (voiceVal && voiceVal !== 'auto') audioObj.voice = voiceVal;
     if (musicVal && musicVal !== 'auto') audioObj.music = musicVal;
 
+    const imageSourceVal = $('imageSource')?.value || 'stock';
+    const imageStyleVal = $('imageStyle')?.value || 'anime';
+    const customPromptVal = $('customStylePrompt')?.value || '';
+
+    const creativeObj = {
+      contentType: $('contentType').value,
+      tone: $('tone').value,
+      audience: 'general YouTube audience',
+      pacing: 'auto',
+      style: 'cinematic_documentary',
+      imageSource: imageSourceVal,
+    };
+    if (imageSourceVal === 'ai') {
+      creativeObj.imageStyle = imageStyleVal;
+      creativeObj.imageModel = $('imageModel')?.value || 'p-image-ideogram';
+      creativeObj.imageQuality = $('imageQuality')?.value || 'medium';
+      if (imageStyleVal === 'custom' && customPromptVal) {
+        creativeObj.customStylePrompt = customPromptVal;
+      }
+    }
+
     const body = {
       prompt: $('prompt').value, profileId: $('channel').value || 'default',
       output: { durationSeconds: Number($('duration').value), aspectRatio: $('aspect').value, resolution: '1080p' },
-      creative: { contentType: $('contentType').value, tone: $('tone').value, audience: 'general YouTube audience', pacing: 'auto', style: 'cinematic_documentary' },
+      creative: creativeObj,
       audio: audioObj,
       subtitles: { enabled: true },
       metadata: { source: 'dashboard', channelId: $('channel').value || 'default' },

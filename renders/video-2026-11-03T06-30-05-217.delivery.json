@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "videoId": "video-2026-11-03T06-30-05-217",
+  "title": "How the Stock Market Actually Works",
+  "createdAt": "2026-11-03T06:40:50.531Z",
+  "file": {
+    "name": "video-2026-11-03T06-30-05-217-landscape.mp4",
+    "bytes": 100753528,
+    "sha256": "513d95c95dac01d35c048e63d3c0ab1595ae17284840557c9710f9409ee4f5a7",
+    "codec": "h264",
+    "colorSpace": "bt709",
+    "audioBitrate": "192k"
+  },
+  "durationSeconds": 71.6,
+  "format": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "artifacts": {
+    "credits": "video-2026-11-03T06-30-05-217.credits.txt",
+    "qualityReport": "runs/video-2026-11-03T06-30-05-217/qc.json"
+  },
+  "quality": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "71.62s (timeline 71.60s)"
+      },
+      {
+        "id": "audio-stream",
+        "ok": true,
+        "severity": "error",
+        "detail": "audio stream present"
+      },
+      {
+        "id": "audio-duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "71.62s audio vs 71.62s video"
+      },
+      {
+        "id": "blank-frames",
+        "ok": true,
+        "severity": "error",
+        "detail": "none"
+      },
+      {
+        "id": "frozen-motion",
+        "ok": true,
+        "severity": "error",
+        "detail": "all planned/native motion is visible"
+      },
+      {
+        "id": "edit-boundary-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "10 edit boundaries inspected"
+      },
+      {
+        "id": "dissolve-luminance-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "dissolve boundaries are smooth"
+      },
+      {
+        "id": "video-loop-seams",
+        "ok": true,
+        "severity": "error",
+        "detail": "no unsafe clip loops"
+      },
+      {
+        "id": "intentional-static-holds",
+        "ok": true,
+        "severity": "warn",
+        "detail": "2 intentional static shot(s)"
+      },
+      {
+        "id": "brightness",
+        "ok": true,
+        "severity": "warn",
+        "detail": "photo clips median luma 82%"
+      }
+    ]
+  }
+}
