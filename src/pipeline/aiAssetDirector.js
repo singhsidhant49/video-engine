@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import sharp from 'sharp';
 import { generateIdeogramImage } from '../services/ideogramService.js';
+import { generateFluxImage } from '../services/replicateService.js';
 import { getImageDimensions } from '../services/imageUtils.js';
 import { getImageStyle, buildFullIdeogramPrompt } from '../config/imageStyles.js';
 import { recordImageInBank } from '../services/imageBank.js';
@@ -46,6 +47,7 @@ export async function directAiAssets(plan, specs, {
   assetRequests = [],
   imageStyle = 'anime',
   customStylePrompt = '',
+  imageProvider = null,
   imageModel = null,
   imageQuality = null,
   offline = false,
@@ -61,7 +63,12 @@ export async function directAiAssets(plan, specs, {
     ? Number(baseSeed)
     : Math.floor(Math.random() * 900000000) + 100000000;
 
-  console.log(`🎨 AI Asset Director: Resolving ${assetRequests.length} shot(s) in "${style.label}" via Ideogram (master seed: ${masterSeed})...`);
+  const normalizedProvider = String(imageProvider || '').trim().toLowerCase();
+  const normalizedModel = String(imageModel || '').trim().toLowerCase();
+  const isFlux = normalizedProvider === 'flux' || normalizedProvider === 'replicate' || normalizedModel.includes('flux');
+  const providerLabel = isFlux ? 'FLUX.1 Schnell (Replicate)' : 'Ideogram';
+
+  console.log(`🎨 AI Asset Director: Resolving ${assetRequests.length} shot(s) in "${style.label}" via ${providerLabel} (master seed: ${masterSeed})...`);
 
   const assets = Object.fromEntries(scenes.map((scene) => [scene.id, { primary: null, alternates: [], byShot: {} }]));
   const requestReports = [];
@@ -79,16 +86,28 @@ export async function directAiAssets(plan, specs, {
 
     let generated;
     try {
-      generated = await generateIdeogramImage({
-        prompt: rawPrompt,
-        styleId: imageStyle,
-        customStylePrompt,
-        format,
-        seed: shotSeed,
-        model: imageModel,
-        quality: imageQuality,
-        offline,
-      });
+      if (isFlux) {
+        generated = await generateFluxImage({
+          prompt: rawPrompt,
+          styleId: imageStyle,
+          customStylePrompt,
+          format,
+          seed: shotSeed,
+          model: imageModel && normalizedModel.includes('flux') ? imageModel : undefined,
+          offline,
+        });
+      } else {
+        generated = await generateIdeogramImage({
+          prompt: rawPrompt,
+          styleId: imageStyle,
+          customStylePrompt,
+          format,
+          seed: shotSeed,
+          model: imageModel,
+          quality: imageQuality,
+          offline,
+        });
+      }
 
       // Copy or write from local cache to run public asset directory
       if (generated.localPath && generated.localPath !== targetFilePath) {
@@ -98,15 +117,36 @@ export async function directAiAssets(plan, specs, {
       if (/credit balance ran out|insufficient_funds|HTTP 402|authentication failed|HTTP 401/i.test(err.message)) {
         throw err;
       }
-      console.warn(`   ⚠️ Ideogram generation failed for [${shotId}]: ${err.message}. Using fallback.`);
-      // If generation failed, create a clean colored canvas fallback to prevent build crash
-      generated = {
-        localPath: targetFilePath,
-        sha256: crypto.createHash('sha256').update(rawPrompt).digest('hex'),
-        seed: shotSeed,
-        prompt: rawPrompt,
-        cached: false,
-      };
+      console.warn(`   ⚠️ ${providerLabel} generation failed for [${shotId}]: ${err.message}. Using fallback.`);
+      
+      // Try to reuse an already resolved image from this scene or a previous scene
+      const priorAsset = Object.values(assets).flatMap((s) => [s.primary, ...(s.alternates || [])]).find((a) => a?.src && a?.type === 'image');
+      if (priorAsset?.src) {
+        const sourceFile = path.join(publicDir, priorAsset.src);
+        try {
+          await fs.copyFile(sourceFile, targetFilePath);
+          generated = {
+            localPath: targetFilePath,
+            sha256: priorAsset.sha256ContentHash,
+            seed: shotSeed,
+            prompt: rawPrompt,
+            cached: false,
+            isFallback: true,
+          };
+        } catch {
+          // continue to canvas fallback
+        }
+      }
+      if (!generated?.localPath) {
+        generated = {
+          localPath: targetFilePath,
+          sha256: crypto.createHash('sha256').update(rawPrompt).digest('hex'),
+          seed: shotSeed,
+          prompt: rawPrompt,
+          cached: false,
+          isFallback: true,
+        };
+      }
     }
 
     let dimensions = { width: format === 'shorts' ? 1080 : 1920, height: format === 'shorts' ? 1920 : 1080 };
@@ -114,17 +154,24 @@ export async function directAiAssets(plan, specs, {
       const buffer = await fs.readFile(targetFilePath);
       dimensions = getImageDimensions(buffer);
     } catch {
-      // Create a clean high-resolution dark slate placeholder canvas if generation was aborted or completely failed
+      // Create a textured high-resolution canvas with visual gradient so zoom produces optical delta
       const width = format === 'shorts' ? 1080 : 1920;
       const height = format === 'shorts' ? 1920 : 1080;
-      const placeholder = await sharp({
-        create: {
-          width,
-          height,
-          channels: 3,
-          background: { r: 24, g: 24, b: 36 },
-        },
-      }).png().toBuffer();
+      const svgPattern = Buffer.from(`
+        <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="grad" cx="50%" cy="50%" r="70%" fx="30%" fy="30%">
+              <stop offset="0%" stop-color="#2a3342" />
+              <stop offset="50%" stop-color="#181e28" />
+              <stop offset="100%" stop-color="#0c0f15" />
+            </radialGradient>
+          </defs>
+          <rect width="${width}" height="${height}" fill="url(#grad)" />
+          <circle cx="${width * 0.4}" cy="${height * 0.45}" r="${width * 0.35}" fill="#3b4b60" opacity="0.25" />
+          <circle cx="${width * 0.6}" cy="${height * 0.55}" r="${width * 0.25}" fill="#4f637f" opacity="0.18" />
+        </svg>
+      `);
+      const placeholder = await sharp(svgPattern).png().toBuffer();
       await fs.writeFile(targetFilePath, placeholder);
       dimensions = { width, height };
     }
@@ -138,13 +185,15 @@ export async function directAiAssets(plan, specs, {
       height: dimensions.height || (format === 'shorts' ? 1920 : 1080),
       sha256ContentHash,
       src: relativeSrc,
-      source: 'ideogram',
+      source: isFlux ? 'replicate' : 'ideogram',
+      isFallback: Boolean(generated.isFallback),
+      qualityTier: generated.isFallback ? 'FALLBACK' : 'AI_GENERATED',
       tier: 'verified',
       generic: false,
       label: `AI Art (${style.id}): ${rawPrompt.slice(0, 40)}`,
       license: {
-        provider: 'ideogram',
-        name: 'AI Generated',
+        provider: isFlux ? 'replicate' : 'ideogram',
+        name: isFlux ? 'FLUX.1 Schnell' : 'Ideogram AI',
         attribution_required: false,
         commercial_use: 'allowed',
         nonFree: false,
@@ -153,11 +202,11 @@ export async function directAiAssets(plan, specs, {
       relevance: 0.95,
       assetRequestId: req.id || `asset_${shotId}`,
       storyboardShotId: shotId,
-      providerCandidateId: `ideogram_${sha256ContentHash.slice(0, 16)}`,
+      providerCandidateId: `${isFlux ? 'replicate' : 'ideogram'}_${sha256ContentHash.slice(0, 16)}`,
       query: rawPrompt,
       queryStage: 'AI_GENERATED',
       focal: { x: 0.5, y: 0.5 },
-      selectionReason: `Generated via Ideogram AI in ${style.label} visual style`,
+      selectionReason: `Generated via ${providerLabel} in ${style.label} visual style`,
       whyItMatchesNarration: `Synthesized specifically for: "${scene?.narration?.slice(0, 80) || rawPrompt.slice(0, 80)}"`,
       finalEditorialScore: 95,
       assetIdentityChain: {

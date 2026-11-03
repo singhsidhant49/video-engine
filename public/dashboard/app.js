@@ -164,8 +164,10 @@ $('createForm').addEventListener('submit', async (event) => {
       imageSource: imageSourceVal,
     };
     if (imageSourceVal === 'ai') {
+      const selectedModel = $('imageModel')?.value || 'p-image-ideogram';
       creativeObj.imageStyle = imageStyleVal;
-      creativeObj.imageModel = $('imageModel')?.value || 'p-image-ideogram';
+      creativeObj.imageModel = selectedModel;
+      creativeObj.imageProvider = selectedModel.includes('flux') ? 'flux' : 'ideogram';
       creativeObj.imageQuality = $('imageQuality')?.value || 'medium';
       if (imageStyleVal === 'custom' && customPromptVal) {
         creativeObj.customStylePrompt = customPromptVal;

@@ -207,3 +207,48 @@ test('Timeline QC relaxes minVideoShare when imageSource is AI while enforcing c
   assert.equal(assetReuseCheck.ok, true, 'asset-reuse-hard-limit must pass in AI mode with intra-scene reframing');
 });
 
+test('FLUX Schnell via Replicate helper and directAiAssets routing works correctly', async () => {
+  const { resolveFluxAspectRatio, normalizeFluxModel } = await import('../src/services/replicateService.js');
+  assert.equal(resolveFluxAspectRatio('landscape'), '16:9');
+  assert.equal(resolveFluxAspectRatio('shorts'), '9:16');
+
+  // Verify model normalization
+  assert.equal(normalizeFluxModel('flux-schnell'), 'black-forest-labs/flux-schnell');
+  assert.equal(normalizeFluxModel('flux'), 'black-forest-labs/flux-schnell');
+  assert.equal(normalizeFluxModel('schnell'), 'black-forest-labs/flux-schnell');
+  assert.equal(normalizeFluxModel('black-forest-labs/flux-schnell'), 'black-forest-labs/flux-schnell');
+  assert.equal(normalizeFluxModel('flux-dev'), 'black-forest-labs/flux-dev');
+
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'vf-flux-test-'));
+  const publicDir = path.join(tmpDir, 'public');
+  await fs.mkdir(publicDir, { recursive: true });
+
+  const plan = {
+    scenes: [
+      { id: 'scene_001', narration: 'Intro words.', imagePrompt: 'A futuristic city' },
+    ],
+  };
+
+  const assetRequests = [
+    { id: 'asset_scene_001_shot_01', sceneId: 'scene_001', storyboardShotId: 'scene_001_shot_01', concept: 'futuristic city' },
+  ];
+
+  try {
+    const result = await directAiAssets(plan, [], {
+      publicDir,
+      format: 'landscape',
+      assetRequests,
+      imageStyle: 'anime',
+      imageModel: 'flux-schnell',
+      offline: true,
+      baseSeed: 999,
+    });
+
+    assert.ok(result.assets.scene_001.primary, 'scene_001 must have primary asset');
+    assert.equal(result.assets.scene_001.primary.source, 'replicate');
+    assert.equal(result.assets.scene_001.primary.type, 'image');
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true });
+  }
+});
+

@@ -147,6 +147,7 @@ export async function createFacelessVideo({
   imageSource = 'stock',
   imageStyle = 'anime',
   customStylePrompt = '',
+  imageProvider = null,
   imageModel = null,
   imageQuality = null,
 }) {
@@ -185,6 +186,7 @@ export async function createFacelessVideo({
   let effectiveImageSource = (normalizedBrief?.imageSource || brief?.creative?.imageSource || brief?.imageSource || imageSource || 'stock').toLowerCase();
   let effectiveImageStyle = normalizedBrief?.imageStyle || brief?.creative?.imageStyle || brief?.imageStyle || imageStyle || 'anime';
   let effectiveCustomStylePrompt = normalizedBrief?.customStylePrompt || brief?.creative?.customStylePrompt || brief?.customStylePrompt || customStylePrompt || '';
+  let effectiveImageProvider = normalizedBrief?.imageProvider || brief?.creative?.imageProvider || brief?.imageProvider || imageProvider || null;
   let effectiveImageModel = normalizedBrief?.imageModel || brief?.creative?.imageModel || brief?.imageModel || imageModel || null;
   let effectiveImageQuality = normalizedBrief?.imageQuality || brief?.creative?.imageQuality || brief?.imageQuality || imageQuality || null;
   let sourceData = normalizedBrief?.sourceData;
@@ -725,6 +727,7 @@ export async function createFacelessVideo({
         assetRequests,
         imageStyle: plan.imageStyle || effectiveImageStyle,
         customStylePrompt: plan.customStylePrompt || effectiveCustomStylePrompt,
+        imageProvider: plan.imageProvider || effectiveImageProvider,
         imageModel: plan.imageModel || effectiveImageModel,
         imageQuality: plan.imageQuality || effectiveImageQuality,
         offline,

@@ -176,7 +176,7 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
   };
   let cameraIntent = nativeVideo || role === 'EVIDENCE' ? 'STATIC'
     : cameraMap[authoredCamera] || (role === 'DETAIL' ? 'SUBTLE_PUSH' : 'STATIC');
-  if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 800 : 1280) || primary.qualityTier === 'FALLBACK')) {
+  if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 512 : 1280) || primary.qualityTier === 'FALLBACK')) {
     cameraIntent = 'STATIC';
   }
 

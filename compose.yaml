@@ -39,6 +39,9 @@ x-app-environment: &app-environment
   IDEOGRAM_MODEL: ${IDEOGRAM_MODEL:-p-image-ideogram}
   IDEOGRAM_QUALITY: ${IDEOGRAM_QUALITY:-medium}
   IDEOGRAM_RESOLUTION: ${IDEOGRAM_RESOLUTION:-1k}
+  REPLICATE_API_TOKEN: ${REPLICATE_API_TOKEN:-${FluxSchellKey:-}}
+  FluxSchellKey: ${FluxSchellKey:-}
+  FLUX_MODEL: ${FLUX_MODEL:-black-forest-labs/flux-schnell}
   HF_HOME: /app/.cache/huggingface
   XDG_CACHE_HOME: /app/.cache
   TRANSFORMERS_CACHE: /app/.cache/huggingface

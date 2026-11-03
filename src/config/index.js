@@ -44,6 +44,14 @@ export const config = {
     };
   },
 
+  get replicate() {
+    dotenv.config();
+    return {
+      apiToken: (process.env.REPLICATE_API_TOKEN || process.env.FluxSchellKey || process.env.FLUX_API_KEY || '').trim(),
+      model: process.env.FLUX_MODEL || 'black-forest-labs/flux-schnell',
+    };
+  },
+
   kokoro: {
     url: process.env.KOKORO_TTS_URL || 'http://localhost:8880/v1/audio/speech',
     defaultVoice: process.env.KOKORO_VOICE || 'af_bella',

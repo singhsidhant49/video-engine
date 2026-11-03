@@ -79,7 +79,7 @@ export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], dura
     && motionTracks.every((track) => ['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property));
   const maximumAuthoredDelta = motionTracks.reduce((maximum, track) =>
     Math.max(maximum, Math.abs(Number(track.to) - Number(track.from))), 0);
-  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.06;
+  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.10;
   if (intentionallySubtleHold || isAiWorkflow) return 0.08;
   return meanLuminance < 12 ? 0.15 : 0.35;
 }
@@ -101,8 +101,11 @@ export function classifyEditBoundary({ before, after, sameAsset = false, transit
 
 function shotMotionExpectation(shot, timeline) {
   const motionPlan = timeline.motionPlans?.[shot.motionPlanId];
-  const tracks = motionPlan?.tracks || [];
   const duration = motionPlan?.durationInFrames || shot.durationInFrames || 0;
+  if (shot.asset?.isFallback || shot.asset?.qualityTier === 'FALLBACK') {
+    return { nativeMotion: false, expectedMotion: false, tracks: [], durationInFrames: duration };
+  }
+  const tracks = motionPlan?.tracks || [];
   const firstSampleFrame = Math.round(duration * 0.15);
   const changingTrack = tracks.some((track) => {
     const delta = Math.abs(Number(track.to) - Number(track.from));

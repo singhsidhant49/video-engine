@@ -296,3 +296,46 @@ test('post-solve directing keeps compatible motion boundaries as clean cuts', ()
   assert.equal(second.transitionAnchor, null);
   assert.deepEqual(second.enter, { type: 'cut', frames: 0 });
 });
+
+test('Shorts video format applies camera zoom in/out and smooth transitions across shots', () => {
+  const visualPolicy = resolveVisualPolicy();
+  const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
+  const timing = [{ startFrame: 0, endFrame: 75, durationInFrames: 75, from: 0 }]; // 2.5s shot in shorts
+  const makeScene = (id, role = 'detail') => ({
+    id, kind: 'subject', purpose: 'detail', tone: 'neutral', intensity: 3, informationDensity: 3, visualIntent: 'explain',
+    storyboardShots: [{ id: `${id}_shot`, role, visualConcept: 'A vertical subject', mediaPreference: 'auto', assetIntent: 'concept', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }],
+  });
+
+  // 768x1344 is the native FLUX Schnell 9:16 Shorts resolution
+  const shortsShot = realizeSceneShots({
+    scene: makeScene('shorts1', 'detail'), spec,
+    sceneAssets: { primary: { src: 'flux_shorts.png', type: 'image', width: 768, height: 1344, focal: { x: .5, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'shorts', fps: 30,
+  })[0];
+
+  assert.notEqual(shortsShot.presentation.cameraMove, 'static', 'Shorts shot must not be downgraded to static');
+  assert.equal(shortsShot.presentation.cameraMove, 'subtlePush', 'Detail shot in shorts should subtlePush');
+  assert.deepEqual(shortsShot.move.scale, [1, 1.06], 'Shorts camera zoom should have 6% magnitude [1, 1.06]');
+
+  // Test transitions in Shorts
+  const makeShortsShot = (id) => ({
+    id, storyboardShotId: id, sceneId: 's', role: 'context', visualConcept: `concept ${id}`,
+    durationInFrames: 75, from: 0,
+    presentation: { cameraMove: 'subtlePush' },
+    asset: { type: 'image', src: `${id}.png`, width: 768, height: 1344, focal: { x: .5, y: .5 } },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 },
+  });
+
+  const shots = [makeShortsShot('shot1'), makeShortsShot('shot2'), makeShortsShot('shot3')];
+  const clips = [{ id: 'c01', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots }];
+  directSolvedShotTransitions({
+    clips,
+    scenes: [{ id: 's', tone: 'neutral' }],
+    fps: 30,
+    visualPolicy: { format: 'shorts', imageSource: 'ai' },
+  });
+
+  const dissolves = shots.filter((s) => s.enter.type === 'dissolve');
+  assert.ok(dissolves.length >= 1, 'Shorts must include smooth dissolve transitions between shots');
+  assert.ok(dissolves[0].enter.frames >= 15, 'Dissolve frames must be at least 15 frames (~0.5s) for smoothness');
+});

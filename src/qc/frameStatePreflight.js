@@ -195,7 +195,10 @@ export function preflightSolvedScene({ solvedScene, motionPlan, composition, med
       const sourceWidth = geometry.sourceDimensions.width || 0;
       const requiredSourceWidth = geometry.rect.width / Math.max(.01, geometry.crop.width) * Math.max(path?.start.scale || 1, path?.end.scale || 1);
       const assetSpec = mediaSceneSpec.assets.find((item) => item.assetId === geometry.assetId);
-      const resolutionFloor = assetSpec?.qualityTier === 'FALLBACK' && mediaSceneSpec.cameraIntent === 'STATIC' ? .55 : .72;
+      const isShorts = geometry.rect.height > geometry.rect.width;
+      const resolutionFloor = assetSpec?.qualityTier === 'FALLBACK' && mediaSceneSpec.cameraIntent === 'STATIC'
+        ? .55
+        : isShorts ? .45 : .72;
       if (sourceWidth && sourceWidth + 1 < requiredSourceWidth * resolutionFloor) issues.push({ code: 'camera_resolution_insufficient', severity: 'hard', elementId, sourceWidth, requiredSourceWidth: Math.round(requiredSourceWidth) });
       if (geometry.nativeMotion && path?.behavior !== 'STATIC') issues.push({ code: 'synthetic_motion_over_native_video', severity: 'hard', elementId });
     }

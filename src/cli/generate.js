@@ -48,10 +48,11 @@ Resumability & Iteration (Milestone 12):
   --offline                run with cached provider queries and local assets only
 
 AI Image Generation Options:
-  --image-source <src>     stock (default) | ai (generate images via Ideogram API)
+  --image-source <src>     stock (default) | ai (generate images via AI)
+  --image-provider <p>     ideogram | flux | replicate (auto-detected if model is flux)
   --image-style <style>    doodle_comic | storybook | anime (default) | 2d_animation | stickman | hyper_realistic | comic_book | watercolor | pixel_art | 3d_render | custom
   --custom-style-prompt <s> custom style prompt when using --image-style custom
-  --image-model <model>    p-image-ideogram ($0.01) | ideogram-4-5 ($0.03-$0.10) | ideogram-4 ($0.06) | V_2_TURBO ($0.05)
+  --image-model <model>    flux-schnell | p-image-ideogram | ideogram-4-5 | ideogram-4 | V_2_TURBO
   --image-quality <q>      low | medium | high
 `);
   process.exit(0);
@@ -109,6 +110,7 @@ async function main() {
     noTts: hasFlag('--no-tts', '--noTts'),
     offline: hasFlag('--offline'),
     imageSource: getArg(['--image-source', '--imageSource'], 'stock'),
+    imageProvider: getArg(['--image-provider', '--imageProvider'], null),
     imageStyle: getArg(['--image-style', '--imageStyle'], 'anime'),
     customStylePrompt: getArg(['--custom-style-prompt', '--customStylePrompt'], ''),
     imageModel: getArg(['--image-model', '--imageModel'], null),

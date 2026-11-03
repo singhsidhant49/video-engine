@@ -80,7 +80,8 @@ function chooseCameraMove(shot, scene, family, asset, timing, memory, format = '
   if (shot.motionPreference === 'stable') return 'static';
 
   const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
-  if (durationSec < 3.0) return 'static';
+  const minDuration = format === 'shorts' ? 1.5 : 3.0;
+  if (durationSec < minDuration) return 'static';
 
   const aspect = Number(asset?.width) / Math.max(1, Number(asset?.height));
   const targetAspect = format === 'shorts' ? 9 / 16 : 16 / 9;
@@ -91,8 +92,9 @@ function chooseCameraMove(shot, scene, family, asset, timing, memory, format = '
   const movingRun = [...recentMoves].reverse().findIndex((move) => move === 'static');
   const consecutiveMoving = movingRun === -1 ? recentMoves.length : movingRun;
 
-  // 2. Intermittent deliberate still rests every 3–4 shots
-  if (consecutiveMoving >= 3) return 'static';
+  // 2. Intermittent deliberate still rests (relaxed in shorts for continuous motion)
+  const maxConsecutiveMoving = format === 'shorts' ? 6 : 3;
+  if (consecutiveMoving >= maxConsecutiveMoving) return 'static';
 
   // 3. Wide panoramic photo slack: optional subtle horizontal drift (<= 3% travel)
   const horizontalSlack = aspect > targetAspect ? 1 - targetAspect / aspect : 0;
@@ -127,17 +129,17 @@ function chooseMinimalCameraMove(shot, scene, family, asset, timing, memory, fps
   return lastMove === 'subtlePush' ? 'subtlePull' : 'subtlePush';
 }
 
-function cameraMagnitudeFor(timing, fps, move) {
+function cameraMagnitudeFor(timing, fps, move, format = 'landscape') {
   if (move === 'static') return 0;
   if (move === 'panLeft' || move === 'panRight') return .03;
-  // Standardized strict maximum scale factor of 1.04 (4% max motion) across all content types
-  return 0.04;
+  // In shorts, dynamic mobile viewing benefits from a slightly more pronounced, smooth zoom (6% vs 4%)
+  return format === 'shorts' ? 0.06 : 0.04;
 }
 
 function cameraPath(type, asset, magnitude = 0.04, base = 1) {
   const focal = asset?.focalPoint || asset?.focal || { x: 0.5, y: 0.45 };
-  // Bounded strictly between 2% and 4% (scale <= 1.04)
-  const subtle = Math.min(0.04, Math.max(0.02, Number(magnitude) || 0.04));
+  // Bounded strictly between 2% and 8% (scale <= 1.08)
+  const subtle = Math.min(0.08, Math.max(0.02, Number(magnitude) || 0.04));
 
   if (type === 'static' || type === 'hold') {
     return { type: 'static', scale: [base, base], focus: [[focal.x, focal.y], [focal.x, focal.y]] };
@@ -222,8 +224,8 @@ export function realizeSceneShots({ scene, spec, sceneAssets, timings, sectionId
     cameraMove = normalizeCameraMove(cameraMove, asset);
     const movementState = classifyMovementState(cameraMove);
     const cameraMagnitude = visualPolicy?.motionPreset === 'minimal' && cameraMove !== 'static'
-      ? Math.min(.04, cameraMagnitudeFor(timing, fps, cameraMove))
-      : cameraMagnitudeFor(timing, fps, cameraMove);
+      ? Math.min(.04, cameraMagnitudeFor(timing, fps, cameraMove, format))
+      : cameraMagnitudeFor(timing, fps, cameraMove, format);
     const density = densityFor(family, shot, scene, memory.recentDensities);
     const layout = `${family}:${variant}`;
     const montageAssets = family === 'montage' ? pool.filter((item) => item?.src !== asset?.src && !editorialSelection?.rejectedAlternatives.some((rejected) => rejected.assetId === String(item.id || item.assetId || item.src))).slice(0, 4) : [];

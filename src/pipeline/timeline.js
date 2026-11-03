@@ -315,17 +315,20 @@ function titleOverlay(scene) {
 // ─── Transitions ───────────────────────────────────────────────────────────
 
 export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy, productionProfile = null, assets = null) {
+  const isShorts = plan?.format === 'shorts' || visualPolicy?.format === 'shorts';
+  const isAi = plan?.imageSource === 'ai' || visualPolicy?.imageSource === 'ai';
   const minutes = totalFrames / fps / 60;
-  const semanticRate = 3.5;
-  let budget = Math.max(1, Math.ceil(Math.min(3.5, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
+  const semanticRate = (isShorts || isAi) ? 5.5 : 3.5;
+  let budget = Math.max(1, Math.ceil(Math.min(6.0, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
   const transitionProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { target: 0.22 };
-  const designedShare = transitionProfile.target;
+  const designedShare = (isShorts || isAi) ? Math.max(0.35, transitionProfile.target * 1.6) : transitionProfile.target;
   budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
   let scenesSinceDissolve = 99;
+  const minScenesBetweenDissolves = (isShorts || isAi) ? 1 : 2;
   plan.scenes.forEach((scene, index) => {
     if (index === 0) return;
     const previous = plan.scenes[index - 1];
@@ -333,9 +336,9 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     const softTone = ['somber', 'reflective', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
     const isSectionBreak = scene.section || reason === TRANSITION_REASON.SECTION_CHANGE;
     const isMajorPayoff = (scene.purpose === 'payoff' || reason === TRANSITION_REASON.REVEAL) && scene.intensity <= 4;
-    const semanticPause = isSectionBreak || isMajorPayoff
+    const semanticPause = isShorts || isSectionBreak || isMajorPayoff
       || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason));
-    if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= 2) {
+    if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= minScenesBetweenDissolves) {
       out[index] = 'dissolve';
       budget--;
       previousWasDissolve = true;
@@ -400,9 +403,14 @@ function synchronizeShotTransition(shot, previous, { type, frames, policy, reaso
 export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, mediaSceneSpecs = {}, mediaShotPlans = {}, visualPolicy = null, productionProfile = null }) {
   const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
   const entries = clips.flatMap((clip, clipIndex) => (clip.shots || []).map((shot, shotIndex) => ({ clip, clipIndex, shot, shotIndex })));
-  const transitionProfile = productionProfile?.contentType
+  const isShorts = visualPolicy?.format === 'shorts';
+  const isAi = visualPolicy?.imageSource === 'ai';
+  const baseProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { min: 0, target: 0.22, max: 0.25 };
+  const transitionProfile = (isShorts || isAi)
+    ? { min: Math.max(0.15, baseProfile.min), target: Math.max(0.35, baseProfile.target), max: Math.max(0.50, baseProfile.max) }
+    : baseProfile;
   const boundaryCount = Math.max(0, entries.length - 1);
   const minimumDissolves = Math.ceil(boundaryCount * transitionProfile.min);
   const maximumDissolves = productionProfile?.contentType
@@ -411,6 +419,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
   let remainingDissolves = maximumDissolves;
   let previousWasDissolve = false;
   let shotsSinceDissolve = 99;
+  const minShotsBetweenDissolves = (isShorts || isAi) ? 1 : 2;
   // Standardized duration: 15-20 frames (~0.5s-0.67s)
   const dissolveFrames = Math.min(20, Math.max(15, Math.round(fps * 0.53)));
 
@@ -450,7 +459,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       ? false
       : sceneBoundary
         ? allocatedSceneDissolve
-        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= 2 && semanticDissolve);
+        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && (semanticDissolve || isShorts));
     const appliedFrames = useDissolve && sceneBoundary ? clip.enter.frames : useDissolve ? dissolveFrames : 0;
     const decision = useDissolve
       ? { type: 'dissolve', frames: appliedFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
@@ -1025,6 +1034,7 @@ export function buildTimeline({ plan, specs, narration, assets, sfx, bgm, videoI
     videoId,
     title: plan.title,
     format,
+    imageSource: plan.imageSource || visualPolicy?.imageSource || 'stock',
     fps,
     width,
     height,
