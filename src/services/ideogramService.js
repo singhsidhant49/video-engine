@@ -120,7 +120,7 @@ export async function generateIdeogramImage({
 
   // Check persistent disk cache if cacheDir is provided
   const promptHash = computePromptHash(fullPrompt, styleId, aspectRatio, seed);
-  const effectiveCacheDir = cacheDir || path.join(config.publicDir, 'media-bank', 'ai');
+  const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
   const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
 
   try {
@@ -138,6 +138,28 @@ export async function generateIdeogramImage({
       };
     }
   } catch {
+    // Check legacy cache directory in public/media-bank/ai
+    const legacyCachedPath = path.join(config.publicDir, 'media-bank', 'ai', `${promptHash}.png`);
+    try {
+      const legacyStat = await fs.stat(legacyCachedPath);
+      if (legacyStat.isFile() && legacyStat.size > 1000) {
+        try {
+          await fs.mkdir(effectiveCacheDir, { recursive: true });
+          await fs.copyFile(legacyCachedPath, cachedFilePath);
+        } catch {}
+        const finalPath = await fs.stat(cachedFilePath).then(() => cachedFilePath).catch(() => legacyCachedPath);
+        const buffer = await fs.readFile(finalPath);
+        const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
+        return {
+          url: null,
+          localPath: finalPath,
+          sha256,
+          seed,
+          prompt: fullPrompt,
+          cached: true,
+        };
+      }
+    } catch {}
     // Cache miss, proceed to generate
   }
 

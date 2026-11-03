@@ -25,8 +25,8 @@ RUN --mount=type=cache,target=/root/.npm \
     npx --no-install remotion browser ensure
 
 COPY --chown=node:node . .
-RUN mkdir -p /app/renders /app/temp /app/.cache /app/node_modules/.cache && \
-    chown -R node:node /app/renders /app/temp /app/.cache /app/node_modules/.cache
+RUN mkdir -p /app/renders /app/temp /app/.cache /app/node_modules/.cache /app/storage/media-bank && \
+    chown -R node:node /app/renders /app/temp /app/.cache /app/node_modules/.cache /app/storage
 USER node
 
 EXPOSE 3000

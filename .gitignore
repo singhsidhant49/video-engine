@@ -25,6 +25,10 @@ public/media/*
 !public/media/.gitkeep
 !public/audio/.gitkeep
 
+# Dedicated persistent media-bank storage
+storage/
+!storage/**/.gitkeep
+
 # Operating System Files
 .DS_Store
 Thumbs.db

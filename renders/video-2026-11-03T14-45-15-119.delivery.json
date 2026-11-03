@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "videoId": "video-2026-11-03T14-45-15-119",
+  "title": "How Gravity Works",
+  "createdAt": "2026-11-03T14:51:08.491Z",
+  "file": {
+    "name": "video-2026-11-03T14-45-15-119-shorts.mp4",
+    "bytes": 12683753,
+    "sha256": "b4eb3835f7aae670d998e3ad7f3e3a4edee0a8cc7ac88547814f2083edb14180",
+    "codec": "h264",
+    "colorSpace": "bt709",
+    "audioBitrate": "192k"
+  },
+  "durationSeconds": 42.93333333333333,
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "artifacts": {
+    "credits": "video-2026-11-03T14-45-15-119.credits.txt",
+    "qualityReport": "runs/video-2026-11-03T14-45-15-119/qc.json"
+  },
+  "quality": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "42.94s (timeline 42.93s)"
+      },
+      {
+        "id": "audio-stream",
+        "ok": true,
+        "severity": "error",
+        "detail": "audio stream present"
+      },
+      {
+        "id": "audio-duration",
+        "ok": true,
+        "severity": "error",
+        "detail": "42.94s audio vs 42.94s video"
+      },
+      {
+        "id": "blank-frames",
+        "ok": true,
+        "severity": "error",
+        "detail": "none"
+      },
+      {
+        "id": "frozen-motion",
+        "ok": true,
+        "severity": "error",
+        "detail": "all planned/native motion is visible"
+      },
+      {
+        "id": "edit-boundary-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "13 edit boundaries inspected"
+      },
+      {
+        "id": "dissolve-luminance-continuity",
+        "ok": true,
+        "severity": "warn",
+        "detail": "dissolve boundaries are smooth"
+      },
+      {
+        "id": "video-loop-seams",
+        "ok": true,
+        "severity": "error",
+        "detail": "no unsafe clip loops"
+      },
+      {
+        "id": "intentional-static-holds",
+        "ok": true,
+        "severity": "warn",
+        "detail": "0 intentional static shot(s)"
+      },
+      {
+        "id": "brightness",
+        "ok": true,
+        "severity": "warn",
+        "detail": "photo clips median luma 95%"
+      }
+    ]
+  }
+}

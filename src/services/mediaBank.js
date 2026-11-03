@@ -8,13 +8,8 @@ import { terms } from '../assets/assetSearchContext.js';
 
 function getEffectiveMediaBankDir() {
   if (process.env.MEDIA_BANK_DIR) return path.resolve(process.env.MEDIA_BANK_DIR);
-  const defaultDir = path.join(config.rootDir, 'public', 'media-bank');
-  try {
-    fs.accessSync(path.join(config.rootDir, 'public'), fs.constants.W_OK);
-    return defaultDir;
-  } catch {
-    return path.join(config.rendersDir, 'media-bank');
-  }
+  if (config.mediaBankDir) return config.mediaBankDir;
+  return path.join(config.rootDir, 'storage', 'media-bank');
 }
 
 const defaultMediaBankDir = getEffectiveMediaBankDir();
@@ -91,6 +86,13 @@ export async function loadMediaBankCatalog({ forceRefresh = false } = {}) {
   }
 
   try {
+    if (!fs.existsSync(catalogFile)) {
+      const legacyCatalog = path.join(config.rootDir, 'public', 'media-bank', 'catalog.json');
+      if (fs.existsSync(legacyCatalog)) {
+        fs.mkdirSync(mediaBankDir, { recursive: true });
+        fs.copyFileSync(legacyCatalog, catalogFile);
+      }
+    }
     if (fs.existsSync(catalogFile)) {
       const data = fs.readFileSync(catalogFile, 'utf8');
       memoryCatalog = JSON.parse(data);
@@ -385,7 +387,13 @@ export async function searchMediaBank(queryText, { mediaType = 'all', orientatio
     const totalScore = normalizedScore + orientationBonus + categoryAdjustment;
 
     if (totalScore >= minScore && matchedTerms >= Math.min(2, searchTokens.length)) {
-      const absolutePath = path.join(mediaBankDir, asset.path);
+      let absolutePath = path.join(mediaBankDir, asset.path);
+      if (!fs.existsSync(absolutePath)) {
+        const legacyPath = path.join(config.rootDir, 'public', 'media-bank', asset.path);
+        if (fs.existsSync(legacyPath)) {
+          absolutePath = legacyPath;
+        }
+      }
       if (fs.existsSync(absolutePath)) {
         candidates.push({
           asset,

@@ -46,6 +46,7 @@ x-app-environment: &app-environment
   XDG_CACHE_HOME: /app/.cache
   TRANSFORMERS_CACHE: /app/.cache/huggingface
   NODE_OPTIONS: ${NODE_OPTIONS:---max-old-space-size=4096 --expose-gc}
+  MEDIA_BANK_DIR: ${MEDIA_BANK_DIR:-/app/storage/media-bank}
 
 services:
   postgres:
@@ -98,9 +99,10 @@ services:
   storage-init:
     image: videoforge-app:latest
     user: root
-    command: ["sh", "-c", "chown -R node:node /app/renders /app/.cache"]
+    command: ["sh", "-c", "mkdir -p /app/storage/media-bank /app/renders /app/.cache && chown -R node:node /app/renders /app/.cache /app/storage"]
     restart: "no"
     volumes:
+      - ./storage/media-bank:/app/storage/media-bank
       - video_data:/app/renders
       - engine_cache:/app/.cache
       - webpack_cache:/app/node_modules/.cache
@@ -122,6 +124,7 @@ services:
       # PostgreSQL and Redis remain local; Kokoro is local unless explicitly LAN-bound.
       - "${VIDEO_API_BIND_IP:-127.0.0.1}:${VIDEO_API_PORT:-3000}:3000"
     volumes:
+      - ./storage/media-bank:/app/storage/media-bank
       - video_data:/app/renders
       - engine_cache:/app/.cache
     read_only: true
@@ -134,6 +137,7 @@ services:
     depends_on:
       postgres: { condition: service_healthy }
       redis: { condition: service_healthy }
+      storage-init: { condition: service_completed_successfully }
       worker: { condition: service_started }
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
@@ -156,6 +160,7 @@ services:
       VIDEO_PROCESS_ROLE: worker
     shm_size: "2gb"
     volumes:
+      - ./storage/media-bank:/app/storage/media-bank
       - video_data:/app/renders
       - engine_cache:/app/.cache
       - webpack_cache:/app/node_modules/.cache

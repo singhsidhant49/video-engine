@@ -14,6 +14,12 @@ export const config = {
   publicDir: path.join(ROOT_DIR, 'public'),
   rendersDir: path.join(ROOT_DIR, 'renders'),
   tempDir: path.join(ROOT_DIR, 'temp'),
+  storageDir: process.env.VIDEO_STORAGE_DIR ? path.resolve(process.env.VIDEO_STORAGE_DIR) : path.join(ROOT_DIR, 'storage'),
+  mediaBankDir: process.env.MEDIA_BANK_DIR
+    ? path.resolve(process.env.MEDIA_BANK_DIR)
+    : (process.env.VIDEO_STORAGE_DIR
+      ? path.join(path.resolve(process.env.VIDEO_STORAGE_DIR), 'media-bank')
+      : path.join(ROOT_DIR, 'storage', 'media-bank')),
 
   get deepseek() {
     dotenv.config();

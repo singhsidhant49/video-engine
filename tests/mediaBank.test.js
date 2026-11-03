@@ -157,3 +157,15 @@ test('MediaBank: newly fetched image is recorded and reused by searchImageBank w
     fs.rmSync(isolatedRoot, { recursive: true, force: true });
   }
 });
+
+test('MediaBank: storage location resolves to dedicated storage/media-bank and supports fallback', async () => {
+  const { config } = await import('../src/config/index.js');
+  assert.ok(config.mediaBankDir.includes(path.join('storage', 'media-bank')), `Expected storage/media-bank path, got ${config.mediaBankDir}`);
+  assert.ok(fs.existsSync(config.mediaBankDir), `Dedicated storage directory must exist: ${config.mediaBankDir}`);
+  assert.ok(fs.existsSync(path.join(config.mediaBankDir, 'ai')), 'Dedicated storage ai directory must exist');
+
+  // Verify searchMediaBank finds assets in the storage media bank
+  const results = await searchMediaBank('laptop developer technology', { limit: 1 });
+  assert.ok(results.length > 0, 'Must find media bank assets');
+  assert.ok(fs.existsSync(results[0].localPath), `Resolved localPath must exist on disk: ${results[0].localPath}`);
+});

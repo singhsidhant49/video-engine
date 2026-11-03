@@ -39,7 +39,9 @@ app.use('/v1', apiAuth, apiRateLimit, createVideoApiRouter({ service: videoJobSe
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
 app.use('/audiotrack', express.static(path.join(config.publicDir, 'audiotrack')));
 app.use('/media', express.static(path.join(config.publicDir, 'media')));
+app.use('/media-bank', express.static(config.mediaBankDir));
 app.use('/media-bank', express.static(path.join(config.publicDir, 'media-bank')));
+app.use('/storage/media-bank', express.static(config.mediaBankDir));
 if (process.env.NODE_ENV !== 'production') app.use('/renders', express.static(config.rendersDir));
 
 app.get('/api/audiotracks', (req, res) => {

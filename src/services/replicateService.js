@@ -64,7 +64,7 @@ export async function generateFluxImage({
   // Check persistent disk cache
   const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}`;
   const promptHash = crypto.createHash('sha256').update(content).digest('hex');
-  const effectiveCacheDir = cacheDir || path.join(config.publicDir, 'media-bank', 'ai');
+  const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
   const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
 
   try {
@@ -84,6 +84,30 @@ export async function generateFluxImage({
       };
     }
   } catch {
+    // Check legacy cache directory in public/media-bank/ai
+    const legacyCachedPath = path.join(config.publicDir, 'media-bank', 'ai', `${promptHash}.png`);
+    try {
+      const legacyStat = await fs.stat(legacyCachedPath);
+      if (legacyStat.isFile() && legacyStat.size > 1000) {
+        try {
+          await fs.mkdir(effectiveCacheDir, { recursive: true });
+          await fs.copyFile(legacyCachedPath, cachedFilePath);
+        } catch {}
+        const finalPath = await fs.stat(cachedFilePath).then(() => cachedFilePath).catch(() => legacyCachedPath);
+        const buffer = await fs.readFile(finalPath);
+        const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
+        return {
+          url: null,
+          localPath: finalPath,
+          sha256,
+          seed,
+          prompt: fullPrompt,
+          cached: true,
+          provider: 'replicate',
+          model: selectedModel,
+        };
+      }
+    } catch {}
     // Cache miss, proceed to generate
   }
 

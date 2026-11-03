@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
-const mediaBankDir = path.join(rootDir, 'public', 'media-bank');
+const mediaBankDir = process.env.MEDIA_BANK_DIR
+  ? path.resolve(process.env.MEDIA_BANK_DIR)
+  : path.join(rootDir, 'storage', 'media-bank');
 
 const MEDIA_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.mp4', '.mov', '.webm']);
 const SKIP_JSON_NAMES = new Set(['index.json', 'manifest.json', 'summary.json', 'package.json']);

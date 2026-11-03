@@ -14,4 +14,6 @@ scratch
 /speech.wav
 /test_barry.jpg
 public/media-bank
+storage
+storage/
 npm-debug.log*
