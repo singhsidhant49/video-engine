@@ -318,12 +318,12 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
   const isShorts = plan?.format === 'shorts' || visualPolicy?.format === 'shorts';
   const isAi = plan?.imageSource === 'ai' || visualPolicy?.imageSource === 'ai';
   const minutes = totalFrames / fps / 60;
-  const semanticRate = (isShorts || isAi) ? 5.5 : 3.5;
+  const semanticRate = (isShorts || isAi) ? 5.5 : 4.0;
   let budget = Math.max(1, Math.ceil(Math.min(6.0, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
   const transitionProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { target: 0.22 };
-  const designedShare = (isShorts || isAi) ? Math.max(0.35, transitionProfile.target * 1.6) : transitionProfile.target;
+  const designedShare = (isShorts || isAi) ? Math.max(0.30, transitionProfile.target * 1.5) : transitionProfile.target;
   budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
@@ -336,8 +336,10 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     const softTone = ['somber', 'reflective', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
     const isSectionBreak = scene.section || reason === TRANSITION_REASON.SECTION_CHANGE;
     const isMajorPayoff = (scene.purpose === 'payoff' || reason === TRANSITION_REASON.REVEAL) && scene.intensity <= 4;
-    const semanticPause = isShorts || isSectionBreak || isMajorPayoff
-      || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason));
+    const naturalProgression = plan.scenes.length >= 4 && scenesSinceDissolve >= minScenesBetweenDissolves && scene.intensity <= 4;
+    const semanticPause = isShorts || isAi || isSectionBreak || isMajorPayoff
+      || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason))
+      || (naturalProgression && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.NEW_IDEA].includes(reason));
     if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= minScenesBetweenDissolves) {
       out[index] = 'dissolve';
       budget--;
@@ -459,7 +461,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       ? false
       : sceneBoundary
         ? allocatedSceneDissolve
-        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && (semanticDissolve || isShorts));
+        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && (semanticDissolve || isShorts || isAi));
     const appliedFrames = useDissolve && sceneBoundary ? clip.enter.frames : useDissolve ? dissolveFrames : 0;
     const decision = useDissolve
       ? { type: 'dissolve', frames: appliedFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }

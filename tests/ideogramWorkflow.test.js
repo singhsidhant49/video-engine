@@ -25,12 +25,18 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
   assert.equal(stickman.ideogramStyleType, 'DESIGN');
   assert.ok(stickman.stylePromptAnchor.includes('stick figure'));
 
+  const doodle = getImageStyle('doodle_comic');
+  assert.equal(doodle.ideogramStyleType, 'AUTO');
+  assert.ok(doodle.stylePromptAnchor.includes('modern animated stick figure comic style'));
+  assert.ok(doodle.stylePromptAnchor.includes('detailed modern environments'));
+  assert.ok(doodle.negativePrompt.includes('blank white void background'));
+
   const fullPrompt = buildFullIdeogramPrompt({
-    prompt: 'A wanderer walking under rain',
-    styleId: 'anime',
+    prompt: 'Two friends sitting on a city rooftop with a lantern',
+    styleId: 'doodle_comic',
   });
-  assert.ok(fullPrompt.startsWith('A wanderer walking under rain'));
-  assert.ok(fullPrompt.includes('cel-shaded anime aesthetic'));
+  assert.ok(fullPrompt.startsWith('Two friends sitting on a city rooftop with a lantern'));
+  assert.ok(fullPrompt.includes('modern animated stick figure comic style'));
 
   const customPrompt = buildFullIdeogramPrompt({
     prompt: 'A futuristic tower',

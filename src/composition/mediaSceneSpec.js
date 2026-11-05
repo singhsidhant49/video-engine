@@ -175,8 +175,8 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     subtlePull: 'SUBTLE_PULL', pull: 'SUBTLE_PULL', slowZoomOut: 'SUBTLE_PULL',
   };
   let cameraIntent = nativeVideo || role === 'EVIDENCE' ? 'STATIC'
-    : cameraMap[authoredCamera] || (role === 'DETAIL' ? 'SUBTLE_PUSH' : 'STATIC');
-  if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 512 : 1280) || primary.qualityTier === 'FALLBACK')) {
+    : cameraMap[authoredCamera] || cameraMap[shot?.cameraMove] || cameraMap[shot?.move?.type] || (role === 'DETAIL' ? 'SUBTLE_PUSH' : 'STATIC');
+  if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 512 : 640) || primary.qualityTier === 'FALLBACK')) {
     cameraIntent = 'STATIC';
   }
 

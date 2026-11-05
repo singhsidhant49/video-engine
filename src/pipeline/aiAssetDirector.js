@@ -78,7 +78,22 @@ export async function directAiAssets(plan, specs, {
   await mapLimit(assetRequests, 2, async (req, index) => {
     const scene = sceneMap.get(req.sceneId);
     const shotId = req.storyboardShotId || `shot_${index + 1}`;
-    const rawPrompt = req.concept || scene?.imagePrompt || scene?.visual || scene?.narration || 'atmospheric scene';
+
+    // Extract shot-specific visual nuances from visual proposition or visible need
+    const shotConcept = req.visualProposition?.positiveDescriptions?.[0]
+      || req.visibleNeed?.visualGoal
+      || req.visibleNeed?.focalSubject
+      || req.concept;
+
+    // Prioritize the director's authored AI image prompt, then shot visual proposition, then scene visual
+    let rawPrompt = scene?.imagePrompt || scene?.visual;
+    if (!rawPrompt || rawPrompt.trim().length < 15) {
+      rawPrompt = shotConcept || scene?.narration || 'atmospheric narrative scene';
+    } else if (shotConcept && shotConcept.length > 5 && !rawPrompt.toLowerCase().includes(shotConcept.toLowerCase().slice(0, 15))) {
+      // If the shot has a specific focal subject or action not already mentioned in the scene prompt, enrich it
+      rawPrompt = `${rawPrompt.replace(/[.,\s]+$/, '')}, focusing on ${shotConcept}`;
+    }
+
     const shotSeed = (masterSeed + index * 17) % 1000000000;
 
     const targetFileName = `${shotId}_a.png`;

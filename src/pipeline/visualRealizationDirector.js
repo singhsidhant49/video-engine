@@ -80,7 +80,7 @@ function chooseCameraMove(shot, scene, family, asset, timing, memory, format = '
   if (shot.motionPreference === 'stable') return 'static';
 
   const durationSec = (timing?.durationInFrames || 0) / Math.max(1, fps);
-  const minDuration = format === 'shorts' ? 1.5 : 3.0;
+  const minDuration = 1.5;
   if (durationSec < minDuration) return 'static';
 
   const aspect = Number(asset?.width) / Math.max(1, Number(asset?.height));
@@ -92,8 +92,8 @@ function chooseCameraMove(shot, scene, family, asset, timing, memory, format = '
   const movingRun = [...recentMoves].reverse().findIndex((move) => move === 'static');
   const consecutiveMoving = movingRun === -1 ? recentMoves.length : movingRun;
 
-  // 2. Intermittent deliberate still rests (relaxed in shorts for continuous motion)
-  const maxConsecutiveMoving = format === 'shorts' ? 6 : 3;
+  // 2. Intermittent deliberate still rests (relaxed for continuous cinematic motion)
+  const maxConsecutiveMoving = format === 'shorts' ? 6 : 5;
   if (consecutiveMoving >= maxConsecutiveMoving) return 'static';
 
   // 3. Wide panoramic photo slack: optional subtle horizontal drift (<= 3% travel)
@@ -132,7 +132,7 @@ function chooseMinimalCameraMove(shot, scene, family, asset, timing, memory, fps
 function cameraMagnitudeFor(timing, fps, move, format = 'landscape') {
   if (move === 'static') return 0;
   if (move === 'panLeft' || move === 'panRight') return .03;
-  // In shorts, dynamic mobile viewing benefits from a slightly more pronounced, smooth zoom (6% vs 4%)
+  // Shorts viewing benefits from a slightly more pronounced zoom (6% vs 4%)
   return format === 'shorts' ? 0.06 : 0.04;
 }
 

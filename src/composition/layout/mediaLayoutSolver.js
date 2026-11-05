@@ -131,7 +131,7 @@ export function solveMediaLayout(composition, mediaSceneSpec, ctx) {
     const scales = behavior === 'SUBTLE_PUSH' ? [baseScale, Number((baseScale * zoomFactor).toFixed(4))]
       : behavior === 'SUBTLE_PULL' ? [Number((baseScale * zoomFactor).toFixed(4)), baseScale]
         : ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? [Number((baseScale * zoomFactor).toFixed(4)), Number((baseScale * zoomFactor).toFixed(4))] : [baseScale, baseScale];
-    const travel = .03;
+    const travel = .04;
     const startX = behavior === 'PAN_LEFT' ? focus.x + travel
       : behavior === 'PAN_RIGHT' ? focus.x - travel : focus.x;
     const endX = focus.x;

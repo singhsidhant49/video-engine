@@ -198,7 +198,7 @@ export function preflightSolvedScene({ solvedScene, motionPlan, composition, med
       const isShorts = geometry.rect.height > geometry.rect.width;
       const resolutionFloor = assetSpec?.qualityTier === 'FALLBACK' && mediaSceneSpec.cameraIntent === 'STATIC'
         ? .55
-        : isShorts ? .45 : .72;
+        : isShorts ? .45 : .48;
       if (sourceWidth && sourceWidth + 1 < requiredSourceWidth * resolutionFloor) issues.push({ code: 'camera_resolution_insufficient', severity: 'hard', elementId, sourceWidth, requiredSourceWidth: Math.round(requiredSourceWidth) });
       if (geometry.nativeMotion && path?.behavior !== 'STATIC') issues.push({ code: 'synthetic_motion_over_native_video', severity: 'hard', elementId });
     }

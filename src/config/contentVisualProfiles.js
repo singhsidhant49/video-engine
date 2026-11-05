@@ -2,19 +2,19 @@ const PROFILES = Object.freeze({
   documentary: {
     id: 'documentary', authenticMediaPriority: true, maxImageShare: 0.88,
     minVideoShare: 0, minStructuredShare: 0, maxPhotoRun: 10,
-    dissolveShare: { min: 0.15, target: 0.22, max: 0.30 },
+    dissolveShare: { min: 0.12, target: 0.22, max: 0.35 },
     videoRoles: new Set(['action', 'transition', 'atmosphere']),
   },
   explainer: {
     id: 'explainer', authenticMediaPriority: true, maxImageShare: 0.60,
     minVideoShare: 0.10, minStructuredShare: 0.25, maxPhotoRun: 5,
-    dissolveShare: { min: 0.04, target: 0.09, max: 0.15 },
+    dissolveShare: { min: 0.04, target: 0.18, max: 0.35 },
     videoRoles: new Set(['action', 'transition']),
   },
   motivational: {
     id: 'motivational', authenticMediaPriority: true, maxImageShare: 0.48,
     minVideoShare: 0.50, minStructuredShare: 0, maxPhotoRun: 4,
-    dissolveShare: { min: 0, target: 0.05, max: 0.10 },
+    dissolveShare: { min: 0.04, target: 0.15, max: 0.28 },
     videoRoles: new Set(['hook', 'action', 'transition', 'atmosphere', 'payoff', 'establishing']),
   },
   meditation: {

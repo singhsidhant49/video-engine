@@ -339,3 +339,43 @@ test('Shorts video format applies camera zoom in/out and smooth transitions acro
   assert.ok(dissolves.length >= 1, 'Shorts must include smooth dissolve transitions between shots');
   assert.ok(dissolves[0].enter.frames >= 15, 'Dissolve frames must be at least 15 frames (~0.5s) for smoothness');
 });
+
+test('Landscape video format applies camera zoom in/out and smooth transitions across scenes and shots', () => {
+  const visualPolicy = resolveVisualPolicy();
+  const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
+  const timing = [{ startFrame: 0, endFrame: 75, durationInFrames: 75, from: 0 }]; // 2.5s shot in landscape
+  const makeScene = (id, role = 'detail') => ({
+    id, kind: 'subject', purpose: 'detail', tone: 'neutral', intensity: 2, informationDensity: 3, visualIntent: 'explain',
+    storyboardShots: [{ id: `${id}_shot`, role, visualConcept: 'A landscape subject', mediaPreference: 'auto', assetIntent: 'concept', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }],
+  });
+
+  // 1280x720 standard landscape AI/stock resolution
+  const landscapeShot = realizeSceneShots({
+    scene: makeScene('landscape1', 'detail'), spec,
+    sceneAssets: { primary: { src: 'flux_landscape.png', type: 'image', width: 1280, height: 720, focal: { x: .5, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'landscape', fps: 30,
+  })[0];
+
+  assert.notEqual(landscapeShot.presentation.cameraMove, 'static', 'Landscape shot must not be downgraded to static');
+  assert.equal(landscapeShot.presentation.cameraMove, 'subtlePush', 'Detail shot in landscape should subtlePush');
+  assert.deepEqual(landscapeShot.move.scale, [1, 1.04], 'Landscape camera zoom should have 4% magnitude [1, 1.04]');
+
+  // Test transitions in Landscape for multi-scene video
+  const scenes = Array.from({ length: 6 }, (_, i) => ({
+    id: `scene_${i + 1}`,
+    purpose: i === 0 ? 'hook' : i === 5 ? 'payoff' : 'context',
+    tone: 'neutral',
+    intensity: 2,
+    storyboardShots: [{ id: `s_${i + 1}`, role: 'subject', visualConcept: `concept ${i + 1}`, durationInFrames: 90, from: i * 90 }],
+  }));
+
+  const transitions = chooseTransitions(
+    { scenes, format: 'landscape', imageSource: 'ai' },
+    scenes.map(() => ({ family: 'image' })),
+    { transitions: { perMinute: 3 } },
+    30, 540, resolveVisualPolicy(), { contentType: 'explainer' },
+  );
+
+  const sceneDissolves = transitions.filter((t) => t === 'dissolve');
+  assert.ok(sceneDissolves.length >= 1, 'Landscape video must include dissolve transitions between scenes');
+});
