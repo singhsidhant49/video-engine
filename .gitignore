@@ -18,12 +18,16 @@ renders/**/*.mp4
 renders/downloads/
 renders/transition-audit/
 renders/*.png
+renders/*.credits.txt
+renders/*.delivery.json
 renders/stills/
 renders/template_tests/
 public/audio/*.mp3
 public/media/*
 !public/media/.gitkeep
 !public/audio/.gitkeep
+temp/*
+!temp/.gitkeep
 
 # Dedicated persistent media-bank storage
 storage/
