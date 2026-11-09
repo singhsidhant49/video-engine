@@ -25,8 +25,10 @@ import { ffmpeg, probeDuration } from '../services/ffmpeg.js';
 import { DOMAIN_SYNONYMS } from './assetIntelligenceScorer.js';
 
 const CACHE_DIR = path.resolve('.cache', 'visual-inspection');
-const BACKEND_VERSION = 'v2.1';
-const SCHEMA_VERSION = 'v4';
+// Bump both values whenever semantic classes or feature extraction changes so
+// production retries cannot reuse a stale false-negative inspection.
+const BACKEND_VERSION = 'v2.2';
+const SCHEMA_VERSION = 'v5';
 
 const STOP_WORDS = new Set([
   'the', 'a', 'an', 'and', 'or', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from',
@@ -419,7 +421,7 @@ function inspectLocalSemanticSignals(candidate, textCorpus) {
 /**
  * Level 3: Semantic Vision-Language Pixel Classification (using CLIP zero-shot).
  */
-async function inspectSemanticVisionLanguage(filePath, candidateSignals) {
+async function inspectSemanticVisionLanguage(filePath) {
   const classifier = await getVisionClassifier();
   if (!classifier || !filePath) return null;
 
@@ -443,7 +445,10 @@ async function inspectSemanticVisionLanguage(filePath, candidateSignals) {
       'scientific laboratory glassware, petri dish, or microscope',
       'computer code editor on screen',
       'modern server rack in data center room',
-      'glowing cosmic abstract quantum illustration'
+      'glowing cosmic abstract quantum illustration',
+      'person awake in bed using a smartphone at night',
+      'close-up of tired human eyes or face at night',
+      'person sleeping or resting in a bedroom',
     ];
 
     const results = await classifier(filePath, candidateClasses);
@@ -489,7 +494,7 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
   // otherwise from Level 2 verified entities, NEVER raw query words.
   if (level3Vision && level3Vision.confidence > 0.35) {
     communicatedMeanings.push(level3Vision.topClass);
-    const isHumanOrEverydayClass = /person|portrait|researcher|speaker|educator|working at.*desk|meeting.*handshake|thoughtful.*stressed|shelves with food|documents.*contracts/i.test(level3Vision.topClass);
+    const isHumanOrEverydayClass = /person|portrait|researcher|speaker|educator|working at.*desk|meeting.*handshake|thoughtful.*stressed|shelves with food|documents.*contracts|human eyes|sleeping.*bedroom/i.test(level3Vision.topClass);
     const hasSpecificEntity = primarySubject && primarySubject !== 'subject' && !primarySubject.includes('generic');
     if (!hasSpecificEntity) {
       primarySubject = level3Vision.topClass;
@@ -519,6 +524,27 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
       visibleEnvironment = 'thoughtful or contemplative setting';
       visiblePeople.push('thoughtful person');
       likelyUseCases.push('decision making', 'deliberation', 'stress', 'contemplation');
+    } else if (level3Vision.topClass.includes('person awake in bed using a smartphone')) {
+      visibleEnvironment = 'bedroom at night';
+      visiblePeople.push('person awake in bed');
+      visibleObjects.push('bed', 'smartphone', 'phone screen');
+      visibleAction = 'using a smartphone while awake in bed';
+      communicatedMeanings.push('insomnia', 'sleeplessness', 'nighttime phone use');
+      likelyUseCases.push('insomnia', 'sleep problems', 'late-night screen use');
+    } else if (level3Vision.topClass.includes('close-up of tired human eyes')) {
+      visibleEnvironment = 'dark nighttime close-up';
+      visiblePeople.push('tired person');
+      visibleObjects.push('human eye', 'eyes', 'face');
+      visibleAction = 'eyes open in a close-up gaze';
+      communicatedMeanings.push('tiredness', 'wakefulness', 'insomnia');
+      likelyUseCases.push('fatigue', 'insomnia', 'sleeplessness');
+    } else if (level3Vision.topClass.includes('person sleeping or resting in a bedroom')) {
+      visibleEnvironment = 'bedroom at night';
+      visiblePeople.push('person sleeping in bed');
+      visibleObjects.push('bed', 'bedroom');
+      visibleAction = 'sleeping or resting in bed';
+      communicatedMeanings.push('sleep', 'rest', 'bedtime');
+      likelyUseCases.push('sleep', 'rest', 'bedtime routine');
     } else if (level3Vision.topClass.includes('books, paperwork, documents')) {
       visibleEnvironment = 'desk or study table';
       visibleObjects.push('paperwork', 'documents', 'contract');
@@ -596,6 +622,10 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
     visibleEnvironment = 'modern corporate office interior';
     visibleObjects.push('office desk', 'conference table');
     communicatedMeanings.push('corporate collaboration', 'business workflow');
+  } else if (/bedroom|\bbed\b|sleeping|insomnia|sleepless|awake\s+at\s+night/i.test(textCorpus)) {
+    visibleEnvironment = 'bedroom at night';
+    visibleObjects.push('bed', 'bedroom');
+    communicatedMeanings.push('sleep', 'insomnia', 'nighttime rest');
   } else if (/ocean|sea|seabed|underwater/i.test(textCorpus)) {
     visibleEnvironment = 'ocean seabed or marine underwater';
     visibleObjects.push('undersea environment');
@@ -609,6 +639,8 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
   if (/warning\s+sign|radiation\s+sign|hazard\s+sign/i.test(textCorpus)) visibleObjects.push('warning sign', 'radiation sign');
   if (/code|javascript|html/i.test(textCorpus)) visibleObjects.push('code editor screen');
   if (/diagram|genealog/i.test(textCorpus)) visibleObjects.push('diagram chart');
+  if (/smartphone|mobile\s+phone|cell\s*phone|using\s+(?:a\s+)?phone/i.test(textCorpus)) visibleObjects.push('smartphone', 'phone screen');
+  if (/\beyes?\b|eyelid|gaze/i.test(textCorpus)) visibleObjects.push('human eye', 'eyes');
 
   // 2. Detect Visible People from verified corpus
   if (/sanitation\s+worker|street\s+worker|engineer\s+monitoring|scientist\s+in\s+lab|people\s+walking/i.test(textCorpus)) {
@@ -627,6 +659,10 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
     visibleAction = 'loading municipal trash or collecting street waste';
   } else if (/running|driving|moving/i.test(textCorpus)) {
     visibleAction = 'vehicle motion or physical locomotion';
+  } else if (/using\s+(?:a\s+)?(?:smartphone|mobile|phone)|looking\s+at\s+(?:a\s+)?phone/i.test(textCorpus)) {
+    visibleAction = 'using a smartphone and looking at its screen';
+  } else if (/\beyes?\b|gaze|eyelid/i.test(textCorpus)) {
+    visibleAction = 'eyes open in a close-up gaze';
   }
 
   // Determine Style Class
@@ -751,7 +787,7 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
   // LEVEL 3: Semantic Vision-Language Pixel Classification (using CLIP zero-shot when pixels are accessible)
   if (actualFilePath && (candidate.type !== 'video' && !String(actualFilePath).endsWith('.mp4'))) {
     try {
-      level3Vision = await inspectSemanticVisionLanguage(actualFilePath, level2Signals);
+      level3Vision = await inspectSemanticVisionLanguage(actualFilePath);
     } catch {}
   }
 
@@ -893,7 +929,7 @@ export function compareVisualToNeed(inspection, visibleNeed) {
       if (m > maxAltMatch) maxAltMatch = m;
     }
   }
-  const coreNounTokens = primaryTokens.filter((t) => !['loneliness', 'epidemic', 'pristine', 'perfect', 'dark', 'abstract', 'modern', 'authentic', 'close', 'general', 'view', 'wide', 'detail', 'footage', 'photo', 'image', 'video'].includes(t));
+  const coreNounTokens = primaryTokens.filter((t) => !['loneliness', 'epidemic', 'pristine', 'perfect', 'dark', 'abstract', 'modern', 'authentic', 'close', 'general', 'view', 'wide', 'open', 'tired', 'night', 'detail', 'footage', 'photo', 'image', 'video'].includes(t));
   let matchCoreNoun = 0;
   if (coreNounTokens.length > 0) {
     matchCoreNoun = overlap(coreNounTokens, visibleObj);

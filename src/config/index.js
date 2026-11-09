@@ -15,6 +15,9 @@ export const config = {
   rendersDir: path.join(ROOT_DIR, 'renders'),
   tempDir: path.join(ROOT_DIR, 'temp'),
   storageDir: process.env.VIDEO_STORAGE_DIR ? path.resolve(process.env.VIDEO_STORAGE_DIR) : path.join(ROOT_DIR, 'storage'),
+  channelsDir: process.env.CHANNEL_STORAGE_DIR
+    ? path.resolve(process.env.CHANNEL_STORAGE_DIR)
+    : path.join(process.env.VIDEO_STORAGE_DIR ? path.resolve(process.env.VIDEO_STORAGE_DIR) : path.join(ROOT_DIR, 'storage'), 'channels'),
   mediaBankDir: process.env.MEDIA_BANK_DIR
     ? path.resolve(process.env.MEDIA_BANK_DIR)
     : (process.env.VIDEO_STORAGE_DIR
@@ -85,5 +88,6 @@ export const config = {
     shutdownTimeoutMs: Math.max(1_000, parseInt(process.env.VIDEO_SHUTDOWN_TIMEOUT_MS || '30000', 10)),
     jobStore: process.env.VIDEO_JOB_STORE || (process.env.DATABASE_URL ? 'postgres' : 'file'),
     queueBackend: process.env.VIDEO_QUEUE_BACKEND || (process.env.REDIS_URL ? 'bullmq' : 'memory'),
+    youtubePublishingEnabled: String(process.env.YOUTUBE_PUBLISHING_ENABLED || '').toLowerCase() === 'true',
   }
 };

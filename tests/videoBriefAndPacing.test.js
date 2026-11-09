@@ -39,6 +39,21 @@ test('production profiles adapt pacing to different YouTube channel types', () =
   assert.ok(explainer.pacing.minimumShotSeconds > educationalShort.pacing.minimumShotSeconds);
 });
 
+test('sleep neuroscience explainer is not misclassified as guided meditation', () => {
+  const profile = resolveProductionProfile({
+    topic: `Why Your Brain Deletes Memories While You Sleep: explain synaptic pruning and memory consolidation.
+Target audience: psychology-curious self-improvement enthusiasts.
+SCRIPT CONTRACT:
+Never end with empty thanks or generic inspiration.`,
+    niche: 'Psychology & Human Behavior',
+    format: 'landscape',
+  });
+
+  assert.equal(profile.contentType, 'explainer');
+  assert.equal(profile.pacing.mode, 'balanced');
+  assert.equal(profile.voice, 'af_bella');
+});
+
 test('contemplative pacing authors fewer image changes than balanced pacing', () => {
   const scene = {
     purpose: 'explanation', energy: 2, informationDensity: 2, durationHint: 12,
@@ -139,6 +154,48 @@ test('documentary QC warns instead of failing on archival photo runs and quantiz
   assert.equal(transitions.ok, true);
   assert.equal(qc.checks.filter((check) => !check.ok && check.severity === 'error').length, 0);
   assert.equal(qc.ok, true);
+});
+
+test('long-form reuse gate accepts broad diversity but rejects concentration on one asset', () => {
+  const fps = 30;
+  const makeTimeline = (concentrated) => {
+    const shots = Array.from({ length: 91 }, (_, index) => ({
+      id: `long${index + 1}`,
+      storyboardShotId: `long${index + 1}`,
+      sceneId: 'long-scene',
+      sectionId: 'long-section',
+      from: index * 120,
+      durationInFrames: 120,
+      family: 'media',
+      asset: {
+        type: 'video',
+        src: index < 65
+          ? `asset-${index}.mp4`
+          : concentrated ? 'asset-0.mp4' : `asset-${index - 65}.mp4`,
+      },
+      enter: { type: 'cut', frames: 0 },
+      transitionPolicy: 'CUT',
+      presentation: { layout: 'full' },
+    }));
+    return {
+      fps,
+      durationInFrames: shots.length * 120,
+      style: 'cinematic_documentary',
+      visualMode: 'MEDIA_EDITORIAL',
+      productionProfile: {
+        contentType: 'motivational',
+        pacing: { mode: 'energetic', minimumShotSeconds: 3.4, maximumCutsPer10Seconds: 5, targetAverageShotSeconds: 4.2 },
+      },
+      clips: [{ id: 'long-scene', sceneId: 'long-scene', from: 0, durationInFrames: shots.length * 120, shots }],
+      realizedShots: shots,
+    };
+  };
+
+  const diverse = runTimelineQc(makeTimeline(false), { publishMode: 'PRODUCTION_RENDER' });
+  const concentrated = runTimelineQc(makeTimeline(true), { publishMode: 'PRODUCTION_RENDER' });
+  assert.equal(diverse.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.ok, true);
+  assert.match(diverse.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.detail || '', /65 unique assets/);
+  assert.equal(concentrated.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.ok, false);
 });
 
 test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole whisper', () => {

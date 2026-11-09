@@ -23,6 +23,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
   const topic = plan.topic || 'Unknown Topic';
   const title = plan.title || topic;
   const style = plan.style || 'cinematic_dark';
+  const metadata = options.metadata || {};
 
   // 1. Generate 3 High-CTR Thumbnail Concepts
   const thumbnailConcepts = [
@@ -38,6 +39,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
         accent: '#F5C542',
       },
       compositionTip: 'Place subject slightly off-center right, with 3-4 bold words on the left at 72pt+ font.',
+      strategicBrief: metadata.thumbnailConcept || null,
     },
     {
       conceptId: 'B_provocative_question',
@@ -121,7 +123,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
 
   // 4. Formatted Description
   const description = [
-    `${title}\n`,
+    `${metadata.primaryKeyword ? `${metadata.primaryKeyword}: ` : ''}${title}\n`,
     `${plan.script ? plan.script.slice(0, 180) + '...' : ''}\n`,
     '⏱️ CHAPTERS:',
     chapters.map((c) => `${c.time} - ${c.title}`).join('\n'),
@@ -140,5 +142,10 @@ export function generateVideoPackage(plan, timeline, options = {}) {
     chapters,
     evidenceSources,
     description,
+    strategy: {
+      trafficStrategy: metadata.trafficStrategy || null,
+      primaryKeyword: metadata.primaryKeyword || null,
+      thumbnailConcept: metadata.thumbnailConcept || null,
+    },
   };
 }

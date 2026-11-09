@@ -24,6 +24,7 @@ import { generateVideoPackage } from '../services/thumbnailGenerator.js';
 import { buildTimeline, rngFrom, sceneWordRanges } from './timeline.js';
 import { synthesizeWithSay } from '../services/devTts.js';
 import { formatCredits } from '../shared/licensing.js';
+import { ffmpeg } from '../services/ffmpeg.js';
 import { runTimelineQc, printQc } from '../qc/timelineQc.js';
 import { runRenderQc } from '../qc/renderQc.js';
 import { JobContext } from '../core/jobs/jobContext.js';
@@ -152,6 +153,13 @@ export async function createFacelessVideo({
   imageQuality = null,
 }) {
   if (global.gc) { try { global.gc(); } catch {} }
+  const explicitVoiceRequested = Boolean(
+    voice
+    || brief?.voice
+    || brief?.channel?.voice
+    || brief?.channelProfile?.voice
+    || channelProfile?.voice
+  );
   const throwIfCancelled = () => {
     if (signal?.aborted) {
       const error = new Error('Video generation cancelled');
@@ -245,6 +253,10 @@ export async function createFacelessVideo({
     if (savedRequest.imageStyle && effectiveImageStyle === 'anime') effectiveImageStyle = savedRequest.imageStyle;
     if (savedRequest.customStylePrompt && !effectiveCustomStylePrompt) effectiveCustomStylePrompt = savedRequest.customStylePrompt;
     productionProfile = resolveProductionProfile({ topic, niche, format, channelProfile });
+    // A resumed run may have persisted an automatically selected voice from an
+    // older, incorrect content profile. Preserve actual user choices, but let
+    // automatic voice selection follow the freshly resolved profile.
+    if (!explicitVoiceRequested) voice = productionProfile.voice;
     narrationProfile = resolveNarrationProfile({
       topic,
       niche,
@@ -734,7 +746,7 @@ export async function createFacelessVideo({
       });
     } else {
       dirResult = await directAssets(executionPlan, specs, {
-        publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode,
+        publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode, signal,
       });
     }
     assets = dirResult.assets;
@@ -1030,7 +1042,7 @@ export async function createFacelessVideo({
     videoPackage = JSON.parse(await fs.readFile(path.join(runDir, 'packaging.json'), 'utf8'));
   } else {
     await job.startStage('package');
-    videoPackage = generateVideoPackage(executionPlan, timeline, { format });
+    videoPackage = generateVideoPackage(executionPlan, timeline, { format, metadata: normalizedBrief?.metadata || {} });
     await save('packaging.json', videoPackage);
     await fs.writeFile(path.join(runDir, 'package.md'), `# ${videoPackage.title}\n\n${videoPackage.description}`);
     await job.completeStage('package', ['packaging.json', 'package.md']);
@@ -1281,21 +1293,29 @@ export async function createFacelessVideo({
   // 8. Render upload-ready Thumbnail PNG (only if full render)
   if (!scene && !range) {
     try {
-      const thumbComp = await selectComposition({ serveUrl, id: 'YouTubeThumbnail', inputProps: { packageData: videoPackage } });
+      const heroFramePath = path.join(runDir, 'thumbnail-hero.jpg');
+      await ffmpeg(['-ss', String(Math.max(1, Number(result.durationSeconds || 10) * 0.22)), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
+      const heroImage = `data:image/jpeg;base64,${(await fs.readFile(heroFramePath)).toString('base64')}`;
+      const thumbnailPackage = {
+        ...videoPackage,
+        thumbnails: videoPackage.thumbnails.map((concept) => ({ ...concept, heroImage })),
+      };
       const thumbnailPath = path.join(runDir, 'thumbnail.png');
-      await renderStill({
-        composition: thumbComp,
-        serveUrl,
-        output: thumbnailPath,
-        inputProps: { packageData: videoPackage },
-        imageFormat: 'png',
-        delayRenderTimeoutInMilliseconds: 120_000,
-        chromiumOptions,
-      });
+      for (let conceptIndex = 0; conceptIndex < Math.min(3, thumbnailPackage.thumbnails.length); conceptIndex++) {
+        const inputProps = { packageData: thumbnailPackage, conceptIndex };
+        const thumbComp = await selectComposition({ serveUrl, id: 'YouTubeThumbnail', inputProps });
+        await renderStill({
+          composition: thumbComp, serveUrl,
+          output: conceptIndex === 0 ? thumbnailPath : path.join(runDir, `thumbnail-${conceptIndex + 1}.png`),
+          inputProps, imageFormat: 'png', delayRenderTimeoutInMilliseconds: 120_000, chromiumOptions,
+        });
+      }
+      await fs.rm(heroFramePath, { force: true }).catch(() => {});
       result.thumbnail = thumbnailPath;
-      console.log(`   🖼️  Thumbnail generated: ${thumbnailPath}`);
+      console.log(`   🖼️  Three thumbnail variants generated from an actual video frame: ${thumbnailPath}`);
     } catch (e) {
-      // Graceful fallback if thumbnail composition has a minor issue
+      console.warn(`Thumbnail generation failed: ${e.message}`);
+      result.thumbnailError = String(e.message || e).slice(0, 500);
     }
   }
 

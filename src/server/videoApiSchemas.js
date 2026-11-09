@@ -75,5 +75,6 @@ export function toPipelineBrief(request) {
       captions: request.subtitles.enabled ? 'subtitles' : 'none',
       music: request.audio.music,
     },
+    metadata: request.metadata || {},
   };
 }

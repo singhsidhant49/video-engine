@@ -248,6 +248,13 @@ export function evaluateEditorialUsefulness({
   } else {
     specificity = 0.10;
   }
+  // The semantic judge understands domain synonyms (for example phone /
+  // smartphone and bed / bedroom). Preserve that pixel-grounded evidence
+  // instead of reducing specificity solely because exact words differ.
+  const semanticSubjectMatch = Number(editorialMatch?.comparison?.subjectMatch || editorialMatch?.subjectMatch || 0);
+  if (matchClass === 'CONTEXTUAL' && semanticSubjectMatch > 0) {
+    specificity = Math.min(0.65, Math.max(specificity, semanticSubjectMatch * 0.78));
+  }
 
   // If candidate only matched search experiment but does not meaningfully represent required concept:
   const isWeakSearchHit = searchExpOverlap >= 0.40 && requiredOverlap < 0.25 &&

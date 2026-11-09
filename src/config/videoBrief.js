@@ -62,8 +62,17 @@ const BASE_PACING = Object.freeze({
 });
 
 function inferContentType(topic = '', niche = '') {
-  const text = `${niche} ${topic}`.toLowerCase();
-  if (isMeditationNarration({ topic, niche }) || /\b(?:sleep|bedtime story|asmr|whisper)\b/.test(text)) return 'meditation';
+  // Channel-generated prompts append production instructions which may mention
+  // other genres in a negative rule (for example "never end with generic
+  // inspiration"). Classify the actual creative brief, not that instruction
+  // appendix.
+  const creativeBrief = String(topic || '').split(/\n\s*SCRIPT CONTRACT\s*:/i)[0];
+  const text = `${niche} ${creativeBrief}`.toLowerCase();
+  // "Sleep" is also a common subject in neuroscience, health, and psychology
+  // explainers. Only meditation-shaped language should select the meditation
+  // production profile; a subject word alone must not change pacing, voice, or
+  // transition requirements.
+  if (isMeditationNarration({ topic, niche })) return 'meditation';
   const scores = {
     documentary: 0, explainer: 0, motivational: 0, story: 0, audiobook: 0,
   };
@@ -73,6 +82,7 @@ function inferContentType(topic = '', niche = '') {
   add('documentary', /\b(?:history|historical|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat\w*|scandal|unsolved|archive|archival)\b/, 2);
   add('motivational', /\b(?:motivational|motivation|self improvement|discipline|mindset|inspiration|overcome|resilience)\b/, 4);
   add('story', /\b(?:fiction|short story|dramatic story|tale|character arc|narrative fiction)\b/, 4);
+  add('explainer', /\b(?:science|scientist|scientific|psychology|neuroscience|brain|mechanism|explain|explanation)\b/, 4);
   add('explainer', /\b(?:explain|explainer|how .{0,30} works?|why .{0,30}|tutorial|lesson|breakdown|mechanism|science of)\b/, 3);
   const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   return ranked[0][1] > 0 ? ranked[0][0] : 'explainer';

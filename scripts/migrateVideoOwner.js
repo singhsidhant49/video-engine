@@ -5,7 +5,14 @@ import 'dotenv/config';
 import pg from 'pg';
 import { config } from '../src/config/index.js';
 
-const ownerForKey = (key) => `acct_${crypto.createHash('sha256').update(key).digest('hex').slice(0, 24)}`;
+const ownerForCredential = (credential) => {
+  const value = String(credential || '').trim();
+  const separator = value.indexOf(':');
+  const account = separator > 0 ? value.slice(0, separator) : '';
+  return /^[a-zA-Z0-9_-]{3,64}$/.test(account)
+    ? `acct_${account}`
+    : `acct_${crypto.createHash('sha256').update(value).digest('hex').slice(0, 24)}`;
+};
 const oldKey = process.env.OLD_VIDEO_API_KEY;
 const newKey = String(process.env.NEW_VIDEO_API_KEY || process.env.VIDEO_API_KEYS || '').split(',')[0].trim();
 
@@ -13,8 +20,8 @@ if (!newKey) {
   throw new Error('Set NEW_VIDEO_API_KEY or VIDEO_API_KEYS before running this migration');
 }
 
-const oldOwner = oldKey ? ownerForKey(oldKey) : null;
-const newOwner = ownerForKey(newKey);
+const oldOwner = oldKey ? ownerForCredential(oldKey) : null;
+const newOwner = ownerForCredential(newKey);
 
 let pgMigrated = 0;
 if (process.env.DATABASE_URL) {
@@ -40,8 +47,21 @@ if (process.env.DATABASE_URL) {
             updated_at=now()
         ${whereClause}
       `, params);
+      let channelsMigrated = 0;
+      const channelTable = await client.query("SELECT to_regclass('public.channels') AS channels, to_regclass('public.channel_ideas') AS ideas");
+      if (channelTable.rows[0]?.channels && channelTable.rows[0]?.ideas) {
+        const sourceFilter = oldOwner ? 'owner_id=$2' : 'owner_id != $1';
+        await client.query(`
+          INSERT INTO channels(owner_id,id,data,updated_at)
+          SELECT $1,id,data,updated_at FROM channels WHERE ${sourceFilter}
+          ON CONFLICT(owner_id,id) DO UPDATE SET data=EXCLUDED.data,updated_at=EXCLUDED.updated_at
+        `, params);
+        const ideas = await client.query(`UPDATE channel_ideas SET owner_id=$1 WHERE ${sourceFilter}`, params);
+        const removed = await client.query(`DELETE FROM channels WHERE ${sourceFilter}`, params);
+        channelsMigrated = ideas.rowCount + removed.rowCount;
+      }
       await client.query('COMMIT');
-      pgMigrated = jobs.rowCount + operations.rowCount;
+      pgMigrated = jobs.rowCount + operations.rowCount + channelsMigrated;
     } catch (error) {
       await client.query('ROLLBACK').catch(() => {});
       console.warn('Postgres migration warning:', error.message);
@@ -87,5 +107,20 @@ try {
   }
 } catch {}
 
-console.log(JSON.stringify({ pgMigrated, fileJobsMigrated, ownerId: newOwner }));
+let fileChannelsMigrated = 0;
+for (const filename of ['channels.json', 'ideas.json']) {
+  const file = path.join(config.channelsDir, filename);
+  try {
+    const rows = JSON.parse(await fs.readFile(file, 'utf8'));
+    let changed = false;
+    for (const row of rows) {
+      if (oldOwner ? row.ownerId === oldOwner : row.ownerId !== newOwner) {
+        row.ownerId = newOwner; changed = true; fileChannelsMigrated++;
+      }
+    }
+    if (changed) await fs.writeFile(file, JSON.stringify(rows, null, 2), 'utf8');
+  } catch {}
+}
+
+console.log(JSON.stringify({ pgMigrated, fileJobsMigrated, fileChannelsMigrated, ownerId: newOwner }));
 

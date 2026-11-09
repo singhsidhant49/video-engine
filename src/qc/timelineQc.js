@@ -118,13 +118,28 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   add('variant-repetition', mediaOnly || diagnostics.variantRepetitionRate <= 0.4, 'warn', mediaOnly ? mediaOnlyDetail : `${(diagnostics.variantRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   add('motion-repetition', diagnostics.cameraMoveRepetitionRate <= 0.55, 'warn', `${(diagnostics.cameraMoveRepetitionRate * 100).toFixed(0)}% adjacent repetition`);
   const uniqueAssetCount = new Set(shots.map((shot) => shot.asset?.src).filter(Boolean)).size;
+  const assetUseCounts = new Map();
+  for (const shot of shots) {
+    const src = shot.asset?.src;
+    if (src) assetUseCounts.set(src, (assetUseCounts.get(src) || 0) + 1);
+  }
+  const maxAssetUseCount = Math.max(0, ...assetUseCounts.values());
   const assetReuseWarnThreshold = isAiWorkflow ? 0.70 : 0.20;
   const assetReuseHardLimit = isAiWorkflow ? 0.75 : 0.25;
+  // A fixed percentage penalizes long edits even when they contain dozens of
+  // distinct assets and every deliberate callback is used only once. Permit a
+  // narrow long-form band while retaining the warning and blocking repeated
+  // dependence on any one clip.
+  const diverseLongFormReuse = !isAiWorkflow
+    && shots.length >= 60
+    && uniqueAssetCount >= Math.ceil(shots.length * 0.67)
+    && maxAssetUseCount <= 2
+    && diagnostics.assetReuseRate <= 0.33;
   const assetReuseHardOk = isAiWorkflow
     ? (diagnostics.assetReuseRate <= assetReuseHardLimit || uniqueAssetCount >= Math.min(clips.length, 3))
-    : diagnostics.assetReuseRate <= 0.25;
+    : (diagnostics.assetReuseRate <= assetReuseHardLimit || diverseLongFormReuse);
   add('asset-reuse', diagnostics.assetReuseRate <= assetReuseWarnThreshold, 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse among media shots`);
-  add('asset-reuse-hard-limit', assetReuseHardOk, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (${isAiWorkflow ? 'AI illustration limit: 75%' : 'production hard limit: 25%'})`);
+  add('asset-reuse-hard-limit', assetReuseHardOk, publishMode === 'PRODUCTION_RENDER' ? 'error' : 'warn', `${(diagnostics.assetReuseRate * 100).toFixed(0)}% reuse (${isAiWorkflow ? 'AI illustration limit: 75%' : diverseLongFormReuse ? `${uniqueAssetCount} unique assets; maximum use count ${maxAssetUseCount}; guarded long-form allowance` : 'production hard limit: 25%'})`);
   const photoRunLimit = mediaOnly ? Math.max(10, contentVisualProfile?.maxPhotoRun ?? 10) : (contentVisualProfile?.maxPhotoRun ?? 4);
   const excessivePhotoRun = diagnostics.consecutivePhotoCount > photoRunLimit;
   // A lack of third-party stock footage must not make an otherwise valid

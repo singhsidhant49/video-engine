@@ -12,6 +12,13 @@ const connectionFromUrl = (url) => {
   };
 };
 
+export const generationQueueJobId = (videoId, attempt = 0) => `video-${videoId}-${attempt}`;
+
+const leaseLostError = (jobId) => Object.assign(
+  new Error(`Queue lease lost for ${jobId}; stopping the stale processor so BullMQ can retry it safely`),
+  { name: 'AbortError', code: 'QUEUE_LEASE_LOST' },
+);
+
 export class BullVideoQueue {
   constructor({ redisUrl = process.env.REDIS_URL, processJobs = false, concurrency = 1, queueName = process.env.VIDEO_QUEUE_NAME || 'video-generation' } = {}) {
     if (!redisUrl) throw new Error('REDIS_URL is required for the BullMQ queue');
@@ -28,9 +35,9 @@ export class BullVideoQueue {
     if (this.processJobs) {
       // BullMQ owns active-job leases and stalled-job recovery. Removing active
       // jobs here can discard work that is still owned by another worker.
-      this.worker = new Worker(this.queueName, async (job) => {
-        if (job.name === 'generate') return onGenerate(job.data.videoId);
-        if (job.name === 'delete') return onDelete(job.data.videoId);
+      this.worker = new Worker(this.queueName, async (job, _token, signal) => {
+        if (job.name === 'generate') return onGenerate(job.data.videoId, { signal, queueJobId: job.id });
+        if (job.name === 'delete') return onDelete(job.data.videoId, { signal, queueJobId: job.id });
         throw new Error(`Unknown video queue task: ${job.name}`);
       }, {
         connection: this.connection,
@@ -43,6 +50,8 @@ export class BullVideoQueue {
         stalledInterval: Number(process.env.VIDEO_QUEUE_STALLED_INTERVAL_MS || 60_000),
         maxStalledCount: Number(process.env.VIDEO_QUEUE_MAX_STALLED_COUNT || 2),
       });
+      const leaseCancellationRequested = new Set();
+      this.worker.on('active', (job) => leaseCancellationRequested.delete(job?.id));
       this.worker.on('failed', async (job, error) => {
         console.error(`BullMQ job ${job?.id || 'unknown'} failed:`, error);
         const exhausted = Number(job?.attemptsMade || 0) >= Number(job?.opts?.attempts || 1);
@@ -50,20 +59,41 @@ export class BullVideoQueue {
           await onFailed(job.data.videoId, error).catch(() => {});
         }
       });
+      this.worker.on('lockRenewalFailed', (jobIds) => {
+        for (const jobId of jobIds) {
+          if (leaseCancellationRequested.has(jobId)) continue;
+          leaseCancellationRequested.add(jobId);
+          console.error(`BullMQ lease lost for ${jobId}; aborting its stale processor.`);
+          this.worker?.cancelJob(jobId, leaseLostError(jobId));
+        }
+      });
+      this.worker.on('error', (error) => {
+        // lockRenewalFailed above already reports the actionable error and
+        // aborts the ghost processor. Avoid printing the same stack repeatedly.
+        if (!String(error?.message || '').startsWith('could not renew lock for job ')) {
+          console.error('BullMQ worker error:', error);
+        }
+      });
       await this.worker.waitUntilReady();
     }
   }
 
   async enqueueGeneration(videoId, attempt = 0) {
-    const jobId = `video-${videoId}-${attempt}-${Date.now()}`;
+    const jobId = generationQueueJobId(videoId, attempt);
+    const existing = await this.queue.getJob(jobId);
+    if (existing && ['completed', 'failed'].includes(await existing.getState())) await existing.remove();
     return this.queue.add('generate', { videoId, attempt }, {
       jobId, attempts: 3, backoff: { type: 'exponential', delay: 5_000 },
       removeOnComplete: { age: 86_400, count: 1_000 }, removeOnFail: { age: 604_800, count: 2_000 },
     });
   }
 
-  async hasGeneration(videoId) {
+  async hasGeneration(videoId, attempt = 0) {
     try {
+      const exact = await this.queue.getJob(generationQueueJobId(videoId, attempt));
+      if (exact && ['waiting', 'active', 'delayed', 'paused', 'prioritized', 'waiting-children'].includes(await exact.getState())) return true;
+      // Recognize jobs created by releases that used timestamp-suffixed IDs so
+      // rolling upgrades do not duplicate work already owned by Redis.
       const jobs = await this.queue.getJobs(['waiting', 'active', 'delayed', 'paused', 'prioritized']);
       return jobs.some((j) => j?.data?.videoId === videoId);
     } catch {

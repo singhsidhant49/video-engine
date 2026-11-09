@@ -84,6 +84,28 @@ Live preview and edit React video components in real-time:
 npm run remotion:studio
 ```
 
+### Autonomous channels and YouTube publishing
+
+The dashboard includes a **Channels & Automation** desk for persistent channel profiles, content pillars,
+retention-scored idea brainstorming, approval, scheduled production, and YouTube publishing. New channels
+default to manual approval with autopublishing disabled. Automatic uploads default to YouTube `private`.
+
+For YouTube OAuth, enable YouTube Data API v3 in Google Cloud, create a Web application OAuth client, and
+register the exact callback URL below:
+
+```env
+YOUTUBE_CLIENT_ID=...
+YOUTUBE_CLIENT_SECRET=...
+YOUTUBE_REDIRECT_URI=https://video.example.com/oauth/youtube/callback
+YOUTUBE_OAUTH_STATE_SECRET=independent-random-secret-at-least-32-characters
+YOUTUBE_TOKEN_ENCRYPTION_KEY=different-random-secret-at-least-32-characters
+```
+
+Refresh tokens are encrypted at rest with AES-256-GCM. OAuth state is signed and expires after ten minutes.
+The dashboard never receives stored refresh tokens. Scheduled production uses five-field cron expressions and
+IANA timezones; for example, `0 12 * * 1,3,5` runs at noon every Monday, Wednesday, and Friday.
+See [Channel automation production handoff](docs/channel-automation-production-handoff-2026-11-05.md) before enabling unattended production.
+
 ### Option D: Asynchronous Video API
 
 The application-facing API is prompt-first; channel/profile settings are optional. Configure at least one API key for production:

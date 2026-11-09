@@ -7,6 +7,11 @@ import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
 import { createConfiguredVideoJobService } from './serviceFactory.js';
 import { createApiAuth, createApiRateLimit, createVideoApiRouter, videoApiErrorHandler } from './videoApiRouter.js';
 import { getAudioCatalog } from '../audio/musicCatalog.js';
+import { ChannelStore } from './channelStore.js';
+import { ChannelDirectorService } from '../services/channelDirectorService.js';
+import { ChannelScheduler } from './channelScheduler.js';
+import { createChannelApiRouter } from './channelApiRouter.js';
+import { YouTubePublisherService } from '../services/youtubePublisherService.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -16,15 +21,25 @@ app.use((req, res, next) => {
   res.set({
     'x-request-id': requestId,
     'x-content-type-options': 'nosniff',
+    'x-frame-options': 'DENY',
     'referrer-policy': 'no-referrer',
-    'content-security-policy': "default-src 'self'; img-src 'self' data: https:; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com",
+    'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+    'content-security-policy': "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; connect-src 'self'; img-src 'self' data: https:; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com",
   });
+  if (process.env.NODE_ENV === 'production') res.set('strict-transport-security', 'max-age=31536000; includeSubDomains');
   next();
 });
 app.use(express.json({ limit: config.server.maxRequestBytes }));
 
 const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all' });
 await videoJobService.init();
+const channelStore = new ChannelStore({ rootDir: config.channelsDir });
+await channelStore.init();
+const channelDirector = new ChannelDirectorService({ store: channelStore, videoService: videoJobService });
+const youtubePublisher = config.server.youtubePublishingEnabled
+  ? new YouTubePublisherService({ store: channelStore, videoService: videoJobService })
+  : null;
+const channelScheduler = new ChannelScheduler({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher });
 const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production: process.env.NODE_ENV === 'production' });
 const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE_LIMIT_PER_MINUTE || 120) });
 
@@ -33,7 +48,18 @@ app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, n
   const readiness = await videoJobService.readiness();
   res.status(readiness.ready ? 200 : 503).json({ status: readiness.ready ? 'ready' : 'not_ready', ...readiness });
 });
-app.use('/v1', apiAuth, apiRateLimit, createVideoApiRouter({ service: videoJobService }));
+if (youtubePublisher) app.get('/oauth/youtube/callback', async (req, res) => {
+  try {
+    if (req.query.error) throw Object.assign(new Error('YouTube authorization was denied'), { status: 400 });
+    await youtubePublisher.handleCallback({ code: String(req.query.code || ''), state: String(req.query.state || '') });
+    res.type('html').send('<!doctype html><meta charset="utf-8"><title>YouTube connected</title><body style="font-family:system-ui;padding:3rem;background:#101114;color:#f8f8f2"><h1>YouTube connected</h1><p>You can close this window and return to FrameForge.</p>');
+  } catch (error) {
+    res.status(error.status || 500).type('html').send(`<!doctype html><meta charset="utf-8"><title>Connection failed</title><body style="font-family:system-ui;padding:3rem"><h1>Connection failed</h1><p>${String(error.message || 'Unknown error').replace(/[&<>"']/g, '')}</p>`);
+  }
+});
+app.use('/v1', apiAuth, apiRateLimit,
+  createChannelApiRouter({ store: channelStore, director: channelDirector, publisher: youtubePublisher }),
+  createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
@@ -46,15 +72,6 @@ if (process.env.NODE_ENV !== 'production') app.use('/renders', express.static(co
 
 app.get('/api/audiotracks', (req, res) => {
   res.json({ status: 'ok', tracks: getAudioCatalog() });
-});
-
-app.get('/api/session-token', (req, res) => {
-  const first = (config.server.apiKeys[0] || '').trim();
-  const separator = first.indexOf(':');
-  const account = separator > 0 ? first.slice(0, separator) : '';
-  const named = /^[a-zA-Z0-9_-]{3,64}$/.test(account);
-  const token = named ? first.slice(separator + 1) : first;
-  res.json({ token });
 });
 
 // Endpoint: Trigger Video Generation
@@ -121,10 +138,14 @@ app.get('/api/renders', process.env.NODE_ENV === 'production' ? apiAuth : (req, 
   }
 });
 
-// Serve Visual Studio Frontend Dashboard
-app.get('/', (req, res) => {
-  res.sendFile(path.join(config.publicDir, 'dashboard', 'index.html'));
+// Serve the route-based Studio dashboard. Keeping these as real URLs makes
+// navigation, refreshes and browser history work without a client router.
+const studioPages = ['/', '/dashboard', '/dashboard/overview', '/dashboard/production', '/dashboard/channels', '/dashboard/ideas', '/dashboard/analytics', '/dashboard/settings'];
+app.get(studioPages, (req, res) => {
+  res.sendFile(path.join(config.publicDir, 'dashboard', 'studio.html'));
 });
+app.get('/dashboard/index.html', (req, res) => res.redirect(308, '/dashboard/overview'));
+app.get(['/dashboard/app.js', '/dashboard/styles.css'], (req, res) => res.status(410).end());
 app.use('/dashboard', express.static(path.join(config.publicDir, 'dashboard')));
 
 // Body-parser failures happen before the /v1 router is entered. Keep those
@@ -138,6 +159,7 @@ const server = app.listen(PORT, () => {
   console.log(`✨ Faceless Video Studio Running at: http://localhost:${PORT}`);
   console.log(`======================================================\n`);
 });
+channelScheduler.start();
 server.on('error', (error) => {
   console.error(`Video API failed to listen on port ${PORT}:`, error);
   process.exitCode = 1;
@@ -149,8 +171,10 @@ async function shutdown(signal) {
   stopping = true;
   console.log(`${signal} received; stopping new work and draining active video jobs...`);
   videoJobService.stopAccepting();
+  channelScheduler.stop();
   const closeServer = new Promise((resolve) => server.close(resolve));
   await videoJobService.shutdown({ timeoutMs: config.server.shutdownTimeoutMs });
+  await channelStore.close();
   await closeServer;
   console.log('Video API shutdown complete.');
 }

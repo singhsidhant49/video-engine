@@ -198,8 +198,12 @@ function scoredCandidates(pool, memory, usedIdentities) {
  * URL returned by one provider is hotlink-blocked or not an image.
  */
 export function buildMaterializationQueue(ranked, maxAttempts = 10) {
+  const parsedLimit = Number(maxAttempts);
+  const attemptLimit = Number.isFinite(parsedLimit)
+    ? Math.max(1, Math.min(50, Math.floor(parsedLimit)))
+    : 10;
   const viable = ranked.filter(acceptable);
-  const queue = viable.slice(0, 4);
+  const queue = viable.slice(0, Math.min(4, attemptLimit));
   const represented = new Set(queue.map((item) => item.candidate.providerId));
 
   const hasVideo = queue.some((item) => item.candidate.type === 'video');
@@ -211,17 +215,47 @@ export function buildMaterializationQueue(ranked, maxAttempts = 10) {
   }
 
   for (const item of viable) {
-    if (queue.length >= maxAttempts) break;
+    if (queue.length >= attemptLimit) break;
     if (!represented.has(item.candidate.providerId)) {
       queue.push(item);
       represented.add(item.candidate.providerId);
     }
   }
   for (const item of viable) {
-    if (queue.length >= maxAttempts) break;
+    if (queue.length >= attemptLimit) break;
     if (!queue.includes(item)) queue.push(item);
   }
   return queue;
+}
+
+function boundedAttemptCount(value, fallback, minimum, maximum) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(minimum, Math.min(maximum, Math.floor(parsed)));
+}
+
+export function resolveMaterializationAttemptLimits(env = process.env) {
+  return {
+    primary: boundedAttemptCount(env.ASSET_PRIMARY_MATERIALIZATION_ATTEMPTS, 6, 3, 12),
+    emergency: boundedAttemptCount(env.ASSET_EMERGENCY_MATERIALIZATION_ATTEMPTS, 3, 0, 6),
+  };
+}
+
+export function shouldPreferVideoForCoverage({
+  request,
+  currentVideoDuration = 0,
+  totalPlannedDuration = 1,
+  minVideoShare = 0,
+  consecutiveImageSelections = 0,
+  maxPhotoRun = 10,
+} = {}) {
+  const explicitImage = request?.preferredMediaType === 'image';
+  if (request?.nativeMotionRequired || request?.preferredMediaType === 'video') return true;
+  if (explicitImage) return false;
+  const videoShare = Number(currentVideoDuration) / Math.max(1, Number(totalPlannedDuration));
+  const videoShareDeficit = videoShare < (Number(minVideoShare) - 0.001);
+  const photoRunNeedsMotion = Number(consecutiveImageSelections) >= Math.max(1, Number(maxPhotoRun) || 10) - 1;
+  return videoShareDeficit || photoRunNeedsMotion;
 }
 
 async function materializeCandidate(item, request, dir, publicDir, sequence, usedHashes) {
@@ -553,7 +587,15 @@ export async function directAssets(plan, specs, {
   unresolvedMediaMode = 'FAIL_PRODUCTION_RENDER',
   publishMode = 'PRODUCTION_RENDER',
   offline = false,
+  signal = null,
 }) {
+  const throwIfAborted = () => {
+    if (!signal?.aborted) return;
+    const reason = signal.reason instanceof Error ? signal.reason : new Error('Asset resolution cancelled');
+    if (!reason.name) reason.name = 'AbortError';
+    throw reason;
+  };
+  throwIfAborted();
   if (allowGenerated) throw new Error('Generated media providers are disabled for V1');
   if (!assetRequests?.length) throw new Error('directAssets requires canonical-shot AssetRequest objects');
   resetSearchStats();
@@ -563,6 +605,7 @@ export async function directAssets(plan, specs, {
     ? providers.filter((provider) => ['local-bank', 'local-assets'].includes(provider.id))
     : providers;
   const pools = await mapLimit(assetRequests, 3, (request) => gather(request, activeProviders));
+  throwIfAborted();
   const memory = new VideoAssetMemory();
   const usedIdentities = new Set();
   const usedHashes = [];
@@ -579,8 +622,11 @@ export async function directAssets(plan, specs, {
   const targetContentType = assetRequests[0]?.contentType || 'explainer';
   const targetProfile = getContentVisualProfile(targetContentType);
   const minVideoShare = targetProfile?.minVideoShare || 0.10;
+  const maxPhotoRun = targetProfile?.maxPhotoRun || 10;
+  let consecutiveImageSelections = 0;
 
   for (const pool of pools) {
+    throwIfAborted();
     const { request, context } = pool;
     console.log(`   [Shot ${request.storyboardShotId}] resolving "${request.concept}" (${request.preferredMediaType || 'any'})...`);
     const fallbackAuditTraces = [];
@@ -589,18 +635,28 @@ export async function directAssets(plan, specs, {
     const currentVideoDuration = assetRequests
       .filter((r) => assets[r.sceneId]?.byShot[r.storyboardShotId]?.type === 'video')
       .reduce((sum, r) => sum + (Number(r.constraints?.durationHint) || 3.5), 0);
-    const videoShareDeficit = (currentVideoDuration / totalPlannedDuration) < (minVideoShare - 0.001);
-    const preferVideo = request.nativeMotionRequired
-      || request.preferredMediaType === 'video'
-      || (videoShareDeficit && request.preferredMediaType !== 'image');
+    const preferVideo = shouldPreferVideoForCoverage({
+      request,
+      currentVideoDuration,
+      totalPlannedDuration,
+      minVideoShare,
+      consecutiveImageSelections,
+      maxPhotoRun,
+    });
 
     // Search metadata ranks the download shortlist only. It is not semantic proof.
-    const viable = buildMaterializationQueue(ranked);
+    const {
+      primary: maxPrimaryAttempts,
+      emergency: maxEmergencyAttempts,
+    } = resolveMaterializationAttemptLimits();
+    const viable = buildMaterializationQueue(ranked, maxPrimaryAttempts);
     const materialized = [];
     const materializationRejects = [];
     for (let index = 0; index < viable.length; index++) {
+      throwIfAborted();
       const item = viable[index];
       const result = await materializeCandidate(item, request, dir, publicDir, index, usedHashes);
+      throwIfAborted();
       if (result.asset) {
         const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
         if (judgment.accepted && !judgment.rejected) materialized.push({ ...item, ...result });
@@ -610,14 +666,23 @@ export async function directAssets(plan, specs, {
         }
       } else materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
       const hasApprovedVideo = materialized.some((m) => m.candidate.type === 'video');
-      if (materialized.length >= (preferVideo && !hasApprovedVideo ? 3 : 2)) break;
+      if (materialized.length >= 2 && (!preferVideo || hasApprovedVideo)) break;
     }
 
-    if (!materialized.length) {
-      const emergencyCandidates = ranked.filter((item) => !viable.includes(item) && item.score.qualityRank >= 1);
+    const primaryHasApprovedVideo = materialized.some((item) => item.candidate.type === 'video');
+    if (!materialized.length || (preferVideo && !primaryHasApprovedVideo)) {
+      const emergencyCandidates = ranked
+        .filter((item) => !viable.includes(item) && item.score.qualityRank >= 1)
+        .sort((a, b) => {
+          if (!preferVideo) return 0;
+          return Number(b.candidate.type === 'video') - Number(a.candidate.type === 'video');
+        })
+        .slice(0, maxEmergencyAttempts);
       for (let index = 0; index < emergencyCandidates.length; index++) {
+        throwIfAborted();
         const item = emergencyCandidates[index];
         const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index, usedHashes);
+        throwIfAborted();
         if (result.asset) {
           const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
           if (judgment.rejected || !judgment.accepted) {
@@ -627,14 +692,16 @@ export async function directAssets(plan, specs, {
           }
           fallbackAuditTraces.push({
             fallbackType: 'emergency_candidate',
-            whyTriggered: 'Top viable candidates failed materialization',
+            whyTriggered: preferVideo && !primaryHasApprovedVideo
+              ? 'Primary candidates produced no approved motion asset before the photo-run limit'
+              : 'Top viable candidates failed materialization',
             candidateBefore: viable[0]?.candidate?.id || null,
             candidateAfter: item.candidate.id,
             semanticClassBefore: viable[0]?.editorialJudgment?.classification || null,
             semanticClassAfter: judgment.classification,
           });
           materialized.push({ ...item, ...result });
-          break;
+          if (!preferVideo || item.candidate.type === 'video') break;
         } else {
           materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
         }
@@ -773,6 +840,9 @@ export async function directAssets(plan, specs, {
     for (const loser of materialized.filter((item) => item !== selected)) await fs.rm(loser.file, { force: true });
 
     if (selected) {
+      consecutiveImageSelections = selected.candidate.type === 'video'
+        ? 0
+        : consecutiveImageSelections + 1;
       const ext = selected.candidate.type === 'video' ? 'mp4' : 'jpg';
       const canonicalFile = path.join(dir, `${request.storyboardShotId}_a.${ext}`);
       if (selected.file !== canonicalFile) {
@@ -866,6 +936,7 @@ export async function directAssets(plan, specs, {
       }
       console.log(`   ✓ [Shot ${request.storyboardShotId}] selected ${selected.asset.type}: ${selected.asset.label || selected.asset.src}`);
     } else if (publishMode !== 'PRODUCTION_RENDER' && unresolvedMediaMode === 'ALLOW_DEV_PLACEHOLDER') {
+      consecutiveImageSelections += 1;
       // Step 8: Unresolved media placeholder & audit tracking
       // Let publishability quality gates (timelineQc.js / mediaVisualQualityGate.js) enforce production policy
       const unresolvedFile = path.join(dir, `${request.storyboardShotId}_unresolved.jpg`);
@@ -904,6 +975,8 @@ export async function directAssets(plan, specs, {
       sceneAssets.byShot[request.storyboardShotId] = unresolvedAsset;
       if (!sceneAssets.primary) sceneAssets.primary = unresolvedAsset;
     } else {
+      // An unresolved request does not break the preceding photo run.
+      consecutiveImageSelections += 1;
       console.log(`   ✗ [Shot ${request.storyboardShotId}] unresolved (0 approved candidates)`);
     }
 

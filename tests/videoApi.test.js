@@ -7,7 +7,7 @@ import express from 'express';
 
 import { CreateVideoRequestSchema, toPipelineBrief } from '../src/server/videoApiSchemas.js';
 import { FileJobStore } from '../src/server/fileJobStore.js';
-import { VideoJobService } from '../src/server/videoJobService.js';
+import { VideoJobService, resumeStageForTimelineQc } from '../src/server/videoJobService.js';
 import { createApiAuth, createVideoApiRouter, videoApiErrorHandler } from '../src/server/videoApiRouter.js';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -348,4 +348,24 @@ test('post-render QC retry preserves the video ID and recompiles the timeline', 
     { videoId: created.job.id, resume: null, from: null },
     { videoId: created.job.id, resume: created.job.id, from: 'timeline' },
   ]);
+});
+
+test('timeline QC retry restarts from audio when duration failed', () => {
+  const qc = {
+    checks: [
+      { id: 'duration-tolerance', ok: false, severity: 'error', detail: '334s is below the requested range' },
+      { id: 'content-profile-transition-share', ok: false, severity: 'error', detail: 'too few dissolves' },
+    ],
+  };
+  assert.equal(resumeStageForTimelineQc(qc), 'audio');
+});
+
+test('timeline QC retry restarts only the stage capable of repairing its failure', () => {
+  assert.equal(resumeStageForTimelineQc({
+    checks: [{ id: 'content-profile-transition-share', ok: false, severity: 'error' }],
+  }), 'timeline');
+  assert.equal(resumeStageForTimelineQc({
+    checks: [{ id: 'visual-coverage-unresolved', ok: false, severity: 'error' }],
+  }), 'assets');
+  assert.equal(resumeStageForTimelineQc(null), 'timeline');
 });

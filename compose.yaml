@@ -21,6 +21,8 @@ x-app-environment: &app-environment
   VIDEO_MAX_OWNER_PENDING_JOBS: ${VIDEO_MAX_OWNER_PENDING_JOBS:-5}
   VIDEO_SHUTDOWN_TIMEOUT_MS: ${VIDEO_SHUTDOWN_TIMEOUT_MS:-30000}
   VIDEO_JOB_TIMEOUT_MS: ${VIDEO_JOB_TIMEOUT_MS:-5400000}
+  ASSET_PRIMARY_MATERIALIZATION_ATTEMPTS: ${ASSET_PRIMARY_MATERIALIZATION_ATTEMPTS:-6}
+  ASSET_EMERGENCY_MATERIALIZATION_ATTEMPTS: ${ASSET_EMERGENCY_MATERIALIZATION_ATTEMPTS:-3}
   VIDEO_API_MAX_REQUEST_BYTES: ${VIDEO_API_MAX_REQUEST_BYTES:-1mb}
   VIDEO_API_RATE_LIMIT_PER_MINUTE: ${VIDEO_API_RATE_LIMIT_PER_MINUTE:-120}
   VIDEO_SHARED_SENSITIVE_CACHE: ${VIDEO_SHARED_SENSITIVE_CACHE:-false}
@@ -42,6 +44,14 @@ x-app-environment: &app-environment
   REPLICATE_API_TOKEN: ${REPLICATE_API_TOKEN:-${FluxSchellKey:-}}
   FluxSchellKey: ${FluxSchellKey:-}
   FLUX_MODEL: ${FLUX_MODEL:-black-forest-labs/flux-schnell}
+  YOUTUBE_CLIENT_ID: ${YOUTUBE_CLIENT_ID:-}
+  YOUTUBE_CLIENT_SECRET: ${YOUTUBE_CLIENT_SECRET:-}
+  YOUTUBE_REDIRECT_URI: ${YOUTUBE_REDIRECT_URI:-}
+  YOUTUBE_OAUTH_STATE_SECRET: ${YOUTUBE_OAUTH_STATE_SECRET:-}
+  YOUTUBE_TOKEN_ENCRYPTION_KEY: ${YOUTUBE_TOKEN_ENCRYPTION_KEY:-}
+  YOUTUBE_UPLOAD_TIMEOUT_MS: ${YOUTUBE_UPLOAD_TIMEOUT_MS:-3600000}
+  # Publishing remains deliberately off until the upload workflow is re-enabled and audited.
+  YOUTUBE_PUBLISHING_ENABLED: ${YOUTUBE_PUBLISHING_ENABLED:-false}
   HF_HOME: /app/.cache/huggingface
   XDG_CACHE_HOME: /app/.cache
   TRANSFORMERS_CACHE: /app/.cache/huggingface
@@ -150,6 +160,9 @@ services:
     image: videoforge-app:latest
     build: .
     restart: unless-stopped
+    # Give the application time to persist an interrupted render as resumable
+    # and release its BullMQ lease before Docker sends SIGKILL.
+    stop_grace_period: ${VIDEO_WORKER_STOP_GRACE_PERIOD:-2m}
     init: true
     dns:
       - 8.8.8.8

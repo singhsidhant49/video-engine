@@ -24,9 +24,9 @@ export const IMAGE_STYLE_CATALOG = Object.freeze({
     id: 'stickman',
     label: 'Modern Illustrated Stick Figure (Explainer & Narrative)',
     ideogramStyleType: 'DESIGN',
-    stylePromptAnchor: 'modern illustrated stick figure style, charming round-headed stick figure character with expressive gestures, set in a beautifully rendered colorful illustrated scene, crisp line art, clean vector comic aesthetic, rich atmospheric background',
-    negativePrompt: 'photorealistic photo, realistic 3d CGI, blank white void, messy sketches, low resolution, ugly, distorted',
-    llmGuidance: 'Depict expressive stick figure characters interacting with props and environments that directly illustrate the narrated concept, with clean lines and colorful cartoon background scenery.',
+    stylePromptAnchor: 'modern animated stick figure storytelling style, minimalist clean-ink stick figure characters with expressive round heads and subtle accessories (beanies, glasses, scarves, aprons), situated within rich detailed cel-shaded background environments (detailed city rooftops, urban skylines, cozy modern kitchens, atmospheric interiors), cinematic lighting with warm lantern or candle glow and moody twilight shadows, graphic novel linework, clean digital animation keyframe, no messy scribbles, no white void',
+    negativePrompt: 'photorealistic photo, realistic 3d CGI, blank white void, messy sketches, low resolution, ugly, distorted, rough pencil scribbles',
+    llmGuidance: 'Depict expressive modern stick figure characters with round heads and simple accessories situated in fully rendered, highly detailed atmospheric background environments with warm moody lighting.',
   },
   hyper_realistic: {
     id: 'hyper_realistic',
@@ -80,8 +80,8 @@ export const IMAGE_STYLE_CATALOG = Object.freeze({
     id: 'doodle_comic',
     label: 'Modern Stickman Comic (Storytelling & Explainer)',
     ideogramStyleType: 'AUTO',
-    stylePromptAnchor: 'modern animated stick figure comic style, expressive round-headed stickman characters with clean black linework and simple accessories (beanies, glasses, scarves, aprons), set in rich fully-colored detailed modern environments, warm cinematic lighting, cel-shaded architectural backgrounds, high quality webcomic keyframe aesthetic',
-    negativePrompt: 'photorealistic photo, detailed realistic human face, 3d CGI render, blank white void background, empty paper background, messy scribbles, low quality, blurry, distorted anatomy, text artifacts',
+    stylePromptAnchor: 'modern animated stick figure comic style, minimalist clean-ink stick figure characters with expressive round heads and subtle accessories (beanies, glasses, scarves, aprons), situated within detailed modern environments and rich cel-shaded background scenes (detailed city rooftops with water tanks at twilight, cozy modern kitchens with full cabinets and warm candlelight, urban skylines), cinematic lighting with warm lantern or candle glow and moody twilight shadows, clean graphic novel linework, high quality digital webtoon keyframe aesthetic, no messy scribbles, no white void',
+    negativePrompt: 'photorealistic photo, detailed realistic human face, 3d CGI render, blank white void background, empty paper background, messy scribbles, low quality, blurry, distorted anatomy, text artifacts, rough pencil sketches',
     llmGuidance: 'Depict relatable narrative or educational moments with modern stick figure characters (round heads, expressive eyes, simple stick limbs with accessories like hats, scarves, glasses, or aprons). Always situate them inside a rich, fully illustrated, colored environment (e.g., city rooftop with water tower and skyline, cozy kitchen, workspace, library, or street) with warm atmospheric lighting.',
   },
   custom: {
@@ -96,8 +96,22 @@ export const IMAGE_STYLE_CATALOG = Object.freeze({
 
 export const DEFAULT_IMAGE_STYLE = 'anime';
 
+const STYLE_ALIASES = Object.freeze({
+  doodle: 'doodle_comic',
+  doodle_comic: 'doodle_comic',
+  doodle_art: 'doodle_comic',
+  stick_figure: 'stickman',
+  stickfigure: 'stickman',
+  '2d': '2d_animation',
+  '3d': '3d_render',
+  realistic: 'hyper_realistic',
+  comic: 'comic_book',
+  ghibli: 'anime',
+});
+
 export function getImageStyle(styleId = DEFAULT_IMAGE_STYLE) {
-  const normalized = String(styleId || DEFAULT_IMAGE_STYLE).trim().toLowerCase();
+  const raw = String(styleId || DEFAULT_IMAGE_STYLE).trim().toLowerCase();
+  const normalized = STYLE_ALIASES[raw] || raw;
   return IMAGE_STYLE_CATALOG[normalized] || IMAGE_STYLE_CATALOG[DEFAULT_IMAGE_STYLE];
 }
 

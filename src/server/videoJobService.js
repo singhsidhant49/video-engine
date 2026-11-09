@@ -39,6 +39,42 @@ function safeGenerationFailure(error) {
     : { code: error?.code || 'GENERATION_FAILED', message: 'Video generation failed' };
 }
 
+const failedQcChecks = (qc) => Array.isArray(qc?.checks)
+  ? qc.checks.filter((check) => check?.ok === false && check?.severity === 'error')
+  : [];
+
+export function resumeStageForTimelineQc(qc) {
+  const failedIds = new Set(failedQcChecks(qc).map((check) => check.id));
+  // Duration is authored by the script/TTS stages. Restarting from assets can
+  // never fix it and only repeats expensive provider downloads.
+  if (failedIds.has('duration-tolerance')) return 'audio';
+  const assetFailures = [
+    'visual-coverage-unresolved',
+    'editorial-unresolved-media',
+    'editorial-wrong-assets',
+    'editorial-accidental-assets',
+    'editorial-foreign-entity',
+    'editorial-distracting-critical',
+    'editorial-weak-critical-shots',
+    'asset-identity-drift',
+    'asset-reuse-hard-limit',
+    'content-profile-video-share',
+    'content-profile-image-share',
+    'content-profile-structured-share',
+    'content-profile-photo-run',
+  ];
+  if (assetFailures.some((id) => failedIds.has(id))) return 'assets';
+  return 'timeline';
+}
+
+async function readTimelineQc(rendersDir, id) {
+  try {
+    return JSON.parse(await fs.readFile(path.join(rendersDir, 'runs', id, 'qc.json'), 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
 function safeOwnedPath(root, candidate) {
   const base = path.resolve(root);
   const target = path.resolve(candidate);
@@ -100,7 +136,7 @@ export class VideoJobService {
     }
     if (this.taskQueue) {
       await this.taskQueue.init({
-        onGenerate: (id) => this.#runExternal(id),
+        onGenerate: (id, options) => this.#runExternal(id, options),
         onDelete: (id) => this.#runExternalDeletion(id),
         onFailed: (id, err) => this.#handleQueueFailure(id, err),
       });
@@ -108,9 +144,14 @@ export class VideoJobService {
       // persisted job when they start. Reconciliation belongs to workers.
       for (const job of this.taskQueue.processJobs ? jobs : []) {
         if (job.status === 'queued') {
-          job.resumeExisting = Boolean(job.startedAt || job.resumeExisting);
-          await this.store.putJob(job);
-          await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0);
+          const queued = typeof this.taskQueue.hasGeneration === 'function'
+            ? await this.taskQueue.hasGeneration(job.id, job.retryCount || 0)
+            : false;
+          if (!queued) {
+            job.resumeExisting = Boolean(job.startedAt || job.resumeExisting);
+            await this.store.putJob(job);
+            await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0);
+          }
         } else if (['preparing', 'processing'].includes(job.status)) {
           const queued = typeof this.taskQueue.hasGeneration === 'function'
             ? await this.taskQueue.hasGeneration(job.id, job.retryCount || 0)
@@ -341,12 +382,14 @@ export class VideoJobService {
     job.updatedAt = now();
     job.retryCount = (job.retryCount || 0) + 1;
     job.resumeExisting = true;
-    // A failed timeline/QC checkpoint is not reusable. If timeline QC failed,
-    // re-resolve assets to fix video share or coverage shortfalls. If post-render
-    // QC failed, recompile the timeline from approved assets.
+    // Resume from the earliest stage capable of repairing the failed check.
+    // This avoids repeating asset downloads for narration-duration failures.
+    const timelineQc = failedCode === 'TIMELINE_QC_FAILED'
+      ? await readTimelineQc(this.rendersDir, id)
+      : null;
     job.resumeFrom = failedCode === 'POST_RENDER_QC_FAILED'
       ? 'timeline'
-      : (failedCode === 'TIMELINE_QC_FAILED' ? 'assets' : null);
+      : (failedCode === 'TIMELINE_QC_FAILED' ? resumeStageForTimelineQc(timelineQc) : null);
     await this.store.putJob(job);
     if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount);
     else { this.queue.push(id); this.#pump(); }
@@ -364,7 +407,16 @@ export class VideoJobService {
       bytes: job.result?.delivery?.bytes,
       manifestUrl: `/v1/videos/${job.id}/manifest`,
       creditsUrl: `/v1/videos/${job.id}/credits`,
+      package: job.result?.package || null,
+      thumbnailError: job.result?.thumbnailError || null,
     };
+  }
+
+  async packaging(ownerId, id) {
+    const job = await this.store.getJob(id);
+    if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
+    if (job.status !== 'completed') throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
+    return job.result?.package || null;
   }
 
   async download(ownerId, id) {
@@ -418,11 +470,17 @@ export class VideoJobService {
     }
   }
 
-  async #runExternal(id) {
-    if (this.active.has(id)) return;
+  async #runExternal(id, { signal = null } = {}) {
+    if (this.active.has(id)) return this.active.get(id).promise;
     const controller = new AbortController();
+    const abortFromQueue = () => controller.abort(signal?.reason || Object.assign(new Error('Queue processor cancelled'), { name: 'AbortError' }));
+    if (signal?.aborted) abortFromQueue();
+    else signal?.addEventListener('abort', abortFromQueue, { once: true });
     const entry = { controller, promise: null };
-    entry.promise = this.#run(id, controller).finally(() => this.active.delete(id));
+    entry.promise = this.#run(id, controller, { queueSignal: signal }).finally(() => {
+      signal?.removeEventListener('abort', abortFromQueue);
+      this.active.delete(id);
+    });
     this.active.set(id, entry);
     return entry.promise;
   }
@@ -447,7 +505,7 @@ export class VideoJobService {
     await this.store.putJob(job);
   }
 
-  async #run(id, controller) {
+  async #run(id, controller, { queueSignal = null } = {}) {
     let job = await this.store.getJob(id);
     if (!job || !['queued', 'preparing', 'processing'].includes(job.status)) return;
     job.status = 'processing'; job.stage = 'preparing'; job.startedAt ||= now(); job.updatedAt = now();
@@ -491,7 +549,8 @@ export class VideoJobService {
       job.result = {
         outputPath: result.outputPath, outputFilename: result.outputFilename,
         durationSeconds: result.durationSeconds, title: result.title, runDir: result.runDir,
-        delivery: result.delivery || null,
+        delivery: result.delivery || null, package: result.package || null,
+        thumbnailError: result.thumbnailError || null,
       };
       job.resumeExisting = false;
       job.resumeFrom = null;
@@ -502,13 +561,26 @@ export class VideoJobService {
       const latest = await this.store.getJob(id);
       if (latest?.status === 'delete_requested') return;
       const cancelled = !timedOut && (controller.signal.aborted || error?.name === 'AbortError' || error?.code === 'VIDEO_GENERATION_CANCELLED');
+      const queueAbortReason = queueSignal?.reason;
+      const leaseLost = cancelled && queueAbortReason?.code === 'QUEUE_LEASE_LOST';
       const interruptedForShutdown = cancelled && this.shuttingDown;
-      job.status = interruptedForShutdown ? 'queued' : cancelled ? 'cancelled' : 'failed';
+      const recoverableInterruption = interruptedForShutdown || leaseLost;
+      job.status = recoverableInterruption ? 'queued' : cancelled ? 'cancelled' : 'failed';
       job.stage = job.status; job.completedAt = now(); job.updatedAt = job.completedAt;
-      job.progress = interruptedForShutdown ? 0 : job.progress;
-      job.completedAt = interruptedForShutdown ? null : job.completedAt;
+      job.progress = recoverableInterruption ? 0 : job.progress;
+      job.completedAt = recoverableInterruption ? null : job.completedAt;
+      if (recoverableInterruption) job.resumeExisting = true;
       job.error = timedOut ? { code: 'VIDEO_JOB_TIMEOUT', message: `Video generation exceeded ${Math.round(jobTimeoutMs / 60_000)} minutes` } : cancelled ? null : safeGenerationFailure(error);
+      if (job.error?.code === 'TIMELINE_QC_FAILED') {
+        const timelineQc = await readTimelineQc(this.rendersDir, id);
+        const failures = failedQcChecks(timelineQc);
+        job.error.failedChecks = failures.map(({ id: checkId, detail }) => ({ id: checkId, detail }));
+        job.error.resumeFrom = resumeStageForTimelineQc(timelineQc);
+      }
       await this.store.putJob(job);
+      // Let BullMQ retain/retry the queue item instead of marking an interrupted
+      // processor complete while the durable video record is still queued.
+      if (recoverableInterruption && this.taskQueue) throw (queueAbortReason || error);
     } finally {
       if (cancelPoll) clearInterval(cancelPoll);
       clearTimeout(jobTimeout);
