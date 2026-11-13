@@ -28,9 +28,7 @@ export class ChannelStore {
           ) AND NOT EXISTS (
             SELECT 1 FROM information_schema.columns WHERE table_name = 'channels' AND column_name = 'owner_id'
           ) THEN
-            DROP TABLE IF EXISTS channel_video_ideas CASCADE;
-            DROP TABLE IF EXISTS channel_ideas CASCADE;
-            DROP TABLE IF EXISTS channels CASCADE;
+            RAISE EXCEPTION 'Legacy channels schema detected without owner_id. Refusing destructive startup migration; back up the database and run an explicit channel-owner migration.';
           END IF;
         END $$;
         CREATE TABLE IF NOT EXISTS channels (

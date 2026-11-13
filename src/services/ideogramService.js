@@ -115,7 +115,7 @@ export async function generateIdeogramImage({
   const isV2Endpoint = ['p-image-ideogram', 'ideogram-4-5', 'ideogram-4', 'ideogram-3', 'ideogram-2'].includes(selectedModel);
 
   const styleConfig = getImageStyle(styleId);
-  const fullPrompt = buildFullIdeogramPrompt({ prompt, styleId, customStylePrompt });
+  const fullPrompt = buildFullIdeogramPrompt({ prompt, styleId, customStylePrompt, format });
   const aspectRatio = resolveIdeogramAspectRatio(format, selectedModel);
 
   // Check persistent disk cache if cacheDir is provided

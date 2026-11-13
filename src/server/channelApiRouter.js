@@ -1,6 +1,8 @@
 import express from 'express';
 import { ChannelInputSchema, ChannelPatchSchema, ChannelPerformanceInputSchema, ChannelPerformanceSnapshotSchema, ChannelProfileSchema, IdeaPatchSchema, publicChannel, publicIdea } from '../models/channel.schema.js';
 import { parseCron } from './channelScheduler.js';
+import { importYouTubeAnalyticsCsv } from '../services/youtubeAnalyticsImportService.js';
+import { summarizeChannelPerformance } from '../services/youtubeGrowthService.js';
 
 const errorWith = (status, code, message) => Object.assign(new Error(message), { status, code });
 
@@ -18,7 +20,7 @@ function validateProduction(production) {
   }
 }
 
-export function createChannelApiRouter({ store, director, publisher = null }) {
+export function createChannelApiRouter({ store, director, publisher = null, publishingEnabled = Boolean(publisher) }) {
   const router = express.Router();
   router.get('/channels', async (req, res, next) => {
     try { res.json({ channels: (await store.listChannels(req.ownerId)).map(publicChannel) }); } catch (error) { next(error); }
@@ -26,7 +28,7 @@ export function createChannelApiRouter({ store, director, publisher = null }) {
   router.post('/channels', async (req, res, next) => {
     try {
       const input = ChannelInputSchema.parse(req.body);
-      if (input.automation?.autoPublish && !publisher) throw errorWith(503, 'PUBLISHING_DISABLED', 'YouTube publishing is disabled');
+      if (input.automation?.autoPublish && !publishingEnabled) throw errorWith(503, 'PUBLISHING_DISABLED', 'YouTube publishing is disabled');
       const id = input.id || store.createId('channel', input.name);
       if (await store.getChannel(req.ownerId, id)) throw errorWith(409, 'CHANNEL_EXISTS', 'Channel ID already exists');
       validateAutomation(input.automation);
@@ -49,7 +51,7 @@ export function createChannelApiRouter({ store, director, publisher = null }) {
       const existing = await store.getChannel(req.ownerId, req.params.channelId);
       if (!existing) throw errorWith(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
       const patch = ChannelPatchSchema.parse(req.body);
-      if (patch.automation?.autoPublish && !publisher) throw errorWith(503, 'PUBLISHING_DISABLED', 'YouTube publishing is disabled');
+      if (patch.automation?.autoPublish && !publishingEnabled) throw errorWith(503, 'PUBLISHING_DISABLED', 'YouTube publishing is disabled');
       validateAutomation(patch.automation);
       const productionDefaults = {
         ...existing.productionDefaults, ...(patch.productionDefaults || {}),
@@ -82,6 +84,16 @@ export function createChannelApiRouter({ store, director, publisher = null }) {
       res.json({ snapshots: await store.listPerformance(req.ownerId, req.params.channelId, { limit: req.query.limit }) });
     } catch (error) { next(error); }
   });
+  router.get('/channels/:channelId/performance/summary', async (req, res, next) => {
+    try {
+      if (!await store.getChannel(req.ownerId, req.params.channelId)) throw errorWith(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
+      const [snapshots, ideas] = await Promise.all([
+        store.listPerformance(req.ownerId, req.params.channelId, { limit: req.query.limit || 500 }),
+        store.listIdeas(req.ownerId, req.params.channelId),
+      ]);
+      res.json(summarizeChannelPerformance(snapshots, ideas));
+    } catch (error) { next(error); }
+  });
   router.post('/channels/:channelId/performance', async (req, res, next) => {
     try {
       if (!await store.getChannel(req.ownerId, req.params.channelId)) throw errorWith(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
@@ -91,6 +103,32 @@ export function createChannelApiRouter({ store, director, publisher = null }) {
         capturedAt: input.capturedAt || new Date().toISOString(),
       });
       res.status(201).json(await store.putPerformance(req.ownerId, snapshot));
+    } catch (error) { next(error); }
+  });
+  router.post('/channels/:channelId/performance/import', express.text({
+    type: ['text/csv', 'application/csv', 'text/plain'], limit: '2mb',
+  }), async (req, res, next) => {
+    try {
+      if (!await store.getChannel(req.ownerId, req.params.channelId)) throw errorWith(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
+      const csv = typeof req.body === 'string' ? req.body : req.body?.csv;
+      if (!csv || typeof csv !== 'string') throw errorWith(400, 'ANALYTICS_CSV_REQUIRED', 'Send a YouTube Analytics CSV file or a JSON body containing csv');
+      let imported;
+      try {
+        imported = importYouTubeAnalyticsCsv(csv, {
+          channelId: req.params.channelId,
+          capturedAt: typeof req.body === 'object' ? req.body?.capturedAt : undefined,
+          ideas: await store.listIdeas(req.ownerId, req.params.channelId),
+        });
+      } catch (error) {
+        throw errorWith(400, 'INVALID_ANALYTICS_CSV', error.message);
+      }
+      if (!imported.snapshots.length) throw errorWith(400, 'ANALYTICS_CSV_EMPTY', 'No valid video rows were found in the CSV');
+      const snapshots = [];
+      for (const value of imported.snapshots) {
+        const snapshot = ChannelPerformanceSnapshotSchema.parse(value);
+        snapshots.push(await store.putPerformance(req.ownerId, snapshot));
+      }
+      res.status(201).json({ imported: snapshots.length, skipped: imported.errors.length, errors: imported.errors, snapshots });
     } catch (error) { next(error); }
   });
   router.post('/channels/:channelId/ideas/brainstorm', async (req, res, next) => {
@@ -118,9 +156,16 @@ export function createChannelApiRouter({ store, director, publisher = null }) {
     router.post('/channels/:channelId/youtube/disconnect', async (req, res, next) => {
       try { await publisher.disconnect(req.ownerId, req.params.channelId); res.status(204).end(); } catch (error) { next(error); }
     });
-    router.post('/channels/:channelId/ideas/:ideaId/publish', async (req, res, next) => {
-      try { res.status(202).json(await publisher.publishIdea(req.ownerId, req.params.channelId, req.params.ideaId)); } catch (error) { next(error); }
+    router.post('/channels/:channelId/youtube/analytics/sync', async (req, res, next) => {
+      try {
+        res.json(await publisher.syncAnalytics(req.ownerId, req.params.channelId, { days: req.body?.days }));
+      } catch (error) { next(error); }
     });
+    if (publishingEnabled) {
+      router.post('/channels/:channelId/ideas/:ideaId/publish', async (req, res, next) => {
+        try { res.status(202).json(await publisher.publishIdea(req.ownerId, req.params.channelId, req.params.ideaId)); } catch (error) { next(error); }
+      });
+    }
   }
   return router;
 }

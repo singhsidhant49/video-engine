@@ -232,6 +232,64 @@ async function callJson(llm, messages, { temperature = 0.6, retries = 2, timeout
   throw new Error(`${llm.name} failed: ${lastErr?.message}`);
 }
 
+function normalizeDurationRange(format, range) {
+  const fallback = format === 'shorts' ? { min: 20, max: 60 } : { min: 120, max: 600 };
+  const min = Math.max(10, Math.round(Number(range?.min) || fallback.min));
+  const max = Math.min(7_200, Math.round(Number(range?.max) || fallback.max));
+  return min <= max ? { min, max } : fallback;
+}
+
+function heuristicDuration(topic, format, range) {
+  const words = String(topic || '').trim().split(/\s+/).filter(Boolean).length;
+  const depthSignals = (String(topic || '').match(/\b(?:why|how|history|science|evidence|investigat|complete|guide|explained|versus|future|cause|effect)\w*/gi) || []).length;
+  const depth = Math.min(1, (words / 45) + (depthSignals * 0.12));
+  const ratio = format === 'shorts' ? 0.35 + (depth * 0.45) : 0.25 + (depth * 0.55);
+  return Math.round(range.min + ((range.max - range.min) * ratio));
+}
+
+/** Select a topic-appropriate duration inside the channel's configured guardrails. */
+export async function selectTargetDuration({ topic = '', niche = '', format = 'landscape', range, channelProfile = {}, llm = llmConfig(), call = callJson } = {}) {
+  const normalizedRange = normalizeDurationRange(format, range);
+  const fallbackSeconds = heuristicDuration(topic, format, normalizedRange);
+  if (!llm) {
+    return {
+      durationSeconds: fallbackSeconds, method: 'heuristic', range: normalizedRange,
+      rationale: 'No LLM provider is configured; selected from topic depth within the channel guardrails.',
+    };
+  }
+
+  const messages = [
+    {
+      role: 'system',
+      content: `You are a YouTube programming editor. Select the shortest duration that can fully deliver the title promise without padding. Stay inside the supplied hard boundaries. Consider topic depth, viewer intent, format, audience, and retention. Return JSON only: {"durationSeconds": integer, "rationale": string}.`,
+    },
+    {
+      role: 'user',
+      content: JSON.stringify({ topic, niche, format, audience: channelProfile?.audience, contentType: channelProfile?.contentType, tone: channelProfile?.tone, hardDurationRangeSeconds: normalizedRange }),
+    },
+  ];
+
+  try {
+    const selected = await call(llm, messages, { temperature: 0.2, retries: 1, timeoutMs: 30_000 });
+    const suppliedDuration = selected?.durationSeconds;
+    const raw = suppliedDuration == null || suppliedDuration === '' ? Number.NaN : Math.round(Number(suppliedDuration));
+    const hasValidDuration = Number.isFinite(raw) && raw > 0;
+    const durationSeconds = hasValidDuration
+      ? Math.max(normalizedRange.min, Math.min(normalizedRange.max, raw))
+      : fallbackSeconds;
+    return {
+      durationSeconds, method: hasValidDuration ? 'llm' : 'heuristic', range: normalizedRange,
+      rationale: String(selected?.rationale || 'Selected for topic depth and viewer intent.').slice(0, 500),
+    };
+  } catch (error) {
+    console.warn(`   Duration selection failed (${error.message}); using bounded heuristic.`);
+    return {
+      durationSeconds: fallbackSeconds, method: 'heuristic', range: normalizedRange,
+      rationale: `LLM duration selection was unavailable; used a bounded topic-depth estimate.`,
+    };
+  }
+}
+
 /** Deterministic, extractive compression fallback. */
 function finishTruncatedSentence(words) {
   const kept = [...words];
@@ -387,27 +445,69 @@ export async function compressPlanScript(plan, targetWords, maxWords = Math.roun
 /** Expand an undersized script without changing its scene structure or adding
  * unsupported exact claims. If no LLM is configured, leave the script intact
  * so the duration gate can fail honestly instead of padding with filler. */
+function expansionSceneBudgets(scenes, targetWords) {
+  const sourceCounts = scenes.map((scene) => Math.max(1, String(scene.narration || '').split(/\s+/).filter(Boolean).length));
+  const sourceTotal = sourceCounts.reduce((sum, count) => sum + count, 0);
+  const targets = sourceCounts.map((count) => Math.max(count + 2, Math.round((count / sourceTotal) * targetWords)));
+  const targetTotal = targets.reduce((sum, count) => sum + count, 0);
+  if (targetTotal !== targetWords && targets.length) {
+    targets[targets.length - 1] = Math.max(3, targets[targets.length - 1] + targetWords - targetTotal);
+  }
+  return targets;
+}
+
+/** Validate the complete expansion before mutating the working plan. */
+export function validateExpansionCandidate(plan, expanded, minWords, maxWords) {
+  if (!Array.isArray(expanded?.scenes) || expanded.scenes.length !== plan.scenes.length) {
+    throw new Error(`expansion response changed the scene count (expected ${plan.scenes.length})`);
+  }
+
+  const expandedById = new Map();
+  for (const item of expanded.scenes) {
+    const id = String(item?.id || '').trim();
+    const narration = String(item?.narration || '').replace(/\s+/g, ' ').trim();
+    if (!id || !narration) throw new Error('expansion response omitted a scene ID or narration');
+    if (expandedById.has(id)) throw new Error(`expansion response duplicated scene ID ${id}`);
+    expandedById.set(id, { ...item, id, narration });
+  }
+
+  const replacements = plan.scenes.map((scene, index) => {
+    const stableId = editableSceneId(scene, index);
+    const replacement = expandedById.get(stableId);
+    if (!replacement) throw new Error(`expansion response omitted ${stableId}`);
+    return replacement;
+  });
+  const wordCount = replacements.map((item) => item.narration).join(' ').split(/\s+/).filter(Boolean).length;
+  if (wordCount < minWords) throw new Error(`expansion response undershot the word budget (${wordCount} words; minimum ${minWords})`);
+  if (wordCount > maxWords) throw new Error(`expansion response exceeded the word budget (${wordCount} words; maximum ${maxWords})`);
+  return { replacements, wordCount };
+}
+
 export async function expandPlanScript(plan, targetWords, minWords = Math.round(targetWords * 0.93), llm = llmConfig(), correctionAttempt = 0) {
   const currentWords = (plan.scenes || []).map((s) => s.narration).join(' ').split(/\s+/).filter(Boolean).length;
   if (currentWords >= minWords || !llm) return plan;
 
   console.log(`   ↗️ Expanding script from ${currentWords} words to ~${targetWords} words (minimum ${minWords})...`);
+  const sceneTargets = expansionSceneBudgets(plan.scenes || [], targetWords);
   const sceneList = (plan.scenes || []).map((scene, index) => ({
     id: editableSceneId(scene, index),
     purpose: scene.purpose,
     narration: scene.narration,
+    targetWords: sceneTargets[index],
   }));
+  const maxWords = Math.round(targetWords * 1.04);
   try {
     const expanded = await callJson(llm, [
       {
         role: 'system',
-        content: 'You are a careful documentary script editor. Expand an undersized script with useful explanation, not filler. Preserve all scene IDs and factual meaning. Do not introduce new exact numbers, quotations, dates, people, organizations, accusations, or medical/financial claims. Reply with JSON only.',
+        content: 'You are a careful documentary script editor. Expand an undersized script with useful explanation, not filler. Preserve all scene IDs and factual meaning. Meet every supplied scene word target so the complete narration meets its required speaking duration. Do not introduce new exact numbers, quotations, dates, people, organizations, accusations, or medical/financial claims. Reply with JSON only.',
       },
       {
         role: 'user',
-        content: `Expand this ${currentWords}-word script to between ${minWords} and ${Math.round(targetWords * 1.04)} words. Keep exactly ${sceneList.length} scenes and the same IDs. Add definitions, causal explanation, concrete but non-numeric context, and transitions. Do not repeat sentences. Return {"scenes":[{"id":string,"narration":string,"emphasis":string|null}]} only.\n${JSON.stringify(sceneList)}`,
+        content: `Expand this ${currentWords}-word script to between ${minWords} and ${maxWords} words. Keep exactly ${sceneList.length} scenes and the same IDs. Each input scene includes its required targetWords; keep each rewritten scene within 10% of that target. Add definitions, causal explanation, concrete but non-numeric context, examples grounded in the existing meaning, and natural transitions. Do not repeat sentences, pad with generic motivation, or summarize material that the script already stated. This is corrective attempt ${correctionAttempt + 1}; a response below ${minWords} total words is invalid. Return {"scenes":[{"id":string,"narration":string,"emphasis":string|null}]} only.\n${JSON.stringify(sceneList)}`,
       },
     ], { temperature: 0.35, retries: 2, timeoutMs: 60000 });
+    const { replacements } = validateExpansionCandidate(plan, expanded, minWords, maxWords);
     if (!Array.isArray(expanded?.scenes) || expanded.scenes.length !== plan.scenes.length) {
       if (correctionAttempt < 1) {
         console.warn('   Expansion response changed the scene count; requesting one corrective expansion pass.');
@@ -419,7 +519,7 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
     for (let sceneIndex = 0; sceneIndex < plan.scenes.length; sceneIndex++) {
       const scene = plan.scenes[sceneIndex];
       const stableId = editableSceneId(scene, sceneIndex);
-      const replacement = expanded.scenes.find((item) => item.id === stableId);
+      const replacement = replacements[sceneIndex];
       if (!replacement?.narration) {
         if (correctionAttempt < 1) {
           console.warn(`   Expansion response omitted ${stableId}; requesting one corrective expansion pass.`);
@@ -434,14 +534,13 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
     plan.script = plan.scenes.map((scene) => scene.narration).join(' ');
     plan = await repairIncompleteNarration(plan, llm);
     const expandedWords = plan.script.split(/\s+/).filter(Boolean).length;
-    const maxWords = Math.round(targetWords * 1.04);
     if (expandedWords > maxWords) {
       console.warn(`   Expansion returned ${expandedWords} words (maximum ${maxWords}); applying sentence-safe compression.`);
       plan = await compressPlanScript(plan, targetWords, maxWords, llm);
       plan = await repairIncompleteNarration(plan, llm);
     }
     const finalWords = plan.scenes.map((scene) => scene.narration).join(' ').split(/\s+/).filter(Boolean).length;
-    if (finalWords < minWords && correctionAttempt < 1) {
+    if (finalWords < minWords && correctionAttempt < 2) {
       console.warn(`   Expansion returned only ${finalWords} words (minimum ${minWords}); requesting one corrective expansion pass.`);
       return expandPlanScript(plan, targetWords, minWords, llm, correctionAttempt + 1);
     }
@@ -450,6 +549,10 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
     }
     return plan;
   } catch (error) {
+    if (correctionAttempt < 2) {
+      console.warn(`   Expansion candidate rejected (${error.message}); requesting corrective pass ${correctionAttempt + 2} of 3.`);
+      return expandPlanScript(plan, targetWords, minWords, llm, correctionAttempt + 1);
+    }
     console.warn(`   ⚠️ LLM expansion failed (${error.message}). Duration QC will enforce the undersized result.`);
     return plan;
   }
@@ -564,6 +667,7 @@ export async function generateDirectorPlan({
       `- Visual Art Style: "${styleName}".\n` +
       `- Style Prompt Anchor: "${effectiveStyleAnchor}".\n` +
       `- Art Directing Rule: ${styleConfig?.llmGuidance || ''}\n` +
+      `- Composition Contract: ${styleConfig?.generationRules || 'One coherent scene, one focal action, clear foreground/middle-ground/background separation.'}\n` +
       `- MANDATORY FIELD FOR EVERY SCENE: In addition to standard scene fields, each scene object MUST provide an "imagePrompt" field describing the visual composition, subject, character action, and setting in rich detail tailored specifically for an AI image generator in the ${styleName} visual style.\n` +
       `- Visual Continuity: Ensure recurring characters, outfits, hair, facial features, and environments remain consistent across all scene image prompts.`
     : '';
@@ -674,6 +778,7 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
       `- Artistic Style: "${styleName}".\n` +
       `- Style Prompt Anchor: "${effectiveStyleAnchor}".\n` +
       `- Style Directing Guidance: ${styleConfig?.llmGuidance || ''}\n` +
+      `- Composition Contract: ${styleConfig?.generationRules || 'One coherent scene, one focal action, clear foreground/middle-ground/background separation.'}\n` +
       `- MANDATORY FIELD FOR EVERY SCENE: In addition to standard scene fields, each scene object MUST provide an "imagePrompt" field describing the visual composition, subject, character action, and setting in rich detail tailored specifically for an AI image generator in the ${styleName} visual style.\n` +
       `- Visual Continuity: Ensure recurring characters, outfits, hair, facial features, and environments remain consistent across all scene image prompts.`
     : '';

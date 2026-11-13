@@ -89,5 +89,6 @@ export const config = {
     jobStore: process.env.VIDEO_JOB_STORE || (process.env.DATABASE_URL ? 'postgres' : 'file'),
     queueBackend: process.env.VIDEO_QUEUE_BACKEND || (process.env.REDIS_URL ? 'bullmq' : 'memory'),
     youtubePublishingEnabled: String(process.env.YOUTUBE_PUBLISHING_ENABLED || '').toLowerCase() === 'true',
+    youtubeAnalyticsEnabled: String(process.env.YOUTUBE_ANALYTICS_ENABLED || 'true').toLowerCase() !== 'false',
   }
 };

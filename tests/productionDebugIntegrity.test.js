@@ -256,6 +256,20 @@ test('packaging emits real section chapters instead of every clip', () => {
   assert.equal(result.chapters[1].title, 'Second Section');
 });
 
+test('packaging derives niche-specific hashtags instead of hard-coded technology tags', () => {
+  const plan = {
+    title: 'Why Your Brain Replays Embarrassing Moments', topic: 'embarrassing memory loops',
+    niche: 'psychology and human behavior', script: 'A complete psychology explanation.',
+    scenes: [{ id: 'scene_001', narration: 'Opening explanation.', section: true }],
+  };
+  const timeline = { fps: 30, clips: [{ id: 'c1', sceneId: 'scene_001', from: 0, sectionId: 'a' }] };
+  const result = generateVideoPackage(plan, timeline, { metadata: { primaryKeyword: 'replaying embarrassing moments' } });
+  assert.match(result.description, /#ReplayingEmbarrassingMoments/);
+  assert.match(result.description, /#PsychologyAndHuman/);
+  assert.doesNotMatch(result.description, /#technology/i);
+  assert.deepEqual(result.strategy.hashtags.slice(0, 2), ['#ReplayingEmbarrassingMoments', '#PsychologyAndHuman']);
+});
+
 test('media diagnostics classify native footage as video, not slideshow photography', () => {
   const base = { durationInFrames: 90, presentation: { cameraMove: 'static' }, variant: 'full', layout: 'image:full' };
   const diagnostics = buildVisualRealizationDiagnostics({ fps: 30, clips: [], realizedShots: [

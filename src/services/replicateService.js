@@ -58,7 +58,7 @@ export async function generateFluxImage({
   }
 
   const selectedModel = normalizeFluxModel(model);
-  const fullPrompt = buildFullIdeogramPrompt({ prompt, styleId, customStylePrompt });
+  const fullPrompt = buildFullIdeogramPrompt({ prompt, styleId, customStylePrompt, format });
   const aspectRatio = resolveFluxAspectRatio(format);
 
   // Check persistent disk cache

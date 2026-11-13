@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import os from 'node:os';
 import { createFacelessVideo } from '../src/pipeline/videoGeneratorPipeline.js';
 import { evaluateProductionBenchmark, resultFromPipeline } from '../src/benchmark/productionBenchmark.js';
 
@@ -26,6 +27,19 @@ const render = !args.includes('--no-render');
 const offline = args.includes('--offline');
 const listOnly = args.includes('--list');
 const profiles = selected === 'all' ? PROFILES : PROFILES.filter((profile) => profile.id === selected);
+
+async function writeWithRetry(file, contents, attempts = 3) {
+  let lastError;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    try { await fs.writeFile(file, contents); return; }
+    catch (error) {
+      lastError = error;
+      if (!['EPERM', 'EBUSY', 'EACCES'].includes(error.code) || attempt === attempts - 1) break;
+      await new Promise((resolve) => setTimeout(resolve, 100 * (attempt + 1)));
+    }
+  }
+  throw lastError;
+}
 
 if (listOnly) {
   console.log(PROFILES.map((profile) => `${profile.id}: ${profile.topic}`).join('\n'));
@@ -63,11 +77,22 @@ for (let repeat = 1; repeat <= repeatCount; repeat++) {
 const verdict = evaluateProductionBenchmark(results);
 const report = { generatedAt: new Date().toISOString(), render, offline, durationSec, profiles: profiles.map((item) => item.id), results, verdict };
 const outputDir = path.resolve('benchmarks', 'production');
-await fs.mkdir(outputDir, { recursive: true });
 const stamp = new Date().toISOString().replaceAll(':', '-').replace(/\.\d{3}Z$/, 'Z');
-const reportPath = path.join(outputDir, `benchmark-${stamp}.json`);
-await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
-await fs.writeFile(path.join(outputDir, 'latest.json'), JSON.stringify(report, null, 2));
+const contents = JSON.stringify(report, null, 2);
+let reportPath = path.join(outputDir, `benchmark-${stamp}.json`);
+try {
+  await fs.mkdir(outputDir, { recursive: true });
+  await writeWithRetry(reportPath, contents);
+  await writeWithRetry(path.join(outputDir, 'latest.json'), contents).catch((error) => {
+    console.warn(`[benchmark] Could not refresh latest.json: ${error.message}`);
+  });
+} catch (error) {
+  const fallbackDir = path.join(os.tmpdir(), 'videoforge-benchmarks');
+  await fs.mkdir(fallbackDir, { recursive: true });
+  reportPath = path.join(fallbackDir, `benchmark-${stamp}.json`);
+  await writeWithRetry(reportPath, contents);
+  console.warn(`[benchmark] Workspace report directory unavailable (${error.code || error.message}); wrote the report to a temporary directory.`);
+}
 console.log(JSON.stringify(verdict, null, 2));
 console.log(`Report: ${reportPath}`);
 if (!verdict.passed) process.exitCode = 2;

@@ -6,9 +6,26 @@ const GOOGLE_AUTH = 'https://accounts.google.com/o/oauth2/v2/auth';
 const GOOGLE_TOKEN = 'https://oauth2.googleapis.com/token';
 const YOUTUBE_API = 'https://www.googleapis.com/youtube/v3';
 const YOUTUBE_UPLOAD = 'https://www.googleapis.com/upload/youtube/v3';
-const SCOPES = ['https://www.googleapis.com/auth/youtube.upload', 'https://www.googleapis.com/auth/youtube.readonly'];
+const YOUTUBE_ANALYTICS_API = 'https://youtubeanalytics.googleapis.com/v2/reports';
+const SCOPES = [
+  'https://www.googleapis.com/auth/youtube.upload',
+  'https://www.googleapis.com/auth/youtube.readonly',
+  'https://www.googleapis.com/auth/yt-analytics.readonly',
+];
 
 const serviceError = (status, code, message) => Object.assign(new Error(message), { status, code });
+
+const isoDate = (date) => date.toISOString().slice(0, 10);
+function youtubeDurationSeconds(value) {
+  const match = String(value || '').match(/^P(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?$/i);
+  if (!match) return null;
+  return Math.round((Number(match[1] || 0) * 86_400) + (Number(match[2] || 0) * 3_600) + (Number(match[3] || 0) * 60) + Number(match[4] || 0));
+}
+
+function reportObjects(report) {
+  const headers = (report.columnHeaders || []).map((header) => header.name);
+  return (report.rows || []).map((row) => Object.fromEntries(headers.map((header, index) => [header, row[index]])));
+}
 
 export class YouTubePublisherService {
   constructor({ store, videoService, env = process.env, fetchImpl = fetch } = {}) {
@@ -101,6 +118,110 @@ export class YouTubePublisherService {
     const refreshed = await response.json(); Object.assign(token, refreshed, { expires_at: Date.now() + (Number(refreshed.expires_in || 3600) * 1000) });
     channel.youtube.tokenCiphertext = this.#encrypt(token, cfg.encryptionKey); channel.updatedAt = new Date().toISOString(); await this.store.putChannel(ownerId, channel);
     return token.access_token;
+  }
+
+  async #analyticsReport(accessToken, parameters) {
+    const rows = [];
+    for (let startIndex = 1; startIndex <= 2_000; startIndex += 200) {
+      const url = new URL(YOUTUBE_ANALYTICS_API);
+      url.search = new URLSearchParams({ ...parameters, maxResults: '200', startIndex: String(startIndex) }).toString();
+      const response = await this.fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(30_000) });
+      if (!response.ok) {
+        const code = response.status === 403 ? 'YOUTUBE_ANALYTICS_RECONNECT_REQUIRED' : 'YOUTUBE_ANALYTICS_FAILED';
+        const message = response.status === 403
+          ? 'YouTube Analytics access was denied. Reconnect the channel to grant analytics permission.'
+          : `YouTube Analytics query failed (${response.status})`;
+        throw serviceError(response.status === 403 ? 409 : 502, code, message);
+      }
+      const report = await response.json();
+      const page = reportObjects(report); rows.push(...page);
+      if (page.length < 200) break;
+    }
+    return rows;
+  }
+
+  async syncAnalytics(ownerId, channelId, { days = 90 } = {}) {
+    const channel = await this.store.getChannel(ownerId, channelId);
+    if (!channel) throw serviceError(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
+    const capturedAt = new Date().toISOString();
+    channel.youtube.lastAnalyticsSyncAttemptAt = capturedAt;
+    channel.youtube.analyticsSyncError = null;
+    channel.updatedAt = capturedAt;
+    await this.store.putChannel(ownerId, channel);
+    try {
+      const accessToken = await this.#accessToken(ownerId, channel);
+      const boundedDays = Math.max(7, Math.min(365, Number(days) || 90));
+      const end = new Date(); end.setUTCDate(end.getUTCDate() - 3);
+      const start = new Date(end); start.setUTCDate(start.getUTCDate() - boundedDays + 1);
+      const common = { ids: 'channel==MINE', startDate: isoDate(start), endDate: isoDate(end), dimensions: 'video,creatorContentType', sort: '-views' };
+      const activity = await this.#analyticsReport(accessToken, {
+        ...common,
+        metrics: 'views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained',
+      });
+      let reach = [];
+      try {
+        reach = await this.#analyticsReport(accessToken, {
+          ...common, metrics: 'videoThumbnailImpressions,videoThumbnailImpressionsClickRate',
+        });
+      } catch (error) {
+        console.warn(`YouTube reach metrics unavailable for ${channelId}: ${error.message}`);
+      }
+      const reachByVideo = new Map(reach.map((row) => [String(row.video), row]));
+      const videoIds = [...new Set(activity.map((row) => String(row.video || '')).filter(Boolean))];
+      const metadata = new Map();
+      for (let index = 0; index < videoIds.length; index += 50) {
+        const ids = videoIds.slice(index, index + 50);
+        const url = new URL(`${YOUTUBE_API}/videos`);
+        url.search = new URLSearchParams({ part: 'snippet,contentDetails', id: ids.join(','), maxResults: '50' }).toString();
+        const response = await this.fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(30_000) });
+        if (!response.ok) throw serviceError(502, 'YOUTUBE_VIDEO_LOOKUP_FAILED', `YouTube video metadata lookup failed (${response.status})`);
+        for (const item of (await response.json()).items || []) metadata.set(String(item.id), item);
+      }
+      const ideas = await this.store.listIdeas(ownerId, channelId);
+      const ideasByVideo = new Map(ideas.filter((idea) => idea.youtubeVideoId).map((idea) => [String(idea.youtubeVideoId), idea]));
+      const snapshots = [];
+      for (const row of activity) {
+        const videoId = String(row.video || '');
+        if (!videoId) continue;
+        const info = metadata.get(videoId); const idea = ideasByVideo.get(videoId) || null; const reachRow = reachByVideo.get(videoId) || {};
+        const durationSeconds = youtubeDurationSeconds(info?.contentDetails?.duration) || idea?.durationSeconds || null;
+        const snapshot = {
+          channelId, ideaId: idea?.id || null, videoId,
+          title: String(info?.snippet?.title || idea?.title || videoId).slice(0, 200),
+          format: row.creatorContentType === 'SHORTS' ? 'shorts'
+            : row.creatorContentType === 'VIDEO_ON_DEMAND' ? 'landscape'
+            : idea?.format || 'landscape',
+          durationSeconds,
+          capturedAt,
+          publishedAt: info?.snippet?.publishedAt || null,
+          impressions: reachRow.videoThumbnailImpressions == null ? null : Math.max(0, Math.round(Number(reachRow.videoThumbnailImpressions))),
+          views: Math.max(0, Math.round(Number(row.views || 0))),
+          clickThroughRate: reachRow.videoThumbnailImpressionsClickRate == null ? null : Number(reachRow.videoThumbnailImpressionsClickRate),
+          averageViewDurationSeconds: row.averageViewDuration == null ? null : Number(row.averageViewDuration),
+          averageViewPercentage: row.averageViewPercentage == null ? null : Number(row.averageViewPercentage),
+          retention30sPercentage: null,
+          subscribersGained: Math.round(Number(row.subscribersGained || 0)),
+          watchTimeHours: row.estimatedMinutesWatched == null ? null : Number((Number(row.estimatedMinutesWatched) / 60).toFixed(3)),
+          revenue: null, rpm: null, trafficSources: {}, source: 'api',
+        };
+        const identity = JSON.stringify([
+          channelId, videoId, snapshot.impressions, snapshot.views, snapshot.clickThroughRate,
+          snapshot.averageViewDurationSeconds, snapshot.averageViewPercentage, snapshot.subscribersGained, snapshot.watchTimeHours,
+        ]);
+        snapshot.id = `metric-${crypto.createHash('sha256').update(identity).digest('hex').slice(0, 24)}`;
+        snapshots.push(await this.store.putPerformance(ownerId, snapshot));
+      }
+      channel.youtube.lastAnalyticsSyncAt = capturedAt;
+      channel.youtube.analyticsSyncError = null;
+      channel.updatedAt = capturedAt;
+      await this.store.putChannel(ownerId, channel);
+      return { imported: snapshots.length, startDate: common.startDate, endDate: common.endDate, capturedAt, snapshots };
+    } catch (error) {
+      channel.youtube.analyticsSyncError = String(error.message || error).slice(0, 1_000);
+      channel.updatedAt = new Date().toISOString();
+      await this.store.putChannel(ownerId, channel).catch(() => {});
+      throw error;
+    }
   }
 
   async publishIdea(ownerId, channelId, ideaId) {

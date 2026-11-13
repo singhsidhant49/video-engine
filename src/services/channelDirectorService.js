@@ -1,4 +1,5 @@
 import { brainstormGrowthIdeas } from './youtubeGrowthService.js';
+import { CreateVideoRequestSchema } from '../server/videoApiSchemas.js';
 
 const now = () => new Date().toISOString();
 
@@ -54,6 +55,7 @@ SCRIPT CONTRACT:
 10. Meet the duration because the topic warrants it; never repeat or pad to fill time.`;
     const creative = {
       contentType: d.contentType, tone: d.tone, audience: channel.targetAudience, pacing: 'auto',
+      language: channel.language,
       imageSource: d.imageSource,
     };
     if (d.imageProvider) creative.imageProvider = d.imageProvider;
@@ -82,9 +84,13 @@ SCRIPT CONTRACT:
     const [channel, idea] = await Promise.all([this.store.getChannel(ownerId, channelId), this.store.getIdea(ownerId, ideaId)]);
     if (!channel || !idea || idea.channelId !== channelId) throw Object.assign(new Error('Idea not found'), { status: 404, code: 'IDEA_NOT_FOUND' });
     if (!['draft', 'approved', 'failed'].includes(idea.status)) throw Object.assign(new Error(`Idea cannot be produced while ${idea.status}`), { status: 409, code: 'IDEA_NOT_PRODUCIBLE' });
-    const created = idea.status === 'failed' && idea.videoId && typeof this.videoService.retry === 'function'
-      ? await this.videoService.retry(ownerId, idea.videoId)
-      : await this.videoService.create(ownerId, this.buildVideoRequest(channel, idea), `channel:${channelId}:idea:${ideaId}`);
+    let created;
+    if (idea.status === 'failed' && idea.videoId && typeof this.videoService.retry === 'function') {
+      created = await this.videoService.retry(ownerId, idea.videoId);
+    } else {
+      const request = CreateVideoRequestSchema.parse(this.buildVideoRequest(channel, idea));
+      created = await this.videoService.create(ownerId, request, `channel:${channelId}:idea:${ideaId}`);
+    }
     const updated = { ...idea, status: 'queued', videoId: created.job.id, error: null, updatedAt: now() };
     await this.store.putIdea(ownerId, updated);
     return { idea: updated, video: created.job, reused: created.reused };

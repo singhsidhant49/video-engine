@@ -12,6 +12,25 @@ function formatTimestamp(seconds) {
   return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
+const HASHTAG_STOP_WORDS = new Set([
+  'about', 'after', 'before', 'complete', 'explained', 'guide', 'happened', 'into', 'most',
+  'that', 'this', 'truth', 'video', 'what', 'when', 'where', 'which', 'with', 'your',
+]);
+
+export function buildVideoHashtags({ title = '', topic = '', niche = '', primaryKeyword = '' } = {}) {
+  const phrases = [primaryKeyword, niche, topic, title];
+  const tags = [];
+  for (const phrase of phrases) {
+    const words = String(phrase).toLowerCase().match(/[a-z0-9]+/g)
+      ?.filter((word) => word.length > 2 && !HASHTAG_STOP_WORDS.has(word)) || [];
+    if (!words.length) continue;
+    const candidate = `#${words.slice(0, 3).map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('')}`;
+    if (candidate.length <= 40 && !tags.some((tag) => tag.toLowerCase() === candidate.toLowerCase())) tags.push(candidate);
+    if (tags.length >= 4) break;
+  }
+  return tags.length ? tags : ['#EducationalVideo'];
+}
+
 /**
  * Generate 3 high-CTR thumbnail concepts and a full YouTube distribution package.
  * @param {object} plan The editorial plan.json
@@ -24,6 +43,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
   const title = plan.title || topic;
   const style = plan.style || 'cinematic_dark';
   const metadata = options.metadata || {};
+  const hashtags = buildVideoHashtags({ title, topic, niche: plan.niche || '', primaryKeyword: metadata.primaryKeyword || '' });
 
   // 1. Generate 3 High-CTR Thumbnail Concepts
   const thumbnailConcepts = [
@@ -132,7 +152,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
       ? evidenceSources.map((e) => `- ${e.name || e.claim || e.speaker}: ${e.reference || e.source || ''}`).join('\n')
       : '- No externally verified claim sources were recorded for this run.',
     evidenceSources.length ? '\nSources are recorded for editorial review; automated citation presence is not a substitute for human fact-checking.' : '',
-    '\n#technology #education #documentary #analysis',
+    `\n${hashtags.join(' ')}`,
   ].join('\n');
 
   return {
@@ -146,6 +166,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
       trafficStrategy: metadata.trafficStrategy || null,
       primaryKeyword: metadata.primaryKeyword || null,
       thumbnailConcept: metadata.thumbnailConcept || null,
+      hashtags,
     },
   };
 }

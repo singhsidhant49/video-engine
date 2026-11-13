@@ -1,6 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const query = new URLSearchParams(location.search);
-const state = { key: sessionStorage.getItem('videoApiKey') || '', videos: [], channels: [], ideas: [], performance: [], selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), poll: null, mediaUrl: null, pollCount: 0 };
+const state = { key: sessionStorage.getItem('videoApiKey') || '', videos: [], channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), poll: null, mediaUrl: null, pollCount: 0 };
 const terminal = new Set(['completed', 'failed', 'cancelled']);
 const activeStatuses = new Set(['queued', 'preparing', 'processing', 'cancel_requested']);
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[c]);
@@ -20,6 +20,7 @@ async function api(path, options = {}) {
   if (!response.ok) {
     const error = new Error(body?.error?.message || `Request failed (${response.status})`);
     error.status = response.status;
+    error.body = body;
     throw error;
   }
   return body;
@@ -52,7 +53,8 @@ function videoCard(video) {
     : ['failed', 'cancelled'].includes(video.status)
       ? `<button data-video-action="retry" data-id="${video.id}">Retry</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
       : `<button data-video-action="cancel" data-id="${video.id}">Cancel</button>`;
-  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${video.status !== 'completed' ? `<strong>${escapeHtml(video.stage || 'QUEUED')}</strong>` : ''}</div><div class="card-body"><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
+  const posterMessage = video.status !== 'completed' ? escapeHtml(video.stage || 'QUEUED') : thumb ? '' : 'LOADING THUMBNAIL';
+  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
 }
 
 function renderVideos() {
@@ -69,9 +71,12 @@ async function loadThumbnails() {
   for (const [id, url] of state.thumbs) if (!ids.has(id)) { URL.revokeObjectURL(url); state.thumbs.delete(id); }
   for (const video of state.videos.filter((v) => v.status === 'completed' && !state.thumbs.has(v.id))) {
     fetch(`/v1/videos/${video.id}/thumbnail`, { headers: headers(false) }).then(async (res) => {
-      if (!res.ok) return; const url = URL.createObjectURL(await res.blob()); state.thumbs.set(video.id, url);
-      document.querySelectorAll(`[data-poster="${video.id}"]`).forEach((el) => { el.style.backgroundImage = `url('${url}')`; });
-    }).catch(() => {});
+      if (!res.ok) throw new Error(`Thumbnail request failed (${res.status})`);
+      const url = URL.createObjectURL(await res.blob()); state.thumbs.set(video.id, url);
+      document.querySelectorAll(`[data-poster="${video.id}"]`).forEach((el) => { el.style.backgroundImage = `url('${url}')`; el.querySelector('[data-poster-message]')?.remove(); });
+    }).catch(() => {
+      document.querySelectorAll(`[data-poster="${video.id}"] [data-poster-message]`).forEach((el) => { el.textContent = 'THUMBNAIL UNAVAILABLE'; });
+    });
   }
 }
 
@@ -97,13 +102,16 @@ function channelCard(channel) {
 
 function renderChannels() {
   $('channelCount').textContent = state.channels.length;
-  $('channelGrid').innerHTML = state.channels.length ? state.channels.map(channelCard).join('') : '<div class="empty">No channel profiles yet. Create one to unlock strategic ideation and automation.</div>';
+  $('channelGrid').innerHTML = !state.key
+    ? '<div class="empty">Connect your API key in Settings to load channel profiles.</div>'
+    : state.channels.length ? state.channels.map(channelCard).join('') : '<div class="empty">No channel profiles yet. Create one to unlock strategic ideation and automation.</div>';
   const options = state.channels.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
   const currentProfile = $('profileId').value;
   $('profileId').innerHTML = '<option value="default">Default profile</option>' + options;
   if ([...$('profileId').options].some((option) => option.value === currentProfile)) $('profileId').value = currentProfile;
-  $('ideaChannel').innerHTML = options || '<option value="">Create a channel first</option>';
-  $('performanceChannel').innerHTML = options || '<option value="">Create a channel first</option>';
+  const emptyOption = state.key ? 'Create a channel first' : 'API key required';
+  $('ideaChannel').innerHTML = options || `<option value="">${emptyOption}</option>`;
+  $('performanceChannel').innerHTML = options || `<option value="">${emptyOption}</option>`;
   if (state.selectedChannelId && state.channels.some((c) => c.id === state.selectedChannelId)) $('ideaChannel').value = state.selectedChannelId;
   else state.selectedChannelId = state.channels[0]?.id || null;
   if (state.selectedChannelId) $('performanceChannel').value = state.selectedChannelId;
@@ -124,11 +132,48 @@ function renderPerformance() {
   $('performanceGrid').innerHTML = state.performance.length ? state.performance.map((item) => `<article class="idea-card"><div class="card-top"><div class="badge-row"><span class="badge accent">${escapeHtml(item.format)}</span><span class="badge">${durationLabel(item.durationSeconds)}</span></div><span class="meta">${dateLabel(item.capturedAt)}</span></div><h3>${escapeHtml(item.title || item.videoId || 'Untitled video')}</h3><div class="channel-stats"><div><span>Views</span><strong>${Number(item.views || 0).toLocaleString()}</strong></div><div><span>CTR</span><strong>${item.clickThroughRate == null ? '—' : `${item.clickThroughRate}%`}</strong></div><div><span>Viewed</span><strong>${item.averageViewPercentage == null ? '—' : `${item.averageViewPercentage}%`}</strong></div><div><span>Subscribers</span><strong>${Number(item.subscribersGained || 0).toLocaleString()}</strong></div></div></article>`).join('') : '<div class="empty">No performance snapshots yet. Add results after a video has collected meaningful data.</div>';
 }
 
+function renderPerformanceSummary() {
+  const summary = state.performanceSummary;
+  if (!summary?.sampleSize) {
+    $('performanceSummary').innerHTML = '<div class="empty">Import or synchronize at least three videos to establish a directional baseline.</div>';
+    return;
+  }
+  const cards = Object.entries(summary.formats || {}).map(([format, item]) => `<article><span>${escapeHtml(label(format))} · ${escapeHtml(label(item.confidence))}</span><strong>${item.weightedCtr == null ? '—' : `${item.weightedCtr}% CTR`}</strong><small>${item.weightedAverageViewedPercentage == null ? 'Retention unavailable' : `${item.weightedAverageViewedPercentage}% viewed`} · ${item.samples} video${item.samples === 1 ? '' : 's'}</small></article>`);
+  cards.unshift(`<article><span>Total evidence</span><strong>${summary.sampleSize}</strong><small>Unique videos with usable performance data</small></article>`);
+  const nextTest = summary.guidance?.nextExperiments?.[0];
+  cards.push(`<article><span>Strategy confidence</span><strong>${escapeHtml(label(summary.guidance?.evidenceLevel || 'insufficient'))}</strong><small>${nextTest ? `Next test: ${escapeHtml(label(nextTest.variant))}` : escapeHtml(summary.guidance?.caution || 'Keep collecting comparable results.')}</small></article>`);
+  $('performanceSummary').innerHTML = cards.join('');
+}
+
 async function loadPerformance() {
   const channelId = $('performanceChannel').value || state.selectedChannelId;
-  if (!state.key || !channelId) { state.performance = []; renderPerformance(); return; }
-  try { const result = await api(`/v1/channels/${channelId}/performance`); state.performance = result.snapshots || []; renderPerformance(); }
+  if (!state.key || !channelId) { state.performance = []; state.performanceSummary = null; renderPerformance(); renderPerformanceSummary(); return; }
+  try {
+    const [result, summary] = await Promise.all([api(`/v1/channels/${channelId}/performance`), api(`/v1/channels/${channelId}/performance/summary`)]);
+    state.performance = result.snapshots || []; state.performanceSummary = summary; renderPerformance(); renderPerformanceSummary();
+  }
   catch (error) { handleApiError(error); }
+}
+
+async function syncYoutubeAnalytics() {
+  const channelId = $('performanceChannel').value || state.selectedChannelId;
+  const channel = state.channels.find((item) => item.id === channelId);
+  if (!channel) return toast('Create or select a channel first');
+  if (!channel.youtube.connected) {
+    try {
+      const result = await api(`/v1/channels/${channelId}/youtube/connect`);
+      window.open(result.authorizationUrl, 'youtube-oauth', 'width=620,height=760,noopener,noreferrer');
+      $('csvImportMessage').textContent = 'Finish YouTube authorization, then click Sync YouTube again.';
+    } catch (error) { handleApiError(error); }
+    return;
+  }
+  const button = $('syncYoutubeAnalytics'); button.disabled = true; $('csvImportMessage').textContent = 'Synchronizing the last 90 days...';
+  try {
+    const result = await api(`/v1/channels/${channelId}/youtube/analytics/sync`, { method: 'POST', body: JSON.stringify({ days: 90 }) });
+    $('csvImportMessage').textContent = `Synchronized ${result.imported} video${result.imported === 1 ? '' : 's'} through ${result.endDate}.`;
+    toast('YouTube Analytics synchronized'); await Promise.all([loadChannels(), loadPerformance()]);
+  } catch (error) { $('csvImportMessage').textContent = error.message; handleApiError(error); }
+  finally { button.disabled = false; }
 }
 
 const optionalNumber = (id) => $(id).value === '' ? null : Number($(id).value);
@@ -151,7 +196,26 @@ async function savePerformance(event) {
   } catch (error) { $('performanceMessage').textContent = error.message; handleApiError(error); }
 }
 
-function renderIdeas() { $('ideaGrid').innerHTML = state.ideas.length ? state.ideas.map(ideaCard).join('') : `<div class="empty">${state.selectedChannelId ? 'No ideas yet. Run the strategic idea generator.' : 'Create a channel before generating ideas.'}</div>`; }
+async function importAnalyticsCsv(event) {
+  event.preventDefault();
+  const channelId = $('performanceChannel').value || state.selectedChannelId;
+  const file = $('analyticsCsv').files?.[0];
+  if (!channelId) return toast('Create or select a channel first');
+  if (!file) return toast('Choose a YouTube Analytics CSV file');
+  const button = $('importAnalytics');
+  button.disabled = true; $('csvImportMessage').textContent = 'Importing analytics...';
+  try {
+    const result = await api(`/v1/channels/${channelId}/performance/import`, {
+      method: 'POST', headers: { 'Content-Type': 'text/csv' }, body: await file.text(),
+    });
+    $('csvImportMessage').textContent = `Imported ${result.imported} video${result.imported === 1 ? '' : 's'}${result.skipped ? `; skipped ${result.skipped} invalid row${result.skipped === 1 ? '' : 's'}` : ''}.`;
+    $('analyticsCsv').value = ''; toast('Analytics imported'); await loadPerformance();
+  } catch (error) {
+    $('csvImportMessage').textContent = error.message; handleApiError(error);
+  } finally { button.disabled = false; }
+}
+
+function renderIdeas() { $('ideaGrid').innerHTML = state.ideas.length ? state.ideas.map(ideaCard).join('') : `<div class="empty">${!state.key ? 'Connect your API key in Settings to load ideas.' : state.selectedChannelId ? 'No ideas yet. Run the strategic idea generator.' : 'Create a channel before generating ideas.'}</div>`; }
 async function loadIdeas() {
   state.selectedChannelId = $('ideaChannel').value || state.selectedChannelId;
   if (!state.key || !state.selectedChannelId) { state.ideas = []; renderIdeas(); return; }
@@ -165,15 +229,23 @@ async function checkHealth() {
     const ready = await api('/ready'); $('healthDot').classList.toggle('ready', Boolean(ready.ready)); $('healthText').textContent = ready.ready ? 'System ready' : 'Service degraded';
     const workers = ready.queue?.workerCount ?? ready.queue?.workers ?? '—'; $('workerText').textContent = `${workers} worker${workers === 1 ? '' : 's'} connected`; $('keyState').textContent = 'Securely connected';
     $('apiStatus').textContent = ready.ready ? 'Ready' : 'Degraded'; $('workerStatus').textContent = workers; $('storageStatus').textContent = ready.storage?.status || ready.store?.status || 'Available';
-  } catch (error) { handleApiError(error); $('apiStatus').textContent = 'Unavailable'; }
+  } catch (error) {
+    const required = error.body?.preflight?.required || {};
+    const failures = Object.values(required).filter((item) => item && item.healthy === false).map((item) => item.message || item.code);
+    if (failures.length) {
+      $('healthDot').classList.remove('ready'); $('healthText').textContent = 'Setup required';
+      $('workerText').textContent = failures[0]; $('apiStatus').textContent = 'Degraded'; toast(failures[0]);
+    } else { handleApiError(error); $('apiStatus').textContent = 'Unavailable'; }
+  }
 }
 
 function handleApiError(error) {
   if (error.status === 401) {
-    state.key = ''; state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.selectedChannelId = null;
+    state.key = ''; state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null; state.selectedChannelId = null;
     sessionStorage.removeItem('videoApiKey'); $('keyState').textContent = 'Invalid API key'; $('apiKey').value = '';
     for (const url of state.thumbs.values()) URL.revokeObjectURL(url); state.thumbs.clear();
     if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null;
+    $('settingsError').textContent = 'The API key was rejected. Check the secret and try again.';
     renderVideos(); renderChannels(); renderIdeas(); renderPerformance();
   }
   $('healthText').textContent = error.message; toast(error.message);
@@ -186,22 +258,44 @@ async function createVideo(event) {
   try {
     const selectedChannel = state.channels.find((channel) => channel.id === $('profileId').value);
     const defaults = selectedChannel?.productionDefaults || {};
-    const creative = { contentType: $('contentType').value, tone: $('tone').value, audience: selectedChannel?.targetAudience || 'general YouTube audience', pacing: 'auto', imageSource: $('imageSource').value };
+    const creative = { contentType: $('contentType').value, tone: $('tone').value, audience: selectedChannel?.targetAudience || 'general YouTube audience', language: selectedChannel?.language || 'en', pacing: 'auto', imageSource: $('imageSource').value };
     if (creative.imageSource === 'ai') Object.assign(creative, { imageProvider: defaults.imageProvider || undefined, imageModel: defaults.imageModel || undefined, imageQuality: defaults.imageQuality || undefined, imageStyle: defaults.imageStyle || undefined, customStylePrompt: defaults.customStylePrompt || undefined });
-    const body = { prompt: $('prompt').value, profileId: $('profileId').value, niche: selectedChannel?.niche, output: { durationSeconds: Number($('duration').value), aspectRatio: $('aspect').value, resolution: '1080p' }, creative, audio: $('voice').value !== 'auto' ? { voice: $('voice').value } : {}, subtitles: { enabled: defaults.subtitles !== false }, metadata: { source: 'dashboard', channelId: $('profileId').value } };
-    await api('/v1/videos', { method: 'POST', body: JSON.stringify(body) }); event.currentTarget.reset(); $('tone').value = 'clear, compelling, and authoritative'; $('formMessage').textContent = 'Production queued successfully.'; toast('Production queued'); await loadVideos();
+    const durationMode = $('durationMode').value;
+    const output = { durationMode, aspectRatio: $('aspect').value, resolution: '1080p' };
+    if (durationMode === 'exact') output.durationSeconds = Number($('duration').value);
+    else {
+      const format = output.aspectRatio === '9:16' ? 'shorts' : 'landscape';
+      output.durationRange = defaults.durationRanges?.[format] || (format === 'shorts' ? { min: 20, max: 60 } : { min: 120, max: 600 });
+    }
+    const body = { prompt: $('prompt').value, profileId: $('profileId').value, niche: selectedChannel?.niche, output, creative, audio: $('voice').value !== 'auto' ? { voice: $('voice').value } : {}, subtitles: { enabled: defaults.subtitles !== false }, metadata: { source: 'dashboard', channelId: $('profileId').value } };
+    await api('/v1/videos', { method: 'POST', body: JSON.stringify(body) }); event.currentTarget.reset(); $('tone').value = 'clear, compelling, and authoritative'; syncDurationFields(); $('formMessage').textContent = 'Production queued successfully.'; toast('Production queued'); await loadVideos();
   } catch (error) { $('formMessage').textContent = error.message; handleApiError(error); } finally { button.disabled = false; }
 }
 
 function applySelectedChannelDefaults() {
   const channel = state.channels.find((item) => item.id === $('profileId').value);
-  if (!channel) return;
+  if (!channel) { syncDurationFields(); return; }
   const defaults = channel.productionDefaults;
   $('contentType').value = [...$('contentType').options].some((option) => option.value === defaults.contentType) ? defaults.contentType : 'auto';
   $('tone').value = defaults.tone;
   $('imageSource').value = defaults.imageSource;
   $('voice').value = defaults.voice || 'auto';
   if (defaults.formats.length === 1) $('aspect').value = defaults.formats[0] === 'shorts' ? '9:16' : '16:9';
+  syncDurationFields();
+}
+
+function syncDurationFields() {
+  const exact = $('durationMode').value === 'exact';
+  $('durationField').hidden = !exact;
+  $('duration').required = exact;
+  if (exact) {
+    $('durationHint').textContent = 'The production targets the exact number of seconds you enter.';
+    return;
+  }
+  const channel = state.channels.find((item) => item.id === $('profileId').value);
+  const format = $('aspect').value === '9:16' ? 'shorts' : 'landscape';
+  const range = channel?.productionDefaults?.durationRanges?.[format] || (format === 'shorts' ? { min: 20, max: 60 } : { min: 120, max: 600 });
+  $('durationHint').textContent = `AI selects ${durationLabel(range.min)}–${durationLabel(range.max)} based on topic depth.`;
 }
 
 const imageModels = {
@@ -334,6 +428,10 @@ async function channelAction(button) {
     if (action === 'ideas') { location.href = channelPage('ideas', id); return; }
     if (action === 'brainstorm') { await brainstorm(id); location.href = channelPage('ideas', id); return; }
     if (action === 'analytics') { location.href = channelPage('analytics', id); return; }
+    if (action === 'connect') {
+      const result = await api(`/v1/channels/${id}/youtube/connect`);
+      window.open(result.authorizationUrl, 'youtube-oauth', 'width=620,height=760,noopener,noreferrer'); return;
+    }
     if (action === 'edit' && channel) { openChannelDialog(channel); return; }
     if (action === 'toggle' && channel) {
       await api(`/v1/channels/${id}`, { method: 'PATCH', body: JSON.stringify({ automation: { enabled: !channel.automation.enabled } }) });
@@ -341,7 +439,7 @@ async function channelAction(button) {
     }
     if (action === 'delete' && channel && confirm(`Delete ${channel.name}, its ideas, and its analytics? Generated videos will remain available.`)) {
       await api(`/v1/channels/${id}`, { method: 'DELETE' });
-      state.selectedChannelId = null; state.ideas = []; state.performance = [];
+      state.selectedChannelId = null; state.ideas = []; state.performance = []; state.performanceSummary = null;
       toast('Channel deleted'); await loadChannels(); renderIdeas(); renderPerformance(); return;
     }
   } catch (error) { handleApiError(error); }
@@ -360,11 +458,15 @@ async function ideaAction(button) {
 document.addEventListener('click', (event) => { const video = event.target.closest('[data-video-action]'); const channel = event.target.closest('[data-channel-action]'); const idea = event.target.closest('[data-idea-action]'); if (video) void videoAction(video); if (channel) void channelAction(channel); if (idea) void ideaAction(idea); });
 $('createForm').addEventListener('submit', createVideo); $('channelForm').addEventListener('submit', createChannel);
 $('performanceForm').addEventListener('submit', savePerformance); $('refreshPerformance').addEventListener('click', loadPerformance);
+$('csvImportForm').addEventListener('submit', importAnalyticsCsv);
+$('syncYoutubeAnalytics').addEventListener('click', syncYoutubeAnalytics);
 $('newChannel').addEventListener('click', () => openChannelDialog());
 $('brainstorm').addEventListener('click', () => brainstorm()); $('refreshIdeas').addEventListener('click', loadIdeas); $('refreshVideos').addEventListener('click', loadVideos);
 $('ideaChannel').addEventListener('change', () => { state.selectedChannelId = $('ideaChannel').value; history.replaceState(null, '', channelPage('ideas')); void loadIdeas(); });
 $('performanceChannel').addEventListener('change', () => { state.selectedChannelId = $('performanceChannel').value; history.replaceState(null, '', channelPage('analytics')); void loadPerformance(); });
 $('profileId').addEventListener('change', applySelectedChannelDefaults);
+$('durationMode').addEventListener('change', syncDurationFields);
+$('aspect').addEventListener('change', syncDurationFields);
 $('channelImageSource').addEventListener('change', () => syncChannelVisualFields());
 $('channelImageProvider').addEventListener('change', () => syncChannelVisualFields());
 $('channelImageStyle').addEventListener('change', () => syncChannelVisualFields($('channelImageModel').value));
@@ -373,7 +475,8 @@ $('settingsForm').addEventListener('submit', async (event) => { event.preventDef
 $('clearKey').addEventListener('click', () => { state.key = ''; sessionStorage.removeItem('videoApiKey'); $('apiKey').value = ''; location.reload(); });
 $('closeReview').addEventListener('click', () => $('reviewDialog').close()); $('reviewDialog').addEventListener('close', () => { $('reviewVideo').pause(); $('reviewVideo').removeAttribute('src'); $('reviewVideo').load(); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null; });
 window.addEventListener('storage', () => refreshAll());
-setPage(); $('apiKey').value = state.key; renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); await refreshAll();
+$('performanceViewed').max = '1000';
+setPage(); $('apiKey').value = state.key; renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); syncDurationFields(); await refreshAll();
 state.poll = setInterval(() => {
   if (!state.key) return; state.pollCount += 1;
   if (state.videos.some((v) => !terminal.has(v.status))) void loadVideos();

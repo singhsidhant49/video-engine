@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords } from '../src/storyboard/durationBudget.js';
-import { compressPlanScript, validateCompressionCandidate } from '../src/services/aiDirectorService.js';
+import { compressPlanScript, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('calculateDurationBudget derives balanced word and time constraints for 75s explainer', () => {
@@ -114,6 +114,40 @@ test('compression validation assigns stable editing IDs before plan normalizatio
   ] };
   const validated = validateCompressionCandidate(plan, candidate, 10, 11);
   assert.equal(validated.wordCount, 10);
+});
+
+test('expansion rejects an undersized candidate without mutating the source plan', () => {
+  const plan = { scenes: [
+    { id: 's1', narration: 'Original first scene stays intact.' },
+    { id: 's2', narration: 'Original second scene also stays intact.' },
+  ] };
+  const candidate = { scenes: [
+    { id: 's1', narration: 'Still too short.' },
+    { id: 's2', narration: 'Also too short.' },
+  ] };
+
+  assert.throws(
+    () => validateExpansionCandidate(plan, candidate, 20, 24),
+    /undershot the word budget/,
+  );
+  assert.equal(plan.scenes[0].narration, 'Original first scene stays intact.');
+  assert.equal(plan.scenes[1].narration, 'Original second scene also stays intact.');
+});
+
+test('expansion validation preserves stable scene ordering and enforces all IDs', () => {
+  const plan = { scenes: [
+    { id: 's1', narration: 'Short first.' },
+    { id: 's2', narration: 'Short second.' },
+  ] };
+  const candidate = { scenes: [
+    { id: 's2', narration: 'Second scene now has enough useful explanatory words for its assigned duration target.' },
+    { id: 's1', narration: 'First scene now has enough useful explanatory words for its assigned duration target.' },
+  ] };
+
+  const validated = validateExpansionCandidate(plan, candidate, 20, 30);
+  assert.equal(validated.replacements[0].id, 's1');
+  assert.equal(validated.replacements[1].id, 's2');
+  assert.ok(validated.wordCount >= 20);
 });
 
 test('timeline QC enforces duration tolerance and reports hard failure outside 10%', () => {

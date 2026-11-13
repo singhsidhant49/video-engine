@@ -52,6 +52,69 @@ export function scoreTitle(title) {
   return Math.max(1, Math.min(100, Math.round(score)));
 }
 
+/** Stable production ordering. Database recency and model response order must
+ * never decide which idea consumes the next scheduled production slot. */
+export function rankGrowthIdeas(ideas = []) {
+  const urgencyWeight = { trending: 3, seasonal: 2, evergreen: 1 };
+  return [...ideas].sort((left, right) =>
+    (Number(right.compositeScore || 0) - Number(left.compositeScore || 0))
+    || (Number(right.performanceEvidenceScore || 0) - Number(left.performanceEvidenceScore || 0))
+    || (Number(right.retentionScore || 0) - Number(left.retentionScore || 0))
+    || (Number(right.titleScore || 0) - Number(left.titleScore || 0))
+    || ((urgencyWeight[right.urgency] || 0) - (urgencyWeight[left.urgency] || 0))
+    || String(left.id || left.title || '').localeCompare(String(right.id || right.title || '')));
+}
+
+const clampScore = (value) => Math.max(1, Math.min(10, Math.round(Number(value) || 1)));
+
+const performanceQuality = (item) => (Number(item.weightedCtr ?? item.averageCtr ?? 0) * 2)
+  + (Number(item.weightedAverageViewedPercentage ?? item.averageViewedPercentage ?? 0) / 5)
+  + Number(item.subscribersPerThousandViews || 0);
+
+function comparativeLeader(groups = {}) {
+  const reliable = Object.entries(groups).filter(([, item]) => item.confidence === 'reliable');
+  if (reliable.length < 2) return null;
+  return reliable.sort((left, right) => performanceQuality(right[1]) - performanceQuality(left[1]))[0][0];
+}
+
+export function calculatePerformanceEvidence(idea, summary = {}) {
+  const comparisons = [
+    ['format', idea.format, summary.formats],
+    ['pillar', idea.contentPillar, summary.pillars],
+    ['hook', idea.hookFormula, summary.hookFormulas],
+  ];
+  const reasons = []; let score = 0;
+  for (const [label, value, groups] of comparisons) {
+    const leader = comparativeLeader(groups);
+    if (leader && value === leader) { score++; reasons.push(`${label} ${value} leads a reliable within-channel comparison`); }
+  }
+  return {
+    score: Math.max(-3, Math.min(3, score)),
+    reason: reasons.length ? reasons.join('; ').slice(0, 500) : 'No reliable comparative channel evidence yet.',
+  };
+}
+
+/** Compute the production score from normalized, inspectable factors. The LLM
+ * may propose the factors, but it cannot award itself an arbitrary total. */
+export function calculateOpportunityScore({ idea, titleScore, retentionScore, channel }) {
+  const demandBase = { low: 3, medium: 6, high: 9 }[idea.searchVolumeTier] || 4;
+  const trendAdjustment = idea.trendDirection === 'rising' ? 1 : idea.trendDirection === 'declining' ? -1 : 0;
+  const audienceText = `${channel.targetAudience || ''} ${(channel.audiencePainPoints || []).join(' ')} ${(channel.contentPillars || []).join(' ')}`.toLowerCase();
+  const keywordTokens = String(idea.primaryKeyword || '').toLowerCase().match(/[a-z0-9]+/g) || [];
+  const keywordMatches = keywordTokens.filter((token) => token.length > 3 && audienceText.includes(token)).length;
+  const nicheBase = (channel.contentPillars || []).includes(idea.contentPillar) ? 7 : 4;
+  const durationPenalty = Number(idea.durationSeconds || 0) > 600 ? 2 : Number(idea.durationSeconds || 0) > 300 ? 1 : 0;
+  const competitionPenalty = idea.competition === 'high' ? 2 : idea.competition === 'medium' ? 1 : 0;
+  const resourcePenalty = channel.resourceLevel === 'solo' && Number(idea.durationSeconds || 0) > 480 ? 1 : 0;
+  const breakdown = {
+    demand: clampScore(demandBase + trendAdjustment),
+    clickPotential: clampScore((Number(titleScore || 0) + Number(retentionScore || 0)) / 20),
+    nicheFit: clampScore(nicheBase + Math.min(3, keywordMatches)),
+    feasibility: clampScore(10 - durationPenalty - competitionPenalty - resourcePenalty),
+  };
+  return { ...breakdown, total: Object.values(breakdown).reduce((sum, value) => sum + value, 0) };
+}
+
 function extractJson(text) {
   const cleaned = String(text || '').replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
   const start = cleaned.indexOf('['); const end = cleaned.lastIndexOf(']');
@@ -111,7 +174,7 @@ async function researchCurrentYouTubeMarket(channel) {
   }
 }
 
-export function summarizeChannelPerformance(snapshots = []) {
+export function summarizeChannelPerformance(snapshots = [], ideas = []) {
   const latestByVideo = new Map();
   for (const item of snapshots) {
     if (!item || !(item.views > 0 || item.impressions > 0)) continue;
@@ -120,25 +183,93 @@ export function summarizeChannelPerformance(snapshots = []) {
     if (!existing || String(item.capturedAt || '') > String(existing.capturedAt || '')) latestByVideo.set(identity, item);
   }
   const usable = [...latestByVideo.values()];
-  if (!usable.length) return { sampleSize: 0, formats: {}, topVideos: [] };
-  const formats = {};
-  for (const format of ['landscape', 'shorts']) {
-    const rows = usable.filter((item) => item.format === format);
-    if (!rows.length) continue;
+  if (!usable.length) return {
+    sampleSize: 0, formats: {}, pillars: {}, hookFormulas: {}, experiments: { titleAngles: {}, thumbnailVariants: {} },
+    guidance: { evidenceLevel: 'insufficient', reliableComparisons: {}, directionalTests: [], nextExperiments: [], caution: 'Collect results from at least three unique videos before adapting strategy.' },
+    topVideos: [],
+  };
+  const ideasById = new Map(ideas.filter(Boolean).map((idea) => [idea.id, idea]));
+  const ideasByVideo = new Map();
+  const ideasByTitle = new Map();
+  for (const idea of ideas.filter(Boolean)) {
+    if (idea.videoId) ideasByVideo.set(String(idea.videoId), idea);
+    if (idea.youtubeVideoId) ideasByVideo.set(String(idea.youtubeVideoId), idea);
+    if (idea.title) ideasByTitle.set(String(idea.title).trim().toLowerCase(), idea);
+  }
+  const linked = usable.map((snapshot) => ({
+    snapshot,
+    idea: ideasById.get(snapshot.ideaId) || ideasByVideo.get(String(snapshot.videoId || ''))
+      || ideasByTitle.get(String(snapshot.title || '').trim().toLowerCase()) || null,
+  }));
+  const summarizeRows = (rows) => {
     const average = (key) => {
-      const values = rows.map((item) => item[key]).filter((value) => value !== null && value !== undefined && value !== '')
+      const values = rows.map(({ snapshot }) => snapshot[key]).filter((value) => value !== null && value !== undefined && value !== '')
         .map(Number).filter(Number.isFinite);
       return values.length ? Number((values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(2)) : null;
     };
-    formats[format] = {
+    const views = rows.reduce((sum, { snapshot }) => sum + Number(snapshot.views || 0), 0);
+    const subscribers = rows.reduce((sum, { snapshot }) => sum + Number(snapshot.subscribersGained || 0), 0);
+    const impressions = rows.reduce((sum, { snapshot }) => sum + Number(snapshot.impressions || 0), 0);
+    const ctrReach = rows.filter(({ snapshot }) => Number(snapshot.impressions) > 0 && Number.isFinite(Number(snapshot.clickThroughRate)));
+    const viewedReach = rows.filter(({ snapshot }) => Number(snapshot.views) > 0 && Number.isFinite(Number(snapshot.averageViewPercentage)));
+    const confidence = rows.length >= 10 && (views >= 10_000 || impressions >= 10_000)
+      ? 'reliable' : rows.length >= 3 && (views >= 1_000 || impressions >= 1_000) ? 'directional' : 'insufficient';
+    return {
       samples: rows.length,
+      views,
+      impressions,
+      confidence,
       averageCtr: average('clickThroughRate'),
+      weightedCtr: ctrReach.length ? Number((ctrReach.reduce((sum, { snapshot }) => sum + (Number(snapshot.clickThroughRate) * Number(snapshot.impressions)), 0)
+        / ctrReach.reduce((sum, { snapshot }) => sum + Number(snapshot.impressions), 0)).toFixed(2)) : null,
       averageViewedPercentage: average('averageViewPercentage'),
+      weightedAverageViewedPercentage: viewedReach.length ? Number((viewedReach.reduce((sum, { snapshot }) => sum + (Number(snapshot.averageViewPercentage) * Number(snapshot.views)), 0)
+        / viewedReach.reduce((sum, { snapshot }) => sum + Number(snapshot.views), 0)).toFixed(2)) : null,
       averageRetention30s: average('retention30sPercentage'),
-      subscribersPerThousandViews: Number(((rows.reduce((sum, item) => sum + Number(item.subscribersGained || 0), 0)
-        / Math.max(1, rows.reduce((sum, item) => sum + Number(item.views || 0), 0))) * 1_000).toFixed(2)),
+      subscribersPerThousandViews: Number(((subscribers / Math.max(1, views)) * 1_000).toFixed(2)),
     };
+  };
+  const formats = {};
+  for (const format of ['landscape', 'shorts']) {
+    const rows = linked.filter(({ snapshot }) => snapshot.format === format);
+    if (!rows.length) continue;
+    formats[format] = summarizeRows(rows);
   }
+  const groupByIdeaField = (field) => {
+    const groups = {};
+    for (const row of linked) {
+      const value = field.split('.').reduce((current, part) => current?.[part], row.idea);
+      const key = String(value || '').trim();
+      if (!key) continue;
+      (groups[key] ||= []).push(row);
+    }
+    return Object.fromEntries(Object.entries(groups).map(([key, rows]) => [key, summarizeRows(rows)]));
+  };
+  const pillars = groupByIdeaField('contentPillar');
+  const hookFormulas = groupByIdeaField('hookFormula');
+  const titleAngles = groupByIdeaField('packagingExperiment.titleAngle');
+  const thumbnailVariants = groupByIdeaField('packagingExperiment.thumbnailVariant');
+  const comparisonGroups = { formats, pillars, hookFormulas, titleAngles, thumbnailVariants };
+  const reliableComparisons = Object.fromEntries(Object.entries(comparisonGroups).flatMap(([name, groups]) => {
+    const leader = comparativeLeader(groups); return leader ? [[name, leader]] : [];
+  }));
+  const directionalTests = Object.entries(comparisonGroups).flatMap(([dimension, groups]) => Object.entries(groups)
+    .filter(([, item]) => item.confidence === 'directional')
+    .map(([variant, item]) => ({ dimension, variant, samples: item.samples, signalScore: Number(performanceQuality(item).toFixed(2)) })))
+    .sort((left, right) => right.signalScore - left.signalScore).slice(0, 5);
+  const nextExperiments = [
+    ...Object.entries(titleAngles).filter(([, item]) => item.confidence === 'insufficient').map(([variant, item]) => ({ dimension: 'titleAngle', variant, samples: item.samples })),
+    ...Object.entries(thumbnailVariants).filter(([, item]) => item.confidence === 'insufficient').map(([variant, item]) => ({ dimension: 'thumbnailVariant', variant, samples: item.samples })),
+  ].sort((left, right) => left.samples - right.samples).slice(0, 5);
+  const allGroups = Object.values(comparisonGroups).flatMap((groups) => Object.values(groups));
+  const evidenceLevel = allGroups.some((item) => item.confidence === 'reliable') ? 'reliable'
+    : allGroups.some((item) => item.confidence === 'directional') ? 'directional' : 'insufficient';
+  const guidance = {
+    evidenceLevel, reliableComparisons, directionalTests, nextExperiments,
+    caution: evidenceLevel === 'reliable'
+      ? 'Reliable means repeatable within this channel dataset, not guaranteed causation or future virality.'
+      : 'Treat current signals as experiments, not winners; keep testing before changing the whole channel strategy.',
+  };
   const topVideos = [...usable].sort((a, b) => {
     const quality = (item) => (Number(item.views || 0) * 0.2) + (Number(item.clickThroughRate || 0) * 1_000)
       + (Number(item.averageViewPercentage || 0) * 100) + (Number(item.subscribersGained || 0) * 500);
@@ -148,7 +279,7 @@ export function summarizeChannelPerformance(snapshots = []) {
     views: item.views, ctr: item.clickThroughRate, averageViewedPercentage: item.averageViewPercentage,
     retention30s: item.retention30sPercentage, subscribersGained: item.subscribersGained,
   }));
-  return { sampleSize: usable.length, formats, topVideos };
+  return { sampleSize: usable.length, formats, pillars, hookFormulas, experiments: { titleAngles, thumbnailVariants }, guidance, topVideos };
 }
 
 function heuristicIdeas(channel, count, history, performance) {
@@ -197,6 +328,10 @@ function heuristicIdeas(channel, count, history, performance) {
       ? Number(channel.productionDefaults.durationSeconds || range.min)
       : Math.round(range.min + ((range.max - range.min) * depth));
     const durationSeconds = Math.max(range.min, Math.min(range.max, selectedDuration));
+    const titleAngles = ['curiosity_gap', 'contrarian', 'blueprint', 'mistake_warning', 'outcome_reveal'];
+    const thumbnailVariants = ['expressive_subject', 'object_closeup', 'before_after', 'scale_contrast', 'minimal_symbol'];
+    const titleAngle = titleAngles[index % titleAngles.length];
+    const thumbnailVariant = thumbnailVariants[index % thumbnailVariants.length];
     results.push({
       title,
       hookFormula: formula.id,
@@ -217,6 +352,12 @@ function heuristicIdeas(channel, count, history, performance) {
       urgency: 'evergreen',
       compositeScore: Math.max(4, Math.min(40, Math.round((titleScore / 100) * 16 + 20))),
       thumbnailConcept: `One expressive focal subject representing ${pillar}, high contrast, maximum three overlay words, mobile legibility.`,
+      packagingExperiment: {
+        titleAngle,
+        hookVariant: formula.mechanism,
+        thumbnailVariant,
+        hypothesis: `${titleAngle.replaceAll('_', ' ')} packaging paired with a ${formula.mechanism} hook and ${thumbnailVariant.replaceAll('_', ' ')} thumbnail will improve qualified clicks without reducing retention.`,
+      },
       whyThisIdea: `Matches the ${pillar} pillar, a stated audience need, and a ${trafficStrategy.replace('_', '-')} discovery path.`,
       evidenceSource: performance.sampleSize
         ? `channel profile plus ${performance.sampleSize} first-party performance snapshot(s); deterministic fallback did not infer live market demand`
@@ -232,7 +373,7 @@ function durationLabel(seconds) {
 
 export async function brainstormGrowthIdeas(channel, { count = 5, history = [], performance = [], useAi = true } = {}) {
   const bounded = Math.max(1, Math.min(20, Number(count) || 5));
-  const performanceSummary = summarizeChannelPerformance(performance);
+  const performanceSummary = summarizeChannelPerformance(performance, history);
   const marketResearch = useAi ? await researchCurrentYouTubeMarket(channel) : [];
   let raw = null;
   if (useAi) {
@@ -271,9 +412,10 @@ IDEATION RULES:
 - Title and thumbnail must split information instead of repeating one another. Keep the title's main promise within the first 45 characters.
 - A Short needs a 1-3 second scroll stop and frequent resets; landscape needs Grab 0-5s, Promise 5-15s, Stakes 15-30s, meaningful developments, and a final payoff.
 - Do not fabricate search volume, trends, competitor findings, RPM, facts, or sources. When live research is unavailable, use tier estimates and set evidenceSource to the channel inputs used.
-- Use first-party performance only as directional evidence. Prefer repeatable viewer needs and packaging patterns, not copies of past titles. When the sample is small, say so in evidenceSource and avoid confident causal claims.
+- Use first-party performance only at its stated confidence level. Prefer repeatable viewer needs and packaging patterns, not copies of past titles. Never treat insufficient or directional evidence as a proven causal winner.
+- Assign explicit packaging experiment labels so outcomes can be compared later: titleAngle, hookVariant, thumbnailVariant, and a falsifiable hypothesis. Reuse a small stable vocabulary across the batch instead of inventing a unique label for every idea.
 
-Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPillar, retentionScore (1-100), format (landscape or shorts), durationSeconds, durationRationale, trafficStrategy (search_first, browse_first, or trending), primaryKeyword, competition (low/medium/high), searchVolumeTier (low/medium/high), trendDirection (rising/stable/declining), rpmTier (low/medium/high/premium), urgency (trending/evergreen/seasonal), compositeScore (4-40), thumbnailConcept, whyThisIdea, and evidenceSource. Return JSON only.`;
+Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPillar, retentionScore (1-100), format (landscape or shorts), durationSeconds, durationRationale, trafficStrategy (search_first, browse_first, or trending), primaryKeyword, competition (low/medium/high), searchVolumeTier (low/medium/high), trendDirection (rising/stable/declining), rpmTier (low/medium/high/premium), urgency (trending/evergreen/seasonal), compositeScore (4-40), thumbnailConcept, packagingExperiment {titleAngle, hookVariant, thumbnailVariant, hypothesis}, whyThisIdea, and evidenceSource. Return JSON only.`;
     try { raw = await callIdeaModel(prompt); } catch (error) { console.warn(`Idea model unavailable; using deterministic fallback: ${error.message}`); }
   }
   const fallback = heuristicIdeas(channel, bounded, history, performanceSummary);
@@ -302,27 +444,47 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
     const citesCurrentResearch = marketResearch.some((result) => evidenceSource.includes(result.url));
     const requestedTrafficStrategy = pickEnum(item.trafficStrategy, allowedTrafficStrategies, base.trafficStrategy);
     const trafficStrategy = requestedTrafficStrategy === 'trending' && !citesCurrentResearch ? 'browse_first' : requestedTrafficStrategy;
+    const retentionScore = Math.max(1, Math.min(100, Math.round(Number(item.retentionScore) || titleScore)));
+    const competition = pickEnum(item.competition, ['low', 'medium', 'high'], base.competition);
+    const searchVolumeTier = pickEnum(item.searchVolumeTier, ['low', 'medium', 'high'], base.searchVolumeTier);
+    const trendDirection = trafficStrategy === 'trending'
+      ? pickEnum(item.trendDirection, ['rising', 'stable'], 'stable')
+      : pickEnum(item.trendDirection, ['stable', 'declining'], base.trendDirection);
+    const contentPillar = channel.contentPillars.includes(item.contentPillar) ? item.contentPillar : channel.contentPillars[index % channel.contentPillars.length];
+    const primaryKeyword = String(item.primaryKeyword || base.primaryKeyword).trim().slice(0, 120);
+    const scoreBreakdown = calculateOpportunityScore({
+      idea: { searchVolumeTier, trendDirection, competition, durationSeconds, contentPillar, primaryKeyword },
+      titleScore, retentionScore, channel,
+    });
+    const performanceEvidence = calculatePerformanceEvidence({ format: requestedFormat, contentPillar, hookFormula }, performanceSummary);
     return {
       title, hookFormula,
       spokenHook: String(item.spokenHook || formula.template(channel.niche)).trim().slice(0, 300),
       narrativeArc: String(item.narrativeArc || base.narrativeArc).trim().slice(0, 2_000),
-      contentPillar: channel.contentPillars.includes(item.contentPillar) ? item.contentPillar : channel.contentPillars[index % channel.contentPillars.length],
+      contentPillar,
       titleScore,
-      retentionScore: Math.max(1, Math.min(100, Math.round(Number(item.retentionScore) || titleScore))),
+      retentionScore,
       format: requestedFormat,
       durationSeconds,
       durationRationale: String(item.durationRationale || base.durationRationale).trim().slice(0, 500),
       trafficStrategy,
-      primaryKeyword: String(item.primaryKeyword || base.primaryKeyword).trim().slice(0, 120),
-      competition: pickEnum(item.competition, ['low', 'medium', 'high'], base.competition),
-      searchVolumeTier: pickEnum(item.searchVolumeTier, ['low', 'medium', 'high'], base.searchVolumeTier),
-      trendDirection: trafficStrategy === 'trending'
-        ? pickEnum(item.trendDirection, ['rising', 'stable'], 'stable')
-        : pickEnum(item.trendDirection, ['stable', 'declining'], base.trendDirection),
+      primaryKeyword,
+      competition,
+      searchVolumeTier,
+      trendDirection,
       rpmTier: pickEnum(item.rpmTier, ['low', 'medium', 'high', 'premium'], base.rpmTier),
       urgency: pickEnum(item.urgency, trafficStrategy === 'trending' ? ['trending', 'evergreen', 'seasonal'] : ['evergreen', 'seasonal'], base.urgency),
-      compositeScore: Math.max(4, Math.min(40, Math.round(Number(item.compositeScore) || base.compositeScore))),
+      compositeScore: scoreBreakdown.total,
+      scoreBreakdown,
+      performanceEvidenceScore: performanceEvidence.score,
+      performanceEvidenceReason: performanceEvidence.reason,
       thumbnailConcept: String(item.thumbnailConcept || base.thumbnailConcept).trim().slice(0, 500),
+      packagingExperiment: {
+        titleAngle: String(item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle).trim().slice(0, 80),
+        hookVariant: String(item.packagingExperiment?.hookVariant || base.packagingExperiment.hookVariant).trim().slice(0, 80),
+        thumbnailVariant: String(item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant).trim().slice(0, 80),
+        hypothesis: String(item.packagingExperiment?.hypothesis || base.packagingExperiment.hypothesis).trim().slice(0, 500),
+      },
       whyThisIdea: String(item.whyThisIdea || base.whyThisIdea).trim().slice(0, 1_000),
       evidenceSource,
     };
@@ -330,5 +492,14 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
     && !prior.has(item.title.toLowerCase())
     && !history.some((priorIdea) => titleSimilarity(priorIdea.title, item.title) >= 0.6)
     && all.findIndex((candidate) => titleSimilarity(candidate.title, item.title) >= 0.85) === index);
-  return normalized.slice(0, bounded).length ? normalized.slice(0, bounded) : fallback;
+  const ranked = rankGrowthIdeas(normalized);
+  if (ranked.length) return ranked.slice(0, bounded);
+  return rankGrowthIdeas(fallback.map((idea) => {
+    const scoreBreakdown = calculateOpportunityScore({ idea, titleScore: idea.titleScore, retentionScore: idea.retentionScore, channel });
+    const performanceEvidence = calculatePerformanceEvidence(idea, performanceSummary);
+    return {
+      ...idea, compositeScore: scoreBreakdown.total, scoreBreakdown,
+      performanceEvidenceScore: performanceEvidence.score, performanceEvidenceReason: performanceEvidence.reason,
+    };
+  })).slice(0, bounded);
 }

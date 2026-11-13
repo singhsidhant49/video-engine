@@ -22,6 +22,8 @@ test('run pruner skips runs with active lock and prunes expired runs', async () 
   // Create mock files
   await fs.writeFile(path.join(oldRun, 'narration.wav'), 'dummy wav audio content');
   await fs.writeFile(path.join(oldRun, 'output.mp4'), 'dummy video output content');
+  await fs.writeFile(path.join(oldRun, 'thumbnail.png'), 'durable thumbnail');
+  await fs.writeFile(path.join(oldRun, 'qc.json'), '{"render":{"ok":true}}');
   await fs.writeFile(path.join(activeRun, 'request.json'), '{}');
   await fs.writeFile(path.join(activeRun, '.lock'), 'pid: 1234');
   await fs.writeFile(path.join(recentRun, 'request.json'), '{}');
@@ -43,15 +45,29 @@ test('run pruner skips runs with active lock and prunes expired runs', async () 
   const activeRes = await pruneRuns({ olderThanDays: 7, dryRun: false, keepOutputs: true, runsDir: testRunsDir });
   assert.equal(activeRes.pruned, 1);
 
-  // oldRun should be removed
+  // Heavy intermediates are removed, but authenticated delivery/review
+  // artifacts remain available after retention compaction.
   const oldRunExists = await fs.stat(oldRun).then(() => true).catch(() => false);
-  assert.equal(oldRunExists, false);
+  assert.equal(oldRunExists, true);
+  await fs.access(path.join(oldRun, 'thumbnail.png'));
+  await fs.access(path.join(oldRun, 'qc.json'));
+  await fs.access(path.join(oldRun, '.retention-compacted.json'));
+  await assert.rejects(fs.access(path.join(oldRun, 'narration.wav')), /ENOENT/);
+  await assert.rejects(fs.access(path.join(oldRun, 'output.mp4')), /ENOENT/);
 
-  // activeRun (with lock) and recentRun should remain
+  const repeated = await pruneRuns({ olderThanDays: 7, dryRun: false, keepOutputs: true, runsDir: testRunsDir });
+  assert.equal(repeated.pruned, 0, 'already compacted runs are not processed repeatedly');
+
+  const destructive = await pruneRuns({ all: true, dryRun: false, keepOutputs: false, runsDir: testRunsDir });
+  assert.ok(destructive.pruned >= 1);
+  await assert.rejects(fs.access(oldRun), /ENOENT/, 'explicit destructive cleanup removes a compacted run');
+
+  // Active runs remain protected even during --all; the unlocked recent run
+  // is intentionally removed by the explicit destructive cleanup.
   const activeExists = await fs.stat(activeRun).then(() => true).catch(() => false);
   const recentExists = await fs.stat(recentRun).then(() => true).catch(() => false);
   assert.equal(activeExists, true);
-  assert.equal(recentExists, true);
+  assert.equal(recentExists, false);
 
   // Cleanup
   await fs.rm(tmpRoot, { recursive: true, force: true }).catch(() => {});

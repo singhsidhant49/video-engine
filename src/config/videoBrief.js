@@ -29,15 +29,22 @@ export const ChannelProfileSchema = z.object({
   id: z.string().min(1).default('default'),
   contentType: ContentTypeSchema.default('auto'),
   pacingMode: PacingModeSchema.default('auto'),
-  audience: z.string().max(200).default('general audience'),
-  tone: z.string().max(120).default('clear and engaging'),
-  language: z.literal('en').default('en'),
+  audience: z.string().max(500).default('general audience'),
+  tone: z.string().max(200).default('clear and engaging'),
+  language: z.string().trim().min(2).max(20).default('en'),
   style: z.string().optional(),
   voice: z.string().optional(),
   music: z.string().optional(),
   bgm: z.string().optional(),
   captions: z.enum(['subtitles', 'none']).default('subtitles'),
 }).passthrough();
+
+const DurationRangeSchema = z.object({
+  min: z.number().int().min(10).max(7_200),
+  max: z.number().int().min(10).max(7_200),
+}).strict().refine((value) => value.min <= value.max, {
+  message: 'durationRange.min must be less than or equal to durationRange.max', path: ['max'],
+});
 
 export const VideoBriefSchema = z.object({
   version: z.literal(1).default(1),
@@ -46,6 +53,8 @@ export const VideoBriefSchema = z.object({
   niche: z.string().default(''),
   format: z.enum(['shorts', 'landscape']).default('landscape'),
   durationSec: z.number().positive().optional(),
+  durationMode: z.enum(['auto', 'exact']).optional(),
+  durationRange: DurationRangeSchema.optional(),
   style: z.string().optional(),
   voice: z.string().optional(),
   music: z.string().optional(),

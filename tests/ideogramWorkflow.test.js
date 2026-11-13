@@ -23,20 +23,36 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
 
   const stickman = getImageStyle('stickman');
   assert.equal(stickman.ideogramStyleType, 'DESIGN');
-  assert.ok(stickman.stylePromptAnchor.includes('stick figure'));
+  assert.ok(stickman.stylePromptAnchor.includes('editorial vector'));
+  assert.ok(stickman.generationRules.includes('exactly one head, two arms and two legs'));
+  assert.ok(stickman.negativePrompt.includes('hand-drawn doodle'));
 
   const doodle = getImageStyle('doodle_comic');
   assert.equal(doodle.ideogramStyleType, 'AUTO');
-  assert.ok(doodle.stylePromptAnchor.includes('modern animated stick figure comic style'));
-  assert.ok(doodle.stylePromptAnchor.includes('detailed modern environments'));
-  assert.ok(doodle.negativePrompt.includes('blank white void background'));
+  assert.ok(doodle.stylePromptAnchor.includes('hand-inked stickman webcomic'));
+  assert.ok(doodle.stylePromptAnchor.includes('variable-width black brush lines'));
+  assert.ok(doodle.generationRules.includes('single full-frame comic image'));
+  assert.ok(doodle.negativePrompt.includes('sterile corporate vector art'));
 
   const fullPrompt = buildFullIdeogramPrompt({
     prompt: 'Two friends sitting on a city rooftop with a lantern',
     styleId: 'doodle_comic',
   });
   assert.ok(fullPrompt.startsWith('Two friends sitting on a city rooftop with a lantern'));
-  assert.ok(fullPrompt.includes('modern animated stick figure comic style'));
+  assert.ok(fullPrompt.includes('hand-inked stickman webcomic'));
+  assert.ok(fullPrompt.includes('single full-frame comic image'));
+  assert.ok(fullPrompt.includes('Horizontal 16:9 cinematic composition'));
+  assert.ok(fullPrompt.includes('Exclude:'));
+
+  const vectorPrompt = buildFullIdeogramPrompt({
+    prompt: 'A teacher demonstrates compound interest to two students',
+    styleId: 'stickman',
+    format: 'shorts',
+  });
+  assert.ok(vectorPrompt.includes('premium modern editorial vector illustration'));
+  assert.ok(vectorPrompt.includes('Vertical 9:16 composition'));
+  assert.ok(!vectorPrompt.includes('hand-inked stickman webcomic'));
+  assert.notEqual(vectorPrompt, fullPrompt);
 
   const customPrompt = buildFullIdeogramPrompt({
     prompt: 'A futuristic tower',
@@ -44,6 +60,40 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
     customStylePrompt: 'cyberpunk synthwave neon 1980s style',
   });
   assert.ok(customPrompt.includes('cyberpunk synthwave neon 1980s style'));
+});
+
+test('every image style has a complete distinct production prompt and both dashboards expose every option', async () => {
+  const styles = Object.values(IMAGE_STYLE_CATALOG);
+  const prompts = new Set();
+  for (const style of styles) {
+    assert.ok(style.generationRules?.length >= 100, `${style.id} needs composition rules`);
+    assert.ok(style.negativePrompt?.includes('text'), `${style.id} must reject accidental text`);
+    assert.ok(style.llmGuidance?.length >= 80, `${style.id} needs scene-authoring guidance`);
+    const prompt = buildFullIdeogramPrompt({
+      prompt: 'A researcher discovers an unexpected result in a busy laboratory', styleId: style.id, format: 'landscape',
+      customStylePrompt: style.id === 'custom' ? 'charcoal and gold editorial illustration' : '',
+    });
+    assert.ok(prompt.includes('Composition contract:'), `${style.id} must reach the provider with its composition contract`);
+    assert.ok(prompt.includes('Horizontal 16:9 cinematic composition'));
+    assert.ok(prompt.includes('Exclude:'));
+    prompts.add(prompt);
+  }
+  assert.equal(prompts.size, styles.length, 'every style must create a distinct provider prompt');
+
+  const optionEntries = (html, selectId) => {
+    const select = html.match(new RegExp(`<select id="${selectId}">([\\s\\S]*?)<\\/select>`))?.[1] || '';
+    return [...select.matchAll(/<option value="([^"]+)"[^>]*>([^<]+)<\/option>/g)].map((match) => ({
+      id: match[1], label: match[2].replaceAll('&amp;', '&').trim(),
+    }));
+  };
+  const [studioHtml, legacyHtml] = await Promise.all([
+    fs.readFile(path.resolve('public/dashboard/studio.html'), 'utf8'),
+    fs.readFile(path.resolve('public/dashboard/index.html'), 'utf8'),
+  ]);
+  const catalogEntries = styles.map(({ id, label }) => ({ id, label }));
+  assert.deepEqual(optionEntries(studioHtml, 'channelImageStyle'), catalogEntries);
+  assert.deepEqual(optionEntries(legacyHtml, 'imageStyle'), catalogEntries);
+  assert.deepEqual(optionEntries(legacyHtml, 'channelImageStyle'), catalogEntries);
 });
 
 test('Ideogram Service aspect ratio, model normalization, and hash helpers behave deterministically', () => {

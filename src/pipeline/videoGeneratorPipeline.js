@@ -5,7 +5,7 @@ import { createReadStream } from 'node:fs';
 import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames, getRunBundle } from '../tools/preview.js';
 import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
-import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims } from '../services/aiDirectorService.js';
+import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims, selectTargetDuration } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
 import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
@@ -338,7 +338,11 @@ export async function createFacelessVideo({
     console.log(`   ✓ [Reused] request.json & duration-budget.json`);
     const reqData = JSON.parse(await fs.readFile(path.join(runDir, 'request.json'), 'utf8'));
     if (reqData.format) format = reqData.format;
-    targetDuration = durationSec || reqData.durationSec || (format === 'shorts' ? 45 : 75);
+    targetDuration = durationSec || reqData.durationSec;
+    if (!targetDuration) {
+      const durationSelection = await selectTargetDuration({ topic, niche, format, range: normalizedBrief?.durationRange, channelProfile });
+      targetDuration = durationSelection.durationSeconds;
+    }
     const speechRateWps = tts === 'kokoro'
       ? narrationProfile.speechRateWps
       : undefined;
@@ -352,12 +356,17 @@ export async function createFacelessVideo({
     }
   } else {
     await job.startStage('request');
-    targetDuration = durationSec || (format === 'shorts' ? 45 : 75);
+    const durationMode = normalizedBrief?.durationMode || (durationSec ? 'exact' : 'auto');
+    const durationSelection = durationSec
+      ? { durationSeconds: durationSec, method: 'exact', range: normalizedBrief?.durationRange || null, rationale: 'Exact duration supplied by the user.' }
+      : await selectTargetDuration({ topic, niche, format, range: normalizedBrief?.durationRange, channelProfile });
+    throwIfCancelled();
+    targetDuration = durationSelection.durationSeconds;
     const speechRateWps = tts === 'kokoro'
       ? narrationProfile.speechRateWps
       : undefined;
     durationBudget = calculateDurationBudget({ targetDurationSec: targetDuration, format, style, speechRateWps });
-    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
+    await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, durationMode, durationRange: normalizedBrief?.durationRange || durationSelection.range || null, durationSelection, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
     await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
     await job.completeStage('request', ['request.json', 'duration-budget.json']);
   }
@@ -612,6 +621,24 @@ export async function createFacelessVideo({
   ]);
   if (publishMode === 'PRODUCTION_RENDER' && !plan.contentQuality.valid) {
     throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
+  }
+
+  // Duration is already known from the measured narration. Do not spend time
+  // or provider credits on storyboards and visual assets when the audio cannot
+  // satisfy the production contract. Timeline QC remains a second line of
+  // defence for frame quantization and later timeline changes.
+  const measuredNarrationSec = Number(narration.durationInSeconds);
+  const durationFrameTolerance = 1 / Math.max(1, fps);
+  const narrationDurationValid = Number.isFinite(measuredNarrationSec)
+    && measuredNarrationSec + durationFrameTolerance >= durationBudget.allowedMinDuration
+    && measuredNarrationSec - durationFrameTolerance <= durationBudget.allowedMaxDuration;
+  if (publishMode === 'PRODUCTION_RENDER' && !narrationDurationValid) {
+    const error = new Error(
+      `Narration duration repair failed: measured ${measuredNarrationSec.toFixed(1)}s; `
+      + `required ${durationBudget.allowedMinDuration.toFixed(1)}-${durationBudget.allowedMaxDuration.toFixed(1)}s`,
+    );
+    error.code = 'NARRATION_DURATION_FAILED';
+    throw error;
   }
 
   // Whisper and the visual transformer models are individually large. They

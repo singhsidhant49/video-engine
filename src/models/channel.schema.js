@@ -41,6 +41,9 @@ export const AutomationSettingsSchema = z.object({
   publishPrivacy: z.enum(['private', 'unlisted', 'public']).default('private'),
   lastScheduledAt: z.string().datetime().nullable().default(null),
   lastError: z.string().max(1_000).nullable().default(null),
+  consecutiveFailures: z.number().int().min(0).max(20).default(0),
+  retrySlotAt: z.string().datetime().nullable().default(null),
+  nextRetryAt: z.string().datetime().nullable().default(null),
 }).strict();
 
 export const ChannelProfileSchema = z.object({
@@ -52,11 +55,11 @@ export const ChannelProfileSchema = z.object({
   sizeTier: z.enum(['new', 'growing', 'established', 'authority']).default('new'),
   primaryGoal: z.enum(['growth', 'monetization', 'brand_authority', 'audience_engagement']).default('growth'),
   resourceLevel: z.enum(['solo', 'small_team', 'full_team']).default('solo'),
-  positioning: z.string().trim().max(500).default(''),
-  differentiation: z.string().trim().max(500).default(''),
+  positioning: z.string().trim().max(2_000).default(''),
+  differentiation: z.string().trim().max(2_000).default(''),
   competitors: z.array(z.string().trim().min(2).max(200)).max(10).default([]),
-  targetAudience: z.string().trim().min(2).max(500),
-  audiencePainPoints: z.array(z.string().trim().min(2).max(240)).max(20).default([]),
+  targetAudience: z.string().trim().min(2).max(2_000),
+  audiencePainPoints: z.array(z.string().trim().min(2).max(500)).max(20).default([]),
   contentPillars: z.array(z.string().trim().min(2).max(120)).min(1).max(20),
   language: z.string().trim().min(2).max(20).default('en'),
   productionDefaults: ProductionDefaultsSchema.default({}),
@@ -66,6 +69,9 @@ export const ChannelProfileSchema = z.object({
     channelId: z.string().max(120).nullable().default(null),
     channelTitle: z.string().max(200).nullable().default(null),
     tokenCiphertext: z.string().nullable().default(null),
+    lastAnalyticsSyncAt: z.string().datetime().nullable().default(null),
+    lastAnalyticsSyncAttemptAt: z.string().datetime().nullable().default(null),
+    analyticsSyncError: z.string().max(1_000).nullable().default(null),
   }).strict().default({}),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
@@ -75,7 +81,9 @@ export const ChannelInputSchema = ChannelProfileSchema.omit({
   createdAt: true, updatedAt: true, youtube: true,
 }).extend({
   id: Slug.optional(),
-  automation: AutomationSettingsSchema.omit({ lastScheduledAt: true, lastError: true }).partial().optional(),
+  automation: AutomationSettingsSchema.omit({
+    lastScheduledAt: true, lastError: true, consecutiveFailures: true, retrySlotAt: true, nextRetryAt: true,
+  }).partial().optional(),
   productionDefaults: ProductionDefaultsSchema.partial().optional(),
 }).strict();
 
@@ -94,11 +102,11 @@ export const ChannelPatchSchema = z.object({
   sizeTier: z.enum(['new', 'growing', 'established', 'authority']).optional(),
   primaryGoal: z.enum(['growth', 'monetization', 'brand_authority', 'audience_engagement']).optional(),
   resourceLevel: z.enum(['solo', 'small_team', 'full_team']).optional(),
-  positioning: z.string().trim().max(500).optional(),
-  differentiation: z.string().trim().max(500).optional(),
+  positioning: z.string().trim().max(2_000).optional(),
+  differentiation: z.string().trim().max(2_000).optional(),
   competitors: z.array(z.string().trim().min(2).max(200)).max(10).optional(),
-  targetAudience: z.string().trim().min(2).max(500).optional(),
-  audiencePainPoints: z.array(z.string().trim().min(2).max(240)).max(20).optional(),
+  targetAudience: z.string().trim().min(2).max(2_000).optional(),
+  audiencePainPoints: z.array(z.string().trim().min(2).max(500)).max(20).optional(),
   contentPillars: z.array(z.string().trim().min(2).max(120)).min(1).max(20).optional(),
   language: z.string().trim().min(2).max(20).optional(),
   productionDefaults: z.object({
@@ -154,7 +162,25 @@ export const ChannelVideoIdeaSchema = z.object({
   rpmTier: z.enum(['low', 'medium', 'high', 'premium']).default('medium'),
   urgency: z.enum(['trending', 'evergreen', 'seasonal']).default('evergreen'),
   compositeScore: z.number().int().min(4).max(40).default(24),
+  scoreBreakdown: z.object({
+    demand: z.number().int().min(1).max(10),
+    clickPotential: z.number().int().min(1).max(10),
+    nicheFit: z.number().int().min(1).max(10),
+    feasibility: z.number().int().min(1).max(10),
+    total: z.number().int().min(4).max(40),
+  }).strict().default({ demand: 6, clickPotential: 6, nicheFit: 6, feasibility: 6, total: 24 }),
+  performanceEvidenceScore: z.number().int().min(-3).max(3).default(0),
+  performanceEvidenceReason: z.string().trim().max(500).default('No reliable comparative channel evidence yet.'),
   thumbnailConcept: z.string().trim().min(5).max(500).default('One clear focal subject with high contrast and mobile-readable composition.'),
+  packagingExperiment: z.object({
+    titleAngle: z.string().trim().min(2).max(80).default('unclassified'),
+    hookVariant: z.string().trim().min(2).max(80).default('unclassified'),
+    thumbnailVariant: z.string().trim().min(2).max(80).default('unclassified'),
+    hypothesis: z.string().trim().min(5).max(500).default('No explicit packaging hypothesis was recorded.'),
+  }).strict().default({
+    titleAngle: 'unclassified', hookVariant: 'unclassified', thumbnailVariant: 'unclassified',
+    hypothesis: 'No explicit packaging hypothesis was recorded.',
+  }),
   whyThisIdea: z.string().trim().min(5).max(1_000).default('Strong fit for this channel and audience.'),
   evidenceSource: z.string().trim().min(2).max(500).default('channel profile and audience pain points'),
   status: z.enum(['draft', 'approved', 'queued', 'producing', 'ready', 'publishing', 'publish_failed', 'published', 'rejected', 'failed']).default('draft'),
@@ -172,6 +198,7 @@ export const IdeaPatchSchema = z.object({
 }).strict();
 
 const Percentage = z.number().min(0).max(100).nullable().default(null);
+const RewatchablePercentage = z.number().min(0).max(1_000).nullable().default(null);
 export const ChannelPerformanceSnapshotSchema = z.object({
   id: Slug,
   channelId: Slug,
@@ -181,11 +208,12 @@ export const ChannelPerformanceSnapshotSchema = z.object({
   format: z.enum(['landscape', 'shorts']),
   durationSeconds: z.number().int().min(1).max(7_200).nullable().default(null),
   capturedAt: z.string().datetime(),
+  publishedAt: z.string().datetime().nullable().default(null),
   impressions: z.number().int().min(0).nullable().default(null),
   views: z.number().int().min(0).default(0),
   clickThroughRate: Percentage,
   averageViewDurationSeconds: z.number().min(0).nullable().default(null),
-  averageViewPercentage: Percentage,
+  averageViewPercentage: RewatchablePercentage,
   retention30sPercentage: Percentage,
   subscribersGained: z.number().int().default(0),
   watchTimeHours: z.number().min(0).nullable().default(null),
@@ -210,6 +238,9 @@ export function publicChannel(channel) {
       connected: Boolean(channel.youtube?.connected),
       channelId: channel.youtube?.channelId || null,
       channelTitle: channel.youtube?.channelTitle || null,
+      lastAnalyticsSyncAt: channel.youtube?.lastAnalyticsSyncAt || null,
+      lastAnalyticsSyncAttemptAt: channel.youtube?.lastAnalyticsSyncAttemptAt || null,
+      analyticsSyncError: channel.youtube?.analyticsSyncError || null,
     },
   };
 }

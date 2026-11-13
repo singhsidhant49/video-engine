@@ -11,6 +11,26 @@ const ContentType = z.enum([
 });
 const Pacing = z.enum(['auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid']);
 
+const OutputSchema = z.object({
+  durationSeconds: z.number().int().min(10).max(7_200).optional(),
+  durationMode: z.enum(['auto', 'exact']).optional(),
+  durationRange: z.object({
+    min: z.number().int().min(10).max(7_200),
+    max: z.number().int().min(10).max(7_200),
+  }).strict().optional(),
+  aspectRatio: z.enum(['16:9', '9:16']).default('16:9'),
+  resolution: z.enum(['720p', '1080p']).default('1080p'),
+}).strict()
+  .refine((value) => !value.durationRange || value.durationRange.min <= value.durationRange.max, {
+    message: 'durationRange.min must be less than or equal to durationRange.max', path: ['durationRange'],
+  })
+  .refine((value) => value.durationMode !== 'exact' || value.durationSeconds != null, {
+    message: 'durationSeconds is required when durationMode is exact', path: ['durationSeconds'],
+  })
+  .refine((value) => value.durationMode !== 'auto' || value.durationSeconds == null, {
+    message: 'durationSeconds must be omitted when durationMode is auto', path: ['durationSeconds'],
+  });
+
 export const CreateVideoRequestSchema = z.object({
   // Detailed production briefs commonly include narrative structure, visual
   // policy, factual constraints, and QC instructions. Keep a firm bound, but
@@ -19,15 +39,12 @@ export const CreateVideoRequestSchema = z.object({
   sourceData: z.union([z.string().max(100_000), z.record(z.string(), z.unknown()), z.array(z.unknown())]).optional(),
   profileId: z.string().trim().min(1).max(100).optional(),
   niche: z.string().trim().max(200).optional(),
-  output: z.object({
-    durationSeconds: z.number().int().min(10).max(7_200).optional(),
-    aspectRatio: z.enum(['16:9', '9:16']).default('16:9'),
-    resolution: z.enum(['720p', '1080p']).default('1080p'),
-  }).strict().default({ aspectRatio: '16:9', resolution: '1080p' }),
+  output: OutputSchema.default({ aspectRatio: '16:9', resolution: '1080p' }),
   creative: z.object({
     contentType: ContentType.default('auto'),
-    tone: z.string().trim().max(120).default('clear and engaging'),
-    audience: z.string().trim().max(200).default('general audience'),
+    tone: z.string().trim().max(200).default('clear and engaging'),
+    audience: z.string().trim().max(500).default('general audience'),
+    language: z.string().trim().min(2).max(20).default('en'),
     pacing: Pacing.default('auto'),
     style: z.string().trim().max(80).optional(),
     imageSource: z.enum(['stock', 'ai']).default('stock'),
@@ -37,7 +54,7 @@ export const CreateVideoRequestSchema = z.object({
     imageModel: z.string().trim().max(80).optional(),
     imageQuality: z.string().trim().max(40).optional(),
   }).strict().default({
-    contentType: 'auto', tone: 'clear and engaging', audience: 'general audience', pacing: 'auto', imageSource: 'stock',
+    contentType: 'auto', tone: 'clear and engaging', audience: 'general audience', language: 'en', pacing: 'auto', imageSource: 'stock',
   }),
   audio: z.object({
     voice: z.string().trim().regex(/^[a-zA-Z0-9_-]{1,80}$/).optional(),
@@ -55,6 +72,8 @@ export function toPipelineBrief(request) {
     niche: request.niche || '',
     format: request.output.aspectRatio === '9:16' ? 'shorts' : 'landscape',
     durationSec: request.output.durationSeconds,
+    durationMode: request.output.durationMode || (request.output.durationSeconds == null ? 'auto' : 'exact'),
+    durationRange: request.output.durationRange,
     style: request.creative.style,
     imageSource: request.creative.imageSource || 'stock',
     imageProvider: request.creative.imageProvider || null,
@@ -71,7 +90,7 @@ export function toPipelineBrief(request) {
       pacingMode: request.creative.pacing,
       audience: request.creative.audience,
       tone: request.creative.tone,
-      language: 'en',
+      language: request.creative.language,
       captions: request.subtitles.enabled ? 'subtitles' : 'none',
       music: request.audio.music,
     },

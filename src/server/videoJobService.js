@@ -5,6 +5,7 @@ import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
 import { config } from '../config/index.js';
 import { FileJobStore } from './fileJobStore.js';
 import { toPipelineBrief } from './videoApiSchemas.js';
+import { ffmpeg } from '../services/ffmpeg.js';
 
 const now = () => new Date().toISOString();
 const requestHash = (value) => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -22,6 +23,7 @@ function safeGenerationFailure(error) {
   const message = String(error?.message || '');
   const known = [
     ['Narration quality gate failed', 'NARRATION_QC_FAILED', 'Narration quality checks failed'],
+    ['Narration duration repair failed', 'NARRATION_DURATION_FAILED', 'Narration could not meet the requested duration'],
     ['Timeline QC failed', 'TIMELINE_QC_FAILED', 'Timeline quality checks failed'],
     ['Production render blocked by visual critic', 'VISUAL_CRITIC_FAILED', 'Visual quality review requires revision'],
     ['Production render blocked by unresolved long visual holds', 'VISUAL_PACING_FAILED', 'Visual pacing contains unresolved long holds'],
@@ -85,6 +87,15 @@ function safeOwnedPath(root, candidate) {
   return target;
 }
 
+async function extractThumbnailFromVideo({ input, output, durationSeconds = 10 }) {
+  const seekSeconds = Math.max(1, Number(durationSeconds || 10) * 0.22);
+  await ffmpeg([
+    '-ss', String(seekSeconds), '-i', input, '-frames:v', '1',
+    '-vf', 'scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2',
+    '-y', output,
+  ]);
+}
+
 export class VideoJobService {
   constructor({
     store = new FileJobStore(path.join(config.rendersDir, 'api')),
@@ -94,6 +105,7 @@ export class VideoJobService {
     maxQueuedJobs = config.server.maxQueuedJobs,
     maxOwnerPendingJobs = config.server.maxOwnerPendingJobs,
     taskQueue = null,
+    thumbnailGenerator = extractThumbnailFromVideo,
   } = {}) {
     this.store = store;
     this.generator = generator;
@@ -102,6 +114,8 @@ export class VideoJobService {
     this.maxQueuedJobs = Math.max(1, maxQueuedJobs);
     this.maxOwnerPendingJobs = Math.max(1, maxOwnerPendingJobs);
     this.taskQueue = taskQueue;
+    this.thumbnailGenerator = thumbnailGenerator;
+    this.thumbnailGeneration = new Map();
     this.queue = [];
     this.active = new Map();
     this.createChain = Promise.resolve();
@@ -389,7 +403,9 @@ export class VideoJobService {
       : null;
     job.resumeFrom = failedCode === 'POST_RENDER_QC_FAILED'
       ? 'timeline'
-      : (failedCode === 'TIMELINE_QC_FAILED' ? resumeStageForTimelineQc(timelineQc) : null);
+      : (failedCode === 'NARRATION_DURATION_FAILED'
+          ? 'audio'
+          : (failedCode === 'TIMELINE_QC_FAILED' ? resumeStageForTimelineQc(timelineQc) : null));
     await this.store.putJob(job);
     if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount);
     else { this.queue.push(id); this.#pump(); }
@@ -435,12 +451,45 @@ export class VideoJobService {
   async thumbnail(ownerId, id) {
     const job = await this.store.getJob(id);
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
-    if (!job.result?.runDir) throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
+    if (job.status !== 'completed' || !job.result?.runDir || !job.result?.outputPath) {
+      throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
+    }
     const file = safeOwnedPath(this.rendersDir, path.join(job.result.runDir, 'thumbnail.png'));
     try {
       await fs.access(file);
+      return file;
     } catch {
-      throw apiError(404, 'THUMBNAIL_NOT_FOUND', 'Thumbnail not found on disk');
+      // Recover thumbnails for old videos or successful productions whose
+      // dedicated thumbnail render failed.
+    }
+
+    let pending = this.thumbnailGeneration.get(id);
+    if (!pending) {
+      pending = (async () => {
+        const input = safeOwnedPath(this.rendersDir, job.result.outputPath);
+        await fs.access(input).catch(() => { throw apiError(404, 'OUTPUT_FILE_NOT_FOUND', 'Video file not found on disk'); });
+        await fs.mkdir(path.dirname(file), { recursive: true });
+        const temporary = path.join(path.dirname(file), `.thumbnail-${process.pid}-${crypto.randomUUID()}.png`);
+        try {
+          await this.thumbnailGenerator({ input, output: temporary, durationSeconds: job.result.durationSeconds });
+          try {
+            await fs.rename(temporary, file);
+          } catch (error) {
+            // Another API replica may have generated it concurrently.
+            await fs.access(file).catch(() => { throw error; });
+          }
+        } finally {
+          await fs.rm(temporary, { force: true }).catch(() => {});
+        }
+      })().finally(() => this.thumbnailGeneration.delete(id));
+      this.thumbnailGeneration.set(id, pending);
+    }
+    try {
+      await pending;
+    } catch (error) {
+      if (error?.status) throw error;
+      console.warn(`Thumbnail fallback failed for ${id}: ${error.message}`);
+      throw apiError(500, 'THUMBNAIL_GENERATION_FAILED', 'Thumbnail could not be generated');
     }
     return file;
   }

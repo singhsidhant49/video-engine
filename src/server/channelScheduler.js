@@ -1,3 +1,5 @@
+import { rankGrowthIdeas } from '../services/youtubeGrowthService.js';
+
 const FIELD_RANGES = [[0, 59], [0, 23], [1, 31], [1, 12], [0, 7]];
 
 export function parseCronField(field, min, max) {
@@ -65,8 +67,8 @@ export function findDueCronSlot(expression, date = new Date(), timeZone = 'UTC',
 }
 
 export class ChannelScheduler {
-  constructor({ store, director, videoService, publisher = null, intervalMs = 30_000 }) {
-    this.store = store; this.director = director; this.videoService = videoService; this.publisher = publisher; this.intervalMs = intervalMs;
+  constructor({ store, director, videoService, publisher = null, publishingEnabled = Boolean(publisher), intervalMs = 30_000 }) {
+    this.store = store; this.director = director; this.videoService = videoService; this.publisher = publisher; this.publishingEnabled = publishingEnabled; this.intervalMs = intervalMs;
     this.timer = null; this.running = false;
   }
   start() { if (!this.timer) { this.timer = setInterval(() => void this.tick(), this.intervalMs); this.timer.unref?.(); void this.tick(); } }
@@ -77,61 +79,94 @@ export class ChannelScheduler {
     this.running = true;
     try {
       for (const { ownerId, channel } of await this.store.listAllChannels()) {
-        await this.#syncIdeas(ownerId, channel);
+        try {
+          await this.#syncIdeas(ownerId, channel);
+        } catch (error) {
+          console.error(`Channel status synchronization failed for ${channel.id}:`, error);
+          continue;
+        }
+        try { await this.#syncAnalyticsIfDue(ownerId, channel, at); }
+        catch (error) { console.error(`YouTube Analytics synchronization failed for ${channel.id}:`, error); }
         const automation = channel.automation;
         if (!automation.enabled) continue;
         try {
-          const dueSlot = findDueCronSlot(automation.scheduleCron, at, automation.timezone, automation.lastScheduledAt);
+          const nextRetry = automation.nextRetryAt ? new Date(automation.nextRetryAt) : null;
+          if (nextRetry && nextRetry > at) continue;
+          const retryDue = Boolean(nextRetry && automation.retrySlotAt && nextRetry <= at);
+          const dueSlot = retryDue
+            ? new Date(automation.retrySlotAt)
+            : findDueCronSlot(automation.scheduleCron, at, automation.timezone, automation.lastScheduledAt);
           if (!dueSlot) continue;
           // Claim this minute before enqueueing. The idempotency key in produce is the second line of defense.
-          const claimed = typeof this.store.claimSchedule === 'function'
+          const claimed = retryDue
+            ? channel
+            : typeof this.store.claimSchedule === 'function'
             ? await this.store.claimSchedule(ownerId, channel.id, dueSlot)
             : { ...channel, automation: { ...automation, lastScheduledAt: dueSlot.toISOString(), lastError: null }, updatedAt: at.toISOString() };
           if (!claimed) continue;
           Object.assign(channel, claimed);
           if (typeof this.store.claimSchedule !== 'function') await this.store.putChannel(ownerId, channel);
           const backlog = await this.store.listIdeas(ownerId, channel.id);
-          let ideas = backlog.filter((idea) => idea.status === 'approved');
+          let ideas = rankGrowthIdeas(backlog.filter((idea) => idea.status === 'approved'));
           if (automation.approvalMode === 'manual_approval') {
             if (ideas[0]) await this.director.produce(ownerId, channel.id, ideas[0].id);
             else if (!backlog.some((idea) => idea.status === 'draft')) {
               const drafts = await this.director.brainstorm(ownerId, channel.id, { count: 3, autoApprove: false });
               if (!drafts.length) throw new Error('No reviewable idea was available for this schedule');
             }
+            await this.#markScheduleSuccess(ownerId, channel, at);
             continue;
           }
           if (!ideas.length) {
-            const draft = backlog.filter((idea) => idea.status === 'draft').sort((a, b) =>
-              (b.compositeScore - a.compositeScore)
-              || (b.retentionScore - a.retentionScore)
-              || b.createdAt.localeCompare(a.createdAt))[0];
+            const draft = rankGrowthIdeas(backlog.filter((idea) => idea.status === 'draft'))[0];
             if (draft) {
               const approved = { ...draft, status: 'approved', updatedAt: new Date().toISOString() };
               await this.store.putIdea(ownerId, approved); ideas = [approved];
             }
           }
-          if (!ideas.length) ideas = await this.director.brainstorm(ownerId, channel.id, { count: 3, autoApprove: true });
+          if (!ideas.length) ideas = rankGrowthIdeas(await this.director.brainstorm(ownerId, channel.id, { count: 3, autoApprove: true }));
           if (!ideas[0]) throw new Error('No eligible idea was available for this schedule');
           await this.director.produce(ownerId, channel.id, ideas[0].id);
+          await this.#markScheduleSuccess(ownerId, channel, at);
         } catch (error) {
-          // A failed enqueue must not consume the schedule forever. Restore the
-          // prior slot so the next tick can retry after the underlying problem clears.
-          channel.automation = {
-            ...channel.automation,
-            lastScheduledAt: automation.lastScheduledAt,
-            lastError: String(error.message || error).slice(0, 1_000),
-          };
-          channel.updatedAt = new Date().toISOString();
-          await this.store.putChannel(ownerId, channel).catch(() => {});
+          await this.#markScheduleFailure(ownerId, channel, at, error);
           console.error(`Channel schedule failed for ${channel.id}:`, error);
         }
       }
     } finally { this.running = false; }
   }
 
+  async #markScheduleSuccess(ownerId, channel, at) {
+    if (!channel.automation.lastError && !channel.automation.nextRetryAt && !channel.automation.consecutiveFailures) return;
+    channel.automation = {
+      ...channel.automation,
+      lastError: null,
+      consecutiveFailures: 0,
+      retrySlotAt: null,
+      nextRetryAt: null,
+    };
+    channel.updatedAt = at.toISOString();
+    await this.store.putChannel(ownerId, channel);
+  }
+
+  async #markScheduleFailure(ownerId, channel, at, error) {
+    const failures = Math.min(20, Number(channel.automation.consecutiveFailures || 0) + 1);
+    const canRetry = failures < 5;
+    const delayMs = Math.min(6 * 60 * 60_000, 30_000 * (2 ** (failures - 1)));
+    channel.automation = {
+      ...channel.automation,
+      lastError: String(error.message || error).slice(0, 1_000),
+      consecutiveFailures: failures,
+      retrySlotAt: canRetry ? (channel.automation.retrySlotAt || channel.automation.lastScheduledAt || at.toISOString()) : null,
+      nextRetryAt: canRetry ? new Date(at.getTime() + delayMs).toISOString() : null,
+    };
+    channel.updatedAt = at.toISOString();
+    await this.store.putChannel(ownerId, channel).catch(() => {});
+  }
+
   async #syncIdeas(ownerId, channel) {
     for (const idea of await this.store.listIdeas(ownerId, channel.id)) {
-      if (idea.status === 'ready' && channel.automation.autoPublish && this.publisher) {
+      if (idea.status === 'ready' && channel.automation.autoPublish && this.publisher && this.publishingEnabled) {
         try { await this.publisher.publishIdea(ownerId, channel.id, idea.id); }
         catch (error) { console.error(`Automatic YouTube publish failed for ${idea.id}:`, error); }
         continue;
@@ -141,11 +176,21 @@ export class ChannelScheduler {
         const video = await this.videoService.get(ownerId, idea.videoId);
         const status = video.status === 'completed' ? 'ready' : (video.status === 'failed' || video.status === 'cancelled' ? 'failed' : video.status === 'queued' ? 'queued' : 'producing');
         if (status !== idea.status) await this.store.putIdea(ownerId, { ...idea, status, error: video.error?.message || null, updatedAt: new Date().toISOString() });
-        if (status === 'ready' && channel.automation.autoPublish && this.publisher) {
+        if (status === 'ready' && channel.automation.autoPublish && this.publisher && this.publishingEnabled) {
           try { await this.publisher.publishIdea(ownerId, channel.id, idea.id); }
           catch (error) { console.error(`Automatic YouTube publish failed for ${idea.id}:`, error); }
         }
       } catch (error) { if (error.status !== 404) throw error; }
     }
+  }
+
+  async #syncAnalyticsIfDue(ownerId, channel, at) {
+    if (!channel.youtube?.connected || typeof this.publisher?.syncAnalytics !== 'function') return;
+    const lastSuccess = channel.youtube.lastAnalyticsSyncAt ? new Date(channel.youtube.lastAnalyticsSyncAt).getTime() : 0;
+    const lastAttempt = channel.youtube.lastAnalyticsSyncAttemptAt ? new Date(channel.youtube.lastAnalyticsSyncAttemptAt).getTime() : 0;
+    const now = at.getTime();
+    if (lastSuccess && now - lastSuccess < 24 * 60 * 60_000) return;
+    if (lastAttempt && now - lastAttempt < 6 * 60 * 60_000) return;
+    await this.publisher.syncAnalytics(ownerId, channel.id, { days: 90 });
   }
 }

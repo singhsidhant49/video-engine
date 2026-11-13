@@ -12,6 +12,7 @@ import { ChannelDirectorService } from '../services/channelDirectorService.js';
 import { ChannelScheduler } from './channelScheduler.js';
 import { createChannelApiRouter } from './channelApiRouter.js';
 import { YouTubePublisherService } from '../services/youtubePublisherService.js';
+import { inspectProductionPreflight } from './productionPreflight.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -36,17 +37,19 @@ await videoJobService.init();
 const channelStore = new ChannelStore({ rootDir: config.channelsDir });
 await channelStore.init();
 const channelDirector = new ChannelDirectorService({ store: channelStore, videoService: videoJobService });
-const youtubePublisher = config.server.youtubePublishingEnabled
+const youtubePublisher = (config.server.youtubePublishingEnabled || config.server.youtubeAnalyticsEnabled)
   ? new YouTubePublisherService({ store: channelStore, videoService: videoJobService })
   : null;
-const channelScheduler = new ChannelScheduler({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher });
+const channelScheduler = new ChannelScheduler({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled });
 const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production: process.env.NODE_ENV === 'production' });
 const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE_LIMIT_PER_MINUTE || 120) });
 
 app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
 app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
   const readiness = await videoJobService.readiness();
-  res.status(readiness.ready ? 200 : 503).json({ status: readiness.ready ? 'ready' : 'not_ready', ...readiness });
+  const preflight = await inspectProductionPreflight();
+  const ready = readiness.ready && preflight.ready;
+  res.status(ready ? 200 : 503).json({ status: ready ? 'ready' : 'not_ready', ...readiness, ready, preflight });
 });
 if (youtubePublisher) app.get('/oauth/youtube/callback', async (req, res) => {
   try {
@@ -58,16 +61,17 @@ if (youtubePublisher) app.get('/oauth/youtube/callback', async (req, res) => {
   }
 });
 app.use('/v1', apiAuth, apiRateLimit,
-  createChannelApiRouter({ store: channelStore, director: channelDirector, publisher: youtubePublisher }),
+  createChannelApiRouter({ store: channelStore, director: channelDirector, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled }),
   createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
 app.use('/audiotrack', express.static(path.join(config.publicDir, 'audiotrack')));
 app.use('/media', express.static(path.join(config.publicDir, 'media')));
-app.use('/media-bank', express.static(config.mediaBankDir));
-app.use('/media-bank', express.static(path.join(config.publicDir, 'media-bank')));
-app.use('/storage/media-bank', express.static(config.mediaBankDir));
+const mediaBankAuth = process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next();
+app.use('/media-bank', mediaBankAuth, express.static(config.mediaBankDir));
+app.use('/media-bank', mediaBankAuth, express.static(path.join(config.publicDir, 'media-bank')));
+app.use('/storage/media-bank', mediaBankAuth, express.static(config.mediaBankDir));
 if (process.env.NODE_ENV !== 'production') app.use('/renders', express.static(config.rendersDir));
 
 app.get('/api/audiotracks', (req, res) => {

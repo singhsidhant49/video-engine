@@ -5,6 +5,23 @@ import { config } from '../config/index.js';
 // Active locks heartbeat every minute. A lock is stale only after missing
 // heartbeats for long enough to survive temporary I/O stalls.
 const STALE_LOCK_MAX_AGE_MS = 10 * 60 * 1000;
+const RETENTION_MARKER = '.retention-compacted.json';
+const DURABLE_RUN_FILES = new Set([
+  'request.json',
+  'plan.json',
+  'timeline.json',
+  'qc.json',
+  'content-quality-diagnostics.json',
+  'claim-evidence-diagnostics.json',
+  'visual_critic.json',
+  'creative-qa-after.json',
+  'packaging.json',
+  'contact-sheet.jpg',
+]);
+
+function isDurableRunFile(name) {
+  return DURABLE_RUN_FILES.has(name) || /^thumbnail(?:-\d+)?\.png$/i.test(name);
+}
 
 /**
  * Calculates directory size in bytes recursively.
@@ -70,6 +87,18 @@ export async function pruneRuns({
     results.scanned++;
     const runPath = path.join(runsDir, entry.name);
 
+    // Do not repeatedly compact runs during ordinary retention. Explicit
+    // destructive cleanup (keepOutputs=false) must still be able to remove a
+    // previously compacted run.
+    if (keepOutputs) {
+      try {
+        await fs.access(path.join(runPath, RETENTION_MARKER));
+        continue;
+      } catch {
+        // Not compacted yet.
+      }
+    }
+
     // 1. Check for active generation lock
     const lockFile = path.join(runPath, '.lock');
     try {
@@ -119,22 +148,45 @@ export async function pruneRuns({
 
         if (mp4Files.length > 0) {
           // If mp4 files exist, move them to renders/downloads or keep them, removing heavy intermediate files
-          const downloadsDir = path.join(config.rendersDir, 'downloads');
+          const downloadsDir = path.join(path.dirname(runsDir), 'downloads');
           await fs.mkdir(downloadsDir, { recursive: true });
 
           for (const mp4 of mp4Files) {
             const srcMp4 = path.join(runPath, mp4);
             const targetMp4 = path.join(downloadsDir, mp4.startsWith('vid_') ? mp4 : `${entry.name}_${mp4}`);
-            await fs.copyFile(srcMp4, targetMp4).catch(() => {});
+            // A failed preservation copy must abort compaction. Silently
+            // continuing here could delete the only final output.
+            await fs.copyFile(srcMp4, targetMp4);
           }
         }
       }
 
-      // Purge the run directory
-      await fs.rm(runPath, { recursive: true, force: true });
+      if (keepOutputs) {
+        // Keep the small artifacts used by authenticated thumbnail delivery,
+        // quality review, factual audit, and production support. Remove heavy
+        // downloaded media, TTS chunks, extracted frames, and render scratch.
+        const entriesToCompact = await fs.readdir(runPath, { withFileTypes: true }).catch(() => []);
+        await Promise.all(entriesToCompact.map(async (runEntry) => {
+          if (runEntry.isFile() && isDurableRunFile(runEntry.name)) return;
+          await fs.rm(path.join(runPath, runEntry.name), { recursive: true, force: true });
+        }));
+        await fs.writeFile(path.join(runPath, RETENTION_MARKER), JSON.stringify({
+          version: 1,
+          compactedAt: new Date().toISOString(),
+          preserved: [...DURABLE_RUN_FILES, 'thumbnail*.png'],
+        }, null, 2));
+      } else {
+        await fs.rm(runPath, { recursive: true, force: true });
+      }
+      const remainingBytes = keepOutputs ? await getDirSize(runPath) : 0;
       results.pruned++;
-      results.bytesFreed += dirBytes;
-      results.details.push({ id: entry.name, path: runPath, bytes: dirBytes, action: 'deleted' });
+      results.bytesFreed += Math.max(0, dirBytes - remainingBytes);
+      results.details.push({
+        id: entry.name,
+        path: runPath,
+        bytes: Math.max(0, dirBytes - remainingBytes),
+        action: keepOutputs ? 'compacted' : 'deleted',
+      });
     } catch (err) {
       console.warn(`[RunPruner] Failed to delete run ${entry.name}:`, err?.message);
     }

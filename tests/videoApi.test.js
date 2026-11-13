@@ -57,6 +57,31 @@ test('public prompt request maps to the existing channel-independent pipeline br
   assert.equal(brief.channel.contentType, 'auto');
 });
 
+test('auto duration and channel language survive API normalization', () => {
+  const request = CreateVideoRequestSchema.parse({
+    prompt: 'Explain the science of memory during sleep',
+    output: { durationMode: 'auto', durationRange: { min: 150, max: 420 }, aspectRatio: '16:9' },
+    creative: { language: 'hi-IN' },
+  });
+  const brief = toPipelineBrief(request);
+  assert.equal(brief.durationMode, 'auto');
+  assert.deepEqual(brief.durationRange, { min: 150, max: 420 });
+  assert.equal(brief.durationSec, undefined);
+  assert.equal(brief.channel.language, 'hi-IN');
+});
+
+test('duration request validation rejects inverted ranges and exact mode without seconds', () => {
+  assert.throws(() => CreateVideoRequestSchema.parse({
+    prompt: 'Explain a useful topic', output: { durationMode: 'auto', durationRange: { min: 90, max: 30 } },
+  }), /durationRange/i);
+  assert.throws(() => CreateVideoRequestSchema.parse({
+    prompt: 'Explain a useful topic', output: { durationMode: 'exact' },
+  }), /durationSeconds/i);
+  assert.throws(() => CreateVideoRequestSchema.parse({
+    prompt: 'Explain a useful topic', output: { durationMode: 'auto', durationSeconds: 60 },
+  }), /durationSeconds/i);
+});
+
 test('public API accepts detailed production briefs while retaining a bounded prompt limit', () => {
   const detailed = CreateVideoRequestSchema.parse({ prompt: `Create this video. ${'visual and editorial direction '.repeat(500)}` });
   assert.ok(detailed.prompt.length > 12_000);
@@ -101,6 +126,42 @@ test('persistent video service generates asynchronously and reuses idempotent re
     service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'A different request' }), 'request-1'),
     (error) => error.code === 'IDEMPOTENCY_CONFLICT',
   );
+});
+
+test('completed videos recover a missing thumbnail from the final MP4 once', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-thumbnail-fallback-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const rendersDir = path.join(root, 'renders');
+  await fs.mkdir(rendersDir, { recursive: true });
+  const generator = async ({ videoId }) => {
+    const runDir = path.join(rendersDir, 'runs', videoId);
+    const outputPath = path.join(rendersDir, `${videoId}-landscape.mp4`);
+    await fs.mkdir(runDir, { recursive: true });
+    await fs.writeFile(outputPath, 'test video fixture');
+    return { outputPath, outputFilename: path.basename(outputPath), runDir, durationSeconds: 90, title: 'Thumbnail recovery' };
+  };
+  let extractions = 0;
+  const thumbnailGenerator = async ({ input, output, durationSeconds }) => {
+    extractions++;
+    assert.equal(durationSeconds, 90);
+    await fs.access(input);
+    await fs.writeFile(output, 'generated png fixture');
+  };
+  const service = new VideoJobService({
+    store: new FileJobStore(path.join(root, 'api')), generator, rendersDir, thumbnailGenerator,
+  });
+  await service.init();
+  const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'Recover my thumbnail' }));
+  await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');
+
+  const [first, second] = await Promise.all([
+    service.thumbnail('account-a', created.job.id), service.thumbnail('account-a', created.job.id),
+  ]);
+  assert.equal(first, second);
+  assert.equal(extractions, 1);
+  assert.equal(await fs.readFile(first, 'utf8'), 'generated png fixture');
+  assert.equal(await service.thumbnail('account-a', created.job.id), first);
+  assert.equal(extractions, 1);
 });
 
 test('video service reports real readiness and enforces bounded per-owner admission', async (t) => {
@@ -347,6 +408,37 @@ test('post-render QC retry preserves the video ID and recompiles the timeline', 
   assert.deepEqual(calls, [
     { videoId: created.job.id, resume: null, from: null },
     { videoId: created.job.id, resume: created.job.id, from: 'timeline' },
+  ]);
+});
+
+test('narration duration failure retries from audio without regenerating assets first', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-duration-retry-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const rendersDir = path.join(root, 'renders');
+  await fs.mkdir(rendersDir, { recursive: true });
+  const calls = [];
+  const generator = async (options) => {
+    calls.push({ resume: options.resume, from: options.from });
+    if (calls.length === 1) {
+      const error = new Error('Narration duration repair failed: measured 292.6s; required 313.5-346.5s');
+      error.code = 'NARRATION_DURATION_FAILED';
+      throw error;
+    }
+    const outputPath = path.join(rendersDir, `${options.videoId}-landscape.mp4`);
+    await fs.writeFile(outputPath, 'video');
+    return { outputPath, outputFilename: path.basename(outputPath), runDir: path.join(rendersDir, 'runs', options.videoId), durationSeconds: 330, title: 'Duration repaired' };
+  };
+  const service = new VideoJobService({ store: new FileJobStore(path.join(root, 'api')), generator, rendersDir });
+  await service.init();
+  const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'Repair narration duration before assets' }));
+  const failed = await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'failed');
+  assert.equal(failed.error.code, 'NARRATION_DURATION_FAILED');
+  assert.equal(failed.error.message, 'Narration could not meet the requested duration');
+  await service.retry('account-a', created.job.id);
+  await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');
+  assert.deepEqual(calls, [
+    { resume: null, from: null },
+    { resume: created.job.id, from: 'audio' },
   ]);
 });
 

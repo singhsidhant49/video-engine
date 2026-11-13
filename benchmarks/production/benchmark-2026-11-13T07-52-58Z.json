@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-11-13T07:52:58.799Z",
+  "render": false,
+  "offline": true,
+  "durationSec": 30,
+  "profiles": [
+    "technology"
+  ],
+  "results": [
+    {
+      "profileId": "technology",
+      "repeat": 1,
+      "success": false,
+      "attempts": 1,
+      "elapsedMs": 83013,
+      "runDir": null,
+      "outputPath": null,
+      "error": "Narration duration repair failed: measured 31.6s; required 28.5-31.5s",
+      "failureCategory": "unknown",
+      "durationCompliant": null,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "qcChecks": []
+    }
+  ],
+  "verdict": {
+    "version": 1,
+    "passed": false,
+    "metrics": {
+      "totalRuns": 1,
+      "successfulRuns": 0,
+      "firstPassRate": 0,
+      "durationCompliance": 0,
+      "hardQcFailures": 0,
+      "unresolvedMedia": 0,
+      "wrongAssets": 0,
+      "blankFrames": 0,
+      "frozenMotion": 0,
+      "failureCategories": {
+        "unknown": 1
+      }
+    },
+    "thresholds": {
+      "minimumRuns": 30,
+      "minimumFirstPassRate": 0.95,
+      "minimumDurationCompliance": 0.98,
+      "maximumHardQcFailures": 0,
+      "maximumUnresolvedMedia": 0,
+      "maximumWrongAssets": 0,
+      "maximumBlankFrames": 0,
+      "maximumFrozenMotion": 0
+    },
+    "failures": [
+      "needs 29 more run(s)",
+      "first-pass rate 0 < 0.95",
+      "duration compliance 0 < 0.98"
+    ]
+  }
+}
