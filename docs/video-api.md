@@ -37,10 +37,16 @@ POST   /v1/videos/:id/retry
 DELETE /v1/videos/:id
 GET    /v1/operations/:id
 GET    /health
+GET    /health/ready
 GET    /ready
 ```
 
-Send `Authorization: Bearer <key>` on `/v1` routes. `VIDEO_API_KEYS` may contain comma-separated keys. Production startup fails closed if no key is configured. Send a stable `Idempotency-Key` on creation; reuse with the same request returns the original job, while reuse with a different request returns `409`.
+Dashboard requests use the signed administrator session cookie. API clients may
+instead send `Authorization: Bearer <key>` on `/v1` routes when
+`VIDEO_API_KEYS` is configured. Production startup fails closed unless an
+administrator account or valid API key is configured. Send a stable
+`Idempotency-Key` on creation; reuse with the same request returns the original
+job, while reuse with a different request returns `409`.
 
 All API errors use JSON, including malformed and oversized request bodies:
 

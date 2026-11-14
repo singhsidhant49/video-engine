@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { configureMediaBankDirectory, loadMediaBankCatalog, searchMediaBank, recordMediaInBank, extractAndIndexMediaBank, normalizeCategory } from '../src/services/mediaBank.js';
+import { configureMediaBankDirectory, loadMediaBankCatalog, searchMediaBank, recordMediaInBank, quarantineMediaAsset, extractAndIndexMediaBank, normalizeCategory } from '../src/services/mediaBank.js';
 import { searchImageBank } from '../src/services/imageBank.js';
 import { ffmpeg } from '../src/services/ffmpeg.js';
 
@@ -96,6 +96,14 @@ test('MediaBank: recordMediaInBank saves a new asset with sidecar metadata and i
     const found = await searchMediaBank('deep learning neural network', { category: 'test-temp', limit: 1 });
     assert.ok(found.length > 0, 'Newly recorded asset must be immediately discoverable in search');
     assert.equal(found[0].contentHash, recorded.id);
+
+    const quarantined = await quarantineMediaAsset(recorded.id, 'semantic mismatch in test');
+    assert.equal(quarantined.verificationStatus, 'quarantined');
+    assert.equal(quarantined.quarantineReason, 'semantic mismatch in test');
+    const excluded = await searchMediaBank('deep learning neural network', { category: 'test-temp', limit: 1 });
+    assert.equal(excluded.length, 0, 'Quarantined assets must not be returned by search');
+    const sidecar = JSON.parse(fs.readFileSync(path.join(isolatedRoot, recorded.path.replace(/\.[^.]+$/, '.json')), 'utf8'));
+    assert.equal(sidecar.verificationStatus, 'quarantined');
   } finally {
     configureMediaBankDirectory();
     fs.rmSync(isolatedRoot, { recursive: true, force: true });

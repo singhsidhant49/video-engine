@@ -442,6 +442,30 @@ export async function compressPlanScript(plan, targetWords, maxWords = Math.roun
   return deterministicCompress(plan, targetWords);
 }
 
+/** Enforce the hard narration ceiling before any paid TTS or transcription.
+ * A sentence-safe deterministic pass may intentionally leave prose above the
+ * ceiling; in that case we give the editor another constrained attempt and
+ * then fail early instead of synthesizing audio that cannot meet duration. */
+export async function enforceMaximumNarrationWords(plan, budget, llm = llmConfig(), maxPasses = 2) {
+  const countWords = () => (plan.scenes || []).map((scene) => scene.narration).join(' ').split(/\s+/).filter(Boolean).length;
+  let words = countWords();
+  let passes = 0;
+  while (words > budget.maxWords && passes < maxPasses) {
+    plan = await compressPlanScript(plan, budget.targetWords, budget.maxWords, llm);
+    plan = await repairIncompleteNarration(plan, llm);
+    words = countWords();
+    passes++;
+  }
+  if (words > budget.maxWords) {
+    const error = new Error(`Narration is ${words} words; maximum ${budget.maxWords} words for the selected duration`);
+    error.code = 'SCRIPT_DURATION_BUDGET_FAILED';
+    error.details = { words, targetWords: budget.targetWords, maxWords: budget.maxWords, passes };
+    throw error;
+  }
+  plan.script = (plan.scenes || []).map((scene) => scene.narration).join(' ');
+  return { plan, words, passes };
+}
+
 /** Expand an undersized script without changing its scene structure or adding
  * unsupported exact claims. If no LLM is configured, leave the script intact
  * so the duration gate can fail honestly instead of padding with filler. */
@@ -758,6 +782,9 @@ export async function generateDirectorPlan({
   }
 
   plan = await repairIncompleteNarration(plan, llm);
+  const enforced = await enforceMaximumNarrationWords(plan, budget, llm);
+  plan = enforced.plan;
+  compressionPasses += enforced.passes;
   const normalized = normalizePlan(plan, { topic, niche, format, style });
   normalized.durationBudget = budget;
   normalized.compressionPasses = compressionPasses;

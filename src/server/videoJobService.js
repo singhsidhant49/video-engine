@@ -23,6 +23,7 @@ function safeGenerationFailure(error) {
   const message = String(error?.message || '');
   const known = [
     ['Narration quality gate failed', 'NARRATION_QC_FAILED', 'Narration quality checks failed'],
+    ['Narration is ', 'SCRIPT_DURATION_BUDGET_FAILED', 'Script could not meet the selected duration before speech generation'],
     ['Narration duration repair failed', 'NARRATION_DURATION_FAILED', 'Narration could not meet the requested duration'],
     ['Timeline QC failed', 'TIMELINE_QC_FAILED', 'Timeline quality checks failed'],
     ['Production render blocked by visual critic', 'VISUAL_CRITIC_FAILED', 'Visual quality review requires revision'],
@@ -284,16 +285,31 @@ export class VideoJobService {
 
   async list(ownerId) {
     const jobs = (await this.store.listJobs()).filter((job) => job.ownerId === ownerId);
-    return jobs.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map((job) => ({
+    return jobs.sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id)).map((job) => ({
       ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
     }));
   }
 
   async listPage(ownerId, { limit = 50, cursor = null } = {}) {
+    if (typeof this.store.listJobsPage === 'function') {
+      const page = await this.store.listJobsPage(ownerId, { limit, cursor });
+      return {
+        videos: page.videos.map((job) => ({
+          ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
+        })),
+        total: page.total,
+        nextCursor: page.nextCursor,
+      };
+    }
     const all = await this.list(ownerId);
-    const eligible = cursor ? all.filter((job) => job.createdAt < cursor) : all;
+    const separator = cursor ? cursor.lastIndexOf('|') : -1;
+    const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
+    const cursorId = separator > 0 ? cursor.slice(separator + 1) : null;
+    const eligible = cursorDate ? all.filter((job) => job.createdAt < cursorDate
+      || (cursorId && job.createdAt === cursorDate && job.id < cursorId)) : all;
     const videos = eligible.slice(0, limit);
-    return { videos, nextCursor: eligible.length > limit ? videos.at(-1)?.createdAt || null : null };
+    const last = videos.at(-1);
+    return { videos, total: all.length, nextCursor: eligible.length > limit && last ? `${last.createdAt}|${last.id}` : null };
   }
 
   async result(ownerId, id) {

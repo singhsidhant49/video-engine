@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/dashboard/studio.css">
-  <style>.login-dialog{width:min(480px,calc(100% - 28px))}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.admin-row:last-child{border-bottom:0}.admin-row strong,.admin-row small{display:block}.admin-row small{margin-top:4px;color:var(--muted)}</style>
+  <style>.login-dialog{width:min(480px,calc(100% - 28px))}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.admin-row:last-child{border-bottom:0}.admin-row strong,.admin-row small{display:block}.admin-row small{margin-top:4px;color:var(--muted)}.load-more{display:flex;justify-content:center;margin-top:22px}</style>
 </head>
 <body>
   <div class="app-shell">
@@ -44,7 +44,7 @@
           </form>
           <aside class="panel guide-panel"><p class="eyebrow">WORKFLOW</p><h3>What happens next</h3><ol><li><strong>Strategy</strong><span>Audience, angle, hook, and narrative arc.</span></li><li><strong>Production</strong><span>Script, voice, scenes, visuals, captions, and music.</span></li><li><strong>Quality control</strong><span>Package validation and final render.</span></li><li><strong>Publish package</strong><span>Title, thumbnail, description, and downloadable video.</span></li></ol></aside>
         </div>
-        <div class="section-head"><div><p class="eyebrow">PRODUCTION QUEUE</p><h2>All videos</h2></div><button class="button secondary" id="refreshVideos">Refresh</button></div><div id="videoGrid" class="video-grid"></div>
+        <div class="section-head"><div><p class="eyebrow">PRODUCTION QUEUE</p><h2>All videos</h2></div><button class="button secondary" id="refreshVideos">Refresh</button></div><div id="videoGrid" class="video-grid"></div><div class="load-more"><button class="button secondary" id="loadMoreVideos" hidden>Load older videos</button></div>
       </section>
 
       <section class="page" data-page-panel="channels">

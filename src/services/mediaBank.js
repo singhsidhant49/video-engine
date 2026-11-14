@@ -116,6 +116,37 @@ export async function loadMediaBankCatalog({ forceRefresh = false } = {}) {
   }
 }
 
+/** Remove a semantically incorrect or unsafe asset from all future searches
+ * without deleting the underlying file. The action is reversible by editing
+ * the catalog/sidecar after an operator review. */
+export async function quarantineMediaAsset(assetId, reason = 'operator review required') {
+  const id = String(assetId || '').trim();
+  if (!id) throw new Error('assetId is required');
+  return withCatalogLock(async () => {
+    const catalog = await loadMediaBankCatalog({ forceRefresh: true });
+    const asset = (catalog.assets || []).find((item) => item.id === id);
+    if (!asset) throw new Error(`Media asset not found: ${id}`);
+    asset.verificationStatus = 'quarantined';
+    asset.quarantineReason = String(reason || 'operator review required').slice(0, 500);
+    asset.quarantinedAt = new Date().toISOString();
+    writeJsonAtomicSync(catalogFile, catalog);
+
+    const absoluteMediaPath = path.join(mediaBankDir, asset.path);
+    const sidecar = absoluteMediaPath.replace(/\.[^.]+$/, '.json');
+    if (fs.existsSync(sidecar)) {
+      try {
+        const metadata = JSON.parse(fs.readFileSync(sidecar, 'utf8'));
+        writeJsonAtomicSync(sidecar, { ...metadata, verificationStatus: asset.verificationStatus, quarantineReason: asset.quarantineReason, quarantinedAt: asset.quarantinedAt });
+      } catch (error) {
+        console.warn(`[MediaBank] Could not update quarantine sidecar for ${id}: ${error.message}`);
+      }
+    }
+    memoryCatalog = catalog;
+    memoryCatalogMtimeMs = fs.statSync(catalogFile).mtimeMs;
+    return asset;
+  });
+}
+
 /**
  * Extract all zip archives and index the entire media bank.
  */

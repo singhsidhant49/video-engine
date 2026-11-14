@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
-import { compressPlanScript, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
+import { compressPlanScript, enforceMaximumNarrationWords, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('calculateDurationBudget derives balanced word and time constraints for 75s explainer', () => {
@@ -114,6 +114,19 @@ test('offline compression preserves complete hook and payoff when safe shortenin
   assert.equal(compressed.scenes.length, 6, 'Must preserve all scene IDs');
   assert.equal(compressed.scenes[0].purpose, 'hook');
   assert.equal(compressed.scenes[5].purpose, 'payoff');
+});
+
+test('pre-TTS word ceiling fails early when safe compression cannot meet duration', async () => {
+  const plan = {
+    scenes: [
+      { id: 'hook', purpose: 'hook', narration: 'This intentionally long opening sentence preserves an essential question that cannot be removed safely from the final narration.' },
+      { id: 'payoff', purpose: 'payoff', narration: 'This intentionally long concluding sentence resolves that essential question and therefore cannot be removed safely either.' },
+    ],
+  };
+  await assert.rejects(
+    enforceMaximumNarrationWords(plan, { targetWords: 12, maxWords: 14 }, null),
+    (error) => error.code === 'SCRIPT_DURATION_BUDGET_FAILED' && error.details.words > 14,
+  );
 });
 
 test('compression rejects a structurally valid response that undershoots the duration budget', () => {

@@ -1,6 +1,8 @@
 const $ = (id) => document.getElementById(id);
 const query = new URLSearchParams(location.search);
-const state = { authenticated: false, user: null, videos: [], channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), poll: null, mediaUrl: null, pollCount: 0, requests: new Map() };
+const state = { authenticated: false, user: null, videos: [], videoTotal: 0, videoCursor: null, channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), thumbnailQueued: new Set(), thumbnailLoading: new Set(), thumbnailActive: 0, thumbnailObserver: null, poll: null, mediaUrl: null, pollCount: 0, requests: new Map() };
+const VIDEO_PAGE_SIZE = 50;
+const THUMBNAIL_CONCURRENCY = 4;
 const terminal = new Set(['completed', 'failed', 'cancelled']);
 const activeStatuses = new Set(['queued', 'preparing', 'processing', 'cancel_requested']);
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[c]);
@@ -61,7 +63,7 @@ async function login(event) {
 
 async function logout() {
   await api('/auth/logout', { method: 'POST' }).catch(() => {});
-  state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null;
+  state.videos = []; state.videoTotal = 0; state.videoCursor = null; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null;
   renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); showLogin('You have signed out.');
 }
 
@@ -92,43 +94,79 @@ function videoCard(video) {
     : ['failed', 'cancelled'].includes(video.status)
       ? `<button data-video-action="retry" data-id="${video.id}">Retry</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
       : `<button data-video-action="cancel" data-id="${video.id}">Cancel</button>`;
-  const posterMessage = video.status !== 'completed' ? escapeHtml(video.stage || 'QUEUED') : thumb ? '' : 'LOADING THUMBNAIL';
+  const posterMessage = video.status !== 'completed' ? escapeHtml(video.error?.message || video.stage || 'QUEUED') : thumb ? '' : 'LOADING THUMBNAIL';
   return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
 }
 
 function renderVideos() {
-  $('totalCount').textContent = state.videos.length;
+  $('totalCount').textContent = state.videoTotal || state.videos.length;
   $('activeCount').textContent = state.videos.filter((v) => activeStatuses.has(v.status)).length;
   $('completedCount').textContent = state.videos.filter((v) => v.status === 'completed').length;
   const empty = '<div class="empty">No productions yet. Create your first video to begin.</div>';
   $('videoGrid').innerHTML = state.videos.length ? state.videos.map(videoCard).join('') : empty;
   $('recentGrid').innerHTML = state.videos.length ? state.videos.slice(0, 4).map(videoCard).join('') : empty;
+  $('loadMoreVideos').hidden = !state.videoCursor;
+  observeThumbnails();
 }
 
-async function loadThumbnails() {
-  const ids = new Set(state.videos.map((v) => v.id));
-  for (const [id, url] of state.thumbs) if (!ids.has(id)) { URL.revokeObjectURL(url); state.thumbs.delete(id); }
-  for (const video of state.videos.filter((v) => v.status === 'completed' && !state.thumbs.has(v.id))) {
-    fetch(`/v1/videos/${video.id}/thumbnail`, { credentials: 'same-origin', headers: headers(false) }).then(async (res) => {
+function pumpThumbnailQueue() {
+  while (state.thumbnailActive < THUMBNAIL_CONCURRENCY && state.thumbnailQueued.size) {
+    const id = state.thumbnailQueued.values().next().value;
+    state.thumbnailQueued.delete(id);
+    if (state.thumbs.has(id) || state.thumbnailLoading.has(id)) continue;
+    state.thumbnailLoading.add(id);
+    state.thumbnailActive++;
+    fetch(`/v1/videos/${id}/thumbnail`, { credentials: 'same-origin', headers: headers(false) }).then(async (res) => {
       if (!res.ok) throw new Error(`Thumbnail request failed (${res.status})`);
-      const url = URL.createObjectURL(await res.blob()); state.thumbs.set(video.id, url);
-      document.querySelectorAll(`[data-poster="${video.id}"]`).forEach((el) => { el.style.backgroundImage = `url('${url}')`; el.querySelector('[data-poster-message]')?.remove(); });
+      const url = URL.createObjectURL(await res.blob());
+      if (!state.videos.some((video) => video.id === id)) { URL.revokeObjectURL(url); return; }
+      state.thumbs.set(id, url);
+      document.querySelectorAll(`[data-poster="${id}"]`).forEach((el) => { el.style.backgroundImage = `url('${url}')`; el.querySelector('[data-poster-message]')?.remove(); });
     }).catch(() => {
-      document.querySelectorAll(`[data-poster="${video.id}"] [data-poster-message]`).forEach((el) => { el.textContent = 'THUMBNAIL UNAVAILABLE'; });
-    });
+      document.querySelectorAll(`[data-poster="${id}"] [data-poster-message]`).forEach((el) => { el.textContent = 'THUMBNAIL UNAVAILABLE'; });
+    }).finally(() => { state.thumbnailLoading.delete(id); state.thumbnailActive--; pumpThumbnailQueue(); });
   }
 }
 
-async function loadVideos() {
+function queueThumbnail(id) {
+  if (!id || state.thumbs.has(id) || state.thumbnailQueued.has(id) || state.thumbnailLoading.has(id)) return;
+  state.thumbnailQueued.add(id); pumpThumbnailQueue();
+}
+
+function observeThumbnails() {
+  state.thumbnailObserver?.disconnect();
+  state.thumbnailObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+    entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
+      state.thumbnailObserver.unobserve(entry.target); queueThumbnail(entry.target.dataset.poster);
+    });
+  }, { rootMargin: '240px' }) : null;
+  const completed = new Set(state.videos.filter((video) => video.status === 'completed').map((video) => video.id));
+  document.querySelectorAll('[data-poster]').forEach((node) => {
+    if (!completed.has(node.dataset.poster) || state.thumbs.has(node.dataset.poster)) return;
+    if (state.thumbnailObserver) state.thumbnailObserver.observe(node); else queueThumbnail(node.dataset.poster);
+  });
+}
+
+function pruneThumbnails() {
+  const ids = new Set(state.videos.map((v) => v.id));
+  for (const id of state.thumbnailQueued) if (!ids.has(id)) state.thumbnailQueued.delete(id);
+  for (const [id, url] of state.thumbs) if (!ids.has(id)) { URL.revokeObjectURL(url); state.thumbs.delete(id); }
+}
+
+async function loadVideos({ append = false } = {}) {
   if (!state.authenticated) { renderVideos(); return; }
   try {
-    const videos = []; let cursor = null;
-    do {
-      const suffix = cursor ? `&cursor=${encodeURIComponent(cursor)}` : '';
-      const result = await api(`/v1/videos?limit=100${suffix}`);
-      videos.push(...(result.videos || [])); cursor = result.nextCursor || null;
-    } while (cursor && videos.length < 2_000);
-    state.videos = videos; renderVideos(); void loadThumbnails();
+    const cursor = append ? state.videoCursor : null;
+    if (append && !cursor) return;
+    const suffix = cursor ? `&cursor=${encodeURIComponent(cursor)}` : '';
+    const result = await api(`/v1/videos?limit=${VIDEO_PAGE_SIZE}${suffix}`);
+    const incoming = result.videos || [];
+    state.videos = append
+      ? [...new Map([...state.videos, ...incoming].map((video) => [video.id, video])).values()]
+      : incoming;
+    state.videoCursor = result.nextCursor || null;
+    state.videoTotal = Number.isFinite(result.total) ? result.total : state.videos.length;
+    pruneThumbnails(); renderVideos();
   }
   catch (error) { handleApiError(error); }
 }
@@ -526,6 +564,7 @@ $('csvImportForm').addEventListener('submit', importAnalyticsCsv);
 $('syncYoutubeAnalytics').addEventListener('click', syncYoutubeAnalytics);
 $('newChannel').addEventListener('click', () => openChannelDialog());
 $('brainstorm').addEventListener('click', () => brainstorm()); $('refreshIdeas').addEventListener('click', loadIdeas); $('refreshVideos').addEventListener('click', loadVideos);
+$('loadMoreVideos').addEventListener('click', () => singleRequest('videos-more', () => loadVideos({ append: true })));
 $('ideaChannel').addEventListener('change', () => { state.selectedChannelId = $('ideaChannel').value; history.replaceState(null, '', channelPage('ideas')); void loadIdeas(); });
 $('performanceChannel').addEventListener('change', () => { state.selectedChannelId = $('performanceChannel').value; history.replaceState(null, '', channelPage('analytics')); void loadPerformance(); });
 $('profileId').addEventListener('change', applySelectedChannelDefaults);

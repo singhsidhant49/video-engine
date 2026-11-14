@@ -31,20 +31,33 @@ database record.
    docker compose logs -f api worker
    ```
 
-3. Open `http://localhost:3000`. Enter one configured API key in the dashboard.
-   The dashboard creates jobs, monitors progress, reviews results, downloads
+3. Initialize any missing administrator/session secrets, then start the stack:
+
+   ```powershell
+   npm run env:init
+   docker compose up --build -d
+   ```
+
+   The initializer preserves existing `.env` settings and prints a generated
+   one-time administrator password only when it creates one. To supply your own
+   credentials use `npm run env:init -- --email you@example.com --password "your-long-password"`.
+
+4. Open `http://localhost:3000` and sign in with the administrator email and
+   password configured before the first startup. The dashboard creates jobs, monitors progress, reviews results, downloads
    videos, retries failures, cancels active work, and permanently deletes videos.
 
 4. Check runtime health:
 
    ```powershell
    Invoke-RestMethod http://localhost:3000/health
-   Invoke-RestMethod http://localhost:3000/ready
+   Invoke-RestMethod http://localhost:3000/health/ready
    npm run test:docker:infra
    ```
 
-`/health` proves the API process is alive. `/ready` succeeds only when the
-database, Redis queue, and at least one worker are available.
+`/health` proves the API process is alive. `/health/ready` is the minimal
+container readiness probe and succeeds only when the database, Redis queue,
+and at least one worker are available. The authenticated `/ready` endpoint also
+runs the complete generation-provider and media-toolchain preflight.
 
 ## Operations
 

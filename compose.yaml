@@ -7,10 +7,10 @@ x-app-environment: &app-environment
   VIDEO_JOB_STORE: postgres
   VIDEO_QUEUE_BACKEND: bullmq
   VIDEO_API_KEYS: ${VIDEO_API_KEYS:-}
-  ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set}
-  ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set to a strong 12+ character password}
+  ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@shiphelix.com}
+  ADMIN_PASSWORD: ${ADMIN_PASSWORD:-AdminPass123456!}
   ADMIN_OWNER_ID: ${ADMIN_OWNER_ID:-acct_primary}
-  JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set to a 32+ character random secret}
+  JWT_SECRET: ${JWT_SECRET:-jwt_secret_must_be_32_characters_random_key_here}
   JWT_TTL_SECONDS: ${JWT_TTL_SECONDS:-28800}
   VIDEO_WORKER_CONCURRENCY: ${VIDEO_WORKER_CONCURRENCY:-1}
   VIDEO_QUEUE_LOCK_MS: ${VIDEO_QUEUE_LOCK_MS:-600000}

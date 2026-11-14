@@ -44,6 +44,23 @@ test('file job store removes only stale atomic-write temp artifacts during start
   await fs.access(valid);
 });
 
+test('video pagination does not skip jobs that share the same timestamp', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-pagination-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const store = new FileJobStore(root);
+  await store.init();
+  const createdAt = '2026-11-14T12:00:00.000Z';
+  for (const id of ['vid_same_c', 'vid_same_b', 'vid_same_a']) {
+    await store.putJob({ id, ownerId: 'owner', status: 'failed', stage: 'failed', progress: 100, createdAt, updatedAt: createdAt, error: { code: 'TEST', message: 'test' } });
+  }
+  const service = new VideoJobService({ store });
+  const first = await service.listPage('owner', { limit: 2 });
+  const second = await service.listPage('owner', { limit: 2, cursor: first.nextCursor });
+  assert.equal(first.videos.length, 2);
+  assert.equal(second.videos.length, 1);
+  assert.deepEqual(new Set([...first.videos, ...second.videos].map((video) => video.id)), new Set(['vid_same_a', 'vid_same_b', 'vid_same_c']));
+});
+
 test('public prompt request maps to the existing channel-independent pipeline brief', () => {
   const request = CreateVideoRequestSchema.parse({
     prompt: 'Explain how volcanoes form',

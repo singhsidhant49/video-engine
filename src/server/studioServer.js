@@ -60,6 +60,19 @@ const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE
 app.use('/auth', createAdminAuthRouter({ auth: adminAuth, store: adminStore, requireAuth: apiAuth, production }));
 
 app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
+app.get('/health/ready', async (req, res) => {
+  try {
+    const readiness = await videoJobService.readiness();
+    res.status(readiness.ready ? 200 : 503).json({
+      status: readiness.ready ? 'ready' : 'not_ready',
+      ready: readiness.ready,
+      storage: { healthy: readiness.storage?.healthy !== false, type: readiness.storage?.type || 'unknown' },
+      queue: { healthy: readiness.queue?.healthy !== false, type: readiness.queue?.type || 'unknown', workerCount: readiness.queue?.workerCount },
+    });
+  } catch {
+    res.status(503).json({ status: 'not_ready', ready: false });
+  }
+});
 app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
   const readiness = await videoJobService.readiness();
   const preflight = await inspectProductionPreflight();

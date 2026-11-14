@@ -171,6 +171,31 @@ export class PostgresJobStore {
     return result.rows.map((row) => row.document);
   }
 
+  async listJobsPage(ownerId, { limit = 50, cursor = null } = {}) {
+    const boundedLimit = Math.min(100, Math.max(1, Number(limit) || 50));
+    const separator = cursor ? cursor.lastIndexOf('|') : -1;
+    const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
+    const cursorId = separator > 0 ? cursor.slice(separator + 1) : null;
+    const values = cursorDate
+      ? (cursorId ? [ownerId, cursorDate, cursorId, boundedLimit + 1] : [ownerId, cursorDate, boundedLimit + 1])
+      : [ownerId, boundedLimit + 1];
+    const [result, countResult] = await Promise.all([
+      this.pool.query(
+        cursorDate
+          ? (cursorId
+            ? 'SELECT document FROM video_jobs WHERE owner_id=$1 AND (created_at, id) < ($2::timestamptz, $3) ORDER BY created_at DESC, id DESC LIMIT $4'
+            : 'SELECT document FROM video_jobs WHERE owner_id=$1 AND created_at < $2 ORDER BY created_at DESC, id DESC LIMIT $3')
+          : 'SELECT document FROM video_jobs WHERE owner_id=$1 ORDER BY created_at DESC, id DESC LIMIT $2',
+        values,
+      ),
+      this.pool.query('SELECT COUNT(*)::int AS total FROM video_jobs WHERE owner_id=$1', [ownerId]),
+    ]);
+    const rows = result.rows.map((row) => row.document);
+    const videos = rows.slice(0, boundedLimit);
+    const last = videos.at(-1);
+    return { videos, total: Number(countResult.rows[0]?.total || 0), nextCursor: rows.length > boundedLimit && last ? `${last.createdAt}|${last.id}` : null };
+  }
+
   async findByIdempotency(ownerId, key) {
     if (!key) return null;
     const result = await this.pool.query('SELECT document FROM video_jobs WHERE owner_id=$1 AND idempotency_key=$2 LIMIT 1', [ownerId, key]);
