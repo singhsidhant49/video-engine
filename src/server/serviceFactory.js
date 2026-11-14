@@ -10,7 +10,11 @@ export function createConfiguredVideoJobService({ role = process.env.VIDEO_PROCE
     ? new PostgresJobStore()
     : new FileJobStore(path.join(config.rendersDir, 'api'));
   const taskQueue = config.server.queueBackend === 'bullmq'
-    ? new BullVideoQueue({ processJobs: ['worker', 'all'].includes(role), concurrency: config.server.workerConcurrency })
+    ? new BullVideoQueue({
+      processJobs: ['worker', 'all'].includes(role),
+      concurrency: config.server.workerConcurrency,
+      globalConcurrency: config.server.queueGlobalConcurrency,
+    })
     : null;
   if (role === 'api' && !taskQueue) {
     throw new Error('VIDEO_PROCESS_ROLE=api requires VIDEO_QUEUE_BACKEND=bullmq; otherwise no worker can receive jobs');

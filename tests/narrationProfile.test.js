@@ -9,6 +9,21 @@ import {
   MEDITATION_PAUSE_TYPES,
 } from '../src/audio/meditationPacer.js';
 
+test('narration mastering and delivery adapt to the content type', () => {
+  const meditation = resolveNarrationProfile({ contentType: 'meditation', topic: 'Guided sleep meditation' });
+  assert.equal(meditation.targetLufs, -18);
+  assert.equal(meditation.maxPeakDb, -2);
+  assert.equal(meditation.delivery, 'soft_spacious');
+
+  const documentary = resolveNarrationProfile({ contentType: 'documentary' });
+  assert.equal(documentary.targetLufs, -16);
+  assert.equal(documentary.delivery, 'measured_authoritative');
+
+  const audiobook = resolveNarrationProfile({ contentType: 'audiobook' });
+  assert.equal(audiobook.targetLufs, -17);
+  assert.equal(audiobook.delivery, 'warm_narrative');
+});
+
 test('meditation narration starts at natural speed and budgets fewer words for silence holds', () => {
   const profile = resolveNarrationProfile({
     topic: 'A gentle guided sleep meditation',

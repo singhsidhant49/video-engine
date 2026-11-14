@@ -1,3 +1,6 @@
+import { scoreTitle } from './youtubeGrowthService.js';
+import { conciseThumbnailText } from './creativeQuality.js';
+
 /**
  * Thumbnail and Video Packaging Generator
  *
@@ -40,54 +43,73 @@ export function buildVideoHashtags({ title = '', topic = '', niche = '', primary
  */
 export function generateVideoPackage(plan, timeline, options = {}) {
   const topic = plan.topic || 'Unknown Topic';
-  const title = plan.title || topic;
-  const style = plan.style || 'cinematic_dark';
   const metadata = options.metadata || {};
+  const titleCandidates = [...new Set([
+    plan.title,
+    ...(plan.titleOptions || []),
+    ...(metadata.titleOptions || []),
+  ].map((item) => String(item || '').replace(/\s+/g, ' ').trim()).filter(Boolean))]
+    .map((value) => ({ value, score: scoreTitle(value) - (/\bthe truth about\b/i.test(value) ? 20 : 0) - (/!{2,}|\?{2,}/.test(value) ? 8 : 0) }))
+    .sort((left, right) => right.score - left.score);
+  const title = titleCandidates[0]?.value || plan.title || topic;
+  const style = plan.style || 'cinematic_dark';
   const hashtags = buildVideoHashtags({ title, topic, niche: plan.niche || '', primaryKeyword: metadata.primaryKeyword || '' });
+
+  const hook = plan.scenes?.[0] || {};
+  const payoff = [...(plan.scenes || [])].reverse().find((scene) => ['payoff', 'reveal', 'conclusion'].includes(scene.purpose)) || plan.scenes?.at(-1) || {};
+  const statistic = plan.scenes?.find((scene) => scene.kind === 'statistic' && scene.data?.value);
+  const heroSubject = hook.entity?.name || hook.focus || hook.visual || metadata.thumbnailConcept || topic;
+  const hookText = conciseThumbnailText(hook.text?.headline || hook.emphasis || title) || conciseThumbnailText(topic) || 'WATCH THIS';
+  const tensionText = conciseThumbnailText(hook.narration || title) || conciseThumbnailText(topic) || 'WATCH THIS';
+  const payoffText = statistic
+    ? conciseThumbnailText(`${statistic.data.value}${statistic.data.suffix || ''} ${statistic.data.label || ''}`, { maxWords: 3 })
+    : conciseThumbnailText(payoff.text?.headline || payoff.emphasis || payoff.narration || title, { maxWords: 3 });
+  const resolvedPayoffText = payoffText || conciseThumbnailText(topic, { maxWords: 3 }) || 'WHY IT MATTERS';
 
   // 1. Generate 3 High-CTR Thumbnail Concepts
   const thumbnailConcepts = [
     {
       conceptId: 'A_high_contrast_statement',
       style: 'bold_editorial',
-      overlayText: (plan.scenes[0]?.text?.headline || title).split(/\s+/).slice(0, 4).join(' ').toUpperCase(),
-      mainSubject: plan.scenes[0]?.entity?.name || 'Central Hero Element',
+      overlayText: hookText,
+      mainSubject: heroSubject,
       emotion: 'curiosity',
+      layout: 'text_left_subject_right',
       palette: {
         background: '#0B1020',
         text: '#FFFFFF',
         accent: '#F5C542',
       },
-      compositionTip: 'Place subject slightly off-center right, with 3-4 bold words on the left at 72pt+ font.',
+      compositionTip: 'Use the strongest real frame full bleed. Keep the focal subject on the right and 2-4 high-contrast words on the left.',
       strategicBrief: metadata.thumbnailConcept || null,
     },
     {
-      conceptId: 'B_provocative_question',
-      style: 'mystery_gap',
-      overlayText: `THE TRUTH ABOUT ${topic.split(/\s+/).slice(0, 2).join(' ').toUpperCase()}`,
-      mainSubject: 'Dramatic Cinematic Close-Up',
+      conceptId: 'B_tension_closeup',
+      style: 'tension_closeup',
+      overlayText: tensionText,
+      mainSubject: heroSubject,
       emotion: 'surprise',
+      layout: 'text_right_subject_left',
       palette: {
         background: '#05070E',
         text: '#F7F8FA',
         accent: '#FF4D4D',
       },
-      compositionTip: 'High contrast vignetted background with large saturated red/white text in top third.',
+      compositionTip: 'Crop tightly around the most expressive subject or story-critical object; place concise text in clean negative space.',
     },
     {
-      conceptId: 'C_stat_proof',
-      style: 'evidence_proof',
-      overlayText: plan.scenes.find((s) => s.kind === 'statistic' && s.data?.value)?.data?.value
-        ? `${plan.scenes.find((s) => s.kind === 'statistic' && s.data?.value).data.value} CHANGED THIS`
-        : 'HOW IT HAPPENED',
-      mainSubject: 'Data Graphic or Blueprint Mockup',
+      conceptId: 'C_payoff_proof',
+      style: 'payoff_proof',
+      overlayText: resolvedPayoffText,
+      mainSubject: payoff.entity?.name || payoff.focus || payoff.visual || heroSubject,
       emotion: 'urgency',
+      layout: 'text_left_subject_right',
       palette: {
         background: '#0F172A',
         text: '#38BDF8',
         accent: '#FACC15',
       },
-      compositionTip: 'Clear legible number callout with glowing accent bounding box.',
+      compositionTip: 'Use the clearest evidence or payoff frame with one visual focal point; never add fake charts, interface mockups, or decorative clutter.',
     },
   ];
 
@@ -157,6 +179,8 @@ export function generateVideoPackage(plan, timeline, options = {}) {
 
   return {
     title,
+    titleOptions: titleCandidates.slice(0, 5).map((item) => item.value),
+    titleScores: titleCandidates.slice(0, 5),
     topic,
     thumbnails: thumbnailConcepts,
     chapters,

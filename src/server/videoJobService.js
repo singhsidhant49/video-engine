@@ -11,9 +11,15 @@ const now = () => new Date().toISOString();
 const requestHash = (value) => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const publicJob = (job) => ({
   id: job.id, status: job.status, stage: job.stage, progress: job.progress,
+  channelId: job.request?.profileId || job.pipelineBrief?.channel?.id || 'default',
   createdAt: job.createdAt, startedAt: job.startedAt, completedAt: job.completedAt,
   error: job.error || undefined, metadata: job.metadata || undefined,
 });
+
+const matchesJobFilters = (job, { channelId = null, statuses = [] } = {}) => {
+  const jobChannelId = job.request?.profileId || job.pipelineBrief?.channel?.id || 'default';
+  return (!channelId || jobChannelId === channelId) && (!statuses.length || statuses.includes(job.status));
+};
 
 function apiError(status, code, message) {
   return Object.assign(new Error(message), { status, code });
@@ -283,16 +289,16 @@ export class VideoJobService {
     return { ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}) };
   }
 
-  async list(ownerId) {
-    const jobs = (await this.store.listJobs()).filter((job) => job.ownerId === ownerId);
+  async list(ownerId, filters = {}) {
+    const jobs = (await this.store.listJobs()).filter((job) => job.ownerId === ownerId && matchesJobFilters(job, filters));
     return jobs.sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id)).map((job) => ({
       ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
     }));
   }
 
-  async listPage(ownerId, { limit = 50, cursor = null } = {}) {
+  async listPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [] } = {}) {
     if (typeof this.store.listJobsPage === 'function') {
-      const page = await this.store.listJobsPage(ownerId, { limit, cursor });
+      const page = await this.store.listJobsPage(ownerId, { limit, cursor, channelId, statuses });
       return {
         videos: page.videos.map((job) => ({
           ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
@@ -301,7 +307,7 @@ export class VideoJobService {
         nextCursor: page.nextCursor,
       };
     }
-    const all = await this.list(ownerId);
+    const all = await this.list(ownerId, { channelId, statuses });
     const separator = cursor ? cursor.lastIndexOf('|') : -1;
     const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
     const cursorId = separator > 0 ? cursor.slice(separator + 1) : null;

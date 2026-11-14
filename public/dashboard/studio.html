@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/dashboard/studio.css">
+  <link rel="stylesheet" href="/dashboard/filters.css">
   <style>.login-dialog{width:min(480px,calc(100% - 28px))}.admin-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.admin-row:last-child{border-bottom:0}.admin-row strong,.admin-row small{display:block}.admin-row small{margin-top:4px;color:var(--muted)}.load-more{display:flex;justify-content:center;margin-top:22px}</style>
 </head>
 <body>
@@ -44,7 +45,9 @@
           </form>
           <aside class="panel guide-panel"><p class="eyebrow">WORKFLOW</p><h3>What happens next</h3><ol><li><strong>Strategy</strong><span>Audience, angle, hook, and narrative arc.</span></li><li><strong>Production</strong><span>Script, voice, scenes, visuals, captions, and music.</span></li><li><strong>Quality control</strong><span>Package validation and final render.</span></li><li><strong>Publish package</strong><span>Title, thumbnail, description, and downloadable video.</span></li></ol></aside>
         </div>
-        <div class="section-head"><div><p class="eyebrow">PRODUCTION QUEUE</p><h2>All videos</h2></div><button class="button secondary" id="refreshVideos">Refresh</button></div><div id="videoGrid" class="video-grid"></div><div class="load-more"><button class="button secondary" id="loadMoreVideos" hidden>Load older videos</button></div>
+        <div class="section-head"><div><p class="eyebrow">PRODUCTION QUEUE</p><h2>All videos</h2></div><button class="button secondary" id="refreshVideos">Refresh</button></div>
+        <div class="filter-bar"><label class="field"><span>Channel</span><select id="videoChannelFilter"><option value="">All channels</option></select></label><label class="field"><span>Status</span><select id="videoStatusFilter"><option value="">All statuses</option><option value="active">Active</option><option value="queued">Queued</option><option value="preparing">Preparing</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="failed">Failed</option><option value="cancelled">Cancelled</option></select></label><p id="videoFilterSummary" class="muted">0 videos</p></div>
+        <div id="videoGrid" class="video-grid"></div><div class="load-more"><button class="button secondary" id="loadMoreVideos" hidden>Load older videos</button></div>
       </section>
 
       <section class="page" data-page-panel="channels">
@@ -53,7 +56,7 @@
       </section>
 
       <section class="page" data-page-panel="ideas">
-        <div class="toolbar"><label class="field channel-select"><span>Channel</span><select id="ideaChannel"></select></label><div><button class="button secondary" id="refreshIdeas">Refresh</button><button class="button primary" id="brainstorm">Generate strategic ideas</button></div></div>
+        <div class="toolbar"><div class="filter-group"><label class="field channel-select"><span>Channel</span><select id="ideaChannel"></select></label><label class="field"><span>Status</span><select id="ideaStatusFilter"><option value="">All statuses</option><option value="draft">Draft</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="queued">Queued</option><option value="producing">Producing</option><option value="ready">Ready</option><option value="publishing">Publishing</option><option value="published">Published</option><option value="publish_failed">Publish failed</option><option value="failed">Failed</option></select></label></div><div><button class="button secondary" id="refreshIdeas">Refresh</button><button class="button primary" id="brainstorm">Generate strategic ideas</button></div></div>
         <div class="strategy-banner"><strong>Claude-YouTube strategy system</strong><span>Ideas are scored for search demand, click potential, feasibility, niche fit, retention, and title strength. The LLM chooses the best supported format and duration inside your boundaries.</span></div>
         <div id="ideaGrid" class="idea-grid"></div>
       </section>

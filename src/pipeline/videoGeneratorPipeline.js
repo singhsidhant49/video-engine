@@ -503,7 +503,7 @@ export async function createFacelessVideo({
 
       // Milestone 9 Narration Normalization & Peak Limiting
       try {
-        narrationNorm = await normalizeNarrationWav(narrationFile, { targetLufs: -16.0, maxPeakDb: -1.5 });
+        narrationNorm = await normalizeNarrationWav(narrationFile, { targetLufs: narrationProfile.targetLufs, maxPeakDb: narrationProfile.maxPeakDb });
       } catch (normErr) {
         console.warn(`   ⚠️ Narration normalization warning: ${normErr.message}`);
       }
@@ -514,7 +514,7 @@ export async function createFacelessVideo({
       await job.startStage('alignment');
       throwIfCancelled();
       onProgress({ step: 3, message: 'Aligning script to narration...' });
-      narration = await analyzeNarration(narrationFile, plan.script, fps);
+      narration = await analyzeNarration(narrationFile, plan.script, fps, { signal });
       await save('words.json', {
         source: narration.source,
         matchRate: narration.matchRate,
@@ -1328,12 +1328,24 @@ export async function createFacelessVideo({
   // 8. Render upload-ready Thumbnail PNG (only if full render)
   if (!scene && !range) {
     try {
-      const heroFramePath = path.join(runDir, 'thumbnail-hero.jpg');
-      await ffmpeg(['-ss', String(Math.max(1, Number(result.durationSeconds || 10) * 0.22)), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
-      const heroImage = `data:image/jpeg;base64,${(await fs.readFile(heroFramePath)).toString('base64')}`;
+      const videoDuration = Math.max(1, Number(result.durationSeconds || timeline.durationInFrames / timeline.fps || 10));
+      const storyMomentRatios = [0.08, 0.34, 0.78];
+      const heroFramePaths = [];
+      const heroImages = [];
+      for (let index = 0; index < Math.min(3, videoPackage.thumbnails.length); index++) {
+        const heroFramePath = path.join(runDir, `thumbnail-hero-${index + 1}.jpg`);
+        const timeSec = Math.min(Math.max(0.5, videoDuration * storyMomentRatios[index]), Math.max(0.5, videoDuration - 0.25));
+        await ffmpeg(['-ss', timeSec.toFixed(3), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
+        heroFramePaths.push(heroFramePath);
+        heroImages.push(`data:image/jpeg;base64,${(await fs.readFile(heroFramePath)).toString('base64')}`);
+      }
       const thumbnailPackage = {
         ...videoPackage,
-        thumbnails: videoPackage.thumbnails.map((concept) => ({ ...concept, heroImage })),
+        thumbnails: videoPackage.thumbnails.map((concept, index) => ({
+          ...concept,
+          heroImage: heroImages[Math.min(index, heroImages.length - 1)],
+          storyMoment: ['hook', 'tension', 'payoff'][index] || 'supporting',
+        })),
       };
       const thumbnailPath = path.join(runDir, 'thumbnail.png');
       for (let conceptIndex = 0; conceptIndex < Math.min(3, thumbnailPackage.thumbnails.length); conceptIndex++) {
@@ -1345,9 +1357,9 @@ export async function createFacelessVideo({
           inputProps, imageFormat: 'png', delayRenderTimeoutInMilliseconds: 120_000, chromiumOptions,
         });
       }
-      await fs.rm(heroFramePath, { force: true }).catch(() => {});
+      await Promise.all(heroFramePaths.map((heroFramePath) => fs.rm(heroFramePath, { force: true }).catch(() => {})));
       result.thumbnail = thumbnailPath;
-      console.log(`   🖼️  Three thumbnail variants generated from an actual video frame: ${thumbnailPath}`);
+      console.log(`   🖼️  Three thumbnail variants generated from distinct hook, tension, and payoff frames: ${thumbnailPath}`);
     } catch (e) {
       console.warn(`Thumbnail generation failed: ${e.message}`);
       result.thumbnailError = String(e.message || e).slice(0, 500);

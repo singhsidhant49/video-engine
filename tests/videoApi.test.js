@@ -61,6 +61,47 @@ test('video pagination does not skip jobs that share the same timestamp', async 
   assert.deepEqual(new Set([...first.videos, ...second.videos].map((video) => video.id)), new Set(['vid_same_a', 'vid_same_b', 'vid_same_c']));
 });
 
+test('video listing filters by channel and status without leaking other owners', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-channel-filters-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const store = new FileJobStore(root);
+  await store.init();
+  const createdAt = '2026-11-14T12:00:00.000Z';
+  const jobs = [
+    { id: 'vid_alpha_done', ownerId: 'owner', status: 'completed', request: { profileId: 'alpha' } },
+    { id: 'vid_alpha_queue', ownerId: 'owner', status: 'queued', request: { profileId: 'alpha' } },
+    { id: 'vid_beta_done', ownerId: 'owner', status: 'completed', request: { profileId: 'beta' } },
+    { id: 'vid_other_done', ownerId: 'other', status: 'completed', request: { profileId: 'alpha' } },
+  ];
+  for (const job of jobs) await store.putJob({ ...job, stage: job.status, progress: 0, createdAt, updatedAt: createdAt });
+  const service = new VideoJobService({ store });
+  const page = await service.listPage('owner', { channelId: 'alpha', statuses: ['completed'], limit: 20 });
+  assert.equal(page.total, 1);
+  assert.deepEqual(page.videos.map((video) => video.id), ['vid_alpha_done']);
+  assert.equal(page.videos[0].channelId, 'alpha');
+});
+
+test('in-process generation queue runs multiple channels strictly one at a time', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-serial-queue-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  let active = 0; let maximumActive = 0;
+  const generator = async ({ videoId }) => {
+    active += 1; maximumActive = Math.max(maximumActive, active);
+    await sleep(30);
+    active -= 1;
+    const outputPath = path.join(root, `${videoId}.mp4`);
+    await fs.writeFile(outputPath, 'video');
+    return { outputPath, outputFilename: path.basename(outputPath), runDir: root, durationSeconds: 10, title: videoId };
+  };
+  const service = new VideoJobService({ store: new FileJobStore(path.join(root, 'store')), generator, rendersDir: root, concurrency: 1 });
+  await service.init();
+  t.after(() => service.shutdown({ timeoutMs: 1_000 }));
+  const alpha = await service.create('owner', CreateVideoRequestSchema.parse({ prompt: 'Create the alpha channel video', profileId: 'alpha' }));
+  const beta = await service.create('owner', CreateVideoRequestSchema.parse({ prompt: 'Create the beta channel video', profileId: 'beta' }));
+  await waitFor(async () => Promise.all([service.get('owner', alpha.job.id), service.get('owner', beta.job.id)]), (items) => items.every((item) => item.status === 'completed'));
+  assert.equal(maximumActive, 1);
+});
+
 test('public prompt request maps to the existing channel-independent pipeline brief', () => {
   const request = CreateVideoRequestSchema.parse({
     prompt: 'Explain how volcanoes form',

@@ -457,6 +457,12 @@ test('channel HTTP API validates schedules and completes CRUD plus brainstorming
   assert.equal(performanceSummary.status, 200); assert.equal((await performanceSummary.json()).sampleSize, 2);
   const brainstorm = await fetch(`${base}/channels/api-channel/ideas/brainstorm`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ count: 2, useAi: false }) });
   assert.equal(brainstorm.status, 201); assert.equal((await brainstorm.json()).ideas.length, 2);
+  const draftIdeas = await fetch(`${base}/channels/api-channel/ideas?status=draft`);
+  assert.equal(draftIdeas.status, 200); assert.equal((await draftIdeas.json()).ideas.length, 2);
+  const approvedIdeas = await fetch(`${base}/channels/api-channel/ideas?status=approved`);
+  assert.equal(approvedIdeas.status, 200); assert.equal((await approvedIdeas.json()).ideas.length, 0);
+  const invalidIdeaFilter = await fetch(`${base}/channels/api-channel/ideas?status=not-a-status`);
+  assert.equal(invalidIdeaFilter.status, 400); assert.equal((await invalidIdeaFilter.json()).error.code, 'INVALID_STATUS_FILTER');
   const listed = await fetch(`${base}/channels`); assert.equal((await listed.json()).channels.length, 1);
   assert.equal((await fetch(`${base}/channels/api-channel`, { method: 'DELETE' })).status, 204);
 });

@@ -171,24 +171,39 @@ export class PostgresJobStore {
     return result.rows.map((row) => row.document);
   }
 
-  async listJobsPage(ownerId, { limit = 50, cursor = null } = {}) {
+  async listJobsPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [] } = {}) {
     const boundedLimit = Math.min(100, Math.max(1, Number(limit) || 50));
     const separator = cursor ? cursor.lastIndexOf('|') : -1;
     const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
     const cursorId = separator > 0 ? cursor.slice(separator + 1) : null;
-    const values = cursorDate
-      ? (cursorId ? [ownerId, cursorDate, cursorId, boundedLimit + 1] : [ownerId, cursorDate, boundedLimit + 1])
-      : [ownerId, boundedLimit + 1];
+    const filters = ['owner_id=$1'];
+    const baseValues = [ownerId];
+    if (channelId) {
+      baseValues.push(channelId);
+      filters.push(`COALESCE(document #>> '{request,profileId}', document #>> '{pipelineBrief,channel,id}', 'default')=$${baseValues.length}`);
+    }
+    if (statuses.length) {
+      baseValues.push(statuses);
+      filters.push(`status=ANY($${baseValues.length}::text[])`);
+    }
+    const countValues = [...baseValues];
+    const countWhere = filters.join(' AND ');
+    if (cursorDate) {
+      baseValues.push(cursorDate);
+      const dateIndex = baseValues.length;
+      if (cursorId) {
+        baseValues.push(cursorId);
+        filters.push(`(created_at, id) < ($${dateIndex}::timestamptz, $${baseValues.length})`);
+      } else filters.push(`created_at < $${dateIndex}::timestamptz`);
+    }
+    baseValues.push(boundedLimit + 1);
+    const limitIndex = baseValues.length;
     const [result, countResult] = await Promise.all([
       this.pool.query(
-        cursorDate
-          ? (cursorId
-            ? 'SELECT document FROM video_jobs WHERE owner_id=$1 AND (created_at, id) < ($2::timestamptz, $3) ORDER BY created_at DESC, id DESC LIMIT $4'
-            : 'SELECT document FROM video_jobs WHERE owner_id=$1 AND created_at < $2 ORDER BY created_at DESC, id DESC LIMIT $3')
-          : 'SELECT document FROM video_jobs WHERE owner_id=$1 ORDER BY created_at DESC, id DESC LIMIT $2',
-        values,
+        `SELECT document FROM video_jobs WHERE ${filters.join(' AND ')} ORDER BY created_at DESC, id DESC LIMIT $${limitIndex}`,
+        baseValues,
       ),
-      this.pool.query('SELECT COUNT(*)::int AS total FROM video_jobs WHERE owner_id=$1', [ownerId]),
+      this.pool.query(`SELECT COUNT(*)::int AS total FROM video_jobs WHERE ${countWhere}`, countValues),
     ]);
     const rows = result.rows.map((row) => row.document);
     const videos = rows.slice(0, boundedLimit);

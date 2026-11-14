@@ -3,6 +3,7 @@ import { STYLES, STYLE_IDS, DEFAULT_STYLE, hexToHue } from '../shared/styles.js'
 import { normalizeToken, tokenizeScript } from './alignmentService.js';
 import { calculateDurationBudget, DEFAULT_SPEECH_RATE_WPS } from '../storyboard/durationBudget.js';
 import { getImageStyle } from '../config/imageStyles.js';
+import { scoreHookQuality, selectStrongestHook } from './creativeQuality.js';
 
 const wordBudget = (seconds) => Math.round(Number(seconds || 0) * (DEFAULT_SPEECH_RATE_WPS || 2.60));
 const editableSceneId = (scene, index) => scene?.id || `__scene_${String(index + 1).padStart(3, '0')}`;
@@ -230,6 +231,44 @@ async function callJson(llm, messages, { temperature = 0.6, retries = 2, timeout
     }
   }
   throw new Error(`${llm.name} failed: ${lastErr?.message}`);
+}
+
+/** Rewrite only a weak opening beat. The candidate must materially improve
+ * the measured hook quality while preserving the existing facts and scene
+ * structure; otherwise the original narration remains untouched. */
+export async function strengthenPlanHook(plan, { topic = '', llm = llmConfig(), call = callJson } = {}) {
+  const scene = plan?.scenes?.[0];
+  if (!scene?.narration) return plan;
+  const before = scoreHookQuality(scene.narration, { topic });
+  if (before.score >= 75 || !llm) {
+    plan.hookQuality = { ...before, repaired: false };
+    return plan;
+  }
+  try {
+    const response = await call(llm, [
+      {
+        role: 'system',
+        content: 'You are a senior YouTube opening editor. Rewrite weak openings into specific, honest spoken hooks. Preserve known facts and never invent a number, quotation, danger, promise, or certainty. Reply with JSON only.',
+      },
+      {
+        role: 'user',
+        content: `Topic: ${topic}\nCurrent opening: ${scene.narration}\nCreate exactly three distinct opening narrations: (1) contradiction, (2) consequence/stakes, (3) unresolved specific question. Each must be 8-28 spoken words, name the concrete subject, create one honest information gap, and avoid generic phrases or empty hype. Preserve the current meaning and use no facts absent from the current opening. Return {"candidates":[{"narration":string}]}.`,
+      },
+    ], { temperature: 0.75, retries: 1 });
+    const strongest = selectStrongestHook(response?.candidates || [], { topic });
+    if (strongest && strongest.quality.score >= Math.max(70, before.score + 8)) {
+      scene.narration = strongest.narration;
+      const emphasisWords = strongest.narration.match(/[a-zA-Z0-9'-]{5,}/g) || [];
+      scene.emphasis = emphasisWords[0] || scene.emphasis || null;
+      plan.script = plan.scenes.map((item) => item.narration).join(' ');
+      plan.hookQuality = { ...strongest.quality, repaired: true, previousScore: before.score };
+      return plan;
+    }
+  } catch (error) {
+    console.warn(`   Hook strengthening skipped (${error.message}).`);
+  }
+  plan.hookQuality = { ...before, repaired: false };
+  return plan;
 }
 
 function normalizeDurationRange(format, range) {
@@ -730,9 +769,12 @@ export async function generateDirectorPlan({
           (isAiWorkflow
             ? `Every beat will be rendered as an AI-generated image in the "${styleName}" style. Outline concrete visual scenes and character actions. Do not output charts or generic templates.\n`
             : `Every beat must use authentic real-world photography and video clips (kind: "subject" or "atmosphere"). Concrete physical queries are required for all scenes. Do not output charts, diagrams, or templates.\n`) +
-          `Return {"title": string, "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "retentionFunction": string, "openQuestion": string|null, "answerToQuestion": string|null, "targetWords": number, "visualType": string, "visualProof": string, "changeReason": string}]}`,
+          `Generate three distinct spoken hook candidates before outlining: contradiction, consequence/stakes, and unresolved specific question. Each hook must be 8-28 words, name the concrete subject, open only one honest information gap, and use no unsupported exact claim. Also generate three accurate titleOptions using different angles; no generic "truth about" phrasing.\n` +
+          `Return {"title": string, "titleOptions":[string,string,string], "hookCandidates":[{"narration":string}], "style": string, "brandColor": string|null, "beats": [{"beatIndex": number, "section": string, "contentBeat": string, "purpose": string, "coreIdea": string, "retentionFunction": string, "openQuestion": string|null, "answerToQuestion": string|null, "targetWords": number, "visualType": string, "visualProof": string, "changeReason": string}]}`,
       },
     ]);
+
+    const selectedOutlineHook = selectStrongestHook(outline?.hookCandidates || [], { topic });
 
     // Pass 2: Write complete scenes adhering strictly to beat outline and word budget
     console.log(`   🎬 Pass 2: Authoring ${budget.targetSceneCount} scenes (budget: ${budget.targetWords} words)...`);
@@ -746,7 +788,8 @@ export async function generateDirectorPlan({
           `STRICT DURATION & WORD BUDGET:\n` +
           `- Total narration length: EXACTLY ${budget.targetWords} words (minimum ${budget.minWords} words, ABSOLUTE CEILING: ${budget.maxWords} words).\n` +
           `- Total scenes: EXACTLY ${budget.targetSceneCount} content beats.\n` +
-          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a detailed visual prompt for Ideogram matching the ${styleName} style).\n` : '') +
+          (selectedOutlineHook ? `- Opening contract: begin the first scene with this approved spoken hook exactly: "${selectedOutlineHook.narration}"\n` : '') +
+          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a provider-neutral, concrete scene prompt matching the ${styleName} style). Put the visible subject, action, environment, framing, and continuity identifiers before aesthetic adjectives. Never include text, captions, logos, or multi-panel layouts.\n` : '') +
           (beatsContext ? `Follow this approved beat outline:\n${beatsContext}\n\n` : '') +
           `CRITICAL EDITORIAL RULE: Every word takes speaking time. Do not write filler. The sum of all scene narrations MUST be between ${budget.minWords} and ${budget.maxWords} words.\n` +
           `FINAL QUALITY GATE: Before answering, silently revise once. The opening sentence must create concrete tension; every scene must add new information, consequence, mechanism, choice, or payoff; causal transitions must connect the beats; every opened question must close; visuals must show the exact spoken subject/action; recurring people and places must remain identical; remove repetition, generic hype, vague stock queries, unsupported precision, and meta-commentary.\n` +
@@ -755,11 +798,14 @@ export async function generateDirectorPlan({
     ]);
 
     if (outline?.title && !plan.title) plan.title = outline.title;
+    if (Array.isArray(outline?.titleOptions)) plan.titleOptions = outline.titleOptions;
     if (outline?.style && !plan.style) plan.style = outline.style;
     if (outline?.brandColor && !plan.brandColor) plan.brandColor = outline.brandColor;
   } else {
     plan = await planLongForm(llm, brief, target, budget, genre, productionProfile, { imageSource, imageStyle, customStylePrompt });
   }
+
+  plan = await strengthenPlanHook(plan, { topic, llm });
 
   if (isAiWorkflow) {
     plan.imageSource = 'ai';
@@ -801,7 +847,7 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
   const effectiveStyleAnchor = (imageStyle === 'custom' && customStylePrompt) ? customStylePrompt : styleConfig?.stylePromptAnchor;
   const artDirectionGuidance = isAiWorkflow
     ? `\n\n🎨 AI ART DIRECTION & VISUAL STYLE:\n` +
-      `- Medium: AI-Generated Illustrations (Ideogram API).\n` +
+      `- Medium: AI-generated illustrations using the channel's selected image provider.\n` +
       `- Artistic Style: "${styleName}".\n` +
       `- Style Prompt Anchor: "${effectiveStyleAnchor}".\n` +
       `- Style Directing Guidance: ${styleConfig?.llmGuidance || ''}\n` +
@@ -834,7 +880,7 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
         role: 'user',
         content: `${brief}\nVideo title: "${outline.title}". Style: "${outline.style}".\nPremise: ${outline.premise || ''}\nCentral question: ${outline.centralQuestion || ''}\nPromised payoff: ${outline.promisedPayoff || ''}\nContinuity bible (immutable): ${JSON.stringify(outline.continuityBible || {})}\n${genre.toneGuidance}\n${genre.visualGuidance}${artDirectionGuidance}\nWrite ONLY chapter ${i + 1} of ${chapters.length}: "${ch.title}" — ${ch.summary}\nRequired new development: ${ch.newDevelopment || ch.summary}\n` +
           `Chapter length: ${targetWords} words. ${i > 0 ? `Start with a "chapter" scene (section: true), but begin its narration naturally: never say "Chapter", a chapter number, or read the section title aloud. Preserve all established facts and state. The preceding narrative context is: "${soFar}"` : 'This is the cold open: begin in concrete action with a specific unresolved tension.'}\n` +
-          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a detailed visual prompt for Ideogram matching the ${styleName} style).\n` : '') +
+          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a provider-neutral concrete scene prompt matching the ${styleName} style). Put subject, action, environment, framing, and continuity identifiers first; never request text or collage layouts.\n` : '') +
           `Quality gate before answering: remove repeated ideas, generic transitions, unsupported exact claims, unrelated visuals, identity drift, and any scene that does not change knowledge, stakes, mechanism, relationship, or choice. Ensure this chapter opens and closes only the questions assigned in the outline.\n` +
           `Return {"scenes": [...]} only.`,
       },
@@ -843,6 +889,7 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
   }
   return {
     title: outline.title,
+    titleOptions: outline.titleOptions,
     style: outline.style,
     brandColor: outline.brandColor,
     scenes,
@@ -1268,6 +1315,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
 
   return {
     title: str(raw?.title) || topic || 'Untitled',
+    titleOptions: [...new Set((Array.isArray(raw?.titleOptions) ? raw.titleOptions : []).map((item) => str(item)).filter(Boolean))].slice(0, 5),
     topic,
     niche,
     format,
@@ -1280,6 +1328,7 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
     imageStyle: raw?.imageStyle || (raw?.creative?.imageStyle) || null,
     customStylePrompt: raw?.customStylePrompt || (raw?.creative?.customStylePrompt) || null,
     contentQuality,
+    hookQuality: raw?.hookQuality || scoreHookQuality(scenes[0]?.narration || '', { topic }),
     diagnostics: { ...diagnostics, downgrades, contentQualityIssues: contentQuality.issues.length },
   };
 }
@@ -1297,6 +1346,7 @@ export function validateContentQuality({ scenes = [], claims = [] } = {}) {
   }
   const hookScene = scenes[0];
   const hookText = (hookScene?.narration || hookScene?.script || '').toLowerCase();
+  const hookQuality = scoreHookQuality(hookScene?.narration || hookScene?.script || '');
   const genericHookPhrases = [
     'have you ever wondered', 'in this video', 'today we will', 'welcome back',
     'did you know that', 'let us dive in', 'let\'s explore',
@@ -1309,6 +1359,13 @@ export function validateContentQuality({ scenes = [], claims = [] } = {}) {
         message: `Hook contains generic filler opener: "${phrase}". Prefer concrete tension or high-stakes fact.`,
       });
     }
+  }
+  if (hookQuality.score < 55) {
+    issues.push({
+      type: 'weak_hook',
+      severity: 'warn',
+      message: `Hook quality is ${hookQuality.score}/100 (${hookQuality.weaknesses.join(', ') || 'insufficient specific tension'}).`,
+    });
   }
 
   for (let i = 1; i < scenes.length; i++) {
@@ -1354,6 +1411,7 @@ export function validateContentQuality({ scenes = [], claims = [] } = {}) {
     valid: issues.filter((i) => i.severity === 'error').length === 0,
     totalScenes: scenes.length,
     hookText: hookScene?.narration || hookScene?.script || '',
+    hookQuality,
     hasHookPayoff: payoffScenes.length > 0,
     hasGenericHook: issues.some((i) => i.type === 'generic_hook'),
     hasPayoff: payoffScenes.length > 0,

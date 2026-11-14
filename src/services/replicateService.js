@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { config } from '../config/index.js';
-import { getImageStyle, buildFullIdeogramPrompt } from '../config/imageStyles.js';
+import { buildFluxPrompt } from '../config/imageStyles.js';
 import { downloadImageToFile } from './ideogramService.js';
 
 /**
@@ -45,6 +45,7 @@ export async function generateFluxImage({
   timeoutMs = 90000,
   offline = false,
   model = null,
+  quality = 'high',
 }) {
   if (offline) {
     throw new Error('Offline mode requested — skipping external Replicate network calls');
@@ -58,11 +59,11 @@ export async function generateFluxImage({
   }
 
   const selectedModel = normalizeFluxModel(model);
-  const fullPrompt = buildFullIdeogramPrompt({ prompt, styleId, customStylePrompt, format });
+  const fullPrompt = buildFluxPrompt({ prompt, styleId, customStylePrompt, format });
   const aspectRatio = resolveFluxAspectRatio(format);
 
   // Check persistent disk cache
-  const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}`;
+  const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}::${quality}`;
   const promptHash = crypto.createHash('sha256').update(content).digest('hex');
   const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
   const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
@@ -118,6 +119,10 @@ export async function generateFluxImage({
       aspect_ratio: aspectRatio,
       output_format: 'png',
       disable_safety_checker: true,
+      num_outputs: 1,
+      num_inference_steps: quality === 'low' ? 3 : 4,
+      go_fast: quality !== 'high',
+      megapixels: '1',
       ...(seed != null ? { seed: Number(seed) } : {}),
     },
   };

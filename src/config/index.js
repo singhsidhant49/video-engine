@@ -88,6 +88,7 @@ export const config = {
     jwtTtlSeconds: Math.max(300, parseInt(process.env.JWT_TTL_SECONDS || '28800', 10)),
     maxRequestBytes: process.env.VIDEO_API_MAX_REQUEST_BYTES || '1mb',
     workerConcurrency: Math.max(1, parseInt(process.env.VIDEO_WORKER_CONCURRENCY || '1', 10)),
+    queueGlobalConcurrency: Math.max(1, parseInt(process.env.VIDEO_QUEUE_GLOBAL_CONCURRENCY || '1', 10)),
     maxQueuedJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_QUEUED_JOBS || '25', 10)),
     maxOwnerPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_OWNER_PENDING_JOBS || '5', 10)),
     shutdownTimeoutMs: Math.max(1_000, parseInt(process.env.VIDEO_SHUTDOWN_TIMEOUT_MS || '30000', 10)),

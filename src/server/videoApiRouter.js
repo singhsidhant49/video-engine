@@ -87,6 +87,16 @@ function operationView(operation) {
   };
 }
 
+const VIDEO_STATUSES = new Set(['queued', 'preparing', 'processing', 'cancel_requested', 'completed', 'failed', 'cancelled', 'delete_requested']);
+function videoStatusFilter(value) {
+  const status = String(value || '').trim().toLowerCase();
+  if (!status || status === 'all') return [];
+  if (status === 'active') return ['queued', 'preparing', 'processing', 'cancel_requested'];
+  if (status === 'finished') return ['completed', 'failed', 'cancelled'];
+  if (!VIDEO_STATUSES.has(status)) throw Object.assign(new Error('Invalid video status filter'), { status: 400, code: 'INVALID_STATUS_FILTER' });
+  return [status];
+}
+
 export function createVideoApiRouter({ service }) {
   const router = express.Router();
   router.param('id', (req, res, next, id) => {
@@ -110,9 +120,12 @@ export function createVideoApiRouter({ service }) {
     try {
       const limit = Math.min(100, Math.max(1, Number.parseInt(String(req.query.limit || '50'), 10) || 50));
       const cursor = req.query.cursor ? String(req.query.cursor) : null;
+      const channelId = req.query.channelId ? String(req.query.channelId).trim() : null;
+      if (channelId && !/^[a-z0-9][a-z0-9_-]{0,99}$/i.test(channelId)) throw Object.assign(new Error('Invalid channel filter'), { status: 400, code: 'INVALID_CHANNEL_FILTER' });
+      const statuses = videoStatusFilter(req.query.status);
       const page = typeof service.listPage === 'function'
-        ? await service.listPage(req.ownerId, { limit, cursor })
-        : { videos: await service.list(req.ownerId), nextCursor: null };
+        ? await service.listPage(req.ownerId, { limit, cursor, channelId, statuses })
+        : { videos: await service.list(req.ownerId, { channelId, statuses }), nextCursor: null };
       res.json(page);
     }
     catch (error) { next(error); }

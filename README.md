@@ -159,6 +159,13 @@ docker compose ps
 docker compose logs -f api worker
 ```
 
+CPU-only speech alignment is resource-bounded by default. Narration longer
+than `WHISPER_MAX_AUDIO_SECONDS` uses deterministic word timing, and local
+Whisper runs in an isolated process that is terminated after
+`WHISPER_TIMEOUT_MS`. On a 2-vCPU VPS, keep the defaults or set
+`WHISPER_ENABLED=false`; set `WHISPER_MAX_AUDIO_SECONDS=0` only on hardware
+that can safely process unbounded local Whisper workloads.
+
 Open [http://localhost:3000](http://localhost:3000) for the authenticated production dashboard. The stack contains the API, a separate video worker, PostgreSQL, Redis/BullMQ, and Kokoro TTS. Videos and databases survive restarts in named Docker volumes. See [Docker production deployment](docs/docker-production.md) for health checks, backups, scaling, storage, and the future multi-user migration.
 
 ---

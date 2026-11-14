@@ -290,7 +290,11 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     const missing = Object.entries(plan.diagnostics.missingAttributes || {});
     add('plan-feel', missing.length === 0, 'warn', missing.length ? `director omitted: ${missing.map(([key, count]) => `${key}x${count}`).join(', ')}` : 'ok');
   }
-  if (narration) add('alignment', narration.matchRate >= 0.8, narration.matchRate >= 0.5 ? 'warn' : 'error', `${(narration.matchRate * 100).toFixed(0)}% script-word match (${narration.source})`);
+  if (narration?.source === 'estimate') {
+    add('alignment', false, 'warn', 'deterministic estimated word timing used because speech recognition was unavailable or outside resource limits');
+  } else if (narration) {
+    add('alignment', narration.matchRate >= 0.8, narration.matchRate >= 0.5 ? 'warn' : 'error', `${(narration.matchRate * 100).toFixed(0)}% script-word match (${narration.source})`);
+  }
   const badChunks = (timeline.captions?.chunks || []).filter((chunk, index, all) => chunk.endFrame <= chunk.startFrame || (index && chunk.startFrame < all[index - 1].startFrame));
   add('caption-order', badChunks.length === 0, 'error', badChunks.length ? `${badChunks.length} malformed chunks` : `${timeline.captions?.chunks?.length || 0} chunks`);
 

@@ -88,6 +88,8 @@ function setPage() {
 
 function videoCard(video) {
   const title = video.result?.title || video.metadata?.title || video.metadata?.externalId || video.id;
+  const channel = state.channels.find((item) => item.id === video.channelId);
+  const channelName = channel?.name || (video.channelId === 'default' ? 'Default profile' : video.channelId || 'Default profile');
   const thumb = state.thumbs.get(video.id);
   const controls = video.status === 'completed'
     ? `<button data-video-action="review" data-id="${video.id}">Review</button><button data-video-action="download" data-id="${video.id}">Download</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
@@ -95,17 +97,19 @@ function videoCard(video) {
       ? `<button data-video-action="retry" data-id="${video.id}">Retry</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
       : `<button data-video-action="cancel" data-id="${video.id}">Cancel</button>`;
   const posterMessage = video.status !== 'completed' ? escapeHtml(video.error?.message || video.stage || 'QUEUED') : thumb ? '' : 'LOADING THUMBNAIL';
-  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
+  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><div class="badge-row compact"><span class="badge accent">${escapeHtml(channelName)}</span></div><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
 }
 
 function renderVideos() {
   $('totalCount').textContent = state.videoTotal || state.videos.length;
   $('activeCount').textContent = state.videos.filter((v) => activeStatuses.has(v.status)).length;
   $('completedCount').textContent = state.videos.filter((v) => v.status === 'completed').length;
-  const empty = '<div class="empty">No productions yet. Create your first video to begin.</div>';
+  const filtersActive = Boolean($('videoChannelFilter')?.value || $('videoStatusFilter')?.value);
+  const empty = `<div class="empty">${filtersActive ? 'No videos match the selected filters.' : 'No productions yet. Create your first video to begin.'}</div>`;
   $('videoGrid').innerHTML = state.videos.length ? state.videos.map(videoCard).join('') : empty;
   $('recentGrid').innerHTML = state.videos.length ? state.videos.slice(0, 4).map(videoCard).join('') : empty;
   $('loadMoreVideos').hidden = !state.videoCursor;
+  if ($('videoFilterSummary')) $('videoFilterSummary').textContent = `${state.videoTotal} video${state.videoTotal === 1 ? '' : 's'}`;
   observeThumbnails();
 }
 
@@ -158,8 +162,11 @@ async function loadVideos({ append = false } = {}) {
   try {
     const cursor = append ? state.videoCursor : null;
     if (append && !cursor) return;
-    const suffix = cursor ? `&cursor=${encodeURIComponent(cursor)}` : '';
-    const result = await api(`/v1/videos?limit=${VIDEO_PAGE_SIZE}${suffix}`);
+    const params = new URLSearchParams({ limit: String(VIDEO_PAGE_SIZE) });
+    if (cursor) params.set('cursor', cursor);
+    if ($('videoChannelFilter')?.value) params.set('channelId', $('videoChannelFilter').value);
+    if ($('videoStatusFilter')?.value) params.set('status', $('videoStatusFilter').value);
+    const result = await api(`/v1/videos?${params}`);
     const incoming = result.videos || [];
     state.videos = append
       ? [...new Map([...state.videos, ...incoming].map((video) => [video.id, video])).values()]
@@ -183,6 +190,11 @@ function renderChannels() {
     ? '<div class="empty">Sign in to load channel profiles.</div>'
     : state.channels.length ? state.channels.map(channelCard).join('') : '<div class="empty">No channel profiles yet. Create one to unlock strategic ideation and automation.</div>';
   const options = state.channels.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+  const currentVideoChannel = $('videoChannelFilter')?.value || '';
+  if ($('videoChannelFilter')) {
+    $('videoChannelFilter').innerHTML = '<option value="">All channels</option><option value="default">Default profile</option>' + options;
+    if ([...$('videoChannelFilter').options].some((option) => option.value === currentVideoChannel)) $('videoChannelFilter').value = currentVideoChannel;
+  }
   const currentProfile = $('profileId').value;
   $('profileId').innerHTML = '<option value="default">Default profile</option>' + options;
   if ([...$('profileId').options].some((option) => option.value === currentProfile)) $('profileId').value = currentProfile;
@@ -192,6 +204,9 @@ function renderChannels() {
   if (state.selectedChannelId && state.channels.some((c) => c.id === state.selectedChannelId)) $('ideaChannel').value = state.selectedChannelId;
   else state.selectedChannelId = state.channels[0]?.id || null;
   if (state.selectedChannelId) $('performanceChannel').value = state.selectedChannelId;
+  // Channel data and video data load concurrently on startup. Re-render so
+  // production cards replace raw channel IDs with names as soon as profiles arrive.
+  renderVideos();
 }
 
 async function loadChannels() {
@@ -296,7 +311,11 @@ function renderIdeas() { $('ideaGrid').innerHTML = state.ideas.length ? state.id
 async function loadIdeas() {
   state.selectedChannelId = $('ideaChannel').value || state.selectedChannelId;
   if (!state.authenticated || !state.selectedChannelId) { state.ideas = []; renderIdeas(); return; }
-  try { const result = await api(`/v1/channels/${state.selectedChannelId}/ideas`); state.ideas = result.ideas || []; renderIdeas(); }
+  try {
+    const status = $('ideaStatusFilter')?.value;
+    const suffix = status ? `?status=${encodeURIComponent(status)}` : '';
+    const result = await api(`/v1/channels/${state.selectedChannelId}/ideas${suffix}`); state.ideas = result.ideas || []; renderIdeas();
+  }
   catch (error) { handleApiError(error); }
 }
 
@@ -565,6 +584,9 @@ $('syncYoutubeAnalytics').addEventListener('click', syncYoutubeAnalytics);
 $('newChannel').addEventListener('click', () => openChannelDialog());
 $('brainstorm').addEventListener('click', () => brainstorm()); $('refreshIdeas').addEventListener('click', loadIdeas); $('refreshVideos').addEventListener('click', loadVideos);
 $('loadMoreVideos').addEventListener('click', () => singleRequest('videos-more', () => loadVideos({ append: true })));
+$('videoChannelFilter').addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
+$('videoStatusFilter').addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
+$('ideaStatusFilter').addEventListener('change', () => void singleRequest('ideas-filter', loadIdeas));
 $('ideaChannel').addEventListener('change', () => { state.selectedChannelId = $('ideaChannel').value; history.replaceState(null, '', channelPage('ideas')); void loadIdeas(); });
 $('performanceChannel').addEventListener('change', () => { state.selectedChannelId = $('performanceChannel').value; history.replaceState(null, '', channelPage('analytics')); void loadPerformance(); });
 $('profileId').addEventListener('change', applySelectedChannelDefaults);

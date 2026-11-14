@@ -92,6 +92,11 @@ export function resolveNarrationProfile({
     ? Number((1.55 * speed).toFixed(2))
     : Number((2.35 * speed).toFixed(2));
 
+  const targetLufs = meditation ? -18 : ['audiobook', 'story'].includes(contentType) ? -17 : contentType === 'motivational' ? -15.5 : -16;
+  const maxPeakDb = meditation ? -2 : -1.5;
+  const delivery = meditation ? 'soft_spacious' : ['documentary', 'investigative'].includes(contentType)
+    ? 'measured_authoritative' : contentType === 'motivational' ? 'energetic_controlled' : ['story', 'audiobook'].includes(contentType) ? 'warm_narrative' : 'clear_conversational';
+
   return {
     id,
     meditation,
@@ -99,5 +104,8 @@ export function resolveNarrationProfile({
     speed: Number(speed.toFixed(3)),
     minimumRepairSpeed,
     speechRateWps,
+    targetLufs,
+    maxPeakDb,
+    delivery,
   };
 }

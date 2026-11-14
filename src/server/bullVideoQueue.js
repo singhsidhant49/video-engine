@@ -20,11 +20,12 @@ const leaseLostError = (jobId) => Object.assign(
 );
 
 export class BullVideoQueue {
-  constructor({ redisUrl = process.env.REDIS_URL, processJobs = false, concurrency = 1, queueName = process.env.VIDEO_QUEUE_NAME || 'video-generation' } = {}) {
+  constructor({ redisUrl = process.env.REDIS_URL, processJobs = false, concurrency = 1, globalConcurrency = 1, queueName = process.env.VIDEO_QUEUE_NAME || 'video-generation' } = {}) {
     if (!redisUrl) throw new Error('REDIS_URL is required for the BullMQ queue');
     this.connection = connectionFromUrl(redisUrl);
     this.processJobs = processJobs;
     this.concurrency = concurrency;
+    this.globalConcurrency = Math.max(1, Number(globalConcurrency) || 1);
     this.queueName = queueName;
     this.queue = new Queue(queueName, { connection: this.connection });
     this.worker = null;
@@ -32,6 +33,9 @@ export class BullVideoQueue {
 
   async init({ onGenerate, onDelete, onFailed } = {}) {
     await this.queue.waitUntilReady();
+    // Redis enforces this across every worker replica. The VPS therefore runs
+    // one expensive production at a time even if a second worker is started.
+    await this.queue.setGlobalConcurrency(this.globalConcurrency);
     if (this.processJobs) {
       // BullMQ owns active-job leases and stalled-job recovery. Removing active
       // jobs here can discard work that is still owned by another worker.
@@ -128,7 +132,7 @@ export class BullVideoQueue {
     try {
       const counts = await this.queue.getJobCounts('waiting', 'active', 'delayed', 'failed');
       const workers = await this.queue.getWorkers();
-      return { healthy: this.processJobs || workers.length > 0, type: 'redis-bullmq', counts, workerCount: workers.length };
+      return { healthy: this.processJobs || workers.length > 0, type: 'redis-bullmq', counts, workerCount: workers.length, globalConcurrency: this.globalConcurrency };
     } catch (error) {
       return { healthy: false, type: 'redis-bullmq', code: error?.code || 'QUEUE_UNAVAILABLE' };
     }

@@ -7,6 +7,7 @@ import { generateFluxImage } from '../services/replicateService.js';
 import { getImageDimensions } from '../services/imageUtils.js';
 import { getImageStyle, buildFullIdeogramPrompt } from '../config/imageStyles.js';
 import { recordImageInBank } from '../services/imageBank.js';
+import { compareVisualToNeed, inspectVisualCandidate } from '../assets/visualInspectionService.js';
 
 async function computeFileSha256(filePath) {
   try {
@@ -73,6 +74,7 @@ export async function directAiAssets(plan, specs, {
   const assets = Object.fromEntries(scenes.map((scene) => [scene.id, { primary: null, alternates: [], byShot: {} }]));
   const requestReports = [];
   const editorialAssetJudgments = {};
+  const visualInspections = {};
 
   // Resolve each shot request with dedicated AI visual synthesis (concurrency 2)
   await mapLimit(assetRequests, 2, async (req, index) => {
@@ -109,6 +111,7 @@ export async function directAiAssets(plan, specs, {
           format,
           seed: shotSeed,
           model: imageModel && normalizedModel.includes('flux') ? imageModel : undefined,
+          quality: imageQuality || 'high',
           offline,
         });
       } else {
@@ -194,6 +197,17 @@ export async function directAiAssets(plan, specs, {
     const sha256ContentHash = await computeFileSha256(targetFilePath);
     const relativeSrc = path.relative(publicDir, targetFilePath).split(path.sep).join('/');
 
+    const inspectionCandidate = {
+      id: `${isFlux ? 'replicate' : 'ideogram'}_${shotId}`,
+      type: 'image', localPath: targetFilePath, width: dimensions.width, height: dimensions.height,
+      label: rawPrompt, description: rawPrompt, tags: [style.id, req.concept, shotConcept].filter(Boolean),
+    };
+    const inspection = await inspectVisualCandidate(inspectionCandidate, { filePath: targetFilePath }).catch(() => null);
+    const visualMatch = inspection ? compareVisualToNeed(inspection, req.visibleNeed) : null;
+    visualInspections[shotId] = inspection;
+    const semanticMismatch = Boolean(inspection?.semanticPixelInspected && visualMatch?.overallVisualMatch < 0.35);
+    const editorialScore = semanticMismatch ? 0 : Math.round(75 + (visualMatch?.overallVisualMatch || 0.65) * 25);
+
     const assetObj = {
       type: 'image',
       width: dimensions.width || (format === 'shorts' ? 1080 : 1920),
@@ -223,9 +237,9 @@ export async function directAiAssets(plan, specs, {
       focal: { x: 0.5, y: 0.5 },
       selectionReason: `Generated via ${providerLabel} in ${style.label} visual style`,
       whyItMatchesNarration: `Synthesized specifically for: "${scene?.narration?.slice(0, 80) || rawPrompt.slice(0, 80)}"`,
-      finalEditorialScore: 95,
+      finalEditorialScore: editorialScore,
       assetIdentityChain: {
-        candidateId: `ideogram_${sha256ContentHash.slice(0, 16)}`,
+        candidateId: `${isFlux ? 'replicate' : 'ideogram'}_${sha256ContentHash.slice(0, 16)}`,
         materializedAssetId: targetFileName,
         solvedSceneAssetId: `${req.sceneId}:${shotId}`,
         timelineAssetId: shotId,
@@ -245,35 +259,41 @@ export async function directAiAssets(plan, specs, {
     }
 
     editorialAssetJudgments[shotId] = {
-      accepted: true,
-      rejected: false,
-      finalEditorialScore: 95,
-      selectionReason: `AI-generated illustration in ${style.label} style`,
-      whyItMatchesNarration: `Custom rendered for ${req.concept || rawPrompt}`,
+      accepted: !semanticMismatch,
+      rejected: semanticMismatch,
+      finalEditorialScore: editorialScore,
+      classification: semanticMismatch ? 'ACCIDENTAL' : 'DIRECT',
+      rejectReasons: semanticMismatch ? ['ai_pixel_semantic_mismatch'] : [],
+      selectionReason: semanticMismatch
+        ? `Rejected: generated pixels did not clearly communicate ${req.concept || shotConcept}`
+        : `AI-generated illustration in ${style.label} style; pixel relevance ${Math.round((visualMatch?.overallVisualMatch || 0.65) * 100)}%`,
+      whyItMatchesNarration: visualMatch?.details || `Custom rendered for ${req.concept || rawPrompt}`,
     };
 
     requestReports.push({
       shotId,
       sceneId: req.sceneId,
-      status: 'resolved',
-      source: 'ideogram',
+      status: semanticMismatch ? 'unresolved' : 'resolved',
+      source: isFlux ? 'replicate' : 'ideogram',
       candidateCount: 1,
       selected: assetObj,
     });
 
-    console.log(`   ✓ [Shot ${shotId}] resolved AI image (${style.id}): "${rawPrompt.slice(0, 50)}..."`);
+    console.log(semanticMismatch
+      ? `   ⚠️ [Shot ${shotId}] rejected AI image after pixel review (${style.id}): "${rawPrompt.slice(0, 50)}..."`
+      : `   ✓ [Shot ${shotId}] resolved AI image (${style.id}): "${rawPrompt.slice(0, 50)}..."`);
   });
 
   return {
     assets,
     report: {
       totalRequests: assetRequests.length,
-      resolvedCount: assetRequests.length,
-      unresolvedCount: 0,
+      resolvedCount: requestReports.filter((item) => item.status === 'resolved').length,
+      unresolvedCount: requestReports.filter((item) => item.status !== 'resolved').length,
       requests: requestReports,
     },
     editorialAssetJudgments,
-    visualInspections: {},
+    visualInspections,
     editorialUsefulnessRecords: {},
     formatFitnessEvaluations: {},
     videoWindowSelections: {},

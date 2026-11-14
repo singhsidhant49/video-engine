@@ -165,3 +165,24 @@ export function buildFullIdeogramPrompt({ prompt, styleId = DEFAULT_IMAGE_STYLE,
   ].filter(Boolean).join('. ');
 }
 
+/** FLUX Schnell follows concise natural-language scene descriptions more
+ * reliably than long negative-prompt blocks. Keep subject/action first, then
+ * art direction and composition, with a short artifact guard at the end. */
+export function buildFluxPrompt({ prompt, styleId = DEFAULT_IMAGE_STYLE, customStylePrompt = '', format = 'landscape' }) {
+  const style = getImageStyle(styleId);
+  const scene = String(prompt || '').replace(/\s+/g, ' ').trim().replace(/[.,\s]+$/, '');
+  const artDirection = styleId === 'custom' && customStylePrompt
+    ? String(customStylePrompt).replace(/\s+/g, ' ').trim()
+    : style.stylePromptAnchor;
+  const frame = format === 'shorts'
+    ? 'Vertical 9:16 cinematic frame; one dominant focal subject; important face, hands, and action inside the central mobile-safe area; foreground, middle ground, and background depth'
+    : 'Horizontal 16:9 cinematic frame; one dominant focal subject; clear readable action; layered foreground, middle ground, and background; center-safe composition';
+  return [
+    scene ? `Scene: ${scene}` : 'Scene: one clear narrative action in a specific environment',
+    artDirection ? `Visual language: ${artDirection}` : '',
+    `Composition: ${frame}`,
+    'Continuity: coherent anatomy, physically connected hands and props, consistent lighting and perspective',
+    'Clean image only: no words, captions, logos, watermarks, collage, split screen, poster layout, or decorative border',
+  ].filter(Boolean).join('. ').slice(0, 2200);
+}
+

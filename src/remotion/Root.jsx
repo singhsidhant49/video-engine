@@ -1,7 +1,7 @@
 import React from 'react';
 import { Composition } from 'remotion';
 import { Video } from './engine/Video.jsx';
-import { ThumbnailComposition } from './Thumbnail.jsx';
+import { ThumbnailComposition } from './ThumbnailV2.jsx';
 import { sampleTimeline } from './sampleTimeline.js';
 
 // Size and length come from the timeline itself, so Studio previews and renders always match it.

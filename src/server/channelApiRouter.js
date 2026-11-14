@@ -5,6 +5,7 @@ import { importYouTubeAnalyticsCsv } from '../services/youtubeAnalyticsImportSer
 import { summarizeChannelPerformance } from '../services/youtubeGrowthService.js';
 
 const errorWith = (status, code, message) => Object.assign(new Error(message), { status, code });
+const IDEA_STATUSES = new Set(['draft', 'approved', 'queued', 'producing', 'ready', 'publishing', 'publish_failed', 'published', 'rejected', 'failed']);
 
 function validateAutomation(automation) {
   try {
@@ -75,7 +76,10 @@ export function createChannelApiRouter({ store, director, publisher = null, publ
   router.get('/channels/:channelId/ideas', async (req, res, next) => {
     try {
       if (!await store.getChannel(req.ownerId, req.params.channelId)) throw errorWith(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
-      res.json({ ideas: (await store.listIdeas(req.ownerId, req.params.channelId)).map(publicIdea) });
+      const status = String(req.query.status || '').trim().toLowerCase();
+      if (status && status !== 'all' && !IDEA_STATUSES.has(status)) throw errorWith(400, 'INVALID_STATUS_FILTER', 'Invalid idea status filter');
+      const ideas = await store.listIdeas(req.ownerId, req.params.channelId);
+      res.json({ ideas: ideas.filter((idea) => !status || status === 'all' || idea.status === status).map(publicIdea) });
     } catch (error) { next(error); }
   });
   router.get('/channels/:channelId/performance', async (req, res, next) => {

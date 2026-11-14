@@ -25,7 +25,6 @@
     "media-bank:sync": "node scripts/extractMediaBank.js",
     "media-bank:quarantine": "node src/cli/quarantineMedia.js",
     "env:init": "node scripts/initProductionEnv.js",
-    "env:init": "node scripts/initProductionEnv.js",
     "api:migrate-owner": "node scripts/migrateVideoOwner.js",
     "runs:clean": "node src/cli/cleanRuns.js"
   },
