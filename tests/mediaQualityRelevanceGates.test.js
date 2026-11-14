@@ -500,6 +500,32 @@ test('asset scorer disqualifies green screen phone mockup for UI smoothness and 
   assert.ok(scored.gates.includes('mockup_placeholder_match'));
 });
 
+test('asset scorer rejects generic home imagery when a network router is required', () => {
+  const request = {
+    id: 'req_router',
+    concept: 'home router blinking lights close up',
+    assetIntent: 'concept',
+    entities: [],
+    evidenceRequired: false,
+    constraints: { orientation: 'landscape', minWidth: 1920, minHeight: 1080 },
+  };
+  const context = analyzeAssetRequest(request);
+  const candidate = {
+    id: 'child-in-bed',
+    label: 'Crop tiny feet of little child lying under white blanket on comfortable bed in light bedroom at home',
+    width: 2600,
+    height: 1733,
+    providerId: 'local-bank',
+    sourceUrl: 'https://images.example.test/child-in-bed.jpg',
+    license: { nonFree: false, page: 'https://pexels.com/photo/child-in-bed' },
+    metadata: { tags: ['child', 'blanket', 'bedroom', 'home', 'light'] },
+  };
+
+  const scored = scoreAssetCandidate(candidate, request, context);
+  assert.equal(scored.resolutionStatus, 'unusable');
+  assert.ok(scored.gates.includes('required_technical_object_missing'));
+});
+
 test('asset scorer disqualifies diagram and mindmap images in media editorial mode', () => {
   const request = {
     id: 'req_dom',

@@ -6,7 +6,12 @@ x-app-environment: &app-environment
   REDIS_URL: redis://redis:6379/0
   VIDEO_JOB_STORE: postgres
   VIDEO_QUEUE_BACKEND: bullmq
-  VIDEO_API_KEYS: ${VIDEO_API_KEYS:?VIDEO_API_KEYS must be set to a 32+ character random secret}
+  VIDEO_API_KEYS: ${VIDEO_API_KEYS:-}
+  ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set}
+  ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set to a strong 12+ character password}
+  ADMIN_OWNER_ID: ${ADMIN_OWNER_ID:-acct_primary}
+  JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set to a 32+ character random secret}
+  JWT_TTL_SECONDS: ${JWT_TTL_SECONDS:-28800}
   VIDEO_WORKER_CONCURRENCY: ${VIDEO_WORKER_CONCURRENCY:-1}
   VIDEO_QUEUE_LOCK_MS: ${VIDEO_QUEUE_LOCK_MS:-600000}
   VIDEO_QUEUE_LOCK_RENEW_MS: ${VIDEO_QUEUE_LOCK_RENEW_MS:-30000}
@@ -30,6 +35,8 @@ x-app-environment: &app-environment
   KOKORO_VOICE: ${KOKORO_VOICE:-af_bella}
   KOKORO_SPEED: ${KOKORO_SPEED:-0.9}
   KOKORO_MEDITATION_SPEED: ${KOKORO_MEDITATION_SPEED:-0.58}
+  WHISPER_ENABLED: ${WHISPER_ENABLED:-true}
+  WHISPER_TIMEOUT_MS: ${WHISPER_TIMEOUT_MS:-90000}
   DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
   DEEPSEEK_API_URL: ${DEEPSEEK_API_URL:-https://api.deepseek.com/v1}
   OPENAI_API_KEY: ${OPENAI_API_KEY:-}
@@ -150,7 +157,7 @@ services:
       storage-init: { condition: service_completed_successfully }
       worker: { condition: service_started }
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 20

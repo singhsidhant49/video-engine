@@ -81,6 +81,11 @@ export const config = {
   server: {
     port: parseInt(process.env.PORT || '3000', 10),
     apiKeys: (process.env.VIDEO_API_KEYS || '').split(',').map((key) => key.trim()).filter(Boolean),
+    adminEmail: process.env.ADMIN_EMAIL || '',
+    adminPassword: process.env.ADMIN_PASSWORD || '',
+    adminOwnerId: process.env.ADMIN_OWNER_ID || '',
+    jwtSecret: process.env.JWT_SECRET || '',
+    jwtTtlSeconds: Math.max(300, parseInt(process.env.JWT_TTL_SECONDS || '28800', 10)),
     maxRequestBytes: process.env.VIDEO_API_MAX_REQUEST_BYTES || '1mb',
     workerConcurrency: Math.max(1, parseInt(process.env.VIDEO_WORKER_CONCURRENCY || '1', 10)),
     maxQueuedJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_QUEUED_JOBS || '25', 10)),

@@ -1,20 +1,16 @@
 const $ = (id) => document.getElementById(id);
 const query = new URLSearchParams(location.search);
-const state = { key: sessionStorage.getItem('videoApiKey') || '', videos: [], channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), poll: null, mediaUrl: null, pollCount: 0 };
+const state = { authenticated: false, user: null, videos: [], channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), poll: null, mediaUrl: null, pollCount: 0, requests: new Map() };
 const terminal = new Set(['completed', 'failed', 'cancelled']);
 const activeStatuses = new Set(['queued', 'preparing', 'processing', 'cancel_requested']);
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[c]);
 const label = (value) => String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 const dateLabel = (value) => value ? new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value)) : '';
 const durationLabel = (seconds) => seconds >= 60 ? `${Math.floor(seconds / 60)}m ${seconds % 60 ? `${seconds % 60}s` : ''}`.trim() : `${seconds}s`;
-const bearerKey = () => {
-  const separator = state.key.indexOf(':');
-  return separator > 0 && /^[a-zA-Z0-9_-]{3,64}$/.test(state.key.slice(0, separator)) ? state.key.slice(separator + 1) : state.key;
-};
-const headers = (json = true) => ({ Authorization: `Bearer ${bearerKey()}`, ...(json ? { 'Content-Type': 'application/json' } : {}) });
+const headers = (json = true) => json ? { 'Content-Type': 'application/json' } : {};
 
 async function api(path, options = {}) {
-  const response = await fetch(path, { ...options, headers: { ...headers(options.body !== undefined), ...(options.headers || {}) } });
+  const response = await fetch(path, { credentials: 'same-origin', ...options, headers: { ...headers(options.body !== undefined), ...(options.headers || {}) } });
   const type = response.headers.get('content-type') || '';
   const body = type.includes('json') ? await response.json() : response;
   if (!response.ok) {
@@ -24,6 +20,49 @@ async function api(path, options = {}) {
     throw error;
   }
   return body;
+}
+
+async function singleRequest(name, task) {
+  if (state.requests.has(name)) return state.requests.get(name);
+  const pending = Promise.resolve().then(task).finally(() => state.requests.delete(name));
+  state.requests.set(name, pending);
+  return pending;
+}
+
+function showLogin(message = '') {
+  state.authenticated = false; state.user = null;
+  $('keyState').textContent = 'Sign in required';
+  $('loginError').textContent = message;
+  if (!$('loginDialog').open) $('loginDialog').showModal();
+}
+
+async function restoreSession() {
+  try {
+    const result = await api('/auth/me');
+    state.authenticated = true; state.user = result.user;
+    $('accountEmail').textContent = result.user.email; $('keyState').textContent = result.user.email;
+    if ($('loginDialog').open) $('loginDialog').close();
+    return true;
+  } catch (error) {
+    if (error.status === 401) { showLogin(); return false; }
+    showLogin('The server is unavailable. Check the deployment and try again.'); return false;
+  }
+}
+
+async function login(event) {
+  event.preventDefault(); const button = $('loginButton'); button.disabled = true; $('loginError').textContent = '';
+  try {
+    const result = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email: $('loginEmail').value, password: $('loginPassword').value }) });
+    state.authenticated = true; state.user = result.user; $('accountEmail').textContent = result.user.email; $('keyState').textContent = result.user.email;
+    $('loginPassword').value = ''; $('loginDialog').close(); await refreshAll(); await loadAdminUsers();
+  } catch (error) { $('loginError').textContent = error.message; }
+  finally { button.disabled = false; }
+}
+
+async function logout() {
+  await api('/auth/logout', { method: 'POST' }).catch(() => {});
+  state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null;
+  renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); showLogin('You have signed out.');
 }
 
 function toast(message) {
@@ -70,7 +109,7 @@ async function loadThumbnails() {
   const ids = new Set(state.videos.map((v) => v.id));
   for (const [id, url] of state.thumbs) if (!ids.has(id)) { URL.revokeObjectURL(url); state.thumbs.delete(id); }
   for (const video of state.videos.filter((v) => v.status === 'completed' && !state.thumbs.has(v.id))) {
-    fetch(`/v1/videos/${video.id}/thumbnail`, { headers: headers(false) }).then(async (res) => {
+    fetch(`/v1/videos/${video.id}/thumbnail`, { credentials: 'same-origin', headers: headers(false) }).then(async (res) => {
       if (!res.ok) throw new Error(`Thumbnail request failed (${res.status})`);
       const url = URL.createObjectURL(await res.blob()); state.thumbs.set(video.id, url);
       document.querySelectorAll(`[data-poster="${video.id}"]`).forEach((el) => { el.style.backgroundImage = `url('${url}')`; el.querySelector('[data-poster-message]')?.remove(); });
@@ -81,7 +120,7 @@ async function loadThumbnails() {
 }
 
 async function loadVideos() {
-  if (!state.key) { renderVideos(); return; }
+  if (!state.authenticated) { renderVideos(); return; }
   try {
     const videos = []; let cursor = null;
     do {
@@ -102,14 +141,14 @@ function channelCard(channel) {
 
 function renderChannels() {
   $('channelCount').textContent = state.channels.length;
-  $('channelGrid').innerHTML = !state.key
-    ? '<div class="empty">Connect your API key in Settings to load channel profiles.</div>'
+  $('channelGrid').innerHTML = !state.authenticated
+    ? '<div class="empty">Sign in to load channel profiles.</div>'
     : state.channels.length ? state.channels.map(channelCard).join('') : '<div class="empty">No channel profiles yet. Create one to unlock strategic ideation and automation.</div>';
   const options = state.channels.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
   const currentProfile = $('profileId').value;
   $('profileId').innerHTML = '<option value="default">Default profile</option>' + options;
   if ([...$('profileId').options].some((option) => option.value === currentProfile)) $('profileId').value = currentProfile;
-  const emptyOption = state.key ? 'Create a channel first' : 'API key required';
+  const emptyOption = state.authenticated ? 'Create a channel first' : 'Sign in required';
   $('ideaChannel').innerHTML = options || `<option value="">${emptyOption}</option>`;
   $('performanceChannel').innerHTML = options || `<option value="">${emptyOption}</option>`;
   if (state.selectedChannelId && state.channels.some((c) => c.id === state.selectedChannelId)) $('ideaChannel').value = state.selectedChannelId;
@@ -118,7 +157,7 @@ function renderChannels() {
 }
 
 async function loadChannels() {
-  if (!state.key) { renderChannels(); return; }
+  if (!state.authenticated) { renderChannels(); return; }
   try { const result = await api('/v1/channels'); state.channels = result.channels || []; renderChannels(); }
   catch (error) { handleApiError(error); }
 }
@@ -147,7 +186,7 @@ function renderPerformanceSummary() {
 
 async function loadPerformance() {
   const channelId = $('performanceChannel').value || state.selectedChannelId;
-  if (!state.key || !channelId) { state.performance = []; state.performanceSummary = null; renderPerformance(); renderPerformanceSummary(); return; }
+  if (!state.authenticated || !channelId) { state.performance = []; state.performanceSummary = null; renderPerformance(); renderPerformanceSummary(); return; }
   try {
     const [result, summary] = await Promise.all([api(`/v1/channels/${channelId}/performance`), api(`/v1/channels/${channelId}/performance/summary`)]);
     state.performance = result.snapshots || []; state.performanceSummary = summary; renderPerformance(); renderPerformanceSummary();
@@ -215,19 +254,19 @@ async function importAnalyticsCsv(event) {
   } finally { button.disabled = false; }
 }
 
-function renderIdeas() { $('ideaGrid').innerHTML = state.ideas.length ? state.ideas.map(ideaCard).join('') : `<div class="empty">${!state.key ? 'Connect your API key in Settings to load ideas.' : state.selectedChannelId ? 'No ideas yet. Run the strategic idea generator.' : 'Create a channel before generating ideas.'}</div>`; }
+function renderIdeas() { $('ideaGrid').innerHTML = state.ideas.length ? state.ideas.map(ideaCard).join('') : `<div class="empty">${!state.authenticated ? 'Sign in to load ideas.' : state.selectedChannelId ? 'No ideas yet. Run the strategic idea generator.' : 'Create a channel before generating ideas.'}</div>`; }
 async function loadIdeas() {
   state.selectedChannelId = $('ideaChannel').value || state.selectedChannelId;
-  if (!state.key || !state.selectedChannelId) { state.ideas = []; renderIdeas(); return; }
+  if (!state.authenticated || !state.selectedChannelId) { state.ideas = []; renderIdeas(); return; }
   try { const result = await api(`/v1/channels/${state.selectedChannelId}/ideas`); state.ideas = result.ideas || []; renderIdeas(); }
   catch (error) { handleApiError(error); }
 }
 
 async function checkHealth() {
-  if (!state.key) { $('healthText').textContent = 'API key required'; $('workerText').textContent = 'Open Settings'; $('keyState').textContent = 'API key required'; return; }
+  if (!state.authenticated) { $('healthText').textContent = 'Sign in required'; $('workerText').textContent = 'Administrator session'; $('keyState').textContent = 'Sign in required'; return; }
   try {
     const ready = await api('/ready'); $('healthDot').classList.toggle('ready', Boolean(ready.ready)); $('healthText').textContent = ready.ready ? 'System ready' : 'Service degraded';
-    const workers = ready.queue?.workerCount ?? ready.queue?.workers ?? '—'; $('workerText').textContent = `${workers} worker${workers === 1 ? '' : 's'} connected`; $('keyState').textContent = 'Securely connected';
+    const workers = ready.queue?.workerCount ?? ready.queue?.workers ?? '—'; $('workerText').textContent = `${workers} worker${workers === 1 ? '' : 's'} connected`; $('keyState').textContent = state.user?.email || 'Securely connected';
     $('apiStatus').textContent = ready.ready ? 'Ready' : 'Degraded'; $('workerStatus').textContent = workers; $('storageStatus').textContent = ready.storage?.status || ready.store?.status || 'Available';
   } catch (error) {
     const required = error.body?.preflight?.required || {};
@@ -241,17 +280,17 @@ async function checkHealth() {
 
 function handleApiError(error) {
   if (error.status === 401) {
-    state.key = ''; state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null; state.selectedChannelId = null;
-    sessionStorage.removeItem('videoApiKey'); $('keyState').textContent = 'Invalid API key'; $('apiKey').value = '';
+    state.authenticated = false; state.user = null; state.videos = []; state.channels = []; state.ideas = []; state.performance = []; state.performanceSummary = null; state.selectedChannelId = null;
+    $('keyState').textContent = 'Session expired';
     for (const url of state.thumbs.values()) URL.revokeObjectURL(url); state.thumbs.clear();
     if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null;
-    $('settingsError').textContent = 'The API key was rejected. Check the secret and try again.';
+    $('settingsError').textContent = 'Your administrator session expired. Sign in again.'; showLogin('Your session expired. Sign in again.');
     renderVideos(); renderChannels(); renderIdeas(); renderPerformance();
   }
   $('healthText').textContent = error.message; toast(error.message);
 }
 
-async function refreshAll() { await checkHealth(); if (!state.key) return; await Promise.all([loadVideos(), loadChannels()]); if (state.selectedChannelId) await Promise.all([loadIdeas(), loadPerformance()]); }
+async function refreshAll() { if (!state.authenticated) return; await checkHealth(); await Promise.all([singleRequest('videos', loadVideos), singleRequest('channels', loadChannels)]); if (state.selectedChannelId) await Promise.all([singleRequest('ideas', loadIdeas), singleRequest('performance', loadPerformance)]); }
 
 async function createVideo(event) {
   event.preventDefault(); const button = event.currentTarget.querySelector('[type=submit]'); button.disabled = true; $('formMessage').textContent = 'Submitting production…';
@@ -401,8 +440,8 @@ async function videoAction(button) {
   const { videoAction: action, id } = button.dataset; const video = state.videos.find((v) => v.id === id);
   button.disabled = true;
   try {
-    if (action === 'download') { const response = await fetch(`/v1/videos/${id}/download`, { headers: headers(false) }); if (!response.ok) throw new Error('Download failed'); const url = URL.createObjectURL(await response.blob()); const a = document.createElement('a'); a.href = url; a.download = `${id}.mp4`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 2000); return; }
-    if (action === 'review') { const result = await api(`/v1/videos/${id}/result`); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); const response = await fetch(result.videoUrl, { headers: headers(false) }); if (!response.ok) throw new Error(`Video could not be loaded (${response.status})`); state.mediaUrl = URL.createObjectURL(await response.blob()); $('reviewVideo').src = state.mediaUrl; $('reviewTitle').textContent = result.title || video?.id || 'Video'; const pkg = result.package; $('packageDetails').innerHTML = pkg ? `<strong>${escapeHtml(pkg.title || result.title || '')}</strong><p>${escapeHtml(pkg.description || '')}</p>` : '<p>Publish package created with the completed video.</p>'; $('reviewDialog').showModal(); return; }
+    if (action === 'download') { const response = await fetch(`/v1/videos/${id}/download`, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error('Download failed'); const url = URL.createObjectURL(await response.blob()); const a = document.createElement('a'); a.href = url; a.download = `${id}.mp4`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 2000); return; }
+    if (action === 'review') { const result = await api(`/v1/videos/${id}/result`); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); const response = await fetch(result.videoUrl, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error(`Video could not be loaded (${response.status})`); state.mediaUrl = URL.createObjectURL(await response.blob()); $('reviewVideo').src = state.mediaUrl; $('reviewTitle').textContent = result.title || video?.id || 'Video'; const pkg = result.package; $('packageDetails').innerHTML = pkg ? `<strong>${escapeHtml(pkg.title || result.title || '')}</strong><p>${escapeHtml(pkg.description || '')}</p>` : '<p>Publish package created with the completed video.</p>'; $('reviewDialog').showModal(); return; }
     if (action === 'cancel') await api(`/v1/videos/${id}/cancel`, { method: 'POST', body: '{}' });
     if (action === 'retry') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: '{}' });
     if (action === 'delete' && confirm('Delete this video and all generated files?')) await api(`/v1/videos/${id}`, { method: 'DELETE' });
@@ -455,7 +494,32 @@ async function ideaAction(button) {
   } catch (error) { handleApiError(error); }
 }
 
-document.addEventListener('click', (event) => { const video = event.target.closest('[data-video-action]'); const channel = event.target.closest('[data-channel-action]'); const idea = event.target.closest('[data-idea-action]'); if (video) void videoAction(video); if (channel) void channelAction(channel); if (idea) void ideaAction(idea); });
+function renderAdminUsers(users = []) {
+  $('adminUserList').innerHTML = `<p class="eyebrow">ACTIVE ADMINS</p><h2>${users.length} account${users.length === 1 ? '' : 's'}</h2>` + users.map((user) => `<div class="admin-row"><div><strong>${escapeHtml(user.email)}</strong><small>${escapeHtml(user.role)} · ${dateLabel(user.createdAt)}</small></div>${user.email !== state.user?.email ? `<button class="button danger ghost" data-admin-delete="${encodeURIComponent(user.email)}">Remove</button>` : '<span class="badge accent">Current</span>'}</div>`).join('');
+}
+
+async function loadAdminUsers() {
+  if (!state.authenticated) return;
+  try { renderAdminUsers((await api('/auth/users')).users || []); }
+  catch (error) { if (error.status !== 401) $('adminUserError').textContent = error.message; }
+}
+
+async function saveAdminUser(event) {
+  event.preventDefault(); $('adminUserError').textContent = '';
+  try {
+    await api('/auth/users', { method: 'POST', body: JSON.stringify({ email: $('adminUserEmail').value, password: $('adminUserPassword').value }) });
+    event.currentTarget.reset(); toast('Administrator saved'); await loadAdminUsers();
+  } catch (error) { $('adminUserError').textContent = error.message; }
+}
+
+async function deleteAdminUser(button) {
+  const email = decodeURIComponent(button.dataset.adminDelete || '');
+  if (!email || !confirm(`Remove administrator ${email}?`)) return;
+  try { await api(`/auth/users/${encodeURIComponent(email)}`, { method: 'DELETE' }); toast('Administrator removed'); await loadAdminUsers(); }
+  catch (error) { $('adminUserError').textContent = error.message; }
+}
+
+document.addEventListener('click', (event) => { const video = event.target.closest('[data-video-action]'); const channel = event.target.closest('[data-channel-action]'); const idea = event.target.closest('[data-idea-action]'); const admin = event.target.closest('[data-admin-delete]'); if (video) void videoAction(video); if (channel) void channelAction(channel); if (idea) void ideaAction(idea); if (admin) void deleteAdminUser(admin); });
 $('createForm').addEventListener('submit', createVideo); $('channelForm').addEventListener('submit', createChannel);
 $('performanceForm').addEventListener('submit', savePerformance); $('refreshPerformance').addEventListener('click', loadPerformance);
 $('csvImportForm').addEventListener('submit', importAnalyticsCsv);
@@ -471,15 +535,15 @@ $('channelImageSource').addEventListener('change', () => syncChannelVisualFields
 $('channelImageProvider').addEventListener('change', () => syncChannelVisualFields());
 $('channelImageStyle').addEventListener('change', () => syncChannelVisualFields($('channelImageModel').value));
 $('openSettings').addEventListener('click', () => { location.href = '/dashboard/settings'; }); $('menuButton').addEventListener('click', () => document.querySelector('.sidebar').classList.toggle('open'));
-$('settingsForm').addEventListener('submit', async (event) => { event.preventDefault(); state.key = $('apiKey').value.trim(); sessionStorage.setItem('videoApiKey', state.key); $('settingsError').textContent = ''; await refreshAll(); });
-$('clearKey').addEventListener('click', () => { state.key = ''; sessionStorage.removeItem('videoApiKey'); $('apiKey').value = ''; location.reload(); });
+$('loginForm').addEventListener('submit', login); $('loginDialog').addEventListener('cancel', (event) => { if (!state.authenticated) event.preventDefault(); }); $('logoutButton').addEventListener('click', logout); $('adminUserForm').addEventListener('submit', saveAdminUser);
 $('closeReview').addEventListener('click', () => $('reviewDialog').close()); $('reviewDialog').addEventListener('close', () => { $('reviewVideo').pause(); $('reviewVideo').removeAttribute('src'); $('reviewVideo').load(); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null; });
-window.addEventListener('storage', () => refreshAll());
+document.addEventListener('visibilitychange', () => { if (!document.hidden && state.authenticated) void refreshAll(); });
 $('performanceViewed').max = '1000';
-setPage(); $('apiKey').value = state.key; renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); syncDurationFields(); await refreshAll();
+setPage(); renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); syncDurationFields();
+if (await restoreSession()) { await refreshAll(); await loadAdminUsers(); }
 state.poll = setInterval(() => {
-  if (!state.key) return; state.pollCount += 1;
-  if (state.videos.some((v) => !terminal.has(v.status))) void loadVideos();
-  if (state.selectedChannelId && state.ideas.some((idea) => ['queued', 'producing'].includes(idea.status))) void loadIdeas();
-  if (state.pollCount % 6 === 0) void loadChannels();
-}, 5000);
+  if (!state.authenticated || document.hidden) return; state.pollCount += 1;
+  if (state.videos.some((v) => !terminal.has(v.status))) void singleRequest('videos', loadVideos);
+  if (state.selectedChannelId && state.ideas.some((idea) => ['queued', 'producing'].includes(idea.status))) void singleRequest('ideas', loadIdeas);
+  if (state.pollCount % 6 === 0 && state.channels.some((channel) => channel.automation?.enabled)) void singleRequest('channels', loadChannels);
+}, 10000);

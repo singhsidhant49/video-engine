@@ -46,3 +46,4 @@ renders/matrix/
 
 # Crash-safe API store scratch files (canonical job records remain tracked/visible)
 renders/api/**/*.json.tmp-*
+renders/admin_users.json

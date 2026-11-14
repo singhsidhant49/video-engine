@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords } from '../src/storyboard/durationBudget.js';
+import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
 import { compressPlanScript, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
@@ -48,6 +48,31 @@ test('overlong narration compression targets final duration rather than the smal
 
   assert.equal(targetWords, 135);
   assert.ok(targetWords > Math.round(145 * budget.targetNarrationSec / 64.38));
+});
+
+test('measured-duration compression can never accept an identical cached retry', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 30, format: 'shorts' });
+  const limits = calculateNarrationCompressionLimits({
+    currentWords: 81,
+    actualDurationSec: 31.55,
+    budget,
+  });
+
+  assert.equal(limits.targetWords, 77);
+  assert.ok(limits.maxWords < 81, 'The current script must be outside the accepted retry range');
+  assert.ok(limits.maxWords >= limits.targetWords);
+});
+
+test('overlong narration speed repair aims inside the upper duration boundary', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 30, format: 'shorts' });
+  const speed = calculateOverlongNarrationRepairSpeed({
+    currentSpeed: 1,
+    actualDurationSec: 31.55,
+    budget,
+  });
+
+  assert.equal(speed, 1.052);
+  assert.ok(31.55 / speed < budget.allowedMaxDuration);
 });
 
 test('narration duration repair aims safely inside the accepted range', () => {

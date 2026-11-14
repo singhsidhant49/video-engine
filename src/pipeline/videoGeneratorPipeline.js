@@ -5,12 +5,12 @@ import { createReadStream } from 'node:fs';
 import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames, getRunBundle } from '../tools/preview.js';
 import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
-import { generateDirectorPlan, normalizePlan, compressPlanScript, deterministicCompress, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims, selectTargetDuration } from '../services/aiDirectorService.js';
+import { generateDirectorPlan, normalizePlan, compressPlanScript, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims, selectTargetDuration } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
 import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
-import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords } from '../storyboard/durationBudget.js';
+import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../storyboard/durationBudget.js';
 import { resolveNarrationProfile } from '../audio/narrationProfile.js';
 import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
@@ -529,7 +529,6 @@ export async function createFacelessVideo({
       // Post-TTS Duration Check (Milestone 8, Step 6)
       const actualSec = narration.durationInSeconds;
       const allowedMax = durationBudget.allowedMaxDuration;
-      const hardMax = durationBudget.hardMaxDuration;
 
       if (actualSec < durationBudget.allowedMinDuration && attempt < 3 && !audioFile) {
         console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) is below target minimum (${durationBudget.allowedMinDuration.toFixed(1)}s).`);
@@ -572,28 +571,37 @@ export async function createFacelessVideo({
         console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) exceeds target max (${allowedMax.toFixed(1)}s).`);
         console.log(`   Initiating post-TTS script compression and re-synthesis...`);
         const currentWords = plan.script.split(/\s+/).filter(Boolean).length;
-        const newTargetWords = calculateNarrationCompressionTargetWords({
+        const scriptBeforeCompression = plan.script;
+        const { targetWords: newTargetWords, maxWords: newMaxWords } = calculateNarrationCompressionLimits({
           currentWords,
           actualDurationSec: actualSec,
           budget: durationBudget,
         });
-        plan = await compressPlanScript(plan, newTargetWords, Math.round(newTargetWords * 1.05));
-        compressionPasses++;
-        await save('plan.json', plan);
-        continue;
+        plan = await compressPlanScript(plan, newTargetWords, newMaxWords);
+        const repairedWords = plan.script.split(/\s+/).filter(Boolean).length;
+        if (plan.script !== scriptBeforeCompression && repairedWords < currentWords) {
+          compressionPasses++;
+          await save('plan.json', plan);
+          continue;
+        }
+
+        // Complete-sentence preservation can make extractive compression a
+        // no-op. Avoid repeating the same cached TTS request; use a small,
+        // bounded cadence correction instead.
+        const adjustedSpeed = calculateOverlongNarrationRepairSpeed({
+          currentSpeed: synthesisSpeed,
+          actualDurationSec: actualSec,
+          budget: durationBudget,
+        });
+        if (Math.abs(adjustedSpeed - synthesisSpeed) >= 0.005) {
+          synthesisSpeed = adjustedSpeed;
+          console.log(`   Script could not be shortened safely; adjusting narration speed to ${synthesisSpeed}.`);
+          continue;
+        }
+        console.warn('   Script compression and bounded voice-speed repair produced no material change; duration QC will block the overrun.');
+        break;
       }
 
-      if (actualSec > hardMax && attempt === 1 && !audioFile) {
-        console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) still exceeds hard max (${hardMax.toFixed(1)}s).`);
-        console.log(`   Applying final deterministic trim pass to ensure timeline compliance...`);
-        const currentWords = plan.script.split(/\s+/).filter(Boolean).length;
-        const measuredWps = currentWords / actualSec;
-        const targetWords = Math.max(10, Math.floor(durationBudget.targetNarrationSec * measuredWps * 0.96));
-        plan = deterministicCompress(plan, targetWords);
-        compressionPasses++;
-        await save('plan.json', plan);
-        continue;
-      }
       break;
     }
   }

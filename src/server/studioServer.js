@@ -13,6 +13,8 @@ import { ChannelScheduler } from './channelScheduler.js';
 import { createChannelApiRouter } from './channelApiRouter.js';
 import { YouTubePublisherService } from '../services/youtubePublisherService.js';
 import { inspectProductionPreflight } from './productionPreflight.js';
+import { AdminAuthService, AdminUserStore } from './adminAuthService.js';
+import { createAdminAuthRouter } from './adminAuthRouter.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -41,8 +43,21 @@ const youtubePublisher = (config.server.youtubePublishingEnabled || config.serve
   ? new YouTubePublisherService({ store: channelStore, videoService: videoJobService })
   : null;
 const channelScheduler = new ChannelScheduler({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled });
-const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production: process.env.NODE_ENV === 'production' });
+const production = process.env.NODE_ENV === 'production';
+const namedApiAccount = config.server.apiKeys.map((entry) => {
+  const value = String(entry); const separator = value.indexOf(':');
+  return separator > 0 ? value.slice(0, separator) : '';
+}).find((name) => /^[a-zA-Z0-9_-]{3,64}$/.test(name));
+const adminOwnerId = config.server.adminOwnerId || (namedApiAccount ? `acct_${namedApiAccount}` : 'acct_admin');
+const adminStore = new AdminUserStore({ file: path.join(config.rendersDir, 'admin_users.json'), defaultOwnerId: adminOwnerId });
+await adminStore.init();
+const adminAuth = new AdminAuthService({ store: adminStore, jwtSecret: config.server.jwtSecret, ttlSeconds: config.server.jwtTtlSeconds, production });
+await adminAuth.bootstrap({ email: config.server.adminEmail, password: config.server.adminPassword, ownerId: adminOwnerId });
+if (production && await adminStore.count() === 0) throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD are required to create the first administrator');
+const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production, sessionAuth: adminAuth });
 const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE_LIMIT_PER_MINUTE || 120) });
+
+app.use('/auth', createAdminAuthRouter({ auth: adminAuth, store: adminStore, requireAuth: apiAuth, production }));
 
 app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
 app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
@@ -179,6 +194,7 @@ async function shutdown(signal) {
   const closeServer = new Promise((resolve) => server.close(resolve));
   await videoJobService.shutdown({ timeoutMs: config.server.shutdownTimeoutMs });
   await channelStore.close();
+  await adminStore.close();
   await closeServer;
   console.log('Video API shutdown complete.');
 }

@@ -10,6 +10,9 @@ const RUIN_OR_ABANDONED_PATTERN = /\b(abandoned|derelict|ruins?|damaged|chernoby
 const MOCKUP_OR_GREENSCREEN_PATTERN = /\b(green screen|chroma key|mockup|blank screen|empty screen|isolated on white|placeholder)\b/i;
 const DIAGRAM_IMAGE_PATTERN = /\b(mindmap|mind map|infographic|flowchart|flow chart|block diagram|architecture diagram|protocol diagram|screen time)\b/i;
 const IRRELEVANT_CHURCH_PATTERN = /\b(church|cathedral|altar|medieval|stained\s+glass|chapel|monastery)\b/i;
+const TECHNICAL_OBJECT_RULES = [
+  { requested: /\b(?:home\s+)?router\b/i, visible: /\b(router|modem|wi-?fi|wireless access point|network device|ethernet hub|ethernet switch)\b/i },
+];
 
 const CLICHES = [
   ['smiling_office_team', /smiling.*(?:office|team)|office team/i],
@@ -228,6 +231,7 @@ export const CONTEXT_INVALID_GATES = new Set([
   'diagram_image_rejected',
   'generic_office_cliche',
   'generic_stock_technical_mismatch',
+  'required_technical_object_missing',
   'subject_mismatch',
   'entity_mismatch',
   'building_false_match',
@@ -488,6 +492,11 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
   }
 
   const isTechnicalTopic = /tech|server|datacenter|computer|software|browser|network|code|internet|data|dns|http|html|css|javascript|dom|gpu|connection|packet|traffic|hardware|developer|undersea|submarine|cable|ocean|optical|fiber/i.test(conceptLower);
+  const missingTechnicalObject = TECHNICAL_OBJECT_RULES.some((rule) => rule.requested.test(conceptLower) && !rule.visible.test(text));
+  if (missingTechnicalObject) {
+    gates.push('required_technical_object_missing');
+    contextInvalid.push('required_technical_object_missing');
+  }
   if (RUIN_OR_ABANDONED_PATTERN.test(text) && isTechnicalTopic) {
     gates.push('abandoned_mismatch');
     contextInvalid.push('abandoned_mismatch');

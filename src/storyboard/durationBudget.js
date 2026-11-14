@@ -166,6 +166,45 @@ export function calculateNarrationCompressionTargetWords({
 }
 
 /**
+ * Build a strict word range for a measured-duration repair pass. The normal
+ * editor tolerance must never include the current word count or a retry can
+ * return the identical script and reuse the identical cached audio forever.
+ */
+export function calculateNarrationCompressionLimits({
+  currentWords,
+  actualDurationSec,
+  budget,
+} = {}) {
+  const words = Math.max(1, Math.round(Number(currentWords) || 1));
+  const targetWords = Math.min(
+    Math.max(10, words - 1),
+    calculateNarrationCompressionTargetWords({ currentWords: words, actualDurationSec, budget }),
+  );
+  const maxWords = Math.max(10, Math.min(words - 1, Math.ceil(targetWords * 1.02)));
+  return { targetWords, maxWords };
+}
+
+/** Increase cadence only when safe text compression cannot make progress. */
+export function calculateOverlongNarrationRepairSpeed({
+  currentSpeed,
+  actualDurationSec,
+  budget,
+  maximumSpeed = 1.15,
+} = {}) {
+  const speed = Number(currentSpeed);
+  const actual = Number(actualDurationSec);
+  if (!Number.isFinite(speed) || speed <= 0 || !Number.isFinite(actual) || actual <= 0) return speed;
+
+  const allowedMax = Number(budget?.allowedMaxDuration);
+  const requested = Number(budget?.targetDurationSec);
+  const safetyMarginSec = Math.max(0.25, requested * 0.005);
+  const repairTargetSec = Math.min(requested, allowedMax - safetyMarginSec);
+  if (!(repairTargetSec > 0) || actual <= allowedMax) return speed;
+
+  return Number(clamp(speed * actual / repairTargetSec, speed, maximumSpeed).toFixed(3));
+}
+
+/**
  * Formats a duration diagnostic summary payload for persistence.
  */
 export function buildDurationDiagnostics({

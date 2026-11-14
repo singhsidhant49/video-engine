@@ -88,7 +88,15 @@ export async function analyzeNarration(audioPath, scriptText, fps) {
     console.log(`⚡ Reused cached Whisper word alignment (${transcript.length} words)`);
   } else {
     try {
-      transcript = await transcribeWords(audioPath);
+      if (process.env.WHISPER_ENABLED === 'false') {
+        throw new Error('Whisper disabled via WHISPER_ENABLED=false');
+      }
+      const whisperTimeoutMs = Math.max(5_000, Number(process.env.WHISPER_TIMEOUT_MS || 90_000));
+      let timer;
+      const timeoutPromise = new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`Whisper transcription timed out after ${Math.round(whisperTimeoutMs / 1000)}s`)), whisperTimeoutMs);
+      });
+      transcript = await Promise.race([transcribeWords(audioPath), timeoutPromise]).finally(() => clearTimeout(timer));
       if (transcript.length < Math.max(3, scriptWords.length * 0.3)) throw new Error(`only ${transcript.length} transcript words`);
       words = alignScriptToTranscript(scriptWords, transcript, durationInSeconds);
       if (audioHash) {

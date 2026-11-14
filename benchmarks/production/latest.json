@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T07:52:58.799Z",
+  "generatedAt": "2026-11-14T02:10:37.089Z",
   "render": false,
   "offline": true,
   "durationSec": 30,
@@ -12,14 +12,14 @@
       "repeat": 1,
       "success": false,
       "attempts": 1,
-      "elapsedMs": 83013,
-      "runDir": null,
+      "elapsedMs": 125398,
+      "runDir": "D:\\projects\\videoforge\\videogenerator\\renders\\runs\\video-2026-11-14T02-08-31-700",
       "outputPath": null,
-      "error": "Narration duration repair failed: measured 31.6s; required 28.5-31.5s",
-      "failureCategory": "unknown",
+      "error": "Production rendering requires every media-routed shot to have an approved pixel-inspected asset. Unresolved shots: scene_001_shot_01",
+      "failureCategory": "asset_resolution",
       "durationCompliant": null,
       "hardQcFailures": 0,
-      "unresolvedMedia": 0,
+      "unresolvedMedia": 1,
       "wrongAssets": 0,
       "qcChecks": []
     }
@@ -33,12 +33,12 @@
       "firstPassRate": 0,
       "durationCompliance": 0,
       "hardQcFailures": 0,
-      "unresolvedMedia": 0,
+      "unresolvedMedia": 1,
       "wrongAssets": 0,
       "blankFrames": 0,
       "frozenMotion": 0,
       "failureCategories": {
-        "unknown": 1
+        "asset_resolution": 1
       }
     },
     "thresholds": {
@@ -54,7 +54,8 @@
     "failures": [
       "needs 29 more run(s)",
       "first-pass rate 0 < 0.95",
-      "duration compliance 0 < 0.98"
+      "duration compliance 0 < 0.98",
+      "unresolvedMedia 1 > 0"
     ]
   }
 }

@@ -8,7 +8,7 @@ function ownerForKey(key) {
   return `acct_${crypto.createHash('sha256').update(key).digest('hex').slice(0, 24)}`;
 }
 
-export function createApiAuth({ apiKeys = [], production = false } = {}) {
+export function createApiAuth({ apiKeys = [], production = false, sessionAuth = null, sessionCookie = 'vf_session' } = {}) {
   const unsafeKeys = new Set([
     'replace-this-before-exposing-the-api',
     'replace-with-a-long-random-api-key',
@@ -22,7 +22,7 @@ export function createApiAuth({ apiKeys = [], production = false } = {}) {
     const key = named ? value.slice(separator + 1) : value;
     return { key, ownerId: named ? `acct_${account}` : ownerForKey(key) };
   });
-  if (production && credentials.length === 0) throw new Error('VIDEO_API_KEYS is required when NODE_ENV=production');
+  if (production && credentials.length === 0 && !sessionAuth) throw new Error('Administrator sessions or VIDEO_API_KEYS are required when NODE_ENV=production');
   if (production && credentials.some(({ key }) => unsafeKeys.has(key.toLowerCase()) || key.length < 32)) {
     throw new Error('VIDEO_API_KEYS must contain only non-placeholder keys of at least 32 characters in production');
   }
@@ -30,8 +30,18 @@ export function createApiAuth({ apiKeys = [], production = false } = {}) {
   // credentials can rotate without orphaning that client's jobs.
   const allowed = credentials;
   return (req, res, next) => {
-    if (allowed.length === 0) {
+    const cookieToken = String(req.get('cookie') || '').split(';').map((part) => part.trim()).find((part) => part.startsWith(`${sessionCookie}=`))?.slice(sessionCookie.length + 1);
+    let sessionUser = null;
+    try { sessionUser = cookieToken && sessionAuth?.verify(decodeURIComponent(cookieToken)); } catch { sessionUser = null; }
+    if (sessionUser) {
+      req.ownerId = sessionUser.ownerId;
+      req.adminUser = sessionUser;
+      req.authType = 'session';
+      return next();
+    }
+    if (allowed.length === 0 && !sessionAuth && !production) {
       req.ownerId = 'acct_local';
+      req.authType = 'local';
       return next();
     }
     const authorization = req.get('authorization') || '';
@@ -42,8 +52,9 @@ export function createApiAuth({ apiKeys = [], production = false } = {}) {
       : '';
     const suppliedHash = crypto.createHash('sha256').update(supplied).digest();
     const match = allowed.find(({ key }) => crypto.timingSafeEqual(suppliedHash, crypto.createHash('sha256').update(key).digest()));
-    if (!match) return res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'A valid bearer API key is required' } });
+    if (!match) return res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'A valid administrator session or bearer API key is required' } });
     req.ownerId = match.ownerId;
+    req.authType = 'api_key';
     return next();
   };
 }
