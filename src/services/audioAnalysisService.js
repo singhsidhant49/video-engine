@@ -21,8 +21,8 @@ const positiveNumber = (value, fallback, minimum = 0) => {
 
 export function resolveWhisperPolicy(durationInSeconds, source = process.env) {
   const enabled = String(source.WHISPER_ENABLED || 'auto').trim().toLowerCase();
-  const maxAudioSeconds = positiveNumber(source.WHISPER_MAX_AUDIO_SECONDS, 180, 0);
-  const timeoutMs = positiveNumber(source.WHISPER_TIMEOUT_MS, 120_000, 5_000);
+  const maxAudioSeconds = positiveNumber(source.WHISPER_MAX_AUDIO_SECONDS, 900, 0);
+  const timeoutMs = positiveNumber(source.WHISPER_TIMEOUT_MS, Math.max(180_000, Math.ceil(durationInSeconds * 1_500)), 5_000);
   if (['false', '0', 'off', 'disabled'].includes(enabled)) {
     return { useWhisper: false, reason: 'disabled by WHISPER_ENABLED', maxAudioSeconds, timeoutMs };
   }
@@ -67,19 +67,87 @@ async function decodeTo16kMono(audioPath) {
   }
 }
 
+/**
+ * Locates the lowest energy (silence) point within a window to avoid cutting in the middle of a spoken word.
+ */
+export function findSilenceCutPoint(samples, startOffset, sampleRate = 16000, targetSec = 28, windowSec = 4) {
+  const targetSample = startOffset + Math.round(targetSec * sampleRate);
+  if (targetSample >= samples.length) return samples.length;
+
+  const minSample = Math.max(startOffset + Math.round((targetSec - windowSec) * sampleRate), startOffset + sampleRate * 10);
+  const maxSample = Math.min(samples.length, startOffset + Math.round((targetSec + windowSec) * sampleRate));
+
+  const step = Math.round(sampleRate * 0.05); // 50ms step
+  const win = Math.round(sampleRate * 0.1); // 100ms window
+  let bestSample = targetSample;
+  let minEnergy = Infinity;
+
+  for (let s = minSample; s + win <= maxSample; s += step) {
+    let sum = 0;
+    for (let j = 0; j < win; j += 4) {
+      const val = samples[s + j];
+      sum += val * val;
+    }
+    if (sum < minEnergy) {
+      minEnergy = sum;
+      bestSample = s + Math.round(win / 2);
+    }
+  }
+  return bestSample;
+}
+
 /** Word-level transcript executed inside the isolated Whisper process. */
 async function transcribeWordsInProcess(audioPath) {
   const samples = await decodeTo16kMono(audioPath);
   const transcriber = await getWhisper();
-  const result = await transcriber(samples, {
-    return_timestamps: 'word',
-    chunk_length_s: 30,
-    stride_length_s: 5,
-  });
-  return (result?.chunks || [])
-    .map((c) => ({ text: String(c.text || '').trim(), start: c.timestamp?.[0], end: c.timestamp?.[1] }))
-    .filter((w) => w.text && Number.isFinite(w.start))
-    .map((w) => ({ ...w, end: Number.isFinite(w.end) ? w.end : w.start + 0.3 }));
+  const sampleRate = 16000;
+
+  if (samples.length <= sampleRate * 35) {
+    const result = await transcriber(samples, {
+      return_timestamps: 'word',
+      chunk_length_s: 30,
+      stride_length_s: 5,
+    });
+    return (result?.chunks || [])
+      .map((c) => ({ text: String(c.text || '').trim(), start: c.timestamp?.[0], end: c.timestamp?.[1] }))
+      .filter((w) => w.text && Number.isFinite(w.start))
+      .map((w) => ({ ...w, end: Number.isFinite(w.end) ? w.end : w.start + 0.3 }));
+  }
+
+  // Multi-chunk transcription: cleanly slice long audio (e.g. 8-15 min) at sentence pauses
+  // to prevent memory blowout, DTW cross-attention thrashing, or timestamp drift.
+  const allWords = [];
+  let currentOffset = 0;
+
+  while (currentOffset < samples.length) {
+    const cutPoint = findSilenceCutPoint(samples, currentOffset, sampleRate, 28, 4);
+    const chunkSamples = samples.subarray(currentOffset, cutPoint);
+    const chunkOffsetSec = currentOffset / sampleRate;
+
+    if (chunkSamples.length >= sampleRate * 0.25) {
+      const result = await transcriber(chunkSamples, {
+        return_timestamps: 'word',
+        chunk_length_s: 30,
+        stride_length_s: 5,
+      });
+
+      const chunkWords = (result?.chunks || [])
+        .map((c) => ({
+          text: String(c.text || '').trim(),
+          start: Number.isFinite(c.timestamp?.[0]) ? c.timestamp[0] + chunkOffsetSec : null,
+          end: Number.isFinite(c.timestamp?.[1]) ? c.timestamp[1] + chunkOffsetSec : null,
+        }))
+        .filter((w) => w.text && Number.isFinite(w.start))
+        .map((w) => ({ ...w, end: Number.isFinite(w.end) ? w.end : w.start + 0.3 }));
+
+      allWords.push(...chunkWords);
+    }
+
+    if (cutPoint >= samples.length || cutPoint <= currentOffset) break;
+    currentOffset = cutPoint;
+  }
+
+  return allWords;
 }
 
 /** Run Whisper in a separate OS process. A timeout terminates the actual ONNX

@@ -3,6 +3,9 @@ import path from 'node:path';
 import wavefile from 'wavefile';
 import { config } from '../config/index.js';
 import { ttsCache } from '../core/cache/cacheManager.js';
+import { normalizeTextForTts } from '../audio/ttsTextNormalizer.js';
+
+export { normalizeTextForTts };
 
 const { WaveFile } = wavefile;
 const TTS_CHUNK_CHARS = 2800;
@@ -11,7 +14,8 @@ const TTS_CHUNK_CHARS = 2800;
 export function splitTtsText(text, maxChars = TTS_CHUNK_CHARS) {
   const clean = String(text || '').replace(/\r\n/g, '\n').trim();
   if (!clean || clean.length <= maxChars) return clean ? [clean] : [];
-  const units = clean.match(/[^.!?\n]+(?:[.!?]+|\n+|$)/g)?.map((part) => part.trim()).filter(Boolean) || [clean];
+  // Use lookbehind & lookahead so decimal numbers (e.g. 7.5) are never split across units
+  const units = clean.match(/(?:[^.!?\n]|(?<=\d)\.(?=\d))+([.!?]+|\n+|$)/g)?.map((part) => part.trim()).filter(Boolean) || [clean];
   const chunks = [];
   let current = '';
   for (const unit of units) {
@@ -123,14 +127,15 @@ export async function generateSpeech({
   if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
   const effectiveSilenceMs = silenceMs != null ? silenceMs : (format === 'shorts' ? 220 : 500);
   const effectiveGapMs = gapMs != null ? gapMs : (format === 'shorts' ? 50 : 120);
+  const spokenText = normalizeTextForTts(text);
 
   // Ensure target directory exists
   const dir = path.dirname(outputFile);
   await fs.mkdir(dir, { recursive: true });
   const wavFile = outputFile.replace(/\.mp3$/i, '.wav');
 
-  // Check TTS Cache (Milestone 12)
-  const cached = await ttsCache.get({ text, voice, speed });
+  // Check TTS Cache (Milestone 12) keyed on normalized spoken text
+  const cached = await ttsCache.get({ text: spokenText, voice, speed });
   if (cached.hit && cached.wavPath) {
     await fs.copyFile(cached.wavPath, wavFile);
     await fs.copyFile(cached.wavPath, outputFile);
@@ -138,7 +143,7 @@ export async function generateSpeech({
     return { filePath: outputFile, wavPath: wavFile, success: true, cached: true };
   }
 
-  const chunks = splitTtsText(text);
+  const chunks = splitTtsText(spokenText);
   if (chunks.length > 1) {
     console.log(`Long-form narration: generating ${chunks.length} bounded TTS chunks...`);
     const chunkFiles = [];
@@ -153,7 +158,7 @@ export async function generateSpeech({
       const buffer = await joinWavFiles(chunkWavFiles, effectiveGapMs, effectiveSilenceMs);
       await fs.writeFile(wavFile, buffer);
       await fs.writeFile(outputFile, buffer);
-      await ttsCache.set({ text, voice, speed }, buffer);
+      await ttsCache.set({ text: spokenText, voice, speed }, buffer);
       console.log(`Joined ${chunks.length} narration chunks (${(buffer.length / 1024 / 1024).toFixed(1)} MB) -> ${outputFile}`);
       return { filePath: outputFile, wavPath: wavFile, success: true, cached: false, chunks: chunks.length };
     } finally {
@@ -167,7 +172,7 @@ export async function generateSpeech({
     const controller = new AbortController();
     const abortFromCaller = () => controller.abort();
     signal?.addEventListener('abort', abortFromCaller, { once: true });
-    const timeoutMs = Math.min(15 * 60_000, Math.max(120_000, text.length * 45));
+    const timeoutMs = Math.min(15 * 60_000, Math.max(120_000, spokenText.length * 45));
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     // Fetch raw WAV from Kokoro for instant zero-loss Whisper alignment
     let response;
@@ -180,7 +185,7 @@ export async function generateSpeech({
         },
         body: JSON.stringify({
           model: 'kokoro',
-          input: text,
+          input: spokenText,
           voice: voice,
           response_format: 'wav',
           speed: speed,
@@ -205,7 +210,7 @@ export async function generateSpeech({
     await fs.writeFile(outputFile, buffer);
     
     // Cache for future runs
-    await ttsCache.set({ text, voice, speed }, buffer);
+    await ttsCache.set({ text: spokenText, voice, speed }, buffer);
 
     console.log(`🔊 Voiceover saved successfully (${(buffer.length / 1024).toFixed(1)} KB) -> ${outputFile}`);
 

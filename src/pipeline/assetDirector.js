@@ -484,7 +484,9 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
   }
   if (!approved.length) return {};
 
-  const maxReuseCount = Math.max(3, Math.ceil(assetRequests.length / Math.max(1, approved.length)) + 1);
+  // For YouTube production quality, strictly limit reuse to at most 2 occurrences
+  // (1 original + 1 reuse). Never allow a single asset to dominate an 8-minute video.
+  const maxReuseCount = 2;
 
   const fallbacks = {};
   for (const report of requestReports) {
