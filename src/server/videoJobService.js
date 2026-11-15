@@ -14,11 +14,24 @@ const publicJob = (job) => ({
   channelId: job.request?.profileId || job.pipelineBrief?.channel?.id || 'default',
   createdAt: job.createdAt, startedAt: job.startedAt, completedAt: job.completedAt,
   error: job.error || undefined, metadata: job.metadata || undefined,
+  costEstimate: job.costEstimate || undefined,
 });
 
-const matchesJobFilters = (job, { channelId = null, statuses = [] } = {}) => {
+const estimateProviderCost = (request) => {
+  const seconds = Number(request.output?.durationSeconds || request.output?.durationRange?.max || 120);
+  const imageCount = request.creative?.imageSource === 'ai' ? Math.max(1, Math.ceil(seconds / (request.output?.aspectRatio === '9:16' ? 3 : 7))) : 0;
+  const imageRate = Math.max(0, Number(process.env.AI_IMAGE_ESTIMATED_COST_USD || 0.003));
+  const llmEstimate = Math.max(0, Number(process.env.LLM_ESTIMATED_COST_PER_VIDEO_USD || 0.02));
+  return { currency: 'USD', estimated: true, imageCount, amount: Number((llmEstimate + (imageCount * imageRate)).toFixed(3)) };
+};
+
+const matchesJobFilters = (job, { channelId = null, statuses = [], format = null, dateFrom = null, dateTo = null, minDuration = null, maxDuration = null } = {}) => {
   const jobChannelId = job.request?.profileId || job.pipelineBrief?.channel?.id || 'default';
-  return (!channelId || jobChannelId === channelId) && (!statuses.length || statuses.includes(job.status));
+  const jobFormat = job.request?.output?.aspectRatio === '9:16' || job.pipelineBrief?.format === 'shorts' ? 'shorts' : 'landscape';
+  const duration = Number(job.result?.durationSeconds || job.request?.output?.durationSeconds || job.pipelineBrief?.durationSec || 0);
+  return (!channelId || jobChannelId === channelId) && (!statuses.length || statuses.includes(job.status))
+    && (!format || jobFormat === format) && (!dateFrom || job.createdAt >= dateFrom) && (!dateTo || job.createdAt <= dateTo)
+    && (minDuration == null || duration >= minDuration) && (maxDuration == null || duration <= maxDuration);
 };
 
 function apiError(status, code, message) {
@@ -111,6 +124,7 @@ export class VideoJobService {
     concurrency = config.server.workerConcurrency,
     maxQueuedJobs = config.server.maxQueuedJobs,
     maxOwnerPendingJobs = config.server.maxOwnerPendingJobs,
+    maxChannelPendingJobs = config.server.maxChannelPendingJobs,
     taskQueue = null,
     thumbnailGenerator = extractThumbnailFromVideo,
   } = {}) {
@@ -120,6 +134,7 @@ export class VideoJobService {
     this.concurrency = Math.max(1, concurrency);
     this.maxQueuedJobs = Math.max(1, maxQueuedJobs);
     this.maxOwnerPendingJobs = Math.max(1, maxOwnerPendingJobs);
+    this.maxChannelPendingJobs = Math.max(1, maxChannelPendingJobs);
     this.taskQueue = taskQueue;
     this.thumbnailGenerator = thumbnailGenerator;
     this.thumbnailGeneration = new Map();
@@ -163,7 +178,12 @@ export class VideoJobService {
       });
       // API replicas enqueue newly-created requests but must not replay every
       // persisted job when they start. Reconciliation belongs to workers.
-      for (const job of this.taskQueue.processJobs ? jobs : []) {
+      // Reconcile oldest first so a worker restart cannot reverse FIFO order
+      // inside a channel while rebuilding fair queue priorities.
+      const recoveryJobs = this.taskQueue.processJobs
+        ? [...jobs].sort((left, right) => String(left.createdAt || '').localeCompare(String(right.createdAt || '')) || String(left.id).localeCompare(String(right.id)))
+        : [];
+      for (const job of recoveryJobs) {
         if (job.status === 'queued') {
           const queued = typeof this.taskQueue.hasGeneration === 'function'
             ? await this.taskQueue.hasGeneration(job.id, job.retryCount || 0)
@@ -171,7 +191,7 @@ export class VideoJobService {
           if (!queued) {
             job.resumeExisting = Boolean(job.startedAt || job.resumeExisting);
             await this.store.putJob(job);
-            await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0);
+            await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0, { channelId: job.request?.profileId || 'default', queuePriority: job.metadata?.queuePriority });
           }
         } else if (['preparing', 'processing'].includes(job.status)) {
           const queued = typeof this.taskQueue.hasGeneration === 'function'
@@ -183,7 +203,7 @@ export class VideoJobService {
             job.resumeExisting = true;
             job.updatedAt = now();
             await this.store.putJob(job);
-            await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0);
+            await this.taskQueue.enqueueGeneration(job.id, job.retryCount || 0, { channelId: job.request?.profileId || 'default', queuePriority: job.metadata?.queuePriority });
           }
         } else if (job.status === 'delete_requested' && job.deletionOperationId) {
           await this.taskQueue.enqueueDeletion(job.id, job.deletionOperationId);
@@ -256,12 +276,14 @@ export class VideoJobService {
       request, pipelineBrief: toPipelineBrief(request), metadata: request.metadata || null,
       idempotencyKey: idempotencyKey || null, requestHash: requestHash(request),
       result: null, error: null, createdAt: timestamp, updatedAt: timestamp,
+      costEstimate: estimateProviderCost(request),
       startedAt: null, completedAt: null,
     };
     if (typeof this.store.createJob === 'function') {
       const created = await this.store.createJob(job, {
         maxQueuedJobs: this.maxQueuedJobs,
         maxOwnerPendingJobs: this.maxOwnerPendingJobs,
+        maxChannelPendingJobs: Math.min(this.maxChannelPendingJobs, Number(job.metadata?.maxPendingJobs) || this.maxChannelPendingJobs),
       });
       if (created.existing) {
         if (created.existing.requestHash !== job.requestHash) throw apiError(409, 'IDEMPOTENCY_CONFLICT', 'Idempotency key was already used with a different request');
@@ -269,16 +291,20 @@ export class VideoJobService {
       }
       if (created.limit === 'global') throw apiError(429, 'QUEUE_CAPACITY_EXCEEDED', 'Video generation queue is currently full');
       if (created.limit === 'owner') throw apiError(429, 'OWNER_QUEUE_LIMIT_EXCEEDED', 'Too many videos are already pending for this API account');
+      if (created.limit === 'channel') throw apiError(429, 'CHANNEL_QUEUE_LIMIT_EXCEEDED', 'This channel already has the maximum number of pending videos');
     } else {
       const jobs = await this.store.listJobs();
       const pendingStatuses = new Set(['queued', 'preparing', 'processing', 'cancel_requested']);
       const globallyPending = jobs.filter((item) => pendingStatuses.has(item.status)).length;
       const ownerPending = jobs.filter((item) => item.ownerId === ownerId && pendingStatuses.has(item.status)).length;
+      const channelId = request.profileId || 'default';
+      const channelPending = jobs.filter((item) => item.ownerId === ownerId && pendingStatuses.has(item.status) && (item.request?.profileId || 'default') === channelId).length;
       if (globallyPending >= this.maxQueuedJobs) throw apiError(429, 'QUEUE_CAPACITY_EXCEEDED', 'Video generation queue is currently full');
       if (ownerPending >= this.maxOwnerPendingJobs) throw apiError(429, 'OWNER_QUEUE_LIMIT_EXCEEDED', 'Too many videos are already pending for this API account');
+      if (channelPending >= Math.min(this.maxChannelPendingJobs, Number(job.metadata?.maxPendingJobs) || this.maxChannelPendingJobs)) throw apiError(429, 'CHANNEL_QUEUE_LIMIT_EXCEEDED', 'This channel already has the maximum number of pending videos');
       await this.store.putJob(job);
     }
-    if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, 0);
+    if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, 0, { channelId: request.profileId || 'default', queuePriority: job.metadata?.queuePriority });
     else { this.queue.push(id); this.#pump(); }
     return { job: publicJob(job), reused: false };
   }
@@ -286,28 +312,41 @@ export class VideoJobService {
   async get(ownerId, id) {
     const job = await this.store.getJob(id);
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
-    return { ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}) };
+    return (await this.#withQueueDetails([{ ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}) }]))[0];
+  }
+
+  async #withQueueDetails(videos) {
+    if (!this.taskQueue || typeof this.taskQueue.getGenerationPositions !== 'function') return videos;
+    const pending = videos.filter((video) => ['queued', 'preparing', 'processing'].includes(video.status));
+    if (!pending.length) return videos;
+    const positions = await this.taskQueue.getGenerationPositions(pending.map((video) => video.id)).catch(() => ({}));
+    const estimateMinutes = config.server.estimatedJobMinutes;
+    return videos.map((video) => {
+      const detail = positions[video.id];
+      return detail ? { ...video, ...detail, estimatedStartMinutes: detail.queuePosition * estimateMinutes } : video;
+    });
   }
 
   async list(ownerId, filters = {}) {
     const jobs = (await this.store.listJobs()).filter((job) => job.ownerId === ownerId && matchesJobFilters(job, filters));
-    return jobs.sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id)).map((job) => ({
+    return this.#withQueueDetails(jobs.sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id)).map((job) => ({
       ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
-    }));
+    })));
   }
 
-  async listPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [] } = {}) {
+  async listPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [], format = null, dateFrom = null, dateTo = null, minDuration = null, maxDuration = null } = {}) {
+    const filters = { channelId, statuses, format, dateFrom, dateTo, minDuration, maxDuration };
     if (typeof this.store.listJobsPage === 'function') {
-      const page = await this.store.listJobsPage(ownerId, { limit, cursor, channelId, statuses });
+      const page = await this.store.listJobsPage(ownerId, { limit, cursor, ...filters });
       return {
-        videos: page.videos.map((job) => ({
+        videos: await this.#withQueueDetails(page.videos.map((job) => ({
           ...publicJob(job), ...(job.status === 'completed' ? { result: this.#publicResult(job) } : {}),
-        })),
+        }))),
         total: page.total,
         nextCursor: page.nextCursor,
       };
     }
-    const all = await this.list(ownerId, { channelId, statuses });
+    const all = await this.list(ownerId, filters);
     const separator = cursor ? cursor.lastIndexOf('|') : -1;
     const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
     const cursorId = separator > 0 ? cursor.slice(separator + 1) : null;
@@ -316,6 +355,22 @@ export class VideoJobService {
     const videos = eligible.slice(0, limit);
     const last = videos.at(-1);
     return { videos, total: all.length, nextCursor: eligible.length > limit && last ? `${last.createdAt}|${last.id}` : null };
+  }
+
+  async summary(ownerId) {
+    const jobs = (await this.store.listJobs(ownerId)).filter((job) => job.ownerId === ownerId);
+    const perChannel = {}; const failureStages = {}; let storageBytes = 0; let estimatedProviderCostUsd = 0;
+    for (const job of jobs) {
+      const channelId = job.request?.profileId || 'default';
+      const bucket = perChannel[channelId] ||= { total: 0, active: 0, completed: 0, failed: 0 };
+      bucket.total++;
+      if (['queued', 'preparing', 'processing', 'cancel_requested'].includes(job.status)) bucket.active++;
+      if (job.status === 'completed') bucket.completed++;
+      if (job.status === 'failed') { bucket.failed++; const stage = job.error?.stage || job.error?.resumeFrom || job.error?.code || 'unknown'; failureStages[stage] = (failureStages[stage] || 0) + 1; }
+      storageBytes += Number(job.result?.delivery?.bytes || 0);
+      estimatedProviderCostUsd += Number(job.costEstimate?.amount || 0);
+    }
+    return { total: jobs.length, perChannel, failureStages, storageBytes, estimatedProviderCostUsd: Number(estimatedProviderCostUsd.toFixed(2)) };
   }
 
   async result(ownerId, id) {
@@ -406,7 +461,7 @@ export class VideoJobService {
     return operation;
   }
 
-  async retry(ownerId, id) {
+  async retry(ownerId, id, { resumeFrom = null } = {}) {
     const job = await this.store.getJob(id);
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
     if (!['failed', 'cancelled', 'cancel_requested'].includes(job.status)) throw apiError(409, 'VIDEO_NOT_RETRYABLE', `Video is ${job.status}`);
@@ -428,8 +483,9 @@ export class VideoJobService {
       : (failedCode === 'NARRATION_DURATION_FAILED'
           ? 'audio'
           : (failedCode === 'TIMELINE_QC_FAILED' ? resumeStageForTimelineQc(timelineQc) : null));
+    if (resumeFrom) job.resumeFrom = resumeFrom;
     await this.store.putJob(job);
-    if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount);
+    if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount, { channelId: job.request?.profileId || 'default', queuePriority: job.metadata?.queuePriority });
     else { this.queue.push(id); this.#pump(); }
     return { job: publicJob(job), reused: true };
   }
@@ -629,6 +685,7 @@ export class VideoJobService {
     } catch (error) {
       console.error(`❌ [Job ${id}] Video generation error:`, error);
       await progressWrites;
+      const failedStage = job.stage;
       const latest = await this.store.getJob(id);
       if (latest?.status === 'delete_requested') return;
       const cancelled = !timedOut && (controller.signal.aborted || error?.name === 'AbortError' || error?.code === 'VIDEO_GENERATION_CANCELLED');
@@ -642,6 +699,7 @@ export class VideoJobService {
       job.completedAt = recoverableInterruption ? null : job.completedAt;
       if (recoverableInterruption) job.resumeExisting = true;
       job.error = timedOut ? { code: 'VIDEO_JOB_TIMEOUT', message: `Video generation exceeded ${Math.round(jobTimeoutMs / 60_000)} minutes` } : cancelled ? null : safeGenerationFailure(error);
+      if (job.error) job.error.stage = failedStage;
       if (job.error?.code === 'TIMELINE_QC_FAILED') {
         const timelineQc = await readTimelineQc(this.rendersDir, id);
         const failures = failedQcChecks(timelineQc);

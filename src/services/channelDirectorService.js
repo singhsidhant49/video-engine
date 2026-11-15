@@ -76,6 +76,9 @@ SCRIPT CONTRACT:
         source: 'channel-director', channelId: channel.id, ideaId: idea.id, title: idea.title,
         format: idea.format, trafficStrategy: idea.trafficStrategy, primaryKeyword: idea.primaryKeyword,
         thumbnailConcept: idea.thumbnailConcept,
+        titleAngle: idea.packagingExperiment.titleAngle, hookVariant: idea.packagingExperiment.hookVariant,
+        thumbnailVariant: idea.packagingExperiment.thumbnailVariant,
+        queuePriority: channel.automation.queuePriority, maxPendingJobs: channel.automation.maxPendingJobs,
       },
     };
   }

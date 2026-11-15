@@ -91,6 +91,8 @@ export const config = {
     queueGlobalConcurrency: Math.max(1, parseInt(process.env.VIDEO_QUEUE_GLOBAL_CONCURRENCY || '1', 10)),
     maxQueuedJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_QUEUED_JOBS || '25', 10)),
     maxOwnerPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_OWNER_PENDING_JOBS || '5', 10)),
+    maxChannelPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_CHANNEL_PENDING_JOBS || '2', 10)),
+    estimatedJobMinutes: Math.max(1, parseInt(process.env.VIDEO_ESTIMATED_JOB_MINUTES || '20', 10)),
     shutdownTimeoutMs: Math.max(1_000, parseInt(process.env.VIDEO_SHUTDOWN_TIMEOUT_MS || '30000', 10)),
     jobStore: process.env.VIDEO_JOB_STORE || (process.env.DATABASE_URL ? 'postgres' : 'file'),
     queueBackend: process.env.VIDEO_QUEUE_BACKEND || (process.env.REDIS_URL ? 'bullmq' : 'memory'),

@@ -123,12 +123,31 @@ export function createVideoApiRouter({ service }) {
       const channelId = req.query.channelId ? String(req.query.channelId).trim() : null;
       if (channelId && !/^[a-z0-9][a-z0-9_-]{0,99}$/i.test(channelId)) throw Object.assign(new Error('Invalid channel filter'), { status: 400, code: 'INVALID_CHANNEL_FILTER' });
       const statuses = videoStatusFilter(req.query.status);
+      const format = req.query.format ? String(req.query.format) : null;
+      if (format && !['shorts', 'landscape'].includes(format)) throw Object.assign(new Error('Invalid format filter'), { status: 400, code: 'INVALID_FORMAT_FILTER' });
+      const parseDate = (value, end = false) => {
+        if (!value) return null;
+        const text = String(value);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) throw Object.assign(new Error('Invalid date filter'), { status: 400, code: 'INVALID_DATE_FILTER' });
+        const date = new Date(`${text}T${end ? '23:59:59.999' : '00:00:00.000'}Z`);
+        const [year, month, day] = text.split('-').map(Number);
+        if (!Number.isFinite(date.getTime()) || date.getUTCFullYear() !== year || date.getUTCMonth() + 1 !== month || date.getUTCDate() !== day) throw Object.assign(new Error('Invalid date filter'), { status: 400, code: 'INVALID_DATE_FILTER' });
+        return date.toISOString();
+      };
+      const dateFrom = parseDate(req.query.dateFrom); const dateTo = parseDate(req.query.dateTo, true);
+      const minDuration = req.query.minDuration === undefined || req.query.minDuration === '' ? null : Math.max(0, Number(req.query.minDuration));
+      const maxDuration = req.query.maxDuration === undefined || req.query.maxDuration === '' ? null : Math.max(0, Number(req.query.maxDuration));
+      if ((minDuration != null && !Number.isFinite(minDuration)) || (maxDuration != null && !Number.isFinite(maxDuration)) || (minDuration != null && maxDuration != null && minDuration > maxDuration)) throw Object.assign(new Error('Invalid duration filter'), { status: 400, code: 'INVALID_DURATION_FILTER' });
       const page = typeof service.listPage === 'function'
-        ? await service.listPage(req.ownerId, { limit, cursor, channelId, statuses })
-        : { videos: await service.list(req.ownerId, { channelId, statuses }), nextCursor: null };
+        ? await service.listPage(req.ownerId, { limit, cursor, channelId, statuses, format, dateFrom, dateTo, minDuration, maxDuration })
+        : { videos: await service.list(req.ownerId, { channelId, statuses, format, dateFrom, dateTo, minDuration, maxDuration }), nextCursor: null };
       res.json(page);
     }
     catch (error) { next(error); }
+  });
+
+  router.get('/videos-summary', async (req, res, next) => {
+    try { res.json(await service.summary(req.ownerId)); } catch (error) { next(error); }
   });
 
   router.get('/videos/:id', async (req, res, next) => {
@@ -168,7 +187,10 @@ export function createVideoApiRouter({ service }) {
 
   router.post('/videos/:id/retry', async (req, res, next) => {
     try {
-      const created = await service.retry(req.ownerId, req.params.id);
+      const resumeFrom = req.body?.resumeFrom || null;
+      const allowed = new Set(['plan', 'audio', 'alignment', 'visualStrategy', 'storyboard', 'assets', 'timeline', 'package', 'preRenderQa', 'render', 'postRenderQa']);
+      if (resumeFrom && !allowed.has(resumeFrom)) throw Object.assign(new Error('Invalid retry stage'), { status: 400, code: 'INVALID_RETRY_STAGE' });
+      const created = await service.retry(req.ownerId, req.params.id, { resumeFrom });
       res.status(202).json({ ...created.job, statusUrl: `/v1/videos/${created.job.id}` });
     } catch (error) { next(error); }
   });

@@ -93,9 +93,9 @@ export class FileJobStore {
     return (await this.listOperations()).find((operation) => operation.ownerId === ownerId && operation.videoId === videoId) || null;
   }
 
-  async listJobs() {
+  async listJobs(ownerId = null) {
     const files = (await fs.readdir(this.jobsDir)).filter((file) => file.endsWith('.json'));
-    return (await Promise.all(files.map((file) => readJson(path.join(this.jobsDir, file))))).filter(Boolean);
+    return (await Promise.all(files.map((file) => readJson(path.join(this.jobsDir, file))))).filter((job) => job && (!ownerId || job.ownerId === ownerId));
   }
 
   async findByIdempotency(ownerId, key) {

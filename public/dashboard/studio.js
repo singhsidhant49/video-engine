@@ -1,6 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const query = new URLSearchParams(location.search);
-const state = { authenticated: false, user: null, videos: [], videoTotal: 0, videoCursor: null, channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), thumbnailQueued: new Set(), thumbnailLoading: new Set(), thumbnailActive: 0, thumbnailObserver: null, poll: null, mediaUrl: null, pollCount: 0, requests: new Map() };
+const state = { authenticated: false, user: null, videos: [], videoTotal: 0, videoCursor: null, videoSummary: null, channels: [], ideas: [], performance: [], performanceSummary: null, selectedChannelId: query.get('channelId'), editingChannelId: null, thumbs: new Map(), thumbnailQueued: new Set(), thumbnailLoading: new Set(), thumbnailActive: 0, thumbnailObserver: null, poll: null, mediaUrl: null, pollCount: 0, requests: new Map() };
 const VIDEO_PAGE_SIZE = 50;
 const THUMBNAIL_CONCURRENCY = 4;
 const terminal = new Set(['completed', 'failed', 'cancelled']);
@@ -94,17 +94,33 @@ function videoCard(video) {
   const controls = video.status === 'completed'
     ? `<button data-video-action="review" data-id="${video.id}">Review</button><button data-video-action="download" data-id="${video.id}">Download</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
     : ['failed', 'cancelled'].includes(video.status)
-      ? `<button data-video-action="retry" data-id="${video.id}">Retry</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
+      ? `<button data-video-action="retry" data-id="${video.id}">Smart retry</button><select data-retry-stage aria-label="Retry from stage"><option value="plan">Script</option><option value="audio">Audio</option><option value="assets">Visual assets</option><option value="timeline">Timeline</option><option value="render">Render</option></select><button data-video-action="retry-stage" data-id="${video.id}">Retry from stage</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
       : `<button data-video-action="cancel" data-id="${video.id}">Cancel</button>`;
   const posterMessage = video.status !== 'completed' ? escapeHtml(video.error?.message || video.stage || 'QUEUED') : thumb ? '' : 'LOADING THUMBNAIL';
-  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><div class="badge-row compact"><span class="badge accent">${escapeHtml(channelName)}</span></div><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}</div><div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
+  const queueDetail = video.queuePosition == null ? '' : video.queuePosition === 0 ? ' · Active now' : ` · Queue #${video.queuePosition} · ~${video.estimatedStartMinutes}m`;
+  const cost = video.costEstimate ? ` · est. $${Number(video.costEstimate.amount).toFixed(3)}` : '';
+  return `<article class="video-card"><div class="poster" data-poster="${video.id}" ${thumb ? `style="background-image:url('${thumb}')"` : ''}><span class="status ${escapeHtml(video.status)}">${escapeHtml(video.status)}</span>${posterMessage ? `<strong data-poster-message>${posterMessage}</strong>` : ''}</div><div class="card-body"><div class="badge-row compact"><span class="badge accent">${escapeHtml(channelName)}</span></div><h3>${escapeHtml(title)}</h3><div class="meta">${dateLabel(video.createdAt)}${video.result?.durationSeconds ? ` · ${durationLabel(Math.round(video.result.durationSeconds))}` : ''}${queueDetail}${cost}</div>${video.error ? `<p class="error-text">Failed at ${escapeHtml(video.error.stage || video.error.resumeFrom || video.stage || 'unknown stage')}: ${escapeHtml(video.error.message)}</p>` : ''}<div class="progress"><span style="width:${Number(video.progress || 0)}%"></span></div><div class="actions">${controls}</div></div></article>`;
+}
+
+function renderProductionInsights() {
+  const summary = state.videoSummary;
+  if (!summary) { $('productionInsights').innerHTML = ''; return; }
+  const failed = Object.values(summary.perChannel || {}).reduce((sum, item) => sum + item.failed, 0);
+  const topFailure = Object.entries(summary.failureStages || {}).sort((a, b) => b[1] - a[1])[0];
+  const failureLines = Object.entries(summary.failureStages || {}).sort((a, b) => b[1] - a[1]).map(([stage, count]) => `${escapeHtml(label(stage))}: ${count}`).join('<br>');
+  const channelLines = Object.entries(summary.perChannel || {}).map(([id, item]) => {
+    const name = state.channels.find((channel) => channel.id === id)?.name || id;
+    const failureRate = item.total ? Math.round((item.failed / item.total) * 100) : 0;
+    return `${escapeHtml(name)}: ${item.total} total, ${item.active} active, ${failureRate}% failed`;
+  }).join('<br>') || 'No channel production data';
+  $('productionInsights').innerHTML = `<article><span>Stored output</span><strong>${(summary.storageBytes / 1_073_741_824).toFixed(2)} GB</strong><small>Completed delivery files</small></article><article><span>Estimated provider cost</span><strong>$${Number(summary.estimatedProviderCostUsd || 0).toFixed(2)}</strong><small>Configuration-based estimate</small></article><article><span>Failed productions</span><strong>${failed}</strong><small>${failureLines || (topFailure ? `Most common: ${escapeHtml(label(topFailure[0]))}` : 'No recorded failures')}</small></article><article><span>Channels producing</span><strong>${Object.keys(summary.perChannel || {}).length}</strong><small>${channelLines}</small></article>`;
 }
 
 function renderVideos() {
   $('totalCount').textContent = state.videoTotal || state.videos.length;
   $('activeCount').textContent = state.videos.filter((v) => activeStatuses.has(v.status)).length;
   $('completedCount').textContent = state.videos.filter((v) => v.status === 'completed').length;
-  const filtersActive = Boolean($('videoChannelFilter')?.value || $('videoStatusFilter')?.value);
+  const filtersActive = ['videoChannelFilter', 'videoStatusFilter', 'videoFormatFilter', 'videoDateFrom', 'videoDateTo', 'videoDurationMin', 'videoDurationMax'].some((id) => $(id)?.value);
   const empty = `<div class="empty">${filtersActive ? 'No videos match the selected filters.' : 'No productions yet. Create your first video to begin.'}</div>`;
   $('videoGrid').innerHTML = state.videos.length ? state.videos.map(videoCard).join('') : empty;
   $('recentGrid').innerHTML = state.videos.length ? state.videos.slice(0, 4).map(videoCard).join('') : empty;
@@ -166,6 +182,11 @@ async function loadVideos({ append = false } = {}) {
     if (cursor) params.set('cursor', cursor);
     if ($('videoChannelFilter')?.value) params.set('channelId', $('videoChannelFilter').value);
     if ($('videoStatusFilter')?.value) params.set('status', $('videoStatusFilter').value);
+    if ($('videoFormatFilter')?.value) params.set('format', $('videoFormatFilter').value);
+    if ($('videoDateFrom')?.value) params.set('dateFrom', $('videoDateFrom').value);
+    if ($('videoDateTo')?.value) params.set('dateTo', $('videoDateTo').value);
+    if ($('videoDurationMin')?.value) params.set('minDuration', $('videoDurationMin').value);
+    if ($('videoDurationMax')?.value) params.set('maxDuration', $('videoDurationMax').value);
     const result = await api(`/v1/videos?${params}`);
     const incoming = result.videos || [];
     state.videos = append
@@ -176,6 +197,11 @@ async function loadVideos({ append = false } = {}) {
     pruneThumbnails(); renderVideos();
   }
   catch (error) { handleApiError(error); }
+}
+
+async function loadVideoSummary() {
+  if (!state.authenticated) return;
+  try { state.videoSummary = await api('/v1/videos-summary'); renderProductionInsights(); } catch (error) { handleApiError(error); }
 }
 
 function channelCard(channel) {
@@ -207,6 +233,7 @@ function renderChannels() {
   // Channel data and video data load concurrently on startup. Re-render so
   // production cards replace raw channel IDs with names as soon as profiles arrive.
   renderVideos();
+  renderProductionInsights();
 }
 
 async function loadChannels() {
@@ -217,7 +244,10 @@ async function loadChannels() {
 
 function ideaCard(idea) {
   const canProduce = ['draft', 'approved', 'failed'].includes(idea.status);
-  return `<article class="idea-card"><div class="card-top"><div><div class="badge-row"><span class="badge accent">${escapeHtml(idea.format)}</span><span class="badge">${durationLabel(idea.durationSeconds)}</span><span class="badge">${escapeHtml(label(idea.trafficStrategy))}</span></div></div><div class="idea-score">${idea.compositeScore}<small>/40</small></div></div><h3>${escapeHtml(idea.title)}</h3><p class="card-copy"><strong>Hook:</strong> ${escapeHtml(idea.spokenHook)}</p><div class="idea-detail"><strong>Keyword</strong> · ${escapeHtml(idea.primaryKeyword)}<br><strong>Why it wins</strong> · ${escapeHtml(idea.whyThisIdea)}<br><strong>Duration</strong> · ${escapeHtml(idea.durationRationale)}</div><div class="idea-detail"><strong>Thumbnail</strong> · ${escapeHtml(idea.thumbnailConcept)}</div><div class="badge-row"><span class="badge">Retention ${idea.retentionScore}</span><span class="badge">Title ${idea.titleScore}</span><span class="badge">${escapeHtml(idea.status)}</span><span class="badge">${escapeHtml(idea.urgency)}</span></div><div class="actions">${idea.status === 'draft' ? `<button data-idea-action="approve" data-id="${idea.id}">Approve</button><button data-idea-action="reject" data-id="${idea.id}">Reject</button>` : ''}${canProduce ? `<button data-idea-action="produce" data-id="${idea.id}">Produce video</button>` : ''}${idea.videoId ? `<button data-idea-action="video" data-video-id="${idea.videoId}">View video</button>` : ''}</div></article>`;
+  const titleOptions = (idea.titleCandidates || []).map((item) => `<option value="${escapeHtml(item.text)}" ${item.selected ? 'selected' : ''}>${escapeHtml(item.text)} · ${item.score}</option>`).join('');
+  const thumbnailOptions = (idea.thumbnailCandidates || []).map((item) => `<option value="${escapeHtml(item.concept)}" ${item.selected ? 'selected' : ''}>${escapeHtml(label(item.variant))}${item.overlayText ? ` · ${escapeHtml(item.overlayText)}` : ''}</option>`).join('');
+  const market = idea.marketEvidence || {};
+  return `<article class="idea-card" data-idea-card="${idea.id}"><div class="card-top"><div><div class="badge-row"><span class="badge accent">${escapeHtml(idea.format)}</span><span class="badge">${durationLabel(idea.durationSeconds)}</span><span class="badge">${escapeHtml(label(idea.trafficStrategy))}</span></div></div><div class="idea-score">${idea.compositeScore}<small>/40</small></div></div><h3>${escapeHtml(idea.title)}</h3><p class="card-copy"><strong>Hook:</strong> ${escapeHtml(idea.spokenHook)}</p><div class="idea-detail"><strong>Keyword</strong> · ${escapeHtml(idea.primaryKeyword)}<br><strong>Why it wins</strong> · ${escapeHtml(idea.whyThisIdea)}<br><strong>Duration</strong> · ${escapeHtml(idea.durationRationale)}<br><strong>Market evidence</strong> · ${market.mode === 'observed_search_results' ? `${market.observedResults || 0} related recent results; ${escapeHtml(label(market.titleSaturation || 'low'))} title saturation; demand not measured` : 'No live research; demand is estimated'}</div><div class="idea-detail"><strong>Thumbnail</strong> · ${escapeHtml(idea.thumbnailConcept)}</div>${titleOptions && thumbnailOptions ? `<div class="experiment-picker"><label class="field"><span>Title candidate</span><select data-experiment-title>${titleOptions}</select></label><label class="field"><span>Thumbnail candidate</span><select data-experiment-thumbnail>${thumbnailOptions}</select></label><button data-idea-action="experiment" data-id="${idea.id}">Save experiment</button></div>` : ''}<div class="badge-row"><span class="badge">Retention ${idea.retentionScore}</span><span class="badge">Title ${idea.titleScore}</span><span class="badge">${escapeHtml(idea.status)}</span><span class="badge">${escapeHtml(idea.urgency)}</span></div><div class="actions">${idea.status === 'draft' ? `<button data-idea-action="approve" data-id="${idea.id}">Approve</button><button data-idea-action="reject" data-id="${idea.id}">Reject</button>` : ''}${canProduce ? `<button data-idea-action="produce" data-id="${idea.id}">Produce video</button>` : ''}${idea.videoId ? `<button data-idea-action="video" data-video-id="${idea.videoId}">View video</button>` : ''}</div></article>`;
 }
 
 function renderPerformance() {
@@ -227,11 +257,12 @@ function renderPerformance() {
 function renderPerformanceSummary() {
   const summary = state.performanceSummary;
   if (!summary?.sampleSize) {
-    $('performanceSummary').innerHTML = '<div class="empty">Import or synchronize at least three videos to establish a directional baseline.</div>';
+    $('performanceSummary').innerHTML = '<div class="empty">Import YouTube Analytics CSV results after each release. Three comparable videos establish a directional baseline; ten or more are needed before treating a pattern as reliable.</div>';
     return;
   }
   const cards = Object.entries(summary.formats || {}).map(([format, item]) => `<article><span>${escapeHtml(label(format))} · ${escapeHtml(label(item.confidence))}</span><strong>${item.weightedCtr == null ? '—' : `${item.weightedCtr}% CTR`}</strong><small>${item.weightedAverageViewedPercentage == null ? 'Retention unavailable' : `${item.weightedAverageViewedPercentage}% viewed`} · ${item.samples} video${item.samples === 1 ? '' : 's'}</small></article>`);
   cards.unshift(`<article><span>Total evidence</span><strong>${summary.sampleSize}</strong><small>Unique videos with usable performance data</small></article>`);
+  cards.push(`<article><span>Evidence target</span><strong>${Math.max(0, 10 - summary.sampleSize)}</strong><small>${summary.sampleSize >= 10 ? 'Reliable sample target reached; continue controlled tests.' : 'More comparable videos needed for the 10-video reliability target.'}</small></article>`);
   const nextTest = summary.guidance?.nextExperiments?.[0];
   cards.push(`<article><span>Strategy confidence</span><strong>${escapeHtml(label(summary.guidance?.evidenceLevel || 'insufficient'))}</strong><small>${nextTest ? `Next test: ${escapeHtml(label(nextTest.variant))}` : escapeHtml(summary.guidance?.caution || 'Keep collecting comparable results.')}</small></article>`);
   $('performanceSummary').innerHTML = cards.join('');
@@ -347,7 +378,7 @@ function handleApiError(error) {
   $('healthText').textContent = error.message; toast(error.message);
 }
 
-async function refreshAll() { if (!state.authenticated) return; await checkHealth(); await Promise.all([singleRequest('videos', loadVideos), singleRequest('channels', loadChannels)]); if (state.selectedChannelId) await Promise.all([singleRequest('ideas', loadIdeas), singleRequest('performance', loadPerformance)]); }
+async function refreshAll() { if (!state.authenticated) return; await checkHealth(); await Promise.all([singleRequest('videos', loadVideos), singleRequest('video-summary', loadVideoSummary), singleRequest('channels', loadChannels)]); if (state.selectedChannelId) await Promise.all([singleRequest('ideas', loadIdeas), singleRequest('performance', loadPerformance)]); }
 
 async function createVideo(event) {
   event.preventDefault(); const button = event.currentTarget.querySelector('[type=submit]'); button.disabled = true; $('formMessage').textContent = 'Submitting production…';
@@ -363,8 +394,8 @@ async function createVideo(event) {
       const format = output.aspectRatio === '9:16' ? 'shorts' : 'landscape';
       output.durationRange = defaults.durationRanges?.[format] || (format === 'shorts' ? { min: 20, max: 60 } : { min: 120, max: 600 });
     }
-    const body = { prompt: $('prompt').value, profileId: $('profileId').value, niche: selectedChannel?.niche, output, creative, audio: $('voice').value !== 'auto' ? { voice: $('voice').value } : {}, subtitles: { enabled: defaults.subtitles !== false }, metadata: { source: 'dashboard', channelId: $('profileId').value } };
-    await api('/v1/videos', { method: 'POST', body: JSON.stringify(body) }); event.currentTarget.reset(); $('tone').value = 'clear, compelling, and authoritative'; syncDurationFields(); $('formMessage').textContent = 'Production queued successfully.'; toast('Production queued'); await loadVideos();
+    const body = { prompt: $('prompt').value, profileId: $('profileId').value, niche: selectedChannel?.niche, output, creative, audio: $('voice').value !== 'auto' ? { voice: $('voice').value } : {}, subtitles: { enabled: defaults.subtitles !== false }, metadata: { source: 'dashboard', channelId: $('profileId').value, queuePriority: selectedChannel?.automation?.queuePriority || 'normal', maxPendingJobs: selectedChannel?.automation?.maxPendingJobs || 2 } };
+    await api('/v1/videos', { method: 'POST', body: JSON.stringify(body) }); event.currentTarget.reset(); $('tone').value = 'clear, compelling, and authoritative'; syncDurationFields(); $('formMessage').textContent = 'Production queued successfully.'; toast('Production queued'); await Promise.all([loadVideos(), loadVideoSummary()]);
   } catch (error) { $('formMessage').textContent = error.message; handleApiError(error); } finally { button.disabled = false; }
 }
 
@@ -448,10 +479,13 @@ function openChannelDialog(channel = null) {
     $('channelAutomationEnabled').checked = channel.automation.enabled;
     $('channelCron').value = channel.automation.scheduleCron; $('channelTimezone').value = channel.automation.timezone;
     $('channelApproval').value = channel.automation.approvalMode;
+    $('channelQueuePriority').value = channel.automation.queuePriority || 'normal';
+    $('channelMaxPending').value = channel.automation.maxPendingJobs || 2;
   } else {
     $('formatLandscape').checked = true; $('formatShorts').checked = true;
     $('shortMin').value = 20; $('shortMax').value = 60; $('landscapeMin').value = 120; $('landscapeMax').value = 600;
     $('channelCron').value = '0 12 * * *'; $('channelTimezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    $('channelQueuePriority').value = 'normal'; $('channelMaxPending').value = 2;
     $('channelImageSource').value = 'stock'; $('channelImageProvider').value = 'ideogram'; $('channelImageStyle').value = 'doodle_comic';
     $('channelImageQuality').value = 'medium'; $('channelContentType').value = 'auto'; $('channelVoice').value = 'auto'; $('channelSubtitles').checked = true;
     syncChannelVisualFields();
@@ -481,7 +515,7 @@ async function createChannel(event) {
       imageModel: imageSource === 'ai' ? $('channelImageModel').value : null, imageQuality: imageSource === 'ai' ? $('channelImageQuality').value : null,
       imageStyle: imageSource === 'ai' ? $('channelImageStyle').value : 'doodle_comic', customStylePrompt: imageSource === 'ai' && $('channelImageStyle').value === 'custom' ? $('channelCustomStylePrompt').value : '',
     },
-    automation: { enabled: $('channelAutomationEnabled').checked, scheduleCron: $('channelCron').value, timezone: $('channelTimezone').value, approvalMode: $('channelApproval').value, autoPublish: false, publishPrivacy: 'private' },
+    automation: { enabled: $('channelAutomationEnabled').checked, scheduleCron: $('channelCron').value, timezone: $('channelTimezone').value, approvalMode: $('channelApproval').value, queuePriority: $('channelQueuePriority').value, maxPendingJobs: Number($('channelMaxPending').value), autoPublish: false, publishPrivacy: 'private' },
   };
   try {
     const editing = state.editingChannelId;
@@ -501,8 +535,9 @@ async function videoAction(button) {
     if (action === 'review') { const result = await api(`/v1/videos/${id}/result`); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); const response = await fetch(result.videoUrl, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error(`Video could not be loaded (${response.status})`); state.mediaUrl = URL.createObjectURL(await response.blob()); $('reviewVideo').src = state.mediaUrl; $('reviewTitle').textContent = result.title || video?.id || 'Video'; const pkg = result.package; $('packageDetails').innerHTML = pkg ? `<strong>${escapeHtml(pkg.title || result.title || '')}</strong><p>${escapeHtml(pkg.description || '')}</p>` : '<p>Publish package created with the completed video.</p>'; $('reviewDialog').showModal(); return; }
     if (action === 'cancel') await api(`/v1/videos/${id}/cancel`, { method: 'POST', body: '{}' });
     if (action === 'retry') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: '{}' });
+    if (action === 'retry-stage') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: JSON.stringify({ resumeFrom: button.parentElement.querySelector('[data-retry-stage]').value }) });
     if (action === 'delete' && confirm('Delete this video and all generated files?')) await api(`/v1/videos/${id}`, { method: 'DELETE' });
-    await loadVideos();
+    await Promise.all([loadVideos(), loadVideoSummary()]);
   } catch (error) { handleApiError(error); }
   finally { button.disabled = false; }
 }
@@ -545,6 +580,10 @@ async function ideaAction(button) {
   const action = button.dataset.ideaAction; const id = button.dataset.id; const base = `/v1/channels/${state.selectedChannelId}/ideas/${id}`;
   try {
     if (action === 'approve' || action === 'reject') await api(base, { method: 'PATCH', body: JSON.stringify({ status: action === 'approve' ? 'approved' : 'rejected' }) });
+    if (action === 'experiment') {
+      const card = button.closest('[data-idea-card]');
+      await api(base, { method: 'PATCH', body: JSON.stringify({ selectedTitle: card.querySelector('[data-experiment-title]').value, selectedThumbnailConcept: card.querySelector('[data-experiment-thumbnail]').value }) });
+    }
     if (action === 'produce') await api(`${base}/produce`, { method: 'POST', body: '{}' });
     if (action === 'video') { location.href = `/dashboard/production?videoId=${encodeURIComponent(button.dataset.videoId)}`; return; }
     await Promise.all([loadIdeas(), loadVideos()]); toast(label(action) + ' complete');
@@ -586,6 +625,8 @@ $('brainstorm').addEventListener('click', () => brainstorm()); $('refreshIdeas')
 $('loadMoreVideos').addEventListener('click', () => singleRequest('videos-more', () => loadVideos({ append: true })));
 $('videoChannelFilter').addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
 $('videoStatusFilter').addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
+$('videoFormatFilter').addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
+for (const id of ['videoDateFrom', 'videoDateTo', 'videoDurationMin', 'videoDurationMax']) $(id).addEventListener('change', () => { state.videoCursor = null; void singleRequest('videos-filter', loadVideos); });
 $('ideaStatusFilter').addEventListener('change', () => void singleRequest('ideas-filter', loadIdeas));
 $('ideaChannel').addEventListener('change', () => { state.selectedChannelId = $('ideaChannel').value; history.replaceState(null, '', channelPage('ideas')); void loadIdeas(); });
 $('performanceChannel').addEventListener('change', () => { state.selectedChannelId = $('performanceChannel').value; history.replaceState(null, '', channelPage('analytics')); void loadPerformance(); });
@@ -601,6 +642,7 @@ $('closeReview').addEventListener('click', () => $('reviewDialog').close()); $('
 document.addEventListener('visibilitychange', () => { if (!document.hidden && state.authenticated) void refreshAll(); });
 $('performanceViewed').max = '1000';
 setPage(); renderVideos(); renderChannels(); renderIdeas(); renderPerformance(); renderPerformanceSummary(); syncDurationFields();
+renderProductionInsights();
 if (await restoreSession()) { await refreshAll(); await loadAdminUsers(); }
 state.poll = setInterval(() => {
   if (!state.authenticated || document.hidden) return; state.pollCount += 1;

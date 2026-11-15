@@ -145,7 +145,21 @@ export function createChannelApiRouter({ store, director, publisher = null, publ
     try {
       const idea = await store.getIdea(req.ownerId, req.params.ideaId);
       if (!idea || idea.channelId !== req.params.channelId) throw errorWith(404, 'IDEA_NOT_FOUND', 'Idea not found');
-      const updated = { ...idea, ...IdeaPatchSchema.parse(req.body), updatedAt: new Date().toISOString() };
+      const patch = IdeaPatchSchema.parse(req.body);
+      const selectedTitle = patch.selectedTitle;
+      const selectedThumbnailConcept = patch.selectedThumbnailConcept;
+      if ((selectedTitle || selectedThumbnailConcept) && !['draft', 'approved', 'failed'].includes(idea.status)) throw errorWith(409, 'EXPERIMENT_ALREADY_IN_PRODUCTION', 'Packaging selection cannot change after production has started');
+      const titleCandidate = selectedTitle && idea.titleCandidates.find((item) => item.text === selectedTitle);
+      const thumbnailCandidate = selectedThumbnailConcept && idea.thumbnailCandidates.find((item) => item.concept === selectedThumbnailConcept);
+      if (selectedTitle && !titleCandidate) throw errorWith(400, 'INVALID_EXPERIMENT_SELECTION', 'Selected title must be one of the stored title candidates');
+      if (selectedThumbnailConcept && !thumbnailCandidate) throw errorWith(400, 'INVALID_EXPERIMENT_SELECTION', 'Selected thumbnail must be one of the stored thumbnail candidates');
+      const updated = {
+        ...idea, ...patch,
+        ...(selectedTitle ? { title: selectedTitle, titleScore: titleCandidate.score, titleCandidates: idea.titleCandidates.map((item) => ({ ...item, selected: item.text === selectedTitle })), packagingExperiment: { ...idea.packagingExperiment, titleAngle: titleCandidate.angle } } : {}),
+        ...(selectedThumbnailConcept ? { thumbnailConcept: selectedThumbnailConcept, thumbnailCandidates: idea.thumbnailCandidates.map((item) => ({ ...item, selected: item.concept === selectedThumbnailConcept })), packagingExperiment: { ...idea.packagingExperiment, ...(selectedTitle ? { titleAngle: titleCandidate.angle } : {}), thumbnailVariant: thumbnailCandidate.variant } } : {}),
+        updatedAt: new Date().toISOString(),
+      };
+      delete updated.selectedTitle; delete updated.selectedThumbnailConcept;
       await store.putIdea(req.ownerId, updated);
       res.json(publicIdea(updated));
     } catch (error) { next(error); }

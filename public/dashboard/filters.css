@@ -1,5 +1,6 @@
 .filter-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   gap: 12px;
   margin: -4px 0 20px;
@@ -9,11 +10,16 @@
   background: var(--surface);
 }
 
-.filter-bar .field { min-width: 190px; }
+.filter-bar .field { min-width: 150px; flex: 1 1 150px; }
 .filter-bar p { margin: 0 0 11px auto; font-size: 12px; }
 .filter-group { display: flex; gap: 12px; align-items: end; flex: 1; }
 .filter-group .channel-select { flex: 1; }
 .badge-row.compact { margin: 0 0 9px; }
+.experiment-picker { display: grid; gap: 10px; margin: 14px 0; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #0d1219; }
+.experiment-picker button { justify-self: start; padding: 8px 11px; border: 1px solid #493d7d; border-radius: 7px; background: #17152a; color: var(--accent-2); font-weight: 700; cursor: pointer; }
+.production-insights { margin: 0 0 18px; }
+.actions select { width: auto; min-height: 34px; padding: 6px 8px; font-size: 11px; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
 
 @media (max-width: 760px) {
   .filter-bar,
@@ -24,4 +30,6 @@
 
   .filter-bar .field { width: 100%; min-width: 0; }
   .filter-bar p { margin: 0; }
+  .production-insights { grid-template-columns: 1fr; }
+  .actions button, .actions select { min-height: 42px; }
 }

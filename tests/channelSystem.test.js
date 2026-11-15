@@ -116,6 +116,8 @@ test('growth engine exposes 21 formulas, scores titles, and generates unique off
   assert.ok(ideas.every((item) => item.durationSeconds >= channel().productionDefaults.durationRanges[item.format].min));
   assert.ok(ideas.every((item) => item.durationSeconds <= channel().productionDefaults.durationRanges[item.format].max));
   assert.ok(ideas.every((item) => item.primaryKeyword && item.thumbnailConcept && item.compositeScore >= 4));
+  assert.ok(ideas.every((item) => item.titleCandidates.length >= 3 && item.thumbnailCandidates.length >= 3));
+  assert.ok(ideas.every((item) => item.marketEvidence.measuredDemand === false));
   assert.ok(ideas.every((item) => item.trafficStrategy !== 'trending' && item.trendDirection !== 'rising'), 'offline fallback must not fabricate current trends');
   const fullBatch = await brainstormGrowthIdeas(channel({ contentPillars: ['space'] }), { count: 20, useAi: false });
   assert.equal(fullBatch.length, 20, 'a single-pillar channel can still receive the maximum distinct batch');
@@ -232,6 +234,8 @@ test('channel director produces an idempotent video request and links the idea',
   assert.equal(captured.request.audio.voice, 'af_heart');
   assert.equal(captured.request.subtitles.enabled, false);
   assert.equal(captured.request.metadata.thumbnailConcept, idea.thumbnailConcept);
+  assert.equal(captured.request.metadata.titleAngle, idea.packagingExperiment.titleAngle);
+  assert.equal(captured.request.metadata.queuePriority, 'normal');
   assert.match(captured.key, /channel:science-lab:idea:/);
 });
 

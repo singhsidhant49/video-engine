@@ -69,7 +69,7 @@ export class PostgresJobStore {
   }
 
   /** Atomically applies idempotency and admission limits across API replicas. */
-  async createJob(job, { maxQueuedJobs, maxOwnerPendingJobs } = {}) {
+  async createJob(job, { maxQueuedJobs, maxOwnerPendingJobs, maxChannelPendingJobs } = {}) {
     const client = await this.pool.connect();
     const pending = ['queued', 'preparing', 'processing', 'cancel_requested'];
     try {
@@ -85,11 +85,15 @@ export class PostgresJobStore {
           return { inserted: false, existing: existing.rows[0].document };
         }
       }
+      const channelId = job.request?.profileId || 'default';
       const counts = await client.query(
-        'SELECT count(*)::int AS global_pending, count(*) FILTER (WHERE owner_id=$1)::int AS owner_pending FROM video_jobs WHERE status = ANY($2::text[])',
-        [job.ownerId, pending],
+        `SELECT count(*)::int AS global_pending,
+          count(*) FILTER (WHERE owner_id=$1)::int AS owner_pending,
+          count(*) FILTER (WHERE owner_id=$1 AND COALESCE(document #>> '{request,profileId}', 'default')=$3)::int AS channel_pending
+         FROM video_jobs WHERE status = ANY($2::text[])`,
+        [job.ownerId, pending, channelId],
       );
-      const { global_pending: globalPending, owner_pending: ownerPending } = counts.rows[0];
+      const { global_pending: globalPending, owner_pending: ownerPending, channel_pending: channelPending } = counts.rows[0];
       if (globalPending >= maxQueuedJobs) {
         await client.query('ROLLBACK');
         return { inserted: false, limit: 'global' };
@@ -97,6 +101,10 @@ export class PostgresJobStore {
       if (ownerPending >= maxOwnerPendingJobs) {
         await client.query('ROLLBACK');
         return { inserted: false, limit: 'owner' };
+      }
+      if (channelPending >= maxChannelPendingJobs) {
+        await client.query('ROLLBACK');
+        return { inserted: false, limit: 'channel' };
       }
       await client.query(`
         INSERT INTO video_jobs (id, owner_id, status, idempotency_key, request_hash, document, created_at, updated_at)
@@ -166,12 +174,14 @@ export class PostgresJobStore {
     }
   }
 
-  async listJobs() {
-    const result = await this.pool.query('SELECT document FROM video_jobs ORDER BY created_at DESC');
+  async listJobs(ownerId = null) {
+    const result = ownerId
+      ? await this.pool.query('SELECT document FROM video_jobs WHERE owner_id=$1 ORDER BY created_at DESC', [ownerId])
+      : await this.pool.query('SELECT document FROM video_jobs ORDER BY created_at DESC');
     return result.rows.map((row) => row.document);
   }
 
-  async listJobsPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [] } = {}) {
+  async listJobsPage(ownerId, { limit = 50, cursor = null, channelId = null, statuses = [], format = null, dateFrom = null, dateTo = null, minDuration = null, maxDuration = null } = {}) {
     const boundedLimit = Math.min(100, Math.max(1, Number(limit) || 50));
     const separator = cursor ? cursor.lastIndexOf('|') : -1;
     const cursorDate = separator > 0 ? cursor.slice(0, separator) : cursor;
@@ -186,6 +196,15 @@ export class PostgresJobStore {
       baseValues.push(statuses);
       filters.push(`status=ANY($${baseValues.length}::text[])`);
     }
+    if (format) {
+      baseValues.push(format);
+      filters.push(`CASE WHEN COALESCE(document #>> '{request,output,aspectRatio}', '')='9:16' OR COALESCE(document #>> '{pipelineBrief,format}', '')='shorts' THEN 'shorts' ELSE 'landscape' END=$${baseValues.length}`);
+    }
+    if (dateFrom) { baseValues.push(dateFrom); filters.push(`created_at >= $${baseValues.length}::timestamptz`); }
+    if (dateTo) { baseValues.push(dateTo); filters.push(`created_at <= $${baseValues.length}::timestamptz`); }
+    const durationExpression = `COALESCE(NULLIF(document #>> '{result,durationSeconds}', '')::numeric, NULLIF(document #>> '{request,output,durationSeconds}', '')::numeric, NULLIF(document #>> '{pipelineBrief,durationSec}', '')::numeric, 0)`;
+    if (minDuration != null) { baseValues.push(minDuration); filters.push(`${durationExpression} >= $${baseValues.length}`); }
+    if (maxDuration != null) { baseValues.push(maxDuration); filters.push(`${durationExpression} <= $${baseValues.length}`); }
     const countValues = [...baseValues];
     const countWhere = filters.join(' AND ');
     if (cursorDate) {

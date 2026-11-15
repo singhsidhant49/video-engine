@@ -246,6 +246,26 @@ test('video service reports real readiness and enforces bounded per-owner admiss
   await service.shutdown({ timeoutMs: 5 });
 });
 
+test('per-channel admission prevents one channel from monopolizing the queue', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-channel-capacity-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const generator = ({ signal }) => new Promise((resolve, reject) => {
+    const fail = () => reject(Object.assign(new Error('shutdown'), { name: 'AbortError' }));
+    if (signal.aborted) fail(); else signal.addEventListener('abort', fail, { once: true });
+  });
+  const service = new VideoJobService({
+    store: new FileJobStore(path.join(root, 'store')), generator, rendersDir: root,
+    concurrency: 1, maxQueuedJobs: 10, maxOwnerPendingJobs: 10, maxChannelPendingJobs: 1,
+  });
+  await service.init();
+  const alpha = CreateVideoRequestSchema.parse({ prompt: 'Alpha channel production', profileId: 'alpha' });
+  const beta = CreateVideoRequestSchema.parse({ prompt: 'Beta channel production', profileId: 'beta' });
+  await service.create('owner', alpha);
+  await assert.rejects(service.create('owner', alpha), (error) => error.code === 'CHANNEL_QUEUE_LIMIT_EXCEEDED');
+  assert.equal((await service.create('owner', beta)).job.channelId, 'beta');
+  await service.shutdown({ timeoutMs: 5 });
+});
+
 test('one permanent deletion removes output, run artifacts, partial outputs, and the job record', async (t) => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-delete-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
@@ -460,6 +480,7 @@ test('post-render QC retry preserves the video ID and recompiles the timeline', 
   const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'Retry this video safely' }));
   const failed = await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'failed');
   assert.equal(failed.error.code, 'POST_RENDER_QC_FAILED');
+  assert.equal(failed.error.stage, 'preparing');
   const retried = await service.retry('account-a', created.job.id);
   assert.equal(retried.job.id, created.job.id);
   await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');

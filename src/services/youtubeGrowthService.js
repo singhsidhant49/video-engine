@@ -145,33 +145,125 @@ async function callIdeaModel(prompt) {
   return null;
 }
 
+const youtubeVideoId = (value) => {
+  try {
+    const url = new URL(value);
+    if (url.hostname.endsWith('youtu.be')) return url.pathname.split('/').filter(Boolean)[0] || null;
+    if (url.pathname.startsWith('/shorts/')) return url.pathname.split('/')[2] || null;
+    return url.searchParams.get('v');
+  } catch { return null; }
+};
+
+const ageDays = (value) => {
+  const relative = String(value || '').toLowerCase().match(/(\d+)\s*(minute|hour|day|week|month|year)s?\s+ago/);
+  if (relative) {
+    const multipliers = { minute: 1 / 1440, hour: 1 / 24, day: 1, week: 7, month: 30, year: 365 };
+    return Math.max(0, Math.floor(Number(relative[1]) * multipliers[relative[2]]));
+  }
+  const time = Date.parse(value || '');
+  return Number.isFinite(time) ? Math.max(0, Math.floor((Date.now() - time) / 86_400_000)) : null;
+};
+
 async function researchCurrentYouTubeMarket(channel) {
   const apiKey = String(process.env.BRAVE_SEARCH_KEY || '').trim();
   if (!apiKey) return [];
-  const query = `site:youtube.com/watch OR site:youtube.com/shorts ${channel.niche} ${channel.contentPillars.slice(0, 5).join(' ')}`;
-  const cached = researchCache.get(query);
+  const queries = [
+    { type: 'niche', query: `site:youtube.com/watch OR site:youtube.com/shorts ${channel.niche} ${channel.contentPillars.slice(0, 5).join(' ')}` },
+    ...channel.competitors.slice(0, 4).map((competitor) => ({ type: 'competitor', competitor, query: `site:youtube.com/watch "${competitor}" ${channel.niche}` })),
+  ];
+  const cacheKey = JSON.stringify(queries);
+  const cached = researchCache.get(cacheKey);
   if (cached && Date.now() - cached.at < RESEARCH_CACHE_MS) return cached.results;
   try {
-    const url = new URL('https://api.search.brave.com/res/v1/web/search');
-    url.search = new URLSearchParams({ q: query, count: '12', safesearch: 'moderate', freshness: 'pm' }).toString();
-    const response = await fetch(url, {
-      headers: { Accept: 'application/json', 'X-Subscription-Token': apiKey },
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const body = await response.json();
-    const results = (body.web?.results || []).filter((item) => /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch|shorts)/i.test(item.url || ''))
-      .slice(0, 10).map((item) => ({
-        title: String(item.title || '').slice(0, 180), url: item.url,
-        description: String(item.description || '').slice(0, 400), age: item.age || item.page_age || null,
+    const attempts = await Promise.allSettled(queries.map(async (entry) => {
+      const url = new URL('https://api.search.brave.com/res/v1/web/search');
+      url.search = new URLSearchParams({ q: entry.query, count: entry.type === 'competitor' ? '8' : '15', safesearch: 'moderate', freshness: 'pm' }).toString();
+      const response = await fetch(url, { headers: { Accept: 'application/json', 'X-Subscription-Token': apiKey }, signal: AbortSignal.timeout(15_000) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const body = await response.json();
+      return (body.web?.results || []).map((item) => ({ item, entry }));
+    }));
+    const batches = attempts.filter((attempt) => attempt.status === 'fulfilled').map((attempt) => attempt.value);
+    if (!batches.length) throw attempts.find((attempt) => attempt.status === 'rejected')?.reason || new Error('No market research query succeeded');
+    const unique = new Map();
+    for (const { item, entry } of batches.flat()) {
+      const id = youtubeVideoId(item.url);
+      if (!id || unique.has(id)) continue;
+      const publishedValue = item.page_age || item.age || null;
+      unique.set(id, {
+        videoId: id, title: String(item.title || '').replace(/\s*[-|]\s*YouTube\s*$/i, '').slice(0, 180), url: item.url,
+        description: String(item.description || '').slice(0, 400), publishedAt: publishedValue,
+        ageDays: ageDays(publishedValue), competitor: entry.competitor || null, queryType: entry.type,
         source: 'brave_recent_youtube_search', capturedAt: new Date().toISOString(),
-      }));
-    researchCache.set(query, { at: Date.now(), results });
+        metricsObserved: false,
+      });
+    }
+    const results = await Promise.all([...unique.values()].slice(0, 30).map(async (result) => {
+      if (!result.competitor) return result;
+      try {
+        const response = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(result.url)}&format=json`, { signal: AbortSignal.timeout(5_000) });
+        if (!response.ok) return { ...result, competitorValidated: false };
+        const author = String((await response.json()).author_name || '');
+        const expected = result.competitor.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const actual = author.toLowerCase().replace(/[^a-z0-9]/g, '');
+        return { ...result, author, competitorValidated: Boolean(expected && (actual.includes(expected) || expected.includes(actual))) };
+      } catch { return { ...result, competitorValidated: false }; }
+    }));
+    researchCache.set(cacheKey, { at: Date.now(), results });
     return results;
   } catch (error) {
     console.warn(`Current YouTube market research unavailable: ${error.message}`);
     return [];
   }
+}
+
+function marketSignalsForIdea({ title, primaryKeyword, contentPillar }, results) {
+  const tokens = String(`${primaryKeyword} ${contentPillar}`).toLowerCase().match(/[a-z0-9]+/g)?.filter((token) => token.length > 3) || [];
+  const matches = results.filter((result) => tokens.some((token) => result.title.toLowerCase().includes(token)));
+  const similarTitles = results.filter((result) => titleSimilarity(title, result.title) >= 0.42);
+  const dated = matches.map((result) => result.ageDays).filter(Number.isFinite);
+  return {
+    mode: results.length ? 'observed_search_results' : 'channel_inputs_only',
+    observedResults: matches.length,
+    validatedCompetitorUploads: matches.filter((result) => result.competitorValidated).length,
+    newestAgeDays: dated.length ? Math.min(...dated) : null,
+    titleSaturation: similarTitles.length >= 5 ? 'high' : similarTitles.length >= 2 ? 'medium' : 'low',
+    topicGap: results.length && matches.length <= 1 ? 'underrepresented_in_observed_results' : matches.length >= 6 ? 'crowded_in_observed_results' : 'unconfirmed',
+    measuredDemand: false,
+  };
+}
+
+function buildTitleCandidates(item, selectedTitle, fallbackAngle) {
+  const supplied = Array.isArray(item.titleCandidates) ? item.titleCandidates : [];
+  const candidates = [
+    { text: selectedTitle, angle: item.packagingExperiment?.titleAngle || fallbackAngle },
+    ...supplied.map((value) => typeof value === 'string' ? { text: value, angle: 'alternative' } : value),
+    { text: `Why ${item.contentPillar || item.primaryKeyword || 'This'} Changes Everything`, angle: 'outcome_reveal' },
+    { text: `The Hidden ${item.contentPillar || item.primaryKeyword || 'Truth'} Mistake`, angle: 'curiosity_gap' },
+  ];
+  const seen = new Set();
+  return candidates.map((candidate) => ({
+    text: String(candidate?.text || '').trim().slice(0, 100),
+    angle: String(candidate?.angle || 'alternative').trim().slice(0, 80),
+  })).filter((candidate) => candidate.text.length >= 5 && !seen.has(candidate.text.toLowerCase()) && seen.add(candidate.text.toLowerCase()))
+    .slice(0, 4).map((candidate, index) => ({ ...candidate, score: scoreTitle(candidate.text), selected: index === 0 }));
+}
+
+function buildThumbnailCandidates(item, selectedConcept, fallbackVariant) {
+  const supplied = Array.isArray(item.thumbnailCandidates) ? item.thumbnailCandidates : [];
+  const candidates = [
+    { concept: selectedConcept, variant: item.packagingExperiment?.thumbnailVariant || fallbackVariant, overlayText: '' },
+    ...supplied.map((value) => typeof value === 'string' ? { concept: value, variant: 'alternative', overlayText: '' } : value),
+    { concept: `A single expressive subject confronting ${item.contentPillar || item.primaryKeyword || 'the central problem'}, strong emotional contrast, uncluttered background`, variant: 'expressive_subject', overlayText: 'WHY?' },
+    { concept: `Before-and-after visual contrast for ${item.contentPillar || item.primaryKeyword || 'the outcome'}, one clear transformation, mobile-readable composition`, variant: 'before_after', overlayText: 'BEFORE / AFTER' },
+  ];
+  const seen = new Set();
+  return candidates.map((candidate) => ({
+    concept: String(candidate?.concept || '').trim().slice(0, 500),
+    variant: String(candidate?.variant || 'alternative').trim().slice(0, 80),
+    overlayText: String(candidate?.overlayText || '').trim().slice(0, 40),
+  })).filter((candidate) => candidate.concept.length >= 5 && !seen.has(candidate.concept.toLowerCase()) && seen.add(candidate.concept.toLowerCase()))
+    .slice(0, 4).map((candidate, index) => ({ ...candidate, selected: index === 0 }));
 }
 
 export function summarizeChannelPerformance(snapshots = [], ideas = []) {
@@ -245,10 +337,20 @@ export function summarizeChannelPerformance(snapshots = [], ideas = []) {
     }
     return Object.fromEntries(Object.entries(groups).map(([key, rows]) => [key, summarizeRows(rows)]));
   };
+  const groupByExperimentField = (snapshotField, ideaField) => {
+    const groups = {};
+    for (const row of linked) {
+      const value = row.snapshot[snapshotField] || ideaField.split('.').reduce((current, part) => current?.[part], row.idea);
+      const key = String(value || '').trim();
+      if (!key) continue;
+      (groups[key] ||= []).push(row);
+    }
+    return Object.fromEntries(Object.entries(groups).map(([key, rows]) => [key, summarizeRows(rows)]));
+  };
   const pillars = groupByIdeaField('contentPillar');
   const hookFormulas = groupByIdeaField('hookFormula');
-  const titleAngles = groupByIdeaField('packagingExperiment.titleAngle');
-  const thumbnailVariants = groupByIdeaField('packagingExperiment.thumbnailVariant');
+  const titleAngles = groupByExperimentField('titleAngle', 'packagingExperiment.titleAngle');
+  const thumbnailVariants = groupByExperimentField('thumbnailVariant', 'packagingExperiment.thumbnailVariant');
   const comparisonGroups = { formats, pillars, hookFormulas, titleAngles, thumbnailVariants };
   const reliableComparisons = Object.fromEntries(Object.entries(comparisonGroups).flatMap(([name, groups]) => {
     const leader = comparativeLeader(groups); return leader ? [[name, leader]] : [];
@@ -414,8 +516,9 @@ IDEATION RULES:
 - Do not fabricate search volume, trends, competitor findings, RPM, facts, or sources. When live research is unavailable, use tier estimates and set evidenceSource to the channel inputs used.
 - Use first-party performance only at its stated confidence level. Prefer repeatable viewer needs and packaging patterns, not copies of past titles. Never treat insufficient or directional evidence as a proven causal winner.
 - Assign explicit packaging experiment labels so outcomes can be compared later: titleAngle, hookVariant, thumbnailVariant, and a falsifiable hypothesis. Reuse a small stable vocabulary across the batch instead of inventing a unique label for every idea.
+- Supply 3 genuinely different titleCandidates and 3 thumbnailCandidates. Each title candidate has text and angle. Each thumbnail candidate has concept, variant, and optional overlayText. Do not create trivial punctuation-only variants.
 
-Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPillar, retentionScore (1-100), format (landscape or shorts), durationSeconds, durationRationale, trafficStrategy (search_first, browse_first, or trending), primaryKeyword, competition (low/medium/high), searchVolumeTier (low/medium/high), trendDirection (rising/stable/declining), rpmTier (low/medium/high/premium), urgency (trending/evergreen/seasonal), compositeScore (4-40), thumbnailConcept, packagingExperiment {titleAngle, hookVariant, thumbnailVariant, hypothesis}, whyThisIdea, and evidenceSource. Return JSON only.`;
+Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrativeArc, contentPillar, retentionScore (1-100), format (landscape or shorts), durationSeconds, durationRationale, trafficStrategy (search_first, browse_first, or trending), primaryKeyword, competition (low/medium/high), searchVolumeTier (low/medium/high), trendDirection (rising/stable/declining), rpmTier (low/medium/high/premium), urgency (trending/evergreen/seasonal), compositeScore (4-40), thumbnailConcept, thumbnailCandidates, packagingExperiment {titleAngle, hookVariant, thumbnailVariant, hypothesis}, whyThisIdea, and evidenceSource. Return JSON only.`;
     try { raw = await callIdeaModel(prompt); } catch (error) { console.warn(`Idea model unavailable; using deterministic fallback: ${error.message}`); }
   }
   const fallback = heuristicIdeas(channel, bounded, history, performanceSummary);
@@ -427,6 +530,8 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
     : [channel.productionDefaults?.aspectRatio === '9:16' ? 'shorts' : 'landscape'];
   const ranges = channel.productionDefaults?.durationRanges || { shorts: { min: 20, max: 60 }, landscape: { min: 120, max: 600 } };
   const allowedTrafficStrategies = marketResearch.length ? ['search_first', 'browse_first', 'trending'] : ['search_first', 'browse_first'];
+  const recentExperiments = history.slice(0, 10);
+  const usageCount = (field, value) => recentExperiments.filter((idea) => idea.packagingExperiment?.[field] === value).length;
   const candidates = Array.isArray(raw) ? [...raw, ...fallback] : fallback;
   const normalized = candidates.map((item, index) => {
     const base = fallback[index % Math.max(1, fallback.length)] || heuristicIdeas(channel, 1, [], performanceSummary)[0];
@@ -452,10 +557,22 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
       : pickEnum(item.trendDirection, ['stable', 'declining'], base.trendDirection);
     const contentPillar = channel.contentPillars.includes(item.contentPillar) ? item.contentPillar : channel.contentPillars[index % channel.contentPillars.length];
     const primaryKeyword = String(item.primaryKeyword || base.primaryKeyword).trim().slice(0, 120);
+    const thumbnailConcept = String(item.thumbnailConcept || base.thumbnailConcept).trim().slice(0, 500);
+    const titleAngle = String(item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle).trim().slice(0, 80);
+    const hookVariant = String(item.packagingExperiment?.hookVariant || base.packagingExperiment.hookVariant).trim().slice(0, 80);
+    const thumbnailVariant = String(item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant).trim().slice(0, 80);
     const scoreBreakdown = calculateOpportunityScore({
       idea: { searchVolumeTier, trendDirection, competition, durationSeconds, contentPillar, primaryKeyword },
       titleScore, retentionScore, channel,
     });
+    const provenTitleWinner = performanceSummary.guidance?.reliableComparisons?.titleAngles;
+    const provenThumbnailWinner = performanceSummary.guidance?.reliableComparisons?.thumbnailVariants;
+    const fatigue = (usageCount('titleAngle', titleAngle) >= 3 && provenTitleWinner !== titleAngle ? 1 : 0)
+      + (usageCount('thumbnailVariant', thumbnailVariant) >= 3 && provenThumbnailWinner !== thumbnailVariant ? 1 : 0);
+    if (fatigue) {
+      scoreBreakdown.clickPotential = Math.max(1, scoreBreakdown.clickPotential - fatigue);
+      scoreBreakdown.total = Object.entries(scoreBreakdown).filter(([key]) => key !== 'total').reduce((sum, [, value]) => sum + value, 0);
+    }
     const performanceEvidence = calculatePerformanceEvidence({ format: requestedFormat, contentPillar, hookFormula }, performanceSummary);
     return {
       title, hookFormula,
@@ -478,15 +595,18 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
       scoreBreakdown,
       performanceEvidenceScore: performanceEvidence.score,
       performanceEvidenceReason: performanceEvidence.reason,
-      thumbnailConcept: String(item.thumbnailConcept || base.thumbnailConcept).trim().slice(0, 500),
+      thumbnailConcept,
+      titleCandidates: buildTitleCandidates({ ...item, contentPillar, primaryKeyword }, title, item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle),
+      thumbnailCandidates: buildThumbnailCandidates({ ...item, contentPillar, primaryKeyword }, thumbnailConcept, item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant),
       packagingExperiment: {
-        titleAngle: String(item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle).trim().slice(0, 80),
-        hookVariant: String(item.packagingExperiment?.hookVariant || base.packagingExperiment.hookVariant).trim().slice(0, 80),
-        thumbnailVariant: String(item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant).trim().slice(0, 80),
+        titleAngle,
+        hookVariant,
+        thumbnailVariant,
         hypothesis: String(item.packagingExperiment?.hypothesis || base.packagingExperiment.hypothesis).trim().slice(0, 500),
       },
       whyThisIdea: String(item.whyThisIdea || base.whyThisIdea).trim().slice(0, 1_000),
       evidenceSource,
+      marketEvidence: marketSignalsForIdea({ title, primaryKeyword, contentPillar }, marketResearch),
     };
   }).filter((item, index, all) => item.title.length >= 5
     && !prior.has(item.title.toLowerCase())
@@ -500,6 +620,9 @@ Each item must contain: title, hookFormula, spokenHook, narrativeArc, contentPil
     return {
       ...idea, compositeScore: scoreBreakdown.total, scoreBreakdown,
       performanceEvidenceScore: performanceEvidence.score, performanceEvidenceReason: performanceEvidence.reason,
+      titleCandidates: buildTitleCandidates(idea, idea.title, idea.packagingExperiment.titleAngle),
+      thumbnailCandidates: buildThumbnailCandidates(idea, idea.thumbnailConcept, idea.packagingExperiment.thumbnailVariant),
+      marketEvidence: marketSignalsForIdea(idea, marketResearch),
     };
   })).slice(0, bounded);
 }

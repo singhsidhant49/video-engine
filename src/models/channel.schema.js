@@ -37,6 +37,8 @@ export const AutomationSettingsSchema = z.object({
   scheduleCron: z.string().trim().min(9).max(100).default('0 12 * * *'),
   timezone: z.string().trim().min(1).max(100).default('UTC'),
   approvalMode: z.enum(['manual_approval', 'automatic']).default('manual_approval'),
+  queuePriority: z.enum(['high', 'normal', 'low']).default('normal'),
+  maxPendingJobs: z.number().int().min(1).max(10).default(2),
   autoPublish: z.boolean().default(false),
   publishPrivacy: z.enum(['private', 'unlisted', 'public']).default('private'),
   lastScheduledAt: z.string().datetime().nullable().default(null),
@@ -136,6 +138,8 @@ export const ChannelPatchSchema = z.object({
     scheduleCron: z.string().trim().min(9).max(100).optional(),
     timezone: z.string().trim().min(1).max(100).optional(),
     approvalMode: z.enum(['manual_approval', 'automatic']).optional(),
+    queuePriority: z.enum(['high', 'normal', 'low']).optional(),
+    maxPendingJobs: z.number().int().min(1).max(10).optional(),
     autoPublish: z.boolean().optional(),
     publishPrivacy: z.enum(['private', 'unlisted', 'public']).optional(),
   }).strict().optional(),
@@ -172,6 +176,18 @@ export const ChannelVideoIdeaSchema = z.object({
   performanceEvidenceScore: z.number().int().min(-3).max(3).default(0),
   performanceEvidenceReason: z.string().trim().max(500).default('No reliable comparative channel evidence yet.'),
   thumbnailConcept: z.string().trim().min(5).max(500).default('One clear focal subject with high contrast and mobile-readable composition.'),
+  titleCandidates: z.array(z.object({
+    text: z.string().trim().min(5).max(100),
+    angle: z.string().trim().min(2).max(80),
+    score: z.number().int().min(1).max(100),
+    selected: z.boolean().default(false),
+  }).strict()).max(5).default([]),
+  thumbnailCandidates: z.array(z.object({
+    concept: z.string().trim().min(5).max(500),
+    variant: z.string().trim().min(2).max(80),
+    overlayText: z.string().trim().max(40).default(''),
+    selected: z.boolean().default(false),
+  }).strict()).max(5).default([]),
   packagingExperiment: z.object({
     titleAngle: z.string().trim().min(2).max(80).default('unclassified'),
     hookVariant: z.string().trim().min(2).max(80).default('unclassified'),
@@ -183,6 +199,15 @@ export const ChannelVideoIdeaSchema = z.object({
   }),
   whyThisIdea: z.string().trim().min(5).max(1_000).default('Strong fit for this channel and audience.'),
   evidenceSource: z.string().trim().min(2).max(500).default('channel profile and audience pain points'),
+  marketEvidence: z.object({
+    mode: z.enum(['observed_search_results', 'channel_inputs_only']).default('channel_inputs_only'),
+    observedResults: z.number().int().min(0).max(100).default(0),
+    validatedCompetitorUploads: z.number().int().min(0).max(100).default(0),
+    newestAgeDays: z.number().int().min(0).nullable().default(null),
+    titleSaturation: z.enum(['low', 'medium', 'high']).default('low'),
+    topicGap: z.enum(['underrepresented_in_observed_results', 'crowded_in_observed_results', 'unconfirmed']).default('unconfirmed'),
+    measuredDemand: z.literal(false).default(false),
+  }).strict().default({}),
   status: z.enum(['draft', 'approved', 'queued', 'producing', 'ready', 'publishing', 'publish_failed', 'published', 'rejected', 'failed']).default('draft'),
   videoId: z.string().max(120).nullable().default(null),
   youtubeVideoId: z.string().max(120).nullable().default(null),
@@ -195,6 +220,8 @@ export const ChannelVideoIdeaSchema = z.object({
 export const IdeaPatchSchema = z.object({
   status: z.enum(['approved', 'rejected']).optional(),
   publishAt: ChannelVideoIdeaSchema.shape.publishAt.optional(),
+  selectedTitle: z.string().trim().min(5).max(100).optional(),
+  selectedThumbnailConcept: z.string().trim().min(5).max(500).optional(),
 }).strict();
 
 const Percentage = z.number().min(0).max(100).nullable().default(null);
@@ -223,6 +250,9 @@ export const ChannelPerformanceSnapshotSchema = z.object({
     browse: Percentage, suggested: Percentage, search: Percentage,
     shortsFeed: Percentage, external: Percentage,
   }).strict().default({}),
+  titleAngle: z.string().trim().max(80).nullable().default(null),
+  hookVariant: z.string().trim().max(80).nullable().default(null),
+  thumbnailVariant: z.string().trim().max(80).nullable().default(null),
   source: z.enum(['manual', 'csv', 'api']).default('manual'),
 }).strict();
 

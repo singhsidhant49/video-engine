@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { generationQueueJobId } from '../src/server/bullVideoQueue.js';
+import { fairQueuePriority, generationQueueJobId } from '../src/server/bullVideoQueue.js';
 import { VideoJobService } from '../src/server/videoJobService.js';
 
 const timestamp = new Date().toISOString();
@@ -53,6 +53,12 @@ function fakeTaskQueue({ present = true } = {}) {
 test('generation queue IDs are deterministic for a video attempt', () => {
   assert.equal(generationQueueJobId('vid_abc', 0), 'video-vid_abc-0');
   assert.equal(generationQueueJobId('vid_abc', 2), 'video-vid_abc-2');
+});
+
+test('fair queue priority rotates channel depth before applying channel tier', () => {
+  assert.ok(fairQueuePriority(0, 'low') < fairQueuePriority(1, 'high'));
+  assert.ok(fairQueuePriority(0, 'high') < fairQueuePriority(0, 'normal'));
+  assert.ok(fairQueuePriority(0, 'normal') < fairQueuePriority(0, 'low'));
 });
 
 test('worker reconciliation does not duplicate an existing queued generation', async () => {
