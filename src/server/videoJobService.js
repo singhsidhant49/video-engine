@@ -14,6 +14,7 @@ const publicJob = (job) => ({
   channelId: job.request?.profileId || job.pipelineBrief?.channel?.id || 'default',
   createdAt: job.createdAt, startedAt: job.startedAt, completedAt: job.completedAt,
   error: job.error || undefined, metadata: job.metadata || undefined,
+  retryCount: job.retryCount || 0, lastError: job.lastError || undefined,
   costEstimate: job.costEstimate || undefined,
 });
 
@@ -59,6 +60,26 @@ function safeGenerationFailure(error) {
   return match
     ? { code: error?.code || match[1], message: match[2] }
     : { code: error?.code || 'GENERATION_FAILED', message: 'Video generation failed' };
+}
+
+const AUTOMATIC_RETRY_CODES = new Set([
+  'GENERATION_FAILED',
+  'RENDER_STALLED_OR_CRASHED',
+  'UNRESOLVED_PRODUCTION_MEDIA',
+]);
+
+export function isAutomaticallyRetryableFailure(failure, originalError = null) {
+  const message = String(originalError?.message || failure?.message || '');
+  if (/authentication failed|unauthorized|invalid api key|invalid token|credit balance ran out|insufficient[_ ]funds|payment required|not configured/i.test(message)) return false;
+  return AUTOMATIC_RETRY_CODES.has(failure?.code);
+}
+
+function resumeStageForFailure(failure) {
+  if (failure?.resumeFrom) return failure.resumeFrom;
+  if (['UNRESOLVED_PRODUCTION_MEDIA', 'EDITORIAL_ASSET_QC_FAILED'].includes(failure?.code)) return 'assets';
+  if (failure?.code === 'NARRATION_DURATION_FAILED') return 'audio';
+  if (failure?.code === 'POST_RENDER_QC_FAILED') return 'timeline';
+  return null;
 }
 
 const failedQcChecks = (qc) => Array.isArray(qc?.checks)
@@ -706,7 +727,31 @@ export class VideoJobService {
         job.error.failedChecks = failures.map(({ id: checkId, detail }) => ({ id: checkId, detail }));
         job.error.resumeFrom = resumeStageForTimelineQc(timelineQc);
       }
-      await this.store.putJob(job);
+      const automaticRetryLimit = Math.max(0, Number(process.env.VIDEO_AUTOMATIC_RETRY_LIMIT ?? 2));
+      const canAutomaticallyRetry = !cancelled && !timedOut && this.taskQueue
+        && (job.retryCount || 0) < automaticRetryLimit
+        && isAutomaticallyRetryableFailure(job.error, error);
+      if (canAutomaticallyRetry) {
+        const retryNumber = (job.retryCount || 0) + 1;
+        const delayMs = Math.min(15 * 60_000, 30_000 * (2 ** (retryNumber - 1)));
+        job.lastError = job.error;
+        job.error = null;
+        job.status = 'queued';
+        job.stage = 'queued';
+        job.completedAt = null;
+        job.updatedAt = now();
+        job.retryCount = retryNumber;
+        job.resumeExisting = true;
+        job.resumeFrom = resumeStageForFailure(job.lastError);
+        await this.store.putJob(job);
+        await this.taskQueue.enqueueGeneration(id, retryNumber, {
+          channelId: job.request?.profileId || 'default',
+          queuePriority: job.metadata?.queuePriority,
+          delayMs,
+        });
+      } else {
+        await this.store.putJob(job);
+      }
       // Let BullMQ retain/retry the queue item instead of marking an interrupted
       // processor complete while the durable video record is still queued.
       if (recoverableInterruption && this.taskQueue) throw (queueAbortReason || error);

@@ -86,7 +86,7 @@ export class BullVideoQueue {
     }
   }
 
-  async enqueueGeneration(videoId, attempt = 0, { channelId = 'default', queuePriority = 'normal' } = {}) {
+  async enqueueGeneration(videoId, attempt = 0, { channelId = 'default', queuePriority = 'normal', delayMs = 0 } = {}) {
     const jobId = generationQueueJobId(videoId, attempt);
     let existing = await this.queue.getJob(jobId);
     if (existing && ['completed', 'failed'].includes(await existing.getState())) { await existing.remove(); existing = null; }
@@ -97,7 +97,7 @@ export class BullVideoQueue {
     const sameChannelDepth = queued.filter((job) => job.name === 'generate' && (job.data?.channelId || 'default') === channelId).length;
     const priority = fairQueuePriority(sameChannelDepth, queuePriority);
     return this.queue.add('generate', { videoId, attempt, channelId, queuePriority }, {
-      jobId, priority, attempts: 3, backoff: { type: 'exponential', delay: 5_000 },
+      jobId, priority, delay: Math.max(0, Number(delayMs) || 0), attempts: 3, backoff: { type: 'exponential', delay: 5_000 },
       removeOnComplete: { age: 86_400, count: 1_000 }, removeOnFail: { age: 604_800, count: 2_000 },
     });
   }

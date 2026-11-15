@@ -1,4 +1,5 @@
 import { rankGrowthIdeas } from '../services/youtubeGrowthService.js';
+import { isAutomaticallyRetryableFailure } from './videoJobService.js';
 
 const FIELD_RANGES = [[0, 59], [0, 23], [1, 31], [1, 12], [0, 7]];
 
@@ -171,9 +172,27 @@ export class ChannelScheduler {
         catch (error) { console.error(`Automatic YouTube publish failed for ${idea.id}:`, error); }
         continue;
       }
-      if (!idea.videoId || !['queued', 'producing'].includes(idea.status)) continue;
+      // Include persisted failures so an automatic channel can recover a job
+      // that failed before an API restart or before this release was deployed.
+      // Include persisted failures so an automatic channel can recover a job
+      // that failed before an API restart or before this release was deployed.
+      // Include persisted failures so an automatic channel can recover a job
+      // that failed before an API restart or before this release was deployed.
+      if (!idea.videoId || !['queued', 'producing', 'failed'].includes(idea.status)) continue;
       try {
         const video = await this.videoService.get(ownerId, idea.videoId);
+        const automaticRetryLimit = Math.max(0, Number(process.env.VIDEO_AUTOMATIC_RETRY_LIMIT ?? 2));
+        const shouldRecoverFailedProduction = channel.automation.enabled
+          && channel.automation.approvalMode === 'automatic'
+          && video.status === 'failed'
+          && Number(video.retryCount || 0) < automaticRetryLimit
+          && isAutomaticallyRetryableFailure(video.error);
+        if (shouldRecoverFailedProduction && typeof this.videoService.retry === 'function') {
+          const retried = await this.videoService.retry(ownerId, idea.videoId, { resumeFrom: video.error?.resumeFrom || null });
+          await this.store.putIdea(ownerId, { ...idea, status: 'queued', error: null, updatedAt: new Date().toISOString() });
+          console.warn(`Automatically retried failed production ${idea.videoId} for channel ${channel.id} (attempt ${retried.job?.retryCount || Number(video.retryCount || 0) + 1}).`);
+          continue;
+        }
         const status = video.status === 'completed' ? 'ready' : (video.status === 'failed' || video.status === 'cancelled' ? 'failed' : video.status === 'queued' ? 'queued' : 'producing');
         if (status !== idea.status) await this.store.putIdea(ownerId, { ...idea, status, error: video.error?.message || null, updatedAt: new Date().toISOString() });
         if (status === 'ready' && channel.automation.autoPublish && this.publisher && this.publishingEnabled) {

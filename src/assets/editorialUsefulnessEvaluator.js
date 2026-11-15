@@ -370,9 +370,21 @@ export function evaluateEditorialUsefulness({
       // (for example, a canyon hiker cannot visibly prove "no signal"). Keep
       // generic contextual media on the stricter threshold.
       const isNativeVideo = candidate.type === 'video' || candidate.mediaType === 'video';
+      // A clean still that visibly contains the requested subject and action is
+      // a legitimate hook. Requiring it to clear the generic-stock threshold
+      // caused otherwise useful, pixel-inspected assets to abort unattended
+      // productions by a few rounding points. Keep the relaxed margin narrow:
+      // the candidate still needs useful editorial value, a visible action and
+      // no meaningful distraction risk.
+      const cleanActionStill = !isNativeVideo
+        && ['DIRECT', 'CONTEXTUAL'].includes(matchClass)
+        && (editorialMatch?.actionMatch || 0) >= 0.75
+        && specificity >= 0.45
+        && verdict === 'USEFUL';
       const specificRealHook = distractionRisk < 0.30 && (
         (matchClass === 'DIRECT' && specificity >= 0.55)
         || (matchClass === 'CONTEXTUAL' && isNativeVideo && specificity >= 0.55)
+        || cleanActionStill
       );
       const minimumHookCommunication = specificRealHook ? 0.60 : 0.65;
       if (communicationValue < minimumHookCommunication || specificity < 0.45 || (verdict !== 'STRONG' && verdict !== 'ESSENTIAL' && verdict !== 'USEFUL') || distractionRisk >= 0.30) {

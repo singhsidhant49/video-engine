@@ -317,6 +317,34 @@ test('scheduler backs off failed production instead of retrying every tick', asy
   assert.equal(due.automation.nextRetryAt, '2026-11-05T09:01:30.000Z');
 });
 
+test('automatic channel recovers a retryable failed video without human interaction', async () => {
+  const automatic = channel({ automation: { enabled: true, approvalMode: 'automatic' } });
+  const idea = { id: 'failed-idea', channelId: automatic.id, status: 'failed', videoId: 'vid-failed' };
+  let retried = 0; let savedIdea = idea;
+  const store = {
+    listAllChannels: async () => [{ ownerId: 'acct-a', channel: automatic }],
+    listIdeas: async () => [savedIdea],
+    putIdea: async (_owner, value) => { savedIdea = value; },
+  };
+  const videoService = {
+    get: async () => ({
+      id: 'vid-failed', status: 'failed', retryCount: 0,
+      error: { code: 'UNRESOLVED_PRODUCTION_MEDIA', message: 'One shot needs replacement', resumeFrom: 'assets' },
+    }),
+    retry: async (_owner, id, options) => {
+      retried += 1;
+      assert.equal(id, 'vid-failed');
+      assert.equal(options.resumeFrom, 'assets');
+      return { job: { id, status: 'queued', retryCount: 1 }, reused: true };
+    },
+  };
+  const scheduler = new ChannelScheduler({ store, director: {}, videoService });
+  await scheduler.tick(new Date('2026-11-05T09:01:00.000Z'));
+  assert.equal(retried, 1);
+  assert.equal(savedIdea.status, 'queued');
+  assert.equal(savedIdea.error, null);
+});
+
 test('YouTube OAuth uses signed state and stores encrypted tokens', async () => {
   let stored = channel();
   const store = { getChannel: async () => stored, putChannel: async (_owner, value) => { stored = value; } };

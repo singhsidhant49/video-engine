@@ -68,6 +68,39 @@ test('specific native contextual hook footage is not rejected for an invisible d
   assert.equal(result.rolePass, true);
 });
 
+test('clean action-specific hook still is not rejected only because it is not video', () => {
+  const result = evaluateEditorialUsefulness({
+    candidate: {
+      type: 'image',
+      label: 'Close-up hands pressing keys on a laptop keyboard',
+      tags: ['hands', 'typing', 'laptop', 'keyboard'],
+    },
+    inspection: {
+      primarySubject: 'hands on laptop keyboard',
+      sceneSummary: 'Close-up of hands actively typing on a laptop keyboard',
+      visibleAction: 'fingers pressing laptop keys',
+      visibleObjects: ['hands', 'laptop', 'keyboard'],
+      environment: 'desk workspace',
+    },
+    visibleNeed: {
+      visualRole: 'HOOK',
+      subject: 'finger pressing laptop keyboard close up',
+      primaryConcept: 'finger pressing laptop keyboard close up',
+      requiredConcepts: ['finger pressing laptop keyboard'],
+      narrationText: 'One key press starts a request that crosses the internet.',
+    },
+    editorialMatch: {
+      classification: 'DIRECT', subjectMatch: 0.8, actionMatch: 1,
+      environmentMatch: 1, objectMatch: 0.8, evidenceMatch: 0.82,
+    },
+  });
+
+  assert.ok(result.communicationValue >= 0.60);
+  assert.ok(result.specificity >= 0.45);
+  assert.equal(result.verdict, 'USEFUL');
+  assert.equal(result.rolePass, true);
+});
+
 // =========================================================================
 // MILESTONE: Editorial Usefulness, Search Calibration & Human-Editor Gating
 // Tests for Sections 49-60
