@@ -11,13 +11,21 @@ const finitePositive = (value, fallback) => {
 export const CONTENT_TYPE_DEFAULT_SPEEDS = Object.freeze({
   meditation: 0.76,
   audiobook: 0.82,
-  documentary: 0.95,
-  investigative: 0.92,
-  story: 0.92,
-  explainer: (format) => (format === 'shorts' ? 1.00 : 0.98),
-  educational: (format) => (format === 'shorts' ? 1.00 : 0.98),
-  tutorial: (format) => (format === 'shorts' ? 1.00 : 0.95),
-  motivational: 0.98,
+  documentary: 0.98,
+  investigative: 0.95,
+  story: 0.95,
+  explainer: (format) => (format === 'shorts' ? 1.15 : 1.02),
+  educational: (format) => (format === 'shorts' ? 1.15 : 1.02),
+  tutorial: (format) => (format === 'shorts' ? 1.12 : 0.98),
+  motivational: (format) => (format === 'shorts' ? 1.18 : 1.08),
+  business: (format) => (format === 'shorts' ? 1.15 : 1.04),
+  finance: (format) => (format === 'shorts' ? 1.15 : 1.04),
+  psychology: (format) => (format === 'shorts' ? 1.14 : 1.02),
+  science: (format) => (format === 'shorts' ? 1.15 : 1.04),
+  technology: (format) => (format === 'shorts' ? 1.15 : 1.04),
+  tech: (format) => (format === 'shorts' ? 1.15 : 1.04),
+  mystery: (format) => (format === 'shorts' ? 1.10 : 0.96),
+  horror: (format) => (format === 'shorts' ? 1.08 : 0.94),
 });
 
 export function isMeditationNarration({ topic = '', niche = '', contentType = '' } = {}) {
@@ -50,10 +58,12 @@ export function resolveNarrationProfile({
   niche = '',
   contentType = '',
   format = 'landscape',
-  baseSpeed = 0.9,
+  baseSpeed = null,
   meditationSpeed = 0.76,
 } = {}) {
-  const normalSpeed = finitePositive(baseSpeed, 0.9);
+  const isShorts = format === 'shorts';
+  const defaultBaseSpeed = isShorts ? 1.15 : 1.02;
+  const normalSpeed = finitePositive(baseSpeed, defaultBaseSpeed);
   const meditation = isMeditationNarration({ topic, niche, contentType });
 
   let speed;
@@ -80,22 +90,44 @@ export function resolveNarrationProfile({
     id = contentType;
     const mapped = CONTENT_TYPE_DEFAULT_SPEEDS[contentType];
     speed = typeof mapped === 'function' ? mapped(format) : mapped;
-    minimumRepairSpeed = contentType === 'motivational' ? 0.75 : 0.70;
+    minimumRepairSpeed = isShorts ? 0.85 : contentType === 'motivational' ? 0.78 : 0.70;
   } else {
     id = 'standard';
     speed = normalSpeed;
-    minimumRepairSpeed = 0.70;
+    minimumRepairSpeed = isShorts ? 0.85 : 0.70;
   }
 
-  // Meditation speech budgeting uses effective rate accounting for silence pauses
+  // Content-aware speech budgeting:
+  // - Shorts: 165-190 WPM (fast, energetic delivery)
+  // - Long-form/Landscape: 140-165 WPM (balanced, natural narration)
+  // - Meditation: ~70-75 WPM (effective rate accounting for intentional silence pauses)
   const speechRateWps = meditation
     ? Number((1.55 * speed).toFixed(2))
-    : Number((2.35 * speed).toFixed(2));
+    : isShorts
+      ? Number((2.55 * speed).toFixed(2))
+      : Number((2.45 * speed).toFixed(2));
 
-  const targetLufs = meditation ? -18 : ['audiobook', 'story'].includes(contentType) ? -17 : contentType === 'motivational' ? -15.5 : -16;
+  const targetLufs = meditation
+    ? -18
+    : ['audiobook', 'story', 'mystery', 'horror'].includes(contentType)
+      ? -17
+      : contentType === 'motivational'
+        ? -15.5
+        : -16;
+
   const maxPeakDb = meditation ? -2 : -1.5;
-  const delivery = meditation ? 'soft_spacious' : ['documentary', 'investigative'].includes(contentType)
-    ? 'measured_authoritative' : contentType === 'motivational' ? 'energetic_controlled' : ['story', 'audiobook'].includes(contentType) ? 'warm_narrative' : 'clear_conversational';
+
+  const delivery = meditation
+    ? 'soft_spacious'
+    : ['documentary', 'investigative'].includes(contentType)
+      ? 'measured_authoritative'
+      : ['mystery', 'horror'].includes(contentType)
+        ? 'tense_suspenseful'
+        : contentType === 'motivational'
+          ? (isShorts ? 'high_energy_punchy' : 'energetic_controlled')
+          : ['story', 'audiobook'].includes(contentType)
+            ? 'warm_narrative'
+            : (isShorts ? 'energetic_engaging' : 'clear_conversational');
 
   return {
     id,

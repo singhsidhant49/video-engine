@@ -156,7 +156,20 @@ EDITORIAL & PACING RULES:
     a. Recurring real entities must keep the same name and visual identity.
     b. Story/audiobook scenes must preserve character appearance, wardrobe, location, time of day, and important props in the visual description and queries.
     c. Documentary scenes must preserve chronology and period accuracy; never mix modern objects into historical scenes.
-20. HONEST ENGAGEMENT: Never invent facts, danger, certainty, quotations, or emotional stakes to improve retention.`;
+20. HONEST ENGAGEMENT: Never invent facts, danger, certainty, quotations, or emotional stakes to improve retention.
+21. STRICT PROHIBITION ON AI TROPES & FILLER:
+    a. BANNED OPENINGS: Never use greetings ("Hey everyone", "Welcome back"), video meta-intros ("In today's video, we explore...", "Today we will talk about..."), rhetorical clichés ("Have you ever wondered...", "Did you know that..."), or fantasy filler ("Imagine a world where...").
+    b. BANNED TRANSITIONS: Never write robotic filler transitions ("Now let's dive into...", "Without further ado...", "Let's examine...", "In conclusion...").
+    c. Start directly in media res with the concrete contradiction, shocking metric, or dramatic catalyst.
+22. YOUTUBE SHORTS PACING & LOOP CONTRACT (VERTICAL FORMAT):
+    a. The opening hook MUST deliver tension within the first 1–2 seconds. No throat clearing.
+    b. Visual beats must shift every 2.5–4.5 seconds to maintain high viewer retention.
+    c. The final scene must resolve the opening question with a punchy payoff, phrased so that it loops seamlessly back into the very first sentence.
+23. AI VISUAL STORYTELLING & PROMPT CONTRACT (AI IMAGE WORKFLOW):
+    a. Every scene MUST provide a rich, detailed "imagePrompt" specifying visible subject, physical action, environment, motivated lighting, and camera angle.
+    b. The prompt must directly communicate the exact meaning of the narration, NOT just a generic keyword or stock aesthetic.
+    c. NO TEXT: Never request on-image text, words, subtitles, labels, logos, or watermarks.
+    d. CONTINUITY: Keep recurring characters, signature clothing, hair, and locations strictly consistent across all scenes.`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -621,9 +634,83 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
   }
 }
 
-export function getGenreDirectingInstructions(contentType = 'explainer') {
+export function getGenreDirectingInstructions(contentType = 'explainer', format = 'landscape') {
   const type = String(contentType || '').toLowerCase().trim();
+  const isShorts = format === 'shorts' || type === 'shorts';
+
+  if (isShorts) {
+    return {
+      roleDescription: 'You are an elite YouTube Shorts director and scriptwriter specializing in viral, high-retention vertical storytelling.',
+      structureGuidance: `- Hook (0–2s): 1 scene (immediate contradiction, shocking number, or impossible paradox; no greeting or filler)\n` +
+        `- Stakes / Tension (2–8s): 1–2 scenes (the hidden cost, why common wisdom fails, escalating the mystery)\n` +
+        `- Core Truth / Rapid Mechanism (8–25s): 3–5 scenes (rapid-fire insights, concrete evidence, unexpected reversal every 3–4s)\n` +
+        `- Decisive Climax (25–35s): 1–2 scenes (the ultimate proof or pivotal mechanism revealed)\n` +
+        `- Seamless Loop Payoff (last 3–5s): 1 scene (satisfying punchline that connects directly back to the first sentence for seamless infinite looping)\n`,
+      visualGuidance: `MANDATORY SHORTS VISUAL DIRECTION: Rapid visual beats every 2.5–4.5 seconds. Use dynamic framing contrasts (wide establishing -> tight macro close-up -> intense Dutch angle). Every visual MUST directly represent the exact spoken action or noun. In AI mode: author rich, specific image prompts with dramatic cinematic lighting, central mobile-safe framing, and visible character emotion. Zero generic corporate clipart or static voids.`,
+      toneGuidance: `Fast, high-energy spoken delivery (target 165–190 words per minute). Razor-sharp conversational phrasing, punchy syntax, zero wasted words, and relentless forward momentum.`,
+    };
+  }
+
   switch (type) {
+    case 'business':
+    case 'finance':
+      return {
+        roleDescription: 'You are an investigative business journalist and executive financial analyst.',
+        structureGuidance: `- Catalytic Incident: 1 scene (the deal, collapse, or financial anomaly that changed everything)\n` +
+          `- Misaligned Incentives & Leverage: 1–2 scenes (unit economics, hidden risk, and predatory power dynamics)\n` +
+          `- The Operational Machinery: 3–4 scenes (how the money, supply chains, or algorithmic arbitrage actually moved)\n` +
+          `- The Climax & Reckoning: 2 scenes (balance sheets collapse, regulatory intervention, winners vs losers)\n` +
+          `- Strategic Market Takeaway: 1–2 scenes (the enduring rule of capital, risk, and human greed)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Ground all visuals in concrete physical business reality—trading floor terminals with red market tickers, bank vault doors, industrial container ports, automated factory assembly lines, boardroom negotiations, physical headquarters, printed regulatory filings. In AI mode: dramatic corporate noir or sharp editorial styling. NEVER abstract lightbulbs, puzzle pieces, or floating green arrows.`,
+        toneGuidance: `Analytical, sharp, objective, high-stakes, grounded in real numbers, verifiable contracts, and systemic incentives.`,
+      };
+    case 'psychology':
+      return {
+        roleDescription: 'You are a cognitive psychologist, behavioral researcher, and science storyteller.',
+        structureGuidance: `- The Common Trap / Paradox: 1 scene (a universal, counterintuitive behavior the viewer recognises in themselves)\n` +
+          `- Subconscious Wiring: 1–2 scenes (the evolutionary bias, neurological trigger, or dopamine loop driving it)\n` +
+          `- The Decisive Experiment: 3–4 scenes (the groundbreaking laboratory study, methodology, and startling discovery)\n` +
+          `- Real-World Exploitation: 2 scenes (how modern tech, marketing, or social environments weaponise this mechanism)\n` +
+          `- Mental Liberation: 1–2 scenes (the psychological reframing or actionable rule to regain agency)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Expressive human body language, micro-expressions, laboratory observation rooms, EEG/fMRI brain imaging, relatable domestic and workplace friction, quiet moments of internal conflict. In AI mode: evocative atmospheric lighting with strong emotional clarity. NEVER generic clip art or smiling stock models.`,
+        toneGuidance: `Intriguing, empathetic, intellectually captivating, conversational yet strictly backed by behavioral science.`,
+      };
+    case 'science':
+    case 'technology':
+    case 'tech':
+      return {
+        roleDescription: 'You are a first-principles science communicator and deep-tech director.',
+        structureGuidance: `- The Impossible Frontier: 1 scene (a technological triumph or natural paradox that defies common sense)\n` +
+          `- The Physical Bottleneck: 1–2 scenes (the fundamental law of physics, chemistry, or computation that stood in the way)\n` +
+          `- The Breakthrough Mechanism: 3–4 scenes (step-by-step causality of how engineers or nature cracked the constraint)\n` +
+          `- Tangible Scale Comparison: 2 scenes (physical metaphors contrasting the microscopic or astronomical scale)\n` +
+          `- The Civilization Horizon: 1–2 scenes (what this breakthrough makes possible for humanity)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Concrete physical engineering and science—silicon wafer lithography, vacuum chambers, particle detectors, cleanroom robotics, server racks, rocket nozzles, electron microscope imagery, laboratory glassware. In AI mode: pristine industrial detail with motivated rim lighting and volumetric atmosphere. NEVER blue holographic floating cubes or abstract cyberspace grids.`,
+        toneGuidance: `Wonder-driven, intellectually lucid, precise, explaining complex mechanisms through clear physical causality.`,
+      };
+    case 'mystery':
+    case 'horror':
+      return {
+        roleDescription: 'You are an acclaimed atmospheric suspense and investigative mystery director.',
+        structureGuidance: `- The Chilling Catalyst: 1 scene (the unsettling disappearance, anomaly, or discovery that cannot be explained)\n` +
+          `- Withheld Information: 1–2 scenes (contradictory clues, mounting dread, and the failure of official explanations)\n` +
+          `- The Investigation Deepens: 3–4 scenes (archival logs, forensic evidence, forgotten locations, escalating unease)\n` +
+          `- The Breaking Point: 2 scenes (the horrifying realization where the narrative turns on its head)\n` +
+          `- The Lingering Shadow: 1–2 scenes (the unresolved mystery or psychological chill that stays with the viewer)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Moody chiaroscuro lighting, deep impenetrable shadows, misty abandoned architecture, flashlight beams piercing dark rooms, weathered handwritten files, eerie silhouettes, rain-streaked windows. In AI mode: cinematic film grain, desaturated palette with selective color accents, and dramatic tension. NEVER cheap cartoonish jump-scares.`,
+        toneGuidance: `Slow-burning, deliberate, chilling, sensory, measured spoken cadence with calculated pauses and intense tension.`,
+      };
+    case 'educational':
+      return {
+        roleDescription: 'You are an elite educational documentary director and master explainer.',
+        structureGuidance: `- The Common Misconception: 1 scene (the intuitive assumption that is completely backward)\n` +
+          `- The Fundamental Mental Model: 1–2 scenes (an intuitive analogy or foundational principle)\n` +
+          `- Step-by-Step Breakdown: 3–4 scenes (progressive revelation from simple concept to deep mechanics)\n` +
+          `- The Stress Test: 2 scenes (an extreme real-world scenario proving how the principle works in practice)\n` +
+          `- The Golden Rule: 1–2 scenes (the single memorable mental model to retain forever)\n`,
+        visualGuidance: `MANDATORY VISUAL DIRECTION: Concrete physical demonstrations, real laboratory apparatus, authentic real-world operations, step-by-step physical causality. In AI mode: clean editorial vector or rich illustrative keyframes with clear focal subject hierarchy. NEVER generic textbook icons or decorative clipart.`,
+        toneGuidance: `Crystal clear, engaging, intellectually thrilling, accessible, with immediate payoffs for curiosity.`,
+      };
     case 'documentary':
       return {
         roleDescription: 'You are an award-winning historical and investigative documentary film director and writer.',
@@ -735,7 +822,7 @@ export async function generateDirectorPlan({
       `- Visual Continuity: Ensure recurring characters, outfits, hair, facial features, and environments remain consistent across all scene image prompts.`
     : '';
 
-  const genre = getGenreDirectingInstructions(productionProfile?.contentType || niche);
+  const genre = getGenreDirectingInstructions(productionProfile?.contentType || niche, format);
   console.log(`🎬 Director (${llm.name}): "${topic}" · ${format} · ~${target}s · Budget: ${budget.targetWords} words (max ${budget.maxWords}) · ${budget.targetSceneCount} beats · Genre: ${productionProfile?.contentType || 'explainer'}${isAiWorkflow ? ` · Art Style: ${styleName}` : ''}`);
   const styleHint = style && STYLES[style] ? `\nThe directing style is fixed: "${style}".` : '';
   const serializedSource = sourceData == null

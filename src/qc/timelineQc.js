@@ -416,6 +416,49 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const unresolvedShots = shots.filter((s) => s.unresolvedMedia || s.editorialApproval?.classification === 'UNRESOLVED' || s.asset?.unresolved);
   add('editorial-unresolved-media', !isProd || unresolvedShots.length === 0, isProd ? 'error' : 'warn', unresolvedShots.length === 0 ? 'zero unresolved media shots' : `${unresolvedShots.length} unresolved media shot(s) in timeline`);
 
+  // YouTube Production Quality Gates: Script, Hook, Audio & Visual Pacing
+  const isShortsFormat = timeline.format === 'shorts' || plan?.format === 'shorts';
+  const firstScene = plan?.scenes?.[0] || clips?.[0]?.shots?.[0];
+  const hookText = String(firstScene?.narration || '').trim();
+  const genericHookPattern = /\b(?:hey\s+(?:everyone|guys)|welcome\s+back|in\s+this\s+video|have\s+you\s+ever\s+wondered|today\s+we(?:'ll|\s+will))\b/i;
+  const hasGenericHook = genericHookPattern.test(hookText);
+  add('script-hook-strength', !hasGenericHook, 'warn', hasGenericHook
+    ? `hook contains generic greeting/filler: "${hookText.slice(0, 40)}..."`
+    : 'opening hook begins with immediate narrative tension without generic filler');
+
+  // Story progression check: scenes must not have all-identical purposes
+  if (plan?.scenes?.length >= 3) {
+    const uniquePurposes = new Set(plan.scenes.map((s) => s.purpose || s.contentBeat || 'beat'));
+    const progressionOk = uniquePurposes.size >= 2;
+    add('script-story-progression', progressionOk, 'warn', progressionOk
+      ? `${uniquePurposes.size} distinct narrative progression stages`
+      : 'script lacks variety in scene purposes');
+  }
+
+  // Visual pacing: in YouTube Shorts, avoid prolonged static holds (> 4.5s) without camera motion
+  if (isShortsFormat) {
+    const staticShortsHold = shots.filter((s) => (s.imageBehavior === 'STATIC' || s.presentation?.cameraMove === 'static') && ((s.durationInFrames || 0) / fps) > 4.5);
+    add('shorts-static-pacing', staticShortsHold.length === 0, 'warn', staticShortsHold.length
+      ? `${staticShortsHold.length} shot(s) in Shorts have static holds > 4.5s without camera motion`
+      : 'all Shorts visual shots maintain dynamic camera motion or tight durations');
+  }
+
+  // Adjacent scene repetition: check for identical queries or prompts
+  if (plan?.scenes?.length >= 2) {
+    let adjacentIdenticalPrompt = false;
+    for (let i = 1; i < plan.scenes.length; i++) {
+      const prev = String(plan.scenes[i - 1].imagePrompt || plan.scenes[i - 1].visual || '').trim().toLowerCase();
+      const curr = String(plan.scenes[i].imagePrompt || plan.scenes[i].visual || '').trim().toLowerCase();
+      if (prev && curr && prev === curr) {
+        adjacentIdenticalPrompt = true;
+        break;
+      }
+    }
+    add('repeated-scene-prompt', !adjacentIdenticalPrompt, 'warn', adjacentIdenticalPrompt
+      ? 'adjacent scenes share identical visual image prompts'
+      : 'adjacent scenes feature distinct visual storytelling prompts');
+  }
+
   const errors = checks.filter((check) => !check.ok && check.severity === 'error');
   const warnings = checks.filter((check) => !check.ok && check.severity === 'warn');
   return {

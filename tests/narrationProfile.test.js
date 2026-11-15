@@ -111,37 +111,47 @@ test('content-type tailored speech speed curve applies accurately across YouTube
   assert.equal(audio.speed, 0.82);
   assert.equal(audio.meditation, false);
 
-  // Documentary: 0.95, Investigative: 0.92
+  // Documentary: 0.98, Investigative: 0.95
   const doc = resolveNarrationProfile({ contentType: 'documentary' });
-  assert.equal(doc.speed, 0.95);
+  assert.equal(doc.speed, 0.98);
   const inv = resolveNarrationProfile({ contentType: 'investigative' });
-  assert.equal(inv.speed, 0.92);
+  assert.equal(inv.speed, 0.95);
 
-  // Story: 0.92
+  // Story: 0.95
   const story = resolveNarrationProfile({ contentType: 'story' });
-  assert.equal(story.speed, 0.92);
+  assert.equal(story.speed, 0.95);
 
-  // Explainer: 1.00 for Shorts, 0.98 for Landscape
+  // Explainer: 1.15 for Shorts, 1.02 for Landscape
   const expShorts = resolveNarrationProfile({ contentType: 'explainer', format: 'shorts' });
-  assert.equal(expShorts.speed, 1.00);
+  assert.equal(expShorts.speed, 1.15);
   const expLand = resolveNarrationProfile({ contentType: 'explainer', format: 'landscape' });
-  assert.equal(expLand.speed, 0.98);
+  assert.equal(expLand.speed, 1.02);
 
-  // Educational: 1.00 for Shorts, 0.98 for Landscape
+  // Educational: 1.15 for Shorts, 1.02 for Landscape
   const eduShorts = resolveNarrationProfile({ contentType: 'educational', format: 'shorts' });
-  assert.equal(eduShorts.speed, 1.00);
+  assert.equal(eduShorts.speed, 1.15);
   const eduLand = resolveNarrationProfile({ contentType: 'educational', format: 'landscape' });
-  assert.equal(eduLand.speed, 0.98);
+  assert.equal(eduLand.speed, 1.02);
 
-  // Tutorial: 1.00 for Shorts, 0.95 for Landscape
+  // Tutorial: 1.12 for Shorts, 0.98 for Landscape
   const tutShorts = resolveNarrationProfile({ contentType: 'tutorial', format: 'shorts' });
-  assert.equal(tutShorts.speed, 1.00);
+  assert.equal(tutShorts.speed, 1.12);
   const tutLand = resolveNarrationProfile({ contentType: 'tutorial', format: 'landscape' });
-  assert.equal(tutLand.speed, 0.95);
+  assert.equal(tutLand.speed, 0.98);
 
-  // Motivational: 0.98
-  const mot = resolveNarrationProfile({ contentType: 'motivational' });
-  assert.equal(mot.speed, 0.98);
-  assert.equal(mot.minimumRepairSpeed, 0.75);
+  // Motivational: 1.18 for Shorts, 1.08 for Landscape
+  const mot = resolveNarrationProfile({ contentType: 'motivational', format: 'landscape' });
+  assert.equal(mot.speed, 1.08);
+  const motShorts = resolveNarrationProfile({ contentType: 'motivational', format: 'shorts' });
+  assert.equal(motShorts.speed, 1.18);
+  assert.equal(motShorts.minimumRepairSpeed, 0.85);
+
+  // Business & Science & Mystery
+  const biz = resolveNarrationProfile({ contentType: 'business', format: 'shorts' });
+  assert.equal(biz.speed, 1.15);
+  const sci = resolveNarrationProfile({ contentType: 'science', format: 'landscape' });
+  assert.equal(sci.speed, 1.04);
+  const myst = resolveNarrationProfile({ contentType: 'mystery', format: 'shorts' });
+  assert.equal(myst.speed, 1.10);
 });
 

@@ -36,9 +36,11 @@ export function calculateDurationBudget({
   const hardMaxDuration = Number((target * (1 + hardToleranceRatio)).toFixed(2));
 
   // Breathing room reserve: opening pause, closing tail hold, and inter-beat pauses
-  const openingHoldSec = format === 'shorts' ? 0.4 : 0.8;
-  const closingHoldSec = format === 'shorts' ? 1.4 : 2.2;
-  const pauseBudgetSec = Number(clamp(target * 0.03, 1.0, 3.5).toFixed(2));
+  // YouTube Shorts uses tighter holds to immediately capture attention and loop seamlessly
+  const isShorts = format === 'shorts';
+  const openingHoldSec = isShorts ? 0.2 : 0.8;
+  const closingHoldSec = isShorts ? 0.6 : 2.2;
+  const pauseBudgetSec = Number(clamp(target * (isShorts ? 0.02 : 0.03), isShorts ? 0.5 : 1.0, isShorts ? 2.0 : 3.5).toFixed(2));
   const totalReserveSec = Number((openingHoldSec + closingHoldSec + pauseBudgetSec).toFixed(2));
 
   const targetNarrationSec = Number(Math.max(10, target - totalReserveSec).toFixed(2));
@@ -46,11 +48,41 @@ export function calculateDurationBudget({
   const minWords = Math.round(targetWords * 0.93);
   const maxWords = Math.round(targetWords * 1.05); // Strict word ceiling
 
-  // Target scene count: each scene is an authored Content Beat (6–8s average hold)
-  const targetSceneCount = clamp(Math.round(target / 7.5), format === 'shorts' ? 5 : 7, 13);
+  // Target scene count: each scene is an authored Content Beat
+  // Shorts: faster visual changes every 3.5-5.5s (higher beat density)
+  // Landscape: 6–8s average hold for deep context and room to breathe
+  const targetSceneCount = isShorts
+    ? clamp(Math.round(target / 4.8), 5, 14)
+    : clamp(Math.round(target / 7.5), 7, 13);
 
   // Section time allocations (proportional to narrative arc)
-  const sectionBudgets = {
+  const sectionBudgets = isShorts ? {
+    hook: {
+      name: 'Immediate Hook (0-2s)',
+      targetSec: Number(clamp(target * 0.08, 1.5, 3.5).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.08, 1.5, 3.5) * speechRateWps),
+    },
+    why_it_matters: {
+      name: 'Stakes / Curiosity Gap',
+      targetSec: Number(clamp(target * 0.16, 3.5, 8.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.16, 3.5, 8.0) * speechRateWps),
+    },
+    core_explanation: {
+      name: 'Fast Escalation / Core Truth',
+      targetSec: Number(clamp(target * 0.42, 10.0, 25.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.42, 10.0, 25.0) * speechRateWps),
+    },
+    example_evidence: {
+      name: 'Proof / Contrast / Reversal',
+      targetSec: Number(clamp(target * 0.20, 5.0, 12.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.20, 5.0, 12.0) * speechRateWps),
+    },
+    payoff_conclusion: {
+      name: 'Loopable Payoff & Punchline',
+      targetSec: Number(clamp(target * 0.14, 3.0, 8.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.14, 3.0, 8.0) * speechRateWps),
+    },
+  } : {
     hook: {
       name: 'Hook',
       targetSec: Number(clamp(target * 0.10, 5, 9).toFixed(1)),

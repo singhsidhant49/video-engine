@@ -1,7 +1,7 @@
 import { z } from 'zod-api';
 import { isMeditationNarration } from '../audio/narrationProfile.js';
 
-// Canonical 6 Production Content Types (+ auto)
+// Canonical Production Content Types (+ auto)
 export const CANONICAL_CONTENT_TYPES = Object.freeze([
   'documentary',
   'explainer',
@@ -9,15 +9,21 @@ export const CANONICAL_CONTENT_TYPES = Object.freeze([
   'motivational',
   'audiobook',
   'story',
+  'business',
+  'psychology',
+  'science',
+  'mystery',
 ]);
 
 export const ContentTypeSchema = z.enum([
   'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  'business', 'finance', 'psychology', 'science', 'technology', 'tech', 'mystery', 'horror',
   // Backward-compatible aliases normalized on ingress:
   'investigative', 'educational', 'tutorial',
 ]).transform((val) => {
   if (val === 'investigative') return 'documentary';
   if (val === 'educational' || val === 'tutorial') return 'explainer';
+  if (val === 'tech') return 'technology';
   return val;
 });
 
@@ -99,8 +105,9 @@ function inferContentType(topic = '', niche = '') {
 
 function defaultPacingMode(contentType, format) {
   if (contentType === 'meditation' || contentType === 'audiobook') return 'contemplative';
-  if (['documentary', 'story'].includes(contentType)) return 'cinematic';
+  if (['documentary', 'story', 'mystery', 'horror'].includes(contentType)) return 'cinematic';
   if (contentType === 'motivational') return format === 'shorts' ? 'rapid' : 'energetic';
+  if (['business', 'finance', 'science', 'technology'].includes(contentType)) return format === 'shorts' ? 'rapid' : 'balanced';
   return format === 'shorts' ? 'rapid' : 'balanced';
 }
 
@@ -144,11 +151,18 @@ export function defaultVoiceForContentType(contentType = 'auto') {
       return 'af_nicole';
     case 'documentary':
     case 'investigative':
+    case 'mystery':
+    case 'horror':
     case 'motivational':
       return 'am_puck';
     case 'story':
     case 'audiobook':
       return 'af_heart';
+    case 'business':
+    case 'finance':
+    case 'psychology':
+    case 'science':
+    case 'technology':
     case 'tutorial':
     case 'educational':
     case 'explainer':

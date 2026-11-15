@@ -46,7 +46,7 @@ export function splitTtsText(text, maxChars = TTS_CHUNK_CHARS) {
   return chunks.filter(Boolean);
 }
 
-async function joinWavFiles(files, gapMs = 140) {
+async function joinWavFiles(files, gapMs = 120, silenceMs = 500) {
   const tracks = [];
   let sampleRate = null;
   let totalSamples = 0;
@@ -72,13 +72,14 @@ async function joinWavFiles(files, gapMs = 140) {
   const output = new WaveFile();
   output.fromScratch(1, sampleRate, '32f', joined);
   output.toBitDepth('16');
-  return appendWavSilence(Buffer.from(output.toBuffer()), 800);
+  return appendWavSilence(Buffer.from(output.toBuffer()), silenceMs);
 }
 
 /**
  * Appends safe clean silence to the end of a WAV buffer to prevent player audio truncation.
+ * Shorts use a tighter 200-250ms tail to enable seamless looping, whereas long-form uses ~500ms.
  */
-export function appendWavSilence(buffer, silenceMs = 800) {
+export function appendWavSilence(buffer, silenceMs = 500) {
   try {
     const wav = new WaveFile(buffer);
     wav.toBitDepth('32f');
@@ -114,9 +115,15 @@ export async function generateSpeech({
   outputFile,
   voice = config.kokoro.defaultVoice,
   speed = config.kokoro.speed,
+  format = 'landscape',
+  silenceMs = null,
+  gapMs = null,
   signal,
 }) {
   if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
+  const effectiveSilenceMs = silenceMs != null ? silenceMs : (format === 'shorts' ? 220 : 500);
+  const effectiveGapMs = gapMs != null ? gapMs : (format === 'shorts' ? 50 : 120);
+
   // Ensure target directory exists
   const dir = path.dirname(outputFile);
   await fs.mkdir(dir, { recursive: true });
@@ -139,11 +146,11 @@ export async function generateSpeech({
     try {
       for (let index = 0; index < chunks.length; index++) {
         const chunkFile = path.join(dir, `.tts-chunk-${String(index + 1).padStart(4, '0')}.mp3`);
-        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed, signal });
+        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed, format, silenceMs: 0, signal });
         chunkFiles.push(chunkFile, generated.wavPath);
         chunkWavFiles.push(generated.wavPath);
       }
-      const buffer = await joinWavFiles(chunkWavFiles);
+      const buffer = await joinWavFiles(chunkWavFiles, effectiveGapMs, effectiveSilenceMs);
       await fs.writeFile(wavFile, buffer);
       await fs.writeFile(outputFile, buffer);
       await ttsCache.set({ text, voice, speed }, buffer);
@@ -191,7 +198,7 @@ export async function generateSpeech({
 
     const arrayBuffer = await response.arrayBuffer();
     const rawBuffer = Buffer.from(arrayBuffer);
-    const buffer = appendWavSilence(rawBuffer, 800);
+    const buffer = appendWavSilence(rawBuffer, effectiveSilenceMs);
 
     await fs.writeFile(wavFile, buffer);
     // Also save MP3 destination (or write buffer)

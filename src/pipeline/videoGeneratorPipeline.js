@@ -497,7 +497,7 @@ export async function createFacelessVideo({
           }
         } else {
           const ttsText = (plan.scenes || []).map((s) => s.narration?.trim()).filter(Boolean).join('\n\n') || plan.script;
-          await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, signal });
+          await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, format, signal });
         }
       }
 

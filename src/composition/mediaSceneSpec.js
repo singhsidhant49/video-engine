@@ -173,9 +173,18 @@ export function normalizeMediaSceneSpec({ shot, editorialPlan = null, overlay = 
     detailCrop: 'SUBTLE_PUSH', detailReveal: 'SUBTLE_PUSH',
     subtlePush: 'SUBTLE_PUSH', push: 'SUBTLE_PUSH', slowZoomIn: 'SUBTLE_PUSH',
     subtlePull: 'SUBTLE_PULL', pull: 'SUBTLE_PULL', slowZoomOut: 'SUBTLE_PULL',
+    static: 'STATIC',
   };
+  const autoCamera = role === 'DETAIL'
+    ? 'SUBTLE_PUSH'
+    : role === 'establishing'
+      ? 'SUBTLE_PULL'
+      : (format === 'shorts' || role === 'context' || role === 'subject')
+        ? (((parseInt((shot?.id || shot?.storyboardShotId || '').replace(/\D/g, '') || '1', 10) % 2) === 1) ? 'SUBTLE_PUSH' : 'SUBTLE_PULL')
+        : 'STATIC';
+
   let cameraIntent = nativeVideo || role === 'EVIDENCE' ? 'STATIC'
-    : cameraMap[authoredCamera] || cameraMap[shot?.cameraMove] || cameraMap[shot?.move?.type] || (role === 'DETAIL' ? 'SUBTLE_PUSH' : 'STATIC');
+    : (cameraMap[authoredCamera] || cameraMap[shot?.cameraMove] || cameraMap[shot?.move?.type] || autoCamera);
   if (cameraIntent !== 'STATIC' && ((primary.dimensions.width || 0) < (format === 'shorts' ? 512 : 640) || primary.qualityTier === 'FALLBACK')) {
     cameraIntent = 'STATIC';
   }

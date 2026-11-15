@@ -19,6 +19,81 @@ async function computeFileSha256(filePath) {
 }
 
 /**
+ * Enriches and structures the AI prompt to maximize visual storytelling,
+ * context relevance to narration, camera perspective, and lighting.
+ */
+export function enrichAiImagePrompt({ scene, shotConcept = '', req = null, style = null, format = 'landscape', index = 0 } = {}) {
+  let basePrompt = (scene?.imagePrompt || scene?.visual || '').trim();
+
+  if (!basePrompt || basePrompt.length < 15) {
+    basePrompt = shotConcept || req?.concept || scene?.narration || 'a cinematic story scene';
+  } else if (shotConcept && shotConcept.length > 5 && !basePrompt.toLowerCase().includes(shotConcept.toLowerCase().slice(0, 15))) {
+    basePrompt = `${basePrompt.replace(/[.,\s]+$/, '')}, focusing on ${shotConcept}`;
+  }
+
+  basePrompt = basePrompt.replace(/[.,\s]+$/, '');
+
+  // 1. Framing / Perspective
+  const shotScale = scene?.shot || 'medium';
+  let framing = '';
+  if (!/\b(close\s*up|wide\s*shot|macro|establishing|overhead|bird['’]s\s*eye|dutch\s*angle|low\s*angle)\b/i.test(basePrompt)) {
+    if (shotScale === 'close' || req?.visibleNeed?.focalSubject?.includes('close')) {
+      framing = 'tight dramatic close-up, sharp facial and textural details';
+    } else if (shotScale === 'detail') {
+      framing = 'extreme macro detail shot, intricate physical textures and surfaces';
+    } else if (shotScale === 'wide') {
+      framing = 'wide expansive establishing composition, deep environmental horizon';
+    } else {
+      framing = 'cinematic eye-level framing, intentional subject-to-background separation';
+    }
+  }
+
+  // 2. Lighting & Atmosphere
+  const tone = scene?.tone || 'neutral';
+  let lighting = '';
+  if (!/\b(lighting|illuminat\w+|shadows?|chiaroscuro|golden\s*hour|neon|rim\s*light|sunlight)\b/i.test(basePrompt)) {
+    switch (tone) {
+      case 'tense':
+      case 'urgent':
+        lighting = 'dramatic chiaroscuro lighting, deep cutting shadows, cold atmospheric rim light';
+        break;
+      case 'curious':
+        lighting = 'volumetric atmospheric illumination, subtle god rays, layered depth of light';
+        break;
+      case 'somber':
+      case 'reflective':
+        lighting = 'moody subdued ambient illumination, soft diffused practical lighting, naturalistic gloom';
+        break;
+      case 'hopeful':
+      case 'triumphant':
+        lighting = 'warm golden hour illumination, vibrant specular rim highlights, luminous atmosphere';
+        break;
+      case 'playful':
+      case 'neutral':
+      default:
+        lighting = 'natural motivated practical lighting, rich dynamic range';
+        break;
+    }
+  }
+
+  // 3. Format Safety
+  const isShorts = format === 'shorts';
+  const compositionSafety = isShorts
+    ? 'vertical 9:16 aspect ratio with all principal subjects and action centered in the mobile safe zone'
+    : 'cinematic 16:9 composition with layered foreground, middle ground, and background';
+
+  const parts = [
+    basePrompt,
+    framing,
+    lighting,
+    compositionSafety,
+    'clean visual storytelling, zero text, zero letters, zero logos, no watermark, single seamless frame',
+  ].filter(Boolean);
+
+  return parts.join(', ');
+}
+
+/**
  * Concurrency-bounded worker helper.
  */
 async function mapLimit(items, limit, fn) {
@@ -87,14 +162,8 @@ export async function directAiAssets(plan, specs, {
       || req.visibleNeed?.focalSubject
       || req.concept;
 
-    // Prioritize the director's authored AI image prompt, then shot visual proposition, then scene visual
-    let rawPrompt = scene?.imagePrompt || scene?.visual;
-    if (!rawPrompt || rawPrompt.trim().length < 15) {
-      rawPrompt = shotConcept || scene?.narration || 'atmospheric narrative scene';
-    } else if (shotConcept && shotConcept.length > 5 && !rawPrompt.toLowerCase().includes(shotConcept.toLowerCase().slice(0, 15))) {
-      // If the shot has a specific focal subject or action not already mentioned in the scene prompt, enrich it
-      rawPrompt = `${rawPrompt.replace(/[.,\s]+$/, '')}, focusing on ${shotConcept}`;
-    }
+    // Prioritize the director's authored AI image prompt, then shot visual proposition, then scene visual, enriched for visual storytelling
+    let rawPrompt = enrichAiImagePrompt({ scene, shotConcept, req, style, format, index });
 
     const shotSeed = (masterSeed + index * 17) % 1000000000;
 
@@ -202,10 +271,66 @@ export async function directAiAssets(plan, specs, {
       type: 'image', localPath: targetFilePath, width: dimensions.width, height: dimensions.height,
       label: rawPrompt, description: rawPrompt, tags: [style.id, req.concept, shotConcept].filter(Boolean),
     };
-    const inspection = await inspectVisualCandidate(inspectionCandidate, { filePath: targetFilePath }).catch(() => null);
-    const visualMatch = inspection ? compareVisualToNeed(inspection, req.visibleNeed) : null;
+    let inspection = await inspectVisualCandidate(inspectionCandidate, { filePath: targetFilePath }).catch(() => null);
+    let visualMatch = inspection ? compareVisualToNeed(inspection, req.visibleNeed) : null;
+    let semanticMismatch = Boolean(inspection?.semanticPixelInspected && visualMatch?.overallVisualMatch < 0.35);
+
+    // Visual Relevance Validation & Selective Regeneration (Requirement 2)
+    // If pixel relevance fails or is poor (< 0.40) while online, perform one targeted focal refinement retry
+    if (!offline && !generated.isFallback && (semanticMismatch || (visualMatch?.overallVisualMatch && visualMatch.overallVisualMatch < 0.40))) {
+      const focalNeed = req.visibleNeed?.focalSubject || req.concept || shotConcept;
+      if (focalNeed && focalNeed.length > 3) {
+        console.log(`   🔄 [Shot ${shotId}] Visual relevance suboptimal (${Math.round((visualMatch?.overallVisualMatch || 0.3) * 100)}%). Refining prompt and regenerating...`);
+        const refinedPrompt = `${focalNeed}, prominent in foreground, clear distinct focus. Action/Context: ${rawPrompt.slice(0, 150)}`;
+        const retrySeed = (shotSeed + 1337) % 1000000000;
+        try {
+          const retried = isFlux
+            ? await generateFluxImage({
+              prompt: refinedPrompt,
+              styleId: imageStyle,
+              customStylePrompt,
+              format,
+              seed: retrySeed,
+              model: imageModel && normalizedModel.includes('flux') ? imageModel : undefined,
+              quality: imageQuality || 'high',
+              offline,
+            })
+            : await generateIdeogramImage({
+              prompt: refinedPrompt,
+              styleId: imageStyle,
+              customStylePrompt,
+              format,
+              seed: retrySeed,
+              model: imageModel,
+              quality: imageQuality,
+              offline,
+            });
+
+          if (retried?.localPath) {
+            const retryCandidate = {
+              id: `${isFlux ? 'replicate' : 'ideogram'}_${shotId}_retry`,
+              type: 'image', localPath: retried.localPath, width: dimensions.width, height: dimensions.height,
+              label: refinedPrompt, description: refinedPrompt, tags: [style.id, req.concept, shotConcept].filter(Boolean),
+            };
+            const retryInspection = await inspectVisualCandidate(retryCandidate, { filePath: retried.localPath }).catch(() => null);
+            const retryMatch = retryInspection ? compareVisualToNeed(retryInspection, req.visibleNeed) : null;
+            if (!retryMatch || (retryMatch.overallVisualMatch >= (visualMatch?.overallVisualMatch || 0))) {
+              await fs.copyFile(retried.localPath, targetFilePath);
+              generated = retried;
+              rawPrompt = refinedPrompt;
+              inspection = retryInspection;
+              visualMatch = retryMatch;
+              semanticMismatch = Boolean(inspection?.semanticPixelInspected && visualMatch?.overallVisualMatch < 0.35);
+              console.log(`   ✅ [Shot ${shotId}] Refinement accepted (pixel match: ${Math.round((visualMatch?.overallVisualMatch || 0.65) * 100)}%).`);
+            }
+          }
+        } catch (retryErr) {
+          console.warn(`   ⚠️ [Shot ${shotId}] Refinement retry skipped: ${retryErr.message}`);
+        }
+      }
+    }
+
     visualInspections[shotId] = inspection;
-    const semanticMismatch = Boolean(inspection?.semanticPixelInspected && visualMatch?.overallVisualMatch < 0.35);
     const editorialScore = semanticMismatch ? 0 : Math.round(75 + (visualMatch?.overallVisualMatch || 0.65) * 25);
 
     const assetObj = {
