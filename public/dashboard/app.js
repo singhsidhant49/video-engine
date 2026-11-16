@@ -385,7 +385,7 @@ function renderChannels() {
     const d = channel.productionDefaults || {};
     const isAi = d.imageSource === 'ai';
     const mediaBadge = isAi
-      ? `<span class="pill badge-ai">🎨 AI · ${escapeHtml(d.imageStyle || 'doodle_comic')} (${escapeHtml(d.imageModel || 'ideogram')})</span>`
+      ? `<span class="pill badge-ai">🎨 AI · ${escapeHtml(d.imageStyle || 'stickman')} (${escapeHtml(d.imageModel || 'ideogram')})</span>`
       : '<span class="pill badge-stock">🌐 Curated Stock</span>';
     const formats = (d.supportedContentTypes?.length ? d.supportedContentTypes : [d.contentType || 'explainer']).join(', ');
     return `
@@ -481,7 +481,7 @@ $('channelForm').addEventListener('submit', async (event) => {
 
     if (imageSourceVal === 'ai') {
       const selectedModel = $('channelImageModel')?.value || 'p-image-ideogram';
-      prodDefaults.imageStyle = $('channelImageStyle')?.value || 'doodle_comic';
+      prodDefaults.imageStyle = $('channelImageStyle')?.value || 'stickman';
       prodDefaults.imageModel = selectedModel;
       const explicitProvider = $('channelImageProvider')?.value;
       prodDefaults.imageProvider = (explicitProvider && explicitProvider !== 'auto')

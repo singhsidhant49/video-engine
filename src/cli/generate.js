@@ -50,7 +50,7 @@ Resumability & Iteration (Milestone 12):
 AI Image Generation Options:
   --image-source <src>     stock (default) | ai (generate images via AI)
   --image-provider <p>     ideogram | flux | replicate (auto-detected if model is flux)
-  --image-style <style>    doodle_comic | storybook | anime (default) | 2d_animation | stickman | hyper_realistic | comic_book | watercolor | pixel_art | 3d_render | custom
+  --image-style <style>    anime (default) | stickman | hyper_realistic | comic_book | 3d_render | custom
   --custom-style-prompt <s> custom style prompt when using --image-style custom
   --image-model <model>    flux-schnell | p-image-ideogram | ideogram-4-5 | ideogram-4 | V_2_TURBO
   --image-quality <q>      low | medium | high

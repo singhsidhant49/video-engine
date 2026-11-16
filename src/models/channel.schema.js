@@ -26,7 +26,7 @@ export const ProductionDefaultsSchema = z.object({
   imageProvider: z.string().trim().max(40).nullable().default(null),
   imageModel: z.string().trim().max(80).nullable().default(null),
   imageQuality: z.string().trim().max(40).nullable().default(null),
-  imageStyle: z.string().trim().max(80).default('doodle_comic'),
+  imageStyle: z.string().trim().max(80).default('stickman'),
   customStylePrompt: z.string().trim().max(500).default(''),
   tone: z.string().trim().min(2).max(200).default('clear, compelling, and authoritative'),
   subtitles: z.boolean().default(true),

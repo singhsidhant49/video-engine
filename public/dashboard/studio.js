@@ -470,7 +470,7 @@ function openChannelDialog(channel = null) {
     const defaults = channel.productionDefaults;
     $('channelImageSource').value = defaults.imageSource || 'stock';
     $('channelImageProvider').value = defaults.imageProvider === 'flux' ? 'replicate' : (defaults.imageProvider || (String(defaults.imageModel || '').includes('flux') ? 'replicate' : 'ideogram'));
-    $('channelImageStyle').value = defaults.imageStyle || 'doodle_comic';
+    $('channelImageStyle').value = defaults.imageStyle || 'stickman';
     $('channelImageQuality').value = defaults.imageQuality || 'medium';
     $('channelCustomStylePrompt').value = defaults.customStylePrompt || '';
     $('channelContentType').value = defaults.contentType || 'auto'; $('channelVoice').value = defaults.voice || 'auto';
@@ -486,7 +486,7 @@ function openChannelDialog(channel = null) {
     $('shortMin').value = 20; $('shortMax').value = 60; $('landscapeMin').value = 120; $('landscapeMax').value = 600;
     $('channelCron').value = '0 12 * * *'; $('channelTimezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
     $('channelQueuePriority').value = 'normal'; $('channelMaxPending').value = 2;
-    $('channelImageSource').value = 'stock'; $('channelImageProvider').value = 'ideogram'; $('channelImageStyle').value = 'doodle_comic';
+    $('channelImageSource').value = 'stock'; $('channelImageProvider').value = 'ideogram'; $('channelImageStyle').value = 'stickman';
     $('channelImageQuality').value = 'medium'; $('channelContentType').value = 'auto'; $('channelVoice').value = 'auto'; $('channelSubtitles').checked = true;
     syncChannelVisualFields();
   }
@@ -513,7 +513,7 @@ async function createChannel(event) {
       contentType: $('channelContentType').value, voice: $('channelVoice').value, tone: $('channelTone').value, subtitles: $('channelSubtitles').checked,
       imageSource, imageProvider: imageSource === 'ai' ? $('channelImageProvider').value : null,
       imageModel: imageSource === 'ai' ? $('channelImageModel').value : null, imageQuality: imageSource === 'ai' ? $('channelImageQuality').value : null,
-      imageStyle: imageSource === 'ai' ? $('channelImageStyle').value : 'doodle_comic', customStylePrompt: imageSource === 'ai' && $('channelImageStyle').value === 'custom' ? $('channelCustomStylePrompt').value : '',
+      imageStyle: imageSource === 'ai' ? $('channelImageStyle').value : 'stickman', customStylePrompt: imageSource === 'ai' && $('channelImageStyle').value === 'custom' ? $('channelCustomStylePrompt').value : '',
     },
     automation: { enabled: $('channelAutomationEnabled').checked, scheduleCron: $('channelCron').value, timezone: $('channelTimezone').value, approvalMode: $('channelApproval').value, queuePriority: $('channelQueuePriority').value, maxPendingJobs: Number($('channelMaxPending').value), autoPublish: false, publishPrivacy: 'private' },
   };

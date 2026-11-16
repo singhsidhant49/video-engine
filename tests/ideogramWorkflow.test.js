@@ -11,11 +11,12 @@ import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('AI Visual Style Catalog provides curated styles and correct prompt construction', () => {
   const styles = listSupportedImageStyles();
-  assert.ok(styles.length >= 8, 'should provide at least 8 curated styles');
+  assert.ok(styles.length >= 6, 'should provide at least 6 curated production styles');
   assert.ok(styles.some((s) => s.id === 'anime'));
-  assert.ok(styles.some((s) => s.id === '2d_animation'));
   assert.ok(styles.some((s) => s.id === 'stickman'));
   assert.ok(styles.some((s) => s.id === 'hyper_realistic'));
+  assert.ok(styles.some((s) => s.id === 'comic_book'));
+  assert.ok(styles.some((s) => s.id === '3d_render'));
 
   const anime = getImageStyle('anime');
   assert.equal(anime.ideogramStyleType, 'AUTO');
@@ -27,20 +28,20 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
   assert.ok(stickman.generationRules.includes('exactly one head, two arms and two legs'));
   assert.ok(stickman.negativePrompt.includes('hand-drawn doodle'));
 
-  const doodle = getImageStyle('doodle_comic');
-  assert.equal(doodle.ideogramStyleType, 'AUTO');
-  assert.ok(doodle.stylePromptAnchor.includes('hand-inked stickman webcomic'));
-  assert.ok(doodle.stylePromptAnchor.includes('variable-width black brush lines'));
-  assert.ok(doodle.generationRules.includes('single full-frame comic image'));
-  assert.ok(doodle.negativePrompt.includes('sterile corporate vector art'));
+  const comic = getImageStyle('comic_book');
+  assert.equal(comic.ideogramStyleType, 'AUTO');
+  assert.ok(comic.stylePromptAnchor.includes('graphic novel'));
+
+  // Legacy style aliases resolve cleanly
+  const doodleAliased = getImageStyle('doodle_comic');
+  assert.equal(doodleAliased.id, 'stickman');
 
   const fullPrompt = buildFullIdeogramPrompt({
     prompt: 'Two friends sitting on a city rooftop with a lantern',
-    styleId: 'doodle_comic',
+    styleId: 'comic_book',
   });
   assert.ok(fullPrompt.startsWith('Two friends sitting on a city rooftop with a lantern'));
-  assert.ok(fullPrompt.includes('hand-inked stickman webcomic'));
-  assert.ok(fullPrompt.includes('single full-frame comic image'));
+  assert.ok(fullPrompt.includes('graphic novel'));
   assert.ok(fullPrompt.includes('Horizontal 16:9 cinematic composition'));
   assert.ok(fullPrompt.includes('Exclude:'));
 
@@ -51,7 +52,6 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
   });
   assert.ok(vectorPrompt.includes('premium modern editorial vector illustration'));
   assert.ok(vectorPrompt.includes('Vertical 9:16 composition'));
-  assert.ok(!vectorPrompt.includes('hand-inked stickman webcomic'));
   assert.notEqual(vectorPrompt, fullPrompt);
 
   const customPrompt = buildFullIdeogramPrompt({
