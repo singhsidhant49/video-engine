@@ -141,10 +141,10 @@ EDITORIAL & PACING RULES:
     c. Open no more than two curiosity gaps at once. Close each gap with a clear answer before the ending.
     d. Use causal bridges between beats (because, but, therefore, meanwhile, until) so the video feels like one story rather than a list of facts.
     e. Escalation must come from stronger information or stakes, never louder adjectives.
-17. SCENE-TO-SCENE VISUAL EDITING:
+17. SCENE-TO-SCENE VISUAL EDITING & PACING:
     a. Each scene must contain one dominant visual proposition that can be shown accurately for its full narration span.
-    b. Change the visual only at a new action, entity, location, evidence item, causal step, emotional turn, or section boundary.
-    c. Do not request a cut merely because a sentence ends. Do not hold an irrelevant image while narration moves to a different subject.
+    b. For high-retention visual storytelling and projection sequences (e.g. YouTube Shorts, documentaries, explainers), keep scene narrations concise: typically 8 to 20 spoken words (approx 2.5 to 5.5 seconds per scene). Do not hold a single still image for longer than 7 seconds.
+    c. Change the visual at every new physical action, entity, tool/prop, location, causal step, or emotional turn so the imagery continuously projects the spoken narrative.
     d. Alternate useful shot scale—wide context, medium action, close evidence, detail payoff—without mechanically repeating the same pattern.
     e. Queries must include the visible action and environment when either matters. A topic keyword alone is not a usable query.
 18. PROFESSIONAL SPOKEN WRITING:
