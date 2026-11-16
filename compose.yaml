@@ -44,8 +44,8 @@ x-app-environment: &app-environment
   # Local Whisper is optional. Long narration uses deterministic timing so a
   # small CPU-only VPS cannot be pinned indefinitely during alignment.
   WHISPER_ENABLED: ${WHISPER_ENABLED:-auto}
-  WHISPER_MAX_AUDIO_SECONDS: ${WHISPER_MAX_AUDIO_SECONDS:-180}
-  WHISPER_TIMEOUT_MS: ${WHISPER_TIMEOUT_MS:-120000}
+  WHISPER_MAX_AUDIO_SECONDS: ${WHISPER_MAX_AUDIO_SECONDS:-900}
+  WHISPER_TIMEOUT_MS: ${WHISPER_TIMEOUT_MS:-720000}
   WHISPER_MODEL: ${WHISPER_MODEL:-Xenova/whisper-base.en}
   DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
   DEEPSEEK_API_URL: ${DEEPSEEK_API_URL:-https://api.deepseek.com/v1}
