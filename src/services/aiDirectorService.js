@@ -165,11 +165,12 @@ EDITORIAL & PACING RULES:
     a. The opening hook MUST deliver tension within the first 1–2 seconds. No throat clearing.
     b. Visual beats must shift every 2.5–4.5 seconds to maintain high viewer retention.
     c. The final scene must resolve the opening question with a punchy payoff, phrased so that it loops seamlessly back into the very first sentence.
-23. AI VISUAL STORYTELLING & PROMPT CONTRACT (AI IMAGE WORKFLOW):
+23. AI VISUAL STORYTELLING & PROJECTION SEQUENCE CONTRACT:
     a. Every scene MUST provide a rich, detailed "imagePrompt" specifying visible subject, physical action, environment, motivated lighting, and camera angle.
-    b. The prompt must directly communicate the exact meaning of the narration, NOT just a generic keyword or stock aesthetic.
-    c. NO TEXT: Never request on-image text, words, subtitles, labels, logos, or watermarks.
-    d. CONTINUITY: Keep recurring characters, signature clothing, hair, and locations strictly consistent across all scenes.`;
+    b. LITERAL PROJECTION SEQUENCE: Treat each scene as a decisive cinematic freeze-frame that directly projects what is spoken in that sentence. If narration speaks of a specific object (e.g. rice bags, flashlight, broken sliding door, luxury auction paddle, bank statement on phone), that object MUST be physically visible and being interacted with. Never provide a generic location wallpaper when a concrete action is narrated.
+    c. SHOT PERSPECTIVE VARIETY: Consciously vary camera angles across the sequence (alternate over-the-shoulder action, tight tension close-up, wide environmental scale, dynamic low-angle).
+    d. NO TEXT: Never request on-image text, words, subtitles, labels, logos, or watermarks.
+    e. CONTINUITY: Keep recurring characters, signature clothing, hair, and locations strictly consistent across all scenes.`;
 
 // ─── Style / niche heuristics (used only when the LLM gives no valid style) ─
 
@@ -876,7 +877,7 @@ export async function generateDirectorPlan({
           `- Total narration length: EXACTLY ${budget.targetWords} words (minimum ${budget.minWords} words, ABSOLUTE CEILING: ${budget.maxWords} words).\n` +
           `- Total scenes: EXACTLY ${budget.targetSceneCount} content beats.\n` +
           (selectedOutlineHook ? `- Opening contract: begin the first scene with this approved spoken hook exactly: "${selectedOutlineHook.narration}"\n` : '') +
-          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a provider-neutral, concrete scene prompt matching the ${styleName} style). Put the visible subject, action, environment, framing, and continuity identifiers before aesthetic adjectives. Never include text, captions, logos, or multi-panel layouts.\n` : '') +
+          (isAiWorkflow ? `- AI Image Prompts (Projection Sequence): In each scene object, author "imagePrompt": string (a provider-neutral, concrete scene prompt matching the ${styleName} style). Build a literal visual projection of that sentence's spoken action: specify visible subject, exact physical gesture, objects/props in hand, environment details, camera angle, and continuity traits. Never write generic location wallpapers or include text/captions.\n` : '') +
           (beatsContext ? `Follow this approved beat outline:\n${beatsContext}\n\n` : '') +
           `CRITICAL EDITORIAL RULE: Every word takes speaking time. Do not write filler. The sum of all scene narrations MUST be between ${budget.minWords} and ${budget.maxWords} words.\n` +
           `FINAL QUALITY GATE: Before answering, silently revise once. The opening sentence must create concrete tension; every scene must add new information, consequence, mechanism, choice, or payoff; causal transitions must connect the beats; every opened question must close; visuals must show the exact spoken subject/action; recurring people and places must remain identical; remove repetition, generic hype, vague stock queries, unsupported precision, and meta-commentary.\n` +
@@ -967,7 +968,7 @@ async function planLongForm(llm, brief, target, budget = null, genre = getGenreD
         role: 'user',
         content: `${brief}\nVideo title: "${outline.title}". Style: "${outline.style}".\nPremise: ${outline.premise || ''}\nCentral question: ${outline.centralQuestion || ''}\nPromised payoff: ${outline.promisedPayoff || ''}\nContinuity bible (immutable): ${JSON.stringify(outline.continuityBible || {})}\n${genre.toneGuidance}\n${genre.visualGuidance}${artDirectionGuidance}\nWrite ONLY chapter ${i + 1} of ${chapters.length}: "${ch.title}" — ${ch.summary}\nRequired new development: ${ch.newDevelopment || ch.summary}\n` +
           `Chapter length: ${targetWords} words. ${i > 0 ? `Start with a "chapter" scene (section: true), but begin its narration naturally: never say "Chapter", a chapter number, or read the section title aloud. Preserve all established facts and state. The preceding narrative context is: "${soFar}"` : 'This is the cold open: begin in concrete action with a specific unresolved tension.'}\n` +
-          (isAiWorkflow ? `- AI Image Prompts: In each scene object, author "imagePrompt": string (a provider-neutral concrete scene prompt matching the ${styleName} style). Put subject, action, environment, framing, and continuity identifiers first; never request text or collage layouts.\n` : '') +
+          (isAiWorkflow ? `- AI Image Prompts (Projection Sequence): In each scene object, author "imagePrompt": string (a provider-neutral concrete scene prompt matching the ${styleName} style). Build a literal visual projection of that sentence: put subject, exact physical action, props/objects mentioned in narration, environment, framing, and continuity identifiers first; never request text or collage layouts.\n` : '') +
           `Quality gate before answering: remove repeated ideas, generic transitions, unsupported exact claims, unrelated visuals, identity drift, and any scene that does not change knowledge, stakes, mechanism, relationship, or choice. Ensure this chapter opens and closes only the questions assigned in the outline.\n` +
           `Return {"scenes": [...]} only.`,
       },

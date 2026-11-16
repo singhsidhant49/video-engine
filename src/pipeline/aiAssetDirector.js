@@ -33,6 +33,15 @@ export function enrichAiImagePrompt({ scene, shotConcept = '', req = null, style
 
   basePrompt = basePrompt.replace(/[.,\s]+$/, '');
 
+  // Connect narration directly if base prompt is short or generic, creating a literal visual projection sequence
+  const narration = (scene?.narration || '').trim();
+  if (!shotConcept && narration && basePrompt.length < 75 && !basePrompt.toLowerCase().includes(narration.toLowerCase().slice(0, 15))) {
+    const actionSnippet = narration.replace(/[.,!?]+$/, '').slice(0, 90).trim();
+    if (actionSnippet) {
+      basePrompt = `${basePrompt.replace(/[.,\s]+$/, '')}, depicting: ${actionSnippet}`;
+    }
+  }
+
   // 1. Framing / Perspective
   const shotScale = scene?.shot || 'medium';
   let framing = '';
