@@ -24,6 +24,8 @@ test('run pruner skips runs with active lock and prunes expired runs', async () 
   await fs.writeFile(path.join(oldRun, 'output.mp4'), 'dummy video output content');
   await fs.writeFile(path.join(oldRun, 'thumbnail.png'), 'durable thumbnail');
   await fs.writeFile(path.join(oldRun, 'qc.json'), '{"render":{"ok":true}}');
+  await fs.writeFile(path.join(oldRun, 'project.json'), '{"id":"vid_old_01"}');
+  await fs.writeFile(path.join(oldRun, 'manifest.json'), '{"videoId":"vid_old_01","stages":{}}');
   await fs.writeFile(path.join(activeRun, 'request.json'), '{}');
   await fs.writeFile(path.join(activeRun, '.lock'), 'pid: 1234');
   await fs.writeFile(path.join(recentRun, 'request.json'), '{}');
@@ -51,6 +53,8 @@ test('run pruner skips runs with active lock and prunes expired runs', async () 
   assert.equal(oldRunExists, true);
   await fs.access(path.join(oldRun, 'thumbnail.png'));
   await fs.access(path.join(oldRun, 'qc.json'));
+  await fs.access(path.join(oldRun, 'project.json'));
+  await fs.access(path.join(oldRun, 'manifest.json'));
   await fs.access(path.join(oldRun, '.retention-compacted.json'));
   await assert.rejects(fs.access(path.join(oldRun, 'narration.wav')), /ENOENT/);
   await assert.rejects(fs.access(path.join(oldRun, 'output.mp4')), /ENOENT/);

@@ -702,7 +702,7 @@ export async function directAiAssets(plan, specs, {
             referenceApplied: true,
             reusedFromShotId: priorShotId,
           };
-          rawPrompt = `Approved same-scene visual continuation for narration: ${narration}`;
+          rawPrompt = `Approved same-scene visual continuation for narration: ${String(scene?.narration || req.visibleNeed?.narrationText || '').trim()}`;
           inspection = visualInspections[priorShotId] || inspection;
           visualMatch = { overallVisualMatch: Math.max(0.65, Number(priorAsset.relevance || 0)), details: `Approved continuation of ${priorShotId} within the same narration scene` };
           pixelGrounding = { available: false, reason: 'approved_same_scene_continuation', matched: true };

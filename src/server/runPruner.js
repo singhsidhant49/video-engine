@@ -8,6 +8,12 @@ const STALE_LOCK_MAX_AGE_MS = 10 * 60 * 1000;
 const RETENTION_MARKER = '.retention-compacted.json';
 const DURABLE_RUN_FILES = new Set([
   'request.json',
+  // These two small files are the checkpoint index. Keeping them lets resume
+  // validation invalidate only stages whose heavy artifacts were compacted,
+  // instead of making every retained production record look resumable and
+  // then fail with ENOENT.
+  'project.json',
+  'manifest.json',
   'plan.json',
   'timeline.json',
   'qc.json',

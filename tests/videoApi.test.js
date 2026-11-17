@@ -21,6 +21,15 @@ async function waitFor(read, predicate, timeoutMs = 3_000) {
   throw new Error('Timed out waiting for asynchronous job state');
 }
 
+async function writeResumeCheckpoint(rendersDir, videoId) {
+  const runDir = path.join(rendersDir, 'runs', videoId);
+  await fs.mkdir(runDir, { recursive: true });
+  await Promise.all([
+    fs.writeFile(path.join(runDir, 'project.json'), JSON.stringify({ id: videoId })),
+    fs.writeFile(path.join(runDir, 'manifest.json'), JSON.stringify({ videoId, stages: {} })),
+  ]);
+}
+
 test('file job store removes only stale atomic-write temp artifacts during startup', async (t) => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-store-cleanup-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
@@ -470,6 +479,7 @@ test('post-render QC retry preserves the video ID and recompiles the timeline', 
   const calls = [];
   const generator = async (options) => {
     calls.push({ videoId: options.videoId, resume: options.resume, from: options.from });
+    if (calls.length === 1) await writeResumeCheckpoint(rendersDir, options.videoId);
     if (calls.length === 1) throw new Error('Post-render QC failed — test fixture');
     const outputPath = path.join(rendersDir, `${options.videoId}-landscape.mp4`);
     await fs.writeFile(outputPath, 'video');
@@ -498,6 +508,7 @@ test('narration duration failure retries from audio without regenerating assets 
   const calls = [];
   const generator = async (options) => {
     calls.push({ resume: options.resume, from: options.from });
+    if (calls.length === 1) await writeResumeCheckpoint(rendersDir, options.videoId);
     if (calls.length === 1) {
       const error = new Error('Narration duration repair failed: measured 292.6s; required 313.5-346.5s');
       error.code = 'NARRATION_DURATION_FAILED';
@@ -519,6 +530,35 @@ test('narration duration failure retries from audio without regenerating assets 
     { resume: null, from: null },
     { resume: created.job.id, from: 'audio' },
   ]);
+});
+
+test('retry cleanly regenerates from the durable request when retention removed checkpoints', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-expired-retry-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const rendersDir = path.join(root, 'renders');
+  await fs.mkdir(rendersDir, { recursive: true });
+  const calls = [];
+  const generator = async (options) => {
+    calls.push({ resume: options.resume, from: options.from });
+    if (calls.length === 1) throw new Error('Post-render QC failed - expired fixture');
+    const outputPath = path.join(rendersDir, `${options.videoId}-landscape.mp4`);
+    await fs.writeFile(outputPath, 'video');
+    return { outputPath, outputFilename: path.basename(outputPath), runDir: path.join(rendersDir, 'runs', options.videoId), durationSeconds: 10, title: 'Cleanly regenerated' };
+  };
+  const service = new VideoJobService({ store: new FileJobStore(path.join(root, 'api')), generator, rendersDir });
+  await service.init();
+  const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'Recover an expired production run' }));
+  await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'failed');
+
+  await service.retry('account-a', created.job.id);
+  const completed = await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');
+
+  assert.deepEqual(calls, [
+    { resume: null, from: null },
+    { resume: null, from: null },
+  ]);
+  assert.equal(completed.recovery.mode, 'clean_restart');
+  assert.equal(completed.recovery.reason, 'checkpoints_expired');
 });
 
 test('timeline QC retry restarts from audio when duration failed', () => {

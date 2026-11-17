@@ -16,7 +16,29 @@ const publicJob = (job) => ({
   error: job.error || undefined, metadata: job.metadata || undefined,
   retryCount: job.retryCount || 0, lastError: job.lastError || undefined,
   costEstimate: job.costEstimate || undefined,
+  recovery: job.recovery || undefined,
 });
+
+async function inspectResumeCheckpoint(rendersDir, id) {
+  const runDir = path.join(rendersDir, 'runs', id);
+  try {
+    const [projectRaw, manifestRaw] = await Promise.all([
+      fs.readFile(path.join(runDir, 'project.json'), 'utf8'),
+      fs.readFile(path.join(runDir, 'manifest.json'), 'utf8'),
+    ]);
+    const project = JSON.parse(projectRaw);
+    const manifest = JSON.parse(manifestRaw);
+    if (project?.id !== id || manifest?.videoId !== id || !manifest?.stages) {
+      return { resumable: false, reason: 'checkpoint_identity_mismatch' };
+    }
+    return { resumable: true, reason: null };
+  } catch (error) {
+    return {
+      resumable: false,
+      reason: error?.code === 'ENOENT' ? 'checkpoints_expired' : 'checkpoints_invalid',
+    };
+  }
+}
 
 const estimateProviderCost = (request) => {
   const seconds = Number(request.output?.durationSeconds || request.output?.durationRange?.max || 120);
@@ -719,6 +741,27 @@ export class VideoJobService {
   async #run(id, controller, { queueSignal = null } = {}) {
     let job = await this.store.getJob(id);
     if (!job || !['queued', 'preparing', 'processing'].includes(job.status)) return;
+    if (job.resumeExisting) {
+      const checkpoint = await inspectResumeCheckpoint(this.rendersDir, id);
+      if (!checkpoint.resumable) {
+        // Retention intentionally removes heavy/intermediate checkpoints after
+        // their TTL. A retry must remain useful: regenerate from the durable
+        // request instead of failing JobContext.load() with ENOENT.
+        job.resumeExisting = false;
+        job.resumeFrom = null;
+        job.recovery = {
+          mode: 'clean_restart',
+          reason: checkpoint.reason,
+          restartedAt: now(),
+        };
+      } else {
+        job.recovery = {
+          mode: 'checkpoint_resume',
+          reason: null,
+          restartedAt: now(),
+        };
+      }
+    }
     job.status = 'processing'; job.stage = 'preparing'; job.startedAt ||= now(); job.updatedAt = now();
     await this.store.putJob(job);
     let progressWrites = Promise.resolve();

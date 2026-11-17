@@ -24,7 +24,7 @@ import { generateVideoPackage } from '../services/thumbnailGenerator.js';
 import { buildTimeline, rngFrom, sceneWordRanges } from './timeline.js';
 import { synthesizeWithSay } from '../services/devTts.js';
 import { formatCredits } from '../shared/licensing.js';
-import { ffmpeg } from '../services/ffmpeg.js';
+import { ffmpeg, probeDuration } from '../services/ffmpeg.js';
 import { runTimelineQc, printQc } from '../qc/timelineQc.js';
 import { runRenderQc } from '../qc/renderQc.js';
 import { JobContext } from '../core/jobs/jobContext.js';
@@ -57,7 +57,7 @@ import { persistConfigSnapshot } from '../core/checkpoints/versionTracker.js';
 import { buildEditContinuityDiagnostics } from '../qc/editContinuityDiagnostics.js';
 import { resolveVisualPolicy } from '../config/visualMode.js';
 import { applyManualVisualOverrides, materializeManualImageOverrides } from './manualVisualOverrides.js';
-import { probeDuration } from '../services/ffmpeg.js';
+import { renderMediaSegmented, shouldUseSegmentedRender } from './segmentedRemotionRender.js';
 
 function buildClaimEvidenceDiagnostics(plan) {
   const claims = plan?.claims || [];
@@ -1316,8 +1316,13 @@ export async function createFacelessVideo({
       ...(process.env.REMOTION_DISABLE_CHROMIUM_SANDBOX === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
     ],
   };
-  try {
-  await renderMedia({
+  const reportRenderProgress = (progress) => {
+    const pct = Math.round(progress * 100);
+    if (pct !== lastPct && pct % 10 === 0) console.log(`   rendering ${pct}%`);
+    lastPct = pct;
+    onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
+  };
+  const renderOptions = {
     composition,
     serveUrl,
     codec: 'h264',
@@ -1326,7 +1331,6 @@ export async function createFacelessVideo({
     jpegQuality: 94,
     colorSpace: 'bt709',
     audioBitrate: '192k',
-    outputLocation: temporaryOutputPath,
     inputProps,
     scale: renderScale,
     concurrency: Number(process.env.REMOTION_CONCURRENCY || 1),
@@ -1334,14 +1338,34 @@ export async function createFacelessVideo({
     delayRenderTimeoutInMilliseconds: 240_000,
     timeoutInMilliseconds: 240_000,
     chromiumOptions,
-    ...(frameRange ? { frameRange } : {}),
-    onProgress: ({ progress: p }) => {
-      const pct = Math.round(p * 100);
-      if (pct !== lastPct && pct % 10 === 0) console.log(`   rendering ${pct}%`);
-      lastPct = pct;
-      onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
-    },
-  });
+  };
+  try {
+  if (shouldUseSegmentedRender({ totalFrames: timeline.durationInFrames, fps, frameRange })) {
+    console.log(`   Rendering long-form video in resumable ${Number(process.env.REMOTION_SEGMENT_SECONDS || 60)}s segments`);
+    await renderMediaSegmented({
+      renderMediaFn: renderMedia,
+      renderOptions,
+      runDir,
+      totalFrames: timeline.durationInFrames,
+      fps,
+      renderIdentity: {
+        timeline,
+        compositionId: composition.id,
+        renderScale,
+        codec: 'h264',
+        crf: 17,
+      },
+      temporaryOutputPath,
+      onOverallProgress: reportRenderProgress,
+    });
+  } else {
+    await renderMedia({
+      ...renderOptions,
+      outputLocation: temporaryOutputPath,
+      ...(frameRange ? { frameRange } : {}),
+      onProgress: ({ progress: p }) => reportRenderProgress(p),
+    });
+  }
   // Publish only a complete encoder output. A crash or cancellation can leave
   // the .partial file, but clients can never mistake it for the final MP4.
   await fs.rename(temporaryOutputPath, outputPath);
