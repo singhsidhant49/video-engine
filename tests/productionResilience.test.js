@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildPixelGroundingClasses } from '../src/assets/visualInspectionService.js';
-import { buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation } from '../src/pipeline/aiAssetDirector.js';
+import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation } from '../src/pipeline/aiAssetDirector.js';
 import { isAutomaticallyRetryableFailure, resolveVideoJobTimeoutMs, resumeStageForFailure } from '../src/server/videoJobService.js';
 
 test('stick-figure validation never treats the selected visual style as a negative class', () => {
@@ -37,6 +37,20 @@ test('approved same-scene continuation never reuses a rejected visual', () => {
     shot_2: { accepted: true },
   });
   assert.deepEqual(continuation, ['shot_2', { src: 'assets/approved.png' }]);
+});
+
+test('approved same-scene continuation always derives its prompt from scoped narration', () => {
+  assert.equal(
+    buildSameSceneContinuationPrompt(
+      { narration: 'Pause before reacting on autopilot.' },
+      { visibleNeed: { narrationText: 'fallback narration' } },
+    ),
+    'Approved same-scene visual continuation for narration: Pause before reacting on autopilot.',
+  );
+  assert.equal(
+    buildSameSceneContinuationPrompt({}, { visibleNeed: { narrationText: 'Use the visible-need narration.' } }),
+    'Approved same-scene visual continuation for narration: Use the visible-need narration.',
+  );
 });
 
 test('long-form jobs receive a duration-aware CPU render budget', () => {

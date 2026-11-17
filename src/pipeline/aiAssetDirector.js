@@ -51,6 +51,11 @@ export function findApprovedSameSceneContinuation(sceneAssets, judgments = {}) {
     .find(([priorShotId, priorAsset]) => priorAsset?.src && judgments[priorShotId]?.accepted === true) || null;
 }
 
+export function buildSameSceneContinuationPrompt(scene = {}, req = {}) {
+  const narration = String(scene?.narration || req?.visibleNeed?.narrationText || '').trim();
+  return `Approved same-scene visual continuation for narration: ${narration}`;
+}
+
 /**
  * Enriches and structures the AI prompt to maximize visual storytelling,
  * context relevance to narration, camera perspective, and lighting.
@@ -702,7 +707,7 @@ export async function directAiAssets(plan, specs, {
             referenceApplied: true,
             reusedFromShotId: priorShotId,
           };
-          rawPrompt = `Approved same-scene visual continuation for narration: ${String(scene?.narration || req.visibleNeed?.narrationText || '').trim()}`;
+          rawPrompt = buildSameSceneContinuationPrompt(scene, req);
           inspection = visualInspections[priorShotId] || inspection;
           visualMatch = { overallVisualMatch: Math.max(0.65, Number(priorAsset.relevance || 0)), details: `Approved continuation of ${priorShotId} within the same narration scene` };
           pixelGrounding = { available: false, reason: 'approved_same_scene_continuation', matched: true };
