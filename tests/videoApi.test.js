@@ -561,6 +561,33 @@ test('retry cleanly regenerates from the durable request when retention removed 
   assert.equal(completed.recovery.reason, 'checkpoints_expired');
 });
 
+test('a completed video can be explicitly reprocessed from alignment to repair subtitles', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'video-api-caption-resync-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const rendersDir = path.join(root, 'renders');
+  await fs.mkdir(rendersDir, { recursive: true });
+  const calls = [];
+  const generator = async (options) => {
+    calls.push({ resume: options.resume, from: options.from });
+    await writeResumeCheckpoint(rendersDir, options.videoId);
+    const outputPath = path.join(rendersDir, `${options.videoId}-landscape.mp4`);
+    await fs.writeFile(outputPath, `video-${calls.length}`);
+    return { outputPath, outputFilename: path.basename(outputPath), runDir: path.join(rendersDir, 'runs', options.videoId), durationSeconds: 300, title: 'Caption resync' };
+  };
+  const service = new VideoJobService({ store: new FileJobStore(path.join(root, 'api')), generator, rendersDir });
+  await service.init();
+  const created = await service.create('account-a', CreateVideoRequestSchema.parse({ prompt: 'A long captioned production' }));
+  await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed');
+
+  await service.retry('account-a', created.job.id, { resumeFrom: 'alignment' });
+  await waitFor(() => service.get('account-a', created.job.id), (job) => job.status === 'completed' && job.retryCount === 1);
+
+  assert.deepEqual(calls, [
+    { resume: null, from: null },
+    { resume: created.job.id, from: 'alignment' },
+  ]);
+});
+
 test('timeline QC retry restarts from audio when duration failed', () => {
   const qc = {
     checks: [

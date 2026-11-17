@@ -17,4 +17,6 @@ test('studio exposes channel and status filters and sends them to the APIs', asy
   assert.match(script, /video\.channelId/);
   assert.match(script, /data-experiment-title/);
   assert.match(script, /data-retry-stage/);
+  assert.match(script, /data-video-action="resync-captions"/);
+  assert.match(script, /resumeFrom: 'alignment'/);
 });

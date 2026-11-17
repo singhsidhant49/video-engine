@@ -92,7 +92,7 @@ function videoCard(video) {
   const channelName = channel?.name || (video.channelId === 'default' ? 'Default profile' : video.channelId || 'Default profile');
   const thumb = state.thumbs.get(video.id);
   const controls = video.status === 'completed'
-    ? `<button data-video-action="review" data-id="${video.id}">Review</button><button data-video-action="download" data-id="${video.id}">Download</button><button data-video-action="visual-diagnostics" data-id="${video.id}">Visual diagnostics</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
+    ? `<button data-video-action="review" data-id="${video.id}">Review</button><button data-video-action="download" data-id="${video.id}">Download</button><button data-video-action="resync-captions" data-id="${video.id}">Re-sync captions</button><button data-video-action="visual-diagnostics" data-id="${video.id}">Visual diagnostics</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
     : ['failed', 'cancelled'].includes(video.status)
       ? `<button data-video-action="retry" data-id="${video.id}">Smart retry</button><select data-retry-stage aria-label="Retry from stage"><option value="plan">Script</option><option value="audio">Audio</option><option value="assets">Visual assets</option><option value="timeline">Timeline</option><option value="render">Render</option></select><button data-video-action="retry-stage" data-id="${video.id}">Retry from stage</button><button data-video-action="visual-diagnostics" data-id="${video.id}">Visual diagnostics</button><button class="danger" data-video-action="delete" data-id="${video.id}">Delete</button>`
       : `<button data-video-action="cancel" data-id="${video.id}">Cancel</button>`;
@@ -536,6 +536,7 @@ async function videoAction(button) {
     if (action === 'cancel') await api(`/v1/videos/${id}/cancel`, { method: 'POST', body: '{}' });
     if (action === 'retry') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: '{}' });
     if (action === 'retry-stage') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: JSON.stringify({ resumeFrom: button.parentElement.querySelector('[data-retry-stage]').value }) });
+    if (action === 'resync-captions' && confirm('Re-align subtitles to the narration and rerender this video?')) await api(`/v1/videos/${id}/retry`, { method: 'POST', body: JSON.stringify({ resumeFrom: 'alignment' }) });
     if (action === 'visual-diagnostics') { window.open(`/v1/videos/${id}/visual-diagnostics`, '_blank', 'noopener,noreferrer'); return; }
     if (action === 'delete' && confirm('Delete this video and all generated files?')) await api(`/v1/videos/${id}`, { method: 'DELETE' });
     await Promise.all([loadVideos(), loadVideoSummary()]);
