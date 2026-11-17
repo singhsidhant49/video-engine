@@ -68,6 +68,44 @@ async function decodeTo16kMono(audioPath) {
 }
 
 /**
+ * Whisper can repeat the tail of one internal window at the beginning of the
+ * next and occasionally returns that repeated phrase with timestamps several
+ * seconds in the past. Caption alignment must never consume a non-monotonic
+ * transcript. Drop punctuation-only hallucinations, adjacent duplicates and
+ * the repeated portion until timestamps catch back up to the accepted audio.
+ */
+export function sanitizeTranscriptTimeline(transcript = []) {
+  const output = [];
+  let catchUpAt = null;
+  for (const item of transcript) {
+    const text = String(item?.text || '').trim();
+    const start = Number(item?.start);
+    const rawEnd = Number(item?.end);
+    if (!text || !/[\p{L}\p{N}]/u.test(text) || !Number.isFinite(start)) continue;
+    const end = Number.isFinite(rawEnd) ? Math.max(start + 0.01, rawEnd) : start + 0.3;
+
+    if (catchUpAt != null) {
+      if (start < catchUpAt) continue;
+      catchUpAt = null;
+    }
+
+    const previous = output.at(-1);
+    if (previous && start < previous.start - 0.35) {
+      catchUpAt = previous.end;
+      if (start < catchUpAt) continue;
+      catchUpAt = null;
+    }
+
+    const normalized = text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+    const previousNormalized = String(previous?.text || '').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+    if (previous && normalized && normalized === previousNormalized && start < previous.end + 0.15) continue;
+
+    output.push({ ...item, text, start, end });
+  }
+  return output;
+}
+
+/**
  * Locates the lowest energy (silence) point within a window to avoid cutting in the middle of a spoken word.
  */
 export function findSilenceCutPoint(samples, startOffset, sampleRate = 16000, targetSec = 28, windowSec = 4) {
@@ -102,16 +140,12 @@ async function transcribeWordsInProcess(audioPath) {
   const transcriber = await getWhisper();
   const sampleRate = 16000;
 
-  if (samples.length <= sampleRate * 35) {
-    const result = await transcriber(samples, {
-      return_timestamps: 'word',
-      chunk_length_s: 30,
-      stride_length_s: 5,
-    });
-    return (result?.chunks || [])
+  if (samples.length <= sampleRate * 29) {
+    const result = await transcriber(samples, { return_timestamps: 'word' });
+    return sanitizeTranscriptTimeline((result?.chunks || [])
       .map((c) => ({ text: String(c.text || '').trim(), start: c.timestamp?.[0], end: c.timestamp?.[1] }))
       .filter((w) => w.text && Number.isFinite(w.start))
-      .map((w) => ({ ...w, end: Number.isFinite(w.end) ? w.end : w.start + 0.3 }));
+      .map((w) => ({ ...w, end: Number.isFinite(w.end) ? w.end : w.start + 0.3 })));
   }
 
   // Multi-chunk transcription: cleanly slice long audio (e.g. 8-15 min) at sentence pauses
@@ -120,16 +154,14 @@ async function transcribeWordsInProcess(audioPath) {
   let currentOffset = 0;
 
   while (currentOffset < samples.length) {
-    const cutPoint = findSilenceCutPoint(samples, currentOffset, sampleRate, 28, 4);
+    // Keep each manual window below Whisper's 30-second receptive field so
+    // the model does not add its own overlapping stride on top of ours.
+    const cutPoint = findSilenceCutPoint(samples, currentOffset, sampleRate, 26, 3);
     const chunkSamples = samples.subarray(currentOffset, cutPoint);
     const chunkOffsetSec = currentOffset / sampleRate;
 
     if (chunkSamples.length >= sampleRate * 0.25) {
-      const result = await transcriber(chunkSamples, {
-        return_timestamps: 'word',
-        chunk_length_s: 30,
-        stride_length_s: 5,
-      });
+      const result = await transcriber(chunkSamples, { return_timestamps: 'word' });
 
       const chunkWords = (result?.chunks || [])
         .map((c) => ({
@@ -147,7 +179,7 @@ async function transcribeWordsInProcess(audioPath) {
     currentOffset = cutPoint;
   }
 
-  return allWords;
+  return sanitizeTranscriptTimeline(allWords);
 }
 
 /** Run Whisper in a separate OS process. A timeout terminates the actual ONNX
@@ -223,7 +255,7 @@ export async function analyzeNarration(audioPath, scriptText, fps, { signal } = 
   // Check alignment cache
   const cached = audioHash ? await alignmentCache.get({ audioHash, script: scriptText, model: WHISPER_MODEL }) : { hit: false };
   if (cached.hit && cached.data?.transcript) {
-    transcript = cached.data.transcript;
+    transcript = sanitizeTranscriptTimeline(cached.data.transcript);
     words = alignScriptToTranscript(scriptWords, transcript, durationInSeconds);
     source = 'whisper-cache';
     console.log(`⚡ Reused cached Whisper word alignment (${transcript.length} words)`);
@@ -231,7 +263,7 @@ export async function analyzeNarration(audioPath, scriptText, fps, { signal } = 
     try {
       const policy = resolveWhisperPolicy(durationInSeconds);
       if (!policy.useWhisper) throw new Error(`Whisper skipped: ${policy.reason}`);
-      transcript = await transcribeWords(audioPath, { timeoutMs: policy.timeoutMs, signal });
+      transcript = sanitizeTranscriptTimeline(await transcribeWords(audioPath, { timeoutMs: policy.timeoutMs, signal }));
       if (transcript.length < Math.max(3, scriptWords.length * 0.3)) throw new Error(`only ${transcript.length} transcript words`);
       words = alignScriptToTranscript(scriptWords, transcript, durationInSeconds);
       if (audioHash) {

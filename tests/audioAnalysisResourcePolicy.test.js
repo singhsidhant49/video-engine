@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import wavefile from 'wavefile';
 
-import { analyzeNarration, resolveWhisperPolicy, transcribeWords } from '../src/services/audioAnalysisService.js';
+import { analyzeNarration, resolveWhisperPolicy, sanitizeTranscriptTimeline, transcribeWords } from '../src/services/audioAnalysisService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('long narration bypasses local Whisper on a resource-bounded deployment', () => {
@@ -31,6 +31,24 @@ test('Whisper cancellation rejects before starting an isolated process', async (
   );
 });
 
+test('long-form Whisper overlap is removed before script and caption alignment', () => {
+  const transcript = [
+    { text: 'reassurance', start: 207.74, end: 208.34 },
+    { text: 'alone', start: 208.34, end: 208.8 },
+    { text: 'brain', start: 209.9, end: 210.22 },
+    { text: '...', start: 209.98, end: 209.98 },
+    // Whisper restarted an overlapping internal window four seconds earlier.
+    { text: 'feel', start: 205.34, end: 205.66 },
+    { text: 'reassurance', start: 207.74, end: 208.38 },
+    { text: 'brain', start: 209.92, end: 210.22 },
+    { text: 'needs', start: 210.22, end: 210.52 },
+    { text: 'new', start: 210.52, end: 210.86 },
+  ];
+  const cleaned = sanitizeTranscriptTimeline(transcript);
+  assert.deepEqual(cleaned.map((word) => word.text), ['reassurance', 'alone', 'brain', 'needs', 'new']);
+  assert.ok(cleaned.every((word, index) => index === 0 || word.start >= cleaned[index - 1].start));
+});
+
 test('disabled Whisper produces monotonic estimated timing without failing alignment QC', async () => {
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'vf-alignment-fallback-'));
   const audioPath = path.join(tmpDir, 'narration.wav');
@@ -49,6 +67,14 @@ test('disabled Whisper produces monotonic estimated timing without failing align
     const alignment = qc.checks.find((check) => check.id === 'alignment');
     assert.equal(alignment.severity, 'warn');
     assert.match(alignment.detail, /deterministic estimated word timing/);
+
+    const productionQc = runTimelineQc({
+      fps: 30, durationInFrames: 30, style: 'minimal_premium', clips: [],
+      captions: { mode: 'phrase', chunks: [] },
+    }, { narration, publishMode: 'PRODUCTION_RENDER' });
+    const productionAlignment = productionQc.checks.find((check) => check.id === 'alignment');
+    assert.equal(productionAlignment.severity, 'error');
+    assert.equal(productionAlignment.ok, false);
   } finally {
     if (originalEnabled == null) delete process.env.WHISPER_ENABLED;
     else process.env.WHISPER_ENABLED = originalEnabled;

@@ -290,11 +290,33 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
     const missing = Object.entries(plan.diagnostics.missingAttributes || {});
     add('plan-feel', missing.length === 0, 'warn', missing.length ? `director omitted: ${missing.map(([key, count]) => `${key}x${count}`).join(', ')}` : 'ok');
   }
+  const captionsRequired = publishMode === 'PRODUCTION_RENDER'
+    && !['none', 'off', 'OFF'].includes(timeline.captions?.mode || 'none');
   if (narration?.source === 'estimate') {
-    add('alignment', false, 'warn', 'deterministic estimated word timing used because speech recognition was unavailable or outside resource limits');
+    add(
+      'alignment',
+      false,
+      captionsRequired ? 'error' : 'warn',
+      'deterministic estimated word timing used because speech recognition was unavailable or outside resource limits',
+    );
   } else if (narration) {
-    add('alignment', narration.matchRate >= 0.8, narration.matchRate >= 0.5 ? 'warn' : 'error', `${(narration.matchRate * 100).toFixed(0)}% script-word match (${narration.source})`);
+    const requiredMatchRate = captionsRequired ? 0.9 : 0.8;
+    add(
+      'alignment',
+      narration.matchRate >= requiredMatchRate,
+      captionsRequired || narration.matchRate < 0.5 ? 'error' : 'warn',
+      `${(narration.matchRate * 100).toFixed(0)}% script-word match (${narration.source}); required ${(requiredMatchRate * 100).toFixed(0)}%`,
+    );
   }
+  const timestampIssues = (narration?.words || []).filter((word, index, all) => (
+    !Number.isFinite(Number(word.start))
+    || !Number.isFinite(Number(word.end))
+    || Number(word.end) < Number(word.start)
+    || (index > 0 && Number(word.start) < Number(all[index - 1].start))
+  ));
+  add('caption-timestamp-order', timestampIssues.length === 0, 'error', timestampIssues.length
+    ? `${timestampIssues.length} non-monotonic or invalid narration timestamps`
+    : `${narration?.words?.length || 0} narration timestamps are monotonic`);
   const badChunks = (timeline.captions?.chunks || []).filter((chunk, index, all) => chunk.endFrame <= chunk.startFrame || (index && chunk.startFrame < all[index - 1].startFrame));
   add('caption-order', badChunks.length === 0, 'error', badChunks.length ? `${badChunks.length} malformed chunks` : `${timeline.captions?.chunks?.length || 0} chunks`);
 
