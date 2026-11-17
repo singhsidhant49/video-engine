@@ -19,4 +19,6 @@ test('studio exposes channel and status filters and sends them to the APIs', asy
   assert.match(script, /data-retry-stage/);
   assert.match(script, /data-video-action="resync-captions"/);
   assert.match(script, /resumeFrom: 'alignment'/);
+  assert.match(script, /hasActiveVideos \|\| state\.pollCount % 6 === 0/);
+  assert.match(script, /singleRequest\('video-summary', loadVideoSummary\)/);
 });

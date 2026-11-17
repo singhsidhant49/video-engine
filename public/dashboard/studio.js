@@ -648,7 +648,14 @@ renderProductionInsights();
 if (await restoreSession()) { await refreshAll(); await loadAdminUsers(); }
 state.poll = setInterval(() => {
   if (!state.authenticated || document.hidden) return; state.pollCount += 1;
-  if (state.videos.some((v) => !terminal.has(v.status))) void singleRequest('videos', loadVideos);
+  const hasActiveVideos = state.videos.some((v) => !terminal.has(v.status));
+  // Keep terminal cards eventually consistent when a retry is started by the
+  // scheduler or another browser tab. Active work remains responsive at 10s;
+  // otherwise refresh once per minute without continuously polling the API.
+  if (hasActiveVideos || state.pollCount % 6 === 0) {
+    void singleRequest('videos', loadVideos);
+    if (state.pollCount % 6 === 0) void singleRequest('video-summary', loadVideoSummary);
+  }
   if (state.selectedChannelId && state.ideas.some((idea) => ['queued', 'producing'].includes(idea.status))) void singleRequest('ideas', loadIdeas);
   if (state.pollCount % 6 === 0 && state.channels.some((channel) => channel.automation?.enabled)) void singleRequest('channels', loadChannels);
 }, 10000);
