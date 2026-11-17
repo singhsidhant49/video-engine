@@ -2,17 +2,40 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 /** Content-aware duration bands (in seconds) by shot/content type. */
 export const DURATION_BANDS = {
-  establishing: { min: 2.5, ideal: 3.8, max: 5.5 },
-  important_photo: { min: 3.0, ideal: 4.2, max: 6.5 },
-  detail: { min: 1.8, ideal: 2.6, max: 3.5 },
-  document_evidence: { min: 3.0, ideal: 4.5, max: 6.5 },
+  establishing: { min: 4.0, ideal: 5.5, max: 7.0 },
+  normal_story: { min: 4.0, ideal: 5.5, max: 7.0 },
+  important_photo: { min: 5.0, ideal: 7.0, max: 10.0 },
+  detail: { min: 2.5, ideal: 3.5, max: 4.5 },
+  document_evidence: { min: 5.0, ideal: 7.0, max: 10.0 },
   chart: { min: 4.0, ideal: 5.5, max: 8.0 },
   process: { min: 4.0, ideal: 5.5, max: 8.0 },
   hero_stat: { min: 2.5, ideal: 3.8, max: 5.5 },
   kinetic_headline: { min: 1.8, ideal: 2.5, max: 3.5 },
-  emotional_hold: { min: 3.0, ideal: 4.8, max: 7.0 },
+  emotional_hold: { min: 6.0, ideal: 7.5, max: 9.0 },
+  meditation_hold: { min: 10.0, ideal: 14.0, max: 18.0 },
   montage_cut: { min: 0.8, ideal: 1.4, max: 2.0 },
 };
+
+export function durationPolicyForShot({ role = 'context', scene = {}, strategy = {} } = {}) {
+  const isShorts = strategy?.format === 'shorts' || scene.format === 'shorts';
+  const meditation = /meditation|sleep|breath|relax/i.test(`${strategy?.contentType || ''} ${scene.preferredPresentation || ''}`)
+    && Number(scene.energy || 0) <= 2;
+  let policyName = 'normal_story';
+  if (meditation) policyName = 'meditation_hold';
+  else if (role === 'detail') policyName = 'detail';
+  else if (role === 'evidence') policyName = 'document_evidence';
+  else if (role === 'establishing') policyName = 'establishing';
+  else if (role === 'reaction' || ['reveal', 'payoff'].includes(scene.purpose)) policyName = 'emotional_hold';
+  const base = DURATION_BANDS[policyName];
+  if (!isShorts) return { name: policyName, ...base, advisory: true };
+  return {
+    name: `${policyName}_shorts`,
+    min: Math.max(1.5, Math.min(4, Number((base.min * 0.5).toFixed(2)))),
+    ideal: Math.max(1.8, Math.min(4, Number((base.ideal * 0.5).toFixed(2)))),
+    max: Math.max(2.2, Math.min(4, Number((base.max * 0.5).toFixed(2)))),
+    advisory: true,
+  };
+}
 
 const ACTION_VERBS = /\b(sends?|requests?|responds?|receives?|processes|parses?|builds?|calculates?|renders?|paints?|draws?|executes?|composites?|translates?|connects?|travels?|moves?|converts?|transforms?|scales?|concentrates?|records?|makes?|runs?|appears?)\b/i;
 const LOCATION_TERMS = /\b(server\s+rack|data\s+center|datacenter|browser|network|cloud|motherboard|screen|room|exchange|wall\s+street|globe|city|borders?|infrastructure)\b/i;
@@ -403,11 +426,13 @@ export function authorShots(scene, strategy, topic) {
     // and prevented subject-aware pans. Imported timelines keep their
     // deterministic hint for backwards compatibility.
     const cameraMove = 'auto';
+    const durationPolicy = durationPolicyForShot({ role, scene, strategy });
 
     return {
       id: `${scene.id}_shot_${String(index + 1).padStart(2, '0')}`,
       role,
       durationHint: Number((scene.durationHint * weights[index]).toFixed(3)),
+      durationPolicy,
       visualConcept,
       assetIntent,
       changeReason,

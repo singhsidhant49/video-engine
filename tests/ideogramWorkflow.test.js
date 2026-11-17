@@ -8,6 +8,13 @@ import { resolveIdeogramAspectRatio, computePromptHash, generateIdeogramImage, n
 import { directAiAssets } from '../src/pipeline/aiAssetDirector.js';
 import { CreateVideoRequestSchema, toPipelineBrief } from '../src/server/videoApiSchemas.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
+import { resolveReplicateRetryDelay } from '../src/services/replicateService.js';
+
+test('Replicate retry pacing honors provider retry-after limits', () => {
+  assert.equal(resolveReplicateRetryDelay({ retryAfterMs: 5000 }, 1), 5000);
+  assert.equal(resolveReplicateRetryDelay({}, 2), 6000);
+  assert.equal(resolveReplicateRetryDelay({ retryAfterMs: 120000 }, 1), 60000);
+});
 
 test('AI Visual Style Catalog provides curated styles and correct prompt construction', () => {
   const styles = listSupportedImageStyles();
@@ -100,6 +107,38 @@ test('high-quality FLUX Schnell request uses the production quality controls', a
     assert.equal(requestInput.go_fast, false);
     assert.equal(requestInput.megapixels, '1');
     assert.equal(requestInput.seed, 41);
+  } finally {
+    global.fetch = originalFetch;
+    if (originalToken == null) delete process.env.REPLICATE_API_TOKEN;
+    else process.env.REPLICATE_API_TOKEN = originalToken;
+    await fs.rm(cacheDir, { recursive: true, force: true });
+  }
+});
+
+test('FLUX Dev applies a deterministic local continuity reference with img2img controls', async () => {
+  const { generateFluxImage } = await import('../src/services/replicateService.js');
+  const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), 'vf-flux-reference-'));
+  const referencePath = path.join(cacheDir, 'character.png');
+  await fs.writeFile(referencePath, Buffer.alloc(2048, 7));
+  const originalFetch = global.fetch;
+  const originalToken = process.env.REPLICATE_API_TOKEN;
+  let requestInput = null;
+  process.env.REPLICATE_API_TOKEN = 'test-token';
+  global.fetch = async (url, options = {}) => {
+    if (String(url).includes('api.replicate.com')) {
+      requestInput = JSON.parse(options.body).input;
+      return { ok: true, json: async () => ({ status: 'succeeded', output: ['https://images.local/reference-result.png'] }) };
+    }
+    return { ok: true, arrayBuffer: async () => new Uint8Array(2048).buffer };
+  };
+  try {
+    const result = await generateFluxImage({
+      prompt: 'The same woman enters the hallway', model: 'flux-dev', seed: 73,
+      referenceImagePath: referencePath, referenceStrength: 0.68, cacheDir, retries: 0,
+    });
+    assert.match(requestInput.image, /^data:image\/png;base64,/);
+    assert.equal(requestInput.prompt_strength, 0.68);
+    assert.equal(result.referenceApplied, true);
   } finally {
     global.fetch = originalFetch;
     if (originalToken == null) delete process.env.REPLICATE_API_TOKEN;

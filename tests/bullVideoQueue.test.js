@@ -76,8 +76,32 @@ test('a transient production media failure is automatically resumed with bounded
   assert.equal(store.current().resumeFrom, 'assets');
   assert.equal(store.current().error, null);
   assert.equal(store.current().lastError.code, 'UNRESOLVED_PRODUCTION_MEDIA');
+  assert.equal(store.current().automaticRetryCounts['UNRESOLVED_PRODUCTION_MEDIA:assets'], 1);
   assert.equal(taskQueue.enqueueCount(), 1);
   assert.equal(taskQueue.lastEnqueue()[1], 1);
+  assert.equal(taskQueue.lastEnqueue()[2].delayMs, 30_000);
+  await service.shutdown({ timeoutMs: 10 });
+});
+
+test('automatic retry budgets are isolated by failure stage instead of global retry count', async () => {
+  const initial = { ...queuedJob(), retryCount: 7, automaticRetryCounts: { 'TTS_UNAVAILABLE:audio': 2 } };
+  const store = fakeStore(initial);
+  const taskQueue = fakeTaskQueue({ present: true });
+  const generator = async () => {
+    throw Object.assign(
+      new Error('Production rendering requires every shot to have a usable, non-placeholder image (1 unresolved).'),
+      { code: 'UNRESOLVED_PRODUCTION_MEDIA' },
+    );
+  };
+  const service = new VideoJobService({ store, taskQueue, generator });
+  await service.init();
+  await taskQueue.handlers().onGenerate(initial.id, { signal: new AbortController().signal, queueJobId: 'video-stage-budget-test' });
+
+  assert.equal(store.current().status, 'queued');
+  assert.equal(store.current().retryCount, 8);
+  assert.equal(store.current().automaticRetryCounts['TTS_UNAVAILABLE:audio'], 2);
+  assert.equal(store.current().automaticRetryCounts['UNRESOLVED_PRODUCTION_MEDIA:assets'], 1);
+  assert.equal(store.current().resumeFrom, 'assets');
   assert.equal(taskQueue.lastEnqueue()[2].delayMs, 30_000);
   await service.shutdown({ timeoutMs: 10 });
 });

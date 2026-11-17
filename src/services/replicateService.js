@@ -3,6 +3,12 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { config } from '../config/index.js';
 import { buildFluxPrompt } from '../config/imageStyles.js';
+
+export function resolveReplicateRetryDelay(error, attempt) {
+  const backoffMs = Math.max(1, Number(attempt) || 1) * 3000;
+  const providerMs = Math.max(0, Number(error?.retryAfterMs) || 0);
+  return Math.min(60_000, Math.max(backoffMs, providerMs));
+}
 import { downloadImageToFile } from './ideogramService.js';
 
 /**
@@ -46,6 +52,8 @@ export async function generateFluxImage({
   offline = false,
   model = null,
   quality = 'high',
+  referenceImagePath = null,
+  referenceStrength = 0.72,
 }) {
   if (offline) {
     throw new Error('Offline mode requested — skipping external Replicate network calls');
@@ -59,11 +67,21 @@ export async function generateFluxImage({
   }
 
   const selectedModel = normalizeFluxModel(model);
+  const supportsImageReference = selectedModel === 'black-forest-labs/flux-dev';
+  let referenceImage = null;
+  let referenceHash = '';
+  if (referenceImagePath && supportsImageReference) {
+    const referenceBuffer = await fs.readFile(referenceImagePath);
+    referenceHash = crypto.createHash('sha256').update(referenceBuffer).digest('hex');
+    const extension = path.extname(referenceImagePath).toLowerCase();
+    const mime = extension === '.jpg' || extension === '.jpeg' ? 'image/jpeg' : extension === '.webp' ? 'image/webp' : 'image/png';
+    referenceImage = `data:${mime};base64,${referenceBuffer.toString('base64')}`;
+  }
   const fullPrompt = buildFluxPrompt({ prompt, styleId, customStylePrompt, format });
   const aspectRatio = resolveFluxAspectRatio(format);
 
   // Check persistent disk cache
-  const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}::${quality}`;
+  const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}::${quality}::${referenceHash}`;
   const promptHash = crypto.createHash('sha256').update(content).digest('hex');
   const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
   const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
@@ -124,6 +142,7 @@ export async function generateFluxImage({
       go_fast: quality !== 'high',
       megapixels: '1',
       ...(seed != null ? { seed: Number(seed) } : {}),
+      ...(referenceImage ? { image: referenceImage, prompt_strength: Math.max(0.1, Math.min(1, Number(referenceStrength) || 0.72)) } : {}),
     },
   };
 
@@ -156,7 +175,16 @@ export async function generateFluxImage({
         if (res.status === 401 || /unauthenticated|unauthorized|invalid token/i.test(errorText)) {
           throw new Error('Replicate API authentication failed (HTTP 401): Check REPLICATE_API_TOKEN in .env.');
         }
-        throw new Error(`Replicate API error ${res.status}: ${errorText.slice(0, 300)}`);
+        let bodyRetrySeconds = 0;
+        try { bodyRetrySeconds = Number(JSON.parse(errorText)?.retry_after || 0); } catch {}
+        const headerRetrySeconds = Number(res.headers?.get?.('retry-after') || 0);
+        throw Object.assign(
+          new Error(`Replicate API error ${res.status}: ${errorText.slice(0, 300)}`),
+          {
+            status: res.status,
+            retryAfterMs: Math.ceil(Math.max(bodyRetrySeconds, headerRetrySeconds) * 1000),
+          }
+        );
       }
 
       let data = await res.json();
@@ -207,6 +235,7 @@ export async function generateFluxImage({
         cached: false,
         provider: 'replicate',
         model: selectedModel,
+        referenceApplied: Boolean(referenceImage),
       };
     } catch (err) {
       lastError = err;
@@ -214,7 +243,7 @@ export async function generateFluxImage({
         throw err;
       }
       if (attempt < retries) {
-        const delay = (attempt + 1) * 3000;
+        const delay = resolveReplicateRetryDelay(err, attempt + 1);
         console.warn(`   ⚠️ Replicate FLUX attempt ${attempt + 1} failed: ${err.message}. Retrying in ${delay / 1000}s...`);
         await new Promise((resolve) => setTimeout(resolve, delay));
       }

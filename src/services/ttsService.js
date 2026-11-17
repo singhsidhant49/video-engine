@@ -9,6 +9,112 @@ export { normalizeTextForTts };
 
 const { WaveFile } = wavefile;
 const TTS_CHUNK_CHARS = 2800;
+const RETRYABLE_TTS_ERROR_CODES = new Set([
+  'EAI_AGAIN',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'ENETDOWN',
+  'ENETUNREACH',
+  'ENOTFOUND',
+  'ETIMEDOUT',
+  'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_SOCKET',
+]);
+const RETRYABLE_TTS_HTTP_STATUSES = new Set([408, 425, 429, 500, 502, 503, 504]);
+
+function errorCode(error) {
+  return error?.code || error?.cause?.code || error?.cause?.cause?.code || null;
+}
+
+export function isRetryableTtsError(error) {
+  return RETRYABLE_TTS_ERROR_CODES.has(errorCode(error))
+    || RETRYABLE_TTS_HTTP_STATUSES.has(Number(error?.status));
+}
+
+function waitForRetry(ms, signal) {
+  if (signal?.aborted) return Promise.reject(Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' }));
+  return new Promise((resolve, reject) => {
+    const cleanup = () => signal?.removeEventListener('abort', abort);
+    const timer = setTimeout(() => {
+      cleanup();
+      resolve();
+    }, ms);
+    const abort = () => {
+      clearTimeout(timer);
+      cleanup();
+      reject(Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' }));
+    };
+    signal?.addEventListener('abort', abort, { once: true });
+  });
+}
+
+/**
+ * Call Kokoro with bounded retries for transient DNS, connection, and provider
+ * failures. A worker must survive a short container restart without discarding
+ * an otherwise valid script and production plan.
+ */
+export async function requestKokoroSpeech({
+  url,
+  payload,
+  signal,
+  timeoutMs,
+  fetchImpl = globalThis.fetch,
+  attempts = Math.max(1, Number(process.env.KOKORO_RETRY_ATTEMPTS || 5)),
+  retryBaseDelayMs = Math.max(0, Number(process.env.KOKORO_RETRY_BASE_DELAY_MS || 1000)),
+}) {
+  const maxAttempts = Number.isFinite(Number(attempts)) ? Math.max(1, Math.floor(Number(attempts))) : 5;
+  let lastError;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
+    const controller = new AbortController();
+    const abortFromCaller = () => controller.abort();
+    signal?.addEventListener('abort', abortFromCaller, { once: true });
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, timeoutMs);
+    try {
+      const response = await fetchImpl(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer not-needed',
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      if (response.ok) return response;
+      const failure = Object.assign(
+        new Error(`Kokoro TTS failed with HTTP ${response.status} ${response.statusText}`),
+        { status: response.status }
+      );
+      if (!isRetryableTtsError(failure)) throw failure;
+      lastError = failure;
+    } catch (error) {
+      if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
+      const requestError = timedOut
+        ? Object.assign(new Error(`Kokoro TTS request timed out after ${timeoutMs}ms`, { cause: error }), { code: 'ETIMEDOUT' })
+        : error;
+      lastError = requestError;
+      if (!isRetryableTtsError(requestError)) throw requestError;
+    } finally {
+      clearTimeout(timeout);
+      signal?.removeEventListener('abort', abortFromCaller);
+    }
+
+    if (attempt < maxAttempts) {
+      const delayMs = Math.min(8000, retryBaseDelayMs * (2 ** (attempt - 1)));
+      console.warn(`Kokoro unavailable (${errorCode(lastError) || lastError?.status || 'transient error'}); retrying ${attempt + 1}/${maxAttempts} in ${delayMs}ms...`);
+      await waitForRetry(delayMs, signal);
+    }
+  }
+
+  throw Object.assign(
+    new Error(`Kokoro TTS is unavailable after ${maxAttempts} attempts: ${lastError?.message || 'connection failed'}`, { cause: lastError }),
+    { code: 'TTS_UNAVAILABLE', resumeFrom: 'audio', retryable: true }
+  );
+}
 
 /** Split long narration at paragraph/sentence boundaries for reliable TTS. */
 export function splitTtsText(text, maxChars = TTS_CHUNK_CHARS) {
@@ -169,37 +275,20 @@ export async function generateSpeech({
   console.log(`🗣️  Generating Kokoro TTS audio (Voice: ${voice}, Speed: ${speed})...`);
 
   try {
-    const controller = new AbortController();
-    const abortFromCaller = () => controller.abort();
-    signal?.addEventListener('abort', abortFromCaller, { once: true });
     const timeoutMs = Math.min(15 * 60_000, Math.max(120_000, spokenText.length * 45));
-    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     // Fetch raw WAV from Kokoro for instant zero-loss Whisper alignment
-    let response;
-    try {
-      response = await fetch(config.kokoro.url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer not-needed',
-        },
-        body: JSON.stringify({
+    const response = await requestKokoroSpeech({
+      url: config.kokoro.url,
+      signal,
+      timeoutMs,
+      payload: {
           model: 'kokoro',
           input: spokenText,
           voice: voice,
           response_format: 'wav',
           speed: speed,
-        }),
-        signal: controller.signal,
-      });
-    } finally {
-      clearTimeout(timeout);
-      signal?.removeEventListener('abort', abortFromCaller);
-    }
-
-    if (!response.ok) {
-      throw new Error(`Kokoro TTS failed with HTTP ${response.status} ${response.statusText}`);
-    }
+      },
+    });
 
     const arrayBuffer = await response.arrayBuffer();
     const rawBuffer = Buffer.from(arrayBuffer);

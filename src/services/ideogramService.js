@@ -101,6 +101,7 @@ export async function generateIdeogramImage({
   model = null,
   quality = null,
   resolution = null,
+  referenceImagePath = null,
 }) {
   if (offline) {
     throw new Error('Offline mode requested — skipping external Ideogram network calls');
@@ -119,7 +120,10 @@ export async function generateIdeogramImage({
   const aspectRatio = resolveIdeogramAspectRatio(format, selectedModel);
 
   // Check persistent disk cache if cacheDir is provided
-  const promptHash = computePromptHash(fullPrompt, styleId, aspectRatio, seed);
+  const referenceHash = referenceImagePath
+    ? await fs.readFile(referenceImagePath).then((buffer) => crypto.createHash('sha256').update(buffer).digest('hex')).catch(() => '')
+    : '';
+  const promptHash = computePromptHash(`${fullPrompt}::${referenceHash}`, styleId, aspectRatio, seed);
   const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
   const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
 
@@ -165,8 +169,17 @@ export async function generateIdeogramImage({
 
   let apiUrl;
   let requestBody;
+  let multipartBody = null;
 
-  if (isV2Endpoint) {
+  if (referenceImagePath && selectedModel === 'ideogram-3') {
+    apiUrl = 'https://api.ideogram.ai/v1/ideogram-v3/generate';
+    const referenceBuffer = await fs.readFile(referenceImagePath);
+    multipartBody = new FormData();
+    multipartBody.append('prompt', fullPrompt);
+    multipartBody.append('style_type', 'AUTO');
+    multipartBody.append('aspect_ratio', aspectRatio);
+    multipartBody.append('character_reference_images', new Blob([referenceBuffer]), path.basename(referenceImagePath));
+  } else if (isV2Endpoint) {
     apiUrl = (config.ideogram?.apiUrl && !config.ideogram.apiUrl.endsWith('/generate'))
       ? config.ideogram.apiUrl
       : `https://api.ideogram.ai/v2/image/generate/${selectedModel}`;
@@ -224,12 +237,12 @@ export async function generateIdeogramImage({
         res = await fetch(apiUrl, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            ...(multipartBody ? {} : { 'Content-Type': 'application/json' }),
             'Api-Key': apiKey,
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
             'Accept': 'application/json',
           },
-          body: JSON.stringify(requestBody),
+          body: multipartBody || JSON.stringify(requestBody),
           signal: ctl.signal,
         });
       } finally {
@@ -272,6 +285,7 @@ export async function generateIdeogramImage({
         seed: firstResult.seed ?? seed,
         prompt: firstResult.prompt || fullPrompt,
         cached: false,
+        referenceApplied: Boolean(multipartBody),
       };
     } catch (err) {
       lastError = err;

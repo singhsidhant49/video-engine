@@ -56,6 +56,7 @@ import { metrics } from '../core/cache/cacheManager.js';
 import { persistConfigSnapshot } from '../core/checkpoints/versionTracker.js';
 import { buildEditContinuityDiagnostics } from '../qc/editContinuityDiagnostics.js';
 import { resolveVisualPolicy } from '../config/visualMode.js';
+import { applyManualVisualOverrides, materializeManualImageOverrides } from './manualVisualOverrides.js';
 import { probeDuration } from '../services/ffmpeg.js';
 
 function buildClaimEvidenceDiagnostics(plan) {
@@ -767,23 +768,40 @@ export async function createFacelessVideo({
     await save('asset-query-diagnostics.json', queryDiagnostics);
 
     const isAiWorkflow = (plan?.imageSource === 'ai' || executionPlan?.imageSource === 'ai' || effectiveImageSource === 'ai');
+    const visualOverrides = normalizedBrief?.visualOverrides || brief?.visualOverrides || {};
+    const manualResult = await materializeManualImageOverrides({
+      overrides: visualOverrides, assetRequests, publicDir: runPublic, mediaBankDir: config.mediaBankDir,
+    });
+    const generatedRequests = assetRequests.filter((request) => !manualResult.shotIds.has(request.storyboardShotId));
     if (isAiWorkflow) {
       dirResult = await directAiAssets(executionPlan, specs, {
         publicDir: runPublic,
         format,
-        assetRequests,
+        assetRequests: generatedRequests,
         imageStyle: plan.imageStyle || effectiveImageStyle,
         customStylePrompt: plan.customStylePrompt || effectiveCustomStylePrompt,
         imageProvider: plan.imageProvider || effectiveImageProvider,
         imageModel: plan.imageModel || effectiveImageModel,
         imageQuality: plan.imageQuality || effectiveImageQuality,
         offline,
+        publishMode,
       });
     } else {
       dirResult = await directAssets(executionPlan, specs, {
-        publicDir: runPublic, format, assetRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode, signal,
+        publicDir: runPublic, format, assetRequests: generatedRequests, allowGenerated: false, offline, unresolvedMediaMode, publishMode, signal,
       });
     }
+    for (const [sceneId, manualScene] of Object.entries(manualResult.assets)) {
+      const sceneAssets = dirResult.assets[sceneId] ||= { primary: null, alternates: [], byShot: {} };
+      sceneAssets.byShot = { ...sceneAssets.byShot, ...manualScene.byShot };
+      if (!sceneAssets.primary) sceneAssets.primary = manualScene.primary;
+      sceneAssets.alternates = [...sceneAssets.alternates, ...manualScene.alternates];
+    }
+    dirResult.editorialAssetJudgments = { ...dirResult.editorialAssetJudgments, ...manualResult.judgments };
+    dirResult.report.requests = [...manualResult.reports, ...(dirResult.report.requests || [])];
+    dirResult.report.totalRequests = assetRequests.length;
+    dirResult.report.resolvedCount = dirResult.report.requests.filter((request) => request.status === 'resolved').length;
+    dirResult.report.unresolvedCount = dirResult.report.requests.filter((request) => request.status !== 'resolved').length;
     assets = dirResult.assets;
     assetReport = dirResult.report;
     if (Object.keys(dirResult.mediaReuseFallbacks || {}).length) {
@@ -793,6 +811,8 @@ export async function createFacelessVideo({
     // Milestone Editorial Asset Intelligence & Production Hardening artifacts
     await save('visual-inspection.json', dirResult.visualInspections || {});
     await save('visual-inspections.json', dirResult.visualInspections || {});
+    if (dirResult.imagePromptSpecs) await save('image-prompt-specs.json', dirResult.imagePromptSpecs);
+    if (dirResult.imageCandidateEvaluations) await save('image-candidate-evaluations.json', dirResult.imageCandidateEvaluations);
     await save('editorial-asset-judgments.json', dirResult.editorialAssetJudgments || {});
     await save('editorial-usefulness.json', dirResult.editorialUsefulnessRecords || {});
     await save('format-fitness.json', dirResult.formatFitnessEvaluations || {});
@@ -804,6 +824,12 @@ export async function createFacelessVideo({
     await save('semantic-judgments.json', dirResult.editorialAssetJudgments || {});
     await save('video-window-semantics.json', dirResult.videoWindowSelections || {});
     await save('query-performance.json', dirResult.queryQualityFeedback || {});
+
+    if (publishMode === 'PRODUCTION_RENDER' && assetReport.unresolvedCount > 0) {
+      const error = new Error(`Production rendering requires every shot to have a usable, non-placeholder image (${assetReport.unresolvedCount} unresolved).`);
+      error.code = 'UNRESOLVED_PRODUCTION_MEDIA';
+      throw error;
+    }
 
     specs.forEach((spec, i) => recast(spec, executionPlan.scenes[i], assets[spec.sceneId], format, i > 0 ? specs[i - 1] : null));
     await save('direction.json', specs);
@@ -929,6 +955,9 @@ export async function createFacelessVideo({
     productionProfile.imageSource = effectiveImageSource;
     timeline = buildTimeline({ plan: executionPlan, specs, narration, assets, sfx, bgm, videoId, format, fps, audioSrc: path.basename(narrationFile), coveragePlan: visualCoveragePlan, editorialVisualPlan, visualPolicy, productionProfile });
     timeline.imageSource = effectiveImageSource;
+    const overrideResult = applyManualVisualOverrides(timeline, normalizedBrief?.visualOverrides || brief?.visualOverrides || {});
+    timeline = overrideResult.timeline;
+    if (overrideResult.applied.length || overrideResult.missing.length) await save('manual-visual-overrides.json', overrideResult);
     compositionArtifacts = timeline._compositionArtifacts || compositionArtifacts;
     await save('scene-compositions.json', compositionArtifacts.sceneCompositions);
     await save('media-scene-specs.json', compositionArtifacts.mediaSceneSpecs);

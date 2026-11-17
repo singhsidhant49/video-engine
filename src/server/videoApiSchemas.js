@@ -11,6 +11,20 @@ const ContentType = z.enum([
 });
 const Pacing = z.enum(['auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid']);
 
+export const VisualOverridesSchema = z.record(z.string().min(1).max(160), z.object({
+  locked: z.boolean().default(true),
+  crop: z.object({
+    x: z.number().min(0).max(1), y: z.number().min(0).max(1),
+    width: z.number().positive().max(1), height: z.number().positive().max(1),
+  }).strict().refine((crop) => crop.x + crop.width <= 1 && crop.y + crop.height <= 1, { message: 'crop must stay inside the image' }).optional(),
+  motion: z.enum(['STATIC', 'SLOW_PUSH_IN', 'SLOW_PULL_OUT', 'PAN_LEFT', 'PAN_RIGHT', 'GENTLE_DRIFT']).optional(),
+  transition: z.enum(['CUT', 'CROSS_DISSOLVE']).optional(),
+  durationSeconds: z.number().min(0.5).max(60).optional(),
+  asset: z.object({
+    mediaBankPath: z.string().trim().min(1).max(500).refine((value) => !value.includes('..') && !value.startsWith('/') && !value.startsWith('\\'), { message: 'mediaBankPath must be a safe relative path' }),
+  }).strict().optional(),
+}).strict()).default({});
+
 const OutputSchema = z.object({
   durationSeconds: z.number().int().min(10).max(7_200).optional(),
   durationMode: z.enum(['auto', 'exact']).optional(),
@@ -62,6 +76,7 @@ export const CreateVideoRequestSchema = z.object({
   }).strict().default({}),
   subtitles: z.object({ enabled: z.boolean().default(true) }).strict().default({ enabled: true }),
   metadata: z.record(z.string().max(100), z.union([z.string().max(500), z.number(), z.boolean(), z.null()])).optional(),
+  visualOverrides: VisualOverridesSchema.optional(),
 }).strict();
 
 export function toPipelineBrief(request) {
@@ -95,5 +110,6 @@ export function toPipelineBrief(request) {
       music: request.audio.music,
     },
     metadata: request.metadata || {},
+    visualOverrides: request.visualOverrides || {},
   };
 }

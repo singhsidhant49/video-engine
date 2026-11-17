@@ -26,6 +26,22 @@ const estimateProviderCost = (request) => {
   return { currency: 'USD', estimated: true, imageCount, amount: Number((llmEstimate + (imageCount * imageRate)).toFixed(3)) };
 };
 
+export function resolveVideoJobTimeoutMs(job = {}, env = process.env) {
+  const configured = Math.max(60_000, Number(env.VIDEO_JOB_TIMEOUT_MS || 90 * 60_000));
+  const durationSeconds = Math.max(0, Number(
+    job.request?.output?.durationSeconds
+      || job.pipelineBrief?.durationSec
+      || job.request?.output?.durationRange?.max
+      || 0
+  ));
+  // CPU-only Remotion renders scale with output duration. Preserve the
+  // configured minimum for Shorts while budgeting an additional 20 seconds of
+  // processing per output second for long-form planning, assets, and render.
+  const durationAware = configured + (durationSeconds * 20_000);
+  const maximum = Math.max(configured, Number(env.VIDEO_JOB_MAX_TIMEOUT_MS || 12 * 60 * 60_000));
+  return Math.min(maximum, Math.ceil(durationAware));
+}
+
 const matchesJobFilters = (job, { channelId = null, statuses = [], format = null, dateFrom = null, dateTo = null, minDuration = null, maxDuration = null } = {}) => {
   const jobChannelId = job.request?.profileId || job.pipelineBrief?.channel?.id || 'default';
   const jobFormat = job.request?.output?.aspectRatio === '9:16' || job.pipelineBrief?.format === 'shorts' ? 'shorts' : 'landscape';
@@ -45,12 +61,14 @@ function safeGenerationFailure(error) {
     ['Narration quality gate failed', 'NARRATION_QC_FAILED', 'Narration quality checks failed'],
     ['Narration is ', 'SCRIPT_DURATION_BUDGET_FAILED', 'Script could not meet the selected duration before speech generation'],
     ['Narration duration repair failed', 'NARRATION_DURATION_FAILED', 'Narration could not meet the requested duration'],
+    ['Kokoro TTS is unavailable', 'TTS_UNAVAILABLE', 'Voice provider is temporarily unavailable; retry will resume from voiceover'],
     ['Timeline QC failed', 'TIMELINE_QC_FAILED', 'Timeline quality checks failed'],
     ['Production render blocked by visual critic', 'VISUAL_CRITIC_FAILED', 'Visual quality review requires revision'],
     ['Production render blocked by unresolved long visual holds', 'VISUAL_PACING_FAILED', 'Visual pacing contains unresolved long holds'],
     ['Creative QA hard failure', 'CREATIVE_QC_FAILED', 'Creative quality checks failed'],
     ['Production render blocked by publishability gate', 'PUBLISHABILITY_FAILED', 'The editorial sequence did not pass publishability checks'],
     ['Production rendering requires every media-routed shot', 'UNRESOLVED_PRODUCTION_MEDIA', 'One or more shots could not resolve approved production media'],
+    ['Production rendering requires every shot', 'UNRESOLVED_PRODUCTION_MEDIA', 'One or more shots could not resolve approved production media'],
     ['Production render blocked: Hard editorial asset failures', 'EDITORIAL_ASSET_QC_FAILED', 'One or more selected visual assets failed editorial quality checks'],
     ['Rendered-frame semantic QA failed', 'RENDERED_FRAME_QA_FAILED', 'Rendered-frame semantic quality checks failed'],
     ['Post-render QC failed', 'POST_RENDER_QC_FAILED', 'The encoded video did not pass final quality checks'],
@@ -64,6 +82,8 @@ function safeGenerationFailure(error) {
 
 const AUTOMATIC_RETRY_CODES = new Set([
   'GENERATION_FAILED',
+  'TTS_UNAVAILABLE',
+  'VIDEO_JOB_TIMEOUT',
   'RENDER_STALLED_OR_CRASHED',
   'UNRESOLVED_PRODUCTION_MEDIA',
 ]);
@@ -74,8 +94,10 @@ export function isAutomaticallyRetryableFailure(failure, originalError = null) {
   return AUTOMATIC_RETRY_CODES.has(failure?.code);
 }
 
-function resumeStageForFailure(failure) {
+export function resumeStageForFailure(failure) {
   if (failure?.resumeFrom) return failure.resumeFrom;
+  if (failure?.code === 'TTS_UNAVAILABLE') return 'audio';
+  if (failure?.code === 'VIDEO_JOB_TIMEOUT' && /render/i.test(String(failure?.stage || ''))) return 'render';
   if (['UNRESOLVED_PRODUCTION_MEDIA', 'EDITORIAL_ASSET_QC_FAILED'].includes(failure?.code)) return 'assets';
   if (failure?.code === 'NARRATION_DURATION_FAILED') return 'audio';
   if (failure?.code === 'POST_RENDER_QC_FAILED') return 'timeline';
@@ -493,6 +515,9 @@ export class VideoJobService {
     job.completedAt = null;
     job.updatedAt = now();
     job.retryCount = (job.retryCount || 0) + 1;
+    // A user-requested retry starts a fresh bounded recovery budget. Automatic
+    // retries remain isolated per failure stage below.
+    job.automaticRetryCounts = {};
     job.resumeExisting = true;
     // Resume from the earliest stage capable of repairing the failed check.
     // This avoids repeating asset downloads for narration-duration failures.
@@ -505,6 +530,24 @@ export class VideoJobService {
           ? 'audio'
           : (failedCode === 'TIMELINE_QC_FAILED' ? resumeStageForTimelineQc(timelineQc) : null));
     if (resumeFrom) job.resumeFrom = resumeFrom;
+    await this.store.putJob(job);
+    if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount, { channelId: job.request?.profileId || 'default', queuePriority: job.metadata?.queuePriority });
+    else { this.queue.push(id); this.#pump(); }
+    return { job: publicJob(job), reused: true };
+  }
+
+  async applyVisualOverrides(ownerId, id, overrides) {
+    const job = await this.store.getJob(id);
+    if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
+    if (['queued', 'preparing', 'processing', 'cancel_requested', 'delete_requested'].includes(job.status)) {
+      throw apiError(409, 'VIDEO_ACTIVE', 'Visual overrides can only be applied when generation is not active');
+    }
+    job.request = { ...job.request, visualOverrides: overrides };
+    job.pipelineBrief = { ...job.pipelineBrief, visualOverrides: overrides };
+    job.status = 'queued'; job.stage = 'queued'; job.error = null; job.completedAt = null; job.updatedAt = now();
+    job.retryCount = (job.retryCount || 0) + 1;
+    job.resumeExisting = true;
+    job.resumeFrom = Object.values(overrides).some((override) => override.asset) ? 'assets' : 'timeline';
     await this.store.putJob(job);
     if (this.taskQueue) await this.taskQueue.enqueueGeneration(id, job.retryCount, { channelId: job.request?.profileId || 'default', queuePriority: job.metadata?.queuePriority });
     else { this.queue.push(id); this.#pump(); }
@@ -532,6 +575,26 @@ export class VideoJobService {
     if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
     if (job.status !== 'completed') throw apiError(409, 'VIDEO_NOT_READY', `Video is ${job.status}`);
     return job.result?.package || null;
+  }
+
+  async visualDiagnostics(ownerId, id) {
+    const job = await this.store.getJob(id);
+    if (!job || job.ownerId !== ownerId) throw apiError(404, 'VIDEO_NOT_FOUND', 'Video not found');
+    const runDir = safeOwnedPath(this.rendersDir, path.join(this.rendersDir, 'runs', id));
+    const artifacts = {
+      promptSpecs: 'image-prompt-specs.json',
+      candidates: 'image-candidate-evaluations.json',
+      inspections: 'visual-inspections.json',
+      judgments: 'editorial-asset-judgments.json',
+      overrides: 'manual-visual-overrides.json',
+      critic: 'visual_critic.json',
+      qc: 'qc.json',
+    };
+    const result = {};
+    for (const [key, filename] of Object.entries(artifacts)) {
+      try { result[key] = JSON.parse(await fs.readFile(path.join(runDir, filename), 'utf8')); } catch { result[key] = null; }
+    }
+    return { videoId: id, status: job.status, artifacts: result };
   }
 
   async download(ownerId, id) {
@@ -660,7 +723,7 @@ export class VideoJobService {
     await this.store.putJob(job);
     let progressWrites = Promise.resolve();
     let timedOut = false;
-    const jobTimeoutMs = Math.max(60_000, Number(process.env.VIDEO_JOB_TIMEOUT_MS || 90 * 60_000));
+    const jobTimeoutMs = resolveVideoJobTimeoutMs(job);
     const jobTimeout = setTimeout(() => { timedOut = true; controller.abort(); }, jobTimeoutMs);
     const cancelPoll = this.taskQueue ? setInterval(() => {
       void this.store.getJob(id).then((current) => {
@@ -728,12 +791,17 @@ export class VideoJobService {
         job.error.resumeFrom = resumeStageForTimelineQc(timelineQc);
       }
       const automaticRetryLimit = Math.max(0, Number(process.env.VIDEO_AUTOMATIC_RETRY_LIMIT ?? 2));
-      const canAutomaticallyRetry = !cancelled && !timedOut && this.taskQueue
-        && (job.retryCount || 0) < automaticRetryLimit
+      const automaticResumeFrom = resumeStageForFailure(job.error);
+      const automaticRetryKey = `${job.error?.code || 'GENERATION_FAILED'}:${automaticResumeFrom || failedStage || 'unknown'}`;
+      const automaticRetryCounts = { ...(job.automaticRetryCounts || {}) };
+      const stageRetryCount = Math.max(0, Number(automaticRetryCounts[automaticRetryKey] || 0));
+      const canAutomaticallyRetry = !cancelled && this.taskQueue
+        && stageRetryCount < automaticRetryLimit
         && isAutomaticallyRetryableFailure(job.error, error);
       if (canAutomaticallyRetry) {
         const retryNumber = (job.retryCount || 0) + 1;
-        const delayMs = Math.min(15 * 60_000, 30_000 * (2 ** (retryNumber - 1)));
+        const stageRetryNumber = stageRetryCount + 1;
+        const delayMs = Math.min(15 * 60_000, 30_000 * (2 ** (stageRetryNumber - 1)));
         job.lastError = job.error;
         job.error = null;
         job.status = 'queued';
@@ -741,8 +809,9 @@ export class VideoJobService {
         job.completedAt = null;
         job.updatedAt = now();
         job.retryCount = retryNumber;
+        job.automaticRetryCounts = { ...automaticRetryCounts, [automaticRetryKey]: stageRetryNumber };
         job.resumeExisting = true;
-        job.resumeFrom = resumeStageForFailure(job.lastError);
+        job.resumeFrom = automaticResumeFrom;
         await this.store.putJob(job);
         await this.taskQueue.enqueueGeneration(id, retryNumber, {
           channelId: job.request?.profileId || 'default',

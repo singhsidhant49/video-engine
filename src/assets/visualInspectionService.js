@@ -289,6 +289,75 @@ export function getVisionDiagnostics() {
 }
 
 /**
+ * Stage-B pixel grounding for generated images. Unlike metadata comparison,
+ * this asks the vision model to choose between the required visual, explicit
+ * confusers, and generic failure classes. Generation prompt text is never
+ * included in the inspected candidate, preventing self-confirming scores.
+ */
+export function buildPixelGroundingClasses(visibleNeed = {}, { styleId = '' } = {}) {
+  const requestedTarget = String(
+    visibleNeed.viewerNeedsToSee
+      || [visibleNeed.subject, visibleNeed.action, visibleNeed.environment].filter(Boolean).join(' ')
+      || visibleNeed.primaryConcept
+      || '',
+  ).replace(/\s+/g, ' ').trim().slice(0, 500);
+  const targets = [...new Set([
+    requestedTarget,
+    visibleNeed.subject,
+    visibleNeed.primaryConcept,
+    ...(visibleNeed.requiredVisibleObjects || []),
+    ...(visibleNeed.acceptableSemanticAlternatives || visibleNeed.acceptableAlternatives || []),
+  ].map((item) => String(item || '').replace(/\s+/g, ' ').trim().slice(0, 300)).filter((item) => item.length >= 3))].slice(0, 5);
+  const confusers = [...new Set((visibleNeed.avoidVisuals || [])
+    .map((item) => String(item || '').trim())
+    .filter(Boolean)
+    .filter((item) => !(styleId === 'stickman' && /\b(?:stickman|stick figure|cartoon clipart)\b/i.test(item))))].slice(0, 5);
+  return {
+    requestedTarget,
+    targets,
+    confusers,
+    classes: [
+      ...targets,
+      ...confusers,
+      'an unrelated generic stock image that does not show the requested event',
+      'an abstract gradient or decorative background without the requested subject',
+      'a malformed AI generated image with distorted anatomy, hands, faces, or duplicated objects',
+      'a collage, poster, logo, watermark, or text-heavy graphic',
+    ],
+  };
+}
+
+export async function inspectPixelsAgainstVisibleNeed(filePath, visibleNeed = {}, options = {}) {
+  const classifier = await getVisionClassifier();
+  if (!classifier || !filePath) return { available: false, reason: 'vision_classifier_unavailable' };
+  const { requestedTarget, targets, classes } = buildPixelGroundingClasses(visibleNeed, options);
+  if (!targets.length) return { available: false, reason: 'visible_need_missing' };
+  try {
+    const results = await classifier(filePath, classes);
+    const ranked = results.slice().sort((a, b) => b.score - a.score);
+    const targetSet = new Set(targets);
+    const targetResult = ranked.find((item) => targetSet.has(item.label));
+    const bestNegative = ranked.find((item) => !targetSet.has(item.label));
+    const targetScore = Number((targetResult?.score || 0).toFixed(3));
+    const negativeScore = Number((bestNegative?.score || 0).toFixed(3));
+    return {
+      available: true,
+      target: targetResult?.label || requestedTarget,
+      requestedTarget,
+      positiveClasses: targets,
+      targetScore,
+      bestNegative: bestNegative?.label || null,
+      bestNegativeScore: negativeScore,
+      margin: Number((targetScore - negativeScore).toFixed(3)),
+      matched: targetSet.has(ranked[0]?.label) && targetScore >= 0.22 && targetScore >= negativeScore,
+      distribution: ranked.slice(0, 5).map((item) => ({ label: item.label, score: Number(item.score.toFixed(3)) })),
+    };
+  } catch (error) {
+    return { available: false, reason: 'vision_classification_failed', error: error.message };
+  }
+}
+
+/**
  * Lazy initialization of the local CLIP zero-shot vision-language model.
  */
 async function getVisionClassifier() {

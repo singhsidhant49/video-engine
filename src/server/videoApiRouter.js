@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import express from 'express';
 import { ZodError } from 'zod-api';
-import { CreateVideoRequestSchema } from './videoApiSchemas.js';
+import { CreateVideoRequestSchema, VisualOverridesSchema } from './videoApiSchemas.js';
 import { getAudioCatalog } from '../audio/musicCatalog.js';
 
 function ownerForKey(key) {
@@ -180,6 +180,11 @@ export function createVideoApiRouter({ service }) {
     catch (error) { next(error); }
   });
 
+  router.get('/videos/:id/visual-diagnostics', async (req, res, next) => {
+    try { res.json(await service.visualDiagnostics(req.ownerId, req.params.id)); }
+    catch (error) { next(error); }
+  });
+
   router.post('/videos/:id/cancel', async (req, res, next) => {
     try { res.status(202).json(await service.cancel(req.ownerId, req.params.id)); }
     catch (error) { next(error); }
@@ -191,6 +196,14 @@ export function createVideoApiRouter({ service }) {
       const allowed = new Set(['plan', 'audio', 'alignment', 'visualStrategy', 'storyboard', 'assets', 'timeline', 'package', 'preRenderQa', 'render', 'postRenderQa']);
       if (resumeFrom && !allowed.has(resumeFrom)) throw Object.assign(new Error('Invalid retry stage'), { status: 400, code: 'INVALID_RETRY_STAGE' });
       const created = await service.retry(req.ownerId, req.params.id, { resumeFrom });
+      res.status(202).json({ ...created.job, statusUrl: `/v1/videos/${created.job.id}` });
+    } catch (error) { next(error); }
+  });
+
+  router.patch('/videos/:id/visual-overrides', async (req, res, next) => {
+    try {
+      const overrides = VisualOverridesSchema.parse(req.body?.overrides || {});
+      const created = await service.applyVisualOverrides(req.ownerId, req.params.id, overrides);
       res.status(202).json({ ...created.job, statusUrl: `/v1/videos/${created.job.id}` });
     } catch (error) { next(error); }
   });

@@ -90,6 +90,14 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
     approved: z.boolean(),
     selectionReason: z.string().optional(),
   }).passthrough().optional(),
+  manualOverride: z.object({
+    locked: z.boolean(),
+    crop: z.object({ x: z.number(), y: z.number(), width: z.number(), height: z.number() }).strict().nullable(),
+    motion: z.string().nullable(),
+    transition: z.string().nullable(),
+    durationSeconds: z.number().nullable(),
+    asset: z.object({ mediaBankPath: z.string() }).strict().nullable(),
+  }).strict().optional(),
 }).strict().superRefine((shot, ctx) => {
   if (shot.renderMode === 'solved' && (!shot.solvedSceneId || !shot.motionPlanId)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Solved shots require solvedSceneId and motionPlanId' });

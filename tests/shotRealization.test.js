@@ -297,7 +297,7 @@ test('post-solve directing keeps compatible motion boundaries as clean cuts', ()
   assert.deepEqual(second.enter, { type: 'cut', frames: 0 });
 });
 
-test('Shorts video format applies camera zoom in/out and smooth transitions across shots', () => {
+test('Shorts video format applies camera motion without forcing dissolves across unrelated beats', () => {
   const visualPolicy = resolveVisualPolicy();
   const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
   const timing = [{ startFrame: 0, endFrame: 75, durationInFrames: 75, from: 0 }]; // 2.5s shot in shorts
@@ -335,9 +335,7 @@ test('Shorts video format applies camera zoom in/out and smooth transitions acro
     visualPolicy: { format: 'shorts', imageSource: 'ai' },
   });
 
-  const dissolves = shots.filter((s) => s.enter.type === 'dissolve');
-  assert.ok(dissolves.length >= 1, 'Shorts must include smooth dissolve transitions between shots');
-  assert.ok(dissolves[0].enter.frames >= 15, 'Dissolve frames must be at least 15 frames (~0.5s) for smoothness');
+  assert.ok(shots.slice(1).every((shot) => shot.enter.type === 'cut'), 'Neutral Shorts beats should use restrained clean cuts');
 });
 
 test('Landscape video format applies camera zoom in/out and smooth transitions across scenes and shots', () => {

@@ -316,19 +316,18 @@ function titleOverlay(scene) {
 
 export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPolicy, productionProfile = null, assets = null) {
   const isShorts = plan?.format === 'shorts' || visualPolicy?.format === 'shorts';
-  const isAi = plan?.imageSource === 'ai' || visualPolicy?.imageSource === 'ai';
   const minutes = totalFrames / fps / 60;
-  const semanticRate = (isShorts || isAi) ? 5.5 : 4.0;
+  const semanticRate = isShorts ? 4.5 : 4.0;
   let budget = Math.max(1, Math.ceil(Math.min(6.0, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
   const transitionProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { target: 0.22 };
-  const designedShare = (isShorts || isAi) ? Math.max(0.30, transitionProfile.target * 1.5) : transitionProfile.target;
+  const designedShare = transitionProfile.target;
   budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
   let scenesSinceDissolve = 99;
-  const minScenesBetweenDissolves = (isShorts || isAi) ? 1 : 2;
+  const minScenesBetweenDissolves = 2;
   plan.scenes.forEach((scene, index) => {
     if (index === 0) return;
     const previous = plan.scenes[index - 1];
@@ -337,7 +336,7 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     const isSectionBreak = scene.section || reason === TRANSITION_REASON.SECTION_CHANGE;
     const isMajorPayoff = (scene.purpose === 'payoff' || reason === TRANSITION_REASON.REVEAL) && scene.intensity <= 4;
     const naturalProgression = plan.scenes.length >= 4 && scenesSinceDissolve >= minScenesBetweenDissolves && scene.intensity <= 4;
-    const semanticPause = isShorts || isAi || isSectionBreak || isMajorPayoff
+    const semanticPause = isSectionBreak || isMajorPayoff
       || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason))
       || (naturalProgression && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.NEW_IDEA].includes(reason));
     if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= minScenesBetweenDissolves) {
@@ -410,18 +409,18 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
   const baseProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { min: 0, target: 0.22, max: 0.25 };
-  const transitionProfile = (isShorts || isAi)
-    ? { min: Math.max(0.15, baseProfile.min), target: Math.max(0.35, baseProfile.target), max: Math.max(0.50, baseProfile.max) }
-    : baseProfile;
+  const transitionProfile = baseProfile;
   const boundaryCount = Math.max(0, entries.length - 1);
-  const minimumDissolves = Math.ceil(boundaryCount * transitionProfile.min);
+  // Dissolves are never a quota. They are permitted only where the semantic
+  // relationship benefits from softness, time passage, or a section change.
+  const minimumDissolves = 0;
   const maximumDissolves = productionProfile?.contentType
     ? Math.max(minimumDissolves, Math.floor(boundaryCount * transitionProfile.max))
     : Math.max(1, Math.floor(boundaryCount * transitionProfile.max));
   let remainingDissolves = maximumDissolves;
   let previousWasDissolve = false;
   let shotsSinceDissolve = 99;
-  const minShotsBetweenDissolves = (isShorts || isAi) ? 1 : 2;
+  const minShotsBetweenDissolves = 2;
   // Standardized duration: 15-20 frames (~0.5s-0.67s)
   const dissolveFrames = Math.min(20, Math.max(15, Math.round(fps * 0.53)));
 
@@ -461,7 +460,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       ? false
       : sceneBoundary
         ? allocatedSceneDissolve
-        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && (semanticDissolve || isShorts || isAi));
+        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && semanticDissolve);
     const appliedFrames = useDissolve && sceneBoundary ? clip.enter.frames : useDissolve ? dissolveFrames : 0;
     const decision = useDissolve
       ? { type: 'dissolve', frames: appliedFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
