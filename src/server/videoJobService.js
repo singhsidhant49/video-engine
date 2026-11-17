@@ -113,6 +113,7 @@ const AUTOMATIC_RETRY_CODES = new Set([
 export function isAutomaticallyRetryableFailure(failure, originalError = null) {
   const message = String(originalError?.message || failure?.message || '');
   if (/authentication failed|unauthorized|invalid api key|invalid token|credit balance ran out|insufficient[_ ]funds|payment required|not configured/i.test(message)) return false;
+  if (failure?.code === 'TIMELINE_QC_FAILED') return failure?.resumeFrom === 'alignment';
   return AUTOMATIC_RETRY_CODES.has(failure?.code);
 }
 
@@ -132,6 +133,7 @@ const failedQcChecks = (qc) => Array.isArray(qc?.checks)
 
 export function resumeStageForTimelineQc(qc) {
   const failedIds = new Set(failedQcChecks(qc).map((check) => check.id));
+  if (failedIds.has('alignment') || failedIds.has('caption-timestamp-order')) return 'alignment';
   // Duration is authored by the script/TTS stages. Restarting from assets can
   // never fix it and only repeats expensive provider downloads.
   if (failedIds.has('duration-tolerance')) return 'audio';

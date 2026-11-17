@@ -600,6 +600,12 @@ test('timeline QC retry restarts from audio when duration failed', () => {
 
 test('timeline QC retry restarts only the stage capable of repairing its failure', () => {
   assert.equal(resumeStageForTimelineQc({
+    checks: [{ id: 'alignment', ok: false, severity: 'error' }],
+  }), 'alignment');
+  assert.equal(resumeStageForTimelineQc({
+    checks: [{ id: 'caption-timestamp-order', ok: false, severity: 'error' }],
+  }), 'alignment');
+  assert.equal(resumeStageForTimelineQc({
     checks: [{ id: 'content-profile-transition-share', ok: false, severity: 'error' }],
   }), 'timeline');
   assert.equal(resumeStageForTimelineQc({

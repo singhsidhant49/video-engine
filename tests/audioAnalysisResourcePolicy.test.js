@@ -19,7 +19,7 @@ test('long narration bypasses local Whisper on a resource-bounded deployment', (
     WHISPER_ENABLED: 'auto', WHISPER_MAX_AUDIO_SECONDS: '180', WHISPER_TIMEOUT_MS: '120000',
   });
   assert.equal(short.useWhisper, true);
-  assert.equal(short.timeoutMs, 120000);
+  assert.equal(short.timeoutMs, 180000, 'unsafe environment timeout is raised to the CPU-safe floor');
 });
 
 test('Whisper cancellation rejects before starting an isolated process', async () => {

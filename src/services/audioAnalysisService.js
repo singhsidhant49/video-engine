@@ -22,7 +22,12 @@ const positiveNumber = (value, fallback, minimum = 0) => {
 export function resolveWhisperPolicy(durationInSeconds, source = process.env) {
   const enabled = String(source.WHISPER_ENABLED || 'auto').trim().toLowerCase();
   const maxAudioSeconds = positiveNumber(source.WHISPER_MAX_AUDIO_SECONDS, 900, 0);
-  const timeoutMs = positiveNumber(source.WHISPER_TIMEOUT_MS, Math.max(180_000, Math.ceil(durationInSeconds * 1_500)), 5_000);
+  // A too-small environment override previously killed base.en after 60s on
+  // a 2-vCPU VPS, guaranteeing estimated (and therefore unsynchronised)
+  // captions. Keep the timeout bounded, but never below the duration-aware
+  // CPU-safe floor.
+  const safeTimeoutFloor = Math.max(180_000, Math.ceil(durationInSeconds * 1_500));
+  const timeoutMs = Math.max(safeTimeoutFloor, positiveNumber(source.WHISPER_TIMEOUT_MS, safeTimeoutFloor, 5_000));
   if (['false', '0', 'off', 'disabled'].includes(enabled)) {
     return { useWhisper: false, reason: 'disabled by WHISPER_ENABLED', maxAudioSeconds, timeoutMs };
   }

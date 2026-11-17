@@ -66,3 +66,9 @@ test('a render timeout is automatically resumable from the render checkpoint', (
   assert.equal(isAutomaticallyRetryableFailure(failure), true);
   assert.equal(resumeStageForFailure(failure), 'render');
 });
+
+test('a caption alignment QC failure is automatically retryable from alignment', () => {
+  const failure = { code: 'TIMELINE_QC_FAILED', resumeFrom: 'alignment', stage: 'Building the edit...' };
+  assert.equal(isAutomaticallyRetryableFailure(failure), true);
+  assert.equal(resumeStageForFailure(failure), 'alignment');
+});
