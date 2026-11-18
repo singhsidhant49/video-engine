@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildPixelGroundingClasses } from '../src/assets/visualInspectionService.js';
-import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation } from '../src/pipeline/aiAssetDirector.js';
+import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation, resolveAiAssetMasterSeed } from '../src/pipeline/aiAssetDirector.js';
 import { isAutomaticallyRetryableFailure, resolveVideoJobTimeoutMs, resumeStageForFailure } from '../src/server/videoJobService.js';
 
 test('stick-figure validation never treats the selected visual style as a negative class', () => {
@@ -50,6 +50,19 @@ test('approved same-scene continuation always derives its prompt from scoped nar
   assert.equal(
     buildSameSceneContinuationPrompt({}, { visibleNeed: { narrationText: 'Use the visible-need narration.' } }),
     'Approved same-scene visual continuation for narration: Use the visible-need narration.',
+  );
+});
+
+test('asset retries deterministically use a new candidate seed instead of a rejected cached image', () => {
+  const seedInput = { title: 'A failed loyalty program', shots: ['shot_1', 'shot_2'] };
+  const first = resolveAiAssetMasterSeed({ generationAttempt: 0, seedInput });
+  const retry = resolveAiAssetMasterSeed({ generationAttempt: 1, seedInput });
+  assert.notEqual(first, retry);
+  assert.equal(retry, resolveAiAssetMasterSeed({ generationAttempt: 1, seedInput }));
+  assert.equal(resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 0 }), 1234);
+  assert.notEqual(
+    resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 0 }),
+    resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 1 }),
   );
 });
 

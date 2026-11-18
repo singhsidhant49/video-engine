@@ -105,6 +105,7 @@ function buildClaimEvidenceDiagnostics(plan) {
  * @param {object} [o.channelProfile] channel-level audience, tone and pacing defaults
  * @param {string} [o.videoId] caller-assigned stable video identifier
  * @param {AbortSignal} [o.signal] cooperative cancellation signal
+ * @param {number} [o.generationAttempt] durable retry number used to vary rejected AI candidates deterministically
  */
 export function resolveEditorialMode(contentType = '', niche = '') {
   const norm = String(contentType || '').toLowerCase().trim();
@@ -152,6 +153,7 @@ export async function createFacelessVideo({
   imageProvider = null,
   imageModel = null,
   imageQuality = null,
+  generationAttempt = 0,
 }) {
   if (global.gc) { try { global.gc(); } catch {} }
   const explicitVoiceRequested = Boolean(
@@ -783,6 +785,7 @@ export async function createFacelessVideo({
         imageProvider: plan.imageProvider || effectiveImageProvider,
         imageModel: plan.imageModel || effectiveImageModel,
         imageQuality: plan.imageQuality || effectiveImageQuality,
+        generationAttempt,
         offline,
         publishMode,
       });
@@ -826,8 +829,27 @@ export async function createFacelessVideo({
     await save('query-performance.json', dirResult.queryQualityFeedback || {});
 
     if (publishMode === 'PRODUCTION_RENDER' && assetReport.unresolvedCount > 0) {
+      const unresolvedRequests = (assetReport.requests || []).filter((request) => request.status !== 'resolved');
+      const failure = {
+        code: 'UNRESOLVED_PRODUCTION_MEDIA',
+        message: 'One or more shots exhausted all approved image candidates.',
+        generationAttempt,
+        unresolvedCount: unresolvedRequests.length,
+        unresolvedShots: unresolvedRequests.map((request) => ({
+          shotId: request.shotId || request.storyboardShotId || null,
+          sceneId: request.sceneId || null,
+          source: request.source || null,
+          candidateCount: request.candidateCount || 0,
+          noUsableCandidate: Boolean(request.noUsableCandidate),
+        })),
+        generatedAt: new Date().toISOString(),
+      };
+      await save('asset-shortlists.json', dirResult.requestReports || []);
+      await save('image-candidate-evaluations.json', dirResult.imageCandidateEvaluations || {});
+      await save('asset-resolution-failure.json', failure);
       const error = new Error(`Production rendering requires every shot to have a usable, non-placeholder image (${assetReport.unresolvedCount} unresolved).`);
       error.code = 'UNRESOLVED_PRODUCTION_MEDIA';
+      error.details = failure;
       throw error;
     }
 

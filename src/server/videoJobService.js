@@ -97,8 +97,26 @@ function safeGenerationFailure(error) {
     ['Scene/Shot "', 'RENDER_MAPPING_FAILED', 'The render plan contains a scene or shot that is missing from the timeline'],
   ];
   const match = known.find(([prefix]) => message.startsWith(prefix));
+  const rawDetails = error?.details;
+  const unresolvedShots = Array.isArray(rawDetails?.unresolvedShots)
+    ? rawDetails.unresolvedShots
+    : Array.isArray(rawDetails?.unresolvedRequests)
+      ? rawDetails.unresolvedRequests.map((request) => ({
+        shotId: request.shotId || request.storyboardShotId || null,
+        sceneId: request.sceneId || null,
+        source: request.source || request.selectedCandidate?.provider || null,
+        candidateCount: request.candidateCount || 0,
+      }))
+      : [];
+  const safeDetails = (error?.code === 'UNRESOLVED_PRODUCTION_MEDIA' || match?.[1] === 'UNRESOLVED_PRODUCTION_MEDIA')
+    ? {
+      generationAttempt: Math.max(0, Number(rawDetails?.generationAttempt || 0)),
+      unresolvedCount: Math.max(0, Number(rawDetails?.unresolvedCount || unresolvedShots.length)),
+      unresolvedShots: unresolvedShots.slice(0, 100),
+    }
+    : null;
   return match
-    ? { code: error?.code || match[1], message: match[2] }
+    ? { code: error?.code || match[1], message: match[2], ...(safeDetails ? { details: safeDetails } : {}) }
     : { code: error?.code || 'GENERATION_FAILED', message: 'Video generation failed' };
 }
 
@@ -781,6 +799,7 @@ export class VideoJobService {
         // Resume checkpoints, but never force-break a live run-directory lock.
         // Stale locks are detected by PID/host/heartbeat in the lock manager.
         videoId: id, resume: job.resumeExisting ? id : null, from: job.resumeFrom || null, force: false, brief: job.pipelineBrief, signal: controller.signal,
+        generationAttempt: job.retryCount || 0,
         renderScale: job.request.output.resolution === '720p' ? 2 / 3 : 1,
         onProgress: (event) => {
           const step = Math.max(0, Number(event.step) || 0);

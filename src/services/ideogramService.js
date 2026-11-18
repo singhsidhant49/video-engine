@@ -139,6 +139,7 @@ export async function generateIdeogramImage({
         seed,
         prompt: fullPrompt,
         cached: true,
+        provider: 'ideogram',
       };
     }
   } catch {
@@ -161,6 +162,7 @@ export async function generateIdeogramImage({
           seed,
           prompt: fullPrompt,
           cached: true,
+          provider: 'ideogram',
         };
       }
     } catch {}
@@ -285,6 +287,7 @@ export async function generateIdeogramImage({
         seed: firstResult.seed ?? seed,
         prompt: firstResult.prompt || fullPrompt,
         cached: false,
+        provider: 'ideogram',
         referenceApplied: Boolean(multipartBody),
       };
     } catch (err) {

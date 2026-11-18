@@ -10,6 +10,7 @@ import { recordImageInBank } from '../services/imageBank.js';
 import { compareVisualToNeed, inspectPixelsAgainstVisibleNeed, inspectVisualCandidate } from '../assets/visualInspectionService.js';
 import { composeImagePrompt, createImagePromptSpec, deterministicImageSeed } from './aiImagePromptComposer.js';
 import { computePerceptualHash, hammingDistance } from '../core/cache/cacheManager.js';
+import { config } from '../config/index.js';
 
 async function computeFileSha256(filePath) {
   try {
@@ -232,6 +233,15 @@ async function mapLimit(items, limit, fn) {
   return results;
 }
 
+export function resolveAiAssetMasterSeed({ baseSeed = null, generationAttempt = 0, seedInput = {} } = {}) {
+  const attempt = Math.max(0, Math.floor(Number(generationAttempt) || 0));
+  if (baseSeed != null) {
+    const normalized = Math.abs(Math.floor(Number(baseSeed) || 0)) % 1000000000;
+    return (normalized + (attempt * 15485863)) % 1000000000;
+  }
+  return deterministicImageSeed({ ...seedInput, generationAttempt: attempt });
+}
+
 /**
  * Directs AI-generated image assets for all scenes/shots via Ideogram.
  * Guarantees visual consistency across the film while outputting the exact
@@ -248,6 +258,7 @@ export async function directAiAssets(plan, specs, {
   imageQuality = null,
   offline = false,
   baseSeed = null,
+  generationAttempt = 0,
   publishMode = 'DEV_RENDER',
   candidateCount = 2,
 }) {
@@ -257,15 +268,17 @@ export async function directAiAssets(plan, specs, {
 
   const scenes = plan.scenes || [];
   const sceneMap = new Map(scenes.map((s) => [s.id, s]));
-  const masterSeed = baseSeed != null
-    ? Number(baseSeed)
-    : deterministicImageSeed({
+  const masterSeed = resolveAiAssetMasterSeed({
+    baseSeed,
+    generationAttempt,
+    seedInput: {
       title: plan.title,
       style: imageStyle,
       format,
       continuityBible: plan.continuityBible,
       shots: assetRequests.map((item) => item.storyboardShotId || item.id),
-    });
+    },
+  });
 
   const normalizedProvider = String(imageProvider || '').trim().toLowerCase();
   const normalizedModel = String(imageModel || '').trim().toLowerCase();
@@ -373,6 +386,35 @@ export async function directAiAssets(plan, specs, {
         }
         console.warn(`   ⚠️ ${providerLabel} generation failed for [${shotId}]: ${err.message}. Using dedicated scene visual.`);
         break;
+      }
+    }
+
+    // A transient outage at the selected provider must not fail an otherwise
+    // valid production when the operator has configured a second provider.
+    // Authentication and billing failures still fail fast above because they
+    // require operator action and must not silently move spend elsewhere.
+    if (!offline && !generated?.localPath) {
+      const alternateConfigured = isFlux
+        ? Boolean(config.ideogram?.apiKey)
+        : Boolean(config.replicate?.apiToken);
+      if (alternateConfigured) {
+        const alternateLabel = isFlux ? 'Ideogram' : 'FLUX.1 Schnell (Replicate)';
+        try {
+          console.warn(`   ↪ [Shot ${shotId}] ${providerLabel} unavailable; trying configured failover provider ${alternateLabel}.`);
+          generated = isFlux
+            ? await generateIdeogramImage({
+              prompt: rawPrompt, styleId: imageStyle, customStylePrompt, format,
+              seed: (shotSeed + 32452843) % 1000000000, quality: imageQuality,
+              offline, referenceImagePath,
+            })
+            : await generateFluxImage({
+              prompt: rawPrompt, styleId: imageStyle, customStylePrompt, format,
+              seed: (shotSeed + 32452843) % 1000000000, quality: imageQuality || 'high',
+              offline, referenceImagePath,
+            });
+        } catch (failoverError) {
+          console.warn(`   ⚠️ ${alternateLabel} failover failed for [${shotId}]: ${failoverError.message}`);
+        }
       }
     }
 
@@ -742,21 +784,23 @@ export async function directAiAssets(plan, specs, {
     const finalSha256ContentHash = await computeFileSha256(targetFilePath);
     if (!rejectedCandidate) continuityReferencePath = targetFilePath;
 
+    const actualProvider = generated?.provider === 'replicate' ? 'replicate' : generated?.provider === 'ideogram' ? 'ideogram' : (isFlux ? 'replicate' : 'ideogram');
+    const actualProviderLabel = actualProvider === 'replicate' ? 'FLUX.1 Schnell (Replicate)' : 'Ideogram';
     const assetObj = {
       type: 'image',
       width: dimensions.width || (format === 'shorts' ? 1080 : 1920),
       height: dimensions.height || (format === 'shorts' ? 1920 : 1080),
       sha256ContentHash: finalSha256ContentHash,
       src: relativeSrc,
-      source: isFlux ? 'replicate' : 'ideogram',
+      source: actualProvider,
       isFallback: Boolean(generated.isFallback),
       qualityTier: generated.isFallback ? 'FALLBACK' : 'AI_GENERATED',
       tier: 'verified',
       generic: false,
       label: `AI Art (${style.id}): ${rawPrompt.slice(0, 40)}`,
       license: {
-        provider: isFlux ? 'replicate' : 'ideogram',
-        name: isFlux ? 'FLUX.1 Schnell' : 'Ideogram AI',
+        provider: actualProvider,
+        name: actualProvider === 'replicate' ? 'FLUX.1 Schnell' : 'Ideogram AI',
         attribution_required: false,
         commercial_use: 'allowed',
         nonFree: false,
@@ -765,18 +809,18 @@ export async function directAiAssets(plan, specs, {
       relevance: 0.95,
       assetRequestId: req.id || `asset_${shotId}`,
       storyboardShotId: shotId,
-      providerCandidateId: `${isFlux ? 'replicate' : 'ideogram'}_${finalSha256ContentHash.slice(0, 16)}`,
+      providerCandidateId: `${actualProvider}_${finalSha256ContentHash.slice(0, 16)}`,
       query: rawPrompt,
       queryStage: 'AI_GENERATED',
       focal: { x: 0.5, y: 0.5 },
-      selectionReason: `Generated via ${providerLabel} in ${style.label} visual style`,
+      selectionReason: `Generated via ${actualProviderLabel} in ${style.label} visual style`,
       whyItMatchesNarration: `Synthesized specifically for: "${scene?.narration?.slice(0, 80) || rawPrompt.slice(0, 80)}"`,
       finalEditorialScore: editorialScore,
       perceptualHash,
       referenceApplied: Boolean(generated.referenceApplied),
       reusedFromShotId: generated.reusedFromShotId || null,
       assetIdentityChain: {
-        candidateId: `${isFlux ? 'replicate' : 'ideogram'}_${finalSha256ContentHash.slice(0, 16)}`,
+        candidateId: `${actualProvider}_${finalSha256ContentHash.slice(0, 16)}`,
         materializedAssetId: targetFileName,
         solvedSceneAssetId: `${req.sceneId}:${shotId}`,
         timelineAssetId: shotId,
@@ -815,7 +859,7 @@ export async function directAiAssets(plan, specs, {
       shotId,
       sceneId: req.sceneId,
       status: rejectedCandidate ? 'unresolved' : 'resolved',
-      source: isFlux ? 'replicate' : 'ideogram',
+      source: actualProvider,
       candidateCount: candidateEvaluations.length,
       selected: assetObj,
       noUsableCandidate: rejectedCandidate,
