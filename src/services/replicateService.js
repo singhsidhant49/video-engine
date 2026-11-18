@@ -9,6 +9,34 @@ export function resolveReplicateRetryDelay(error, attempt) {
   const providerMs = Math.max(0, Number(error?.retryAfterMs) || 0);
   return Math.min(60_000, Math.max(backoffMs, providerMs));
 }
+
+export function parseReplicateRateLimitInterval(errorText = '') {
+  const text = String(errorText || '');
+  const perMinute = text.match(/(?:reduced to|limit(?:ed)? to)\s+(\d+(?:\.\d+)?)\s+requests? per minute/i);
+  if (!perMinute) return 0;
+  const requests = Number(perMinute[1]);
+  return requests > 0 ? Math.ceil(60_000 / requests) : 0;
+}
+
+let replicateMinimumIntervalMs = Math.max(0, Number(process.env.REPLICATE_MIN_REQUEST_INTERVAL_MS || 0));
+let replicateNextRequestAt = 0;
+
+async function reserveReplicateRequestSlot() {
+  const now = Date.now();
+  const waitMs = Math.max(0, replicateNextRequestAt - now);
+  if (waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));
+  const reservedAt = Date.now();
+  replicateNextRequestAt = reservedAt + replicateMinimumIntervalMs;
+}
+
+function applyReplicateRateLimit(errorText, retryAfterMs = 0) {
+  replicateMinimumIntervalMs = Math.max(
+    replicateMinimumIntervalMs,
+    parseReplicateRateLimitInterval(errorText),
+    Math.max(0, Number(retryAfterMs) || 0),
+  );
+  replicateNextRequestAt = Math.max(replicateNextRequestAt, Date.now() + replicateMinimumIntervalMs);
+}
 import { downloadImageToFile } from './ideogramService.js';
 
 /**
@@ -150,6 +178,7 @@ export async function generateFluxImage({
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const ctl = new AbortController();
+      await reserveReplicateRequestSlot();
       const timer = setTimeout(() => ctl.abort(), timeoutMs);
       let res;
       try {
@@ -178,6 +207,9 @@ export async function generateFluxImage({
         let bodyRetrySeconds = 0;
         try { bodyRetrySeconds = Number(JSON.parse(errorText)?.retry_after || 0); } catch {}
         const headerRetrySeconds = Number(res.headers?.get?.('retry-after') || 0);
+        if (res.status === 429) {
+          applyReplicateRateLimit(errorText, Math.ceil(Math.max(bodyRetrySeconds, headerRetrySeconds) * 1000));
+        }
         throw Object.assign(
           new Error(`Replicate API error ${res.status}: ${errorText.slice(0, 300)}`),
           {

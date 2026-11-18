@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildPixelGroundingClasses } from '../src/assets/visualInspectionService.js';
-import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation, resolveAiAssetMasterSeed } from '../src/pipeline/aiAssetDirector.js';
+import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation, recoverUnresolvedAiShotsFromSameScene, resolveAiAssetMasterSeed } from '../src/pipeline/aiAssetDirector.js';
+import { parseReplicateRateLimitInterval } from '../src/services/replicateService.js';
 import { isAutomaticallyRetryableFailure, resolveVideoJobTimeoutMs, resumeStageForFailure } from '../src/server/videoJobService.js';
 
 test('stick-figure validation never treats the selected visual style as a negative class', () => {
@@ -64,6 +65,24 @@ test('asset retries deterministically use a new candidate seed instead of a reje
     resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 0 }),
     resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 1 }),
   );
+});
+
+test('a failed first shot can recover from an approved later shot in the same narration scene', () => {
+  const donor = { src: 'assets/shot_2.png', storyboardShotId: 'shot_2', relevance: 0.91, assetIdentityChain: {} };
+  const assets = { scene_1: { primary: { src: 'assets/rejected.png', storyboardShotId: 'shot_1' }, byShot: { shot_1: { src: 'assets/rejected.png', storyboardShotId: 'shot_1' }, shot_2: donor } } };
+  const reports = [{ shotId: 'shot_1', sceneId: 'scene_1', status: 'unresolved', noUsableCandidate: true }, { shotId: 'shot_2', sceneId: 'scene_1', status: 'resolved', selected: donor }];
+  const judgments = { shot_1: { accepted: false }, shot_2: { accepted: true, classification: 'DIRECT' } };
+  const evaluations = { shot_1: [{ candidateId: 'bad', accepted: false }] };
+  assert.deepEqual(recoverUnresolvedAiShotsFromSameScene({ assets, requestReports: reports, judgments, candidateEvaluations: evaluations }), { shot_1: 'shot_2' });
+  assert.equal(reports[0].status, 'resolved');
+  assert.equal(assets.scene_1.byShot.shot_1.reusedFromShotId, 'shot_2');
+  assert.equal(judgments.shot_1.accepted, true);
+  assert.equal(evaluations.shot_1.at(-1).accepted, true);
+});
+
+test('Replicate low-credit rate-limit messages become a safe global request interval', () => {
+  assert.equal(parseReplicateRateLimitInterval('Your rate limit is reduced to 6 requests per minute while you have less than $5.0 in credit.'), 10_000);
+  assert.equal(parseReplicateRateLimitInterval('ordinary server error'), 0);
 });
 
 test('long-form jobs receive a duration-aware CPU render budget', () => {

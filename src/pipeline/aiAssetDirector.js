@@ -52,6 +52,60 @@ export function findApprovedSameSceneContinuation(sceneAssets, judgments = {}) {
     .find(([priorShotId, priorAsset]) => priorAsset?.src && judgments[priorShotId]?.accepted === true) || null;
 }
 
+export function recoverUnresolvedAiShotsFromSameScene({ assets = {}, requestReports = [], judgments = {}, candidateEvaluations = {} } = {}) {
+  const recovered = {};
+  for (const report of requestReports) {
+    if (report?.status === 'resolved') continue;
+    const shotId = report?.shotId || report?.storyboardShotId;
+    const sceneAssets = assets[report?.sceneId];
+    if (!shotId || !sceneAssets) continue;
+    const donor = Object.entries(sceneAssets.byShot || {})
+      .reverse()
+      .find(([candidateShotId, asset]) => candidateShotId !== shotId && asset?.src && judgments[candidateShotId]?.accepted === true);
+    if (!donor) continue;
+
+    const [donorShotId, donorAsset] = donor;
+    const recoveredAsset = {
+      ...donorAsset,
+      assetRequestId: report.requestId || report.id || donorAsset.assetRequestId,
+      storyboardShotId: shotId,
+      reusedFromShotId: donorShotId,
+      referenceApplied: true,
+      selectionReason: `Approved same-scene recovery from ${donorShotId} after all generated candidates for ${shotId} failed review`,
+      assetIdentityChain: {
+        ...(donorAsset.assetIdentityChain || {}),
+        solvedSceneAssetId: `${report.sceneId}:${shotId}`,
+        timelineAssetId: shotId,
+      },
+    };
+    sceneAssets.byShot[shotId] = recoveredAsset;
+    if (sceneAssets.primary?.storyboardShotId === shotId || !sceneAssets.primary) sceneAssets.primary = recoveredAsset;
+    report.status = 'resolved';
+    report.selected = recoveredAsset;
+    report.noUsableCandidate = false;
+    report.recoveredFromShotId = donorShotId;
+    judgments[shotId] = {
+      ...(judgments[donorShotId] || {}),
+      accepted: true,
+      rejected: false,
+      classification: 'CONTEXTUAL',
+      rejectReasons: [],
+      selectionReason: recoveredAsset.selectionReason,
+      whyItMatchesNarration: `Approved visual continuation within narration scene ${report.sceneId}`,
+    };
+    const evaluations = candidateEvaluations[shotId] ||= [];
+    for (const evaluation of evaluations) evaluation.accepted = false;
+    evaluations.push({
+      candidateId: `${shotId}_same_scene_recovery`,
+      reusedFromShotId: donorShotId,
+      accepted: true,
+      semanticScore: Number(donorAsset.relevance || 0.65),
+    });
+    recovered[shotId] = donorShotId;
+  }
+  return recovered;
+}
+
 export function buildSameSceneContinuationPrompt(scene = {}, req = {}) {
   const narration = String(scene?.narration || req?.visibleNeed?.narrationText || '').trim();
   return `Approved same-scene visual continuation for narration: ${narration}`;
@@ -642,7 +696,10 @@ export async function directAiAssets(plan, specs, {
               nearestDuplicate = null;
               duplicateMismatch = false;
               semanticMismatch = retryGrounding.available ? !retryGrounding.matched : Boolean(inspection?.semanticPixelInspected && visualMatch?.overallVisualMatch < 0.35);
-              console.log(`   ✅ [Shot ${shotId}] Refinement accepted (pixel match: ${Math.round((visualMatch?.overallVisualMatch || 0.65) * 100)}%).`);
+              const refinedScore = Math.round((visualMatch?.overallVisualMatch || 0.65) * 100);
+              console.log(semanticMismatch
+                ? `   ⚠️ [Shot ${shotId}] refinement improved pixel match to ${refinedScore}% but remains below approval threshold.`
+                : `   ✅ [Shot ${shotId}] refinement accepted (pixel match: ${refinedScore}%).`);
             }
           }
         } catch (retryErr) {
@@ -869,6 +926,20 @@ export async function directAiAssets(plan, specs, {
       ? `   ⚠️ [Shot ${shotId}] rejected AI image after pixel review (${style.id}): "${rawPrompt.slice(0, 50)}..."`
       : `   ✓ [Shot ${shotId}] resolved AI image (${style.id}): "${rawPrompt.slice(0, 50)}..."`);
   });
+
+  // The first shot in a multi-shot scene cannot reuse a later approved shot
+  // during the serial generation pass. Resolve that ordering asymmetry after
+  // every shot has been reviewed, while keeping the reuse strictly scoped to
+  // the same narration scene.
+  const recoveredSameSceneShots = recoverUnresolvedAiShotsFromSameScene({
+    assets,
+    requestReports,
+    judgments: editorialAssetJudgments,
+    candidateEvaluations: imageCandidateEvaluations,
+  });
+  for (const [shotId, donorShotId] of Object.entries(recoveredSameSceneShots)) {
+    console.log(`   ✓ [Shot ${shotId}] recovered with approved later same-scene visual from ${donorShotId}.`);
+  }
 
   return {
     assets,
