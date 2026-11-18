@@ -10,7 +10,7 @@ import { generateSpeech } from '../services/ttsService.js';
 import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
-import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../storyboard/durationBudget.js';
+import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationTempoRepair, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../storyboard/durationBudget.js';
 import { resolveNarrationProfile } from '../audio/narrationProfile.js';
 import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
@@ -606,6 +606,66 @@ export async function createFacelessVideo({
       }
 
       break;
+    }
+  }
+
+  // Kokoro's measured duration is not perfectly linear at extreme speed
+  // settings. If all authored repair passes miss the boundary only narrowly,
+  // apply a transparent, bounded tempo correction rather than regenerating
+  // the entire long-form narration or failing for a few seconds. Because the
+  // transform is uniform, existing word timestamps can be scaled exactly.
+  const tempoRepair = !audioFile ? calculateNarrationTempoRepair({
+    actualDurationSec: narration?.durationInSeconds,
+    budget: durationBudget,
+  }) : null;
+  if (tempoRepair) {
+    const beforeDuration = Number(narration.durationInSeconds);
+    const repairedFile = path.join(runPublic, `.narration-duration-repair-${process.pid}.wav`);
+    try {
+      console.log(`   ⏱️ Applying ${(tempoRepair.correctionRatio * 100).toFixed(2)}% narration tempo correction (${tempoRepair.reason}).`);
+      await ffmpeg([
+        '-y', '-i', narrationFile,
+        '-filter:a', `atempo=${tempoRepair.tempo}`,
+        '-c:a', 'pcm_s16le',
+        repairedFile,
+      ]);
+      await fs.rename(repairedFile, narrationFile);
+      const repairedDuration = await probeDuration(narrationFile);
+      const timeScale = repairedDuration / beforeDuration;
+      narration = {
+        ...narration,
+        source: `${narration.source || 'aligned'}+tempo_repair`,
+        duration: repairedDuration,
+        durationInSeconds: repairedDuration,
+        totalFrames: Math.ceil(repairedDuration * fps),
+        words: (narration.words || []).map((word) => ({
+          ...word,
+          start: Number((Number(word.start || 0) * timeScale).toFixed(4)),
+          end: Number((Number(word.end || 0) * timeScale).toFixed(4)),
+        })),
+      };
+      await save('words.json', {
+        source: narration.source,
+        matchRate: narration.matchRate,
+        duration: narration.durationInSeconds,
+        durationInSeconds: narration.durationInSeconds,
+        totalFrames: narration.totalFrames,
+        words: narration.words,
+        transcript: narration.transcript,
+      });
+      await save('narration-duration-repair.json', {
+        ...tempoRepair,
+        beforeDurationSec: beforeDuration,
+        actualDurationSec: repairedDuration,
+        timestampScale: timeScale,
+      });
+      await job.checkpoints.refreshArtifactChecksums('audio', [path.relative(runDir, narrationFile).split(path.sep).join('/')]);
+      await job.checkpoints.refreshArtifactChecksums('alignment', ['words.json']);
+      console.log(`   ✓ Narration duration corrected: ${beforeDuration.toFixed(1)}s → ${repairedDuration.toFixed(1)}s.`);
+    } catch (tempoError) {
+      console.warn(`   ⚠️ Bounded narration tempo correction failed: ${tempoError.message}`);
+    } finally {
+      await fs.rm(repairedFile, { force: true }).catch(() => {});
     }
   }
 

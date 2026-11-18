@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationCompressionTargetWords, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
+import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationTempoRepair, calculateNarrationCompressionTargetWords, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
 import { compressPlanScript, enforceMaximumNarrationWords, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
@@ -88,6 +88,17 @@ test('narration duration repair aims safely inside the accepted range', () => {
   assert.ok(speed < 0.84, 'A narration just below the boundary must be slowed further');
   const projectedDuration = 113.67 * (0.84 / speed);
   assert.ok(projectedDuration >= budget.allowedMinDuration + 0.7);
+});
+
+test('a narrow measured narration miss receives a bounded transparent tempo repair', () => {
+  const budget = { allowedMinDuration: 399, allowedMaxDuration: 441, targetDurationSec: 420, targetNarrationSec: 399 };
+  const repair = calculateNarrationTempoRepair({ actualDurationSec: 395.7, budget });
+  assert.ok(repair);
+  assert.equal(repair.reason, 'narrow_shortfall');
+  assert.ok(repair.tempo > 0.98 && repair.tempo < 1);
+  assert.ok(repair.expectedDurationSec > 399);
+  assert.equal(calculateNarrationTempoRepair({ actualDurationSec: 360, budget }), null, 'large script errors must still fail');
+  assert.equal(calculateNarrationTempoRepair({ actualDurationSec: 420, budget }), null, 'valid duration needs no repair');
 });
 
 test('offline compression preserves complete hook and payoff when safe shortening is unavailable', async () => {

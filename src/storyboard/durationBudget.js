@@ -179,6 +179,34 @@ export function calculateNarrationRepairSpeed({
 }
 
 /**
+ * Plan a transparent final tempo correction for a narration that narrowly
+ * missed its accepted duration band after bounded script/TTS repair. This is
+ * intentionally limited to 3% so it cannot hide a materially wrong script.
+ */
+export function calculateNarrationTempoRepair({ actualDurationSec, budget, maxCorrectionRatio = 0.03 } = {}) {
+  const actual = Number(actualDurationSec);
+  const minimum = Number(budget?.allowedMinDuration);
+  const maximum = Number(budget?.allowedMaxDuration);
+  const targetDuration = Number(budget?.targetDurationSec || budget?.targetNarrationSec || 0);
+  if (![actual, minimum, maximum].every(Number.isFinite) || actual <= 0 || minimum <= 0 || maximum < minimum) return null;
+  if (actual >= minimum && actual <= maximum) return null;
+
+  const margin = Math.max(0.5, targetDuration * 0.0025);
+  const desired = actual < minimum
+    ? Math.min(maximum, minimum + margin)
+    : Math.max(minimum, maximum - margin);
+  const tempo = actual / desired;
+  const correctionRatio = Math.abs(1 - tempo);
+  if (!Number.isFinite(tempo) || tempo < 0.5 || tempo > 2 || correctionRatio > Math.max(0, Number(maxCorrectionRatio) || 0)) return null;
+  return {
+    tempo: Number(tempo.toFixed(6)),
+    expectedDurationSec: Number(desired.toFixed(3)),
+    correctionRatio: Number(correctionRatio.toFixed(6)),
+    reason: actual < minimum ? 'narrow_shortfall' : 'narrow_overrun',
+  };
+}
+
+/**
  * Scale an overlong measured narration toward the requested final duration.
  * The final timeline follows measured narration length, so using the smaller
  * speech-only budget here can over-compress and make the next pass too short.
