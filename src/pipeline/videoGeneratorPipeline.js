@@ -1368,15 +1368,6 @@ export async function createFacelessVideo({
     }
 
     // 7. Render.
-    await job.startStage('render');
-    throwIfCancelled();
-    if (global.gc) { try { global.gc(); } catch { } }
-    const renderStartedAt = Date.now();
-    onProgress({ step: 6, message: 'Bundling compositions...' });
-    const serveUrl = await getRunBundle(runDir);
-    const inputProps = { timeline };
-    const composition = await selectComposition({ serveUrl, id: format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer', inputProps });
-
     let frameRange = null;
     let outputFilename = `${videoId}-${format}.mp4`;
 
@@ -1404,115 +1395,145 @@ export async function createFacelessVideo({
     }
 
     const outputPath = path.join(config.rendersDir, outputFilename);
-    const temporaryOutputPath = `${outputPath}.partial-${process.pid}-${Date.now()}.mp4`;
-    let lastPct = -1;
-    const renderCancellation = makeCancelSignal();
-    const cancelRender = () => renderCancellation.cancel();
-    signal?.addEventListener('abort', cancelRender, { once: true });
-    const chromiumOptions = {
-      args: [
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        ...(process.env.REMOTION_DISABLE_CHROMIUM_SANDBOX === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
-      ],
-    };
-    const reportRenderProgress = (progress) => {
-      const pct = Math.round(progress * 100);
-      if (pct !== lastPct && pct % 10 === 0) console.log(`   rendering ${pct}%`);
-      lastPct = pct;
-      onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
-    };
-    const renderOptions = {
-      composition,
-      serveUrl,
-      codec: 'h264',
-      crf: 17,
-      imageFormat: 'jpeg',
-      jpegQuality: 94,
-      colorSpace: 'bt709',
-      audioBitrate: '192k',
-      inputProps,
-      scale: renderScale,
-      concurrency: Number(process.env.REMOTION_CONCURRENCY || 1),
-      cancelSignal: renderCancellation.cancelSignal,
-      delayRenderTimeoutInMilliseconds: 240_000,
-      timeoutInMilliseconds: 240_000,
-      chromiumOptions,
-    };
-    try {
-      if (shouldUseSegmentedRender({ totalFrames: timeline.durationInFrames, fps, frameRange })) {
-        console.log(`   Rendering long-form video in resumable ${Number(process.env.REMOTION_SEGMENT_SECONDS || 60)}s segments`);
-        await renderMediaSegmented({
-          renderMediaFn: renderMedia,
-          renderOptions,
-          runDir,
-          totalFrames: timeline.durationInFrames,
-          fps,
-          renderIdentity: {
-            timeline,
-            compositionId: composition.id,
-            renderScale,
-            codec: 'h264',
-            crf: 17,
-          },
-          temporaryOutputPath,
-          onOverallProgress: reportRenderProgress,
-        });
-      } else {
-        await renderMedia({
-          ...renderOptions,
-          outputLocation: temporaryOutputPath,
-          ...(frameRange ? { frameRange } : {}),
-          onProgress: ({ progress: p }) => reportRenderProgress(p),
-        });
+    const reusableRender = canReuse('render') && (await fs.stat(outputPath).then((s) => s.size > 1024).catch(() => false));
+
+    if (reusableRender) {
+      console.log(`   ✓ [Reused] ${outputFilename} (no video re-render)`);
+      await job.completeStage('render', [path.relative(runDir, outputPath).split(path.sep).join('/')]);
+    } else {
+      await job.startStage('render');
+      throwIfCancelled();
+      if (global.gc) { try { global.gc(); } catch { } }
+      const renderStartedAt = Date.now();
+      onProgress({ step: 6, message: 'Bundling compositions...' });
+      const serveUrl = await getRunBundle(runDir);
+      const inputProps = { timeline };
+      const composition = await selectComposition({ serveUrl, id: format === 'shorts' ? 'DynamicShorts' : 'LandscapeExplainer', inputProps });
+
+      const temporaryOutputPath = `${outputPath}.partial-${process.pid}-${Date.now()}.mp4`;
+      let lastPct = -1;
+      const renderCancellation = makeCancelSignal();
+      const cancelRender = () => renderCancellation.cancel();
+      signal?.addEventListener('abort', cancelRender, { once: true });
+      const chromiumOptions = {
+        args: [
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          ...(process.env.REMOTION_DISABLE_CHROMIUM_SANDBOX === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
+        ],
+      };
+      const reportRenderProgress = (progress) => {
+        const pct = Math.round(progress * 100);
+        if (pct !== lastPct && pct % 10 === 0) console.log(`   rendering ${pct}%`);
+        lastPct = pct;
+        onProgress({ step: 6, message: `Rendering video: ${pct}%`, progress: pct });
+      };
+      const renderOptions = {
+        composition,
+        serveUrl,
+        codec: 'h264',
+        crf: 17,
+        imageFormat: 'jpeg',
+        jpegQuality: 94,
+        colorSpace: 'bt709',
+        audioBitrate: '192k',
+        inputProps,
+        scale: renderScale,
+        concurrency: Number(process.env.REMOTION_CONCURRENCY || 1),
+        cancelSignal: renderCancellation.cancelSignal,
+        delayRenderTimeoutInMilliseconds: 240_000,
+        timeoutInMilliseconds: 240_000,
+        chromiumOptions,
+      };
+      try {
+        if (shouldUseSegmentedRender({ totalFrames: timeline.durationInFrames, fps, frameRange })) {
+          console.log(`   Rendering long-form video in resumable ${Number(process.env.REMOTION_SEGMENT_SECONDS || 60)}s segments`);
+          await renderMediaSegmented({
+            renderMediaFn: renderMedia,
+            renderOptions,
+            runDir,
+            totalFrames: timeline.durationInFrames,
+            fps,
+            renderIdentity: {
+              timeline,
+              compositionId: composition.id,
+              renderScale,
+              codec: 'h264',
+              crf: 17,
+            },
+            temporaryOutputPath,
+            onOverallProgress: reportRenderProgress,
+          });
+        } else {
+          await renderMedia({
+            ...renderOptions,
+            outputLocation: temporaryOutputPath,
+            ...(frameRange ? { frameRange } : {}),
+            onProgress: ({ progress: p }) => reportRenderProgress(p),
+          });
+        }
+        // Publish only a complete encoder output. A crash or cancellation can leave
+        // the .partial file, but clients can never mistake it for the final MP4.
+        await fs.rename(temporaryOutputPath, outputPath);
+      } finally {
+        signal?.removeEventListener('abort', cancelRender);
+        await fs.rm(temporaryOutputPath, { force: true }).catch(() => { });
       }
-      // Publish only a complete encoder output. A crash or cancellation can leave
-      // the .partial file, but clients can never mistake it for the final MP4.
-      await fs.rename(temporaryOutputPath, outputPath);
-    } finally {
-      signal?.removeEventListener('abort', cancelRender);
-      await fs.rm(temporaryOutputPath, { force: true }).catch(() => { });
+      throwIfCancelled();
+      await job.completeStage('render', [path.relative(runDir, outputPath).split(path.sep).join('/')]);
+      timeline.performance = { ...(timeline.performance || {}), renderOverheadMs: Date.now() - renderStartedAt };
+      await save('media-editorial-performance.json', timeline.performance);
     }
-    throwIfCancelled();
-    await job.completeStage('render', [path.relative(runDir, outputPath).split(path.sep).join('/')]);
-    timeline.performance = { ...(timeline.performance || {}), renderOverheadMs: Date.now() - renderStartedAt };
-    await save('media-editorial-performance.json', timeline.performance);
 
     // 8. Render upload-ready Thumbnail PNG (only if full render)
     if (!scene && !range) {
       try {
-        const videoDuration = Math.max(1, Number(result.durationSeconds || timeline.durationInFrames / timeline.fps || 10));
-        const storyMomentRatios = [0.08, 0.34, 0.78];
-        const heroFramePaths = [];
-        const heroImages = [];
-        for (let index = 0; index < Math.min(3, videoPackage.thumbnails.length); index++) {
-          const heroFramePath = path.join(runDir, `thumbnail-hero-${index + 1}.jpg`);
-          const timeSec = Math.min(Math.max(0.5, videoDuration * storyMomentRatios[index]), Math.max(0.5, videoDuration - 0.25));
-          await ffmpeg(['-ss', timeSec.toFixed(3), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
-          heroFramePaths.push(heroFramePath);
-          heroImages.push(`data:image/jpeg;base64,${(await fs.readFile(heroFramePath)).toString('base64')}`);
-        }
-        const thumbnailPackage = {
-          ...videoPackage,
-          thumbnails: videoPackage.thumbnails.map((concept, index) => ({
-            ...concept,
-            heroImage: heroImages[Math.min(index, heroImages.length - 1)],
-            storyMoment: ['hook', 'tension', 'payoff'][index] || 'supporting',
-          })),
-        };
         const thumbnailPath = path.join(runDir, 'thumbnail.png');
-        for (let conceptIndex = 0; conceptIndex < Math.min(3, thumbnailPackage.thumbnails.length); conceptIndex++) {
-          const inputProps = { packageData: thumbnailPackage, conceptIndex };
-          const thumbComp = await selectComposition({ serveUrl, id: 'YouTubeThumbnail', inputProps });
-          await renderStill({
-            composition: thumbComp, serveUrl,
-            output: conceptIndex === 0 ? thumbnailPath : path.join(runDir, `thumbnail-${conceptIndex + 1}.png`),
-            inputProps, imageFormat: 'png', delayRenderTimeoutInMilliseconds: 120_000, chromiumOptions,
-          });
+        const hasThumbnail = await fs.stat(thumbnailPath).then((s) => s.size > 1024).catch(() => false);
+        if (reusableRender && hasThumbnail) {
+          result.thumbnail = thumbnailPath;
+          console.log(`   ✓ [Reused] thumbnail.png: ${thumbnailPath}`);
+        } else {
+          const videoDuration = Math.max(1, Number(result.durationSeconds || timeline.durationInFrames / timeline.fps || 10));
+          const storyMomentRatios = [0.08, 0.34, 0.78];
+          const heroFramePaths = [];
+          const heroImages = [];
+          for (let index = 0; index < Math.min(3, videoPackage.thumbnails.length); index++) {
+            const heroFramePath = path.join(runDir, `thumbnail-hero-${index + 1}.jpg`);
+            const timeSec = Math.min(Math.max(0.5, videoDuration * storyMomentRatios[index]), Math.max(0.5, videoDuration - 0.25));
+            await ffmpeg(['-ss', timeSec.toFixed(3), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
+            heroFramePaths.push(heroFramePath);
+            heroImages.push(`data:image/jpeg;base64,${(await fs.readFile(heroFramePath)).toString('base64')}`);
+          }
+          const thumbnailPackage = {
+            ...videoPackage,
+            thumbnails: videoPackage.thumbnails.map((concept, index) => ({
+              ...concept,
+              heroImage: heroImages[Math.min(index, heroImages.length - 1)],
+              storyMoment: ['hook', 'tension', 'payoff'][index] || 'supporting',
+            })),
+          };
+          const serveUrl = await getRunBundle(runDir);
+          const chromiumOptions = {
+            args: [
+              '--disable-dev-shm-usage',
+              '--disable-gpu',
+              ...(process.env.REMOTION_DISABLE_CHROMIUM_SANDBOX === 'true' ? ['--no-sandbox', '--disable-setuid-sandbox'] : []),
+            ],
+          };
+          for (let conceptIndex = 0; conceptIndex < Math.min(3, thumbnailPackage.thumbnails.length); conceptIndex++) {
+            const inputProps = { packageData: thumbnailPackage, conceptIndex };
+            const thumbComp = await selectComposition({ serveUrl, id: 'YouTubeThumbnail', inputProps });
+            await renderStill({
+              composition: thumbComp, serveUrl,
+              output: conceptIndex === 0 ? thumbnailPath : path.join(runDir, `thumbnail-${conceptIndex + 1}.png`),
+              inputProps, imageFormat: 'png', delayRenderTimeoutInMilliseconds: 120_000, chromiumOptions,
+            });
+          }
+          await Promise.all(heroFramePaths.map((heroFramePath) => fs.rm(heroFramePath, { force: true }).catch(() => { })));
+          result.thumbnail = thumbnailPath;
+          console.log(`   🖼️  Three thumbnail variants generated from distinct hook, tension, and payoff frames: ${thumbnailPath}`);
         }
-        await Promise.all(heroFramePaths.map((heroFramePath) => fs.rm(heroFramePath, { force: true }).catch(() => { })));
-        result.thumbnail = thumbnailPath;
-        console.log(`   🖼️  Three thumbnail variants generated from distinct hook, tension, and payoff frames: ${thumbnailPath}`);
       } catch (e) {
         console.warn(`Thumbnail generation failed: ${e.message}`);
         result.thumbnailError = String(e.message || e).slice(0, 500);

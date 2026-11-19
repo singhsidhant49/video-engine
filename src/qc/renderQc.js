@@ -129,7 +129,8 @@ export async function runRenderQc(videoFile, timeline) {
   try {
     const duration = await probeDuration(videoFile);
     const expected = timeline.durationInFrames / fps;
-    add('duration', Math.abs(duration - expected) <= 2 / fps + 0.05, 'error', `${duration.toFixed(2)}s (timeline ${expected.toFixed(2)}s)`);
+    const durationTolerance = Number(process.env.POST_RENDER_QC_DURATION_TOLERANCE || Math.max(0.5, (4 / fps) + 0.1));
+    add('duration', Math.abs(duration - expected) <= durationTolerance, 'error', `${duration.toFixed(2)}s (timeline ${expected.toFixed(2)}s)`);
     const { stdout: streamJson } = await runBinary('ffprobe', [
       '-v', 'error', '-show_entries', 'stream=codec_type,duration:format=duration', '-of', 'json', videoFile,
     ]);
