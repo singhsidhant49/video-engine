@@ -453,26 +453,30 @@ export async function createFacelessVideo({
       await job.checkpoints.refreshArtifactChecksums('plan', ['plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json']);
     }
     if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
-      throw new Error(`Narration quality gate failed — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
+      plan = await repairIncompleteNarration(plan, null);
+      plan = await repairUnverifiedClaims(plan);
+      plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+      await save('plan.json', plan);
+      await save('content-quality-diagnostics.json', plan.contentQuality);
+      await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
+      await job.checkpoints.refreshArtifactChecksums('plan', ['plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json']);
+    }
+    const strictQuality = String(process.env.STRICT_CONTENT_QUALITY || 'false').toLowerCase() === 'true';
+    if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
+      if (strictQuality) {
+        throw new Error(`Narration quality gate failed — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
+      } else {
+        console.warn(`⚠️  Narration quality gate has ${plan.contentQuality.issues?.length || 0} issue(s) — proceeding with diagnostics saved to content-quality-diagnostics.json`);
+      }
     }
 
-  if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
-    plan = await repairIncompleteNarration(plan, null);
-    plan = await repairUnverifiedClaims(plan);
-    plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
-    await save('plan.json', plan);
-    await save('content-quality-diagnostics.json', plan.contentQuality);
-    await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
-    await job.checkpoints.refreshArtifactChecksums('plan', ['plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json']);
-  }
-  const strictQuality = String(process.env.STRICT_CONTENT_QUALITY || 'false').toLowerCase() === 'true';
-  if (publishMode === 'PRODUCTION_RENDER' && plan.contentQuality?.valid === false) {
-    if (strictQuality) {
-      throw new Error(`Narration quality gate failed — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
-    } else {
-      console.warn(`⚠️  Narration quality gate has ${plan.contentQuality.issues?.length || 0} issue(s) — proceeding with diagnostics saved to content-quality-diagnostics.json`);
-    }
-  }
+    // 2. Narration & 3. Alignment with duration check and repair loop
+    let narrationFile = path.join(runPublic, 'narration.wav');
+    let narration;
+    let narrationNorm = null;
+    let compressionPasses = plan.compressionPasses || 0;
+    let expansionPasses = plan.expansionPasses || 0;
+    let synthesisSpeed = narrationProfile.speed;
 
     if ((canReuse('audio') || noTts) && canReuse('alignment')) {
       console.log(`   ✓ [Reused] narration.wav & words.json (no audio regeneration)`);
@@ -679,34 +683,34 @@ export async function createFacelessVideo({
       }
     }
 
-  // Expansion/compression can change prose after the initial plan gate. Never
-  // send incomplete sentences into storyboard, captions, or final rendering.
-  plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
-  const consolidation = consolidatePlanForPacing(plan, narration.words, productionProfile.pacing);
-  if (consolidation.merged.length) {
-    console.log(`   ↔ Consolidated ${consolidation.merged.length} short scene boundary/boundaries for ${productionProfile.pacing.mode} pacing.`);
-    plan = normalizePlan(consolidation.plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
-    plan.pacingConsolidation = consolidation.plan.pacingConsolidation;
-  }
-  plan.contentQuality = validateContentQuality({ scenes: plan.scenes, claims: plan.claims });
-  plan.script = plan.scenes.map((sceneItem) => sceneItem.narration).join(' ');
-  await save('plan.json', plan);
-  await save('content-quality-diagnostics.json', plan.contentQuality);
-  await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
-  // Measured TTS duration can expand/compress the plan after the planning
-  // checkpoint completed. Keep that checkpoint's checksums aligned with the
-  // final script so timeline/render-only resumes reuse the corrected audio and
-  // assets instead of restarting the entire job.
-  await job.checkpoints.refreshArtifactChecksums('plan', [
-    'plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json',
-  ]);
-  if (publishMode === 'PRODUCTION_RENDER' && !plan.contentQuality.valid) {
-    if (strictQuality) {
-      throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
-    } else {
-      console.warn(`⚠️  Narration quality gate has issue(s) after duration repair — proceeding with diagnostics.`);
+    // Expansion/compression can change prose after the initial plan gate. Never
+    // send incomplete sentences into storyboard, captions, or final rendering.
+    plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+    const consolidation = consolidatePlanForPacing(plan, narration.words, productionProfile.pacing);
+    if (consolidation.merged.length) {
+      console.log(`   ↔ Consolidated ${consolidation.merged.length} short scene boundary/boundaries for ${productionProfile.pacing.mode} pacing.`);
+      plan = normalizePlan(consolidation.plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
+      plan.pacingConsolidation = consolidation.plan.pacingConsolidation;
     }
-  }
+    plan.contentQuality = validateContentQuality({ scenes: plan.scenes, claims: plan.claims });
+    plan.script = plan.scenes.map((sceneItem) => sceneItem.narration).join(' ');
+    await save('plan.json', plan);
+    await save('content-quality-diagnostics.json', plan.contentQuality);
+    await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
+    // Measured TTS duration can expand/compress the plan after the planning
+    // checkpoint completed. Keep that checkpoint's checksums aligned with the
+    // final script so timeline/render-only resumes reuse the corrected audio and
+    // assets instead of restarting the entire job.
+    await job.checkpoints.refreshArtifactChecksums('plan', [
+      'plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json',
+    ]);
+    if (publishMode === 'PRODUCTION_RENDER' && !plan.contentQuality.valid) {
+      if (strictQuality) {
+        throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
+      } else {
+        console.warn(`⚠️  Narration quality gate has issue(s) after duration repair — proceeding with diagnostics.`);
+      }
+    }
 
   // Duration is already known from the measured narration. Do not spend time
   // or provider credits on storyboards and visual assets when the audio cannot
