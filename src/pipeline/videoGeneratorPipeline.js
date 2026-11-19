@@ -679,49 +679,6 @@ export async function createFacelessVideo({
       }
     }
 
-    // Expansion/compression can change prose after the initial plan gate. Never
-    // send incomplete sentences into storyboard, captions, or final rendering.
-    plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
-    const consolidation = consolidatePlanForPacing(plan, narration.words, productionProfile.pacing);
-    if (consolidation.merged.length) {
-      console.log(`   ↔ Consolidated ${consolidation.merged.length} short scene boundary/boundaries for ${productionProfile.pacing.mode} pacing.`);
-      plan = normalizePlan(consolidation.plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
-      plan.pacingConsolidation = consolidation.plan.pacingConsolidation;
-    }
-    plan.contentQuality = validateContentQuality({ scenes: plan.scenes, claims: plan.claims });
-    plan.script = plan.scenes.map((sceneItem) => sceneItem.narration).join(' ');
-    await save('plan.json', plan);
-    await save('content-quality-diagnostics.json', plan.contentQuality);
-    await save('claim-evidence-diagnostics.json', buildClaimEvidenceDiagnostics(plan));
-    // Measured TTS duration can expand/compress the plan after the planning
-    // checkpoint completed. Keep that checkpoint's checksums aligned with the
-    // final script so timeline/render-only resumes reuse the corrected audio and
-    // assets instead of restarting the entire job.
-    await job.checkpoints.refreshArtifactChecksums('plan', [
-      'plan.json', 'content-quality-diagnostics.json', 'claim-evidence-diagnostics.json',
-    ]);
-    if (publishMode === 'PRODUCTION_RENDER' && !plan.contentQuality.valid) {
-      throw new Error(`Narration quality gate failed after duration repair — see ${path.join(runDir, 'content-quality-diagnostics.json')}`);
-    }
-
-    // Duration is already known from the measured narration. Do not spend time
-    // or provider credits on storyboards and visual assets when the audio cannot
-    // satisfy the production contract. Timeline QC remains a second line of
-    // defence for frame quantization and later timeline changes.
-    const measuredNarrationSec = Number(narration.durationInSeconds);
-    const durationFrameTolerance = 1 / Math.max(1, fps);
-    const narrationDurationValid = Number.isFinite(measuredNarrationSec)
-      && measuredNarrationSec + durationFrameTolerance >= durationBudget.allowedMinDuration
-      && measuredNarrationSec - durationFrameTolerance <= durationBudget.allowedMaxDuration;
-    if (publishMode === 'PRODUCTION_RENDER' && !narrationDurationValid) {
-      const error = new Error(
-        `Narration duration repair failed: measured ${measuredNarrationSec.toFixed(1)}s; `
-        + `required ${durationBudget.allowedMinDuration.toFixed(1)}-${durationBudget.allowedMaxDuration.toFixed(1)}s`,
-      );
-      error.code = 'NARRATION_DURATION_FAILED';
-      throw error;
-    }
-
   // Expansion/compression can change prose after the initial plan gate. Never
   // send incomplete sentences into storyboard, captions, or final rendering.
   plan = normalizePlan(plan, { topic: topic || plan.topic, niche: niche || plan.niche, format, style: style || plan.style });
@@ -750,6 +707,30 @@ export async function createFacelessVideo({
       console.warn(`⚠️  Narration quality gate has issue(s) after duration repair — proceeding with diagnostics.`);
     }
   }
+
+  // Duration is already known from the measured narration. Do not spend time
+  // or provider credits on storyboards and visual assets when the audio cannot
+  // satisfy the production contract. Timeline QC remains a second line of
+  // defence for frame quantization and later timeline changes.
+  const measuredNarrationSec = Number(narration.durationInSeconds);
+  const durationFrameTolerance = 1 / Math.max(1, fps);
+  const narrationDurationValid = Number.isFinite(measuredNarrationSec)
+    && measuredNarrationSec + durationFrameTolerance >= durationBudget.allowedMinDuration
+    && measuredNarrationSec - durationFrameTolerance <= durationBudget.allowedMaxDuration;
+  if (publishMode === 'PRODUCTION_RENDER' && !narrationDurationValid) {
+    const error = new Error(
+      `Narration duration repair failed: measured ${measuredNarrationSec.toFixed(1)}s; `
+      + `required ${durationBudget.allowedMinDuration.toFixed(1)}-${durationBudget.allowedMaxDuration.toFixed(1)}s`,
+    );
+    error.code = 'NARRATION_DURATION_FAILED';
+    throw error;
+  }
+
+  // Whisper and the visual transformer models are individually large. They
+  // are used in separate phases, so release alignment memory before loading
+  // semantic visual inspection models in the worker container.
+  await releaseWhisper();
+  if (global.gc) { try { global.gc(); } catch {} }
 
     // 4. Visual Storyboard & Visual Director.
     onProgress({ step: 4, message: 'Directing visuals and resolving imagery...' });
