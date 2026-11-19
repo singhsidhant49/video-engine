@@ -292,11 +292,12 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   }
   const captionsRequired = publishMode === 'PRODUCTION_RENDER'
     && !['none', 'off', 'OFF'].includes(timeline.captions?.mode || 'none');
+  const allowEstimated = String(process.env.ALLOW_ESTIMATED_ALIGNMENT || 'false').toLowerCase() === 'true';
   if (narration?.source === 'estimate') {
     add(
       'alignment',
-      false,
-      captionsRequired ? 'error' : 'warn',
+      allowEstimated,
+      captionsRequired && !allowEstimated ? 'error' : 'warn',
       'deterministic estimated word timing used because speech recognition was unavailable or outside resource limits',
     );
   } else if (narration) {
