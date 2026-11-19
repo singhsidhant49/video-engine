@@ -712,29 +712,29 @@ export async function createFacelessVideo({
       }
     }
 
-  // Duration is already known from the measured narration. Do not spend time
-  // or provider credits on storyboards and visual assets when the audio cannot
-  // satisfy the production contract. Timeline QC remains a second line of
-  // defence for frame quantization and later timeline changes.
-  const measuredNarrationSec = Number(narration.durationInSeconds);
-  const durationFrameTolerance = 1 / Math.max(1, fps);
-  const narrationDurationValid = Number.isFinite(measuredNarrationSec)
-    && measuredNarrationSec + durationFrameTolerance >= durationBudget.allowedMinDuration
-    && measuredNarrationSec - durationFrameTolerance <= durationBudget.allowedMaxDuration;
-  if (publishMode === 'PRODUCTION_RENDER' && !narrationDurationValid) {
-    const error = new Error(
-      `Narration duration repair failed: measured ${measuredNarrationSec.toFixed(1)}s; `
-      + `required ${durationBudget.allowedMinDuration.toFixed(1)}-${durationBudget.allowedMaxDuration.toFixed(1)}s`,
-    );
-    error.code = 'NARRATION_DURATION_FAILED';
-    throw error;
-  }
+    // Duration is already known from the measured narration. Do not spend time
+    // or provider credits on storyboards and visual assets when the audio cannot
+    // satisfy the production contract. Timeline QC remains a second line of
+    // defence for frame quantization and later timeline changes.
+    const measuredNarrationSec = Number(narration.durationInSeconds);
+    const durationFrameTolerance = 1 / Math.max(1, fps);
+    const narrationDurationValid = Number.isFinite(measuredNarrationSec)
+      && measuredNarrationSec + durationFrameTolerance >= durationBudget.allowedMinDuration
+      && measuredNarrationSec - durationFrameTolerance <= durationBudget.allowedMaxDuration;
+    if (publishMode === 'PRODUCTION_RENDER' && !narrationDurationValid) {
+      const error = new Error(
+        `Narration duration repair failed: measured ${measuredNarrationSec.toFixed(1)}s; `
+        + `required ${durationBudget.allowedMinDuration.toFixed(1)}-${durationBudget.allowedMaxDuration.toFixed(1)}s`,
+      );
+      error.code = 'NARRATION_DURATION_FAILED';
+      throw error;
+    }
 
-  // Whisper and the visual transformer models are individually large. They
-  // are used in separate phases, so release alignment memory before loading
-  // semantic visual inspection models in the worker container.
-  await releaseWhisper();
-  if (global.gc) { try { global.gc(); } catch {} }
+    // Whisper and the visual transformer models are individually large. They
+    // are used in separate phases, so release alignment memory before loading
+    // semantic visual inspection models in the worker container.
+    await releaseWhisper();
+    if (global.gc) { try { global.gc(); } catch { } }
 
     // 4. Visual Storyboard & Visual Director.
     onProgress({ step: 4, message: 'Directing visuals and resolving imagery...' });
