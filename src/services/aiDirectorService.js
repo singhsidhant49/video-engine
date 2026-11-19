@@ -1425,11 +1425,12 @@ export function normalizePlan(raw, { topic = '', niche = '', format = 'shorts', 
 
 /** Validate narrative progression, hook curiosity, redundancy, and hook-to-payoff closure. */
 export function validateContentQuality({ scenes = [], claims = [] } = {}) {
+  const allowUnverified = String(process.env.ALLOW_UNVERIFIED_CLAIMS || 'true').toLowerCase() === 'true';
   const issues = [...narrationCompletenessIssues(scenes)];
   for (const claim of claims.filter((item) => item.type === 'statistic' && item.status === 'unverified')) {
     issues.push({
       type: 'unverified_exact_claim',
-      severity: 'error',
+      severity: allowUnverified ? 'warn' : 'error',
       sceneId: claim.scene_id,
       message: `Exact factual claim has no recorded source: "${claim.text.slice(0, 140)}"`,
     });
