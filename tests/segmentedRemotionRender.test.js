@@ -58,7 +58,7 @@ test('completed render segments are reused after interruption', async (t) => {
   // Simulate persisted files being valid to a real probe on the next worker.
   for (const [file, duration] of [...durations]) {
     if (file.includes('segment-') && file.includes('.partial-')) {
-      durations.set(file.replace(/\.partial-\d+$/, ''), duration);
+      durations.set(file.replace(/\.partial-[^.]+\.mp4$/, '.mp4'), duration);
     }
   }
   const outputTwo = path.join(runDir, 'second.mp4');

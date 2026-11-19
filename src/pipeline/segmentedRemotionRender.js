@@ -75,7 +75,7 @@ export async function renderMediaSegmented({
 
   for (const segment of segments) {
     const segmentPath = path.join(segmentDir, `segment-${String(segment.index).padStart(4, '0')}.mp4`);
-    const partialPath = `${segmentPath}.partial-${process.pid}`;
+    const partialPath = path.join(segmentDir, `segment-${String(segment.index).padStart(4, '0')}.partial-${process.pid}.mp4`);
     if (!(await isUsableSegment(segmentPath, segment.durationSeconds, probe))) {
       await fs.rm(segmentPath, { force: true }).catch(() => {});
       await fs.rm(partialPath, { force: true }).catch(() => {});
