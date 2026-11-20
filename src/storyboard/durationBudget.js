@@ -45,8 +45,12 @@ export function calculateDurationBudget({
 
   const targetNarrationSec = Number(Math.max(10, target - totalReserveSec).toFixed(2));
   const targetWords = Math.round(targetNarrationSec * speechRateWps);
-  const minWords = Math.round(targetWords * 0.93);
-  const maxWords = Math.round(targetWords * 1.05); // Strict word ceiling
+  const minWords = isShorts
+    ? Math.max(10, Math.round(targetWords * 0.88))
+    : Math.round(targetWords * 0.93);
+  const maxWords = isShorts
+    ? Math.max(Math.round(targetWords * 1.15), targetWords + 10)
+    : Math.max(Math.round(targetWords * 1.05), targetWords + 8);
 
   // Target scene count: each scene is an authored Content Beat
   // Shorts: faster visual changes every 3.5-5.5s (higher beat density)

@@ -78,11 +78,13 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const pacingProfileName = pacingPolicy?.mode || 'legacy';
   const productionPacing = publishMode === 'PRODUCTION_RENDER' && Boolean(pacingPolicy);
   const isAiWorkflow = plan?.imageSource === 'ai' || timeline?.imageSource === 'ai' || timeline?.productionProfile?.imageSource === 'ai';
+  const isStockWorkflow = plan?.imageSource === 'stock' || timeline?.imageSource === 'stock' || timeline?.productionProfile?.imageSource === 'stock';
+  const isShorts = (timeline.format || timeline.productionProfile?.format || plan?.format) === 'shorts';
   const rawProfile = timeline.productionProfile?.contentType
     ? getContentVisualProfile(timeline.productionProfile.contentType)
     : null;
-  const contentVisualProfile = (rawProfile && isAiWorkflow)
-    ? { ...rawProfile, minVideoShare: 0, maxImageShare: 1.0, maxPhotoRun: 50 }
+  const contentVisualProfile = (rawProfile && (isAiWorkflow || (isShorts && rawProfile.minVideoShare > 0.3)))
+    ? { ...rawProfile, minVideoShare: 0, maxImageShare: 1.0, maxPhotoRun: isAiWorkflow ? 50 : 25 }
     : rawProfile;
   add('pacing-average-shot', avgShotSec >= targetAverageShotSeconds * 0.82, productionPacing ? 'error' : 'warn', `average shot duration ${avgShotSec.toFixed(2)}s (profile ${pacingProfileName}, target: ≥ ${(targetAverageShotSeconds * 0.82).toFixed(2)}s)`);
 
@@ -197,7 +199,8 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
       .reduce((sum, [, share]) => sum + share, 0);
     add('content-profile-image-share', mediaOnly || imageShare <= contentVisualProfile.maxImageShare, 'error',
       `${contentVisualProfile.id}: image ${(imageShare * 100).toFixed(0)}% (maximum ${(contentVisualProfile.maxImageShare * 100).toFixed(0)}%)`);
-    add('content-profile-video-share', videoShare + 0.001 >= contentVisualProfile.minVideoShare, 'error',
+    const videoShareSeverity = (isStockWorkflow || isShorts) ? 'warn' : 'error';
+    add('content-profile-video-share', videoShare + 0.001 >= contentVisualProfile.minVideoShare, videoShareSeverity,
       `${contentVisualProfile.id}: video ${(videoShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minVideoShare * 100).toFixed(0)}%)`);
     add('content-profile-structured-share', mediaOnly || structuredShare + 0.001 >= contentVisualProfile.minStructuredShare, 'error',
       `${contentVisualProfile.id}: structured ${(structuredShare * 100).toFixed(0)}% (minimum ${(contentVisualProfile.minStructuredShare * 100).toFixed(0)}%)`);

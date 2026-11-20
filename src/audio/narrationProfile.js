@@ -77,15 +77,17 @@ export function resolveNarrationProfile({
     
     // Default 0.76x for guided and sleep meditation, 0.82x for quick mindfulness
     let targetMedSpeed = meditationSpeed;
-    if (meditationSpeed === 0.76 || meditationSpeed === 0.80 || meditationSpeed === 0.58) {
+    if (isShorts) {
+      targetMedSpeed = 1.02; // Shorts need conversational delivery even for mindfulness/sleep tips
+    } else if (meditationSpeed === 0.76 || meditationSpeed === 0.80 || meditationSpeed === 0.58) {
       if (subprofile === 'sleep') targetMedSpeed = 0.76;
       else if (subprofile === 'quick_mindfulness') targetMedSpeed = 0.82;
       else targetMedSpeed = 0.76;
     }
 
-    speed = Math.min(normalSpeed, finitePositive(targetMedSpeed, 0.76));
+    speed = Math.min(normalSpeed, finitePositive(targetMedSpeed, isShorts ? 1.02 : 0.76));
     // Articulation suffers below 0.72x on Kokoro; tranquility comes from silence pauses
-    minimumRepairSpeed = 0.72;
+    minimumRepairSpeed = isShorts ? 0.85 : 0.72;
   } else if (contentType && CONTENT_TYPE_DEFAULT_SPEEDS[contentType]) {
     id = contentType;
     const mapped = CONTENT_TYPE_DEFAULT_SPEEDS[contentType];
@@ -102,7 +104,7 @@ export function resolveNarrationProfile({
   // - Long-form/Landscape: 140-165 WPM (balanced, natural narration)
   // - Meditation: ~70-75 WPM (effective rate accounting for intentional silence pauses)
   const speechRateWps = meditation
-    ? Number((1.55 * speed).toFixed(2))
+    ? (isShorts ? Number((2.10 * speed).toFixed(2)) : Number((1.55 * speed).toFixed(2)))
     : isShorts
       ? Number((2.55 * speed).toFixed(2))
       : Number((2.45 * speed).toFixed(2));

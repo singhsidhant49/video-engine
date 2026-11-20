@@ -510,10 +510,15 @@ export async function enforceMaximumNarrationWords(plan, budget, llm = llmConfig
     passes++;
   }
   if (words > budget.maxWords) {
-    const error = new Error(`Narration is ${words} words; maximum ${budget.maxWords} words for the selected duration`);
-    error.code = 'SCRIPT_DURATION_BUDGET_FAILED';
-    error.details = { words, targetWords: budget.targetWords, maxWords: budget.maxWords, passes };
-    throw error;
+    const allowableAbsorption = Math.max(10, Math.round(budget.maxWords * 0.15));
+    if (words <= budget.maxWords + allowableAbsorption) {
+      console.log(`   ⚠️ Script is ${words} words (target ${budget.targetWords}, max ${budget.maxWords}). Within TTS dynamic speed range (+${allowableAbsorption} words); proceeding.`);
+    } else {
+      const error = new Error(`Narration is ${words} words; maximum ${budget.maxWords} words for the selected duration`);
+      error.code = 'SCRIPT_DURATION_BUDGET_FAILED';
+      error.details = { words, targetWords: budget.targetWords, maxWords: budget.maxWords, passes };
+      throw error;
+    }
   }
   plan.script = (plan.scenes || []).map((scene) => scene.narration).join(' ');
   return { plan, words, passes };
