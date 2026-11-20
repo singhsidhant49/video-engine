@@ -621,7 +621,29 @@ async function videoAction(button) {
   const { videoAction: action, id } = button.dataset; const video = state.videos.find((v) => v.id === id);
   button.disabled = true;
   try {
-    if (action === 'download') { const response = await fetch(`/v1/videos/${id}/download`, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error('Download failed'); const url = URL.createObjectURL(await response.blob()); const a = document.createElement('a'); a.href = url; a.download = `${id}.mp4`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 2000); return; }
+    if (action === 'download') {
+      toast('Starting video download…');
+      if (!state.key) {
+        const a = document.createElement('a');
+        a.href = `/v1/videos/${id}/download`;
+        a.download = `${id}.mp4`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        return;
+      }
+      const response = await fetch(`/v1/videos/${id}/download`, { credentials: 'same-origin', headers: headers(false) });
+      if (!response.ok) throw new Error('Download failed');
+      const url = URL.createObjectURL(await response.blob());
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${id}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      return;
+    }
     if (action === 'review') { const result = await api(`/v1/videos/${id}/result`); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); const response = await fetch(result.videoUrl, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error(`Video could not be loaded (${response.status})`); state.mediaUrl = URL.createObjectURL(await response.blob()); $('reviewVideo').src = state.mediaUrl; $('reviewTitle').textContent = result.title || video?.id || 'Video'; const pkg = result.package; $('packageDetails').innerHTML = pkg ? `<strong>${escapeHtml(pkg.title || result.title || '')}</strong><p>${escapeHtml(pkg.description || '')}</p>` : '<p>Publish package created with the completed video.</p>'; $('reviewDialog').showModal(); return; }
     if (action === 'cancel') await api(`/v1/videos/${id}/cancel`, { method: 'POST', body: '{}' });
     if (action === 'retry') await api(`/v1/videos/${id}/retry`, { method: 'POST', body: '{}' });
