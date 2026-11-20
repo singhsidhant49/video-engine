@@ -207,7 +207,11 @@ async function loadVideoSummary() {
 function channelCard(channel) {
   const formats = channel.productionDefaults.formats || [channel.productionDefaults.aspectRatio === '9:16' ? 'shorts' : 'landscape'];
   const ranges = channel.productionDefaults.durationRanges || {};
-  return `<article class="channel-card"><div class="card-top"><div><p class="eyebrow">${escapeHtml(channel.handle || channel.language || 'CHANNEL')}</p><h3>${escapeHtml(channel.name)}</h3><p>${escapeHtml(channel.niche)}</p></div><span class="status-dot ${channel.automation.enabled ? 'ready' : ''}" title="${channel.automation.enabled ? 'Automation active' : 'Automation paused'}"></span></div><div class="badge-row">${formats.map((f) => `<span class="badge accent">${escapeHtml(f)}</span>`).join('')}<span class="badge">${escapeHtml(channel.archetype)}</span><span class="badge">${escapeHtml(channel.primaryGoal)}</span></div><p class="card-copy">${escapeHtml(channel.targetAudience)}</p><div class="channel-stats"><div><span>Shorts range</span><strong>${ranges.shorts ? `${durationLabel(ranges.shorts.min)}–${durationLabel(ranges.shorts.max)}` : 'Disabled'}</strong></div><div><span>Landscape range</span><strong>${ranges.landscape ? `${durationLabel(ranges.landscape.min)}–${durationLabel(ranges.landscape.max)}` : 'Disabled'}</strong></div><div><span>Automation</span><strong>${channel.automation.enabled ? 'Enabled' : 'Paused'}</strong></div><div><span>Schedule</span><strong>${escapeHtml(channel.automation.scheduleCron)}</strong></div></div>${channel.automation.lastError ? `<p class="error-text">Last scheduler error: ${escapeHtml(channel.automation.lastError)}</p>` : ''}<div class="actions"><button data-channel-action="ideas" data-id="${channel.id}">Open ideas</button><button data-channel-action="brainstorm" data-id="${channel.id}">Generate ideas</button><button data-channel-action="analytics" data-id="${channel.id}">Add results</button><button data-channel-action="edit" data-id="${channel.id}">Edit</button><button data-channel-action="toggle" data-id="${channel.id}">${channel.automation.enabled ? 'Pause' : 'Enable'} automation</button><button class="danger" data-channel-action="delete" data-id="${channel.id}">Delete</button></div></article>`;
+  const isAi = channel.productionDefaults.imageSource === 'ai';
+  const mediaBadge = isAi
+    ? `<span class="badge accent">🎨 ${escapeHtml(channelStyleLabel(channel.productionDefaults.imageStyle))}</span>`
+    : '<span class="badge">🌐 Stock Media</span>';
+  return `<article class="channel-card"><div class="card-top"><div><p class="eyebrow">${escapeHtml(channel.handle || channel.language || 'CHANNEL')}</p><h3>${escapeHtml(channel.name)}</h3><p>${escapeHtml(channel.niche)}</p></div><span class="status-dot ${channel.automation.enabled ? 'ready' : ''}" title="${channel.automation.enabled ? 'Automation active' : 'Automation paused'}"></span></div><div class="badge-row">${formats.map((f) => `<span class="badge accent">${escapeHtml(f)}</span>`).join('')}<span class="badge">${escapeHtml(channel.archetype)}</span><span class="badge">${escapeHtml(channel.primaryGoal)}</span>${mediaBadge}</div><p class="card-copy">${escapeHtml(channel.targetAudience)}</p><div class="channel-stats"><div><span>Shorts range</span><strong>${ranges.shorts ? `${durationLabel(ranges.shorts.min)}–${durationLabel(ranges.shorts.max)}` : 'Disabled'}</strong></div><div><span>Landscape range</span><strong>${ranges.landscape ? `${durationLabel(ranges.landscape.min)}–${durationLabel(ranges.landscape.max)}` : 'Disabled'}</strong></div><div><span>Automation</span><strong>${channel.automation.enabled ? 'Enabled' : 'Paused'}</strong></div><div><span>Schedule</span><strong>${escapeHtml(channel.automation.scheduleCron)}</strong></div></div>${channel.automation.lastError ? `<p class="error-text">Last scheduler error: ${escapeHtml(channel.automation.lastError)}</p>` : ''}<div class="actions"><button data-channel-action="ideas" data-id="${channel.id}">Open ideas</button><button data-channel-action="brainstorm" data-id="${channel.id}">Generate ideas</button><button data-channel-action="analytics" data-id="${channel.id}">Add results</button><button data-channel-action="edit" data-id="${channel.id}">Edit</button><button data-channel-action="toggle" data-id="${channel.id}">${channel.automation.enabled ? 'Pause' : 'Enable'} automation</button><button class="danger" data-channel-action="delete" data-id="${channel.id}">Delete</button></div></article>`;
 }
 
 function renderChannels() {
@@ -425,25 +429,95 @@ function syncDurationFields() {
   $('durationHint').textContent = `AI selects ${durationLabel(range.min)}–${durationLabel(range.max)} based on topic depth.`;
 }
 
-const imageModels = {
-  ideogram: [
-    ['p-image-ideogram', 'P-Image Ideogram - fast and economical'],
-    ['ideogram-4-5', 'Ideogram 4.5 - highest precision'],
-    ['ideogram-4', 'Ideogram 4 - design and layout'],
-    ['V_2_TURBO', 'Ideogram V2 Turbo'],
-  ],
-  replicate: [['black-forest-labs/flux-schnell', 'FLUX.1 Schnell - fast generation']],
+const styleMetadata = {
+  cinematic_documentary: {
+    desc: 'Photorealistic photography, 35mm film aesthetic, natural light, realistic environments and cinematic compositions.',
+    bestFor: 'Business stories, history, technology, science, real-world case studies',
+    defaultModel: 'black-forest-labs/flux-schnell',
+  },
+  dark_noir: {
+    desc: 'Deep shadows, dramatic chiaroscuro lighting, muted desaturated colors, suspenseful atmosphere and high contrast.',
+    bestFor: 'Corporate scandals, psychological mysteries, horror, true crime and business failures',
+    defaultModel: 'black-forest-labs/flux-schnell',
+  },
+  editorial_vector: {
+    desc: 'Clean geometric shapes, premium color palettes, strong visual metaphors and sophisticated 2D publication illustration.',
+    bestFor: 'Finance, AI, technology, productivity, science and educational explainers',
+    defaultModel: 'p-image-ideogram',
+  },
+  stickman: {
+    desc: "Expressive minimalist stick-figure characters, conceptual symbolism and cinematic framing. Not children's whiteboard drawings.",
+    bestFor: 'Psychology, human behavior, stoicism, self-improvement and emotional storytelling',
+    defaultModel: 'p-image-ideogram',
+  },
+  '3d_render': {
+    desc: 'Expressive stylized characters, tactile materials, soft lighting, vibrant depth and feature-animation appeal.',
+    bestFor: 'Approaching complex topics playfully, storytelling, tech explainers and character journeys',
+    defaultModel: 'black-forest-labs/flux-schnell',
+  },
+  anime: {
+    desc: 'Japanese feature animation aesthetic, dramatic atmospheric lighting, detailed backgrounds and emotional depth.',
+    bestFor: 'Narrative storytelling, philosophical video essays, high-drama explainers and gaming lore',
+    defaultModel: 'black-forest-labs/flux-schnell',
+  },
+  custom: {
+    desc: 'Prompt-driven visual language defined by your custom art direction prompt below.',
+    bestFor: 'Unique channel branding, signature creator aesthetics, bespoke art styles',
+    defaultModel: 'black-forest-labs/flux-schnell',
+  },
 };
+
+const allImageModels = [
+  ['black-forest-labs/flux-schnell', 'FLUX.1 Schnell (Replicate · Fast & Photorealistic)'],
+  ['p-image-ideogram', 'P-Image Ideogram (Ideogram · Design, Vector & Text)'],
+  ['ideogram-4-5', 'Ideogram 4.5 (Ideogram · High Precision Detail)'],
+  ['ideogram-4', 'Ideogram 4.0 (Ideogram · Graphic Layout)'],
+];
+
+function getProviderForModel(model) {
+  return String(model || '').includes('flux') ? 'replicate' : 'ideogram';
+}
+
+function channelStyleLabel(styleId) {
+  const labels = {
+    cinematic_documentary: 'Cinematic Documentary',
+    hyper_realistic: 'Cinematic Documentary',
+    dark_noir: 'Dark Investigative Noir',
+    editorial_vector: 'Modern Editorial Vector',
+    stickman: 'Modern Stickman',
+    '3d_render': 'Stylized 3D Animation',
+    anime: 'Cinematic Anime',
+    custom: 'Custom Brand Style',
+  };
+  return labels[styleId] || styleId || 'Stock Media';
+}
 
 function syncChannelVisualFields(preferredModel = null) {
   const ai = $('channelImageSource').value === 'ai';
   document.querySelectorAll('.channel-ai-field').forEach((field) => { field.hidden = !ai; });
+  if ($('channelStockInfo')) $('channelStockInfo').hidden = ai;
   if (!ai) return;
-  const provider = $('channelImageProvider').value;
-  const choices = imageModels[provider] || imageModels.ideogram;
-  $('channelImageModel').innerHTML = choices.map(([value, text]) => `<option value="${value}">${text}</option>`).join('');
-  if (preferredModel && choices.some(([value]) => value === preferredModel)) $('channelImageModel').value = preferredModel;
-  $('channelCustomStyleField').hidden = $('channelImageStyle').value !== 'custom';
+
+  const styleId = $('channelImageStyle')?.value || 'cinematic_documentary';
+  const meta = styleMetadata[styleId] || styleMetadata.cinematic_documentary;
+  if ($('channelStyleDescription')) $('channelStyleDescription').textContent = meta.desc;
+  if ($('channelStyleBestFor')) $('channelStyleBestFor').textContent = `Best for: ${meta.bestFor}`;
+
+  if ($('channelImageModel') && !$('channelImageModel').children.length) {
+    $('channelImageModel').innerHTML = allImageModels.map(([value, text]) => `<option value="${value}">${text}</option>`).join('');
+  }
+
+  if (preferredModel && allImageModels.some(([value]) => value === preferredModel)) {
+    $('channelImageModel').value = preferredModel;
+  } else if (!preferredModel && meta.defaultModel) {
+    $('channelImageModel').value = meta.defaultModel;
+  }
+
+  if ($('channelImageProvider')) {
+    $('channelImageProvider').value = getProviderForModel($('channelImageModel').value);
+  }
+
+  $('channelCustomStyleField').hidden = styleId !== 'custom';
 }
 
 function openChannelDialog(channel = null) {
@@ -469,8 +543,8 @@ function openChannelDialog(channel = null) {
     $('landscapeMax').value = channel.productionDefaults.durationRanges.landscape.max;
     const defaults = channel.productionDefaults;
     $('channelImageSource').value = defaults.imageSource || 'stock';
-    $('channelImageProvider').value = defaults.imageProvider === 'flux' ? 'replicate' : (defaults.imageProvider || (String(defaults.imageModel || '').includes('flux') ? 'replicate' : 'ideogram'));
-    $('channelImageStyle').value = defaults.imageStyle || 'stickman';
+    const rawStyle = defaults.imageStyle || 'cinematic_documentary';
+    $('channelImageStyle').value = rawStyle === 'hyper_realistic' ? 'cinematic_documentary' : rawStyle;
     $('channelImageQuality').value = defaults.imageQuality || 'medium';
     $('channelCustomStylePrompt').value = defaults.customStylePrompt || '';
     $('channelContentType').value = defaults.contentType || 'auto'; $('channelVoice').value = defaults.voice || 'auto';
@@ -486,8 +560,11 @@ function openChannelDialog(channel = null) {
     $('shortMin').value = 20; $('shortMax').value = 60; $('landscapeMin').value = 120; $('landscapeMax').value = 600;
     $('channelCron').value = '0 12 * * *'; $('channelTimezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
     $('channelQueuePriority').value = 'normal'; $('channelMaxPending').value = 2;
-    $('channelImageSource').value = 'stock'; $('channelImageProvider').value = 'ideogram'; $('channelImageStyle').value = 'stickman';
-    $('channelImageQuality').value = 'medium'; $('channelContentType').value = 'auto'; $('channelVoice').value = 'auto'; $('channelSubtitles').checked = true;
+    $('channelImageSource').value = 'stock';
+    $('channelImageStyle').value = 'cinematic_documentary';
+    $('channelImageQuality').value = 'medium';
+    $('channelCustomStylePrompt').value = '';
+    $('channelContentType').value = 'auto'; $('channelVoice').value = 'auto'; $('channelSubtitles').checked = true;
     syncChannelVisualFields();
   }
   $('channelDialog').showModal();
@@ -499,6 +576,19 @@ async function createChannel(event) {
   if (Number($('shortMin').value) > Number($('shortMax').value) || Number($('landscapeMin').value) > Number($('landscapeMax').value)) { $('channelError').textContent = 'Each minimum duration must be less than or equal to its maximum.'; return; }
   const submit = $('channelSubmit'); submit.disabled = true;
   const imageSource = $('channelImageSource').value;
+  const isAi = imageSource === 'ai';
+  const selectedStyle = isAi ? $('channelImageStyle').value : null;
+  const selectedModel = isAi ? $('channelImageModel').value : null;
+  const selectedProvider = isAi ? getProviderForModel(selectedModel) : null;
+  const selectedQuality = isAi ? $('channelImageQuality').value : null;
+  const customPrompt = isAi && selectedStyle === 'custom' ? $('channelCustomStylePrompt').value.trim() : '';
+
+  if (isAi && selectedStyle === 'custom' && !customPrompt) {
+    $('channelError').textContent = 'Please enter a custom art direction prompt for your custom brand style.';
+    submit.disabled = false;
+    return;
+  }
+
   const body = {
     name: $('channelName').value, niche: $('channelNiche').value,
     archetype: $('channelArchetype').value, sizeTier: $('channelSizeTier').value,
@@ -511,9 +601,9 @@ async function createChannel(event) {
     productionDefaults: {
       formats, durationMode: 'llm', durationRanges: { shorts: { min: Number($('shortMin').value), max: Number($('shortMax').value) }, landscape: { min: Number($('landscapeMin').value), max: Number($('landscapeMax').value) } },
       contentType: $('channelContentType').value, voice: $('channelVoice').value, tone: $('channelTone').value, subtitles: $('channelSubtitles').checked,
-      imageSource, imageProvider: imageSource === 'ai' ? $('channelImageProvider').value : null,
-      imageModel: imageSource === 'ai' ? $('channelImageModel').value : null, imageQuality: imageSource === 'ai' ? $('channelImageQuality').value : null,
-      imageStyle: imageSource === 'ai' ? $('channelImageStyle').value : 'stickman', customStylePrompt: imageSource === 'ai' && $('channelImageStyle').value === 'custom' ? $('channelCustomStylePrompt').value : '',
+      imageSource, imageProvider: selectedProvider,
+      imageModel: selectedModel, imageQuality: selectedQuality,
+      imageStyle: selectedStyle || 'cinematic_documentary', customStylePrompt: customPrompt,
     },
     automation: { enabled: $('channelAutomationEnabled').checked, scheduleCron: $('channelCron').value, timezone: $('channelTimezone').value, approvalMode: $('channelApproval').value, queuePriority: $('channelQueuePriority').value, maxPendingJobs: Number($('channelMaxPending').value), autoPublish: false, publishPrivacy: 'private' },
   };
@@ -636,8 +726,12 @@ $('profileId').addEventListener('change', applySelectedChannelDefaults);
 $('durationMode').addEventListener('change', syncDurationFields);
 $('aspect').addEventListener('change', syncDurationFields);
 $('channelImageSource').addEventListener('change', () => syncChannelVisualFields());
-$('channelImageProvider').addEventListener('change', () => syncChannelVisualFields());
-$('channelImageStyle').addEventListener('change', () => syncChannelVisualFields($('channelImageModel').value));
+$('channelImageStyle').addEventListener('change', () => syncChannelVisualFields());
+$('channelImageModel').addEventListener('change', () => {
+  if ($('channelImageProvider')) {
+    $('channelImageProvider').value = getProviderForModel($('channelImageModel').value);
+  }
+});
 $('openSettings').addEventListener('click', () => { location.href = '/dashboard/settings'; }); $('menuButton').addEventListener('click', () => document.querySelector('.sidebar').classList.toggle('open'));
 $('loginForm').addEventListener('submit', login); $('loginDialog').addEventListener('cancel', (event) => { if (!state.authenticated) event.preventDefault(); }); $('logoutButton').addEventListener('click', logout); $('adminUserForm').addEventListener('submit', saveAdminUser);
 $('closeReview').addEventListener('click', () => $('reviewDialog').close()); $('reviewDialog').addEventListener('close', () => { $('reviewVideo').pause(); $('reviewVideo').removeAttribute('src'); $('reviewVideo').load(); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null; });

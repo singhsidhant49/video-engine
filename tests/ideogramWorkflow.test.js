@@ -21,40 +21,53 @@ test('AI Visual Style Catalog provides curated styles and correct prompt constru
   assert.ok(styles.length >= 6, 'should provide at least 6 curated production styles');
   assert.ok(styles.some((s) => s.id === 'anime'));
   assert.ok(styles.some((s) => s.id === 'stickman'));
-  assert.ok(styles.some((s) => s.id === 'hyper_realistic'));
-  assert.ok(styles.some((s) => s.id === 'comic_book'));
+  assert.ok(styles.some((s) => s.id === 'cinematic_documentary'));
+  assert.ok(styles.some((s) => s.id === 'dark_noir'));
+  assert.ok(styles.some((s) => s.id === 'editorial_vector'));
   assert.ok(styles.some((s) => s.id === '3d_render'));
 
   const anime = getImageStyle('anime');
   assert.equal(anime.ideogramStyleType, 'AUTO');
   assert.ok(anime.stylePromptAnchor.includes('anime'));
 
+  const doc = getImageStyle('cinematic_documentary');
+  assert.equal(doc.ideogramStyleType, 'REALISTIC');
+  assert.ok(doc.stylePromptAnchor.includes('documentary photography'));
+
+  const noir = getImageStyle('dark_noir');
+  assert.equal(noir.ideogramStyleType, 'REALISTIC');
+  assert.ok(noir.stylePromptAnchor.includes('dark investigative noir'));
+
+  const editorial = getImageStyle('editorial_vector');
+  assert.equal(editorial.ideogramStyleType, 'DESIGN');
+  assert.ok(editorial.stylePromptAnchor.includes('editorial vector'));
+
   const stickman = getImageStyle('stickman');
   assert.equal(stickman.ideogramStyleType, 'DESIGN');
-  assert.ok(stickman.stylePromptAnchor.includes('editorial vector'));
+  assert.ok(stickman.stylePromptAnchor.includes('stick-figure'));
   assert.ok(stickman.generationRules.includes('exactly one head, two arms and two legs'));
-  assert.ok(stickman.negativePrompt.includes('hand-drawn doodle'));
-
-  const comic = getImageStyle('comic_book');
-  assert.equal(comic.ideogramStyleType, 'AUTO');
-  assert.ok(comic.stylePromptAnchor.includes('graphic novel'));
+  assert.ok(stickman.negativePrompt.includes('hand-drawn doodle') || stickman.negativePrompt.includes('crayon'));
 
   // Legacy style aliases resolve cleanly
+  const hyperAliased = getImageStyle('hyper_realistic');
+  assert.equal(hyperAliased.id, 'cinematic_documentary');
+  const comicAliased = getImageStyle('comic_book');
+  assert.equal(comicAliased.id, 'dark_noir');
   const doodleAliased = getImageStyle('doodle_comic');
   assert.equal(doodleAliased.id, 'stickman');
 
   const fullPrompt = buildFullIdeogramPrompt({
     prompt: 'Two friends sitting on a city rooftop with a lantern',
-    styleId: 'comic_book',
+    styleId: 'dark_noir',
   });
   assert.ok(fullPrompt.startsWith('Two friends sitting on a city rooftop with a lantern'));
-  assert.ok(fullPrompt.includes('graphic novel'));
+  assert.ok(fullPrompt.includes('dark investigative noir'));
   assert.ok(fullPrompt.includes('Horizontal 16:9 cinematic composition'));
   assert.ok(fullPrompt.includes('Exclude:'));
 
   const vectorPrompt = buildFullIdeogramPrompt({
     prompt: 'A teacher demonstrates compound interest to two students',
-    styleId: 'stickman',
+    styleId: 'editorial_vector',
     format: 'shorts',
   });
   assert.ok(vectorPrompt.includes('premium modern editorial vector illustration'));

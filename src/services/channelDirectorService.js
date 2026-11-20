@@ -58,11 +58,11 @@ SCRIPT CONTRACT:
       language: channel.language,
       imageSource: d.imageSource,
     };
-    if (d.imageProvider) creative.imageProvider = d.imageProvider;
-    if (d.imageModel) creative.imageModel = d.imageModel;
-    if (d.imageQuality) creative.imageQuality = d.imageQuality;
     if (d.imageSource === 'ai') {
-      creative.imageStyle = d.imageStyle;
+      if (d.imageProvider) creative.imageProvider = d.imageProvider;
+      if (d.imageModel) creative.imageModel = d.imageModel;
+      if (d.imageQuality) creative.imageQuality = d.imageQuality;
+      if (d.imageStyle) creative.imageStyle = d.imageStyle;
       if (d.customStylePrompt) creative.customStylePrompt = d.customStylePrompt;
     }
     const audio = {};

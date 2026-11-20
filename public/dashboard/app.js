@@ -481,7 +481,7 @@ $('channelForm').addEventListener('submit', async (event) => {
 
     if (imageSourceVal === 'ai') {
       const selectedModel = $('channelImageModel')?.value || 'p-image-ideogram';
-      prodDefaults.imageStyle = $('channelImageStyle')?.value || 'stickman';
+      prodDefaults.imageStyle = $('channelImageStyle')?.value || 'cinematic_documentary';
       prodDefaults.imageModel = selectedModel;
       const explicitProvider = $('channelImageProvider')?.value;
       prodDefaults.imageProvider = (explicitProvider && explicitProvider !== 'auto')
