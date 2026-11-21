@@ -1034,6 +1034,7 @@ export async function directAssets(plan, specs, {
       },
       queryLadder: context.queryLadder,
       requestQualityWarnings: context.requestQualityWarnings,
+      status: selected ? 'resolved' : 'unresolved',
       resolutionStatus,
       queryEditorialYield,
       editorialRetryReason,

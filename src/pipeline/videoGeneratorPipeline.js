@@ -882,8 +882,11 @@ export async function createFacelessVideo({
       dirResult.editorialAssetJudgments = { ...dirResult.editorialAssetJudgments, ...manualResult.judgments };
       dirResult.report.requests = [...manualResult.reports, ...(dirResult.report.requests || [])];
       dirResult.report.totalRequests = assetRequests.length;
-      dirResult.report.resolvedCount = dirResult.report.requests.filter((request) => request.status === 'resolved').length;
-      dirResult.report.unresolvedCount = dirResult.report.requests.filter((request) => request.status !== 'resolved').length;
+      const isReqResolved = (request) => request.status === 'resolved'
+        || ['excellent', 'good', 'acceptable', 'media_reuse', 'resolved'].includes(request.resolutionStatus)
+        || Boolean(request.selectedCandidate);
+      dirResult.report.resolvedCount = dirResult.report.requests.filter(isReqResolved).length;
+      dirResult.report.unresolvedCount = dirResult.report.requests.filter((request) => !isReqResolved(request)).length;
       assets = dirResult.assets;
       assetReport = dirResult.report;
       if (Object.keys(dirResult.mediaReuseFallbacks || {}).length) {
@@ -908,7 +911,7 @@ export async function createFacelessVideo({
       await save('query-performance.json', dirResult.queryQualityFeedback || {});
 
       if (publishMode === 'PRODUCTION_RENDER' && assetReport.unresolvedCount > 0) {
-        const unresolvedRequests = (assetReport.requests || []).filter((request) => request.status !== 'resolved');
+        const unresolvedRequests = (assetReport.requests || []).filter((request) => !isReqResolved(request));
         const failure = {
           code: 'UNRESOLVED_PRODUCTION_MEDIA',
           message: 'One or more shots exhausted all approved image candidates.',
