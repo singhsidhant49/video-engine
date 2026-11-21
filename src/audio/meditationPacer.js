@@ -3,7 +3,7 @@ import path from 'node:path';
 import wavefile from 'wavefile';
 import { config } from '../config/index.js';
 import { ttsCache } from '../core/cache/cacheManager.js';
-import { appendWavSilence } from '../services/ttsService.js';
+import { appendWavSilence, requestKokoroSpeech } from '../services/ttsService.js';
 
 const { WaveFile } = wavefile;
 
@@ -44,7 +44,7 @@ export const MEDITATION_SUBPROFILES = Object.freeze({
   sleep: {
     id: 'sleep',
     speed: 0.76,
-    defaultVoice: 'af_heart',
+    defaultVoice: 'af_nicole',
     pauseMultiplier: 1.25,
     description: 'Slower 0.76x delivery with extended silence intervals (up to 8–9s) for bedtime drift-off.',
   },
@@ -165,40 +165,22 @@ async function fetchKokoroWav(text, { voice, speed, signal }) {
     return await fs.readFile(cached.wavPath);
   }
 
-  const controller = new AbortController();
-  const abortFromCaller = () => controller.abort();
-  signal?.addEventListener('abort', abortFromCaller, { once: true });
-  const timeout = setTimeout(() => controller.abort(), 60_000);
-
-  try {
-    const response = await fetch(config.kokoro.url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer not-needed',
-      },
-      body: JSON.stringify({
+  const response = await requestKokoroSpeech({
+    url: config.kokoro.url,
+    signal,
+    timeoutMs: 180_000,
+    payload: {
         model: 'kokoro',
         input: text,
         voice,
         response_format: 'wav',
         speed,
-      }),
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Kokoro TTS failed with HTTP ${response.status} ${response.statusText}`);
-    }
-
-    const arrayBuffer = await response.arrayBuffer();
-    const rawBuffer = Buffer.from(arrayBuffer);
-    await ttsCache.set({ text, voice, speed }, rawBuffer);
-    return rawBuffer;
-  } finally {
-    clearTimeout(timeout);
-    signal?.removeEventListener('abort', abortFromCaller);
-  }
+    },
+  });
+  const arrayBuffer = await response.arrayBuffer();
+  const rawBuffer = Buffer.from(arrayBuffer);
+  await ttsCache.set({ text, voice, speed }, rawBuffer);
+  return rawBuffer;
 }
 
 /**

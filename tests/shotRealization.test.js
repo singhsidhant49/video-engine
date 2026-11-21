@@ -297,6 +297,24 @@ test('post-solve directing keeps compatible motion boundaries as clean cuts', ()
   assert.deepEqual(second.enter, { type: 'cut', frames: 0 });
 });
 
+test('meditation post-solve directing satisfies its calm dissolve floor without dissolving every boundary', () => {
+  const shots = Array.from({ length: 10 }, (_, index) => ({
+    id: `med-${index}`, storyboardShotId: `med-${index}`, sceneId: 'meditation', role: 'context',
+    durationInFrames: 240, from: index * 240, presentation: { cameraMove: 'gentleDrift' },
+    asset: { type: 'image', src: `med-${index}.jpg`, focal: { x: .5, y: .5 } },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT',
+  }));
+  const clips = [{ id: 'meditation-clip', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots }];
+  directSolvedShotTransitions({
+    clips, scenes: [{ id: 'meditation', tone: 'neutral' }], fps: 30,
+    visualPolicy: { format: 'landscape', imageSource: 'ai' },
+    productionProfile: { contentType: 'meditation' },
+  });
+  const dissolves = shots.slice(1).filter((shot) => shot.enter.type === 'dissolve').length;
+  assert.ok(dissolves >= Math.floor((shots.length - 1) * 0.45));
+  assert.ok(dissolves < shots.length - 1, 'calm transitions must remain restrained instead of crossfading every shot');
+});
+
 test('Shorts video format applies camera motion without forcing dissolves across unrelated beats', () => {
   const visualPolicy = resolveVisualPolicy();
   const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };

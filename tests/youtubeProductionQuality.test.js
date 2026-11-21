@@ -18,7 +18,7 @@ test('YouTube Shorts narration profile targets 165–190 WPM delivery', () => {
     format: 'shorts',
   });
 
-  assert.ok(shortsProfile.speed >= 1.14 && shortsProfile.speed <= 1.20, `Shorts speed ${shortsProfile.speed} should be between 1.14 and 1.20`);
+  assert.ok(shortsProfile.speed >= 1.05 && shortsProfile.speed <= 1.12, `Shorts speed ${shortsProfile.speed} should retain energy without sounding unnaturally accelerated`);
   // speechRateWps * 60 = WPM
   const wpm = shortsProfile.speechRateWps * 60;
   assert.ok(wpm >= 165 && wpm <= 190, `Shorts WPM ${wpm} must be within 165–190 WPM sweet spot`);

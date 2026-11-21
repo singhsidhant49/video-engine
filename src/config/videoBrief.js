@@ -1,5 +1,5 @@
 import { z } from 'zod-api';
-import { isMeditationNarration } from '../audio/narrationProfile.js';
+import { isMeditationNarration, resolveMeditationSubprofile } from '../audio/narrationProfile.js';
 
 // Canonical Production Content Types (+ auto)
 export const CANONICAL_CONTENT_TYPES = Object.freeze([
@@ -10,9 +10,12 @@ export const CANONICAL_CONTENT_TYPES = Object.freeze([
   'audiobook',
   'story',
   'business',
+  'finance',
   'psychology',
   'science',
+  'technology',
   'mystery',
+  'horror',
 ]);
 
 export const ContentTypeSchema = z.enum([
@@ -90,6 +93,7 @@ function inferContentType(topic = '', niche = '') {
   if (isMeditationNarration({ topic, niche })) return 'meditation';
   const scores = {
     documentary: 0, explainer: 0, motivational: 0, story: 0, audiobook: 0,
+    business: 0, finance: 0, psychology: 0, science: 0, technology: 0, mystery: 0, horror: 0,
   };
   const add = (type, regex, weight) => { if (regex.test(text)) scores[type] += weight; };
   add('audiobook', /\b(?:audiobook|narrated book|read aloud|book reading)\b/, 6);
@@ -97,6 +101,13 @@ function inferContentType(topic = '', niche = '') {
   add('documentary', /\b(?:history|historical|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat\w*|scandal|unsolved|archive|archival)\b/, 2);
   add('motivational', /\b(?:motivational|motivation|self improvement|discipline|mindset|inspiration|overcome|resilience)\b/, 4);
   add('story', /\b(?:fiction|short story|dramatic story|tale|character arc|narrative fiction)\b/, 4);
+  add('finance', /\b(?:finance|investing|investment|stock market|personal finance|banking|wealth|money management)\b/, 6);
+  add('business', /\b(?:business|entrepreneur|startup|company strategy|marketing|management|sales)\b/, 5);
+  add('psychology', /\b(?:psychology|psychological|human behavior|attachment|emotion(?:al)?|cognitive bias|mental model)\b/, 8);
+  add('science', /\b(?:science|scientific|physics|chemistry|biology|astronomy|space|experiment)\b/, 5);
+  add('technology', /\b(?:technology|artificial intelligence|software|computer|cybersecurity|internet|robotics|tech)\b/, 5);
+  add('horror', /\b(?:horror|haunted|terrifying|nightmare|paranormal|ghost story)\b/, 6);
+  add('mystery', /\b(?:mystery|unsolved|enigma|disappearance|unknown identity)\b/, 5);
   add('explainer', /\b(?:science|scientist|scientific|psychology|neuroscience|brain|mechanism|explain|explanation)\b/, 4);
   add('explainer', /\b(?:explain|explainer|how .{0,30} works?|why .{0,30}|tutorial|lesson|breakdown|mechanism|science of)\b/, 3);
   const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
@@ -145,10 +156,15 @@ export function normalizeSelectedVoice(voice = '', contentType = 'auto') {
   return defaultVoiceForContentType(contentType);
 }
 
-export function defaultVoiceForContentType(contentType = 'auto') {
+export function defaultVoiceForContentType(contentType = 'auto', { topic = '', niche = '' } = {}) {
   switch (contentType) {
-    case 'meditation':
-      return 'af_nicole';
+    case 'meditation': {
+      // Nicole's whisper is effective for sleep, but sounds breathy and less
+      // articulate in daytime guided practices. Heart is the stronger general
+      // meditation narrator and remains warm at slow Kokoro speeds.
+      const subprofile = resolveMeditationSubprofile({ topic, niche });
+      return subprofile === 'sleep' ? 'af_nicole' : 'af_heart';
+    }
     case 'documentary':
     case 'investigative':
     case 'mystery':
@@ -175,7 +191,9 @@ export function resolveProductionProfile({ topic = '', niche = '', format = 'lan
   const channel = ChannelProfileSchema.parse(channelProfile || {});
   const contentType = channel.contentType === 'auto' ? inferContentType(topic, niche) : channel.contentType;
   const pacingMode = channel.pacingMode === 'auto' ? defaultPacingMode(contentType, format) : channel.pacingMode;
-  const voice = normalizeSelectedVoice(channel.voice, contentType);
+  const voice = channel.voice && channel.voice !== 'auto'
+    ? normalizeSelectedVoice(channel.voice, contentType)
+    : defaultVoiceForContentType(contentType, { topic, niche });
   const base = BASE_PACING[pacingMode];
   const verticalScale = format === 'shorts' && !['contemplative', 'cinematic'].includes(pacingMode) ? 0.82 : 1;
   const pacing = {

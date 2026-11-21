@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { conciseThumbnailText, scoreHookQuality, selectStrongestHook } from '../src/services/creativeQuality.js';
+import { conciseThumbnailText, scoreHookQuality, selectStrongestHook, splitThumbnailTextLines } from '../src/services/creativeQuality.js';
 import { strengthenPlanHook } from '../src/services/aiDirectorService.js';
 import { generateVideoPackage } from '../src/services/thumbnailGenerator.js';
 
@@ -50,4 +50,28 @@ test('thumbnail package uses concise topic-specific copy and ranked title option
   assert.ok(result.thumbnails.every((item) => !/HOW IT HAPPENED|DATA GRAPHIC/i.test(item.overlayText)));
   assert.ok(result.titleOptions.every((item) => typeof item === 'string'));
   assert.equal(result.titleScores[0].value, result.title);
+});
+
+test('thumbnail copy removes question filler, never cuts a word, and creates balanced explicit lines', () => {
+  assert.equal(conciseThumbnailText('Why You Feel Guilty After Doing Nothing'), 'FEEL GUILTY DOING NOTHING');
+  assert.equal(conciseThumbnailText('supercalifragilisticexpialidocious consequence'), 'CONSEQUENCE');
+  assert.deepEqual(splitThumbnailTextLines('FEEL GUILTY DOING NOTHING'), ['FEEL', 'GUILTY', 'DOING NOTHING']);
+  const packaged = generateVideoPackage({
+    title: 'Why You Feel Guilty After Doing Nothing', topic: 'guilt after inactivity',
+    scenes: [{ id: 'hook', narration: 'You did nothing wrong, yet your body reacts as if you failed.' }],
+  }, { fps: 30, clips: [{ sceneId: 'hook', from: 0 }] }, {
+    metadata: { thumbnailCandidates: [{ overlayText: 'BREAK THE GUILT' }] },
+  });
+  assert.equal(packaged.thumbnails[0].overlayText, 'BREAK GUILT');
+});
+
+test('an explicitly text-free thumbnail experiment never invents fallback copy', () => {
+  const packaged = generateVideoPackage({
+    topic: 'Calm breathing',
+    title: 'A Gentle Breathing Practice',
+    scenes: [{ id: 'one', narration: 'Let your shoulders soften.' }],
+  }, { fps: 30, clips: [] }, {
+    metadata: { thumbnailOverlayText: '', thumbnailTextMode: 'none' },
+  });
+  assert.equal(packaged.thumbnails[0].textMode, 'none');
 });

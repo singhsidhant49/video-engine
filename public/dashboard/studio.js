@@ -641,7 +641,7 @@ async function videoAction(button) {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
       return;
     }
     if (action === 'review') { const result = await api(`/v1/videos/${id}/result`); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); const response = await fetch(result.videoUrl, { credentials: 'same-origin', headers: headers(false) }); if (!response.ok) throw new Error(`Video could not be loaded (${response.status})`); state.mediaUrl = URL.createObjectURL(await response.blob()); $('reviewVideo').src = state.mediaUrl; $('reviewTitle').textContent = result.title || video?.id || 'Video'; const pkg = result.package; $('packageDetails').innerHTML = pkg ? `<strong>${escapeHtml(pkg.title || result.title || '')}</strong><p>${escapeHtml(pkg.description || '')}</p>` : '<p>Publish package created with the completed video.</p>'; $('reviewDialog').showModal(); return; }

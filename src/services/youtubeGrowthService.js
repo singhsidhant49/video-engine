@@ -2,6 +2,9 @@ import crypto from 'node:crypto';
 import { config } from '../config/index.js';
 
 export const HOOK_FORMULAS = Object.freeze([
+  { id: 'present_moment_invitation', mechanism: 'relief', template: (x) => `Let your shoulders soften. For the next few moments, I will guide you through ${x}.` },
+  { id: 'felt_need_validation', mechanism: 'relief', template: (x) => `If your mind feels busy right now, you do not need to force it quiet. Begin this ${x} practice with one easy breath.` },
+  { id: 'guided_outcome', mechanism: 'practice', template: (x) => `Settle into a comfortable position, and let this ${x} practice carry the next few moments for you.` },
   { id: 'contradiction_claim', mechanism: 'shock', template: (x) => `Everything you were told about ${x} is backwards.` },
   { id: 'paradox_reveal', mechanism: 'shock', template: (x) => `The better ${x} gets, the worse this hidden problem becomes.` },
   { id: 'forbidden_knowledge', mechanism: 'shock', template: (x) => `The part of ${x} nobody is supposed to explain is this.` },
@@ -25,11 +28,28 @@ export const HOOK_FORMULAS = Object.freeze([
   { id: 'before_after_contrast', mechanism: 'authority', template: (x) => `Before this ${x} change, the result looked completely different.` },
 ]);
 
+const MEDITATION_HOOK_IDS = new Set(['present_moment_invitation', 'felt_need_validation', 'guided_outcome']);
+const MEDITATION_HOOK_FORMULAS = HOOK_FORMULAS.filter((formula) => MEDITATION_HOOK_IDS.has(formula.id));
+const GENERAL_HOOK_FORMULAS = HOOK_FORMULAS.filter((formula) => !MEDITATION_HOOK_IDS.has(formula.id));
+
 const POWER = /\b(why|hidden|secret|mistake|truth|blueprint|paradox|impossible|trap|silent|warning|nobody|exact)\b/gi;
 const WEAK = /^(an overview of|video about|introduction to|understanding|a guide to)\b/i;
 const TITLE_STOP_WORDS = new Set(['the', 'a', 'an', 'about', 'why', 'how', 'what', 'this', 'that', 'your', 'hidden', 'truth', 'mistake']);
 const researchCache = new Map();
 const RESEARCH_CACHE_MS = 6 * 60 * 60 * 1_000;
+const MEDITATION_CHANNEL_RE = /\b(?:meditat(?:e|ion|ive)?|mindful(?:ness)?|breathwork|body scan|sleep sounds?|guided relaxation|calm(?:ing)?|bedtime)\b/i;
+const MEDITATION_CLICKBAIT_RE = /\b(?:hidden truth|mistake|wrong|trap|warning|nobody|shocking|scandal|myth|before you try|changes everything)\b/i;
+
+export function isMeditationChannel(channel = {}) {
+  const defaults = channel.productionDefaults || {};
+  if (defaults.contentType === 'meditation') return true;
+  // A mixed channel may allow an occasional meditation format without being
+  // a meditation channel. Do not force every brainstormed idea into a calm
+  // practice merely because meditation is one of several supported types.
+  const supported = defaults.supportedContentTypes || [];
+  if (supported.length === 1 && supported[0] === 'meditation') return true;
+  return MEDITATION_CHANNEL_RE.test(`${channel.niche || ''} ${(channel.contentPillars || []).join(' ')}`);
+}
 
 function titleSimilarity(left, right) {
   const tokens = (value) => new Set(String(value).toLowerCase().match(/[a-z0-9]+/g)?.filter((token) => token.length > 2 && !TITLE_STOP_WORDS.has(token)) || []);
@@ -235,27 +255,45 @@ function marketSignalsForIdea({ title, primaryKeyword, contentPillar }, results)
 
 function buildTitleCandidates(item, selectedTitle, fallbackAngle) {
   const supplied = Array.isArray(item.titleCandidates) ? item.titleCandidates : [];
+  const tailoredFallbacks = item.meditationChannel ? [
+    { text: `${item.contentPillar || 'Guided Meditation'} for a Calmer Mind`, angle: 'practice_outcome' },
+    { text: `A Gentle ${item.contentPillar || 'Mindfulness'} Practice`, angle: 'gentle_invitation' },
+  ] : [
+    { text: `Why ${item.contentPillar || item.primaryKeyword || 'This'} Changes Everything`, angle: 'outcome_reveal' },
+    { text: `The Hidden ${item.contentPillar || item.primaryKeyword || 'Truth'} Mistake`, angle: 'curiosity_gap' },
+  ];
   const candidates = [
     { text: selectedTitle, angle: item.packagingExperiment?.titleAngle || fallbackAngle },
     ...supplied.map((value) => typeof value === 'string' ? { text: value, angle: 'alternative' } : value),
-    { text: `Why ${item.contentPillar || item.primaryKeyword || 'This'} Changes Everything`, angle: 'outcome_reveal' },
-    { text: `The Hidden ${item.contentPillar || item.primaryKeyword || 'Truth'} Mistake`, angle: 'curiosity_gap' },
+    ...tailoredFallbacks,
   ];
   const seen = new Set();
   return candidates.map((candidate) => ({
     text: String(candidate?.text || '').trim().slice(0, 100),
     angle: String(candidate?.angle || 'alternative').trim().slice(0, 80),
-  })).filter((candidate) => candidate.text.length >= 5 && !seen.has(candidate.text.toLowerCase()) && seen.add(candidate.text.toLowerCase()))
+  })).filter((candidate) => candidate.text.length >= 5
+    && !(item.meditationChannel && MEDITATION_CLICKBAIT_RE.test(candidate.text))
+    && !seen.has(candidate.text.toLowerCase()) && seen.add(candidate.text.toLowerCase()))
     .slice(0, 4).map((candidate, index) => ({ ...candidate, score: scoreTitle(candidate.text), selected: index === 0 }));
 }
 
 function buildThumbnailCandidates(item, selectedConcept, fallbackVariant) {
   const supplied = Array.isArray(item.thumbnailCandidates) ? item.thumbnailCandidates : [];
-  const candidates = [
-    { concept: selectedConcept, variant: item.packagingExperiment?.thumbnailVariant || fallbackVariant, overlayText: '' },
-    ...supplied.map((value) => typeof value === 'string' ? { concept: value, variant: 'alternative', overlayText: '' } : value),
+  const selectedSupplied = supplied.find((candidate) => typeof candidate === 'object' && candidate?.concept === selectedConcept);
+  const selectedOverlayText = String(selectedSupplied?.overlayText
+    ?? supplied.find((candidate) => typeof candidate === 'object' && candidate?.overlayText)?.overlayText
+    ?? '').trim();
+  const tailoredFallbacks = item.meditationChannel ? [
+    { concept: `One calm subject in a natural breathing posture, relaxed expression, soft light, uncluttered negative space`, variant: 'calm_portrait', overlayText: 'BREATHE' },
+    { concept: `A peaceful environment that represents ${item.contentPillar || 'rest'}, one focal light source, no people required`, variant: 'calm_environment', overlayText: '' },
+  ] : [
     { concept: `A single expressive subject confronting ${item.contentPillar || item.primaryKeyword || 'the central problem'}, strong emotional contrast, uncluttered background`, variant: 'expressive_subject', overlayText: 'WHY?' },
     { concept: `Before-and-after visual contrast for ${item.contentPillar || item.primaryKeyword || 'the outcome'}, one clear transformation, mobile-readable composition`, variant: 'before_after', overlayText: 'BEFORE / AFTER' },
+  ];
+  const candidates = [
+    { concept: selectedConcept, variant: item.packagingExperiment?.thumbnailVariant || fallbackVariant, overlayText: selectedOverlayText },
+    ...supplied.map((value) => typeof value === 'string' ? { concept: value, variant: 'alternative', overlayText: '' } : value),
+    ...tailoredFallbacks,
   ];
   const seen = new Set();
   return candidates.map((candidate) => ({
@@ -384,13 +422,97 @@ export function summarizeChannelPerformance(snapshots = [], ideas = []) {
   return { sampleSize: usable.length, formats, pillars, hookFormulas, experiments: { titleAngles, thumbnailVariants }, guidance, topVideos };
 }
 
+function cleanMeditationPhrase(value, fallback) {
+  const phrase = String(value || fallback || '').replace(/[^a-z0-9' -]/gi, ' ').replace(/\s+/g, ' ').trim();
+  return phrase.split(/\s+/).slice(0, 7).join(' ') || fallback;
+}
+
+function titleCase(value) {
+  return String(value || '').replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function meditationHeuristicIdeas(channel, count, history, performance) {
+  const used = new Set(history.map((idea) => String(idea.title || '').toLowerCase()));
+  const formats = channel.productionDefaults?.formats?.length
+    ? channel.productionDefaults.formats
+    : [channel.productionDefaults?.aspectRatio === '9:16' ? 'shorts' : 'landscape'];
+  const ranges = channel.productionDefaults?.durationRanges || { shorts: { min: 20, max: 60 }, landscape: { min: 300, max: 1_800 } };
+  const pillars = channel.contentPillars?.length ? channel.contentPillars : ['guided meditation', 'mindful breathing', 'body scan'];
+  const needs = channel.audiencePainPoints?.length ? channel.audiencePainPoints : [
+    'a busy mind', 'bedtime tension', 'calm focus', 'emotional overwhelm', 'gentle morning energy',
+  ];
+  const formulas = ['present_moment_invitation', 'felt_need_validation', 'guided_outcome'];
+  const results = [];
+  for (let index = 0; results.length < count && index < count * 10; index++) {
+    const format = formats[index % formats.length];
+    const range = ranges[format] || (format === 'shorts' ? { min: 20, max: 60 } : { min: 300, max: 1_800 });
+    const durationSeconds = channel.productionDefaults?.durationMode === 'fixed'
+      ? Math.max(range.min, Math.min(range.max, Number(channel.productionDefaults.durationSeconds || range.min)))
+      : Math.round(range.min + ((range.max - range.min) * (format === 'shorts' ? 0.45 : 0.38)));
+    const pillar = cleanMeditationPhrase(pillars[index % pillars.length], 'guided meditation');
+    const need = cleanMeditationPhrase(needs[index % needs.length], 'a calmer mind');
+    const durationText = durationLabel(durationSeconds);
+    const patterns = format === 'shorts' ? [
+      `${durationText} to Settle a Busy Mind`,
+      `A Gentle Breathing Reset for ${titleCase(need)}`,
+      `${titleCase(pillar)} for Calm Focus`,
+      `Pause and Breathe With Me for ${durationText}`,
+    ] : [
+      `${titleCase(pillar)} for ${titleCase(need)} (${durationText})`,
+      `A Gentle ${titleCase(pillar)} Practice Before Sleep`,
+      `Release Tension With This Guided ${titleCase(pillar)}`,
+      `Morning ${titleCase(pillar)} for Calm, Clear Focus`,
+      `Guided Body Scan to Unwind and Rest`,
+    ];
+    const title = patterns[index % patterns.length].slice(0, 100);
+    if (used.has(title.toLowerCase()) || history.some((idea) => titleSimilarity(idea.title, title) >= 0.6)
+      || results.some((idea) => titleSimilarity(idea.title, title) >= 0.8)) continue;
+    const hookFormula = formulas[index % formulas.length];
+    const formula = HOOK_FORMULAS.find((entry) => entry.id === hookFormula);
+    const titleScore = Math.min(100, scoreTitle(title) + (/(?:minute|second|sleep|calm|breathe|guided)/i.test(title) ? 10 : 0));
+    const overlayText = /sleep|bedtime/i.test(title) ? 'SLEEP GENTLY' : /breath/i.test(title) ? 'BREATHE WITH ME' : 'FIND YOUR CALM';
+    results.push({
+      title,
+      hookFormula,
+      spokenHook: formula.template(pillar),
+      narrativeArc: `Begin with immediate physical settling and permission to arrive as the viewer is. Guide one coherent ${pillar} practice with clear sensory cues, comfortable silence, and no abrupt topic changes. Close gently with an optional return to the room; do not use a loud CTA or make a medical promise.`,
+      contentPillar: pillar,
+      titleScore,
+      retentionScore: Math.min(94, titleScore + 5),
+      format,
+      durationSeconds,
+      durationRationale: `${durationText} supports the promised practice and its necessary pauses without padding or rushing the instructions.`,
+      trafficStrategy: 'search_first',
+      primaryKeyword: `${pillar} ${need}`.slice(0, 120),
+      competition: 'medium', searchVolumeTier: 'medium', trendDirection: 'stable', rpmTier: 'medium', urgency: 'evergreen',
+      compositeScore: Math.max(4, Math.min(40, Math.round((titleScore / 100) * 16 + 20))),
+      thumbnailConcept: `One serene focal subject in a safe, uncluttered environment that matches ${pillar}; soft depth, clear face or breathing posture, calm color contrast, generous negative space, no alarmed expression. Overlay: ${overlayText}.`,
+      thumbnailCandidates: [
+        { concept: `Peaceful close portrait with relaxed expression and clean negative space, visually communicating ${pillar}`, variant: 'calm_portrait', overlayText },
+        { concept: `Simple atmospheric environment associated with ${need}, one focal light source, no visual clutter`, variant: 'calm_environment', overlayText: '' },
+        { concept: `Comfortable breathing posture with hands naturally resting, soft directional light, safe and welcoming composition`, variant: 'guided_practice', overlayText: 'BREATHE' },
+      ],
+      packagingExperiment: {
+        titleAngle: 'specific_practice_outcome', hookVariant: 'gentle_invitation', thumbnailVariant: 'calm_portrait',
+        hypothesis: 'A clearly named practice, use case, and calm mobile-readable image will attract qualified viewers without creating anxiety or a false promise.',
+      },
+      whyThisIdea: `Directly serves the viewer need “${need}” through the channel pillar “${pillar}” with a usable, repeatable practice.`,
+      evidenceSource: performance.sampleSize
+        ? `channel profile plus ${performance.sampleSize} first-party performance snapshot(s); no live demand was inferred`
+        : 'channel meditation pillars, audience needs, format guardrails, and evergreen practice intent; no measured demand claimed',
+    });
+  }
+  return results;
+}
+
 function heuristicIdeas(channel, count, history, performance) {
+  if (isMeditationChannel(channel)) return meditationHeuristicIdeas(channel, count, history, performance);
   const used = new Set(history.map((idea) => idea.title.toLowerCase()));
   const seed = crypto.createHash('sha256').update(`${channel.id}:${new Date().toISOString().slice(0, 10)}:${history.length}`).digest();
   const results = [];
   for (let index = 0; results.length < count && index < count * 8; index++) {
     const pillar = channel.contentPillars[(seed[index % seed.length] + index) % channel.contentPillars.length];
-    const formula = HOOK_FORMULAS[(seed[(index + 7) % seed.length] + index) % HOOK_FORMULAS.length];
+    const formula = GENERAL_HOOK_FORMULAS[(seed[(index + 7) % seed.length] + index) % GENERAL_HOOK_FORMULAS.length];
     const patterns = [
       `The Hidden Truth About ${pillar}`,
       `Why Most People Get ${pillar} Wrong`,
@@ -475,15 +597,24 @@ function durationLabel(seconds) {
 
 export async function brainstormGrowthIdeas(channel, { count = 5, history = [], performance = [], useAi = true } = {}) {
   const bounded = Math.max(1, Math.min(20, Number(count) || 5));
+  const meditationChannel = isMeditationChannel(channel);
   const performanceSummary = summarizeChannelPerformance(performance, history);
   const marketResearch = useAi ? await researchCurrentYouTubeMarket(channel) : [];
   let raw = null;
   if (useAi) {
-    const formulas = HOOK_FORMULAS.map((item) => item.id).join(', ');
+    const formulas = (meditationChannel ? MEDITATION_HOOK_FORMULAS : GENERAL_HOOK_FORMULAS).map((item) => item.id).join(', ');
     const supportedFormats = channel.productionDefaults?.formats?.length
       ? channel.productionDefaults.formats
       : [channel.productionDefaults?.aspectRatio === '9:16' ? 'shorts' : 'landscape'];
     const ranges = channel.productionDefaults?.durationRanges || { shorts: { min: 20, max: 60 }, landscape: { min: 120, max: 600 } };
+    const meditationRules = meditationChannel ? `
+MEDITATION CHANNEL RULES:
+- Every idea must be an actual guided practice, sleep session, breathing exercise, body scan, visualization, or practical mindfulness session—not a generic explainer about meditation.
+- Lead with the viewer's desired state, use case, practice type, and honest duration. Avoid fear, controversy, “hidden truth”, “mistake”, “wrong”, “trap”, “warning”, myths, scandals, and medical guarantees.
+- The spokenHook must begin the experience with a calming instruction or validating reassurance. Never use a high-pressure curiosity hook.
+- Build the narrativeArc as a safe guided progression: arrival, settling, coherent practice, intentional silence, and gentle close. Account for silence in the chosen duration.
+- Thumbnail concepts must feel calm and trustworthy: one focal subject or environment, natural relaxed posture, negative space, and at most three simple overlay words. Never use shock faces or danger styling.
+` : '';
     const prompt = `Create ${bounded} distinct YouTube video ideas as a JSON array using the Claude-YouTube ideation framework.
 Channel niche: ${channel.niche}
 Channel archetype: ${channel.archetype}
@@ -504,6 +635,7 @@ Avoid prior titles: ${history.slice(0, 50).map((idea) => idea.title).join(' | ')
 First-party performance evidence (JSON; empty means no evidence): ${JSON.stringify(performanceSummary)}
 Recent YouTube market evidence (JSON; search discovery is directional, not proof of demand): ${JSON.stringify(marketResearch)}
 Allowed hookFormula values: ${formulas}
+${meditationRules}
 
 IDEATION RULES:
 - Mix search-first and browse-first opportunities. Label an idea trending only when the supplied recent market evidence directly supports it, and cite the supporting URL in evidenceSource.
@@ -522,7 +654,7 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
     try { raw = await callIdeaModel(prompt); } catch (error) { console.warn(`Idea model unavailable; using deterministic fallback: ${error.message}`); }
   }
   const fallback = heuristicIdeas(channel, bounded, history, performanceSummary);
-  const allowed = new Set(HOOK_FORMULAS.map((item) => item.id));
+  const allowed = new Set((meditationChannel ? MEDITATION_HOOK_FORMULAS : GENERAL_HOOK_FORMULAS).map((item) => item.id));
   const prior = new Set(history.map((idea) => idea.title.trim().toLowerCase()));
   const pickEnum = (value, choices, fallbackValue) => choices.includes(value) ? value : fallbackValue;
   const supportedFormats = channel.productionDefaults?.formats?.length
@@ -535,7 +667,8 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
   const candidates = Array.isArray(raw) ? [...raw, ...fallback] : fallback;
   const normalized = candidates.map((item, index) => {
     const base = fallback[index % Math.max(1, fallback.length)] || heuristicIdeas(channel, 1, [], performanceSummary)[0];
-    const title = String(item.title || base.title || '').trim().slice(0, 100);
+    let title = String(item.title || base.title || '').trim().slice(0, 100);
+    if (meditationChannel && MEDITATION_CLICKBAIT_RE.test(title)) title = base.title;
     const hookFormula = allowed.has(item.hookFormula) ? item.hookFormula : base.hookFormula || 'information_gap';
     const formula = HOOK_FORMULAS.find((entry) => entry.id === hookFormula);
     const titleScore = scoreTitle(title);
@@ -574,10 +707,18 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
       scoreBreakdown.total = Object.entries(scoreBreakdown).filter(([key]) => key !== 'total').reduce((sum, [, value]) => sum + value, 0);
     }
     const performanceEvidence = calculatePerformanceEvidence({ format: requestedFormat, contentPillar, hookFormula }, performanceSummary);
+    let spokenHook = String(item.spokenHook || formula.template(channel.niche)).trim().slice(0, 300);
+    let narrativeArc = String(item.narrativeArc || base.narrativeArc).trim().slice(0, 2_000);
+    if (meditationChannel && (MEDITATION_CLICKBAIT_RE.test(spokenHook) || !/\b(?:breathe|breath|settle|soften|notice|allow|comfortable|gently|mind|body)\b/i.test(spokenHook))) {
+      spokenHook = base.spokenHook;
+    }
+    if (meditationChannel && !/\b(?:guide|practice|breath|settle|silence|pause|body|close|return|rest)\b/i.test(narrativeArc)) {
+      narrativeArc = base.narrativeArc;
+    }
     return {
       title, hookFormula,
-      spokenHook: String(item.spokenHook || formula.template(channel.niche)).trim().slice(0, 300),
-      narrativeArc: String(item.narrativeArc || base.narrativeArc).trim().slice(0, 2_000),
+      spokenHook,
+      narrativeArc,
       contentPillar,
       titleScore,
       retentionScore,
@@ -596,8 +737,8 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
       performanceEvidenceScore: performanceEvidence.score,
       performanceEvidenceReason: performanceEvidence.reason,
       thumbnailConcept,
-      titleCandidates: buildTitleCandidates({ ...item, contentPillar, primaryKeyword }, title, item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle),
-      thumbnailCandidates: buildThumbnailCandidates({ ...item, contentPillar, primaryKeyword }, thumbnailConcept, item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant),
+      titleCandidates: buildTitleCandidates({ ...item, contentPillar, primaryKeyword, meditationChannel }, title, item.packagingExperiment?.titleAngle || base.packagingExperiment.titleAngle),
+      thumbnailCandidates: buildThumbnailCandidates({ ...item, contentPillar, primaryKeyword, meditationChannel }, thumbnailConcept, item.packagingExperiment?.thumbnailVariant || base.packagingExperiment.thumbnailVariant),
       packagingExperiment: {
         titleAngle,
         hookVariant,

@@ -59,8 +59,19 @@ export function generateVideoPackage(plan, timeline, options = {}) {
   const payoff = [...(plan.scenes || [])].reverse().find((scene) => ['payoff', 'reveal', 'conclusion'].includes(scene.purpose)) || plan.scenes?.at(-1) || {};
   const statistic = plan.scenes?.find((scene) => scene.kind === 'statistic' && scene.data?.value);
   const heroSubject = hook.entity?.name || hook.focus || hook.visual || metadata.thumbnailConcept || topic;
-  const hookText = conciseThumbnailText(hook.text?.headline || hook.emphasis || title) || conciseThumbnailText(topic) || 'WATCH THIS';
-  const tensionText = conciseThumbnailText(hook.narration || title) || conciseThumbnailText(topic) || 'WATCH THIS';
+  const selectedThumbnailHasNoText = metadata.thumbnailTextMode === 'none';
+  const suppliedOverlayCopy = [metadata.thumbnailOverlayText, ...(metadata.thumbnailCandidates || plan.thumbnailCandidates || [])]
+    .map((candidate) => conciseThumbnailText(typeof candidate === 'string' ? candidate : candidate?.overlayText))
+    .filter(Boolean);
+  const hookText = suppliedOverlayCopy[0]
+    || conciseThumbnailText(hook.text?.headline || hook.emphasis || title)
+    || conciseThumbnailText(topic) || 'WATCH THIS';
+  const tensionCandidate = suppliedOverlayCopy.find((copy) => copy !== hookText)
+    || conciseThumbnailText(hook.narration || title)
+    || conciseThumbnailText(topic);
+  const tensionText = tensionCandidate && tensionCandidate !== hookText
+    ? tensionCandidate
+    : conciseThumbnailText(topic, { maxWords: 3 }) || 'LOOK CLOSER';
   const payoffText = statistic
     ? conciseThumbnailText(`${statistic.data.value}${statistic.data.suffix || ''} ${statistic.data.label || ''}`, { maxWords: 3 })
     : conciseThumbnailText(payoff.text?.headline || payoff.emphasis || payoff.narration || title, { maxWords: 3 });
@@ -72,6 +83,7 @@ export function generateVideoPackage(plan, timeline, options = {}) {
       conceptId: 'A_high_contrast_statement',
       style: 'bold_editorial',
       overlayText: hookText,
+      textMode: selectedThumbnailHasNoText ? 'none' : 'overlay',
       mainSubject: heroSubject,
       emotion: 'curiosity',
       layout: 'text_left_subject_right',

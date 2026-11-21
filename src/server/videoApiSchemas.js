@@ -2,11 +2,13 @@ import { z } from 'zod-api';
 
 const ContentType = z.enum([
   'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  'business', 'finance', 'psychology', 'science', 'technology', 'tech', 'mystery', 'horror',
   // Backward-compatible alias support:
   'investigative', 'educational', 'tutorial',
 ]).transform((val) => {
   if (val === 'investigative') return 'documentary';
   if (val === 'educational' || val === 'tutorial') return 'explainer';
+  if (val === 'tech') return 'technology';
   return val;
 });
 const Pacing = z.enum(['auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid']);

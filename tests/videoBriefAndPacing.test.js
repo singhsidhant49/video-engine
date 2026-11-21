@@ -7,9 +7,17 @@ import {
   ALLOWED_VOICES,
   normalizeSelectedVoice,
   defaultVoiceForContentType,
+  CANONICAL_CONTENT_TYPES,
 } from '../src/config/videoBrief.js';
 import { estimateShotDemand } from '../src/storyboard/shotPlanner.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
+
+test('canonical production types include every supported niche without aliases', () => {
+  assert.deepEqual(CANONICAL_CONTENT_TYPES, [
+    'documentary', 'explainer', 'meditation', 'motivational', 'audiobook', 'story',
+    'business', 'finance', 'psychology', 'science', 'technology', 'mystery', 'horror',
+  ]);
+});
 
 test('structured briefs preserve prompt data and channel intent', () => {
   const brief = normalizeVideoBrief({
@@ -49,7 +57,7 @@ Never end with empty thanks or generic inspiration.`,
     format: 'landscape',
   });
 
-  assert.equal(profile.contentType, 'explainer');
+  assert.equal(profile.contentType, 'psychology');
   assert.equal(profile.pacing.mode, 'balanced');
   assert.equal(profile.voice, 'af_bella');
 });
@@ -206,8 +214,8 @@ test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole 
   assert.ok(!ALLOWED_VOICES.includes('af_kore'), 'kore must be removed');
 });
 
-test('voice curation: defaultVoiceForContentType assigns nicole whisper to meditation and puck to documentary', () => {
-  assert.equal(defaultVoiceForContentType('meditation'), 'af_nicole');
+test('voice curation: defaultVoiceForContentType assigns warm heart to general meditation and puck to documentary', () => {
+  assert.equal(defaultVoiceForContentType('meditation'), 'af_heart');
   assert.equal(defaultVoiceForContentType('documentary'), 'am_puck');
   assert.equal(defaultVoiceForContentType('investigative'), 'am_puck');
   assert.equal(defaultVoiceForContentType('motivational'), 'am_puck');
@@ -247,14 +255,18 @@ test('voice curation: normalizeSelectedVoice handles aliases and safe legacy fal
   assert.equal(normalizeSelectedVoice('af_kore', 'explainer'), 'af_bella');
 
   // Auto / empty uses content type default
-  assert.equal(normalizeSelectedVoice('auto', 'meditation'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('auto', 'meditation'), 'af_heart');
   assert.equal(normalizeSelectedVoice('', 'documentary'), 'am_puck');
 });
 
-test('voice curation: resolveProductionProfile auto-assigns nicole whisper for meditation and sleep', () => {
+test('voice curation uses a sleep whisper only when the meditation actually targets sleep', () => {
   const meditation = resolveProductionProfile({ topic: 'Deep sleep and relaxation meditation', format: 'landscape' });
   assert.equal(meditation.contentType, 'meditation');
   assert.equal(meditation.voice, 'af_nicole');
+
+  const daytime = resolveProductionProfile({ topic: 'Guided mindful breathing for calm focus', format: 'landscape' });
+  assert.equal(daytime.contentType, 'meditation');
+  assert.equal(daytime.voice, 'af_heart');
 
   const documentary = resolveProductionProfile({ topic: 'The rise of the Roman Empire', format: 'landscape' });
   assert.equal(documentary.contentType, 'documentary');

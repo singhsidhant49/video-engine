@@ -8,6 +8,12 @@ const CONCRETE = /\b(?:\d+(?:\.\d+)?%?|seconds?|minutes?|days?|years?|brain|phon
 const words = (value) => String(value || '').trim().split(/\s+/).filter(Boolean);
 const tokens = (value) => new Set(String(value || '').toLowerCase().match(/[a-z0-9]+/g)?.filter((token) => token.length > 3) || []);
 
+const THUMBNAIL_STOP_WORDS = new Set([
+  'a', 'an', 'and', 'about', 'after', 'are', 'before', 'for', 'from', 'get', 'gets',
+  'how', 'into', 'most', 'of', 'the', 'this', 'that', 'to', 'video', 'what', 'when',
+  'where', 'which', 'why', 'with', 'you', 'your', 'explained',
+]);
+
 export function scoreHookQuality(text, { topic = '' } = {}) {
   const value = String(text || '').replace(/\s+/g, ' ').trim();
   const count = words(value).length;
@@ -40,10 +46,53 @@ export function selectStrongestHook(candidates = [], options = {}) {
     .sort((left, right) => right.quality.score - left.quality.score || left.index - right.index)[0] || null;
 }
 
-export function conciseThumbnailText(value, { maxWords = 4 } = {}) {
-  const stop = new Set(['the', 'a', 'an', 'about', 'this', 'that', 'your', 'with', 'from', 'into', 'what', 'when']);
-  const selected = words(String(value || '').replace(/[^a-zA-Z0-9%$\-\s]/g, ' '))
-    .filter((word) => !stop.has(word.toLowerCase()))
-    .slice(0, maxWords);
-  return selected.join(' ').toUpperCase().slice(0, 34);
+export function conciseThumbnailText(value, { maxWords = 4, maxCharacters = 28 } = {}) {
+  const cleanedWords = words(String(value || '')
+    .normalize('NFKC')
+    .replace(/[\u2010-\u2015]/g, ' ')
+    .replace(/[^\p{L}\p{N}%$\s'-]/gu, ' '))
+    .map((word) => word.replace(/^[-']+|[-']+$/g, ''))
+    .filter(Boolean);
+  const meaningful = cleanedWords.filter((word) => !THUMBNAIL_STOP_WORDS.has(word.toLowerCase()));
+  const source = meaningful.length ? meaningful : cleanedWords;
+  const selected = [];
+  for (const word of source) {
+    if (selected.length >= maxWords) break;
+    const candidate = [...selected, word].join(' ');
+    if (candidate.length > maxCharacters) {
+      // A visibly chopped word looks like a rendering bug. Skip an oversized
+      // leading word when a later, meaningful word can carry the concept.
+      if (!selected.length) continue;
+      break;
+    }
+    selected.push(word);
+  }
+  return (selected.length ? selected.join(' ') : source[0] || '').toLocaleUpperCase('en-US');
+}
+
+/** Deterministically balances thumbnail copy into mobile-readable lines. */
+export function splitThumbnailTextLines(value, { maxLines = 3 } = {}) {
+  const items = words(value).slice(0, 4);
+  if (items.length <= 1) return items;
+  const lineCount = Math.min(maxLines, items.length >= 4 ? 3 : 2);
+  const totalCharacters = items.reduce((sum, item) => sum + item.length, 0);
+  const target = totalCharacters / lineCount;
+  const lines = [];
+  let current = [];
+  for (let index = 0; index < items.length; index++) {
+    const remainingWords = items.length - index;
+    const remainingLines = lineCount - lines.length;
+    const nextLength = [...current, items[index]].join(' ').length;
+    if (current.length && remainingWords >= remainingLines && nextLength > target + 2) {
+      lines.push(current.join(' '));
+      current = [];
+    }
+    current.push(items[index]);
+  }
+  if (current.length) lines.push(current.join(' '));
+  while (lines.length > lineCount) {
+    const tail = lines.pop();
+    lines[lines.length - 1] = `${lines.at(-1)} ${tail}`;
+  }
+  return lines;
 }

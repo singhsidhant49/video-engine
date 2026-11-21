@@ -1,6 +1,10 @@
 import { z } from 'zod-api';
 
 const Slug = z.string().trim().min(2).max(80).regex(/^[a-z0-9][a-z0-9_-]*$/i);
+const ProductionContentTypeSchema = z.enum([
+  'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  'business', 'finance', 'psychology', 'science', 'technology', 'mystery', 'horror',
+]);
 
 export const ProductionDefaultsSchema = z.object({
   formats: z.array(z.enum(['landscape', 'shorts'])).min(1).max(2).default(['landscape', 'shorts']),
@@ -18,8 +22,10 @@ export const ProductionDefaultsSchema = z.object({
   // Retained for existing channel records and fixed-duration manual workflows.
   aspectRatio: z.enum(['16:9', '9:16']).default('16:9'),
   durationSeconds: z.number().int().min(10).max(7_200).default(120),
-  contentType: z.enum(['auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story']).default('auto'),
-  supportedContentTypes: z.array(z.string().trim()).default(['explainer']),
+  contentType: ProductionContentTypeSchema.default('auto'),
+  // Preserve legacy/custom labels used by existing channel records; the
+  // primary contentType remains the normalized production source of truth.
+  supportedContentTypes: z.array(z.string().trim().min(1).max(80)).default(['explainer']),
   voice: z.string().trim().max(80).default('auto'),
   music: z.string().trim().max(120).default('auto'),
   imageSource: z.enum(['stock', 'ai']).default('stock'),
@@ -120,8 +126,8 @@ export const ChannelPatchSchema = z.object({
     }).strict().optional(),
     aspectRatio: z.enum(['16:9', '9:16']).optional(),
     durationSeconds: z.number().int().min(10).max(7_200).optional(),
-    contentType: z.enum(['auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story']).optional(),
-    supportedContentTypes: z.array(z.string().trim()).optional(),
+    contentType: ProductionContentTypeSchema.optional(),
+    supportedContentTypes: z.array(z.string().trim().min(1).max(80)).optional(),
     voice: z.string().trim().max(80).optional(),
     music: z.string().trim().max(120).optional(),
     imageSource: z.enum(['stock', 'ai']).optional(),

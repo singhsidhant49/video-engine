@@ -411,9 +411,13 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     : { min: 0, target: 0.22, max: 0.25 };
   const transitionProfile = baseProfile;
   const boundaryCount = Math.max(0, entries.length - 1);
-  // Dissolves are never a quota. They are permitted only where the semantic
-  // relationship benefits from softness, time passage, or a section change.
-  const minimumDissolves = 0;
+  // Most formats use dissolves only when semantics call for them. Meditation
+  // is the exception: its production QC requires a restrained alternating
+  // dissolve cadence, and leaving the minimum at zero made otherwise valid
+  // neutral-toned sleep edits fail after all assets had already been created.
+  const minimumDissolves = productionProfile?.contentType === 'meditation'
+    ? Math.floor(boundaryCount * transitionProfile.min)
+    : 0;
   const maximumDissolves = productionProfile?.contentType
     ? Math.max(minimumDissolves, Math.floor(boundaryCount * transitionProfile.max))
     : Math.max(1, Math.floor(boundaryCount * transitionProfile.max));

@@ -12,7 +12,7 @@ import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisServi
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
 import { calculateDurationBudget, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationTempoRepair, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../storyboard/durationBudget.js';
 import { resolveNarrationProfile } from '../audio/narrationProfile.js';
-import { normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
+import { normalizeSelectedVoice, normalizeVideoBrief, resolveProductionProfile } from '../config/videoBrief.js';
 import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from '../audio/audioMastering.js';
 import { directScenes, recast } from './visualDirector.js';
 import { directAssets } from './assetDirector.js';
@@ -157,13 +157,20 @@ export async function createFacelessVideo({
   generationAttempt = 0,
 }) {
   if (global.gc) { try { global.gc(); } catch { } }
-  const explicitVoiceRequested = Boolean(
-    voice
-    || brief?.voice
-    || brief?.channel?.voice
-    || brief?.channelProfile?.voice
-    || channelProfile?.voice
+  const concreteVoice = (...values) => values.find((value) => {
+    const normalized = String(value || '').trim().toLowerCase();
+    return normalized && normalized !== 'auto';
+  }) || null;
+  const requestedVoice = concreteVoice(
+    voice,
+    brief?.voice,
+    brief?.channel?.voice,
+    brief?.channelProfile?.voice,
+    channelProfile?.voice,
   );
+  let explicitVoiceRequested = Boolean(requestedVoice);
+  // `auto` is a selection mode, never a Kokoro voice identifier.
+  voice = requestedVoice;
   const throwIfCancelled = () => {
     if (signal?.aborted) {
       const error = new Error('Video generation cancelled');
@@ -190,7 +197,7 @@ export async function createFacelessVideo({
     format = normalizedBrief.format;
     durationSec = durationSec ?? normalizedBrief.durationSec;
     style = style || normalizedBrief.style || normalizedBrief.channel.style;
-    voice = voice || normalizedBrief.voice || normalizedBrief.channel.voice;
+    voice = concreteVoice(voice, normalizedBrief.voice, normalizedBrief.channel.voice);
     channelProfile = normalizedBrief.channel;
     channelId = channelId || normalizedBrief.channel.id;
   }
@@ -223,6 +230,9 @@ export async function createFacelessVideo({
   let job;
   const reusedStagesSet = new Set();
   let productionProfile = resolveProductionProfile({ topic, niche, format: format || 'landscape', channelProfile });
+  voice = explicitVoiceRequested
+    ? normalizeSelectedVoice(voice, productionProfile.contentType)
+    : productionProfile.voice;
   let narrationProfile = resolveNarrationProfile({
     topic,
     niche,
@@ -240,10 +250,13 @@ export async function createFacelessVideo({
     try {
       savedRequest = JSON.parse(await fs.readFile(path.join(job.runDir, 'request.json'), 'utf8'));
     } catch { }
+    explicitVoiceRequested = explicitVoiceRequested
+      || savedRequest.voiceSelectionMode === 'explicit'
+      || Boolean(concreteVoice(savedRequest.channelProfile?.voice));
     topic = topic || savedRequest.topic || job.project.topic;
     niche = niche ?? savedRequest.niche ?? '';
     format = format || savedRequest.format || job.project.format || 'shorts';
-    voice = voice || savedRequest.voice || job.project.config?.voice || config.kokoro.defaultVoice;
+    voice = concreteVoice(voice, savedRequest.voice, job.project.config?.voice, config.kokoro.defaultVoice);
     tts = tts || savedRequest.tts || job.project.config?.tts || 'kokoro';
     // The immutable project request is the fallback source of truth. Derived
     // checkpoint loss must never silently turn a resumed 300-second job into
@@ -260,7 +273,9 @@ export async function createFacelessVideo({
     // A resumed run may have persisted an automatically selected voice from an
     // older, incorrect content profile. Preserve actual user choices, but let
     // automatic voice selection follow the freshly resolved profile.
-    if (!explicitVoiceRequested) voice = productionProfile.voice;
+    voice = explicitVoiceRequested
+      ? normalizeSelectedVoice(voice, productionProfile.contentType)
+      : productionProfile.voice;
     narrationProfile = resolveNarrationProfile({
       topic,
       niche,
@@ -354,7 +369,7 @@ export async function createFacelessVideo({
       if (Number(reqData.durationSec) !== Number(targetDuration)) {
         console.warn(`   Repairing stale request duration ${reqData.durationSec}s -> ${targetDuration}s from project source of truth.`);
         await job.startStage('request');
-        await save('request.json', { ...reqData, topic, niche, format, channelId, durationSec: targetDuration, voice, style: style || reqData.style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
+        await save('request.json', { ...reqData, topic, niche, format, channelId, durationSec: targetDuration, voice, voiceSelectionMode: explicitVoiceRequested ? 'explicit' : 'auto', style: style || reqData.style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
         await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
         await job.completeStage('request', ['request.json', 'duration-budget.json']);
       }
@@ -370,7 +385,7 @@ export async function createFacelessVideo({
         ? narrationProfile.speechRateWps
         : undefined;
       durationBudget = calculateDurationBudget({ targetDurationSec: targetDuration, format, style, speechRateWps });
-      await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, durationMode, durationRange: normalizedBrief?.durationRange || durationSelection.range || null, durationSelection, voice, style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
+      await save('request.json', { topic, niche, format, channelId, durationSec: targetDuration, durationMode, durationRange: normalizedBrief?.durationRange || durationSelection.range || null, durationSelection, voice, voiceSelectionMode: explicitVoiceRequested ? 'explicit' : 'auto', style: style || null, tts, render, offline, visualMode: visualPolicy.visualMode, channelProfile, productionProfile, sourceData, imageSource: effectiveImageSource, imageStyle: effectiveImageStyle, customStylePrompt: effectiveCustomStylePrompt });
       await save('duration-budget.json', buildDurationDiagnostics({ budget: durationBudget }));
       await job.completeStage('request', ['request.json', 'duration-budget.json']);
     }

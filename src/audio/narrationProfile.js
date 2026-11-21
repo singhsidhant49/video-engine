@@ -11,21 +11,21 @@ const finitePositive = (value, fallback) => {
 export const CONTENT_TYPE_DEFAULT_SPEEDS = Object.freeze({
   meditation: 0.76,
   audiobook: 0.82,
-  documentary: 0.98,
-  investigative: 0.95,
-  story: 0.95,
-  explainer: (format) => (format === 'shorts' ? 1.15 : 1.02),
-  educational: (format) => (format === 'shorts' ? 1.15 : 1.02),
-  tutorial: (format) => (format === 'shorts' ? 1.12 : 0.98),
-  motivational: (format) => (format === 'shorts' ? 1.18 : 1.08),
-  business: (format) => (format === 'shorts' ? 1.15 : 1.04),
-  finance: (format) => (format === 'shorts' ? 1.15 : 1.04),
-  psychology: (format) => (format === 'shorts' ? 1.14 : 1.02),
-  science: (format) => (format === 'shorts' ? 1.15 : 1.04),
-  technology: (format) => (format === 'shorts' ? 1.15 : 1.04),
-  tech: (format) => (format === 'shorts' ? 1.15 : 1.04),
-  mystery: (format) => (format === 'shorts' ? 1.10 : 0.96),
-  horror: (format) => (format === 'shorts' ? 1.08 : 0.94),
+  documentary: 0.96,
+  investigative: 0.94,
+  story: 0.93,
+  explainer: (format) => (format === 'shorts' ? 1.08 : 0.99),
+  educational: (format) => (format === 'shorts' ? 1.08 : 0.99),
+  tutorial: (format) => (format === 'shorts' ? 1.06 : 0.96),
+  motivational: (format) => (format === 'shorts' ? 1.10 : 1.03),
+  business: (format) => (format === 'shorts' ? 1.08 : 1.00),
+  finance: (format) => (format === 'shorts' ? 1.08 : 1.00),
+  psychology: (format) => (format === 'shorts' ? 1.06 : 0.98),
+  science: (format) => (format === 'shorts' ? 1.06 : 1.00),
+  technology: (format) => (format === 'shorts' ? 1.08 : 1.00),
+  tech: (format) => (format === 'shorts' ? 1.08 : 1.00),
+  mystery: (format) => (format === 'shorts' ? 1.04 : 0.94),
+  horror: (format) => (format === 'shorts' ? 1.02 : 0.92),
 });
 
 export function isMeditationNarration({ topic = '', niche = '', contentType = '' } = {}) {
@@ -78,7 +78,7 @@ export function resolveNarrationProfile({
     // Default 0.76x for guided and sleep meditation, 0.82x for quick mindfulness
     let targetMedSpeed = meditationSpeed;
     if (isShorts) {
-      targetMedSpeed = 1.02; // Shorts need conversational delivery even for mindfulness/sleep tips
+      targetMedSpeed = 0.96; // Calm and intelligible, while still compact enough for Shorts
     } else if (meditationSpeed === 0.76 || meditationSpeed === 0.80 || meditationSpeed === 0.58) {
       if (subprofile === 'sleep') targetMedSpeed = 0.76;
       else if (subprofile === 'quick_mindfulness') targetMedSpeed = 0.82;

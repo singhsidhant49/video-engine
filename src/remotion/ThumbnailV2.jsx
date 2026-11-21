@@ -1,5 +1,6 @@
 import React from 'react';
 import { AbsoluteFill, Img, OffthreadVideo, staticFile } from 'remotion';
+import { splitThumbnailTextLines } from '../services/creativeQuality.js';
 
 const sourceFor = (value) => /^(?:data:|https?:|blob:)/.test(String(value || ''))
   ? value
@@ -12,12 +13,15 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
   const textColor = palette.text || '#FFFFFF';
   const background = palette.background || '#0B1020';
   const textRight = concept.layout === 'text_right_subject_left';
+  const noText = concept.textMode === 'none';
   const overlayText = String(concept.overlayText || '').trim().split(/\s+/).slice(0, 4).join(' ');
-  const fontSize = overlayText.length > 26 ? 82 : overlayText.length > 18 ? 96 : 112;
+  const fallbackText = String(concept.mainSubject || packageData?.title || 'WATCH THIS').split(/\s+/).slice(0, 4).join(' ');
+  const textLines = noText ? [] : splitThumbnailTextLines(overlayText || fallbackText);
+  const longestLine = Math.max(...textLines.map((line) => line.length), 1);
+  const fontSize = longestLine > 22 ? 58 : longestLine > 15 ? 76 : longestLine > 11 ? 88 : 104;
   const heroImage = concept.heroImage;
   const heroSrc = heroImage ? sourceFor(heroImage) : null;
   const isVideo = typeof heroImage === 'string' && /\.mp4(?:$|\?)/i.test(heroImage);
-  const fallbackText = String(concept.mainSubject || packageData?.title || 'WATCH THIS').split(/\s+/).slice(0, 4).join(' ');
 
   return (
     <AbsoluteFill style={{ background, fontFamily: "'Outfit', 'Inter', sans-serif", overflow: 'hidden' }}>
@@ -38,23 +42,22 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
 
       <div style={{
         position: 'absolute', top: 72, bottom: 72,
-        left: textRight ? '45%' : 72, right: textRight ? 72 : '45%',
+        left: textRight ? '43%' : 64, right: textRight ? 64 : '43%',
         display: 'flex', flexDirection: 'column', alignItems: textRight ? 'flex-end' : 'flex-start',
         justifyContent: 'center', textAlign: textRight ? 'right' : 'left',
       }}>
-        <div style={{ width: 96, height: 10, borderRadius: 8, background: accent, marginBottom: 28, boxShadow: `0 0 26px ${accent}77` }} />
-        <div style={{
-          color: textColor, fontSize, lineHeight: .88, fontWeight: 950,
-          letterSpacing: '-0.055em', textTransform: 'uppercase', textWrap: 'balance',
+        {!noText && <div style={{ width: 96, height: 10, borderRadius: 8, background: accent, marginBottom: 28, boxShadow: `0 0 26px ${accent}77` }} />}
+        {!noText && <div style={{
+          color: textColor, fontSize, lineHeight: .9, fontWeight: 950,
+          letterSpacing: '-0.045em', textTransform: 'uppercase',
           textShadow: '0 5px 18px rgba(0,0,0,.96), 0 1px 2px rgba(0,0,0,1)',
           WebkitTextStroke: '1px rgba(0,0,0,.24)',
         }}>
-          {overlayText || fallbackText}
-        </div>
+          {textLines.map((line) => <div key={line} style={{ whiteSpace: 'nowrap' }}>{line}</div>)}
+        </div>}
       </div>
 
       <div style={{ position: 'absolute', inset: 20, border: '2px solid rgba(255,255,255,.12)', borderRadius: 22 }} />
-      <div style={{ position: 'absolute', right: 18, bottom: 18, width: 132, height: 42, borderRadius: 8, background: 'rgba(0,0,0,.58)' }} />
     </AbsoluteFill>
   );
 };

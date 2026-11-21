@@ -86,6 +86,9 @@ test('channel patch contract never injects defaults for omitted fields', () => {
   assert.deepEqual(ChannelPatchSchema.parse({ productionDefaults: { durationRanges: { shorts: { min: 30 } } } }), {
     productionDefaults: { durationRanges: { shorts: { min: 30 } } },
   });
+  assert.deepEqual(ChannelPatchSchema.parse({ productionDefaults: { contentType: 'psychology', supportedContentTypes: ['psychology', 'science'] } }), {
+    productionDefaults: { contentType: 'psychology', supportedContentTypes: ['psychology', 'science'] },
+  });
 });
 
 test('file channel store persists tenant-scoped channels and ideas', async (t) => {
@@ -105,13 +108,14 @@ test('file channel store persists tenant-scoped channels and ideas', async (t) =
   assert.equal((await store.listIdeas('acct-a', 'science-lab')).length, 0);
 });
 
-test('growth engine exposes 21 formulas, scores titles, and generates unique offline ideas', async () => {
-  assert.equal(HOOK_FORMULAS.length, 21);
+test('growth engine exposes niche-aware formulas, scores titles, and generates unique offline ideas', async () => {
+  assert.equal(HOOK_FORMULAS.length, 24);
   assert.ok(scoreTitle('The Hidden Truth About Time') > scoreTitle('An Overview of Time'));
   const ideas = await brainstormGrowthIdeas(channel(), { count: 5, useAi: false });
   assert.equal(ideas.length, 5);
   assert.equal(new Set(ideas.map((item) => item.title)).size, 5);
   assert.ok(ideas.every((item) => item.spokenHook && item.retentionScore >= 1));
+  assert.ok(ideas.every((item) => !['present_moment_invitation', 'felt_need_validation', 'guided_outcome'].includes(item.hookFormula)));
   assert.deepEqual(new Set(ideas.map((item) => item.format)), new Set(['landscape', 'shorts']));
   assert.ok(ideas.every((item) => item.durationSeconds >= channel().productionDefaults.durationRanges[item.format].min));
   assert.ok(ideas.every((item) => item.durationSeconds <= channel().productionDefaults.durationRanges[item.format].max));
@@ -121,6 +125,33 @@ test('growth engine exposes 21 formulas, scores titles, and generates unique off
   assert.ok(ideas.every((item) => item.trafficStrategy !== 'trending' && item.trendDirection !== 'rising'), 'offline fallback must not fabricate current trends');
   const fullBatch = await brainstormGrowthIdeas(channel({ contentPillars: ['space'] }), { count: 20, useAi: false });
   assert.equal(fullBatch.length, 20, 'a single-pillar channel can still receive the maximum distinct batch');
+});
+
+test('meditation channels receive guided practices instead of generic clickbait ideas', async () => {
+  const meditation = channel({
+    niche: 'guided meditation and mindful breathing',
+    audiencePainPoints: ['busy thoughts before sleep', 'stress during the workday'],
+    contentPillars: ['sleep meditation', 'mindful breathing', 'body scan'],
+    productionDefaults: { contentType: 'meditation' },
+  });
+  const ideas = await brainstormGrowthIdeas(meditation, { count: 6, useAi: false });
+  assert.equal(ideas.length, 6);
+  assert.ok(ideas.every((idea) => !/hidden truth|mistake|wrong|trap|warning|myth/i.test(idea.title)));
+  assert.ok(ideas.every((idea) => ['present_moment_invitation', 'felt_need_validation', 'guided_outcome'].includes(idea.hookFormula)));
+  assert.ok(ideas.every((idea) => /breathe|breath|settle|soften|comfortable|gently|mind|body/i.test(idea.spokenHook)));
+  assert.ok(ideas.every((idea) => idea.narrativeArc.includes('silence')));
+  assert.ok(ideas.every((idea) => idea.thumbnailCandidates.every((candidate) => !/WHY\?|BEFORE \/ AFTER/.test(candidate.overlayText))));
+});
+
+test('a mixed-format science channel is not forced into meditation ideation', async () => {
+  const mixed = channel({
+    niche: 'practical neuroscience and sleep science',
+    contentPillars: ['memory', 'sleep research'],
+    productionDefaults: { contentType: 'auto', supportedContentTypes: ['explainer', 'meditation'] },
+  });
+  const ideas = await brainstormGrowthIdeas(mixed, { count: 4, useAi: false });
+  assert.ok(ideas.every((idea) => !['present_moment_invitation', 'felt_need_validation', 'guided_outcome'].includes(idea.hookFormula)));
+  assert.ok(ideas.some((idea) => /truth|why|explained|system|question|understand/i.test(idea.title)));
 });
 
 test('performance feedback is summarized by format without inventing missing metrics', () => {
@@ -237,6 +268,31 @@ test('channel director produces an idempotent video request and links the idea',
   assert.equal(captured.request.metadata.titleAngle, idea.packagingExperiment.titleAngle);
   assert.equal(captured.request.metadata.queuePriority, 'normal');
   assert.match(captured.key, /channel:science-lab:idea:/);
+});
+
+test('channel director preserves the calm meditation strategy through the script contract', async () => {
+  const meditation = channel({
+    niche: 'guided meditation and sleep', contentPillars: ['mindful breathing'],
+    productionDefaults: { contentType: 'meditation' },
+  });
+  const [idea] = await brainstormGrowthIdeas(meditation, { count: 1, useAi: false });
+  const request = new ChannelDirectorService({ store: {}, videoService: {} }).buildVideoRequest(meditation, idea);
+  assert.match(request.prompt, /intentional silence/);
+  assert.match(request.prompt, /Do not interrupt the practice with retention tricks/);
+  assert.doesNotMatch(request.prompt, /Stakes at 15-30s|pattern interrupts around every 30 seconds/);
+  assert.equal(request.metadata.thumbnailOverlayText, idea.thumbnailCandidates.find((candidate) => candidate.selected)?.overlayText || '');
+});
+
+test('channel director never borrows overlay copy from an unselected thumbnail experiment', async () => {
+  const baseChannel = channel();
+  const [idea] = await brainstormGrowthIdeas(baseChannel, { count: 1, useAi: false });
+  idea.thumbnailCandidates = [
+    { concept: 'clean object close-up', variant: 'object_closeup', overlayText: '', selected: true },
+    { concept: 'alternative expressive face', variant: 'expressive_subject', overlayText: 'WHY?', selected: false },
+  ];
+  idea.thumbnailConcept = idea.thumbnailCandidates[0].concept;
+  const request = new ChannelDirectorService({ store: {}, videoService: {} }).buildVideoRequest(baseChannel, idea);
+  assert.equal(request.metadata.thumbnailOverlayText, '');
 });
 
 test('channel director retries the linked video job after a failed production', async (t) => {
