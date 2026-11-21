@@ -379,6 +379,19 @@ async function getVisionClassifier() {
   return visionLoadingPromise;
 }
 
+/** Release local CLIP zero-shot vision model memory to prevent RAM accumulation. */
+export async function releaseVisionClassifier() {
+  const active = visionClassifier;
+  visionClassifier = null;
+  visionLoadingPromise = null;
+  try {
+    await active?.dispose?.();
+  } catch {}
+  if (global.gc) {
+    try { global.gc(); } catch {}
+  }
+}
+
 /**
  * Brand, hardware, currency, nature, and vehicle entity definitions.
  */

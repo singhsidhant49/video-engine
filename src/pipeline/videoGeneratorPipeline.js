@@ -17,6 +17,7 @@ import { normalizeNarrationWav, calibrateSfxAssets, buildAudioDiagnostics } from
 import { directScenes, recast } from './visualDirector.js';
 import { directAssets } from './assetDirector.js';
 import { directAiAssets } from './aiAssetDirector.js';
+import { releaseVisionClassifier } from '../assets/visualInspectionService.js';
 import { buildStoryboard } from './visualStoryboardDirector.js';
 import { evaluateContinuity, buildPacingDiagnostics } from './continuityDirector.js';
 import { reviewVisualPlan, applySceneRepairs, reviewRenderedFrames } from '../services/visualCriticService.js';
@@ -997,6 +998,8 @@ export async function createFacelessVideo({
         'continuity.json',
         'credits.txt',
       ]);
+      await releaseVisionClassifier();
+      if (global.gc) { try { global.gc(); } catch { } }
     }
 
     // 6. Timeline Director + Visual Critic & static QC.

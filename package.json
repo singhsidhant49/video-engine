@@ -5,8 +5,8 @@
   "main": "src/pipeline/videoGeneratorPipeline.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server/studioServer.js",
-    "worker": "node src/server/videoWorker.js",
+    "start": "node --expose-gc --max-old-space-size=2048 src/server/studioServer.js",
+    "worker": "node --expose-gc --max-old-space-size=4096 src/server/videoWorker.js",
     "generate": "node src/cli/generate.js",
     "remotion:studio": "npx remotion preview src/remotion/Root.jsx",
     "test": "node --test --test-concurrency=1 tests/**/*.test.js",
