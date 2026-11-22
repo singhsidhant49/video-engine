@@ -21,7 +21,7 @@ const PROFILES = Object.freeze({
     id: 'meditation', authenticMediaPriority: true, maxImageShare: 0.30,
     minVideoShare: 0.65, minStructuredShare: 0, maxPhotoRun: 3,
     dissolveShare: { min: 0.45, target: 0.65, max: 0.90 },
-    videoRoles: new Set(['hook', 'action', 'transition', 'atmosphere', 'payoff', 'establishing', 'subject', 'detail']),
+    videoRoles: new Set(['action', 'transition', 'atmosphere']),
   },
   story: {
     id: 'story', authenticMediaPriority: true, maxImageShare: 0.72,

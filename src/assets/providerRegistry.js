@@ -37,7 +37,7 @@ const searchQueries = async (request, fn, providerId = 'default', max = 5) => {
 };
 
 const mediaRequest = () => true;
-const stillRequest = (request) => mediaRequest(request) && request.preferredSource !== 'video';
+const stillRequest = (request) => mediaRequest(request) && (request.preferredSource !== 'video' || request.allowImageFallback === true);
 
 export const localAssetProvider = createProvider({
   id: 'local-bank',

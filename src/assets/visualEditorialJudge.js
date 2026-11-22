@@ -148,6 +148,15 @@ const ACCIDENTAL_KEYWORD_PATTERNS = [
     semanticDistance: 0.96,
     reason: 'accidental_keyword_match: yellow wet-floor caution triangle does not represent conceptual timeline risk',
   },
+  // 5b. Open palm / hand posture vs Palm tree / Coconut palm
+  {
+    topicRegex: /open\s+palm|palm\s+on\s+knee|palms?\s+facing|hand\s+on\s+knee|gentle\s+breathing|meditation\s+posture/i,
+    literalExceptionRegex: /tropical\s+island|beach|palm\s+grove|resort/i,
+    candidateRejectRegex: /palm\s+tree|perched\s+on.*palm|coconut\s+tree|tropical\s+palm|date\s+palm|palm\s+leaves/i,
+    classification: 'ACCIDENTAL',
+    semanticDistance: 0.96,
+    reason: 'accidental_keyword_match: palm tree does not represent human hand / palm on knee in meditation',
+  },
   // 6. Memory leak in software vs Dripping water pipe / plumbing leak
   {
     topicRegex: /memory\s+leak|ram\s+exhaustion|heap\s+allocation|unreleased\s+pointers|\bram\b/i,

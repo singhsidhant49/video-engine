@@ -45,7 +45,7 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
     retrievalScore: item.score,
     editorialMode: visibleNeed?.editorialMode,
   });
-  if (request.nativeMotionRequired && item.candidate.type !== 'video') {
+  if (request.nativeMotionRequired && item.candidate.type !== 'video' && !item.candidate.isMotionFallback) {
     judgment.accepted = false;
     judgment.rejected = true;
     judgment.finalEditorialScore = 0;
@@ -151,7 +151,10 @@ async function gather(request, providers) {
       .filter((candidate) => licenseAllowed(candidate.license, licensePolicy).ok)
       .map((candidate) => ({ candidate, score: scoreAssetCandidate(candidate, request, context) }));
     const threshold = context.specificity >= 0.65 ? 3 : 2;
-    if (hasReliableSearchResult(scored, threshold)) break;
+    const isVideoRequest = request.preferredSource === 'video' || request.preferredMediaType === 'video' || request.nativeMotionRequired;
+    if (!isVideoRequest && hasReliableSearchResult(scored, threshold)) break;
+    const strongVideos = scored.filter((item) => item.candidate.type === 'video' && item.score.qualityRank >= threshold && !item.score.gates.length);
+    if (isVideoRequest && strongVideos.length >= 8) break;
   }
   return { request, context, candidates, providerCalls };
 }
@@ -183,7 +186,7 @@ function scoredCandidates(pool, memory, usedIdentities) {
       score.qualityRank = 0;
       score.gates.push('exact_asset_reuse');
     }
-    if (pool.request.nativeMotionRequired && candidate.type !== 'video') {
+    if (pool.request.nativeMotionRequired && candidate.type !== 'video' && !candidate.isMotionFallback) {
       score.resolutionStatus = 'unusable';
       score.qualityRank = 0;
       score.gates.push('native_motion_required');
@@ -712,36 +715,103 @@ export async function directAssets(plan, specs, {
 
     if (!materialized.length) {
       const fallbackQuery = context.targetSubject.join(' ') || request.concept;
-      const bankResults = await searchImageBank(fallbackQuery, { limit: 3 });
-      for (let index = 0; index < bankResults.length; index++) {
-        const candidate = {
-          ...bankResults[index],
-          providerId: 'local-bank',
-          tier: 'fallback',
-          query: fallbackQuery,
-          queryStage: 'CONCEPTUAL_FALLBACK',
-        };
-        const score = scoreAssetCandidate(candidate, request, context, memory);
-        const item = { candidate, score };
-        const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index + 10, usedHashes);
-        if (result.asset) {
-          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
-          if (judgment.rejected || !judgment.accepted) {
-            await fs.rm(result.file, { force: true });
-            materializationRejects.push({ candidateId: candidate.id, reason: judgment.rejectReasons.join('; ') });
-            continue;
+
+      // Step 5a: If video candidates failed Gate 2, query simplified video queries first
+      const isVideoPreferred = request.preferredSource === 'video' || request.preferredMediaType === 'video' || request.nativeMotionRequired;
+      if (isVideoPreferred) {
+        const simplifiedVideoQueries = [
+          context.targetSubject.slice(0, 3).join(' '),
+          context.targetSubject.slice(0, 2).join(' '),
+        ].filter((q) => q && q.length > 3 && q !== request.concept);
+
+        for (const query of simplifiedVideoQueries) {
+          try {
+            const videoResults = await searchAssetProviderStage(
+              { ...request, activeQueries: [query], activeQueryStage: 'SIMPLIFIED_VIDEO_FALLBACK' },
+              context,
+              { id: 'SIMPLIFIED_VIDEO_FALLBACK', queries: [query] },
+              providers.filter((p) => p.id === 'pexels-video')
+            );
+            for (let i = 0; i < videoResults.candidates.length; i++) {
+              const candidate = videoResults.candidates[i];
+              const score = scoreAssetCandidate(candidate, request, context, memory);
+              if (score.qualityRank < 1) continue;
+              const item = { candidate, score };
+              const result = await materializeCandidate(item, request, dir, publicDir, viable.length + materialized.length + 20, usedHashes);
+              if (result.asset) {
+                const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+                if (judgment.accepted && !judgment.rejected) {
+                  result.asset.tier = 'fallback';
+                  fallbackAuditTraces.push({
+                    fallbackType: 'simplified_video',
+                    whyTriggered: 'Specific video query failed Gate 2; simplified video query succeeded',
+                    candidateBefore: ranked[0]?.candidate?.id || null,
+                    candidateAfter: candidate.id,
+                    semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+                    semanticClassAfter: judgment.classification,
+                  });
+                  materialized.push({ ...item, ...result });
+                  break;
+                } else {
+                  await fs.rm(result.file, { force: true });
+                }
+              }
+            }
+            if (materialized.length) break;
+          } catch {}
+        }
+      }
+
+      // Step 5b: If still no approved video found, fall back to high-resolution curated still images with motion
+      if (!materialized.length) {
+        const bankResults = await searchImageBank(fallbackQuery, { limit: 3 });
+        let onlineResults = [];
+        try {
+          const onlineBatch = await searchAssetProviderStage(
+            { ...request, activeQueries: [fallbackQuery], activeQueryStage: 'MOTION_IMAGE_FALLBACK', allowImageFallback: true, preferredSource: 'image' },
+            context,
+            { id: 'MOTION_IMAGE_FALLBACK', queries: [fallbackQuery] },
+            providers
+          );
+          onlineResults = onlineBatch.candidates || [];
+        } catch {}
+
+        const fallbackCandidates = [
+          ...bankResults.map((r) => ({ ...r, providerId: 'local-bank', tier: 'fallback' })),
+          ...onlineResults.slice(0, 4),
+        ];
+
+        for (let index = 0; index < fallbackCandidates.length; index++) {
+          const candidate = {
+            ...fallbackCandidates[index],
+            query: fallbackQuery,
+            queryStage: 'MOTION_IMAGE_FALLBACK',
+            isMotionFallback: true,
+          };
+          const score = scoreAssetCandidate(candidate, request, context, memory);
+          const item = { candidate, score };
+          const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index + 30, usedHashes);
+          if (result.asset) {
+            const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+            if (judgment.rejected || !judgment.accepted) {
+              await fs.rm(result.file, { force: true });
+              materializationRejects.push({ candidateId: candidate.id, reason: judgment.rejectReasons.join('; ') });
+              continue;
+            }
+            result.asset.tier = 'fallback';
+            result.asset.isMotionFallback = true;
+            fallbackAuditTraces.push({
+              fallbackType: 'motion_image_fallback',
+              whyTriggered: 'No approved video footage available; fell back to curated still with cinematic camera motion',
+              candidateBefore: ranked[0]?.candidate?.id || null,
+              candidateAfter: candidate.id,
+              semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+              semanticClassAfter: judgment.classification,
+            });
+            materialized.push({ ...item, ...result });
+            console.log(`   ℹ [Shot ${request.storyboardShotId}] No matching stock video found; falling back to approved still image with camera motion: ${result.asset.label || result.asset.src}`);
+            break;
           }
-          result.asset.tier = 'fallback';
-          fallbackAuditTraces.push({
-            fallbackType: 'local_bank',
-            whyTriggered: 'Search candidates failed Gate 2 or materialization',
-            candidateBefore: ranked[0]?.candidate?.id || null,
-            candidateAfter: candidate.id,
-            semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
-            semanticClassAfter: judgment.classification,
-          });
-          materialized.push({ ...item, ...result });
-          break;
         }
       }
     }
