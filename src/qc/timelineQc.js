@@ -86,7 +86,8 @@ export function runTimelineQc(timeline, { plan, narration, assetReport, realizat
   const contentVisualProfile = (rawProfile && (isAiWorkflow || (isShorts && rawProfile.minVideoShare > 0.3)))
     ? { ...rawProfile, minVideoShare: 0, maxImageShare: 1.0, maxPhotoRun: isAiWorkflow ? 50 : 25 }
     : rawProfile;
-  add('pacing-average-shot', avgShotSec >= targetAverageShotSeconds * 0.82, productionPacing ? 'error' : 'warn', `average shot duration ${avgShotSec.toFixed(2)}s (profile ${pacingProfileName}, target: ≥ ${(targetAverageShotSeconds * 0.82).toFixed(2)}s)`);
+  const targetTolerance = isShorts ? 0.72 : 0.80;
+  add('pacing-average-shot', avgShotSec >= targetAverageShotSeconds * targetTolerance, productionPacing ? 'error' : 'warn', `average shot duration ${avgShotSec.toFixed(2)}s (profile ${pacingProfileName}, target: ≥ ${(targetAverageShotSeconds * targetTolerance).toFixed(2)}s)`);
 
   const rushedProfileShots = minimumShotSeconds > 0
     ? shots.filter((shot) => (shot.durationInFrames / fps) < minimumShotSeconds * 0.72)
