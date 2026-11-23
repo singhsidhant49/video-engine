@@ -321,13 +321,20 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
   let budget = Math.max(1, Math.ceil(Math.min(6.0, style?.transitions?.perMinute ?? semanticRate, semanticRate) * Math.max(minutes, 0.5)));
   const transitionProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
-    : { target: 0.22 };
+    : { min: 0, target: 0.22, max: 0.25 };
   const designedShare = transitionProfile.target;
-  budget = Math.min(budget, Math.max(1, Math.floor(Math.max(1, plan.scenes.length - 1) * designedShare)));
+  const isMeditation = productionProfile?.contentType === 'meditation';
+  const minimumDissolves = isMeditation && plan.scenes?.length > 1
+    ? Math.floor((plan.scenes.length - 1) * transitionProfile.min)
+    : 0;
+  const targetDissolves = Math.max(1, Math.floor(Math.max(1, (plan.scenes?.length || 1) - 1) * designedShare));
+  budget = isMeditation
+    ? Math.max(minimumDissolves, targetDissolves)
+    : Math.min(budget, targetDissolves);
   const out = plan.scenes.map(() => 'cut');
   let previousWasDissolve = false;
   let scenesSinceDissolve = 99;
-  const minScenesBetweenDissolves = 2;
+  const minScenesBetweenDissolves = isMeditation ? 1 : 2;
   plan.scenes.forEach((scene, index) => {
     if (index === 0) return;
     const previous = plan.scenes[index - 1];
@@ -336,7 +343,7 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     const isSectionBreak = scene.section || reason === TRANSITION_REASON.SECTION_CHANGE;
     const isMajorPayoff = (scene.purpose === 'payoff' || reason === TRANSITION_REASON.REVEAL) && scene.intensity <= 4;
     const naturalProgression = plan.scenes.length >= 4 && scenesSinceDissolve >= minScenesBetweenDissolves && scene.intensity <= 4;
-    const semanticPause = isSectionBreak || isMajorPayoff
+    const semanticPause = isMeditation || isSectionBreak || isMajorPayoff
       || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason))
       || (naturalProgression && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.NEW_IDEA].includes(reason));
     if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= minScenesBetweenDissolves) {
@@ -349,6 +356,15 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
       scenesSinceDissolve++;
     }
   });
+  let currentDissolves = out.slice(1).filter((t) => t === 'dissolve').length;
+  if (isMeditation && currentDissolves < minimumDissolves) {
+    for (let i = 1; i < plan.scenes.length && currentDissolves < minimumDissolves; i++) {
+      if (out[i] !== 'dissolve' && out[i - 1] !== 'dissolve' && out[i + 1] !== 'dissolve') {
+        out[i] = 'dissolve';
+        currentDissolves++;
+      }
+    }
+  }
   return out;
 }
 
