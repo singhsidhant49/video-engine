@@ -436,28 +436,28 @@ const styleMetadata = {
     defaultModel: 'black-forest-labs/flux-schnell',
   },
   dark_noir: {
-    desc: 'Deep shadows, dramatic chiaroscuro lighting, muted desaturated colors, suspenseful atmosphere and high contrast.',
+    desc: 'Deep shadows, dramatic lighting, muted colors, suspenseful atmosphere and powerful compositions.',
     bestFor: 'Corporate scandals, psychological mysteries, horror, true crime and business failures',
     defaultModel: 'black-forest-labs/flux-schnell',
   },
   editorial_vector: {
-    desc: 'Clean geometric shapes, premium color palettes, strong visual metaphors and sophisticated 2D publication illustration.',
+    desc: 'Clean geometric shapes, premium color palettes, strong visual metaphors and sophisticated 2D illustration.',
     bestFor: 'Finance, AI, technology, productivity, science and educational explainers',
     defaultModel: 'p-image-ideogram',
   },
   stickman: {
-    desc: "Expressive minimalist stick-figure characters, conceptual symbolism and cinematic framing. Not children's whiteboard drawings.",
+    desc: "Expressive stick-figure characters, minimalist environments, conceptual symbolism and cinematic framing. Not children's whiteboard drawings.",
     bestFor: 'Psychology, human behavior, stoicism, self-improvement and emotional storytelling',
     defaultModel: 'p-image-ideogram',
   },
   '3d_render': {
-    desc: 'Expressive stylized characters, tactile materials, soft lighting, vibrant depth and feature-animation appeal.',
-    bestFor: 'Approaching complex topics playfully, storytelling, tech explainers and character journeys',
+    desc: 'Expressive characters, dimensional environments, tactile materials and beautiful soft lighting.',
+    bestFor: 'Educational storytelling, psychology, science concepts and character-driven explainers',
     defaultModel: 'black-forest-labs/flux-schnell',
   },
   anime: {
-    desc: 'Japanese feature animation aesthetic, dramatic atmospheric lighting, detailed backgrounds and emotional depth.',
-    bestFor: 'Narrative storytelling, philosophical video essays, high-drama explainers and gaming lore',
+    desc: 'Expressive Japanese animation-inspired imagery, atmospheric environments, vibrant lighting and emotional compositions.',
+    bestFor: 'Motivational stories, philosophy, personal growth, emotional journeys and heroic narratives',
     defaultModel: 'black-forest-labs/flux-schnell',
   },
   custom: {
@@ -484,7 +484,7 @@ function channelStyleLabel(styleId) {
     hyper_realistic: 'Cinematic Documentary',
     dark_noir: 'Dark Investigative Noir',
     editorial_vector: 'Modern Editorial Vector',
-    stickman: 'Modern Stickman',
+    stickman: 'Modern Stickman Storytelling',
     '3d_render': 'Stylized 3D Animation',
     anime: 'Cinematic Anime',
     custom: 'Custom Brand Style',
@@ -494,8 +494,14 @@ function channelStyleLabel(styleId) {
 
 function syncChannelVisualFields(preferredModel = null) {
   const ai = $('channelImageSource').value === 'ai';
-  document.querySelectorAll('.channel-ai-field').forEach((field) => { field.hidden = !ai; });
-  if ($('channelStockInfo')) $('channelStockInfo').hidden = ai;
+  document.querySelectorAll('.channel-ai-field').forEach((field) => {
+    field.hidden = !ai;
+    field.style.display = ai ? '' : 'none';
+  });
+  if ($('channelStockInfo')) {
+    $('channelStockInfo').hidden = ai;
+    $('channelStockInfo').style.display = ai ? 'none' : '';
+  }
   if (!ai) return;
 
   const styleId = $('channelImageStyle')?.value || 'cinematic_documentary';
@@ -517,7 +523,34 @@ function syncChannelVisualFields(preferredModel = null) {
     $('channelImageProvider').value = getProviderForModel($('channelImageModel').value);
   }
 
-  $('channelCustomStyleField').hidden = styleId !== 'custom';
+  const isCustom = styleId === 'custom';
+  if ($('channelCustomStyleField')) {
+    $('channelCustomStyleField').hidden = !isCustom;
+    $('channelCustomStyleField').style.display = isCustom ? '' : 'none';
+  }
+}
+
+function syncFormatFields() {
+  const hasShorts = $('formatShorts').checked;
+  const hasLandscape = $('formatLandscape').checked;
+  if ($('shortDurationBox')) {
+    $('shortDurationBox').style.opacity = hasShorts ? '1' : '0.45';
+    $('shortMin').disabled = !hasShorts;
+    $('shortMax').disabled = !hasShorts;
+  }
+  if ($('landscapeDurationBox')) {
+    $('landscapeDurationBox').style.opacity = hasLandscape ? '1' : '0.45';
+    $('landscapeMin').disabled = !hasLandscape;
+    $('landscapeMax').disabled = !hasLandscape;
+  }
+}
+
+function syncAutomationFields() {
+  const enabled = $('channelAutomationEnabled').checked;
+  if ($('channelAutomationFields')) {
+    $('channelAutomationFields').hidden = !enabled;
+    $('channelAutomationFields').style.display = enabled ? '' : 'none';
+  }
 }
 
 function openChannelDialog(channel = null) {
@@ -567,13 +600,22 @@ function openChannelDialog(channel = null) {
     $('channelContentType').value = 'auto'; $('channelVoice').value = 'auto'; $('channelSubtitles').checked = true;
     syncChannelVisualFields();
   }
+  syncFormatFields();
+  syncAutomationFields();
   $('channelDialog').showModal();
 }
 
 async function createChannel(event) {
   event.preventDefault(); event.stopPropagation(); const formats = [...($('formatLandscape').checked ? ['landscape'] : []), ...($('formatShorts').checked ? ['shorts'] : [])];
   if (!formats.length) { $('channelError').textContent = 'Select at least one video format.'; return; }
-  if (Number($('shortMin').value) > Number($('shortMax').value) || Number($('landscapeMin').value) > Number($('landscapeMax').value)) { $('channelError').textContent = 'Each minimum duration must be less than or equal to its maximum.'; return; }
+  if (formats.includes('shorts') && Number($('shortMin').value) > Number($('shortMax').value)) {
+    $('channelError').textContent = 'Shorts minimum duration cannot exceed maximum duration.';
+    return;
+  }
+  if (formats.includes('landscape') && Number($('landscapeMin').value) > Number($('landscapeMax').value)) {
+    $('channelError').textContent = 'Landscape minimum duration cannot exceed maximum duration.';
+    return;
+  }
   const submit = $('channelSubmit'); submit.disabled = true;
   const imageSource = $('channelImageSource').value;
   const isAi = imageSource === 'ai';
@@ -599,13 +641,29 @@ async function createChannel(event) {
     audiencePainPoints: $('channelPainPoints').value.split(',').map((x) => x.trim()).filter(Boolean),
     contentPillars: $('channelPillars').value.split(',').map((x) => x.trim()).filter(Boolean),
     productionDefaults: {
-      formats, durationMode: 'llm', durationRanges: { shorts: { min: Number($('shortMin').value), max: Number($('shortMax').value) }, landscape: { min: Number($('landscapeMin').value), max: Number($('landscapeMax').value) } },
+      formats, durationMode: 'llm',
+      durationRanges: {
+        shorts: { min: Number($('shortMin').value), max: Number($('shortMax').value) },
+        landscape: { min: Number($('landscapeMin').value), max: Number($('landscapeMax').value) }
+      },
       contentType: $('channelContentType').value, voice: $('channelVoice').value, tone: $('channelTone').value, subtitles: $('channelSubtitles').checked,
-      imageSource, imageProvider: selectedProvider,
-      imageModel: selectedModel, imageQuality: selectedQuality,
-      imageStyle: selectedStyle || 'cinematic_documentary', customStylePrompt: customPrompt,
+      imageSource,
+      imageProvider: isAi ? selectedProvider : null,
+      imageModel: isAi ? selectedModel : null,
+      imageQuality: isAi ? selectedQuality : null,
+      imageStyle: isAi ? (selectedStyle || 'cinematic_documentary') : null,
+      customStylePrompt: isAi ? customPrompt : '',
     },
-    automation: { enabled: $('channelAutomationEnabled').checked, scheduleCron: $('channelCron').value, timezone: $('channelTimezone').value, approvalMode: $('channelApproval').value, queuePriority: $('channelQueuePriority').value, maxPendingJobs: Number($('channelMaxPending').value), autoPublish: false, publishPrivacy: 'private' },
+    automation: {
+      enabled: $('channelAutomationEnabled').checked,
+      scheduleCron: $('channelCron').value,
+      timezone: $('channelTimezone').value,
+      approvalMode: $('channelApproval').value,
+      queuePriority: $('channelQueuePriority').value,
+      maxPendingJobs: Number($('channelMaxPending').value),
+      autoPublish: false,
+      publishPrivacy: 'private'
+    },
   };
   try {
     const editing = state.editingChannelId;
@@ -754,6 +812,9 @@ $('channelImageModel').addEventListener('change', () => {
     $('channelImageProvider').value = getProviderForModel($('channelImageModel').value);
   }
 });
+$('channelAutomationEnabled').addEventListener('change', syncAutomationFields);
+$('formatLandscape').addEventListener('change', syncFormatFields);
+$('formatShorts').addEventListener('change', syncFormatFields);
 $('openSettings').addEventListener('click', () => { location.href = '/dashboard/settings'; }); $('menuButton').addEventListener('click', () => document.querySelector('.sidebar').classList.toggle('open'));
 $('loginForm').addEventListener('submit', login); $('loginDialog').addEventListener('cancel', (event) => { if (!state.authenticated) event.preventDefault(); }); $('logoutButton').addEventListener('click', logout); $('adminUserForm').addEventListener('submit', saveAdminUser);
 $('closeReview').addEventListener('click', () => $('reviewDialog').close()); $('reviewDialog').addEventListener('close', () => { $('reviewVideo').pause(); $('reviewVideo').removeAttribute('src'); $('reviewVideo').load(); if (state.mediaUrl) URL.revokeObjectURL(state.mediaUrl); state.mediaUrl = null; });
