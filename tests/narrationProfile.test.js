@@ -155,3 +155,23 @@ test('content-type tailored speech speed curve applies accurately across YouTube
   assert.equal(myst.speed, 1.04);
 });
 
+test('meditation subprofile gives priority to topic over broad channel niche name', () => {
+  const morning = resolveMeditationSubprofile({
+    topic: 'Wake Your Nervous System Gently',
+    niche: 'Mindfulness, Guided Meditation & Sleep Restoration',
+  });
+  assert.equal(morning, 'quick_mindfulness');
+
+  const sleep = resolveMeditationSubprofile({
+    topic: 'Deep Sleep Journey to Release Anxiety',
+    niche: 'Mindfulness, Guided Meditation & Sleep Restoration',
+  });
+  assert.equal(sleep, 'sleep');
+
+  const neutral = resolveMeditationSubprofile({
+    topic: 'Gentle Paced Breathing Practice',
+    niche: 'Mindfulness, Guided Meditation & Sleep Restoration',
+  });
+  assert.equal(neutral, 'sleep');
+});
+

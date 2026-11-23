@@ -41,11 +41,20 @@ export function isMeditationNarration({ topic = '', niche = '', contentType = ''
  * Detect meditation subprofile: guided (0.76x), sleep (0.76x), quick mindfulness (0.82x).
  */
 export function resolveMeditationSubprofile({ topic = '', niche = '' } = {}) {
-  const text = `${niche} ${topic}`.toLowerCase();
-  if (/\b(?:sleep|bedtime|deep\s+sleep|unwind|night|drift\s+off)\b/.test(text)) {
+  const topicLower = String(topic || '').toLowerCase();
+  const nicheLower = String(niche || '').toLowerCase();
+  // 1. Give priority to explicit topic keywords:
+  if (/\b(?:morning|wake\s*up|wake|energy|alert|daytime|work\s+break|focus|quick|micro|reset|5\s*min(?:ute)?)\b/.test(topicLower)) {
+    return 'quick_mindfulness';
+  }
+  if (/\b(?:sleep|bedtime|deep\s+sleep|unwind|night|drift\s+off|insomnia)\b/.test(topicLower)) {
     return 'sleep';
   }
-  if (/\b(?:quick|short|micro|focus|morning|work\s+break|reset|5\s*min(?:ute)?)\b/.test(text)) {
+  // 2. Fall back to niche cues if the topic itself is neutral:
+  if (/\b(?:sleep|bedtime|night|drift\s+off|insomnia)\b/.test(nicheLower)) {
+    return 'sleep';
+  }
+  if (/\b(?:morning|daytime|quick|focus)\b/.test(nicheLower)) {
     return 'quick_mindfulness';
   }
   return 'guided';

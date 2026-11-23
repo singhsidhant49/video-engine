@@ -521,6 +521,9 @@ export async function createFacelessVideo({
               voice,
               speed: synthesisSpeed,
               subprofile: narrationProfile.subprofile || 'guided',
+              targetDurationSec: durationBudget.targetNarrationSec || targetDuration,
+              allowedMinDuration: durationBudget.allowedMinDuration,
+              allowedMaxDuration: durationBudget.allowedMaxDuration,
               signal,
             });
             if (Array.isArray(medResult.segments) && Array.isArray(plan.scenes)) {
@@ -566,11 +569,15 @@ export async function createFacelessVideo({
         if (actualSec < durationBudget.allowedMinDuration && attempt < 3 && !audioFile) {
           console.log(`\n⚠️ Actual narration (${actualSec.toFixed(1)}s) is below target minimum (${durationBudget.allowedMinDuration.toFixed(1)}s).`);
           if (attempt === 0) {
+            if (narrationProfile.meditation) {
+              console.log('   Re-synthesizing meditation audio with pause calibration...');
+              continue;
+            }
             const currentWords = plan.script.split(/\s+/).filter(Boolean).length;
             const measuredWps = currentWords / Math.max(1, actualSec);
             const targetWords = Math.max(currentWords + 10, Math.round(durationBudget.targetNarrationSec * measuredWps));
             const scriptBeforeExpansion = plan.script;
-            plan = await expandPlanScript(plan, targetWords, Math.round(targetWords * 0.96));
+            plan = await expandPlanScript(plan, targetWords, Math.round(targetWords * 0.92));
             if (plan.script !== scriptBeforeExpansion) {
               expansionPasses++;
               plan.expansionPasses = expansionPasses;

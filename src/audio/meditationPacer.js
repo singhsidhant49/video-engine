@@ -205,6 +205,9 @@ export async function generateMeditationSpeech({
   voice = 'af_heart',
   speed = 0.80,
   subprofile = 'guided',
+  targetDurationSec = null,
+  allowedMinDuration = null,
+  allowedMaxDuration = null,
   signal,
 }) {
   if (signal?.aborted) throw Object.assign(new Error('Meditation audio generation cancelled'), { name: 'AbortError' });
@@ -224,7 +227,9 @@ export async function generateMeditationSpeech({
         const text = (s.narration || '').trim();
         const isLast = idx === arr.length - 1;
         const pauseType = classifyMeditationPause(text, { isLastScene: isLast });
-        const pauseAfterMs = s.pauseAfterSec
+        // NOTE: Only honor pre-existing pauses if they represent deliberate meditation pauses (>= 1.5s).
+        // Generic 0.3s micro-pauses from explainer templates are replaced with authentic meditation pauses.
+        const pauseAfterMs = (s.pauseAfterSec && Number(s.pauseAfterSec) >= 1.5)
           ? Math.round(Number(s.pauseAfterSec) * 1000)
           : calculateMeditationPauseMs(text, pauseType, { isLastScene: isLast }, subprofile);
         return { text, pauseType, pauseAfterMs };
@@ -246,11 +251,9 @@ export async function generateMeditationSpeech({
   const trackBuffers = [];
   let sampleRate = 24000;
   let totalSpeechSamples = 0;
-  let totalSilenceSamples = 0;
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const isLast = i === items.length - 1;
     const phraseWavBuf = await fetchKokoroWav(item.text, { voice, speed, signal });
 
     const wf = new WaveFile(phraseWavBuf);
@@ -263,15 +266,45 @@ export async function generateMeditationSpeech({
       type: 'speech',
       samples: speechSamples,
       text: item.text,
+      basePauseMs: item.pauseAfterMs || 1500,
+      pauseType: item.pauseType,
     });
     totalSpeechSamples += speechSamples.length;
+  }
 
-    // Insert pause silence (even for last phrase, add a gentle closing pause)
-    const pauseMs = item.pauseAfterMs || 1500;
+  let totalSpeechSec = totalSpeechSamples / sampleRate;
+  const closingPaddingSec = 0.5;
+
+  // Scale pauses dynamically if targetDurationSec is provided
+  let totalSilenceSamples = 0;
+  const totalBasePauseMs = trackBuffers.reduce((sum, t) => sum + t.basePauseMs, 0);
+
+  let scale = 1.0;
+  if (targetDurationSec && totalBasePauseMs > 0) {
+    const targetSilenceSec = targetDurationSec - totalSpeechSec - closingPaddingSec;
+    if (targetSilenceSec > 0) {
+      const rawScale = targetSilenceSec / (totalBasePauseMs / 1000);
+      scale = Math.max(0.5, Math.min(2.5, rawScale));
+    }
+  }
+
+  const assembledTracks = [];
+  for (let i = 0; i < trackBuffers.length; i++) {
+    const t = trackBuffers[i];
+    assembledTracks.push(t);
+
+    const isLast = i === trackBuffers.length - 1;
+    let pauseMs = Math.round(t.basePauseMs * scale);
+    const minPause = subprofile === 'quick_mindfulness' ? 1200 : 1500;
+    const maxPause = subprofile === 'sleep' ? 12000 : 9000;
+    pauseMs = Math.max(minPause, Math.min(maxPause, pauseMs));
+
+    items[i].pauseAfterMs = pauseMs;
+
     const pauseSamplesCount = Math.max(0, Math.round(sampleRate * (pauseMs / 1000)));
     if (pauseSamplesCount > 0) {
       const silenceSamples = new Float32Array(pauseSamplesCount);
-      trackBuffers.push({
+      assembledTracks.push({
         type: 'silence',
         samples: silenceSamples,
         pauseMs,
@@ -285,7 +318,7 @@ export async function generateMeditationSpeech({
   const joinedSamples = new Float32Array(totalCombinedSamples);
   let offset = 0;
 
-  for (const track of trackBuffers) {
+  for (const track of assembledTracks) {
     joinedSamples.set(track.samples, offset);
     offset += track.samples.length;
   }
@@ -300,7 +333,7 @@ export async function generateMeditationSpeech({
 
   const durationSec = Number((masterBuffer.length / (sampleRate * 2)).toFixed(2));
   const totalSilenceSec = Number((totalSilenceSamples / sampleRate).toFixed(2));
-  const totalSpeechSec = Number((totalSpeechSamples / sampleRate).toFixed(2));
+  totalSpeechSec = Number((totalSpeechSamples / sampleRate).toFixed(2));
 
   console.log(`✨ Master meditation audio assembled: ${durationSec}s total (Speech: ${totalSpeechSec}s, Silence: ${totalSilenceSec}s) -> ${outputFile}`);
 

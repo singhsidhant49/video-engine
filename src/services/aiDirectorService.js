@@ -561,7 +561,9 @@ export function validateExpansionCandidate(plan, expanded, minWords, maxWords) {
   });
   const wordCount = replacements.map((item) => item.narration).join(' ').split(/\s+/).filter(Boolean).length;
   if (wordCount < minWords) throw new Error(`expansion response undershot the word budget (${wordCount} words; minimum ${minWords})`);
-  if (wordCount > maxWords) throw new Error(`expansion response exceeded the word budget (${wordCount} words; maximum ${maxWords})`);
+  // Allow headroom for post-expansion sentence-safe compression instead of rejecting usable candidates
+  const allowedExpansionCeiling = Math.max(maxWords, Math.round(maxWords * 1.25));
+  if (wordCount > allowedExpansionCeiling) throw new Error(`expansion response exceeded the word budget (${wordCount} words; maximum ${allowedExpansionCeiling})`);
   return { replacements, wordCount };
 }
 
@@ -578,11 +580,12 @@ export async function expandPlanScript(plan, targetWords, minWords = Math.round(
     targetWords: sceneTargets[index],
   }));
   const maxWords = Math.round(targetWords * 1.04);
+  const genreRole = plan.genre?.roleDescription || 'You are an expert script editor.';
   try {
     const expanded = await callJson(llm, [
       {
         role: 'system',
-        content: 'You are a careful documentary script editor. Expand an undersized script with useful explanation, not filler. Preserve all scene IDs and factual meaning. Meet every supplied scene word target so the complete narration meets its required speaking duration. Do not introduce new exact numbers, quotations, dates, people, organizations, accusations, or medical/financial claims. Reply with JSON only.',
+        content: `${genreRole} Expand an undersized script with useful narrative depth, sensory detail, and clear explanations matching the tone of this genre, not filler. Preserve all scene IDs and factual meaning. Meet every supplied scene word target so the complete narration meets its required speaking duration. Do not introduce new exact numbers, quotations, dates, people, organizations, accusations, or medical/financial claims. Reply with JSON only.`,
       },
       {
         role: 'user',
