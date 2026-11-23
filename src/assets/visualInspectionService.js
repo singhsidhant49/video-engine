@@ -980,8 +980,10 @@ export function compareVisualToNeed(inspection, visibleNeed) {
   const visibleAct = tokenize((inspection.visibleAction || '') + ' ' + (inspection.visibleObjects || []).join(' '));
   const visibleEnv = tokenize((inspection.environment || inspection.visibleEnvironment || '') + ' ' + (inspection.visibleObjects || []).join(' '));
 
+  const isAtmosphereRole = visibleNeed.visualRole === 'ATMOSPHERE';
   const isPlaceholderAction = !visibleNeed.action
-    || /active demonstration|relevant physical phenomenon|showing the required causal relationship/i.test(visibleNeed.action);
+    || isAtmosphereRole
+    || /active demonstration|relevant physical phenomenon|showing the required causal relationship|slow natural breathing|resting or settling/i.test(visibleNeed.action);
   const isPlaceholderEnv = !visibleNeed.environment
     || /authentic real-world environment matching context|general studio or neutral backdrop/i.test(visibleNeed.environment);
 
