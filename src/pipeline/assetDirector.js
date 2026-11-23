@@ -67,7 +67,10 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
       judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'video_window_semantic_evidence_failed'])];
     }
   }
-  if (requirePixelInspection && (!inspection.pixelInspected || !inspection.semanticPixelInspected)) {
+  const isVideoWithPixels = item.candidate.type === 'video' && inspection.pixelInspected;
+  const isSemanticallyInspected = inspection.semanticPixelInspected
+    || (isVideoWithPixels && (item.videoWindowSelection?.semanticEvidence?.available !== false || inspection.confidence >= 0.35));
+  if (requirePixelInspection && (!inspection.pixelInspected || !isSemanticallyInspected)) {
     judgment.accepted = false;
     judgment.rejected = true;
     judgment.finalEditorialScore = 0;

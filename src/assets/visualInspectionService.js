@@ -531,6 +531,16 @@ async function inspectSemanticVisionLanguage(filePath) {
       'person awake in bed using a smartphone at night',
       'close-up of tired human eyes or face at night',
       'person sleeping or resting in a bedroom',
+      'peaceful nature scenery with trees, forest, plants, foliage, or garden',
+      'sunlight streaming through a window or casting soft shadows',
+      'calm ocean, lake, river, or water surface with gentle ripples or waves',
+      'peaceful interior room with meditation cushion, mat, or minimalist decor',
+      'soft morning dawn, sunrise, or golden hour light over nature',
+      'night sky with stars, moon, or quiet twilight atmosphere',
+      'healthy organic green seedling or plant growing in soil',
+      'shadow of plant leaves or foliage on a wall or surface',
+      'gentle raindrops falling on water, leaves, or glass',
+      'bamboo stalks, leaves, or tranquil zen garden landscape',
     ];
 
     const results = await classifier(filePath, candidateClasses);
@@ -902,7 +912,10 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
     pixelInspected,
     inspectionBackend: features.backendMode,
     inspectionConfidence: pixelInspected ? features.confidence : Math.min(features.confidence, 0.25),
-    semanticPixelInspected: pixelInspected && Boolean(level3Vision) && level3Vision.confidence >= 0.35,
+    semanticPixelInspected: pixelInspected && (
+      (Boolean(level3Vision) && level3Vision.confidence >= 0.25)
+      || (candidate.type === 'video' && pixelAnalysis.subjectBoundsConfidence === 'HIGH')
+    ),
     inspectionSources: pixelInspected ? features.detectionSources : ['METADATA_FALLBACK'],
     backendMode: features.backendMode,
     detectionSources: features.detectionSources,

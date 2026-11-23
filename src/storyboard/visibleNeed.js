@@ -191,8 +191,19 @@ function extractAction(text = '') {
     return 'seismic ground movement and earthquake impact';
   }
   if (/\b(?:tsunami|tidal wave|storm surge)\b/i.test(lower)) return 'tsunami waves inundating the coastline';
-  if (/\b(?:send|sending|request|fetch|retrieve|get|ping)\b/i.test(lower)) return 'sending or requesting data';
-  if (/\b(?:return|response|serve|serving|reply|deliver)\b/i.test(lower)) return 'returning data or response';
+  if (/\b(?:breath|breathe|breathing|exhale|inhale)\b/i.test(lower)) return 'slow natural breathing';
+  if (/\b(?:return|returning|settle|settling|arrive|arriving|rest|resting)\b/i.test(lower)
+    && /\b(?:breath|room|body|present|awareness|silence|calm|ground|chair|cushion|intention|mind)\b/i.test(lower)) {
+    return 'resting or settling into calm awareness';
+  }
+  if (/\b(?:send|sending|request|fetch|retrieve|get|ping)\b/i.test(lower)
+    && /\b(?:data|request|server|api|http|query|packet|payload|endpoint)\b/i.test(lower)) {
+    return 'sending or requesting data';
+  }
+  if (/\b(?:return|response|serve|serving|reply|deliver)\b/i.test(lower)
+    && /\b(?:data|request|server|api|http|query|packet|payload|endpoint|code|result)\b/i.test(lower)) {
+    return 'returning data or response';
+  }
   if (/\b(?:parse|parsing|read|reading|inspect|analyze)\b/i.test(lower)) return 'parsing or inspecting structure';
   if (/\b(?:execute|executing|compute|calculat\w*)\b/i.test(lower)
     || (/\b(?:run|running)\b/i.test(lower) && /\b(?:code|program|software|process|runtime|algorithm|instruction|computer|server|cpu|gpu)\b/i.test(lower))) {

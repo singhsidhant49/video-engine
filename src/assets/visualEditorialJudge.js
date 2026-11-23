@@ -625,8 +625,10 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
     const isToyotaContext = feLower.includes('toyota') && /toyota|automobile|car\s+industry|sedan|vehicle/i.test(topicTarget);
     const isCurrencyContext = (feLower.includes('currency') || feLower.includes('banknote') || feLower.includes('rupee')) && /currency|money|financial|rupee|economy|bank/i.test(topicTarget);
     const isHardwareContext = (feLower.includes('motherboard') || feLower.includes('guitar')) && /hardware|guitar|audio\s+gear|pc\s+component/i.test(topicTarget);
+    const isBotanicalContext = (feLower.includes('tree') || feLower.includes('botanical') || feLower.includes('foliage') || feLower.includes('twigs'))
+      && /nature|forest|tree|plant|garden|wood|pine|leaf|leaves|bamboo|morning|calm|meditation|mindfulness|breath|peace|outdoor|landscape|atmosphere/i.test(topicTarget);
 
-    if (!isTopicRelevant && !isNvidiaContext && !isToyotaContext && !isCurrencyContext && !isHardwareContext) {
+    if (!isTopicRelevant && !isNvidiaContext && !isToyotaContext && !isCurrencyContext && !isHardwareContext && !isBotanicalContext) {
       return {
         classification: 'WRONG',
         subjectMatch: 0.05,
@@ -767,7 +769,7 @@ export function classifyVisualMatch({ candidate, inspection, visibleNeed, editor
   const hasConflictingMetadata = /pullman|railroad\s+car|railway\s+car|train\s+car|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|high\s+school|elementary\s+school/i.test(`${candidate.title || ''} ${candidate.description || ''}`)
     && !/railroad|train|car|bedroom|street|school/i.test(topicTarget);
   const hasConflictingInspection = (inspection && (
-    (inspection.foreignEntities && inspection.foreignEntities.length > 0)
+    (inspection.foreignEntities && inspection.foreignEntities.length > 0 && !inspection.foreignEntities.every((fe) => (fe.toLowerCase().includes('tree') || fe.toLowerCase().includes('botanical') || fe.toLowerCase().includes('foliage') || fe.toLowerCase().includes('twigs')) && /nature|forest|tree|plant|garden|wood|pine|leaf|leaves|bamboo|morning|calm|meditation|mindfulness|breath|peace|outdoor|landscape|atmosphere/i.test(topicTarget)))
     || (inspection.unsuitableUseCases && inspection.unsuitableUseCases.some((u) => topicTarget.includes(u)))
     || (/garbage\s+truck|sanitation|aircraft|airplane|airbus|guitar\s+pedal|stompbox/i.test(inspection.primarySubject || '')
         && !/garbage|sanitation|aircraft|airplane|airbus|guitar/i.test(visibleNeed?.subject || visibleNeed?.primaryConcept || ''))
