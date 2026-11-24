@@ -332,9 +332,10 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     ? Math.max(minimumDissolves, targetDissolves)
     : Math.min(budget, targetDissolves);
   const out = plan.scenes.map(() => 'cut');
-  let previousWasDissolve = false;
+  let consecutiveDissolves = 0;
   let scenesSinceDissolve = 99;
-  const minScenesBetweenDissolves = isMeditation ? 1 : 2;
+  const minScenesBetweenDissolves = isMeditation ? 0 : 2;
+  const maxConsecutive = isMeditation ? 2 : 1;
   plan.scenes.forEach((scene, index) => {
     if (index === 0) return;
     const previous = plan.scenes[index - 1];
@@ -346,20 +347,25 @@ export function chooseTransitions(plan, specs, style, fps, totalFrames, visualPo
     const semanticPause = isMeditation || isSectionBreak || isMajorPayoff
       || (softTone && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.REVEAL].includes(reason))
       || (naturalProgression && [TRANSITION_REASON.CONTINUATION, TRANSITION_REASON.NEW_IDEA].includes(reason));
-    if (budget > 0 && semanticPause && !previousWasDissolve && scenesSinceDissolve >= minScenesBetweenDissolves) {
+    if (budget > 0 && semanticPause && consecutiveDissolves < maxConsecutive && (isMeditation || scenesSinceDissolve >= minScenesBetweenDissolves)) {
       out[index] = 'dissolve';
       budget--;
-      previousWasDissolve = true;
+      consecutiveDissolves++;
       scenesSinceDissolve = 0;
     } else {
-      previousWasDissolve = false;
+      consecutiveDissolves = 0;
       scenesSinceDissolve++;
     }
   });
   let currentDissolves = out.slice(1).filter((t) => t === 'dissolve').length;
   if (isMeditation && currentDissolves < minimumDissolves) {
     for (let i = 1; i < plan.scenes.length && currentDissolves < minimumDissolves; i++) {
-      if (out[i] !== 'dissolve' && out[i - 1] !== 'dissolve' && out[i + 1] !== 'dissolve') {
+      if (out[i] !== 'dissolve') {
+        const prevPrevIsDissolve = i >= 2 && out[i - 2] === 'dissolve';
+        const prevIsDissolve = out[i - 1] === 'dissolve';
+        const nextIsDissolve = out[i + 1] === 'dissolve';
+        const nextNextIsDissolve = i + 2 < plan.scenes.length && out[i + 2] === 'dissolve';
+        if ((prevIsDissolve && prevPrevIsDissolve) || (nextIsDissolve && nextNextIsDissolve) || (prevIsDissolve && nextIsDissolve)) continue;
         out[i] = 'dissolve';
         currentDissolves++;
       }
@@ -422,6 +428,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
   const entries = clips.flatMap((clip, clipIndex) => (clip.shots || []).map((shot, shotIndex) => ({ clip, clipIndex, shot, shotIndex })));
   const isShorts = visualPolicy?.format === 'shorts';
   const isAi = visualPolicy?.imageSource === 'ai';
+  const isMeditation = productionProfile?.contentType === 'meditation';
   const baseProfile = productionProfile?.contentType
     ? getContentVisualProfile(productionProfile.contentType).dissolveShare
     : { min: 0, target: 0.22, max: 0.25 };
@@ -431,16 +438,18 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
   // is the exception: its production QC requires a restrained alternating
   // dissolve cadence, and leaving the minimum at zero made otherwise valid
   // neutral-toned sleep edits fail after all assets had already been created.
-  const minimumDissolves = productionProfile?.contentType === 'meditation'
+  const minimumDissolves = isMeditation
     ? Math.floor(boundaryCount * transitionProfile.min)
     : 0;
   const maximumDissolves = productionProfile?.contentType
     ? Math.max(minimumDissolves, Math.floor(boundaryCount * transitionProfile.max))
     : Math.max(1, Math.floor(boundaryCount * transitionProfile.max));
   let remainingDissolves = maximumDissolves;
+  let consecutiveDissolves = 0;
   let previousWasDissolve = false;
   let shotsSinceDissolve = 99;
-  const minShotsBetweenDissolves = 2;
+  const minShotsBetweenDissolves = isMeditation ? 0 : 2;
+  const maxConsecutive = isMeditation ? 2 : 1;
   // Standardized duration: 15-20 frames (~0.5s-0.67s)
   const dissolveFrames = Math.min(20, Math.max(15, Math.round(fps * 0.53)));
 
@@ -460,6 +469,7 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     const scene = sceneById.get(shot.sceneId) || scenes[entry.clipIndex] || {};
     const spec = mediaSceneSpecs?.[shot.mediaSceneSpecId || shot.storyboardShotId];
     const bothImages = previous.asset?.type !== 'video' && shot.asset?.type !== 'video';
+    const canDissolveMedia = isMeditation || bothImages;
     const calm = ['reflective', 'somber', 'hopeful'].includes(scene.tone) || scene.treatment === 'quiet';
     const isSameAsset = Boolean(previous.asset?.src && shot.asset?.src && previous.asset.src === shot.asset.src);
     const detailChange = shot.role === 'detail' || spec?.imageChangeReason === 'newDetail' || isSameAsset;
@@ -470,17 +480,18 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
         : shot.role === 'subject' ? TRANSITION_REASON.NEW_ENTITY : TRANSITION_REASON.NEW_IDEA;
     const semanticDissolve = sceneBoundary
       ? clip.enter?.type === 'dissolve' || reason === TRANSITION_REASON.SECTION_CHANGE || (calm && reason === TRANSITION_REASON.CONTINUATION)
-      : bothImages && (detailChange || calm);
+      : canDissolveMedia && (detailChange || calm || isMeditation);
     // A dissolve between two instances of the same still exposes the camera
     // reset as a ghosted jump. Repeated assets use a stitched camera state and
     // a clean continuity cut. Scene-boundary dissolves may only use the edit
     // handle allocated before clip positions were compiled.
     const allocatedSceneDissolve = sceneBoundary && clip.enter?.type === 'dissolve' && clip.enter.frames > 0;
+    const canUseInternal = remainingDissolves > 0 && consecutiveDissolves < maxConsecutive && (isMeditation || shotsSinceDissolve >= minShotsBetweenDissolves) && semanticDissolve;
     const useDissolve = isSameAsset
       ? false
       : sceneBoundary
         ? allocatedSceneDissolve
-        : (remainingDissolves > 0 && !previousWasDissolve && shotsSinceDissolve >= minShotsBetweenDissolves && semanticDissolve);
+        : canUseInternal;
     const appliedFrames = useDissolve && sceneBoundary ? clip.enter.frames : useDissolve ? dissolveFrames : 0;
     const decision = useDissolve
       ? { type: 'dissolve', frames: appliedFrames, policy: 'SHORT_DISSOLVE', reason, anchor: null }
@@ -493,8 +504,10 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
     }
     if (useDissolve) {
       remainingDissolves--;
+      consecutiveDissolves++;
       shotsSinceDissolve = 0;
     } else {
+      consecutiveDissolves = 0;
       shotsSinceDissolve++;
     }
     previousWasDissolve = useDissolve;
@@ -505,15 +518,19 @@ export function directSolvedShotTransitions({ clips, scenes = [], fps = 30, medi
       if (index === 0 || entry.shot.enter?.type === 'dissolve') return false;
       const previousEntry = entries[index - 1];
       const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
-      const bothImages = previousEntry.shot.asset?.type !== 'video' && entry.shot.asset?.type !== 'video';
+      const canDissolveMedia = isMeditation || (previousEntry.shot.asset?.type !== 'video' && entry.shot.asset?.type !== 'video');
       const sameAsset = previousEntry.shot.asset?.src && previousEntry.shot.asset.src === entry.shot.asset?.src;
       // A new scene cannot acquire a dissolve after clip positions are fixed.
-      return !sameAsset && (sceneBoundary ? entry.clip.enter?.type === 'dissolve' : bothImages);
+      return !sameAsset && (sceneBoundary ? entry.clip.enter?.type === 'dissolve' : canDissolveMedia);
     });
     for (const { entry, index } of candidates) {
       if (usedDissolves >= minimumDissolves || usedDissolves >= maximumDissolves) break;
       const previousEntry = entries[index - 1];
-      if (entries[index - 1]?.shot.enter?.type === 'dissolve' || entries[index + 1]?.shot.enter?.type === 'dissolve') continue;
+      const prevPrevIsDissolve = index >= 2 && entries[index - 2]?.shot.enter?.type === 'dissolve';
+      const prevIsDissolve = entries[index - 1]?.shot.enter?.type === 'dissolve';
+      const nextIsDissolve = entries[index + 1]?.shot.enter?.type === 'dissolve';
+      const nextNextIsDissolve = index + 2 < entries.length && entries[index + 2]?.shot.enter?.type === 'dissolve';
+      if ((prevIsDissolve && prevPrevIsDissolve) || (nextIsDissolve && nextNextIsDissolve) || (prevIsDissolve && nextIsDissolve)) continue;
       const sceneBoundary = entry.clipIndex !== previousEntry.clipIndex;
       const reason = sceneBoundary ? TRANSITION_REASON.SECTION_CHANGE : TRANSITION_REASON.CONTINUATION;
       synchronizeShotTransition(entry.shot, previousEntry.shot, {

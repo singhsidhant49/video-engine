@@ -315,6 +315,33 @@ test('meditation post-solve directing satisfies its calm dissolve floor without 
   assert.ok(dissolves < shots.length - 1, 'calm transitions must remain restrained instead of crossfading every shot');
 });
 
+test('meditation with video assets allows calm dissolves across internal shot boundaries to satisfy dissolve floor', () => {
+  const shots = Array.from({ length: 10 }, (_, index) => ({
+    id: `med-vid-${index}`, storyboardShotId: `med-vid-${index}`, sceneId: `scene-${Math.floor(index / 2)}`, role: 'context',
+    durationInFrames: 240, from: index * 240, presentation: { cameraMove: 'none' },
+    asset: { type: 'video', src: `med-vid-${index}.mp4` },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT',
+  }));
+  // 5 scenes, each with 2 shots
+  const clips = Array.from({ length: 5 }, (_, clipIndex) => ({
+    id: `clip-${clipIndex}`,
+    transitionPolicy: clipIndex === 0 ? 'CUT' : (clipIndex % 2 === 1 ? 'DISSOLVE' : 'CUT'),
+    enter: { type: clipIndex % 2 === 1 ? 'dissolve' : 'cut', frames: clipIndex % 2 === 1 ? 16 : 0 },
+    shots: [shots[clipIndex * 2], shots[clipIndex * 2 + 1]],
+  }));
+  directSolvedShotTransitions({
+    clips,
+    scenes: Array.from({ length: 5 }, (_, i) => ({ id: `scene-${i}`, tone: 'reflective' })),
+    fps: 30,
+    visualPolicy: { format: 'landscape', imageSource: 'stock' },
+    productionProfile: { contentType: 'meditation' },
+  });
+  const dissolves = shots.slice(1).filter((shot) => shot.enter.type === 'dissolve').length;
+  const dissolveShare = dissolves / (shots.length - 1);
+  assert.ok(dissolveShare >= 0.45, `Meditation with video shots must meet 45% dissolve floor, got ${(dissolveShare * 100).toFixed(1)}%`);
+  assert.ok(dissolveShare <= 0.90, `Meditation with video shots must not exceed 90% dissolve share, got ${(dissolveShare * 100).toFixed(1)}%`);
+});
+
 test('Shorts video format applies camera motion without forcing dissolves across unrelated beats', () => {
   const visualPolicy = resolveVisualPolicy();
   const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
