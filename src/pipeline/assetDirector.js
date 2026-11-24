@@ -59,6 +59,13 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
       visibleNeed,
       videoMetadata: item.candidate,
     });
+    if (item.videoWindowSelection.isDarkOrBlank || (item.videoWindowSelection.hasBlackStart && item.videoWindowSelection.selectedStartTime === 0 && (item.videoWindowSelection.avgLuma < 15 || item.videoWindowSelection.windowScore < 0.25))) {
+      judgment.accepted = false;
+      judgment.rejected = true;
+      judgment.finalEditorialScore = 0;
+      judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'video_has_black_frames'])];
+      judgment.selectionReason = 'Rejected: video asset contains black/blank frames or pitch black darkness';
+    }
     const semanticMargin = item.videoWindowSelection.semanticEvidence?.margin;
     if (requirePixelInspection && (!item.videoWindowSelection.semanticEvidence?.available || semanticMargin <= 0)) {
       judgment.accepted = false;

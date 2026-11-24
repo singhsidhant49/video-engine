@@ -230,12 +230,16 @@ export async function selectVideoWindow({
         notes.push('favored: prime action window inside clip');
       }
 
+      const isDarkOrBlank = Boolean(stats && (stats.avgLuma < 8 || (stats.hasBlackStart && stats.avgLuma < 12)));
       scoredWindows.push({
         start: win.start,
         end: win.end,
         score: Number((Math.max(10, score) / 100).toFixed(3)),
         notes: notes.join('; '),
         semanticEvidence: stats?.semanticEvidence || null,
+        hasBlackStart: Boolean(stats?.hasBlackStart),
+        avgLuma: stats ? Number(stats.avgLuma.toFixed(2)) : 120,
+        isDarkOrBlank,
       });
     }
   } finally {
@@ -254,6 +258,9 @@ export async function selectVideoWindow({
     windowScore: best.score,
     selectionReason: best.notes || 'highest stability and visible action score',
     semanticEvidence: best.semanticEvidence || null,
+    hasBlackStart: Boolean(best.hasBlackStart),
+    avgLuma: best.avgLuma != null ? best.avgLuma : 120,
+    isDarkOrBlank: Boolean(best.isDarkOrBlank || (best.hasBlackStart && best.start === 0 && (best.avgLuma || 120) < 15)),
     rejectedWindows: scoredWindows.slice(1).map((w) => ({
       start: w.start,
       end: w.end,

@@ -130,6 +130,7 @@ async function inspectImagePixels(filePath) {
     }
 
     const isGrayscale = meta.channels === 1 || (ch.length >= 3 && Math.abs(ch[0].mean - ch[1].mean) < 4 && Math.abs(ch[1].mean - ch[2].mean) < 4);
+    const isDarkOrBlank = avgMean < 8 && avgStdev < 6;
 
     // Style class inference from pixel properties
     let styleClass = 'STOCK';
@@ -165,6 +166,10 @@ async function inspectImagePixels(filePath) {
       styleClass,
       isGrayscale,
       colorTone,
+      avgMean: Number(avgMean.toFixed(2)),
+      avgStdev: Number(avgStdev.toFixed(2)),
+      isDarkOrBlank,
+      hasBlackStart: avgMean < 10 && avgStdev < 6,
       width: meta.width || 1920,
       height: meta.height || 1080,
     };
@@ -242,6 +247,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
       styleClass: 'DOCUMENTARY',
       temporalVariation: 0.3,
       hasBlackStart: false,
+      avgMean: 120,
+      avgStdev: 35,
+      isDarkOrBlank: false,
       semanticVision: null,
     };
   }
@@ -249,6 +257,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
   const avgBusyness = frameStats.reduce((s, f) => s + f.stdev, 0) / frameStats.length / 75;
   const meanDiff = Math.abs(frameStats[0].mean - frameStats[frameStats.length - 1].mean);
   const temporalVariation = Math.min(1.0, meanDiff / 50);
+  const avgMean = frameStats.reduce((s, f) => s + f.mean, 0) / frameStats.length;
+  const avgStdev = frameStats.reduce((s, f) => s + f.stdev, 0) / frameStats.length;
+  const isDarkOrBlank = frameStats.length > 0 && (avgMean < 8 || frameStats.every((f) => f.mean < 8 && f.stdev < 6) || (hasBlackStart && avgMean < 12 && avgBusyness < 0.12));
 
   return {
     visualBusyness: Number(avgBusyness.toFixed(2)),
@@ -256,6 +267,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
     styleClass: 'DOCUMENTARY',
     temporalVariation: Number(temporalVariation.toFixed(2)),
     hasBlackStart,
+    avgMean: Number(avgMean.toFixed(2)),
+    avgStdev: Number(avgStdev.toFixed(2)),
+    isDarkOrBlank,
     semanticVision: semanticFrames.sort((a, b) => b.confidence - a.confidence)[0] || null,
   };
 }
@@ -862,6 +876,9 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
         pixelAnalysis.styleClass = vidStats.styleClass;
         pixelAnalysis.temporalVariation = vidStats.temporalVariation;
         pixelAnalysis.hasBlackStart = vidStats.hasBlackStart;
+        pixelAnalysis.avgMean = vidStats.avgMean;
+        pixelAnalysis.avgStdev = vidStats.avgStdev;
+        pixelAnalysis.isDarkOrBlank = vidStats.isDarkOrBlank;
         pixelAnalysis.subjectBoundsConfidence = 'HIGH';
         pixelInspected = vidStats.sampledFrameCount > 0;
         level3Vision = vidStats.semanticVision;

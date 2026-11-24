@@ -924,3 +924,50 @@ test('query ladder sanitizes synthetic editorial phrases and avoids pollution', 
     assert.doesNotMatch(q, /authentic real-world environment matching context/i, `Query polluted: "${q}"`);
   }
 });
+
+test('pitch black or blank media candidates are rejected under Gate 1 technical validity', () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_night',
+    role: 'context',
+    visualConcept: 'single bright star in night sky close up',
+    narrationSegment: 'A quiet star glimmers softly above.',
+  }, { editorialMode: 'GENERAL' });
+
+  const blackCandidate = {
+    id: 'cand_black',
+    type: 'video',
+    width: 1280,
+    height: 720,
+    duration: 10,
+    label: 'Starry night sky with twinkling stars',
+  };
+
+  const darkInspection = {
+    composition: { visualBusyness: 0.08, saliencyCenter: { x: 0.5, y: 0.5 } },
+    levels: {
+      level1: {
+        visualBusyness: 0.08,
+        hasBlackStart: true,
+        avgMean: 1.6,
+        avgStdev: 5.1,
+        isDarkOrBlank: true,
+      },
+      level2: { brandEntities: [], productEntities: [], technicalEntities: [], foreignEntities: [], detectedMeanings: [] },
+      level3: { topClass: 'night sky with stars, moon, or quiet twilight atmosphere', confidence: 0.98 },
+    },
+    confidence: 0.98,
+    pixelInspected: true,
+  };
+
+  const judgment = judgeAssetCandidate({
+    candidate: blackCandidate,
+    visibleNeed,
+    targetFormat: 'landscape',
+    inspection: darkInspection,
+    retrievalScore: { resolutionStatus: 'good' },
+  });
+
+  assert.equal(judgment.accepted, false);
+  assert.equal(judgment.rejected, true);
+  assert.ok(judgment.rejectReasons.includes('technical_blank_or_pitch_black_media'));
+});

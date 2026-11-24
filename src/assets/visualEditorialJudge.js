@@ -997,6 +997,16 @@ export function judgeAssetCandidate({
     gate1Pass = false;
     rejectReasons.push('technical_unusable_resolution');
   }
+  const isDarkOrBlank = Boolean(
+    inspection?.levels?.level1?.isDarkOrBlank
+    || inspection?.pixelAnalysis?.isDarkOrBlank
+    || (inspection?.levels?.level1?.avgMean != null && inspection?.levels?.level1?.avgMean < 8 && (inspection?.levels?.level1?.visualBusyness || 0) < 0.12)
+    || (inspection?.levels?.level1?.hasBlackStart && (inspection?.levels?.level1?.visualBusyness || 0) < 0.10)
+  );
+  if (isDarkOrBlank) {
+    gate1Pass = false;
+    rejectReasons.push('technical_blank_or_pitch_black_media');
+  }
 
   // GATE 2: Hard Semantic Validity
   // If match classification is ACCIDENTAL or WRONG, or if accept is false: REJECT
