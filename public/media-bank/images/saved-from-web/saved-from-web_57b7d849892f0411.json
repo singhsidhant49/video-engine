@@ -1,0 +1,68 @@
+{
+  "id": "saved-from-web_57b7d849892f0411",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed financial chart showing a downward trend, ideal for economics and stock market analysis.",
+  "path": "images/saved-from-web/saved-from-web_57b7d849892f0411.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "financial",
+    "chart",
+    "downward",
+    "trend",
+    "ideal",
+    "economic",
+    "stock",
+    "market",
+    "analysi",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "2008",
+    "crisi",
+    "showing",
+    "economics",
+    "analysis"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed financial chart showing a downward trend, ideal for economics and stock market analysis."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "2008 financial crisis stock market",
+    "savedAt": "2026-10-23T09:04:24.675Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Rafael Minguet Delgado",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/financial-market-graph-with-downward-trend-38782891/"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "small_business_finance_planning_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Small business owner planning finances in studio",
+  "path": "images/finance/small_business_finance_planning_002.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "small business",
+    "planning",
+    "cash flow",
+    "e-commerce",
+    "entrepreneur"
+  ],
+  "concepts": [
+    "small business finance",
+    "profit tracking",
+    "entrepreneur budgeting",
+    "revenue planning"
+  ],
+  "subjects": [
+    "business owner",
+    "laptop finance dashboard",
+    "shipping boxes"
+  ],
+  "actions": [
+    "reviewing sales",
+    "tracking profit",
+    "planning operations"
+  ],
+  "mood": [
+    "warm",
+    "productive",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "small business finance",
+    "entrepreneurship",
+    "e-commerce profit",
+    "cash flow"
+  ],
+  "avoidFor": [
+    "institutional trading",
+    "retirement planning",
+    "bank branch"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

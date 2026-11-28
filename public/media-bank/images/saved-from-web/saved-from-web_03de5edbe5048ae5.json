@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_03de5edbe5048ae5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Shikara boats floating by decorated houseboats on Dal Lake, Kashmir, India.",
+  "path": "images/saved-from-web/saved-from-web_03de5edbe5048ae5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "shikara",
+    "boat",
+    "floating",
+    "decorated",
+    "houseboat",
+    "dal",
+    "lake",
+    "kashmir",
+    "india",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "boats",
+    "houseboats",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "shikara",
+    "boat",
+    "floating",
+    "decorated",
+    "houseboat",
+    "dal",
+    "lake",
+    "kashmir",
+    "india",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "boats",
+    "houseboats",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Shikara boats floating by decorated houseboats on Dal Lake, Kashmir, India."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Kashmiri houseboat Dal Lake",
+    "savedAt": "2026-10-27T06:44:28.580Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vũ didulich",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/traditional-shikara-boats-on-dal-lake-kashmir-36132097/"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "saved-from-web_1030b00308e84897",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Runner in crouched starting position on track, ready to sprint.",
+  "path": "images/saved-from-web/saved-from-web_1030b00308e84897.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "runner",
+    "crouched",
+    "starting",
+    "position",
+    "track",
+    "ready",
+    "sprint",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "start",
+    "gun",
+    "fire"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Runner in crouched starting position on track, ready to sprint."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sprint start gun fire",
+    "savedAt": "2026-10-26T07:39:49.988Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-person-in-a-running-start-position-8455978/"
+  }
+}

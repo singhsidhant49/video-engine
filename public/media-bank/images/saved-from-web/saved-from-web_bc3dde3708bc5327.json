@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_bc3dde3708bc5327",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Jebel Ali radar dishes.jpg",
+  "path": "images/saved-from-web/saved-from-web_bc3dde3708bc5327.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "jebel",
+    "ali",
+    "radar",
+    "dishe",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "dishes",
+    "jpg",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "jebel",
+    "ali",
+    "radar",
+    "dishe",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "dishes",
+    "jpg",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Jebel Ali radar dishes.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Jebel Ali",
+    "savedAt": "2026-10-26T10:44:46.840Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Jpbowen",
+    "creator": "Jpbowen",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:37.490Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Jebel_Ali_radar_dishes.jpg"
+  }
+}

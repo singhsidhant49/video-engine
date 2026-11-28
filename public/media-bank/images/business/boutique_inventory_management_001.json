@@ -1,0 +1,73 @@
+{
+  "id": "boutique_inventory_management_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Boutique manager checking inventory on tablet",
+  "path": "images/business/boutique_inventory_management_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "retail",
+    "inventory",
+    "tablet",
+    "boutique",
+    "manager"
+  ],
+  "concepts": [
+    "inventory management",
+    "retail technology",
+    "small business operations",
+    "store management"
+  ],
+  "subjects": [
+    "manager",
+    "tablet",
+    "store shelves"
+  ],
+  "actions": [
+    "checking stock",
+    "managing inventory"
+  ],
+  "mood": [
+    "clean",
+    "stylish",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "retail operations",
+    "small business marketing",
+    "inventory system"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "finance trading",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

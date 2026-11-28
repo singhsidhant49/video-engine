@@ -1,0 +1,77 @@
+{
+  "id": "science_lab_laptop_workflow_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist working on a laptop in a modern laboratory",
+  "path": "images/science/science_lab_laptop_workflow_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "laboratory",
+    "laptop",
+    "scientist",
+    "research workflow",
+    "microscope"
+  ],
+  "concepts": [
+    "digital lab workflow",
+    "scientific analysis",
+    "research documentation",
+    "lab computing"
+  ],
+  "subjects": [
+    "scientist",
+    "laptop",
+    "microscope",
+    "test tubes",
+    "lab bench"
+  ],
+  "actions": [
+    "typing notes",
+    "analyzing data",
+    "documenting research"
+  ],
+  "mood": [
+    "clean",
+    "focused",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.32,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "general science content",
+    "research workflow",
+    "lab operations",
+    "data analysis"
+  ],
+  "avoidFor": [
+    "field ecology",
+    "astronomy observatory",
+    "industrial shop floor"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

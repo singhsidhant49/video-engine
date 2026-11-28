@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_fa40023ff1a0add9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A cozy bedroom setting with books and an alarm clock on a nightstand next to a bed.",
+  "path": "images/saved-from-web/saved-from-web_fa40023ff1a0add9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "cozy",
+    "bedroom",
+    "setting",
+    "book",
+    "alarm",
+    "clock",
+    "nightstand",
+    "next",
+    "bed",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "books",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "cozy",
+    "bedroom",
+    "setting",
+    "book",
+    "alarm",
+    "clock",
+    "nightstand",
+    "next",
+    "bed",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "books",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A cozy bedroom setting with books and an alarm clock on a nightstand next to a bed."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "alarm clock 6:00 AM dark bedroom authentic real-world environment matching context",
+    "savedAt": "2026-10-28T10:38:31.277Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ron Lach",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/books-bed-stack-standing-9615255/"
+  }
+}

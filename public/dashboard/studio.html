@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>VideoForge Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dashboard/studio.css">
+  <link rel="stylesheet" href="/dashboard/filters.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard/overview"><span class="brand-mark">V</span><span>VideoForge<small>AUTONOMOUS STUDIO</small></span></a>
+      <nav aria-label="Studio navigation">
+        <a data-page="overview" href="/dashboard/overview"><span class="nav-ico">⌂</span>Overview</a>
+        <a data-page="calendar" href="/dashboard/calendar"><span class="nav-ico">◷</span>Calendar</a>
+        <a data-page="production" href="/dashboard/production"><span class="nav-ico">▶</span>Productions</a>
+        <a data-page="channels" href="/dashboard/channels"><span class="nav-ico">◫</span>Channels</a>
+        <a data-page="ideas" href="/dashboard/ideas"><span class="nav-ico">✦</span>Ideas</a>
+        <a data-page="alerts" href="/dashboard/alerts"><span class="nav-ico">!</span>Alerts<span id="alertsNavBadge" class="nav-badge" hidden>0</span></a>
+        <a data-page="analytics" href="/dashboard/analytics"><span class="nav-ico">◇</span>Analytics</a>
+        <a data-page="settings" href="/dashboard/settings"><span class="nav-ico">⚙</span>Settings</a>
+      </nav>
+      <div class="sidebar-foot"><span id="healthDot" class="status-dot"></span><div><strong id="healthText">Checking service</strong><small id="workerText">Connecting…</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button id="menuButton" class="icon-button menu-button" aria-label="Open navigation">☰</button>
+        <div>
+          <p class="eyebrow" id="pageEyebrow">STUDIO</p>
+          <h1 id="pageTitle">Overview</h1>
+        </div>
+        <div class="top-actions">
+          <span class="key-state" id="keyState">Checking session</span>
+          <a class="button secondary sm" href="/dashboard/production">+ New Video</a>
+          <button class="button secondary sm" id="openSettings">Account</button>
+        </div>
+      </header>
+
+      <!-- Overview -->
+      <section class="page" data-page-panel="overview">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">AUTONOMOUS VIDEO WORKFLOW</p>
+            <h2>Ideas to scheduled videos, automatically.</h2>
+            <p>Each channel generates strategic ideas, selects the best title and thumbnail, produces videos on schedule, and lands them on your Content Calendar ready to download or publish.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="/dashboard/production">Create video</a>
+              <a class="button secondary" href="/dashboard/calendar">Open calendar</a>
+              <a class="button secondary" href="/dashboard/channels">Manage channels</a>
+            </div>
+          </div>
+          <div class="hero-orbit"><span>IDEA</span><span>PACKAGE</span><span>RENDER</span><span>CALENDAR</span><strong>AI</strong></div>
+        </div>
+
+        <div id="overviewAlertBanner" class="alert-banner" hidden>
+          <div>
+            <strong id="overviewAlertTitle">Attention required</strong>
+            <span id="overviewAlertMessage">Active errors detected in your workspace.</span>
+          </div>
+          <a class="button danger sm" href="/dashboard/alerts">Review alerts →</a>
+        </div>
+
+        <div class="metric-grid">
+          <article><span>Total videos</span><strong id="totalCount">0</strong><small>All productions</small></article>
+          <article><span>In production</span><strong id="activeCount">0</strong><small>Queued or rendering</small></article>
+          <article><span>Completed</span><strong id="completedCount">0</strong><small>Ready to download or publish</small></article>
+          <article><span>Channels</span><strong id="channelCount">0</strong><small>Automation profiles</small></article>
+        </div>
+
+        <div class="section-head"><div><p class="eyebrow">UP NEXT</p><h2>Upcoming on calendar</h2></div><a href="/dashboard/calendar">Full calendar →</a></div>
+        <div id="overviewCalendar" class="calendar-agenda"></div>
+
+        <div class="section-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Latest productions</h2></div><a href="/dashboard/production">Manage all →</a></div>
+        <div id="recentGrid" class="video-grid compact"></div>
+      </section>
+
+      <!-- Calendar -->
+      <section class="page" data-page-panel="calendar">
+        <div class="page-intro">
+          <div>
+            <p class="eyebrow">CONTENT CALENDAR</p>
+            <h2>Scheduled releases across all channels.</h2>
+            <p>Automatically scheduled productions appear here with their winning title, thumbnail concept, and target publish slot. Download, reschedule, or publish directly.</p>
+          </div>
+          <div class="pill-tabs" role="tablist" aria-label="Calendar view">
+            <button type="button" data-calendar-view="agenda" class="active">Agenda</button>
+            <button type="button" data-calendar-view="month">Month Grid</button>
+          </div>
+        </div>
+        <div class="calendar-controls filter-bar">
+          <label class="field"><span>Channel</span><select id="calendarChannelFilter"><option value="">All channels</option></select></label>
+          <label class="field"><span>Status</span><select id="calendarStatusFilter"><option value="">All active &amp; scheduled</option><option value="approved">Approved</option><option value="queued">Queued</option><option value="producing">Producing</option><option value="ready">Ready to use / upload</option><option value="published">Published</option><option value="failed">Failed</option></select></label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="button secondary sm" id="calendarPrevMonth" type="button" hidden>← Prev</button>
+            <strong id="calendarMonthLabel" style="font-size:13px;min-width:120px;text-align:center" hidden></strong>
+            <button class="button secondary sm" id="calendarNextMonth" type="button" hidden>Next →</button>
+            <button class="button secondary sm" id="refreshCalendar" type="button">Refresh</button>
+          </div>
+        </div>
+        <div id="calendarContainer"></div>
+      </section>
+
+      <!-- Productions -->
+      <section class="page" data-page-panel="production">
+        <div class="split-layout">
+          <form id="createForm" class="panel form-panel">
+            <div class="panel-title"><div><p class="eyebrow">NEW PRODUCTION</p><h2>Create a video</h2></div><span class="step-pill">MANUAL</span></div>
+            <label class="field wide" style="margin-top:16px"><span>Topic or creative brief</span><textarea id="prompt" required minlength="10" rows="4" placeholder="Explain what the video should teach, reveal, or make the viewer feel…"></textarea></label>
+            <div class="form-grid">
+              <label class="field"><span>Channel profile</span><select id="profileId"><option value="default">Default profile</option></select></label>
+              <label class="field"><span>Format</span><select id="aspect"><option value="16:9">Landscape · 16:9</option><option value="9:16">Short · 9:16</option></select></label>
+              <label class="field"><span>Duration</span><select id="durationMode"><option value="auto">Auto · AI chooses</option><option value="exact">Exact duration</option></select><small id="durationHint" class="muted">AI selects within channel guardrails.</small></label>
+              <label class="field" id="durationField" hidden><span>Exact seconds</span><input id="duration" type="number" min="10" max="7200" placeholder="Example: 180"></label>
+              <label class="field"><span>Content type</span><select id="contentType"><option value="auto">Auto detect</option><option value="explainer">Explainer</option><option value="documentary">Documentary</option><option value="meditation">Meditation &amp; sleep</option><option value="story">Story</option><option value="motivational">Motivational</option><option value="audiobook">Audiobook</option><option value="business">Business</option><option value="finance">Finance</option><option value="psychology">Psychology</option><option value="science">Science</option><option value="technology">Technology</option><option value="mystery">Mystery</option><option value="horror">Horror</option></select></label>
+              <label class="field"><span>Language</span><select id="language"><option value="en">English (en)</option><option value="hi">Hindi · हिन्दी (hi)</option></select></label>
+              <label class="field"><span>Visual source</span><select id="imageSource"><option value="stock">Curated stock</option><option value="ai">AI generated</option></select></label>
+              <label class="field"><span>Voice</span><select id="voice"><option value="auto">Auto · match content</option><optgroup label="English voices"><option value="af_bella">Bella · crisp explainer</option><option value="af_heart">Heart · warm and natural</option><option value="af_nicole">Nicole · sleep whisper</option><option value="am_puck">Puck · confident documentary</option></optgroup><optgroup label="Hindi voices"><option value="hf_alpha">Alpha · warm Hindi female</option><option value="hf_beta">Beta · crisp Hindi female</option><option value="hm_omega">Omega · deep Hindi male</option><option value="hm_psi">Psi · storytelling Hindi male</option></optgroup></select></label>
+              <label class="field wide"><span>Tone</span><input id="tone" value="clear, compelling, and authoritative"></label>
+            </div>
+            <div class="submit-row"><p id="formMessage" class="form-message"></p><button class="button primary" type="submit">Start production</button></div>
+          </form>
+          <aside class="panel guide-panel">
+            <p class="eyebrow">WORKFLOW</p>
+            <h3>What happens next</h3>
+            <ol>
+              <li><strong>Strategy</strong><span>Audience, angle, hook, and narrative arc.</span></li>
+              <li><strong>Production</strong><span>Script, voice, scenes, visuals, captions, and music.</span></li>
+              <li><strong>Quality control</strong><span>Package validation and final render.</span></li>
+              <li><strong>Publish package</strong><span>Title, thumbnail, description, and downloadable video.</span></li>
+            </ol>
+          </aside>
+        </div>
+
+        <div class="section-head">
+          <div><p class="eyebrow">PRODUCTION QUEUE</p><h2>All videos</h2></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="button secondary sm" id="selectFailedVideos" type="button">Select failed</button>
+            <button class="button secondary sm" id="selectAllVideos" type="button">Select all visible</button>
+            <button class="button secondary sm" id="refreshVideos" type="button">Refresh</button>
+          </div>
+        </div>
+        <div id="productionInsights" class="metric-grid production-insights"></div>
+
+        <div id="bulkActionBar" class="bulk-bar" hidden>
+          <div class="bulk-bar-left">
+            <strong id="bulkSelectedCount">0 selected</strong>
+            <button class="button secondary sm" id="bulkSelectCompleted" type="button">Select completed</button>
+            <button class="button secondary sm" id="bulkClearSelection" type="button">Clear</button>
+          </div>
+          <div class="bulk-bar-right">
+            <button class="button danger sm" id="bulkDeleteVideos" type="button">Delete selected videos &amp; files</button>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <label class="field"><span>Channel</span><select id="videoChannelFilter"><option value="">All channels</option></select></label>
+          <label class="field"><span>Status</span><select id="videoStatusFilter"><option value="">All statuses</option><option value="active">Active</option><option value="queued">Queued</option><option value="preparing">Preparing</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="failed">Failed</option><option value="cancelled">Cancelled</option></select></label>
+          <label class="field"><span>Format</span><select id="videoFormatFilter"><option value="">All formats</option><option value="shorts">Shorts</option><option value="landscape">Landscape</option></select></label>
+          <label class="field"><span>Created from</span><input id="videoDateFrom" type="date"></label>
+          <label class="field"><span>Created through</span><input id="videoDateTo" type="date"></label>
+          <label class="field"><span>Minimum seconds</span><input id="videoDurationMin" type="number" min="0"></label>
+          <label class="field"><span>Maximum seconds</span><input id="videoDurationMax" type="number" min="0"></label>
+          <p id="videoFilterSummary" class="muted">0 videos</p>
+        </div>
+        <div id="videoGrid" class="video-grid"></div>
+        <div class="load-more"><button class="button secondary" id="loadMoreVideos" hidden>Load older videos</button></div>
+      </section>
+
+      <!-- Channels -->
+      <section class="page" data-page-panel="channels">
+        <div class="page-intro">
+          <div>
+            <p class="eyebrow">CHANNEL OPERATING SYSTEM</p>
+            <h2>Each channel runs on its own strategy.</h2>
+            <p>Connect YouTube channels individually, define visual style and duration guardrails, and enable autonomous ideation, packaging, production, and calendar scheduling.</p>
+          </div>
+          <button class="button primary" id="newChannel">New channel</button>
+        </div>
+        <div id="channelGrid" class="channel-grid"></div>
+      </section>
+
+      <!-- Ideas -->
+      <section class="page" data-page-panel="ideas">
+        <div class="toolbar">
+          <div class="filter-group">
+            <label class="field channel-select"><span>Channel</span><select id="ideaChannel"></select></label>
+            <label class="field"><span>Status</span><select id="ideaStatusFilter"><option value="">All statuses</option><option value="draft">Draft</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="queued">Queued</option><option value="producing">Producing</option><option value="ready">Ready</option><option value="publishing">Publishing</option><option value="published">Published</option><option value="publish_failed">Publish failed</option><option value="failed">Failed</option></select></label>
+          </div>
+          <div>
+            <button class="button secondary" id="refreshIdeas">Refresh</button>
+            <button class="button primary" id="brainstorm">Generate strategic ideas</button>
+          </div>
+        </div>
+        <div class="strategy-banner"><strong>Autonomous Packaging &amp; Strategy</strong><span>VideoForge automatically picks the strongest non-fatigued title &amp; thumbnail candidate and assigns a Calendar slot. You can override any title, hook, thumbnail, or schedule date below.</span></div>
+        <div id="ideaGrid" class="idea-grid"></div>
+      </section>
+
+      <!-- Alerts & Errors -->
+      <section class="page" data-page-panel="alerts">
+        <div class="page-intro">
+          <div>
+            <p class="eyebrow">MONITORING &amp; DIAGNOSTICS</p>
+            <h2>Alerts &amp; Errors</h2>
+            <p>Provider billing/key issues, failed renders, scheduler warnings, and YouTube sync errors are collected here with one-click fixes.</p>
+          </div>
+          <button class="button secondary" id="refreshAlerts" type="button">Refresh alerts</button>
+        </div>
+        <div class="metric-grid" id="alertsSummaryGrid">
+          <article><span>Total active alerts</span><strong id="alertsTotalCount">0</strong><small>Across workspace</small></article>
+          <article><span>Critical</span><strong id="alertsCriticalCount">0</strong><small>Billing, auth, or system down</small></article>
+          <article><span>Errors</span><strong id="alertsErrorCount">0</strong><small>Failed productions or uploads</small></article>
+          <article><span>Warnings</span><strong id="alertsWarningCount">0</strong><small>Sync or storage advisories</small></article>
+        </div>
+        <div class="toolbar">
+          <div class="pill-tabs" role="tablist" aria-label="Alert severity filter">
+            <button type="button" data-alert-filter="all" class="active">All</button>
+            <button type="button" data-alert-filter="critical">Critical</button>
+            <button type="button" data-alert-filter="error">Errors</button>
+            <button type="button" data-alert-filter="warning">Warnings</button>
+          </div>
+        </div>
+        <div id="alertsList" class="alerts-list"></div>
+      </section>
+
+      <!-- Analytics -->
+      <section class="page" data-page-panel="analytics">
+        <div class="page-intro"><div><p class="eyebrow">PERFORMANCE FEEDBACK</p><h2>Teach the strategy engine what works.</h2><p>Add results from published videos. Future ideas and packaging winners use these first-party signals.</p></div></div>
+        <form id="csvImportForm" class="panel" style="margin-bottom:20px">
+          <div class="panel-title"><div><p class="eyebrow">YOUTUBE ANALYTICS</p><h2>Import or synchronize performance</h2></div><div class="actions"><button id="syncYoutubeAnalytics" type="button">Sync YouTube</button><span class="step-pill">BULK IMPORT</span></div></div>
+          <p class="muted">Export video-level analytics from YouTube Studio or sync directly when connected.</p>
+          <div class="form-grid"><label class="field wide"><span>CSV file</span><input id="analyticsCsv" type="file" accept=".csv,text/csv" required></label></div>
+          <div class="submit-row"><p id="csvImportMessage" class="form-message"></p><button id="importAnalytics" class="button secondary" type="submit">Import CSV</button></div>
+        </form>
+        <div class="split-layout">
+          <form id="performanceForm" class="panel form-panel"><div class="panel-title"><div><p class="eyebrow">NEW SNAPSHOT</p><h2>Record video results</h2></div><span class="step-pill">MANUAL</span></div>
+            <div class="form-grid"><label class="field wide"><span>Channel</span><select id="performanceChannel" required></select></label><label class="field wide"><span>Video title</span><input id="performanceTitle" required minlength="2"></label><label class="field"><span>Format</span><select id="performanceFormat"><option value="landscape">Landscape</option><option value="shorts">Shorts</option></select></label><label class="field"><span>Duration (seconds)</span><input id="performanceDuration" type="number" min="1" value="120"></label><label class="field"><span>Views</span><input id="performanceViews" type="number" min="0" value="0"></label><label class="field"><span>Impressions</span><input id="performanceImpressions" type="number" min="0" value="0"></label><label class="field"><span>CTR %</span><input id="performanceCtr" type="number" min="0" max="100" step="0.01"></label><label class="field"><span>Average viewed %</span><input id="performanceViewed" type="number" min="0" max="100" step="0.01"></label><label class="field"><span>30-second retention %</span><input id="performanceRetention" type="number" min="0" max="100" step="0.01"></label><label class="field"><span>Subscribers gained</span><input id="performanceSubscribers" type="number" min="0" value="0"></label><label class="field"><span>Watch time hours</span><input id="performanceWatchTime" type="number" min="0" step="0.01"></label><label class="field"><span>Revenue</span><input id="performanceRevenue" type="number" min="0" step="0.01"></label></div>
+            <div class="submit-row"><p id="performanceMessage" class="form-message"></p><button class="button primary" type="submit">Save snapshot</button></div>
+          </form>
+          <aside class="panel guide-panel"><p class="eyebrow">SIGNALS USED</p><h3>Evidence, not guarantees</h3><ol><li><strong>Packaging</strong><span>Impressions and click-through rate indicate title-thumbnail fit.</span></li><li><strong>Retention</strong><span>Average viewed percentage and 30-second retention expose weak openings.</span></li><li><strong>Audience value</strong><span>Subscribers per thousand views helps identify repeatable topics.</span></li><li><strong>Format fit</strong><span>Shorts and landscape are evaluated separately.</span></li></ol></aside>
+        </div>
+        <div class="section-head"><div><p class="eyebrow">EVIDENCE QUALITY</p><h2>Channel baselines</h2></div></div><div id="performanceSummary" class="metric-grid"></div>
+        <div class="section-head"><div><p class="eyebrow">RECORDED DATA</p><h2>Performance history</h2></div><button class="button secondary" id="refreshPerformance">Refresh</button></div><div id="performanceGrid" class="idea-grid"></div>
+      </section>
+
+      <!-- Settings -->
+      <section class="page" data-page-panel="settings">
+        <div class="settings-grid">
+          <article class="panel">
+            <p class="eyebrow">ACCOUNT</p>
+            <h2>Administrator session</h2>
+            <p class="muted">You are signed in as <strong id="accountEmail">—</strong>. Your JWT is protected in an HttpOnly browser cookie.</p>
+            <p id="settingsError" class="error-text"></p>
+            <div class="submit-row"><span></span><button type="button" class="button danger ghost" id="logoutButton">Sign out</button></div>
+          </article>
+          <article class="panel">
+            <p class="eyebrow">SYSTEM</p>
+            <h2>Deployment status</h2>
+            <dl class="status-list">
+              <div><dt>API</dt><dd id="apiStatus">Checking</dd></div>
+              <div><dt>Workers</dt><dd id="workerStatus">—</dd></div>
+              <div><dt>Storage</dt><dd id="storageStatus">—</dd></div>
+              <div><dt>YouTube publishing</dt><dd id="youtubePublishingStatus">—</dd></div>
+              <div><dt>Authentication</dt><dd>JWT administrator session</dd></div>
+            </dl>
+          </article>
+        </div>
+        <div class="section-head"><div><p class="eyebrow">YOUTUBE THUMBNAILS</p><h2>AI thumbnail provider &amp; model</h2></div></div>
+        <form id="thumbnailSettingsForm" class="panel">
+          <p class="muted">Generate clickable AI YouTube thumbnails with Ideogram by default, and automatically fall back to FLUX (Replicate) if Ideogram credits run out.</p>
+          <div class="form-grid" style="margin-top:12px">
+            <label class="field">
+              <span>Primary provider</span>
+              <select id="thumbnailProvider">
+                <option value="ideogram">Ideogram (Recommended for quality &amp; hooks)</option>
+                <option value="replicate">FLUX (Replicate)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Primary model</span>
+              <select id="thumbnailModel"></select>
+            </label>
+            <label class="field">
+              <span>Quality</span>
+              <select id="thumbnailQuality">
+                <option value="low">Low (Fastest / Lowest cost)</option>
+                <option value="medium" selected>Medium (Balanced)</option>
+                <option value="high">High (Best detail)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Fallback FLUX model (Replicate)</span>
+              <select id="thumbnailFallbackModel">
+                <option value="black-forest-labs/flux-schnell">FLUX.1 Schnell (Fast)</option>
+                <option value="black-forest-labs/flux-dev">FLUX.1 Dev (Higher detail)</option>
+              </select>
+            </label>
+            <label class="check-card wide">
+              <input id="thumbnailFallbackToFlux" type="checkbox" checked>
+              <span><strong>Fallback to FLUX when Ideogram credits run out</strong><small>Automatically switches to Replicate FLUX on HTTP 402 / quota errors instead of leaving thumbnails ungenerated.</small></span>
+            </label>
+            <label class="check-card wide">
+              <input id="thumbnailEnabled" type="checkbox" checked>
+              <span><strong>Enable AI thumbnail generation</strong><small>Turn off only if you want raw video frame stills instead of AI thumbnails.</small></span>
+            </label>
+          </div>
+          <div class="badge-row" style="margin-top:12px">
+            <span class="badge" id="thumbnailIdeogramStatus">Ideogram key: Checking</span>
+            <span class="badge" id="thumbnailReplicateStatus">Replicate token: Checking</span>
+          </div>
+          <p id="thumbnailSettingsMessage" class="muted"></p>
+          <div class="submit-row"><span></span><button class="button primary" id="saveThumbnailSettings" type="submit">Save thumbnail settings</button></div>
+        </form>
+        <div class="section-head"><div><p class="eyebrow">ADMINISTRATION</p><h2>Administrator accounts</h2></div></div>
+        <div class="settings-grid">
+          <form id="adminUserForm" class="panel">
+            <label class="field"><span>Email</span><input id="adminUserEmail" type="email" autocomplete="off" required></label>
+            <label class="field" style="margin-top:12px"><span>Temporary password</span><input id="adminUserPassword" type="password" autocomplete="new-password" minlength="12" required></label>
+            <p id="adminUserError" class="error-text"></p>
+            <div class="submit-row"><span></span><button class="button primary" type="submit">Create or reset admin</button></div>
+          </form>
+          <div id="adminUserList" class="panel"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Channel Create / Edit Dialog -->
+  <dialog id="channelDialog">
+    <form method="dialog" id="channelForm" class="dialog-form">
+      <div class="dialog-head">
+        <div><p class="eyebrow">AUTOMATION PROFILE</p><h2 id="channelDialogTitle">Create channel</h2></div>
+        <button class="icon-button" value="cancel" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="form-grid">
+          <label class="field"><span>Channel name</span><input id="channelName" required minlength="2"></label>
+          <label class="field"><span>Niche</span><input id="channelNiche" required placeholder="Personal finance for freelancers"></label>
+          <label class="field wide"><span>Target audience</span><textarea id="channelAudience" required rows="2" placeholder="Who they are, their level, and what outcome they want"></textarea></label>
+          <label class="field wide"><span>Audience pain points · comma separated</span><input id="channelPainPoints" placeholder="Confusing advice, limited time, fear of mistakes"></label>
+          <label class="field wide"><span>Content pillars · comma separated</span><input id="channelPillars" required placeholder="Tax basics, cash flow, investing"></label>
+        </div>
+        <fieldset><legend>Growth strategy</legend><div class="form-grid"><label class="field"><span>Channel archetype</span><select id="channelArchetype"><option value="niche_authority">Niche authority</option><option value="education">Education</option><option value="tutorial">Tutorial</option><option value="review">Review</option><option value="commentary">Commentary</option><option value="entertainment">Entertainment</option><option value="personal_brand">Personal brand</option><option value="shorts_first">Shorts-first</option><option value="vlog">Vlog</option></select></label><label class="field"><span>Channel size</span><select id="channelSizeTier"><option value="new">New · under 1K</option><option value="growing">Growing · 1K–10K</option><option value="established">Established · 10K–100K</option><option value="authority">Authority · 100K+</option></select></label><label class="field"><span>Primary goal</span><select id="channelGoal"><option value="growth">Growth</option><option value="monetization">Monetization</option><option value="brand_authority">Brand authority</option><option value="audience_engagement">Audience engagement</option></select></label><label class="field"><span>Resources</span><select id="channelResources"><option value="solo">Solo creator</option><option value="small_team">Small team</option><option value="full_team">Full team</option></select></label><label class="field wide"><span>Positioning</span><input id="channelPositioning" placeholder="We help [viewer] achieve [outcome] through [unique approach]"></label><label class="field wide"><span>Differentiation</span><input id="channelDifferentiation" placeholder="What this channel does that competitors do not"></label><label class="field wide"><span>Competitors · comma separated</span><input id="channelCompetitors" placeholder="Channel A, Channel B"></label></div></fieldset>
+        <fieldset><legend>Supported video formats</legend><div class="choice-row"><label class="check-card"><input id="formatLandscape" type="checkbox" checked><span><strong>Landscape</strong><small>Long-form · 16:9</small></span></label><label class="check-card"><input id="formatShorts" type="checkbox" checked><span><strong>Shorts</strong><small>Vertical · 9:16</small></span></label></div></fieldset>
+        <fieldset><legend>LLM duration boundaries</legend><p class="muted">The AI chooses the exact duration for each idea based on topic depth and viewer intent.</p><div class="range-grid"><div id="shortDurationBox"><strong>Shorts</strong><label>Minimum <input id="shortMin" type="number" min="10" max="180" value="20"></label><label>Maximum <input id="shortMax" type="number" min="10" max="180" value="60"></label></div><div id="landscapeDurationBox"><strong>Landscape</strong><label>Minimum <input id="landscapeMin" type="number" min="30" max="7200" value="120"></label><label>Maximum <input id="landscapeMax" type="number" min="30" max="7200" value="600"></label></div></div></fieldset>
+        <fieldset>
+          <legend>Production automation &amp; calendar</legend>
+          <div class="choice-row">
+            <label class="check-card"><input id="channelAutomationEnabled" type="checkbox"><span><strong>Enable scheduled production</strong><small>Generate ideas, pick winners, produce, and add to calendar.</small></span></label>
+            <label class="check-card"><input id="channelAutoScheduleCalendar" type="checkbox" checked><span><strong>Auto-assign calendar slots</strong><small>Assign next open publish date/time automatically.</small></span></label>
+          </div>
+          <div id="channelAutomationFields" class="form-grid" hidden>
+            <label class="field"><span>Production schedule · cron</span><input id="channelCron" value="0 12 * * *"></label>
+            <label class="field"><span>Calendar release cron (optional)</span><input id="channelPublishCron" placeholder="Defaults to production schedule"></label>
+            <label class="field"><span>Timezone</span><input id="channelTimezone" value="Asia/Calcutta"></label>
+            <label class="field"><span>Approval</span><select id="channelApproval"><option value="manual_approval">Manual approval</option><option value="automatic">Automatic production</option></select></label>
+            <label class="field"><span>Queue priority</span><select id="channelQueuePriority"><option value="high">High</option><option value="normal" selected>Normal</option><option value="low">Low</option></select></label>
+            <label class="field"><span>Maximum pending videos</span><input id="channelMaxPending" type="number" min="1" max="10" value="2"></label>
+            <label class="check-card"><input id="channelAutoReplenish" type="checkbox" checked><span><strong>Auto-replenish ideas</strong><small>Keep idea backlog topped up.</small></span></label>
+            <label class="check-card"><input id="channelAutoPublish" type="checkbox"><span><strong>Auto-publish to YouTube</strong><small id="channelAutoPublishHint">Uploads ready videos to linked YouTube channel.</small></span></label>
+            <label class="field"><span>YouTube publish privacy</span><select id="channelPublishPrivacy"><option value="private">Private (or Scheduled)</option><option value="unlisted">Unlisted</option><option value="public">Public</option></select></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Visual identity</legend>
+          <p class="muted">Choose the media workflow and keep a consistent visual language across every video on this channel.</p>
+          <div class="form-grid">
+            <label class="field"><span>Visual source</span><select id="channelImageSource"><option value="stock" selected>Curated stock media</option><option value="ai">AI-generated images</option></select></label>
+            <div id="channelStockInfo" class="field wide stock-info-card"><p class="muted"><strong>Curated stock media:</strong> High-definition footage and photos from Pexels, Wikimedia, and public domain archives are automatically matched to scene narration. No AI image credits or API keys required.</p></div>
+            <label class="field channel-ai-field" hidden><span>Image type and style</span><select id="channelImageStyle">
+              <option value="cinematic_documentary">Cinematic Documentary (35mm Photography)</option>
+              <option value="dark_noir">Dark Investigative Noir (Chiaroscuro &amp; Suspense)</option>
+              <option value="editorial_vector">Modern Editorial Vector (Clean 2D Graphics)</option>
+              <option value="stickman">Modern Stickman Storytelling (Minimalist &amp; Conceptual)</option>
+              <option value="3d_render">Stylized 3D Animation (Warm &amp; Expressive)</option>
+              <option value="anime">Cinematic Anime (Atmospheric Lighting)</option>
+              <option value="custom">Custom Brand Style (Prompt-Driven)</option>
+            </select></label>
+            <div id="channelStylePreview" class="field wide channel-ai-field style-preview-card" hidden><div id="channelStyleDescription" class="style-desc"></div><div id="channelStyleBestFor" class="style-best-for muted"></div></div>
+            <label class="field channel-ai-field" hidden><span>AI model</span><select id="channelImageModel"></select></label>
+            <label class="field channel-ai-field" hidden><span>Image quality</span><select id="channelImageQuality"><option value="low">Low - faster</option><option value="medium" selected>Medium - balanced</option><option value="high">High - maximum detail</option></select></label>
+            <input type="hidden" id="channelImageProvider" value="replicate">
+            <label id="channelCustomStyleField" class="field wide channel-ai-field" hidden><span>Custom style direction</span><textarea id="channelCustomStylePrompt" rows="3" maxlength="500" placeholder="Describe the recurring art direction, palette, lighting, characters, camera language, and details to avoid."></textarea></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Production defaults</legend>
+          <div class="form-grid">
+            <label class="field"><span>Default content type</span><select id="channelContentType"><option value="auto">AI chooses by topic</option><option value="documentary">Documentary</option><option value="explainer">Explainer</option><option value="meditation">Meditation &amp; sleep</option><option value="story">Storytelling</option><option value="motivational">Motivational</option><option value="audiobook">Audiobook</option><option value="business">Business</option><option value="finance">Finance</option><option value="psychology">Psychology</option><option value="science">Science</option><option value="technology">Technology</option><option value="mystery">Mystery</option><option value="horror">Horror</option></select></label>
+            <label class="field"><span>Language</span><select id="channelLanguage"><option value="en">English (en)</option><option value="hi">Hindi · हिन्दी (hi)</option></select></label>
+            <label class="field"><span>Voice</span><select id="channelVoice"><option value="auto">AI chooses</option><optgroup label="English voices"><option value="af_heart">Heart - warm female</option><option value="af_bella">Bella - crisp female</option><option value="af_nicole">Nicole - soft female</option><option value="am_puck">Puck - resonant male</option></optgroup><optgroup label="Hindi voices"><option value="hf_alpha">Alpha - warm Hindi female</option><option value="hf_beta">Beta - crisp Hindi female</option><option value="hm_omega">Omega - deep Hindi male</option><option value="hm_psi">Psi - storytelling Hindi male</option></optgroup></select></label>
+            <label class="field wide"><span>Tone</span><input id="channelTone" maxlength="200" value="clear, compelling, and authoritative"></label>
+            <label class="check-card wide"><input id="channelSubtitles" type="checkbox" checked><span><strong>Burn in subtitles</strong><small>Use readable captions in every generated video.</small></span></label>
+          </div>
+        </fieldset>
+        <p id="channelError" class="error-text"></p>
+      </div>
+      <div class="dialog-actions"><button class="button secondary" value="cancel">Cancel</button><button id="channelSubmit" class="button primary" type="submit" value="default">Create channel</button></div>
+    </form>
+  </dialog>
+
+  <!-- Idea / Calendar Edit Dialog -->
+  <dialog id="ideaEditDialog">
+    <form method="dialog" id="ideaEditForm" class="dialog-form">
+      <div class="dialog-head">
+        <div><p class="eyebrow">CALENDAR &amp; PACKAGING</p><h2>Edit scheduled idea</h2></div>
+        <button class="icon-button" value="cancel" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="form-grid">
+          <label class="field wide"><span>Title</span><input id="editIdeaTitle" required minlength="5" maxlength="100"></label>
+          <label class="field wide"><span>Spoken hook</span><input id="editIdeaHook" required minlength="5" maxlength="300"></label>
+          <label class="field wide"><span>Thumbnail concept</span><textarea id="editIdeaThumbnail" required rows="2" minlength="5" maxlength="500"></textarea></label>
+          <label class="field"><span>Publish date &amp; time (local)</span><input id="editIdeaPublishAt" type="datetime-local"></label>
+          <label class="field"><span>Status</span><select id="editIdeaStatus"><option value="draft">Draft</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label>
+        </div>
+        <p id="ideaEditError" class="error-text" style="margin-top:10px"></p>
+      </div>
+      <div class="dialog-actions"><button class="button secondary" value="cancel">Cancel</button><button class="button primary" type="submit">Save changes</button></div>
+    </form>
+  </dialog>
+
+  <!-- Bulk / Single Delete Confirmation Dialog -->
+  <dialog id="confirmDeleteDialog" class="confirm-dialog">
+    <form method="dialog" id="confirmDeleteForm" class="dialog-form">
+      <div class="dialog-head">
+        <div><p class="eyebrow">PERMANENT DELETION</p><h2>Delete selected videos?</h2></div>
+        <button class="icon-button" value="cancel" aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <p id="confirmDeleteSummary" class="muted" style="margin-top:0">This permanently deletes the selected videos, MP4 files, thumbnails, run intermediates, and database records.</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="button secondary" value="cancel">Cancel</button>
+        <button id="confirmDeleteSubmit" class="button danger" type="submit">Delete permanently</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Review Video Dialog -->
+  <dialog id="reviewDialog">
+    <div class="dialog-form review-dialog">
+      <div class="dialog-head"><div><p class="eyebrow">QUALITY REVIEW</p><h2 id="reviewTitle">Video</h2></div><button class="icon-button" id="closeReview">×</button></div>
+      <div class="dialog-body"><video id="reviewVideo" controls playsinline></video><div id="packageDetails"></div></div>
+    </div>
+  </dialog>
+
+  <!-- Login Dialog -->
+  <dialog id="loginDialog" class="login-dialog">
+    <form id="loginForm" class="dialog-form">
+      <div class="dialog-head"><div><p class="eyebrow">SECURE ACCESS</p><h2>Sign in to VideoForge</h2></div></div>
+      <div class="dialog-body">
+        <p class="muted">Use the administrator account configured for this deployment.</p>
+        <div class="form-grid"><label class="field wide"><span>Email</span><input id="loginEmail" type="email" autocomplete="username" required autofocus></label><label class="field wide"><span>Password</span><input id="loginPassword" type="password" autocomplete="current-password" required></label></div>
+        <p id="loginError" class="error-text"></p>
+      </div>
+      <div class="dialog-actions"><button id="loginButton" class="button primary" type="submit">Sign in</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/dashboard/studio.js"></script>
+</body>
+</html>

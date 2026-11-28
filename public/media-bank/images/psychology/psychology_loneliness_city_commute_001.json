@@ -1,0 +1,77 @@
+{
+  "id": "psychology_loneliness_city_commute_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Quiet solitude on a city bus at twilight",
+  "path": "images/psychology/psychology_loneliness_city_commute_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "loneliness",
+    "solitude",
+    "urban life",
+    "reflection",
+    "commute",
+    "mental health"
+  ],
+  "concepts": [
+    "urban loneliness",
+    "social isolation",
+    "self-reflection",
+    "emotional distance"
+  ],
+  "subjects": [
+    "young man",
+    "bus window",
+    "city skyline",
+    "sunset"
+  ],
+  "actions": [
+    "staring out window",
+    "thinking quietly",
+    "commuting alone"
+  ],
+  "mood": [
+    "melancholic",
+    "reflective",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.29,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "loneliness explainer",
+    "mental health storytelling",
+    "social isolation",
+    "reflective scenes"
+  ],
+  "avoidFor": [
+    "mindfulness retreat",
+    "therapy office",
+    "family support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

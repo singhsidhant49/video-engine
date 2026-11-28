@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_595c06844962be15",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Lifeguards on a Santa Monica beach tower with seagulls and a rescue board on a sunny summer day.",
+  "path": "images/saved-from-web/saved-from-web_595c06844962be15.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1693,
+  "aspectRatio": 1.5357,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "lifeguard",
+    "santa",
+    "monica",
+    "beach",
+    "tower",
+    "seagull",
+    "rescue",
+    "board",
+    "sunny",
+    "summer",
+    "day",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "lifeguards",
+    "seagulls",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "lifeguard",
+    "santa",
+    "monica",
+    "beach",
+    "tower",
+    "seagull",
+    "rescue",
+    "board",
+    "sunny",
+    "summer",
+    "day",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "lifeguards",
+    "seagulls",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Lifeguards on a Santa Monica beach tower with seagulls and a rescue board on a sunny summer day."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "men cheering on shore rescue",
+    "savedAt": "2026-10-29T10:54:31.611Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Leticia Golubov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/men-at-lifeguard-tower-on-beach-26794491/"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "science_molecular_team_review_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientists analyzing molecular data on a large digital display",
+  "path": "images/science/science_molecular_team_review_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "team",
+    "molecular data",
+    "protein model",
+    "research",
+    "collaboration",
+    "laboratory"
+  ],
+  "concepts": [
+    "scientific collaboration",
+    "molecular analysis",
+    "research review",
+    "lab data interpretation"
+  ],
+  "subjects": [
+    "scientists",
+    "digital display",
+    "molecular visualization",
+    "laboratory"
+  ],
+  "actions": [
+    "reviewing data",
+    "presenting findings",
+    "team discussion"
+  ],
+  "mood": [
+    "advanced",
+    "collaborative",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.73,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "research teamwork",
+    "biotech explainer",
+    "science presentation",
+    "innovation video"
+  ],
+  "avoidFor": [
+    "solo field study",
+    "astronomy observation",
+    "casual education"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

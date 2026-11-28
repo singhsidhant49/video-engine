@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_527f87e69befcc45",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Powerful ocean waves crash against a rugged rocky shoreline on a clear sunny day.",
+  "path": "images/saved-from-web/saved-from-web_527f87e69befcc45.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1577,
+  "aspectRatio": 1.6487,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "powerful",
+    "ocean",
+    "wave",
+    "crash",
+    "against",
+    "rugged",
+    "rocky",
+    "shoreline",
+    "clear",
+    "sunny",
+    "day",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "powerful",
+    "ocean",
+    "wave",
+    "crash",
+    "against",
+    "rugged",
+    "rocky",
+    "shoreline",
+    "clear",
+    "sunny",
+    "day",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Powerful ocean waves crash against a rugged rocky shoreline on a clear sunny day."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ocean wave crashing",
+    "savedAt": "2026-10-26T15:26:04.489Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Robert So",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/ocean-waves-crashing-on-black-rock-formation-13582033/"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_469f0812366556af",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Supermarket aisle featuring discounted snacks with visible sale tags and prices.",
+  "path": "images/saved-from-web/saved-from-web_469f0812366556af.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "supermarket",
+    "aisle",
+    "featuring",
+    "discounted",
+    "snack",
+    "visible",
+    "sale",
+    "tag",
+    "price",
+    "grocery",
+    "store",
+    "static",
+    "presentation",
+    "snacks",
+    "tags",
+    "prices",
+    "store shelves",
+    "food products or jars"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "supermarket",
+    "aisle",
+    "featuring",
+    "discounted",
+    "snack",
+    "visible",
+    "sale",
+    "tag",
+    "price",
+    "grocery",
+    "store",
+    "static",
+    "presentation",
+    "snacks",
+    "tags",
+    "prices",
+    "store shelves",
+    "food products or jars"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Supermarket aisle featuring discounted snacks with visible sale tags and prices."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "supermarket or grocery store aisle"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "rising grocery price tags supermarket shelf",
+    "savedAt": "2026-10-28T16:28:25.145Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Erik Mclean",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/assorted-labeled-boxes-on-white-shelf-9592528/"
+  }
+}

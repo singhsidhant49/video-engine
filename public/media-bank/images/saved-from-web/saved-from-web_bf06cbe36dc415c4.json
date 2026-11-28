@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_bf06cbe36dc415c4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two soldiers in period uniforms engaged in reenactment outside a tent.",
+  "path": "images/saved-from-web/saved-from-web_bf06cbe36dc415c4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1734,
+  "height": 2600,
+  "aspectRatio": 0.6669,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "soldier",
+    "period",
+    "uniform",
+    "engaged",
+    "reenactment",
+    "outside",
+    "tent",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "soldiers",
+    "uniforms"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "soldier",
+    "period",
+    "uniform",
+    "engaged",
+    "reenactment",
+    "outside",
+    "tent",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "soldiers",
+    "uniforms"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two soldiers in period uniforms engaged in reenactment outside a tent."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "medical tent D-Day wounded soldiers",
+    "savedAt": "2026-11-02T10:17:03.227Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/two-soldiers-in-front-of-a-tent-9268593/"
+  }
+}

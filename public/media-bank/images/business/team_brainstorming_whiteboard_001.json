@@ -1,0 +1,74 @@
+{
+  "id": "team_brainstorming_whiteboard_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Collaborative brainstorming at the whiteboard",
+  "path": "images/business/team_brainstorming_whiteboard_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "brainstorming",
+    "whiteboard",
+    "team",
+    "planning",
+    "startup",
+    "ideas"
+  ],
+  "concepts": [
+    "team ideation",
+    "strategy workshop",
+    "collaborative planning",
+    "creative business thinking"
+  ],
+  "subjects": [
+    "team",
+    "whiteboard",
+    "sticky notes"
+  ],
+  "actions": [
+    "brainstorming",
+    "planning"
+  ],
+  "mood": [
+    "collaborative",
+    "creative",
+    "energetic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.61,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "teamwork",
+    "startup content",
+    "planning workshop"
+  ],
+  "avoidFor": [
+    "finance trading",
+    "formal boardroom",
+    "retail"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_be49fe4bda4d0980",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Breathtaking aerial view of a mountain valley at sunrise, with a winding river and misty clouds.",
+  "path": "images/saved-from-web/saved-from-web_be49fe4bda4d0980.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1421,
+  "aspectRatio": 1.8297,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "aerial",
+    "mountain",
+    "valley",
+    "sunrise",
+    "winding",
+    "river",
+    "misty",
+    "cloud",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "aerial",
+    "mountain",
+    "valley",
+    "sunrise",
+    "winding",
+    "river",
+    "misty",
+    "cloud",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Breathtaking aerial view of a mountain valley at sunrise, with a winding river and misty clouds."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "river catching light mountain valley sunrise",
+    "savedAt": "2026-10-27T07:05:34.905Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vasilis Papapanagiotou",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-footage-of-mountains-and-terrains-11675858/"
+  }
+}

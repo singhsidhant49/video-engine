@@ -1,0 +1,77 @@
+{
+  "id": "science_volcanology_eruption_observation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Volcanologist documenting an active eruption at sunset",
+  "path": "images/science/science_volcanology_eruption_observation_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "volcanology",
+    "volcano",
+    "eruption",
+    "geology",
+    "lava",
+    "field research"
+  ],
+  "concepts": [
+    "volcano monitoring",
+    "eruption observation",
+    "geological hazard science",
+    "earth systems research"
+  ],
+  "subjects": [
+    "scientist",
+    "volcano",
+    "survey equipment",
+    "notebook"
+  ],
+  "actions": [
+    "observing eruption",
+    "taking notes",
+    "monitoring hazard"
+  ],
+  "mood": [
+    "dramatic",
+    "epic",
+    "high-stakes"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "volcano explainer",
+    "geology documentary",
+    "natural hazards",
+    "earth science"
+  ],
+  "avoidFor": [
+    "lab microbiology",
+    "retail",
+    "business meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

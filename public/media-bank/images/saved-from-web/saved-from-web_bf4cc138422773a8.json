@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_bf4cc138422773a8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A beautiful Shetland pony enjoying a peaceful moment in a snowy winter landscape.",
+  "path": "images/saved-from-web/saved-from-web_bf4cc138422773a8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1646,
+  "aspectRatio": 1.5796,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "beautiful",
+    "shetland",
+    "pony",
+    "enjoying",
+    "peaceful",
+    "moment",
+    "snowy",
+    "winter",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "beautiful",
+    "shetland",
+    "pony",
+    "enjoying",
+    "peaceful",
+    "moment",
+    "snowy",
+    "winter",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A beautiful Shetland pony enjoying a peaceful moment in a snowy winter landscape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Antarctic pony in snow",
+    "savedAt": "2026-10-29T13:25:27.860Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sergey  Meshkov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/shetland-pony-on-snow-covered-ground-10964709/"
+  }
+}

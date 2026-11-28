@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_f2c253f7a83aa9d9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Foggy ocean view with cargo ships and a small boat.",
+  "path": "images/saved-from-web/saved-from-web_f2c253f7a83aa9d9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1727,
+  "aspectRatio": 1.5055,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "foggy",
+    "ocean",
+    "cargo",
+    "ship",
+    "small",
+    "boat",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "ships",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "foggy",
+    "ocean",
+    "cargo",
+    "ship",
+    "small",
+    "boat",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "ships",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Foggy ocean view with cargo ships and a small boat."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "small boat storm waves crashing",
+    "savedAt": "2026-10-29T08:40:13.457Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mehmet Turgut  Kirkgoz",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/serene-maritime-scene-with-cargo-ships-37738164/"
+  }
+}

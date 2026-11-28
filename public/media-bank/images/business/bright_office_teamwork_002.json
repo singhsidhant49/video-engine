@@ -1,0 +1,75 @@
+{
+  "id": "bright_office_teamwork_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Collaborative teamwork in a bright office",
+  "path": "images/business/bright_office_teamwork_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "teamwork",
+    "collaboration",
+    "office",
+    "startup",
+    "team meeting"
+  ],
+  "concepts": [
+    "team collaboration",
+    "office culture",
+    "startup teamwork",
+    "idea sharing"
+  ],
+  "subjects": [
+    "team",
+    "laptops",
+    "meeting table"
+  ],
+  "actions": [
+    "collaborating",
+    "discussing",
+    "planning"
+  ],
+  "mood": [
+    "friendly",
+    "collaborative",
+    "energetic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "teamwork",
+    "startup content",
+    "office culture",
+    "collaboration scene"
+  ],
+  "avoidFor": [
+    "solo finance",
+    "retail checkout",
+    "customer support center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

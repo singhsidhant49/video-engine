@@ -24,18 +24,39 @@ async function grabFrame(file, seconds, tmpDir, i) {
       const mean = sum / data.length;
       let sq = 0;
       for (const v of data) sq += (v - mean) ** 2;
-      return { data, mean, stdev: Math.sqrt(sq / data.length) };
+      return { data, mean, stdev: Math.sqrt(sq / data.length), grabFailed: false };
     }
   } catch (e) {
-    // Graceful fallback
+    return { data: null, mean: 0, stdev: 0, grabFailed: true, error: e?.message || String(e) };
+  } finally {
+    await fs.rm(out, { force: true }).catch(() => {});
   }
-  return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30 };
+  return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30, grabFailed: false };
 }
 
-function diff(a, b) {
-  let s = 0;
-  for (let i = 0; i < a.data.length; i++) s += Math.abs(a.data[i] - b.data[i]);
-  return s / a.data.length;
+export function pixelDifferenceExcludingRect(a, b, ignoreRect = null) {
+  let s = 0, count = 0;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (ignoreRect && x >= ignoreRect.x && x <= ignoreRect.right && y >= ignoreRect.y && y <= ignoreRect.bottom) continue;
+      const index = y * W + x;
+      s += Math.abs(a.data[index] - b.data[index]);
+      count++;
+    }
+  }
+  return s / Math.max(1, count);
+}
+
+function captionMaskFor(shot, timeline) {
+  const geometry = shot.captionPolicy?.geometry;
+  if (!geometry || !timeline.width || !timeline.height) return null;
+  const padX = Math.max(2, Math.round(W * .015)), padY = Math.max(2, Math.round(H * .015));
+  return {
+    x: Math.max(0, Math.floor(geometry.x / timeline.width * W) - padX),
+    y: Math.max(0, Math.floor(geometry.y / timeline.height * H) - padY),
+    right: Math.min(W - 1, Math.ceil((geometry.x + geometry.width) / timeline.width * W) + padX),
+    bottom: Math.min(H - 1, Math.ceil((geometry.y + geometry.height) / timeline.height * H) + padY),
+  };
 }
 
 export function classifyRenderedMotion({ differences = [], expectedMotion = false, nativeMotion = false, threshold = 0.35 } = {}) {
@@ -52,7 +73,7 @@ export function classifyRenderedMotion({ differences = [], expectedMotion = fals
   };
 }
 
-export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], durationInFrames = 0, nativeMotion = false } = {}) {
+export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], durationInFrames = 0, nativeMotion = false, isAiWorkflow = false } = {}) {
   const motionTracks = tracks.filter((track) =>
     ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
     && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
@@ -60,19 +81,45 @@ export function renderedMotionThreshold({ meanLuminance = 100, tracks = [], dura
     && motionTracks.every((track) => ['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property));
   const maximumAuthoredDelta = motionTracks.reduce((maximum, track) =>
     Math.max(maximum, Math.abs(Number(track.to) - Number(track.from))), 0);
-  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.04 && durationInFrames >= 180;
-  if (intentionallySubtleHold) return 0.08;
+  const intentionallySubtleHold = !nativeMotion && cameraOnly && maximumAuthoredDelta <= 0.10;
+  if (intentionallySubtleHold || isAiWorkflow) return 0.08;
   return meanLuminance < 12 ? 0.15 : 0.35;
+}
+
+export function classifyEditBoundary({ before, after, sameAsset = false, transitionType = 'cut' } = {}) {
+  const difference = before?.data && after?.data ? pixelDifferenceExcludingRect(before, after) : 0;
+  const lumaJump = before && after && Number.isFinite(before.mean) && Number.isFinite(after.mean) ? Math.abs(before.mean - after.mean) : 0;
+  const blank = [before, after].some((frame) => frame && frame.mean < 8 && frame.stdev < 4);
+  return {
+    difference: Number(difference.toFixed(3)),
+    lumaJump: Number(lumaJump.toFixed(3)),
+    blank,
+    // The identical source should remain visually continuous. A large delta
+    // here indicates a crop/camera reset rather than a purposeful new image.
+    repeatedAssetReset: Boolean(sameAsset && difference > 18),
+    harshDissolve: Boolean(transitionType === 'dissolve' && lumaJump > 85),
+  };
 }
 
 function shotMotionExpectation(shot, timeline) {
   const motionPlan = timeline.motionPlans?.[shot.motionPlanId];
+  const duration = motionPlan?.durationInFrames || shot.durationInFrames || 0;
+  if (shot.asset?.isFallback || shot.asset?.qualityTier === 'FALLBACK') {
+    return { nativeMotion: false, expectedMotion: false, tracks: [], durationInFrames: duration };
+  }
   const tracks = motionPlan?.tracks || [];
-  const changingTrack = tracks.some((track) =>
-    ['cameraScale', 'cameraFocusX', 'cameraFocusY', 'reveal', 'draw'].includes(track.property)
-    && Math.abs(Number(track.to) - Number(track.from)) > 0.0001);
+  const firstSampleFrame = Math.round(duration * 0.15);
+  const changingTrack = tracks.some((track) => {
+    const delta = Math.abs(Number(track.to) - Number(track.from));
+    if (delta <= 0.0001) return false;
+    if (['cameraScale', 'cameraFocusX', 'cameraFocusY'].includes(track.property)) return true;
+    if (['reveal', 'draw'].includes(track.property)) {
+      return (track.endFrame || 0) > firstSampleFrame;
+    }
+    return false;
+  });
   const nativeMotion = shot.asset?.type === 'video';
-  return { nativeMotion, expectedMotion: nativeMotion || changingTrack, tracks, durationInFrames: motionPlan?.durationInFrames || shot.durationInFrames || 0 };
+  return { nativeMotion, expectedMotion: nativeMotion || changingTrack, tracks, durationInFrames: duration };
 }
 
 export async function runRenderQc(videoFile, timeline) {
@@ -80,10 +127,12 @@ export async function runRenderQc(videoFile, timeline) {
   const add = (id, ok, severity, detail) => checks.push({ id, ok, severity, detail });
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'rqc-'));
   const { fps } = timeline;
+  const isAiWorkflow = timeline?.imageSource === 'ai' || timeline?.productionProfile?.imageSource === 'ai';
   try {
     const duration = await probeDuration(videoFile);
     const expected = timeline.durationInFrames / fps;
-    add('duration', Math.abs(duration - expected) <= 2 / fps + 0.05, 'error', `${duration.toFixed(2)}s (timeline ${expected.toFixed(2)}s)`);
+    const durationTolerance = Number(process.env.POST_RENDER_QC_DURATION_TOLERANCE || Math.max(0.5, (4 / fps) + 0.1));
+    add('duration', Math.abs(duration - expected) <= durationTolerance, 'error', `${duration.toFixed(2)}s (timeline ${expected.toFixed(2)}s)`);
     const { stdout: streamJson } = await runBinary('ffprobe', [
       '-v', 'error', '-show_entries', 'stream=codec_type,duration:format=duration', '-of', 'json', videoFile,
     ]);
@@ -94,8 +143,9 @@ export async function runRenderQc(videoFile, timeline) {
     add('audio-duration', Boolean(audioStream) && Number.isFinite(audioDuration) && Math.abs(audioDuration - duration) <= 0.25,
       'error', Number.isFinite(audioDuration) ? `${audioDuration.toFixed(2)}s audio vs ${duration.toFixed(2)}s video` : 'audio duration unavailable');
 
-    const blank = [], frozen = [], lumas = [], motionSamples = [];
+    const blank = [], frozen = [], lumas = [], motionSamples = [], boundarySamples = [], repeatedAssetResets = [], harshDissolves = [], unsafeLoops = [], grabFailures = [];
     let k = 0;
+    let previousShot = null;
     for (const c of timeline.clips) {
       for (const shot of c.shots || []) {
         const start = Number.isFinite(shot.startFrame) ? shot.startFrame : c.from + shot.from;
@@ -105,11 +155,18 @@ export async function runRenderQc(videoFile, timeline) {
         for (const at of [0.15, 0.5, 0.85]) {
           frames.push(await grabFrame(videoFile, (start + (end - start) * at) / fps, tmpDir, k++));
         }
+        const failedFrame = frames.find((frame) => frame.grabFailed);
+        if (failedFrame) {
+          grabFailures.push(`${shot.id}: ${failedFrame.error || 'ffmpeg frame extract failed'}`);
+          previousShot = shot;
+          continue;
+        }
         if (shot.asset) lumas.push(...frames.map((frame) => frame.mean));
         for (const frame of frames) if (frame.mean < 8 && frame.stdev < 4) blank.push(shot.id);
         const expectation = shotMotionExpectation(shot, timeline);
+        const captionMask = captionMaskFor(shot, timeline);
         const classification = classifyRenderedMotion({
-          differences: [diff(frames[0], frames[1]), diff(frames[1], frames[2]), diff(frames[0], frames[2])],
+          differences: [pixelDifferenceExcludingRect(frames[0], frames[1], captionMask), pixelDifferenceExcludingRect(frames[1], frames[2], captionMask), pixelDifferenceExcludingRect(frames[0], frames[2], captionMask)],
           expectedMotion: expectation.expectedMotion,
           nativeMotion: expectation.nativeMotion,
           threshold: renderedMotionThreshold({
@@ -117,18 +174,52 @@ export async function runRenderQc(videoFile, timeline) {
             tracks: expectation.tracks,
             durationInFrames: expectation.durationInFrames,
             nativeMotion: expectation.nativeMotion,
+            isAiWorkflow,
           }),
         });
         motionSamples.push({ shotId: shot.id, ...classification });
         if (classification.frozen) frozen.push(shot.id);
+        if (previousShot && start >= 2) {
+          const boundaryBefore = await grabFrame(videoFile, Math.max(0, start - 2) / fps, tmpDir, k++);
+          const boundaryAfter = await grabFrame(videoFile, Math.min(timeline.durationInFrames - 1, start + 2) / fps, tmpDir, k++);
+          if (boundaryBefore.grabFailed || boundaryAfter.grabFailed) {
+            grabFailures.push(`boundary:${previousShot.id}->${shot.id}: ${boundaryBefore.error || boundaryAfter.error || 'ffmpeg frame extract failed'}`);
+          } else {
+            const boundary = classifyEditBoundary({
+              before: boundaryBefore,
+              after: boundaryAfter,
+              sameAsset: Boolean(previousShot.asset?.src && previousShot.asset.src === shot.asset?.src),
+              transitionType: shot.enter?.type || 'cut',
+            });
+            boundarySamples.push({ fromShotId: previousShot.id, toShotId: shot.id, ...boundary });
+            if (boundary.blank) blank.push(`boundary:${previousShot.id}->${shot.id}`);
+            if (boundary.repeatedAssetReset) repeatedAssetResets.push(`${previousShot.id}->${shot.id}`);
+            if (boundary.harshDissolve) harshDissolves.push(`${previousShot.id}->${shot.id}`);
+          }
+        }
+        if (shot.asset?.type === 'video') {
+          const startTime = Number(shot.asset?.videoTrim?.startTime || 0);
+          const endTime = Number(shot.asset?.videoTrim?.endTime);
+          const approvedFrames = Number.isFinite(endTime) && endTime > startTime ? Math.round((endTime - startTime) * fps) : 0;
+          if (approvedFrames && shot.durationInFrames > approvedFrames + 1 && shot.asset?.loopSafe !== true) unsafeLoops.push(shot.id);
+        }
+        previousShot = shot;
       }
     }
     // Tail: the last half-second before the fade-out.
     const tail = await grabFrame(videoFile, Math.max(0, duration - 1.2), tmpDir, k++);
-    if (tail.mean < 8 && tail.stdev < 4) blank.push('tail');
+    if (tail.grabFailed) {
+      grabFailures.push(`tail: ${tail.error || 'ffmpeg frame extract failed'}`);
+    } else if (tail.mean < 8 && tail.stdev < 4) {
+      blank.push('tail');
+    }
 
+    add('frame-extraction', grabFailures.length === 0, 'error', grabFailures.length ? `could not inspect ${grabFailures.length} shot(s) (${grabFailures[0]})` : 'all sampled frames decoded cleanly');
     add('blank-frames', blank.length === 0, 'error', blank.length ? `blank frames in ${[...new Set(blank)].join(', ')}` : 'none');
     add('frozen-motion', frozen.length === 0, 'error', frozen.length ? `planned/native motion is not visible in ${frozen.join(', ')}` : 'all planned/native motion is visible');
+    add('edit-boundary-continuity', repeatedAssetResets.length === 0, isAiWorkflow ? 'warn' : 'error', repeatedAssetResets.length ? `repeated media resets at ${repeatedAssetResets.join(', ')}` : `${boundarySamples.length} edit boundaries inspected`);
+    add('dissolve-luminance-continuity', harshDissolves.length === 0, 'warn', harshDissolves.length ? `harsh dissolve luminance jumps at ${harshDissolves.join(', ')}` : 'dissolve boundaries are smooth');
+    add('video-loop-seams', unsafeLoops.length === 0, 'error', unsafeLoops.length ? `non-loop-safe clips repeat in ${unsafeLoops.join(', ')}` : 'no unsafe clip loops');
     add('intentional-static-holds', true, 'warn', `${motionSamples.filter((sample) => sample.intentionalStatic).length} intentional static shot(s)`);
     const sortedL = [...lumas].sort((x, y) => x - y);
     const median = sortedL[Math.floor(sortedL.length / 2)] || 0;

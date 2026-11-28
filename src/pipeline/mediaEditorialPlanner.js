@@ -42,14 +42,15 @@ const strategyMap = {
   EVIDENCE_FRAME: 'FULL_BLEED_MEDIA_WITH_SUBTITLE', TWO_MEDIA_COMPARE: 'TWO_MEDIA_COMPARE', LAYERED_MEDIA: 'EDITORIAL_SPLIT',
   BACKGROUND_MEDIA: 'FULL_BLEED_MEDIA_WITH_SUBTITLE', MONTAGE: 'MONTAGE',
 };
-const cameraReason = { SUBTLE_PUSH: 'increaseFocus', SUBTLE_PULL: 'emotionalEmphasis', SLOW_PAN: 'followSubject', FOCAL_PAN: 'followSubject', DETAIL_CROP: 'moveToDetail', REFRAME: 'reframeForText' };
+const cameraReason = { SUBTLE_PUSH: 'increaseFocus', SUBTLE_PULL: 'emotionalEmphasis', PAN_LEFT: 'followSubject', PAN_RIGHT: 'followSubject' };
 
 export function createMediaShotPlan({ beat, mediaSceneSpec, solvedScene, shot, rejectedAlternatives = [], visualQuality = null }) {
   const geometry = solvedScene.mediaGeometry.media_primary;
   const camera = solvedScene.cameraPaths.media_primary;
   const transitionAnchor = mediaSceneSpec.transitionIntent.anchor || shot.transitionAnchor || null;
   const reason = beat.visualChangeReason;
-  const transition = (type) => ({ type, durationInFrames: type === 'CUT' ? 0 : 8, reason, anchor: transitionAnchor });
+  const transitionDuration = { CUT: 0, SHORT_DISSOLVE: 12 };
+  const transition = (type) => ({ type, durationInFrames: transitionDuration[type] ?? 0, reason, anchor: transitionAnchor });
   const textElement = solvedScene.elements.media_stat || solvedScene.elements.media_headline || solvedScene.elements.media_source || null;
   const annotation = solvedScene.annotationGeometry.media_annotation || null;
   return MediaShotPlanSchema.parse({
@@ -64,12 +65,12 @@ export function createMediaShotPlan({ beat, mediaSceneSpec, solvedScene, shot, r
     durationInFrames: shot.durationInFrames,
     compositionStrategy: beat.editorialPurpose === 'CHAPTER' ? 'CHAPTER_HEADING' : strategyMap[mediaSceneSpec.strategy] || 'FULL_BLEED_MEDIA_WITH_SUBTITLE',
     cropPlan: { crop: geometry.crop, objectPosition: geometry.objectPosition, subjectSafeRegion: geometry.subjectSafeRegion || null },
-    cameraPlan: { mode: camera.behavior === 'MATCH_MOVE' ? 'REFRAME' : camera.behavior, reason: camera.behavior === 'STATIC' ? null : cameraReason[camera.behavior] || 'increaseFocus', start: camera.start, end: camera.end },
+    cameraPlan: { mode: camera.behavior, reason: camera.behavior === 'STATIC' ? null : cameraReason[camera.behavior] || 'increaseFocus', start: camera.start, end: camera.end },
     textOverlayPlan: textElement ? { elementId: textElement.id, geometry: { x: textElement.x, y: textElement.y, width: textElement.width, height: textElement.height }, purpose: mediaSceneSpec.textNeed } : null,
     subtitlePlan: { position: mediaSceneSpec.captionPosition, geometry: solvedScene.captionBox, animation: 'DIRECT_REPLACE', maximumLines: 2 },
     annotationPlan: annotation ? { type: mediaSceneSpec.annotationNeed, geometry: annotation } : null,
-    transitionIn: transition(mediaSceneSpec.transitionIntent.entry === 'MATCH_MOVE' ? 'MATCH_CUT' : mediaSceneSpec.transitionIntent.entry),
-    transitionOut: transition(mediaSceneSpec.transitionIntent.exit === 'MATCH_MOVE' ? 'MATCH_CUT' : mediaSceneSpec.transitionIntent.exit),
+    transitionIn: transition(mediaSceneSpec.transitionIntent.entry),
+    transitionOut: transition(mediaSceneSpec.transitionIntent.exit),
     visualChangeReason: reason,
     transitionAnchor,
     qualityTier: mediaSceneSpec.assets[0].qualityTier,

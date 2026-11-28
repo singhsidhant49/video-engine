@@ -1,0 +1,75 @@
+{
+  "id": "boutique_owner_tablet_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Boutique owner using tablet",
+  "path": "images/business/boutique_owner_tablet_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "boutique",
+    "small business",
+    "retail",
+    "tablet",
+    "store owner",
+    "inventory"
+  ],
+  "concepts": [
+    "small business management",
+    "retail operations",
+    "inventory management",
+    "entrepreneurship"
+  ],
+  "subjects": [
+    "store owner",
+    "tablet",
+    "boutique interior"
+  ],
+  "actions": [
+    "checking inventory",
+    "managing store"
+  ],
+  "mood": [
+    "warm",
+    "entrepreneurial",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.39,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "small business video",
+    "retail content",
+    "entrepreneur story",
+    "store management"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "trading desk",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

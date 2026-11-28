@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_7f72cd516dc3669e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A somber hospital scene showcasing two patients, one in a wheelchair, highlighting themes of struggle and illness.",
+  "path": "images/saved-from-web/saved-from-web_7f72cd516dc3669e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "somber",
+    "hospital",
+    "scene",
+    "showcasing",
+    "two",
+    "patient",
+    "one",
+    "wheelchair",
+    "highlighting",
+    "theme",
+    "struggle",
+    "illnes",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "patients",
+    "themes",
+    "illness"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "somber",
+    "hospital",
+    "scene",
+    "showcasing",
+    "two",
+    "patient",
+    "one",
+    "wheelchair",
+    "highlighting",
+    "theme",
+    "struggle",
+    "illnes",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "patients",
+    "themes",
+    "illness"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A somber hospital scene showcasing two patients, one in a wheelchair, highlighting themes of struggle and illness."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "historical hospital ward infection patients",
+    "savedAt": "2026-11-02T09:39:25.651Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Tima Miroshnichenko",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-behind-a-woman-on-a-wheelchair-6011574/"
+  }
+}

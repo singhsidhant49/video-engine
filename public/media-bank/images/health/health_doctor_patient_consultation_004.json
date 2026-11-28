@@ -1,0 +1,75 @@
+{
+  "id": "health_doctor_patient_consultation_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm doctor-patient consultation",
+  "path": "images/health/health_doctor_patient_consultation_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "doctor consultation",
+    "preventive care",
+    "health advice",
+    "clinic",
+    "patient education"
+  ],
+  "concepts": [
+    "medical consultation",
+    "preventive healthcare",
+    "doctor communication"
+  ],
+  "subjects": [
+    "doctor",
+    "adult patient",
+    "clinic desk"
+  ],
+  "actions": [
+    "discussing health",
+    "giving advice",
+    "reviewing care"
+  ],
+  "mood": [
+    "professional",
+    "reassuring",
+    "supportive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "doctor visit videos",
+    "preventive care content",
+    "patient education",
+    "health advice scenes"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

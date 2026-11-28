@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_a964d1a5ce99ac7b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Nimitz Sailors Prepare to Start a Jet Engine (8827230).jpg",
+  "path": "images/saved-from-web/saved-from-web_a964d1a5ce99ac7b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "nimitz",
+    "sailor",
+    "prepare",
+    "start",
+    "jet",
+    "engine",
+    "8827230",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "sailors",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "nimitz",
+    "sailor",
+    "prepare",
+    "start",
+    "jet",
+    "engine",
+    "8827230",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "sailors",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Nimitz Sailors Prepare to Start a Jet Engine (8827230).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "jet engine starting",
+    "savedAt": "2026-10-26T15:09:13.742Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "U.S. Navy photo by Petty Officer 2nd Class Hannah Kantner",
+    "creator": "U.S. Navy photo by Petty Officer 2nd Class Hannah Kantner",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-26T15:01:22.323Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Nimitz_Sailors_Prepare_to_Start_a_Jet_Engine_(8827230).jpg"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "history_viking_harbor_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Viking harbor beneath snowy mountains",
+  "path": "images/history/history_viking_harbor_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "vikings",
+    "norse",
+    "harbor",
+    "longship",
+    "fjord",
+    "scandinavia"
+  ],
+  "concepts": [
+    "maritime culture",
+    "norse trade",
+    "viking daily life",
+    "seafaring communities"
+  ],
+  "subjects": [
+    "longships",
+    "harbor workers",
+    "wooden docks",
+    "mountains",
+    "village"
+  ],
+  "actions": [
+    "unloading cargo",
+    "trading goods",
+    "working at harbor"
+  ],
+  "mood": [
+    "rugged",
+    "historic",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "viking history videos",
+    "norse culture",
+    "maritime scenes",
+    "daily life explainers"
+  ],
+  "avoidFor": [
+    "roman content",
+    "desert civilizations",
+    "enlightenment interiors"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

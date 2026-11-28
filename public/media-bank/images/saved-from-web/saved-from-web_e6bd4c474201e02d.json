@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_e6bd4c474201e02d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Captivating silhouette of Dubai's skyline with vibrant sunset colors and Burj Khalifa dominating the scene.",
+  "path": "images/saved-from-web/saved-from-web_e6bd4c474201e02d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "silhouette",
+    "dubai",
+    "skyline",
+    "vibrant",
+    "sunset",
+    "color",
+    "burj",
+    "khalifa",
+    "dominating",
+    "scene",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "colors",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "silhouette",
+    "dubai",
+    "skyline",
+    "vibrant",
+    "sunset",
+    "color",
+    "burj",
+    "khalifa",
+    "dominating",
+    "scene",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "colors",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Captivating silhouette of Dubai's skyline with vibrant sunset colors and Burj Khalifa dominating the scene."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai Burj Khalifa modern skyline",
+    "savedAt": "2026-10-29T06:24:09.424Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vitaly Gariev",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-dubai-skyline-silhouette-at-sunset-36813102/"
+  }
+}

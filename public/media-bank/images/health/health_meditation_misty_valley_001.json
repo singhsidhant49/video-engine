@@ -1,0 +1,78 @@
+{
+  "id": "health_meditation_misty_valley_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Meditation above the misty sunrise valley",
+  "path": "images/health/health_meditation_misty_valley_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "meditation",
+    "mindfulness",
+    "stress relief",
+    "wellness",
+    "sunrise",
+    "breathwork"
+  ],
+  "concepts": [
+    "mind-body health",
+    "stress reduction",
+    "mental wellbeing",
+    "calm routine"
+  ],
+  "subjects": [
+    "adult woman",
+    "mountain overlook",
+    "sunrise",
+    "misty valley"
+  ],
+  "actions": [
+    "meditating",
+    "sitting still",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "peaceful",
+    "uplifting",
+    "serene"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.55
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wellness videos",
+    "mindfulness content",
+    "stress relief scenes",
+    "mental health intros"
+  ],
+  "avoidFor": [
+    "clinical exam",
+    "nutrition content",
+    "lab science"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_3e5e00b54d1134a5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Group including Robert Falcon Scott, on Quail Island.jpg",
+  "path": "images/saved-from-web/saved-from-web_3e5e00b54d1134a5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1819,
+  "aspectRatio": 1.4294,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "group",
+    "including",
+    "robert",
+    "falcon",
+    "scott",
+    "quail",
+    "island",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "group",
+    "including",
+    "robert",
+    "falcon",
+    "scott",
+    "quail",
+    "island",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Group including Robert Falcon Scott, on Quail Island.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Robert Falcon Scott in action",
+    "savedAt": "2026-10-29T13:25:12.170Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Steffano Francis Webb",
+    "creator": "Steffano Francis Webb",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T13:23:38.644Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Group_including_Robert_Falcon_Scott,_on_Quail_Island.jpg"
+  }
+}

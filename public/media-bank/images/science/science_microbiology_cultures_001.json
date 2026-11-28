@@ -1,0 +1,76 @@
+{
+  "id": "science_microbiology_cultures_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist examining bacterial cultures",
+  "path": "images/science/science_microbiology_cultures_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "microbiology",
+    "bacterial cultures",
+    "petri dish",
+    "laboratory",
+    "microbes"
+  ],
+  "concepts": [
+    "microbiology research",
+    "culture analysis",
+    "cell growth study",
+    "biological testing"
+  ],
+  "subjects": [
+    "scientist",
+    "petri dish",
+    "microscope",
+    "culture plates"
+  ],
+  "actions": [
+    "examining cultures",
+    "holding petri dish",
+    "studying growth"
+  ],
+  "mood": [
+    "clean",
+    "analytical",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.32,
+      "y": 0.36
+    },
+    "safeTextAreas": [
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "microbiology explainer",
+    "medical lab",
+    "science education",
+    "research montage"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "field geology",
+    "corporate presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

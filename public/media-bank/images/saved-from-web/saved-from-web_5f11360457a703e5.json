@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_5f11360457a703e5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Learning to repair a bicycle (24999581619).jpg",
+  "path": "images/saved-from-web/saved-from-web_5f11360457a703e5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "learning",
+    "repair",
+    "bicycle",
+    "24999581619",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "learning",
+    "repair",
+    "bicycle",
+    "24999581619",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Learning to repair a bicycle (24999581619).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "child learning bicycle",
+    "savedAt": "2026-10-26T15:48:47.485Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 2.0",
+    "license_name": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "author": "ILO Asia-Pacific",
+    "creator": "ILO Asia-Pacific",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T15:45:45.756Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Learning_to_repair_a_bicycle_(24999581619).jpg"
+  }
+}

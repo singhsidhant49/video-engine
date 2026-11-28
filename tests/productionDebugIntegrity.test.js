@@ -57,6 +57,18 @@ test('narration completeness rejects dangling generated prose', () => {
   assert.equal(issues[0].type, 'incomplete_narration');
 });
 
+test('narration completeness permits natural questions and clauses ending with prepositions or particles', () => {
+  const issues = narrationCompletenessIssues([
+    { narration: 'So next time you deposit a check, ask: where does that money really come from?' },
+    { narration: 'This is fractional reserve lending, allowing banks to create credit many times over.' },
+    { narration: 'Consider what modern money is actually made of.' },
+    { narration: 'There was nowhere left to turn to.' },
+    { narration: 'Who was this system actually designed for?' },
+    { narration: 'They had no tools to work with.' },
+  ]);
+  assert.equal(issues.length, 0);
+});
+
 test('creative meditation absolutes are not misclassified as factual statistics', () => {
   const plan = normalizePlan({
     title: 'Sleep meditation',
@@ -94,6 +106,20 @@ test('fictional first occurrence is not treated as a historical superlative', ()
     visual: 'A green seedling emerges from dark soil.',
   }] }, { topic: 'A reflective story about patience', niche: 'narrated story', format: 'landscape' });
   assert.equal(plan.claims.length, 0);
+});
+
+test('figurative moral and narrative superlatives in stories are not treated as unverified factual claims', () => {
+  const plan = normalizePlan({
+    title: 'The Little Bird and the Thirsty Tree',
+    scenes: [
+      { id: 's1', kind: 'subject', purpose: 'hook', narration: 'Once upon a time, a little bird lived in a beautiful forest.' },
+      { id: 's2', kind: 'subject', purpose: 'payoff', narration: 'The bird sang her happiest song. Even the smallest effort can change everything. Never give up on doing good.' },
+    ],
+  }, { topic: 'The Little Bird and the Thirsty Tree', niche: 'children story', format: 'landscape' });
+  const result = validateContentQuality(plan);
+  assert.equal(plan.claims.length, 0);
+  assert.equal(result.issues.some((issue) => issue.type === 'unverified_exact_claim'), false);
+  assert.equal(result.valid, true);
 });
 
 test('explicit hypothetical numbers are classified as illustrative, not unsupported facts', () => {
@@ -175,6 +201,28 @@ test('offline narration repair drops only a mechanically truncated trailing frag
   assert.equal(narrationCompletenessIssues(repaired.scenes).length, 0);
 });
 
+test('narration repair and normalizePlan strip placeholder and meta-commentary narration', async () => {
+  const plan = {
+    scenes: [
+      { id: 's1', narration: 'The internet is remarkably physical.' },
+      { id: 's2', narration: 'The narration for this segment is incomplete.' },
+      { id: 's3', narration: 'Every cable reaches across the dark ocean. The narration for this segment is incomplete.' },
+      { id: 's4', narration: 'This segment is incomplete.' },
+    ],
+  };
+
+  const repaired = await repairIncompleteNarration(plan, null);
+  assert.equal(repaired.scenes.some((s) => s.id === 's2'), false);
+  assert.equal(repaired.scenes.some((s) => s.id === 's4'), false);
+  assert.equal(repaired.scenes.find((s) => s.id === 's3')?.narration, 'Every cable reaches across the dark ocean.');
+  assert.equal(narrationCompletenessIssues(repaired.scenes).length, 0);
+
+  const normalized = normalizePlan(plan, { topic: 'Subsea internet cables' });
+  assert.equal(normalized.scenes.some((s) => /incomplete/i.test(s.narration)), false);
+  assert.equal(normalized.scenes.length, 2);
+  assert.equal(normalized.scenes[1].narration, 'Every cable reaches across the dark ocean.');
+});
+
 test('cool nighttime meditation language does not create a technical heat-dissipation query', () => {
   const need = buildVisibleNeed({
     id: 'garden-detail',
@@ -208,6 +256,20 @@ test('packaging emits real section chapters instead of every clip', () => {
   assert.equal(result.chapters[1].title, 'Second Section');
 });
 
+test('packaging derives niche-specific hashtags instead of hard-coded technology tags', () => {
+  const plan = {
+    title: 'Why Your Brain Replays Embarrassing Moments', topic: 'embarrassing memory loops',
+    niche: 'psychology and human behavior', script: 'A complete psychology explanation.',
+    scenes: [{ id: 'scene_001', narration: 'Opening explanation.', section: true }],
+  };
+  const timeline = { fps: 30, clips: [{ id: 'c1', sceneId: 'scene_001', from: 0, sectionId: 'a' }] };
+  const result = generateVideoPackage(plan, timeline, { metadata: { primaryKeyword: 'replaying embarrassing moments' } });
+  assert.match(result.description, /#ReplayingEmbarrassingMoments/);
+  assert.match(result.description, /#PsychologyAndHuman/);
+  assert.doesNotMatch(result.description, /#technology/i);
+  assert.deepEqual(result.strategy.hashtags.slice(0, 2), ['#ReplayingEmbarrassingMoments', '#PsychologyAndHuman']);
+});
+
 test('media diagnostics classify native footage as video, not slideshow photography', () => {
   const base = { durationInFrames: 90, presentation: { cameraMove: 'static' }, variant: 'full', layout: 'image:full' };
   const diagnostics = buildVisualRealizationDiagnostics({ fps: 30, clips: [], realizedShots: [
@@ -218,7 +280,7 @@ test('media diagnostics classify native footage as video, not slideshow photogra
   assert.equal(diagnostics.consecutivePhotoCount, 1);
 });
 
-test('long-hold repair creates a traceable detail shot with complete coverage', () => {
+test('long-hold repair preserves continuous motion instead of restarting the same image', () => {
   const original = {
     id: 'shot_1', storyboardShotId: 'shot_1', sceneId: 'scene_1', sectionId: 'section_1',
     from: 0, durationInFrames: 300, family: 'image', variant: 'full', layout: 'image:full',
@@ -228,10 +290,12 @@ test('long-hold repair creates a traceable detail shot with complete coverage', 
   const repaired = applySceneRepairs({ fps: 30, clips: [{ id: 'c1', sceneId: 'scene_1', from: 0, durationInFrames: 300, shots: [original] }] }, [
     { sceneId: 'scene_1', action: 'split_long_hold' },
   ]);
-  assert.equal(repaired.clips[0].shots.length, 2);
-  assert.equal(repaired.clips[0].shots[0].durationInFrames + repaired.clips[0].shots[1].durationInFrames, 300);
-  assert.equal(repaired.clips[0].shots[1].asset.assetIdentityChain.timelineAssetId, repaired.clips[0].shots[1].storyboardShotId);
-  assert.equal(Object.hasOwn(repaired.clips[0].shots[1], 'timelineStartFrame'), false);
+  assert.equal(repaired.clips[0].shots.length, 1);
+  assert.equal(repaired.clips[0].shots[0].durationInFrames, 300);
+  assert.equal(repaired.clips[0].shots[0].presentation.cameraMove, 'subtlePush');
+  assert.equal(repaired.clips[0].shots[0].imageBehavior, 'SUBTLE_PUSH');
+  const rereview = reviewVisualPlan(repaired);
+  assert.equal(rereview.issues.some((issue) => issue.type === 'single_shot_hold'), false);
 });
 
 test('long-hold critic does not create cuts that violate the production pacing floor', () => {
@@ -248,7 +312,7 @@ test('long-hold critic does not create cuts that violate the production pacing f
   const review = reviewVisualPlan(timeline);
   assert.equal(review.sceneRepairs.length, 0);
   assert.equal(review.issues[0].type, 'paced_long_hold');
-  assert.match(review.issues[0].message, /splitting it would violate/);
+  assert.match(review.issues[0].message, /continuous subtlePush/);
 });
 
 // =========================================================================
@@ -479,4 +543,88 @@ test('Sections 77 & 78: Municipal street sanitation worker rejected for software
   assert.equal(judgment.classification, 'ACCIDENTAL');
   assert.equal(judgment.accepted, false);
   assert.ok(judgment.rejectReasons.some((r) => r.includes('accidental_keyword_match')));
+});
+
+test('Visual Relevance: Supermarket food shelves rejected for bank vault concept', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_vault',
+    concept: 'bank vault door opening dark',
+    narration: 'Most people believe banks lend out money deposited by savers in a vault.',
+    videoTopic: 'How Banks Create Money and Fractional Reserve Lending',
+  });
+
+  const supermarketCandidate = {
+    id: 'cand_supermarket',
+    label: 'High angle of empty and full shelves in supermarket with price tags and cardboard boxes',
+    description: 'Empty grocery store aisle shelves with price tags',
+    tags: ['shelves', 'supermarket', 'grocery', 'aisle', 'store'],
+  };
+
+  const inspection = await inspectVisualCandidate(supermarketCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: supermarketCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
+});
+
+test('Visual Relevance: Kitchen oven dial rejected for central bank interest rates', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_fed_rates',
+    concept: 'central bank adjusts interest rates',
+    narration: 'Central banks manipulate interest rates to influence the economic cycle.',
+    videoTopic: 'Central Banking and Interest Rates',
+  });
+
+  const ovenDialCandidate = {
+    id: 'cand_oven_dial',
+    label: 'Hand adjusting the temperature dial on a modern stainless steel oven in a contemporary kitchen',
+    description: 'Close up of hand turning oven temperature dial in kitchen',
+    tags: ['hand', 'adjusting', 'dial', 'oven', 'kitchen', 'stove'],
+  };
+
+  const inspection = await inspectVisualCandidate(ovenDialCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: ovenDialCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
+});
+
+test('Visual Relevance: Tibetan prayer flags rejected for financial bank statement', async () => {
+  const visibleNeed = buildVisibleNeed({
+    id: 'shot_bank_statement',
+    concept: 'bank statement paper close up',
+    narration: 'The bank statement showed the newly created ledger balance.',
+    videoTopic: 'How Banks Create Money',
+  });
+
+  const prayerFlagCandidate = {
+    id: 'cand_prayer_flags',
+    label: 'Vibrant Tibetan prayer flags fluttering in the wind at Ladakh, India',
+    description: 'Colorful Buddhist prayer flags in high mountain wind',
+    tags: ['prayer flags', 'tibetan', 'ladakh', 'wind'],
+  };
+
+  const inspection = await inspectVisualCandidate(prayerFlagCandidate, { visibleNeed });
+  const judgment = judgeAssetCandidate({
+    candidate: prayerFlagCandidate,
+    inspection,
+    visibleNeed,
+    targetFormat: 'landscape',
+  });
+
+  assert.equal(judgment.classification, 'WRONG');
+  assert.equal(judgment.accepted, false);
+  assert.ok(judgment.rejectReasons.some((r) => r.includes('wrong_subject_match')));
 });

@@ -1,0 +1,76 @@
+{
+  "id": "cafe_point_of_sale_service_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm caf\u00e9 counter service",
+  "path": "images/business/cafe_point_of_sale_service_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "caf\u00e9",
+    "small business",
+    "point of sale",
+    "service",
+    "hospitality",
+    "retail"
+  ],
+  "concepts": [
+    "small business service",
+    "hospitality operations",
+    "point of sale",
+    "customer service"
+  ],
+  "subjects": [
+    "barista",
+    "customer",
+    "POS terminal",
+    "pastry counter"
+  ],
+  "actions": [
+    "processing payment",
+    "serving customer"
+  ],
+  "mood": [
+    "warm",
+    "welcoming",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "small business story",
+    "retail service",
+    "hospitality marketing",
+    "customer experience"
+  ],
+  "avoidFor": [
+    "corporate presentation",
+    "finance strategy",
+    "warehouse logistics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

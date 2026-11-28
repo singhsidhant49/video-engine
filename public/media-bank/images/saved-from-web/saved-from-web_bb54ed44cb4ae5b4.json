@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_bb54ed44cb4ae5b4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a hand interacting with a glowing touchscreen in a dark setting, highlighting technology use.",
+  "path": "images/saved-from-web/saved-from-web_bb54ed44cb4ae5b4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "interacting",
+    "glowing",
+    "touchscreen",
+    "dark",
+    "setting",
+    "highlighting",
+    "technology",
+    "use",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "interacting",
+    "glowing",
+    "touchscreen",
+    "dark",
+    "setting",
+    "highlighting",
+    "technology",
+    "use",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a hand interacting with a glowing touchscreen in a dark setting, highlighting technology use."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hand touching glowing interface",
+    "savedAt": "2026-10-26T08:45:28.718Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Towfiqu barbhuiya",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-using-a-touchscreen-device-11337254/"
+  }
+}

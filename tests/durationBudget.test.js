@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
-import { compressPlanScript, validateCompressionCandidate } from '../src/services/aiDirectorService.js';
+import { calculateDurationBudget, estimateScriptDuration, buildDurationDiagnostics, calculateNarrationRepairSpeed, calculateNarrationTempoRepair, calculateNarrationCompressionTargetWords, calculateNarrationCompressionLimits, calculateOverlongNarrationRepairSpeed } from '../src/storyboard/durationBudget.js';
+import { compressPlanScript, enforceMaximumNarrationWords, validateCompressionCandidate, validateExpansionCandidate } from '../src/services/aiDirectorService.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
 
 test('calculateDurationBudget derives balanced word and time constraints for 75s explainer', () => {
@@ -38,6 +38,43 @@ test('estimateScriptDuration computes word count and estimated speech seconds', 
   assert.ok(Math.abs(est.estimatedTotalSec - (17 / 2.6 + 0.5)) < 0.05);
 });
 
+test('overlong narration compression targets final duration rather than the smaller speech budget', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 60, format: 'landscape' });
+  const targetWords = calculateNarrationCompressionTargetWords({
+    currentWords: 145,
+    actualDurationSec: 64.38,
+    budget,
+  });
+
+  assert.equal(targetWords, 135);
+  assert.ok(targetWords > Math.round(145 * budget.targetNarrationSec / 64.38));
+});
+
+test('measured-duration compression can never accept an identical cached retry', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 30, format: 'shorts' });
+  const limits = calculateNarrationCompressionLimits({
+    currentWords: 81,
+    actualDurationSec: 31.55,
+    budget,
+  });
+
+  assert.equal(limits.targetWords, 77);
+  assert.ok(limits.maxWords < 81, 'The current script must be outside the accepted retry range');
+  assert.ok(limits.maxWords >= limits.targetWords);
+});
+
+test('overlong narration speed repair aims inside the upper duration boundary', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 30, format: 'shorts' });
+  const speed = calculateOverlongNarrationRepairSpeed({
+    currentSpeed: 1,
+    actualDurationSec: 31.55,
+    budget,
+  });
+
+  assert.equal(speed, 1.052);
+  assert.ok(31.55 / speed < budget.allowedMaxDuration);
+});
+
 test('narration duration repair aims safely inside the accepted range', () => {
   const budget = calculateDurationBudget({ targetDurationSec: 120, format: 'landscape' });
   const speed = calculateNarrationRepairSpeed({
@@ -51,6 +88,17 @@ test('narration duration repair aims safely inside the accepted range', () => {
   assert.ok(speed < 0.84, 'A narration just below the boundary must be slowed further');
   const projectedDuration = 113.67 * (0.84 / speed);
   assert.ok(projectedDuration >= budget.allowedMinDuration + 0.7);
+});
+
+test('a narrow measured narration miss receives a bounded transparent tempo repair', () => {
+  const budget = { allowedMinDuration: 399, allowedMaxDuration: 441, targetDurationSec: 420, targetNarrationSec: 399 };
+  const repair = calculateNarrationTempoRepair({ actualDurationSec: 395.7, budget });
+  assert.ok(repair);
+  assert.equal(repair.reason, 'narrow_shortfall');
+  assert.ok(repair.tempo > 0.98 && repair.tempo < 1);
+  assert.ok(repair.expectedDurationSec > 399);
+  assert.equal(calculateNarrationTempoRepair({ actualDurationSec: 360, budget }), null, 'large script errors must still fail');
+  assert.equal(calculateNarrationTempoRepair({ actualDurationSec: 420, budget }), null, 'valid duration needs no repair');
 });
 
 test('offline compression preserves complete hook and payoff when safe shortening is unavailable', async () => {
@@ -79,6 +127,19 @@ test('offline compression preserves complete hook and payoff when safe shortenin
   assert.equal(compressed.scenes[5].purpose, 'payoff');
 });
 
+test('pre-TTS word ceiling fails early when safe compression cannot meet duration', async () => {
+  const plan = {
+    scenes: [
+      { id: 'hook', purpose: 'hook', narration: 'This intentionally long opening sentence preserves an essential question that cannot be removed safely from the final narration.' },
+      { id: 'payoff', purpose: 'payoff', narration: 'This intentionally long concluding sentence resolves that essential question and therefore cannot be removed safely either.' },
+    ],
+  };
+  await assert.rejects(
+    enforceMaximumNarrationWords(plan, { targetWords: 12, maxWords: 14 }, null),
+    (error) => error.code === 'SCRIPT_DURATION_BUDGET_FAILED' && error.details.words > 14,
+  );
+});
+
 test('compression rejects a structurally valid response that undershoots the duration budget', () => {
   const plan = {
     scenes: [
@@ -102,6 +163,40 @@ test('compression validation assigns stable editing IDs before plan normalizatio
   ] };
   const validated = validateCompressionCandidate(plan, candidate, 10, 11);
   assert.equal(validated.wordCount, 10);
+});
+
+test('expansion rejects an undersized candidate without mutating the source plan', () => {
+  const plan = { scenes: [
+    { id: 's1', narration: 'Original first scene stays intact.' },
+    { id: 's2', narration: 'Original second scene also stays intact.' },
+  ] };
+  const candidate = { scenes: [
+    { id: 's1', narration: 'Still too short.' },
+    { id: 's2', narration: 'Also too short.' },
+  ] };
+
+  assert.throws(
+    () => validateExpansionCandidate(plan, candidate, 20, 24),
+    /undershot the word budget/,
+  );
+  assert.equal(plan.scenes[0].narration, 'Original first scene stays intact.');
+  assert.equal(plan.scenes[1].narration, 'Original second scene also stays intact.');
+});
+
+test('expansion validation preserves stable scene ordering and enforces all IDs', () => {
+  const plan = { scenes: [
+    { id: 's1', narration: 'Short first.' },
+    { id: 's2', narration: 'Short second.' },
+  ] };
+  const candidate = { scenes: [
+    { id: 's2', narration: 'Second scene now has enough useful explanatory words for its assigned duration target.' },
+    { id: 's1', narration: 'First scene now has enough useful explanatory words for its assigned duration target.' },
+  ] };
+
+  const validated = validateExpansionCandidate(plan, candidate, 20, 30);
+  assert.equal(validated.replacements[0].id, 's1');
+  assert.equal(validated.replacements[1].id, 's2');
+  assert.ok(validated.wordCount >= 20);
 });
 
 test('timeline QC enforces duration tolerance and reports hard failure outside 10%', () => {
@@ -144,4 +239,21 @@ test('production timeline QC rejects duration outside the ideal range even insid
   assert.equal(development.ok, true);
   assert.equal(production.ok, false);
   assert.equal(production.checks.find((check) => check.id === 'duration-tolerance')?.severity, 'error');
+});
+
+test('production timeline QC allows single-frame quantization boundary without fatal error', () => {
+  const budget = calculateDurationBudget({ targetDurationSec: 120 });
+  // 120s with ±5% allowedMin is 114s = 3420 frames at 30fps.
+  // 3419 frames is 113.9667s, off by 1 frame (0.033s).
+  const quantizedTimeline = {
+    fps: 30,
+    durationInFrames: 3419,
+    clips: [{ id: 'c1', from: 0, durationInFrames: 3419, enter: { type: 'cut' }, shots: [{ id: 'sh1', storyboardShotId: 'sh1', sceneId: 'c1', sectionId: 's1', presentation: { layout: 'full' }, durationInFrames: 3419, from: 0 }] }],
+  };
+  const diagnostics = buildDurationDiagnostics({ budget, timeline: quantizedTimeline });
+  const production = runTimelineQc(quantizedTimeline, { durationDiagnostics: diagnostics, publishMode: 'PRODUCTION_RENDER' });
+
+  assert.equal(diagnostics.isWithinTolerance, true);
+  const durCheck = production.checks.find((check) => check.id === 'duration-tolerance');
+  assert.equal(durCheck?.ok, true);
 });

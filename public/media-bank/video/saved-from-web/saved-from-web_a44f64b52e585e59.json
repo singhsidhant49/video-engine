@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_a44f64b52e585e59",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/spraying-colored-liquid-into-a-petri-dish-8392769/",
+  "path": "video/saved-from-web/saved-from-web_a44f64b52e585e59.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1080,
+  "height": 1920,
+  "aspectRatio": 0.5625,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "spraying",
+    "colored",
+    "liquid",
+    "into",
+    "8392769",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "spraying",
+    "colored",
+    "liquid",
+    "into",
+    "8392769",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "scientific laboratory glassware, petri dish, or microscope"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory or cleanroom"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "penicillin inhibition zone bacteria",
+    "savedAt": "2026-11-02T10:14:22.407Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Anna Tarazevich",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/spraying-colored-liquid-into-a-petri-dish-8392769/"
+  }
+}

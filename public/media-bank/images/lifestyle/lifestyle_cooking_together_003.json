@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_cooking_together_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit kitchen cooking together",
+  "path": "images/lifestyle/lifestyle_cooking_together_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "couple",
+    "cooking",
+    "kitchen",
+    "healthy food",
+    "home life",
+    "relationship"
+  ],
+  "concepts": [
+    "home lifestyle",
+    "shared routine",
+    "healthy living",
+    "togetherness"
+  ],
+  "subjects": [
+    "couple",
+    "vegetables",
+    "salad bowl",
+    "kitchen island",
+    "olive oil"
+  ],
+  "actions": [
+    "chopping vegetables",
+    "mixing salad",
+    "cooking together"
+  ],
+  "mood": [
+    "bright",
+    "warm",
+    "joyful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship videos",
+    "home lifestyle content",
+    "cooking scenes",
+    "healthy living clips"
+  ],
+  "avoidFor": [
+    "solo work topics",
+    "outdoor travel scenes",
+    "corporate training"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

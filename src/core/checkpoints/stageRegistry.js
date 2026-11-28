@@ -211,7 +211,7 @@ export const STAGE_DEFINITIONS = {
     inputs: ['direction.json', 'assets.json', 'words.json'],
     outputs: [
       'timeline.json', 'visual-realization-diagnostics.json', 'pacing-diagnostics.json',
-      'editorial-visual-plan.json', 'editorial-visual-beats.json', 'media-shot-plan.json', 'scene-compositions.json', 'comparison-specs.json', 'chart-specs.json', 'media-scene-specs.json', 'solved-scenes.json',
+      'editorial-visual-plan.json', 'editorial-visual-beats.json', 'media-shot-plan.json', 'scene-compositions.json', 'media-scene-specs.json', 'solved-scenes.json',
       'motion-plans.json', 'visual-quality-reviews.json', 'frame-state-preflight.json', 'composition-fallbacks.json', 'media-composition-diagnostics.json', 'edit-continuity-diagnostics.json',
     ],
     dependencies: ['direction', 'assets', 'alignment'],

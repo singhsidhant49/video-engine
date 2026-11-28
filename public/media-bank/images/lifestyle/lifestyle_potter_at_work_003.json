@@ -1,0 +1,78 @@
+{
+  "id": "lifestyle_potter_at_work_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit potter at work",
+  "path": "images/lifestyle/lifestyle_potter_at_work_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "craft",
+    "pottery",
+    "studio",
+    "creative hobby",
+    "maker",
+    "artisan"
+  ],
+  "concepts": [
+    "creative lifestyle",
+    "handmade living",
+    "slow craft",
+    "artistic routine"
+  ],
+  "subjects": [
+    "woman potter",
+    "clay wheel",
+    "ceramics shelves",
+    "studio window"
+  ],
+  "actions": [
+    "shaping pottery",
+    "working with clay",
+    "creating handmade ceramics"
+  ],
+  "mood": [
+    "artistic",
+    "sunlit",
+    "focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.4,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "creative lifestyle videos",
+    "hobby content",
+    "artisan scenes",
+    "slow living clips"
+  ],
+  "avoidFor": [
+    "corporate scenes",
+    "fitness content",
+    "medical visuals"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

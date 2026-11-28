@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_c53b59b310de36f6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Captivating black and white image of a runner's shadow casting on the pavement in motion.",
+  "path": "images/saved-from-web/saved-from-web_c53b59b310de36f6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 7008,
+  "height": 4672,
+  "aspectRatio": 1.5,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "black",
+    "white",
+    "runner",
+    "shadow",
+    "casting",
+    "pavement",
+    "motion",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "captivating",
+    "black",
+    "white",
+    "runner",
+    "shadow",
+    "casting",
+    "pavement",
+    "motion",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "image",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Captivating black and white image of a runner's shadow casting on the pavement in motion."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "runner in motion cinematic lighting",
+    "savedAt": "2026-10-28T10:34:58.612Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mathias Reding",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/runner-s-shadow-silhouette-in-black-and-white-33995259/"
+  }
+}

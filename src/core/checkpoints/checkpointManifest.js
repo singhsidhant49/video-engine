@@ -159,7 +159,7 @@ export class CheckpointStore {
     const canonical = canonicalStageName(stage);
     const checkpoint = this.manifest.stages[canonical] || this.manifest.stages[stage];
     if (!checkpoint) {
-      return { status: 'pending', artifacts: [], outputFiles: [], inputHashes: {} };
+      throw new Error(`Unknown checkpoint stage: ${stage}`);
     }
     return checkpoint;
   }

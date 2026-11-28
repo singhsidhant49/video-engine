@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_f0cd270a1be63714",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Laboratory №67 «Hydrogen Material Science and Carbon Nanostructures».jpg",
+  "path": "images/saved-from-web/saved-from-web_f0cd270a1be63714.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1024,
+  "height": 768,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "laboratory",
+    "hydrogen",
+    "material",
+    "science",
+    "carbon",
+    "nanostructure",
+    "scientific",
+    "research",
+    "static",
+    "presentation",
+    "file",
+    "nanostructures",
+    "jpg",
+    "handshake",
+    "business meeting",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Laboratory №67 «Hydrogen Material Science and Carbon Nanostructures».jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "laboratory materials science",
+    "savedAt": "2026-10-24T07:26:44.110Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "A.D.Zolotarenko",
+    "creator": "A.D.Zolotarenko",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T07:23:39.055Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Laboratory_%E2%84%9667_%C2%ABHydrogen_Material_Science_and_Carbon_Nanostructures%C2%BB.jpg"
+  }
+}

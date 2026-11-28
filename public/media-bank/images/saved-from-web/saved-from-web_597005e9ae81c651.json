@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_597005e9ae81c651",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Gravitational Lensing in Galaxy Cluster Abell 37 (3903388057).jpg",
+  "path": "images/saved-from-web/saved-from-web_597005e9ae81c651.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2080,
+  "aspectRatio": 1.25,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "gravitational",
+    "lensing",
+    "galaxy",
+    "cluster",
+    "abell",
+    "3903388057",
+    "file",
+    "jpg",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "galaxy cluster gravitational lensing",
+    "savedAt": "2026-10-24T09:28:17.359Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "NASA Goddard Photo and Video",
+    "creator": "NASA Goddard Photo and Video",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-24T09:25:51.549Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Gravitational_Lensing_in_Galaxy_Cluster_Abell_37_(3903388057).jpg"
+  }
+}

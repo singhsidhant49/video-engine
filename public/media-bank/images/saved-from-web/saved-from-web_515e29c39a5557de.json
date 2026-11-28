@@ -1,0 +1,63 @@
+{
+  "id": "saved-from-web_515e29c39a5557de",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tired athlete lies on the track, recovering after a race in sportswear.",
+  "path": "images/saved-from-web/saved-from-web_515e29c39a5557de.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "athlete",
+    "lie",
+    "track",
+    "recovering",
+    "after",
+    "race",
+    "sportswear",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "head",
+    "down",
+    "lies"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tired athlete lies on the track, recovering after a race in sportswear."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "athlete head down after race",
+    "savedAt": "2026-10-26T07:37:29.392Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RUN 4 FFWPU",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-red-shorts-lying-on-red-carpet-12698213/"
+  }
+}

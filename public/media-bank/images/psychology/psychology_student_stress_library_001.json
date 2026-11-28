@@ -1,0 +1,78 @@
+{
+  "id": "psychology_student_stress_library_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Overwhelmed student studying in a library",
+  "path": "images/psychology/psychology_student_stress_library_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "stress",
+    "student",
+    "study pressure",
+    "anxiety",
+    "burnout",
+    "education"
+  ],
+  "concepts": [
+    "academic stress",
+    "cognitive overload",
+    "performance pressure",
+    "student burnout"
+  ],
+  "subjects": [
+    "young woman",
+    "library",
+    "laptop",
+    "books",
+    "notes"
+  ],
+  "actions": [
+    "studying",
+    "holding head",
+    "feeling overwhelmed"
+  ],
+  "mood": [
+    "stressed",
+    "fatigued",
+    "pressured"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.37,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "student mental health",
+    "exam stress",
+    "burnout explainer",
+    "education psychology"
+  ],
+  "avoidFor": [
+    "calm mindfulness",
+    "couples therapy",
+    "child counseling"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

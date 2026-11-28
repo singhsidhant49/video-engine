@@ -1,0 +1,76 @@
+{
+  "id": "science_genomics_analysis_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist analyzing genomics data in the lab",
+  "path": "images/science/science_genomics_analysis_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "genomics",
+    "DNA",
+    "bioinformatics",
+    "laboratory",
+    "data analysis"
+  ],
+  "concepts": [
+    "genomics research",
+    "DNA analysis",
+    "bioinformatics",
+    "precision medicine"
+  ],
+  "subjects": [
+    "scientist",
+    "DNA visualization",
+    "computer monitor",
+    "microscope"
+  ],
+  "actions": [
+    "analyzing genomic data",
+    "reviewing charts",
+    "conducting bioinformatics research"
+  ],
+  "mood": [
+    "high-tech",
+    "focused",
+    "advanced"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.72,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "genetics video",
+    "biotech explainer",
+    "medical research",
+    "DNA science"
+  ],
+  "avoidFor": [
+    "field ecology",
+    "astronomy",
+    "retail lab"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

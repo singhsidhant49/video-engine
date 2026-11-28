@@ -1,0 +1,78 @@
+{
+  "id": "finance_executive_dashboard_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive presenting financial dashboard",
+  "path": "images/finance/finance_executive_dashboard_presentation_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "executive",
+    "dashboard",
+    "presentation",
+    "revenue",
+    "profit",
+    "forecast",
+    "boardroom"
+  ],
+  "concepts": [
+    "financial performance",
+    "executive reporting",
+    "revenue growth",
+    "profitability",
+    "forecasting"
+  ],
+  "subjects": [
+    "executive",
+    "finance dashboard",
+    "boardroom team"
+  ],
+  "actions": [
+    "presenting metrics",
+    "explaining growth",
+    "reviewing forecast"
+  ],
+  "mood": [
+    "professional",
+    "confident",
+    "data-driven"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.6,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "financial reporting",
+    "business finance",
+    "earnings explainer",
+    "corporate finance"
+  ],
+  "avoidFor": [
+    "personal budgeting",
+    "retail checkout",
+    "casual lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

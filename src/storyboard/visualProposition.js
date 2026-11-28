@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const VisualPropositionSchema = z.object({
   version: z.literal(1),
@@ -36,8 +36,23 @@ function domainAndSense(text, kind) {
   }
   if (/\b(?:memory leak|heap|garbage collect(?:ion|or)?|retained reference|ram)\b/i.test(text)) return ['software engineering', 'SOFTWARE_MEMORY'];
   if (/\b(?:cloud comput(?:ing)?|aws|azure|server cluster|datacenter)\b/i.test(text)) return ['cloud computing', 'COMPUTING_CLOUD'];
-  if (/\b(?:dns|tcp|packet|network|http|server request)\b/i.test(text)) return ['computer networking', 'NETWORK_PROTOCOL'];
-  if (/\b(?:bank|bond|stock|market|finance|mortgage|credit)\b/i.test(text)) return ['finance', 'FINANCIAL_SYSTEM'];
+  if (/\b(?:dns|tcp(?:\/ip)?|packet\s+routing|computer\s+network|http|server\s+request|server\s+response)\b/i.test(text)) return ['computer networking', 'NETWORK_PROTOCOL'];
+  const sanitizedText = text
+    .replace(/\bstock\s*(?:footage|photo|video|image|clip|media|asset|library)s?\b/gi, '')
+    .replace(/\b(?:river|snow|image|media|memory)\s+bank\b/gi, '');
+  if (/\b(?:bank run|banking panic|stock market|financial market|wall street|depositor|insolvency|mortgage|credit score|cryptocurrency|portfolio|bonds? and stocks?)\b/i.test(sanitizedText)
+    || (/\b(?:finance|financial|banking)\b/i.test(sanitizedText) && !/\b(?:river bank)\b/i.test(sanitizedText))) {
+    return ['finance', 'FINANCIAL_SYSTEM'];
+  }
+  if (/\b(?:dubai|burj\s+khalifa|uae|emirates|marina)\b/i.test(text)) {
+    return ['geography and travel', 'LOCATION_LANDMARK'];
+  }
+  if (/\b(?:roman\s+empire|ancient\s+rome|ancient\s+roman|roman\s+forum|colosseum|pompeii|ancient\s+greece|ancient\s+egypt|ottoman\s+empire|mesopotamia|persian\s+empire)\b/i.test(text)) {
+    return ['history and civilizations', 'HISTORICAL_CIVILIZATION'];
+  }
+  if (/\b(?:runner|running|athlete|athletics|sprint|marathon|jogging|track and field|workout|fitness|gym|training session)\b/i.test(sanitizedText)) {
+    return ['sports and fitness', 'ATHLETIC_TRAINING'];
+  }
   if (kind === 'timeline') return ['history', 'HISTORICAL_TIMELINE'];
   if (kind === 'code' || kind === 'ui') return ['software engineering', kind === 'code' ? 'SOURCE_CODE' : 'SOFTWARE_INTERFACE'];
   return ['general', String(kind || 'subject').toUpperCase()];
@@ -45,6 +60,12 @@ function domainAndSense(text, kind) {
 
 function confusersFor(sense) {
   const values = {
+    LOCATION_LANDMARK: ['generic modern office meeting', 'stock business team', 'unrelated city skyline without landmark'],
+    HISTORICAL_CIVILIZATION: ['modern office building', 'contemporary skyscrapers', 'digital abstract mesh', 'generic modern traffic'],
+    ATHLETIC_TRAINING: [
+      'office desk paperwork', 'computer keyboard laptop', 'stock chart graphs',
+      'corporate boardroom meeting', 'circuit board motherboard', 'car traffic jam',
+    ],
     ANCESTRAL_CAUSALITY: ['botanical trees', 'man walking in a park', 'forest scenery', 'family lifestyle stock photo'],
     CAUSAL_TIMELINE: ['video editing timeline', 'project management roadmap', 'railway route map', 'fishbone defect diagram'],
     TIMELINE_BRANCHING: ['botanical tree branches', 'video editing timeline', 'project roadmap', 'microscope cells', 'abstract glowing background'],
@@ -67,11 +88,6 @@ function confusersFor(sense) {
 
 function representationNeed(scene, shot, sense, text) {
   const kind = scene.preferredPresentation || scene.kind || scene.presentationSource?.kind;
-  if (shot.mediaPreference === 'procedural') {
-    if (shot.assetIntent === 'interface') return 'UI';
-    if (shot.assetIntent === 'data') return 'DIAGRAM';
-    return 'DIAGRAM';
-  }
   if (kind === 'code') return 'CODE';
   if (kind === 'ui') return 'UI';
   if (kind === 'chart' || kind === 'statistic') return kind === 'statistic' ? 'TEXT_STAT' : 'CHART';
@@ -81,17 +97,18 @@ function representationNeed(scene, shot, sense, text) {
   if (kind === 'document' || kind === 'quote') return 'DOCUMENT';
   if (shot.assetIntent === 'historical') return 'ARCHIVAL_IMAGE';
   if (kind === 'statement' || kind === 'chapter') return 'TEXT_STAT';
-  if (shot.entities?.length || scene.entities?.length) return scene.evidenceRequirement === 'required' ? 'ARCHIVAL_IMAGE' : 'REAL_IMAGE';
   if (['ANCESTRAL_CAUSALITY', 'CAUSAL_TIMELINE', 'TIMELINE_BRANCHING', 'SOFTWARE_MEMORY', 'NETWORK_PROTOCOL', 'CONCURRENCY_DEADLOCK'].includes(sense)) {
     if (sense === 'ANCESTRAL_CAUSALITY' || sense.includes('TIMELINE')) return 'TIMELINE';
     return 'DIAGRAM';
   }
   if (/connects?|flows?|causes?|depends?|cycle|loop|mechanism|branch/i.test(text)) return 'DIAGRAM';
-  if (shot.assetIntent === 'action'
+  const hasDynamicMotion = shot.assetIntent === 'action'
     || ['NEW_ACTION', 'NEW_LOCATION', 'STATE_CHANGE'].includes(shot.semanticSubBeat?.shift)
-    || /\b(walks?|runs?|drives?|flies?|moves?|builds?|opens?|closes?|types?|writes?|works?|operates?|travels?|crosses?|launches?|falls?|rises?|crowd|traffic|factory|assembly line|waves?|burns?|flows?)\b/i.test(text)) {
+    || /\b(walks?|runs?|drives?|flies?|moves?|builds?|opens?|closes?|types?|writes?|works?|operates?|travels?|crosses?|launches?|falls?|rises?|crowd|traffic|factory|assembly line|waves?|burns?|flows?|storm|blizzard|winds?|ocean|sailing|rowing|crushing|struggle|workout|training|sprint|marathon)\b/i.test(text);
+  if (hasDynamicMotion && shot.assetIntent !== 'document' && shot.role !== 'graphic') {
     return 'REAL_VIDEO';
   }
+  if (shot.entities?.length || scene.entities?.length) return scene.evidenceRequirement === 'required' ? 'ARCHIVAL_IMAGE' : 'REAL_IMAGE';
   return 'REAL_IMAGE';
 }
 
@@ -135,8 +152,11 @@ export function buildVisualProposition({ shot, scene, topic = '' }) {
     || /abstract|ambient|background|texture|metaphor/i.test(concept);
   const isDocumentOrHistoricalEvidence = (scene.evidenceRequirement === 'required' || shot.evidenceRequirement === 'required')
     && (shot.assetIntent === 'document' || shot.assetIntent === 'historical' || /document|paper|receipt|certificate|contract|court|record/i.test(concept));
-  const isSpecificNamedEntity = shot.assetIntent === 'entity' && (shot.entities?.length > 0 || /^[A-Z][a-z]+(\s+[A-Z][a-z]+)+$/.test(concept));
-  const literalness = !isAbstractOrConceptual && (isDocumentOrHistoricalEvidence || isSpecificNamedEntity)
+  const isLocationOrCivilization = conceptSense === 'LOCATION_LANDMARK' || conceptSense === 'HISTORICAL_CIVILIZATION'
+    || shot.assetIntent === 'location' || shot.assetIntent === 'historical';
+  const isSpecificNamedEntity = (shot.assetIntent === 'entity' || isLocationOrCivilization)
+    && (shot.entities?.length > 0 || /^[A-Z][a-z]+(\s+[A-Z][a-z]+)+$/.test(concept) || isLocationOrCivilization);
+  const literalness = !isAbstractOrConceptual && (isDocumentOrHistoricalEvidence || isSpecificNamedEntity || isLocationOrCivilization)
     ? 'DIRECT'
     : (shot.role === 'atmosphere' || /abstract|background/i.test(concept)) ? 'METAPHOR_ALLOWED' : 'CONTEXTUAL_ALLOWED';
   const domainSpecificPositives = [];
@@ -146,6 +166,27 @@ export function buildVisualProposition({ shot, scene, topic = '' }) {
       'computer screen code terminal dark mode',
       'database query terminal log monitor',
       'modern server rack data center glowing lights',
+    );
+  } else if (conceptSense === 'ATHLETIC_TRAINING') {
+    domainSpecificPositives.push(
+      'athlete runner training outdoor',
+      'running track stadium athlete',
+      'runner shoes pavement dawn sunrise',
+      'determined runner sprinting',
+    );
+  } else if (conceptSense === 'LOCATION_LANDMARK') {
+    domainSpecificPositives.push(
+      'Dubai Burj Khalifa modern skyline',
+      'Dubai Marina aerial view',
+      'Downtown Dubai skyscrapers cityscape',
+      'Dubai modern architecture drone shot',
+    );
+  } else if (conceptSense === 'HISTORICAL_CIVILIZATION') {
+    domainSpecificPositives.push(
+      'Roman Colosseum ancient ruins Rome',
+      'Roman Forum ancient marble architecture ruins',
+      'Ancient Roman architecture columns aerial',
+      'Ancient Roman statue and temple marble',
     );
   }
   let searchConcepts = shot.searchConcepts || [];

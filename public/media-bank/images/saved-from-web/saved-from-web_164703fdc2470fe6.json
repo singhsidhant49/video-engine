@@ -1,0 +1,104 @@
+{
+  "id": "saved-from-web_164703fdc2470fe6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene path winding through a tall pine forest with sunlight peeking through the trees, creating a peaceful atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_164703fdc2470fe6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "serene",
+    "path",
+    "winding",
+    "through",
+    "tall",
+    "pine",
+    "sunlight",
+    "peeking",
+    "creating",
+    "peaceful",
+    "atmosphere",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "serene",
+    "path",
+    "winding",
+    "through",
+    "tall",
+    "pine",
+    "sunlight",
+    "peeking",
+    "creating",
+    "peaceful",
+    "atmosphere",
+    "trees",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunlight filtering through tall pine trees fog",
+    "savedAt": "2026-10-29T15:18:46.710Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Szymon",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photo-of-a-path-in-the-middle-of-the-woods-6907890/"
+  }
+}

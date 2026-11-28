@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_1f820e9233d39d9d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Black and white image of layered mountain silhouettes shrouded in mist at dawn.",
+  "path": "images/saved-from-web/saved-from-web_1f820e9233d39d9d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "layered",
+    "mountain",
+    "silhouette",
+    "shrouded",
+    "mist",
+    "dawn",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "image",
+    "silhouettes"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "layered",
+    "mountain",
+    "silhouette",
+    "shrouded",
+    "mist",
+    "dawn",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "image",
+    "silhouettes"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Black and white image of layered mountain silhouettes shrouded in mist at dawn."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "layered mountain ridges morning mist",
+    "savedAt": "2026-10-26T16:21:16.745Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marek Piwnicki",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/among-others-if-you-like-my-work-consider-supporting-me-at-https-www-patreon-com-marekpiwnicki-20066246/"
+  }
+}

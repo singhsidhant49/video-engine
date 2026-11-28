@@ -1,0 +1,78 @@
+{
+  "id": "psychology_lonely_commute_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Solitary bus ride at dusk",
+  "path": "images/psychology/psychology_lonely_commute_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "loneliness",
+    "reflection",
+    "urban life",
+    "isolation",
+    "commute",
+    "sadness"
+  ],
+  "concepts": [
+    "urban loneliness",
+    "quiet reflection",
+    "social disconnection",
+    "emotional distance"
+  ],
+  "subjects": [
+    "adult woman",
+    "bus interior",
+    "city skyline",
+    "window view"
+  ],
+  "actions": [
+    "looking outside",
+    "reflecting quietly",
+    "riding alone"
+  ],
+  "mood": [
+    "melancholic",
+    "contemplative",
+    "quiet"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.23,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "loneliness videos",
+    "human behavior content",
+    "urban psychology",
+    "emotional storytelling"
+  ],
+  "avoidFor": [
+    "happy group interaction",
+    "therapy office",
+    "nature healing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -34,7 +34,7 @@ Core Options:
   --tts <engine>           kokoro (default) | say (macOS dev narration)
   --no-render              stop after timeline + QC
   --render-scale <n>       render scale (default 1; use 0.5 for benchmark previews)
-  --visual-mode <mode>     MEDIA_EDITORIAL (default) | LEGACY_PROCEDURAL
+  --visual-mode <mode>     MEDIA_EDITORIAL (the only supported mode)
   --dev                    permit unresolved placeholders; never publishable
 
 Resumability & Iteration (Milestone 12):
@@ -46,6 +46,14 @@ Resumability & Iteration (Milestone 12):
   --contact-sheet-only     generate contact sheet preview without full video render
   --no-tts                 reuse cached audio without calling TTS
   --offline                run with cached provider queries and local assets only
+
+AI Image Generation Options:
+  --image-source <src>     stock (default) | ai (generate images via AI)
+  --image-provider <p>     ideogram | flux | replicate (auto-detected if model is flux)
+  --image-style <style>    anime (default) | stickman | hyper_realistic | comic_book | 3d_render | custom
+  --custom-style-prompt <s> custom style prompt when using --image-style custom
+  --image-model <model>    flux-schnell | p-image-ideogram | ideogram-4-5 | ideogram-4 | V_2_TURBO
+  --image-quality <q>      low | medium | high
 `);
   process.exit(0);
 }
@@ -69,7 +77,7 @@ async function main() {
   const requestedDuration = getArg(['--duration', '--durationSec', '--duration-sec']);
   const requestedVisualMode = getArg(['--visual-mode', '--visualMode']);
   requireValidChoice(requestedFormat, '--format', ['shorts', 'landscape']);
-  requireValidChoice(requestedVisualMode, '--visual-mode', ['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']);
+  requireValidChoice(requestedVisualMode, '--visual-mode', ['MEDIA_EDITORIAL']);
   if (requestedDuration != null && (!Number.isFinite(Number(requestedDuration)) || Number(requestedDuration) <= 0)) {
     throw new Error('--duration must be a positive number of seconds');
   }
@@ -101,6 +109,12 @@ async function main() {
     contactSheetOnly: hasFlag('--contact-sheet-only', '--contactSheetOnly'),
     noTts: hasFlag('--no-tts', '--noTts'),
     offline: hasFlag('--offline'),
+    imageSource: getArg(['--image-source', '--imageSource'], 'stock'),
+    imageProvider: getArg(['--image-provider', '--imageProvider'], null),
+    imageStyle: getArg(['--image-style', '--imageStyle'], 'anime'),
+    customStylePrompt: getArg(['--custom-style-prompt', '--customStylePrompt'], ''),
+    imageModel: getArg(['--image-model', '--imageModel'], null),
+    imageQuality: getArg(['--image-quality', '--imageQuality'], null),
     visualMode: requestedVisualMode,
     publishMode: developmentMode ? 'DEV_RENDER' : 'PRODUCTION_RENDER',
     unresolvedMediaMode: developmentMode ? 'ALLOW_DEV_PLACEHOLDER' : 'FAIL_PRODUCTION_RENDER',

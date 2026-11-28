@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const SolvedElementSchema = z.object({
   id: z.string(),
@@ -100,7 +100,7 @@ export const SolvedSceneSchema = z.object({
     nativeMotion: z.boolean(), videoTrim: z.object({ startTime: z.number().nonnegative(), endTime: z.number().nonnegative(), score: z.number().optional(), reason: z.string().optional() }).strict().nullable().default(null), activeRange: z.object({ startFrame: z.number().int().nonnegative(), endFrame: z.number().int().nonnegative() }).strict().nullable(),
   }).strict()).default({}),
   cameraPaths: z.record(z.string(), z.object({
-    behavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'FOCAL_PAN', 'DETAIL_CROP', 'REFRAME', 'MATCH_MOVE']),
+    behavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']),
     start: z.object({ scale: z.number().positive(), focusX: z.number().min(0).max(1), focusY: z.number().min(0).max(1) }).strict(),
     end: z.object({ scale: z.number().positive(), focusX: z.number().min(0).max(1), focusY: z.number().min(0).max(1) }).strict(),
     rationale: z.string(),

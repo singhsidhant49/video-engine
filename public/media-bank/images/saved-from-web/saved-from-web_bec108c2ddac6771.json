@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_bec108c2ddac6771",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Athletes running and training on an outdoor track in a lush park setting.",
+  "path": "images/saved-from-web/saved-from-web_bec108c2ddac6771.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "athlete",
+    "running",
+    "training",
+    "outdoor",
+    "track",
+    "lush",
+    "park",
+    "setting",
+    "forest",
+    "scenery",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "athletes"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "athlete",
+    "running",
+    "training",
+    "outdoor",
+    "track",
+    "lush",
+    "park",
+    "setting",
+    "forest",
+    "scenery",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "athletes"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Athletes running and training on an outdoor track in a lush park setting."
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "athlete runner training outdoor",
+    "savedAt": "2026-10-29T13:45:32.061Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Peter Kambey",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/athletes-in-sports-venue-15019195/"
+  }
+}

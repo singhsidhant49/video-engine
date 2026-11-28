@@ -1,19 +1,160 @@
 import express from 'express';
+import crypto from 'node:crypto';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import pg from 'pg';
 import { config } from '../config/index.js';
 import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
+import { createConfiguredVideoJobService } from './serviceFactory.js';
+import { createApiAuth, createApiRateLimit, createVideoApiRouter, videoApiErrorHandler } from './videoApiRouter.js';
+import { getAudioCatalog } from '../audio/musicCatalog.js';
+import { ChannelStore } from './channelStore.js';
+import { ChannelDirectorService } from '../services/channelDirectorService.js';
+import { ChannelScheduler } from './channelScheduler.js';
+import { createChannelApiRouter } from './channelApiRouter.js';
+import { YouTubePublisherService } from '../services/youtubePublisherService.js';
+import { inspectProductionPreflight } from './productionPreflight.js';
+import { AdminAuthService, AdminUserStore } from './adminAuthService.js';
+import { createAdminAuthRouter } from './adminAuthRouter.js';
+import { buildOwnerAlerts } from './alertsService.js';
+import { StudioSettingsStore, THUMBNAIL_PROVIDER_CATALOG } from './studioSettingsStore.js';
 
+const { Pool } = pg;
 const app = express();
-app.use(express.json());
+app.disable('x-powered-by');
+app.set('trust proxy', process.env.TRUST_PROXY ? (Number(process.env.TRUST_PROXY) || process.env.TRUST_PROXY) : 1);
+app.use((req, res, next) => {
+  const requestId = String(req.get('x-request-id') || crypto.randomUUID()).slice(0, 128);
+  req.requestId = requestId;
+  res.set({
+    'x-request-id': requestId,
+    'x-content-type-options': 'nosniff',
+    'x-frame-options': 'DENY',
+    'referrer-policy': 'no-referrer',
+    'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+    'content-security-policy': "default-src 'self' blob:; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; connect-src 'self' blob:; img-src 'self' data: https: blob:; media-src 'self' blob:; worker-src 'self' blob:; child-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:",
+  });
+  if (process.env.NODE_ENV === 'production') res.set('strict-transport-security', 'max-age=31536000; includeSubDomains');
+  next();
+});
+app.use(express.json({ limit: config.server.maxRequestBytes }));
+
+const sharedPool = process.env.DATABASE_URL
+  ? new Pool({ connectionString: process.env.DATABASE_URL, max: Number(process.env.POSTGRES_POOL_SIZE || 10) })
+  : null;
+const channelStore = new ChannelStore({ rootDir: config.channelsDir, pool: sharedPool });
+await channelStore.init();
+const studioSettingsStore = new StudioSettingsStore({ pool: sharedPool, connectionString: null });
+await studioSettingsStore.init();
+const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all', pool: sharedPool, settingsStore: studioSettingsStore });
+videoJobService.onVideoDeleted = (job) => channelStore.unlinkDeletedVideo(job.ownerId, job.id);
+await videoJobService.init();
+const channelDirector = new ChannelDirectorService({ store: channelStore, videoService: videoJobService });
+const youtubePublisher = (config.server.youtubePublishingEnabled || config.server.youtubeAnalyticsEnabled)
+  ? new YouTubePublisherService({ store: channelStore, videoService: videoJobService })
+  : null;
+const channelScheduler = new ChannelScheduler({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled });
+const production = process.env.NODE_ENV === 'production';
+const namedApiAccount = config.server.apiKeys.map((entry) => {
+  const value = String(entry); const separator = value.indexOf(':');
+  return separator > 0 ? value.slice(0, separator) : '';
+}).find((name) => /^[a-zA-Z0-9_-]{3,64}$/.test(name));
+const adminOwnerId = config.server.adminOwnerId || (namedApiAccount ? `acct_${namedApiAccount}` : 'acct_admin');
+const adminStore = new AdminUserStore({ file: path.join(config.rendersDir, 'admin_users.json'), pool: sharedPool, defaultOwnerId: adminOwnerId });
+await adminStore.init();
+const adminAuth = new AdminAuthService({ store: adminStore, jwtSecret: config.server.jwtSecret, ttlSeconds: config.server.jwtTtlSeconds, production });
+await adminAuth.bootstrap({ email: config.server.adminEmail, password: config.server.adminPassword, ownerId: adminOwnerId });
+if (production && await adminStore.count() === 0) throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD are required to create the first administrator');
+const apiAuth = createApiAuth({ apiKeys: config.server.apiKeys, production, sessionAuth: adminAuth });
+const apiRateLimit = createApiRateLimit({ max: Number(process.env.VIDEO_API_RATE_LIMIT_PER_MINUTE || 120) });
+
+app.use('/auth', createAdminAuthRouter({ auth: adminAuth, store: adminStore, requireAuth: apiAuth, production }));
+
+app.get('/health', (req, res) => res.json({ status: 'ok', uptimeSeconds: Math.round(process.uptime()) }));
+app.get('/health/ready', async (req, res) => {
+  try {
+    const readiness = await videoJobService.readiness();
+    res.status(readiness.ready ? 200 : 503).json({
+      status: readiness.ready ? 'ready' : 'not_ready',
+      ready: readiness.ready,
+      storage: { healthy: readiness.storage?.healthy !== false, type: readiness.storage?.type || 'unknown' },
+      queue: { healthy: readiness.queue?.healthy !== false, type: readiness.queue?.type || 'unknown', workerCount: readiness.queue?.workerCount },
+    });
+  } catch {
+    res.status(503).json({ status: 'not_ready', ready: false });
+  }
+});
+app.get('/ready', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
+  const readiness = await videoJobService.readiness();
+  const preflight = await inspectProductionPreflight();
+  const ready = readiness.ready && preflight.ready;
+  res.status(ready ? 200 : 503).json({ status: ready ? 'ready' : 'not_ready', ...readiness, ready, preflight });
+});
+if (youtubePublisher) app.get('/oauth/youtube/callback', async (req, res) => {
+  try {
+    if (req.query.error) throw Object.assign(new Error('YouTube authorization was denied'), { status: 400 });
+    await youtubePublisher.handleCallback({ code: String(req.query.code || ''), state: String(req.query.state || '') });
+    res.type('html').send('<!doctype html><meta charset="utf-8"><title>YouTube connected</title><body style="font-family:system-ui;padding:3rem;background:#101114;color:#f8f8f2"><h1>YouTube connected</h1><p>You can close this window and return to FrameForge.</p>');
+  } catch (error) {
+    res.status(error.status || 500).type('html').send(`<!doctype html><meta charset="utf-8"><title>Connection failed</title><body style="font-family:system-ui;padding:3rem"><h1>Connection failed</h1><p>${String(error.message || 'Unknown error').replace(/[&<>"']/g, '')}</p>`);
+  }
+});
+app.get('/v1/alerts', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    const [readiness, preflight] = await Promise.all([
+      videoJobService.readiness().catch(() => null),
+      inspectProductionPreflight().catch(() => null),
+    ]);
+    res.json(await buildOwnerAlerts({
+      ownerId: req.ownerId,
+      videoService: videoJobService,
+      channelStore,
+      readiness,
+      preflight,
+    }));
+  } catch (error) { next(error); }
+});
+const thumbnailSettingsPayload = (settings) => ({
+  settings,
+  thumbnailCatalog: THUMBNAIL_PROVIDER_CATALOG,
+  configuredProviders: {
+    ideogram: Boolean((config.ideogram?.apiKey || '').trim()),
+    replicate: Boolean((config.replicate?.apiToken || '').trim()),
+  },
+});
+app.get('/v1/settings', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    res.json(thumbnailSettingsPayload(await studioSettingsStore.get(req.ownerId)));
+  } catch (error) { next(error); }
+});
+app.patch('/v1/settings', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    res.json(thumbnailSettingsPayload(await studioSettingsStore.update(req.ownerId, req.body)));
+  } catch (error) { next(error); }
+});
+app.use('/v1', apiAuth, apiRateLimit,
+  createChannelApiRouter({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled }),
+  createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
 app.use('/audio', express.static(path.join(config.publicDir, 'audio')));
+app.use('/audiotrack', express.static(path.join(config.publicDir, 'audiotrack')));
 app.use('/media', express.static(path.join(config.publicDir, 'media')));
-app.use('/renders', express.static(config.rendersDir));
+const mediaBankAuth = process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next();
+app.use('/media-bank', mediaBankAuth, express.static(config.mediaBankDir));
+app.use('/media-bank', mediaBankAuth, express.static(path.join(config.publicDir, 'media-bank')));
+app.use('/storage/media-bank', mediaBankAuth, express.static(config.mediaBankDir));
+if (process.env.NODE_ENV !== 'production') app.use('/renders', express.static(config.rendersDir));
+
+app.get('/api/audiotracks', (req, res) => {
+  res.json({ status: 'ok', tracks: getAudioCatalog() });
+});
 
 // Endpoint: Trigger Video Generation
-app.post('/api/generate', async (req, res) => {
+app.post('/api/generate', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(410).json({ error: { code: 'LEGACY_ENDPOINT_DISABLED', message: 'Use POST /v1/videos for asynchronous generation' } });
+  }
   const input = req.body?.brief || req.body || {};
   const topic = input.prompt || input.topic;
 
@@ -22,17 +163,18 @@ app.post('/api/generate', async (req, res) => {
   }
 
   try {
+    const contentType = input.contentType || input.niche;
+    const channelProfile = input.channel || input.channelProfile || (contentType ? { contentType, voice: input.voice } : {});
     const result = await createFacelessVideo({
       brief: req.body?.brief,
       topic,
-      niche: input.niche,
+      niche: input.niche || contentType,
       format: input.format,
-      voice: input.voice,
+      voice: input.voice || undefined,
       style: input.style,
-      durationSec: input.durationSec,
+      durationSec: input.durationSec ? Number(input.durationSec) : undefined,
       channelId: input.channelId || input.channel?.id,
-      channelProfile: input.channel || input.channelProfile,
-      visualMode: input.visualMode,
+      channelProfile,
       onProgress: (progress) => {
         // Simple console logging for progress
       },
@@ -54,7 +196,10 @@ app.post('/api/generate', async (req, res) => {
 });
 
 // Endpoint: List Generated Videos
-app.get('/api/renders', async (req, res) => {
+app.get('/api/renders', process.env.NODE_ENV === 'production' ? apiAuth : (req, res, next) => next(), async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(410).json({ error: { code: 'LEGACY_ENDPOINT_DISABLED', message: 'Use GET /v1/videos for account-scoped video records' } });
+  }
   try {
     const files = await fs.readdir(config.rendersDir);
     const mp4Files = files.filter(f => f.endsWith('.mp4')).reverse();
@@ -69,289 +214,47 @@ app.get('/api/renders', async (req, res) => {
   }
 });
 
-// Serve Visual Studio Frontend Dashboard
-app.get('/', (req, res) => {
-  res.send(getStudioHtml());
+// Serve the route-based Studio dashboard. Keeping these as real URLs makes
+// navigation, refreshes and browser history work without a client router.
+const studioPages = ['/', '/dashboard', '/dashboard/overview', '/dashboard/calendar', '/dashboard/production', '/dashboard/channels', '/dashboard/ideas', '/dashboard/alerts', '/dashboard/analytics', '/dashboard/settings'];
+app.get(studioPages, (req, res) => {
+  res.sendFile(path.join(config.publicDir, 'dashboard', 'studio.html'));
 });
+app.get('/dashboard/index.html', (req, res) => res.redirect(308, '/dashboard/overview'));
+app.get(['/dashboard/app.js', '/dashboard/styles.css'], (req, res) => res.status(410).end());
+app.use('/dashboard', express.static(path.join(config.publicDir, 'dashboard')));
+
+// Body-parser failures happen before the /v1 router is entered. Keep those
+// failures on the same JSON contract instead of returning Express HTML and a
+// local stack trace.
+app.use(videoApiErrorHandler);
 
 const PORT = config.server.port;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n======================================================`);
   console.log(`✨ Faceless Video Studio Running at: http://localhost:${PORT}`);
   console.log(`======================================================\n`);
 });
+channelScheduler.start();
+server.on('error', (error) => {
+  console.error(`Video API failed to listen on port ${PORT}:`, error);
+  process.exitCode = 1;
+});
 
-function getStudioHtml() {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faceless Video Studio - Programmatic AI Pipeline</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: rgba(15, 23, 42, 0.8);
-      --accent: #38bdf8;
-      --accent-purple: #a855f7;
-      --border: rgba(255, 255, 255, 0.1);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
-    }
-    header {
-      padding: 24px 40px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify: space-between;
-      backdrop-filter: blur(12px);
-      background: rgba(9, 13, 22, 0.8);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-icon {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 20px; color: #fff;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-    }
-    .brand h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-    .status-badge {
-      display: flex; align-items: center; gap: 8px; padding: 6px 16px;
-      border-radius: 20px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #10b981; font-size: 14px; font-weight: 600;
-    }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
-
-    main {
-      max-width: 1300px;
-      margin: 40px auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      width: 100%;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-
-    .card-title {
-      font-size: 20px; font-weight: 700; margin-bottom: 24px;
-      display: flex; align-items: center; gap: 10px; color: #fff;
-    }
-
-    .form-group { margin-bottom: 20px; }
-    label { display: block; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-    input[type="text"], select {
-      width: 100%; padding: 14px 18px; border-radius: 14px;
-      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
-      color: #fff; font-size: 16px; outline: none; transition: all 0.2s;
-    }
-    select option {
-      background-color: #0f172a;
-      color: #ffffff;
-      padding: 12px;
-    }
-    input[type="text"]:focus, select:focus {
-      border-color: var(--accent); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-    }
-
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .btn-generate {
-      width: 100%; padding: 18px; border-radius: 16px; border: none;
-      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-      color: #fff; font-size: 18px; font-weight: 800; cursor: pointer;
-      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); transition: all 0.2s;
-      margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
-    .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(56, 189, 248, 0.5); }
-    .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .preview-container {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 450px; border: 2px dashed var(--border); border-radius: 20px;
-      background: rgba(5, 8, 15, 0.5); padding: 24px; text-align: center;
-    }
-
-    video { width: 100%; max-height: 520px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-
-    .loader {
-      width: 48px; height: 48px; border: 4px solid var(--border);
-      border-top-color: var(--accent); border-radius: 50%; animation: spin 1s infinite linear;
-    }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-    .logs {
-      font-family: 'Fira Code', monospace; font-size: 13px; color: var(--accent);
-      background: rgba(0,0,0,0.4); padding: 16px; border-radius: 12px; width: 100%;
-      text-align: left; margin-top: 16px; max-height: 140px; overflow-y: auto;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="brand">
-      <div class="brand-icon">▶</div>
-      <div>
-        <h1>Faceless Video Studio</h1>
-        <p style="font-size: 13px; color: var(--text-muted)">Node.js + DeepSeek + Kokoro TTS + Remotion</p>
-      </div>
-    </div>
-    <div class="status-badge">
-      <div class="status-dot"></div> Kokoro TTS Docker Connected
-    </div>
-  </header>
-
-  <main>
-    <!-- Left: Configuration Form -->
-    <div class="card">
-      <div class="card-title">⚡ Create New Video</div>
-      
-      <div class="form-group">
-        <label>Topic / Prompt</label>
-        <input type="text" id="topicInput" value="How Airbnb Scaled from Zero to 100 Billion" placeholder="e.g. How Airbnb Scaled from Zero to 100 Billion">
-      </div>
-
-      <div class="grid-2">
-        <div class="form-group">
-          <label>Niche / Category</label>
-          <select id="nicheSelect">
-            <option value="business" selected>Business & Startups</option>
-            <option value="finance">Finance & Markets</option>
-            <option value="tech-explainer">Tech & AI Systems</option>
-            <option value="history">History & Documentaries</option>
-            <option value="science">Science & Space</option>
-            <option value="code-snippet">Coding & Dev Tutorials</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Video Format</label>
-          <select id="formatSelect">
-            <option value="shorts" selected>9:16 Vertical (Shorts/Reels)</option>
-            <option value="landscape">16:9 Widescreen (YouTube)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="form-group">
-          <label>Kokoro Voice</label>
-          <select id="voiceSelect">
-            <option value="af_bella" selected>Bella (Female - Crisp & Energetic)</option>
-            <option value="am_adam">Adam (Male - Clear Technical)</option>
-            <option value="af_sarah">Sarah (Female - Professional)</option>
-            <option value="am_michael">Michael (Male - Authoritative)</option>
-          </select>
-        </div>
-      </div>
-
-      <button class="btn-generate" id="generateBtn" onclick="startGeneration()">
-        <span>🎬 Generate Video Now</span>
-      </button>
-    </div>
-
-    <!-- Right: Preview & Player Card -->
-    <div class="card">
-      <div class="card-title">🎥 Video Output & Player</div>
-      
-      <div class="preview-container" id="previewArea">
-        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">✨</div>
-        <p style="color: var(--text-muted); font-size: 16px;">Configure options on the left and click "Generate Video Now".</p>
-      </div>
-
-      <div id="logsArea" style="display: none;">
-        <div class="logs" id="logContent">Initialized pipeline...</div>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    async function startGeneration() {
-      const topic = document.getElementById('topicInput').value.trim();
-      const niche = document.getElementById('nicheSelect').value;
-      const format = document.getElementById('formatSelect').value;
-      const voice = document.getElementById('voiceSelect').value;
-      const btn = document.getElementById('generateBtn');
-
-      if (!topic) return alert('Please enter a topic prompt');
-
-      btn.disabled = true;
-      btn.innerHTML = '<span>⚡ Processing Pipeline...</span>';
-
-      const previewArea = document.getElementById('previewArea');
-      const logsArea = document.getElementById('logsArea');
-      const logContent = document.getElementById('logContent');
-      
-      logsArea.style.display = 'block';
-      previewArea.innerHTML = \`
-        <div class="loader"></div>
-        <p style="margin-top: 20px; font-weight: 700; font-size: 18px;">Rendering Video Frame-by-Frame...</p>
-        <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Scripting AI -> Kokoro Speech -> Remotion Bundle -> MP4</p>
-      \`;
-
-      logContent.innerText = '🤖 [1/4] Generating AI Script & Layout...\\n';
-
-      try {
-        const response = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic, niche, format, voice }),
-        });
-
-        const data = await response.json();
-
-        if (!data.success) {
-          throw new Error(data.error || 'Failed to render video');
-        }
-
-        logContent.innerText += '🗣️ [2/4] Kokoro TTS Audio Generated!\\n';
-        logContent.innerText += '📦 [3/4] Remotion Composition Bundled!\\n';
-        logContent.innerText += '🎬 [4/4] MP4 Render Complete!\\n';
-
-        previewArea.innerHTML = \`
-          <video controls autoplay loop src="\${data.videoUrl}"></video>
-          <div style="margin-top: 16px; display: flex; gap: 12px; align-items: center;">
-            <a href="\${data.videoUrl}" download class="btn-generate" style="padding: 10px 24px; font-size: 14px; text-decoration: none;">
-              ⬇️ Download MP4 (\${data.durationSeconds.toFixed(1)}s)
-            </a>
-          </div>
-        \`;
-      } catch (err) {
-        logContent.innerText += '❌ Error: ' + err.message + '\\n';
-        previewArea.innerHTML = \`
-          <div style="color: #f43f5e; font-size: 36px; margin-bottom: 12px;">⚠️</div>
-          <p style="color: #f43f5e; font-weight: bold;">Generation Failed</p>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">\${err.message}</p>
-        \`;
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<span>🎬 Generate Video Now</span>';
-      }
-    }
-  </script>
-</body>
-</html>`;
+let stopping = false;
+async function shutdown(signal) {
+  if (stopping) return;
+  stopping = true;
+  console.log(`${signal} received; stopping new work and draining active video jobs...`);
+  videoJobService.stopAccepting();
+  channelScheduler.stop();
+  const closeServer = new Promise((resolve) => server.close(resolve));
+  await videoJobService.shutdown({ timeoutMs: config.server.shutdownTimeoutMs });
+  await channelStore.close();
+  await adminStore.close();
+  if (sharedPool) await sharedPool.end().catch(() => {});
+  await closeServer;
+  console.log('Video API shutdown complete.');
 }
+process.once('SIGTERM', () => { void shutdown('SIGTERM'); });
+process.once('SIGINT', () => { void shutdown('SIGINT'); });

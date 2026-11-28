@@ -1,0 +1,78 @@
+{
+  "id": "psychology_nighttime_phone_dependency_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Midnight scrolling by the city window",
+  "path": "images/psychology/psychology_nighttime_phone_dependency_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "phone addiction",
+    "sleep disruption",
+    "blue light",
+    "nighttime scrolling",
+    "habit loop",
+    "anxiety"
+  ],
+  "concepts": [
+    "digital overstimulation",
+    "sleep disturbance",
+    "habit loop",
+    "technology dependence"
+  ],
+  "subjects": [
+    "adult woman",
+    "bed",
+    "smartphone",
+    "night city window"
+  ],
+  "actions": [
+    "scrolling phone",
+    "lying awake",
+    "doomscrolling"
+  ],
+  "mood": [
+    "moody",
+    "restless",
+    "isolated"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.29,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "digital habits content",
+    "sleep psychology",
+    "phone addiction video",
+    "modern behavior"
+  ],
+  "avoidFor": [
+    "group interaction",
+    "daytime productivity",
+    "nature therapy"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-10-29T07:22:36.314Z",
+  "totalTracks": 54,
+  "tracks": [
+    {
+      "id": "audiobook_reading-books",
+      "title": "Reading Books",
+      "artist": "Leberch",
+      "category": "audiobook",
+      "filename": "leberch-reading-books-590361.mp3",
+      "src": "audiotrack/audiobook/leberch-reading-books-590361.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_inspiring-cinematic",
+      "title": "Inspiring Cinematic",
+      "artist": "LN Plus Music",
+      "category": "audiobook",
+      "filename": "lnplusmusic-inspiring-inspiring-cinematic-610925.mp3",
+      "src": "audiotrack/audiobook/lnplusmusic-inspiring-inspiring-cinematic-610925.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_the-book",
+      "title": "The Book",
+      "artist": "Music Word",
+      "category": "audiobook",
+      "filename": "musicword-the-book-334560.mp3",
+      "src": "audiotrack/audiobook/musicword-the-book-334560.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_inspiring",
+      "title": "Inspiring",
+      "artist": "Nastelbom",
+      "category": "audiobook",
+      "filename": "nastelbom-inspiring-423334.mp3",
+      "src": "audiotrack/audiobook/nastelbom-inspiring-423334.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_inspiring-piano",
+      "title": "Inspiring Piano",
+      "artist": "Nastelbom",
+      "category": "audiobook",
+      "filename": "nastelbom-inspiring-piano-602520.mp3",
+      "src": "audiotrack/audiobook/nastelbom-inspiring-piano-602520.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_inspiring-story",
+      "title": "Inspiring Story",
+      "artist": "Nastelbom",
+      "category": "audiobook",
+      "filename": "nastelbom-inspiring-story-606730.mp3",
+      "src": "audiotrack/audiobook/nastelbom-inspiring-story-606730.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_piano-studyingreadingfocusriverbird-chipping",
+      "title": "Piano Studyingreadingfocusriverbird Chipping",
+      "artist": "Audio Library",
+      "category": "audiobook",
+      "filename": "u_5qto80gavx-piano-studyingreadingfocusriverbird-chipping-203328.mp3",
+      "src": "audiotrack/audiobook/u_5qto80gavx-piano-studyingreadingfocusriverbird-chipping-203328.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "audiobook_listen-when-you-need-motivation",
+      "title": "Listen When You Need Motivation",
+      "artist": "Audio Library",
+      "category": "audiobook",
+      "filename": "u_nhimhor2050-listen-when-you-need-motivation-335127.mp3",
+      "src": "audiotrack/audiobook/u_nhimhor2050-listen-when-you-need-motivation-335127.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_documentary-music",
+      "title": "Documentary Music",
+      "artist": "Atlas Audio",
+      "category": "documentary",
+      "filename": "atlasaudio-documentary-documentary-music-507827.mp3",
+      "src": "audiotrack/documentary/atlasaudio-documentary-documentary-music-507827.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_soul-documentary-technology",
+      "title": "Soul Documentary Technology",
+      "artist": "Cinematic",
+      "category": "documentary",
+      "filename": "cinematic-soul-documentary-technology-622736.mp3",
+      "src": "audiotrack/documentary/cinematic-soul-documentary-technology-622736.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_documentary-music",
+      "title": "Documentary Music",
+      "artist": "Dailyvibe",
+      "category": "documentary",
+      "filename": "dailyvibe-documentary-documentary-music-614437.mp3",
+      "src": "audiotrack/documentary/dailyvibe-documentary-documentary-music-614437.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_journeyman",
+      "title": "Journeyman",
+      "artist": "Aakash Gandhi",
+      "category": "documentary",
+      "filename": "Journeyman - Aakash Gandhi.mp3",
+      "src": "audiotrack/documentary/Journeyman - Aakash Gandhi.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_historical-history-background-music",
+      "title": "Historical History Background Music",
+      "artist": "Sigma Music Art",
+      "category": "documentary",
+      "filename": "sigmamusicart-historical-history-background-music-417483.mp3",
+      "src": "audiotrack/documentary/sigmamusicart-historical-history-background-music-417483.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_history-historical-background-music",
+      "title": "History Historical Background Music",
+      "artist": "Sigma Music Art",
+      "category": "documentary",
+      "filename": "sigmamusicart-history-historical-background-music-371414.mp3",
+      "src": "audiotrack/documentary/sigmamusicart-history-historical-background-music-371414.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "documentary_historical-history-documentary-music",
+      "title": "Historical History Documentary Music",
+      "artist": "Viacheslav Starostin",
+      "category": "documentary",
+      "filename": "viacheslavstarostin-historical-history-documentary-music-366065.mp3",
+      "src": "audiotrack/documentary/viacheslavstarostin-historical-history-documentary-music-366065.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "education_light-room-study-music",
+      "title": "Light Room Study Music",
+      "artist": "Atlas Audio",
+      "category": "education",
+      "filename": "atlasaudio-light-room-study-music-602059.mp3",
+      "src": "audiotrack/education/atlasaudio-light-room-study-music-602059.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "education",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/education/July - John Patitucci.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_study-session",
+      "title": "Study Session",
+      "artist": "Luceris",
+      "category": "education",
+      "filename": "luceris-study-session-602503.mp3",
+      "src": "audiotrack/education/luceris-study-session-602503.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_educational-background",
+      "title": "Educational Background",
+      "artist": "The Mountain",
+      "category": "education",
+      "filename": "the_mountain-educational-background-167599.mp3",
+      "src": "audiotrack/education/the_mountain-educational-background-167599.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "education_educational-music",
+      "title": "Educational Music",
+      "artist": "Viacheslav Starostin",
+      "category": "education",
+      "filename": "viacheslavstarostin-educational-educational-music-614992.mp3",
+      "src": "audiotrack/education/viacheslavstarostin-educational-educational-music-614992.mp3",
+      "baseVolume": 0.16,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_morgan-acoustic-corporate-explainer-video",
+      "title": "Morgan Acoustic Corporate Explainer Video",
+      "artist": "Alex",
+      "category": "explainer",
+      "filename": "alex-morgan-acoustic-corporate-explainer-video-552296.mp3",
+      "src": "audiotrack/explainer/alex-morgan-acoustic-corporate-explainer-video-552296.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_explainer-music",
+      "title": "Explainer Music",
+      "artist": "Atlas Audio",
+      "category": "explainer",
+      "filename": "atlasaudio-explainer-explainer-music-576633.mp3",
+      "src": "audiotrack/explainer/atlasaudio-explainer-explainer-music-576633.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_crimson-fly",
+      "title": "Crimson Fly",
+      "artist": "Huma-Huma",
+      "category": "explainer",
+      "filename": "Crimson Fly - Huma-Huma.mp3",
+      "src": "audiotrack/explainer/Crimson Fly - Huma-Huma.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_explainer-video-tiktok-music",
+      "title": "Explainer Video Tiktok Music",
+      "artist": "Hitslab",
+      "category": "explainer",
+      "filename": "hitslab-explainer-video-tiktok-music-269856.mp3",
+      "src": "audiotrack/explainer/hitslab-explainer-video-tiktok-music-269856.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_july",
+      "title": "July",
+      "artist": "John Patitucci",
+      "category": "explainer",
+      "filename": "July - John Patitucci.mp3",
+      "src": "audiotrack/explainer/July - John Patitucci.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_explainer-music",
+      "title": "Explainer Music",
+      "artist": "Paulyudin",
+      "category": "explainer",
+      "filename": "paulyudin-explainer-explainer-music-573982.mp3",
+      "src": "audiotrack/explainer/paulyudin-explainer-explainer-music-573982.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_tech-explainer-background-loop",
+      "title": "Tech Explainer Background Loop",
+      "artist": "Vadim Makes Sound",
+      "category": "explainer",
+      "filename": "vadim_makes_sound-tech-explainer-background-loop-551261.mp3",
+      "src": "audiotrack/explainer/vadim_makes_sound-tech-explainer-background-loop-551261.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "explainer_walk-in-the-park",
+      "title": "Walk In The Park",
+      "artist": "Audionautix",
+      "category": "explainer",
+      "filename": "Walk In The Park - Audionautix.mp3",
+      "src": "audiotrack/explainer/Walk In The Park - Audionautix.mp3",
+      "baseVolume": 0.15,
+      "duckedVolume": 0.04
+    },
+    {
+      "id": "investigate_crime_intrigue",
+      "title": "Intrigue",
+      "artist": "Max Surla_Media Right Productions",
+      "category": "investigate_crime",
+      "filename": "Intrigue - Max Surla_Media Right Productions.mp3",
+      "src": "audiotrack/investigate_crime/Intrigue - Max Surla_Media Right Productions.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_detective-investigation-background",
+      "title": "Detective Investigation Background",
+      "artist": "Joris Vermeer",
+      "category": "investigate_crime",
+      "filename": "jorisvermeer-detective-investigation-background-523193.mp3",
+      "src": "audiotrack/investigate_crime/jorisvermeer-detective-investigation-background-523193.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_keys-to-unravel",
+      "title": "Keys To Unravel",
+      "artist": "The Soundlings",
+      "category": "investigate_crime",
+      "filename": "Keys To Unravel - The Soundlings.mp3",
+      "src": "audiotrack/investigate_crime/Keys To Unravel - The Soundlings.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_investigation-music",
+      "title": "Investigation Music",
+      "artist": "Leberch",
+      "category": "investigate_crime",
+      "filename": "leberch-investigation-investigation-music-606086.mp3",
+      "src": "audiotrack/investigate_crime/leberch-investigation-investigation-music-606086.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_investigation-piano",
+      "title": "Investigation Piano",
+      "artist": "Leberch",
+      "category": "investigate_crime",
+      "filename": "leberch-investigation-piano-611639.mp3",
+      "src": "audiotrack/investigate_crime/leberch-investigation-piano-611639.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_cinematic-thriller-music-loop-investigative-heist",
+      "title": "Cinematic Thriller Music Loop Investigative Heist",
+      "artist": "Sonican",
+      "category": "investigate_crime",
+      "filename": "sonican-cinematic-thriller-music-loop-investigative-heist-420116.mp3",
+      "src": "audiotrack/investigate_crime/sonican-cinematic-thriller-music-loop-investigative-heist-420116.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "investigate_crime_dark-suspense-crime-background",
+      "title": "Dark Suspense Crime Background",
+      "artist": "Universfield",
+      "category": "investigate_crime",
+      "filename": "universfield-dark-suspense-crime-background-499584.mp3",
+      "src": "audiotrack/investigate_crime/universfield-dark-suspense-crime-background-499584.mp3",
+      "baseVolume": 0.18,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "meditation_meditation",
+      "title": "Meditation",
+      "artist": "Atlas Audio",
+      "category": "meditation",
+      "filename": "atlasaudio-meditation-583096.mp3",
+      "src": "audiotrack/meditation/atlasaudio-meditation-583096.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_rain-on-rooftop",
+      "title": "Rain On Rooftop",
+      "artist": "Nature Ambient",
+      "category": "meditation",
+      "filename": "Rain On Rooftop.mp3",
+      "src": "audiotrack/meditation/Rain On Rooftop.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_meditation-music",
+      "title": "Meditation Music",
+      "artist": "Solarflex",
+      "category": "meditation",
+      "filename": "solarflex-meditation-meditation-music-589064.mp3",
+      "src": "audiotrack/meditation/solarflex-meditation-meditation-music-589064.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_tratak",
+      "title": "Tratak",
+      "artist": "Jesse Gallagher",
+      "category": "meditation",
+      "filename": "Tratak - Jesse Gallagher.mp3",
+      "src": "audiotrack/meditation/Tratak - Jesse Gallagher.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_meditation-background",
+      "title": "Meditation Background",
+      "artist": "Velario Music",
+      "category": "meditation",
+      "filename": "velariomusic-meditation-background-603870.mp3",
+      "src": "audiotrack/meditation/velariomusic-meditation-background-603870.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "meditation_meditation-music",
+      "title": "Meditation Music",
+      "artist": "Verclub Music",
+      "category": "meditation",
+      "filename": "verclub_music-meditation-music-550885.mp3",
+      "src": "audiotrack/meditation/verclub_music-meditation-music-550885.mp3",
+      "baseVolume": 0.22,
+      "duckedVolume": 0.08
+    },
+    {
+      "id": "motivational_goddess-of-the-sea",
+      "title": "Goddess of the Sea",
+      "artist": "Jimena Contreras",
+      "category": "motivational",
+      "filename": "Goddess of the Sea - Jimena Contreras.mp3",
+      "src": "audiotrack/motivational/Goddess of the Sea - Jimena Contreras.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_journeyman",
+      "title": "Journeyman",
+      "artist": "Aakash Gandhi",
+      "category": "motivational",
+      "filename": "Journeyman - Aakash Gandhi.mp3",
+      "src": "audiotrack/motivational/Journeyman - Aakash Gandhi.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_motivational-music",
+      "title": "Motivational Music",
+      "artist": "Leberch",
+      "category": "motivational",
+      "filename": "leberch-motivational-motivational-music-610725 (1).mp3",
+      "src": "audiotrack/motivational/leberch-motivational-motivational-music-610725 (1).mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_motivational-music",
+      "title": "Motivational Music",
+      "artist": "Leberch",
+      "category": "motivational",
+      "filename": "leberch-motivational-motivational-music-610725.mp3",
+      "src": "audiotrack/motivational/leberch-motivational-motivational-music-610725.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_motivational",
+      "title": "Motivational",
+      "artist": "Nastelbom",
+      "category": "motivational",
+      "filename": "nastelbom-motivational-355698.mp3",
+      "src": "audiotrack/motivational/nastelbom-motivational-355698.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_motivational",
+      "title": "Motivational",
+      "artist": "Nastelbom",
+      "category": "motivational",
+      "filename": "nastelbom-motivational-487707.mp3",
+      "src": "audiotrack/motivational/nastelbom-motivational-487707.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_motivational-music",
+      "title": "Motivational Music",
+      "artist": "Tata Music",
+      "category": "motivational",
+      "filename": "tatamusic-motivational-motivational-music-595122.mp3",
+      "src": "audiotrack/motivational/tatamusic-motivational-motivational-music-595122.mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "motivational_listen-when-you-need-motivation",
+      "title": "Listen When You Need Motivation",
+      "artist": "Audio Library",
+      "category": "motivational",
+      "filename": "u_nhimhor2050-listen-when-you-need-motivation-335127 (1).mp3",
+      "src": "audiotrack/motivational/u_nhimhor2050-listen-when-you-need-motivation-335127 (1).mp3",
+      "baseVolume": 0.2,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_american-frontiers",
+      "title": "American Frontiers",
+      "artist": "Aaron Kenny",
+      "category": "storytelling",
+      "filename": "American Frontiers - Aaron Kenny.mp3",
+      "src": "audiotrack/storytelling/American Frontiers - Aaron Kenny.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_piano-story",
+      "title": "Piano Story",
+      "artist": "Leberch",
+      "category": "storytelling",
+      "filename": "leberch-piano-story-601906.mp3",
+      "src": "audiotrack/storytelling/leberch-piano-story-601906.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_inspiring-story",
+      "title": "Inspiring Story",
+      "artist": "Nastelbom",
+      "category": "storytelling",
+      "filename": "nastelbom-inspiring-story-606730.mp3",
+      "src": "audiotrack/storytelling/nastelbom-inspiring-story-606730.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_love-story",
+      "title": "Love Story",
+      "artist": "Nastelbom",
+      "category": "storytelling",
+      "filename": "nastelbom-love-story-606734.mp3",
+      "src": "audiotrack/storytelling/nastelbom-love-story-606734.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    },
+    {
+      "id": "storytelling_cinematic-story",
+      "title": "Cinematic Story",
+      "artist": "The Mountain",
+      "category": "storytelling",
+      "filename": "the_mountain-cinematic-story-162224.mp3",
+      "src": "audiotrack/storytelling/the_mountain-cinematic-story-162224.mp3",
+      "baseVolume": 0.17,
+      "duckedVolume": 0.05
+    }
+  ]
+}

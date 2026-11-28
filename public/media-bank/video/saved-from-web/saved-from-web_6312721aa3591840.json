@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_6312721aa3591840",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/",
+  "path": "video/saved-from-web/saved-from-web_6312721aa3591840.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "machine",
+    "cutting",
+    "steel",
+    "plate",
+    "7622764",
+    "electronic",
+    "hardware",
+    "interior",
+    "laser",
+    "drilling",
+    "welding",
+    "thermal",
+    "https",
+    "pexels",
+    "video",
+    "machine-cutting-steel-plate-7622764",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "machine",
+    "cutting",
+    "steel",
+    "plate",
+    "7622764",
+    "electronic",
+    "hardware",
+    "interior",
+    "laser",
+    "drilling",
+    "welding",
+    "thermal",
+    "https",
+    "pexels",
+    "video",
+    "machine-cutting-steel-plate-7622764",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/"
+  ],
+  "actions": [
+    "laser drilling, welding, or thermal cutting"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "robotic arms cutting steel panels",
+    "savedAt": "2026-10-29T04:41:37.584Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "gusat silviu",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/machine-cutting-steel-plate-7622764/"
+  }
+}

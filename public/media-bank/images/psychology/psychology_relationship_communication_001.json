@@ -1,0 +1,75 @@
+{
+  "id": "psychology_relationship_communication_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Thoughtful conversation in a cozy living room",
+  "path": "images/psychology/psychology_relationship_communication_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "communication",
+    "relationship",
+    "listening",
+    "conflict resolution",
+    "couple"
+  ],
+  "concepts": [
+    "healthy communication",
+    "active listening",
+    "relationship dynamics",
+    "emotional expression"
+  ],
+  "subjects": [
+    "adult woman",
+    "adult man",
+    "living room sofa"
+  ],
+  "actions": [
+    "explaining feelings",
+    "listening carefully",
+    "discussing issues"
+  ],
+  "mood": [
+    "constructive",
+    "focused",
+    "empathetic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship psychology",
+    "communication skills videos",
+    "couples content",
+    "social behavior explainers"
+  ],
+  "avoidFor": [
+    "meditation content",
+    "public speaking anxiety",
+    "solitude scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

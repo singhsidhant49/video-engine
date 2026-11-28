@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_a39d026688f1b708",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vibrant aerial view of Panama City glowing with lights at night, showcasing its dynamic urban landscape.",
+  "path": "images/saved-from-web/saved-from-web_a39d026688f1b708.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1462,
+  "aspectRatio": 1.7784,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "aerial",
+    "panama",
+    "city",
+    "glowing",
+    "light",
+    "night",
+    "showcasing",
+    "it",
+    "dynamic",
+    "urban",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "its"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "aerial",
+    "panama",
+    "city",
+    "glowing",
+    "light",
+    "night",
+    "showcasing",
+    "it",
+    "dynamic",
+    "urban",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "its"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vibrant aerial view of Panama City glowing with lights at night, showcasing its dynamic urban landscape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "aerial smart city night",
+    "savedAt": "2026-10-26T08:43:04.125Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "K",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-aerial-view-of-panama-city-at-night-33803484/"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_beeb77fecdf5b1d8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mysterious dark ocean surface with subtle light reflections and deep blue hues.",
+  "path": "images/saved-from-web/saved-from-web_beeb77fecdf5b1d8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "mysteriou",
+    "dark",
+    "ocean",
+    "surface",
+    "subtle",
+    "light",
+    "reflection",
+    "deep",
+    "blue",
+    "hue",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "mysterious",
+    "reflections",
+    "hues",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "mysteriou",
+    "dark",
+    "ocean",
+    "surface",
+    "subtle",
+    "light",
+    "reflection",
+    "deep",
+    "blue",
+    "hue",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "mysterious",
+    "reflections",
+    "hues",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Mysterious dark ocean surface with subtle light reflections and deep blue hues."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "deep ocean darkness",
+    "savedAt": "2026-10-26T09:46:23.900Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kris Møklebust",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dark-ocean-waves-with-reflective-light-patterns-34155535/"
+  }
+}

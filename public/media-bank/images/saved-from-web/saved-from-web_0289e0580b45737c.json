@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_0289e0580b45737c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a digital alarm clock displaying 20:50 and temperature on a wooden desk with a notepad.",
+  "path": "images/saved-from-web/saved-from-web_0289e0580b45737c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "digital",
+    "alarm",
+    "clock",
+    "displaying",
+    "temperature",
+    "wooden",
+    "desk",
+    "notepad",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "office desk",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "digital",
+    "alarm",
+    "clock",
+    "displaying",
+    "temperature",
+    "wooden",
+    "desk",
+    "notepad",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "close-up",
+    "office desk",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a digital alarm clock displaying 20:50 and temperature on a wooden desk with a notepad."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "digital alarm clock 5:59 AM close up",
+    "savedAt": "2026-10-28T10:31:19.541Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Wanshan Luo",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/digital-alarm-clock-20383452/"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_7a3ae0a9c391c9cc",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/a-boat-crossing-a-rough-sea-4441578/",
+  "path": "video/saved-from-web/saved-from-web_7a3ae0a9c391c9cc.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "boat",
+    "crossing",
+    "rough",
+    "sea",
+    "4441578",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "a-boat-crossing-a-rough-sea-4441578",
+    "garbage truck",
+    "waste bins",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "boat",
+    "crossing",
+    "rough",
+    "sea",
+    "4441578",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "a-boat-crossing-a-rough-sea-4441578",
+    "garbage truck",
+    "waste bins",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/a-boat-crossing-a-rough-sea-4441578/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "small boat stormy ocean huge waves",
+    "savedAt": "2026-10-29T08:38:09.863Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ronald Hayward",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/a-boat-crossing-a-rough-sea-4441578/"
+  }
+}

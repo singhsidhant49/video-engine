@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_4b87c122128fde62",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Gentle dark ocean waves creating a natural pattern at twilight, offering a calming and deep visual experience.",
+  "path": "images/saved-from-web/saved-from-web_4b87c122128fde62.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1459,
+  "aspectRatio": 1.782,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "gentle",
+    "dark",
+    "ocean",
+    "wave",
+    "creating",
+    "natural",
+    "pattern",
+    "twilight",
+    "offering",
+    "calming",
+    "deep",
+    "experience",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "visual",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "gentle",
+    "dark",
+    "ocean",
+    "wave",
+    "creating",
+    "natural",
+    "pattern",
+    "twilight",
+    "offering",
+    "calming",
+    "deep",
+    "experience",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "visual",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Gentle dark ocean waves creating a natural pattern at twilight, offering a calming and deep visual experience."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "vast ocean waves evening",
+    "savedAt": "2026-10-26T09:45:18.086Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "İdil Ceren Çelikler",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/waving-dark-water-14979746/"
+  }
+}

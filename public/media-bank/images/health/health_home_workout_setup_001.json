@@ -1,0 +1,79 @@
+{
+  "id": "health_home_workout_setup_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit home workout corner",
+  "path": "images/health/health_home_workout_setup_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "fitness",
+    "home workout",
+    "exercise",
+    "wellness",
+    "dumbbells",
+    "kettlebell"
+  ],
+  "concepts": [
+    "exercise routine",
+    "home fitness",
+    "active lifestyle",
+    "strength training"
+  ],
+  "subjects": [
+    "yoga mat",
+    "dumbbells",
+    "kettlebell",
+    "water bottle",
+    "towel"
+  ],
+  "actions": [
+    "preparing for workout",
+    "setting up exercise space",
+    "showing home fitness"
+  ],
+  "mood": [
+    "bright",
+    "motivating",
+    "fresh"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.57,
+      "y": 0.6
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "workout intros",
+    "home exercise scenes",
+    "lifestyle wellness"
+  ],
+  "avoidFor": [
+    "clinical diagnosis",
+    "nutrition plate",
+    "anatomy explainer"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

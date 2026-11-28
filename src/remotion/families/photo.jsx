@@ -3,7 +3,28 @@ import { AbsoluteFill, Img, OffthreadVideo, Sequence, staticFile, useCurrentFram
 import { useTheme, textStyles, fitSize, glyphRatio } from '../engine/theme.js';
 import { Bed, Ground, Shade, ShotMedia, activeShot, projectPoint } from '../engine/imagery.jsx';
 import { reveal, progress, ease } from '../engine/motion.js';
-import { captionBand, Kicker } from './editorial.jsx';
+
+/** Band reserved above captions so on-screen labels never collide with them. */
+function captionBand(theme) {
+  return theme.style?.captions?.mode === 'none'
+    ? 0
+    : theme.size.caption * (theme.style?.captions?.scale || 0.8) * (theme.isVertical ? 2.6 : 2.2);
+}
+
+function Kicker({ text, at = 0, accent = true }) {
+  if (!text) return null;
+  const frame = useCurrentFrame();
+  const theme = useTheme();
+  const t = textStyles(theme);
+  const startAt = Number.isFinite(at) ? at : 0;
+  const p = progress(frame, startAt, 14);
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: theme.u(14), ...reveal('rise', frame, startAt, theme.unit, 14) }}>
+      {accent && <div style={{ width: theme.u(36) * p, height: theme.u(3), background: theme.palette.accent }} />}
+      <div style={{ ...t.label, color: theme.palette.accent, letterSpacing: '0.14em', opacity: 0.95 }}>{text}</div>
+    </div>
+  );
+}
 
 /**
  * Editorial Photo family — Media-first documentary composition.

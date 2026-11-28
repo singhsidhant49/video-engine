@@ -1,0 +1,77 @@
+{
+  "id": "psychology_cognitive_assessment_session_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cognitive therapy and assessment session",
+  "path": "images/psychology/psychology_cognitive_assessment_session_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "cognitive therapy",
+    "memory",
+    "aging",
+    "assessment",
+    "mental fitness",
+    "neuropsychology"
+  ],
+  "concepts": [
+    "cognitive assessment",
+    "memory support",
+    "healthy aging",
+    "brain training"
+  ],
+  "subjects": [
+    "older man",
+    "psychologist",
+    "shape puzzle",
+    "clipboard"
+  ],
+  "actions": [
+    "solving puzzle",
+    "observing cognition",
+    "guided assessment"
+  ],
+  "mood": [
+    "encouraging",
+    "focused",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "memory care videos",
+    "aging psychology",
+    "brain health content",
+    "assessment scenes"
+  ],
+  "avoidFor": [
+    "mindfulness outdoors",
+    "couples conflict",
+    "public speaking"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

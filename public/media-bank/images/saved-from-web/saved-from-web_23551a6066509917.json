@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_23551a6066509917",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Laptops on a desk displaying stock market charts and financial documents.",
+  "path": "images/saved-from-web/saved-from-web_23551a6066509917.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "laptop",
+    "desk",
+    "displaying",
+    "stock",
+    "market",
+    "chart",
+    "financial",
+    "document",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "laptops",
+    "charts",
+    "documents",
+    "office desk",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "laptop",
+    "desk",
+    "displaying",
+    "stock",
+    "market",
+    "chart",
+    "financial",
+    "document",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "laptops",
+    "charts",
+    "documents",
+    "office desk",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Laptops on a desk displaying stock market charts and financial documents."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "laptop screen financial ledger",
+    "savedAt": "2026-10-28T15:41:10.716Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Yan Krukau",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/gray-laptop-on-the-table-7693142/"
+  }
+}

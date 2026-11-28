@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_d10803c053a310ff",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:South pole jamesway.jpg",
+  "path": "images/saved-from-web/saved-from-web_d10803c053a310ff.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "south",
+    "pole",
+    "jamesway",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "south",
+    "pole",
+    "jamesway",
+    "municipal",
+    "city",
+    "street",
+    "dusk",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:South pole jamesway.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Scott at South Pole tent",
+    "savedAt": "2026-10-29T13:27:05.573Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Amble",
+    "creator": "Amble",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T13:23:57.493Z",
+    "page": "https://commons.wikimedia.org/wiki/File:South_pole_jamesway.jpg"
+  }
+}

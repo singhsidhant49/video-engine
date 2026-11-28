@@ -1,0 +1,77 @@
+{
+  "id": "science_weather_balloon_launch_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Atmospheric scientist launching a weather balloon at sunrise",
+  "path": "images/science/science_weather_balloon_launch_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "meteorology",
+    "weather balloon",
+    "atmosphere",
+    "field science",
+    "climate",
+    "sunrise"
+  ],
+  "concepts": [
+    "atmospheric observation",
+    "weather monitoring",
+    "balloon launch",
+    "meteorological data collection"
+  ],
+  "subjects": [
+    "scientist",
+    "weather balloon",
+    "field equipment",
+    "landscape"
+  ],
+  "actions": [
+    "launching balloon",
+    "collecting weather data",
+    "preparing instruments"
+  ],
+  "mood": [
+    "hopeful",
+    "expansive",
+    "scientific"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "weather explainer",
+    "climate science",
+    "atmospheric research",
+    "environmental video"
+  ],
+  "avoidFor": [
+    "chemistry lab",
+    "oceanography ship",
+    "retail"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

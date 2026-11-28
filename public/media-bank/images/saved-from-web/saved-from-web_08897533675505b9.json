@@ -1,0 +1,74 @@
+{
+  "id": "saved-from-web_08897533675505b9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Elephant Island",
+  "path": "images/saved-from-web/saved-from-web_08897533675505b9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1845,
+  "aspectRatio": 1.4092,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "elephant",
+    "island",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "elephant",
+    "island",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Elephant Island"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Elephant Island",
+    "savedAt": "2026-10-29T12:45:26.445Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "NASA Earth Observatory image by Joshua Stevens, using Landsat data from the U.S. Geological Survey. Story by Kasha Patel.",
+    "creator": "NASA Earth Observatory image by Joshua Stevens, using Landsat data from the U.S. Geological Survey. Story by Kasha Patel.",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T09:51:23.675Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Elephant_Island_by_Landsat_8_(cropped).jpeg"
+  }
+}

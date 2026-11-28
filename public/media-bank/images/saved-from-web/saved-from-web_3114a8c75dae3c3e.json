@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_3114a8c75dae3c3e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Suzuka 300km Endurance - Qualifying 2010.jpg",
+  "path": "images/saved-from-web/saved-from-web_3114a8c75dae3c3e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2200,
+  "height": 1460,
+  "aspectRatio": 1.5068,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "suzuka",
+    "300km",
+    "endurance",
+    "qualifying",
+    "2010",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "suzuka",
+    "300km",
+    "endurance",
+    "qualifying",
+    "2010",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Suzuka 300km Endurance - Qualifying 2010.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Endurance",
+    "savedAt": "2026-10-29T12:44:43.226Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 3.0",
+    "license_name": "CC BY 3.0",
+    "url": "https://creativecommons.org/licenses/by/3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "author": "Laitche",
+    "creator": "Laitche",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T08:35:05.585Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Suzuka_300km_Endurance_-_Qualifying_2010.jpg"
+  }
+}

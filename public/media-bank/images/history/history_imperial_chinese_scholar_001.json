@@ -1,0 +1,79 @@
+{
+  "id": "history_imperial_chinese_scholar_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Imperial scholar in a palace study at golden hour",
+  "path": "images/history/history_imperial_chinese_scholar_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "imperial china",
+    "scholar",
+    "palace study",
+    "manuscripts",
+    "astronomy",
+    "bureaucracy"
+  ],
+  "concepts": [
+    "court scholarship",
+    "imperial administration",
+    "historical learning",
+    "knowledge and governance"
+  ],
+  "subjects": [
+    "scholar",
+    "bamboo scrolls",
+    "maps",
+    "astronomical instrument",
+    "palace balcony"
+  ],
+  "actions": [
+    "writing on scrolls",
+    "studying maps",
+    "recording knowledge"
+  ],
+  "mood": [
+    "golden",
+    "scholarly",
+    "grand"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "asian history videos",
+    "imperial history explainers",
+    "scholar scenes",
+    "civilization content"
+  ],
+  "avoidFor": [
+    "modern politics",
+    "industrial history",
+    "battle scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

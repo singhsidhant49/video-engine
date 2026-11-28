@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_5a945aad34212fb7",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Focused athlete in starting position on a sunny track field, ready to sprint.",
+  "path": "images/saved-from-web/saved-from-web_5a945aad34212fb7.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2048,
+  "height": 1365,
+  "aspectRatio": 1.5004,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "focused",
+    "athlete",
+    "starting",
+    "position",
+    "sunny",
+    "track",
+    "field",
+    "ready",
+    "sprint",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "focused",
+    "athlete",
+    "starting",
+    "position",
+    "sunny",
+    "track",
+    "field",
+    "ready",
+    "sprint",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Focused athlete in starting position on a sunny track field, ready to sprint."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "athlete explosive start sprint",
+    "savedAt": "2026-10-28T08:36:53.973Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "nappy",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-wearing-white-sweater-and-black-shorts-about-to-run-936094/"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "psychology_friend_emotional_support_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Friend offering emotional support at sunset",
+  "path": "images/psychology/psychology_friend_emotional_support_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "friendship",
+    "emotional support",
+    "comfort",
+    "sadness",
+    "connection",
+    "mental health"
+  ],
+  "concepts": [
+    "peer support",
+    "empathy",
+    "emotional connection",
+    "comfort during distress"
+  ],
+  "subjects": [
+    "two women",
+    "park bench",
+    "lake",
+    "sunset"
+  ],
+  "actions": [
+    "comforting friend",
+    "listening",
+    "showing empathy"
+  ],
+  "mood": [
+    "compassionate",
+    "emotional",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.44,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "friendship psychology",
+    "support scenes",
+    "mental health storytelling",
+    "empathy content"
+  ],
+  "avoidFor": [
+    "clinical testing",
+    "workplace stress",
+    "public speaking"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

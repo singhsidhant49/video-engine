@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_b85771de60969a05",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vibrant city street scene captured at night with long exposure showing traffic lights and light trails.",
+  "path": "images/saved-from-web/saved-from-web_b85771de60969a05.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "city",
+    "street",
+    "scene",
+    "captured",
+    "night",
+    "long",
+    "exposure",
+    "traffic",
+    "light",
+    "trail",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "showing",
+    "lights",
+    "trails"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "city",
+    "street",
+    "scene",
+    "captured",
+    "night",
+    "long",
+    "exposure",
+    "traffic",
+    "light",
+    "trail",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "showing",
+    "lights",
+    "trails"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vibrant city street scene captured at night with long exposure showing traffic lights and light trails."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "city traffic light trails",
+    "savedAt": "2026-10-26T08:43:21.426Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Tahir Osman",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/traffic-on-city-street-14780175/"
+  }
+}

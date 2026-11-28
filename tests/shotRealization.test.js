@@ -3,8 +3,59 @@ import test from 'node:test';
 
 import { resolveShotTiming } from '../src/pipeline/shotTimingResolver.js';
 import { createPresentationMemory, realizeSceneShots } from '../src/pipeline/visualRealizationDirector.js';
+import { chooseTransitions, directSolvedShotTransitions, stitchRepeatedAssetMotion } from '../src/pipeline/timeline.js';
+import { resolveVisualPolicy } from '../src/config/visualMode.js';
 import { buildVisualRealizationDiagnostics } from '../src/pipeline/visualRealizationDiagnostics.js';
 import { authorShots, isAbstractEventEntity } from '../src/storyboard/shotPlanner.js';
+
+test('adjacent reuse of the same image continues camera state instead of restarting', () => {
+  const clips = [{ shots: [
+    { id: 'a', asset: { src: 'same.jpg' }, solvedSceneId: 'sa', motionPlanId: 'ma' },
+    { id: 'b', asset: { src: 'same.jpg' }, solvedSceneId: 'sb', motionPlanId: 'mb' },
+  ] }];
+  const geometry = { rect: { x: 0, y: 0, width: 1920, height: 900 } };
+  const solvedScenes = {
+    sa: { mediaGeometry: { media_primary: geometry }, cameraPaths: { media_primary: { start: { scale: 1, focusX: .5, focusY: .5 }, end: { scale: 1.04, focusX: .52, focusY: .48 } } } },
+    sb: { mediaGeometry: { media_primary: geometry }, cameraPaths: { media_primary: { start: { scale: 1, focusX: .5, focusY: .5 }, end: { scale: 1.04, focusX: .5, focusY: .5 } } } },
+  };
+  const motionPlans = {
+    ma: { frame0State: { media_primary: {} }, tracks: [] },
+    mb: { frame0State: { media_primary: {} }, tracks: [{ targetId: 'media_primary', property: 'cameraScale', from: 1, to: 1.04 }] },
+  };
+  stitchRepeatedAssetMotion({ clips, solvedScenes, motionPlans });
+  assert.equal(solvedScenes.sb.cameraPaths.media_primary.start.scale, 1.04);
+  assert.equal(motionPlans.mb.frame0State.media_primary.cameraFocusY, .48);
+  assert.equal(motionPlans.mb.tracks[0].from, 1.04);
+  assert.equal(clips[0].shots[1].cameraContinuity.stitchedFromShotId, 'a');
+});
+
+test('adjacent reuse of the same video continues its playback window', () => {
+  const clips = [{ shots: [
+    {
+      id: 'video-a', durationInFrames: 222, solvedSceneId: 'sa', mediaSceneSpecId: 'spec-a',
+      asset: { type: 'video', src: 'same.mp4', duration: 24, videoTrim: { startTime: 3.5, endTime: 11 } },
+    },
+    {
+      id: 'video-b', durationInFrames: 174, solvedSceneId: 'sb', mediaSceneSpecId: 'spec-b',
+      asset: { type: 'video', src: 'same.mp4', duration: 24, videoTrim: { startTime: 3.5, endTime: 10.5 } },
+    },
+  ] }];
+  const solvedScenes = {
+    sa: { mediaGeometry: { media_primary: { videoTrim: { startTime: 3.5, endTime: 11 } } } },
+    sb: { mediaGeometry: { media_primary: { videoTrim: { startTime: 3.5, endTime: 10.5 } } } },
+  };
+  const mediaSceneSpecs = {
+    'spec-b': { assets: [{ src: 'same.mp4', videoTrim: { startTime: 3.5, endTime: 10.5 } }] },
+  };
+
+  stitchRepeatedAssetMotion({ clips, solvedScenes, mediaSceneSpecs, fps: 30 });
+
+  assert.equal(clips[0].shots[1].asset.videoTrim.startTime, 10.9);
+  assert.equal(clips[0].shots[1].asset.videoTrim.endTime, 16.8);
+  assert.equal(solvedScenes.sb.mediaGeometry.media_primary.videoTrim.startTime, 10.9);
+  assert.equal(mediaSceneSpecs['spec-b'].assets[0].videoTrim.startTime, 10.9);
+  assert.equal(clips[0].shots[1].videoContinuity.continuedFromShotId, 'video-a');
+});
 
 test('shot timing preserves authored order with aligned, gap-free coverage', () => {
   const shots = [
@@ -50,9 +101,9 @@ test('shot realization selects families per authored shot and records presentati
     sectionId: 'section-1',
     memory,
   });
-  assert.deepEqual(result.map((shot) => shot.presentation.family), ['image', 'stat']);
+  assert.deepEqual(result.map((shot) => shot.presentation.family), ['image', 'image']);
   assert.deepEqual(result.map((shot) => shot.storyboardShotId), ['real', 'data']);
-  assert.deepEqual(memory.recentFamilies, ['image', 'stat']);
+  assert.deepEqual(memory.recentFamilies, ['image', 'image']);
   assert.ok(result.every((shot) => shot.presentation.cameraMove));
 });
 
@@ -131,13 +182,243 @@ test('an entity absent from narration does not force an unnecessary portrait loc
   assert.equal(shot.visualConcept, 'cycling coach clipboard training');
 });
 
-test('single-shot scenes alternate restrained camera direction across the storyboard', () => {
+test('media storyboard defers camera direction until inspected asset geometry is available', () => {
   const base = {
     narration: 'A single complete visual thought.', purpose: 'context', visualIntent: 'identify',
     durationHint: 6, preferredPresentation: 'subject', evidenceRequirement: 'preferred',
     entities: [], energy: 3, sourceScenes: [{ narration: 'A single complete visual thought.', imageQueries: ['quiet room'] }],
   };
   const strategy = { useMediaEditorial: true, format: 'landscape', pacing: { minimumShotSeconds: 4.8, maximumStillSeconds: 8 } };
-  assert.equal(authorShots({ ...base, id: 'scene_001' }, strategy, 'Silence')[0].presentation.cameraMove, 'subtlePush');
-  assert.equal(authorShots({ ...base, id: 'scene_002' }, strategy, 'Silence')[0].presentation.cameraMove, 'subtlePull');
+  assert.equal(authorShots({ ...base, id: 'scene_001' }, strategy, 'Silence')[0].presentation.cameraMove, 'auto');
+  assert.equal(authorShots({ ...base, id: 'scene_002' }, strategy, 'Silence')[0].presentation.cameraMove, 'auto');
+});
+
+test('cinematic motion selection uses horizontal pans and intentional holds', () => {
+  const visualPolicy = resolveVisualPolicy();
+  const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .05, baseScale: 1 } };
+  const timing = [{ startFrame: 0, endFrame: 180, durationInFrames: 180, from: 0 }];
+  const makeScene = (id, role = 'context') => ({
+    id, kind: 'subject', purpose: 'context', tone: 'neutral', intensity: 2, informationDensity: 2, visualIntent: 'establish',
+    storyboardShots: [{ id: `${id}_shot`, role, visualConcept: 'A real environment', mediaPreference: 'auto', assetIntent: 'concept', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }],
+  });
+  const wide = realizeSceneShots({
+    scene: makeScene('wide'), spec,
+    sceneAssets: { primary: { src: 'wide.jpg', type: 'image', width: 2400, height: 1000, focal: { x: .72, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'landscape', fps: 30,
+  })[0];
+  assert.equal(wide.presentation.cameraMove, 'panRight');
+  assert.deepEqual(wide.move.scale, [1.04, 1.04]);
+  assert.deepEqual(wide.move.focus[1], [.72, .5]);
+
+  const vertical = realizeSceneShots({
+    scene: makeScene('vertical', 'subject'), spec,
+    sceneAssets: { primary: { src: 'tower.jpg', type: 'image', width: 800, height: 1600, focal: { x: .5, y: .3 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'landscape', fps: 30,
+  })[0];
+  assert.equal(vertical.presentation.cameraMove, 'static');
+
+  const video = realizeSceneShots({
+    scene: makeScene('video'), spec,
+    sceneAssets: { primary: { src: 'native.mp4', type: 'video', width: 1920, height: 1080, focal: { x: .5, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'landscape', fps: 30,
+  })[0];
+  assert.equal(video.presentation.cameraMove, 'static');
+});
+
+test('cinematic transitions use only clean cuts and cross dissolves', () => {
+  const shot = (visualConcept) => [{ visualConcept }];
+  const base = { id: 's1', purpose: 'hook', tone: 'urgent', intensity: 3, storyboardShots: shot('phone message') };
+  const select = (candidate, extra = []) => {
+    const scenes = [base, candidate, ...extra];
+    return chooseTransitions(
+      { scenes }, scenes.map(() => ({ family: 'image' })), { transitions: { perMinute: 3 } },
+      30, 3600, resolveVisualPolicy(), { pacing: { mode: 'cinematic' } },
+    );
+  };
+  assert.equal(select({ id: 's2', purpose: 'context', tone: 'reflective', intensity: 2, continuity: 'continue', storyboardShots: shot('ocean cable') })[1], 'dissolve');
+  assert.equal(select({ id: 's2', purpose: 'transition', tone: 'neutral', intensity: 2, section: true, storyboardShots: shot('landing station') })[1], 'dissolve');
+  assert.equal(select({ id: 's2', purpose: 'reveal', tone: 'tense', intensity: 5, storyboardShots: shot('damaged cable') })[1], 'cut');
+  assert.equal(select({ id: 's2', purpose: 'context', tone: 'reflective', intensity: 2, storyboardShots: shot('repair ship') })[1], 'cut');
+
+  const repeated = select(
+    { id: 's2', purpose: 'transition', tone: 'neutral', intensity: 2, section: true, storyboardShots: shot('new coast') },
+    [{ id: 's3', purpose: 'transition', tone: 'neutral', intensity: 2, section: true, storyboardShots: shot('data center') }],
+  );
+  assert.deepEqual(repeated, ['cut', 'dissolve', 'cut']);
+
+  const mostlyCuts = select(
+    { id: 's2', purpose: 'transition', tone: 'neutral', intensity: 2, section: true, storyboardShots: shot('chapter') },
+    Array.from({ length: 8 }, (_, index) => ({ id: `normal_${index}`, purpose: 'context', tone: 'neutral', intensity: 2, storyboardShots: shot(`normal ${index}`) })),
+  );
+  assert.equal(mostlyCuts[1], 'dissolve');
+  assert.ok(mostlyCuts.filter((type) => type === 'cut').length >= 8);
+  assert.ok(mostlyCuts.every((type) => ['cut', 'dissolve'].includes(type)));
+
+  const balanced = chooseTransitions(
+    { scenes: [base, { id: 'balanced', purpose: 'context', tone: 'neutral', intensity: 2, storyboardShots: shot('server room') }] },
+    [{ family: 'image' }, { family: 'image' }], { transitions: { perMinute: 2 } },
+    30, 1800, resolveVisualPolicy(), { pacing: { mode: 'balanced' } },
+  );
+  assert.deepEqual(balanced, ['cut', 'cut']);
+});
+
+test('post-solve transition directing covers internal shot boundaries without changing timing', () => {
+  const makeShot = (id, role, concept, focalX) => ({
+    id, storyboardShotId: id, sceneId: 'calm', role, visualConcept: concept,
+    startFrame: Number(id.slice(-1)) * 150, from: Number(id.slice(-1)) * 150,
+    durationInFrames: 150, transitionPolicy: 'CUT', transitionReason: 'newIdea', transitionAnchor: null,
+    presentation: { cameraMove: 'static' }, asset: { type: 'image', src: `${id}.jpg`, focal: { x: focalX, y: .5 } },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 },
+  });
+  const shots = [
+    makeShot('shot0', 'establishing', 'quiet coast', .3),
+    makeShot('shot1', 'subject', 'distant lighthouse', .7),
+    makeShot('shot2', 'context', 'evening water', .4),
+    makeShot('shot3', 'subject', 'harbour lights', .6),
+    makeShot('shot4', 'context', 'night horizon', .5),
+  ];
+  const originalTiming = shots.map((shot) => [shot.from, shot.durationInFrames]);
+  const clips = [{ id: 'c01', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots }];
+  directSolvedShotTransitions({ clips, scenes: [{ id: 'calm', tone: 'reflective' }], fps: 30 });
+
+  assert.equal(shots.filter((shot) => shot.enter.type === 'dissolve').length, 1);
+  assert.ok(shots.slice(1).every((shot) => ['cut', 'dissolve'].includes(shot.enter.type)));
+  assert.ok(shots.slice(1).every((shot) => shot.enter && shot.transitionPolicy));
+  assert.deepEqual(shots.map((shot) => [shot.from, shot.durationInFrames]), originalTiming);
+});
+
+test('post-solve directing keeps compatible motion boundaries as clean cuts', () => {
+  const first = { id: 'a', storyboardShotId: 'a', sceneId: 's', role: 'context', visualConcept: 'same turbine', durationInFrames: 150, presentation: { cameraMove: 'panRight' }, asset: { type: 'image', src: 'a.jpg', focal: { x: .55, y: .5 } }, enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT', transitionReason: 'newIdea', transitionAnchor: null };
+  const second = { ...first, id: 'b', storyboardShotId: 'b', asset: { type: 'image', src: 'b.jpg', focal: { x: .58, y: .5 } } };
+  const clips = [{ id: 'c01', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots: [first, second] }];
+  directSolvedShotTransitions({ clips, scenes: [{ id: 's', tone: 'neutral' }], fps: 30 });
+  assert.equal(second.transitionPolicy, 'CUT');
+  assert.equal(second.transitionAnchor, null);
+  assert.deepEqual(second.enter, { type: 'cut', frames: 0 });
+});
+
+test('meditation post-solve directing satisfies its calm dissolve floor without dissolving every boundary', () => {
+  const shots = Array.from({ length: 10 }, (_, index) => ({
+    id: `med-${index}`, storyboardShotId: `med-${index}`, sceneId: 'meditation', role: 'context',
+    durationInFrames: 240, from: index * 240, presentation: { cameraMove: 'gentleDrift' },
+    asset: { type: 'image', src: `med-${index}.jpg`, focal: { x: .5, y: .5 } },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT',
+  }));
+  const clips = [{ id: 'meditation-clip', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots }];
+  directSolvedShotTransitions({
+    clips, scenes: [{ id: 'meditation', tone: 'neutral' }], fps: 30,
+    visualPolicy: { format: 'landscape', imageSource: 'ai' },
+    productionProfile: { contentType: 'meditation' },
+  });
+  const dissolves = shots.slice(1).filter((shot) => shot.enter.type === 'dissolve').length;
+  assert.ok(dissolves >= Math.floor((shots.length - 1) * 0.45));
+  assert.ok(dissolves < shots.length - 1, 'calm transitions must remain restrained instead of crossfading every shot');
+});
+
+test('meditation with video assets allows calm dissolves across internal shot boundaries to satisfy dissolve floor', () => {
+  const shots = Array.from({ length: 10 }, (_, index) => ({
+    id: `med-vid-${index}`, storyboardShotId: `med-vid-${index}`, sceneId: `scene-${Math.floor(index / 2)}`, role: 'context',
+    durationInFrames: 240, from: index * 240, presentation: { cameraMove: 'none' },
+    asset: { type: 'video', src: `med-vid-${index}.mp4` },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT',
+  }));
+  // 5 scenes, each with 2 shots
+  const clips = Array.from({ length: 5 }, (_, clipIndex) => ({
+    id: `clip-${clipIndex}`,
+    transitionPolicy: clipIndex === 0 ? 'CUT' : (clipIndex % 2 === 1 ? 'DISSOLVE' : 'CUT'),
+    enter: { type: clipIndex % 2 === 1 ? 'dissolve' : 'cut', frames: clipIndex % 2 === 1 ? 16 : 0 },
+    shots: [shots[clipIndex * 2], shots[clipIndex * 2 + 1]],
+  }));
+  directSolvedShotTransitions({
+    clips,
+    scenes: Array.from({ length: 5 }, (_, i) => ({ id: `scene-${i}`, tone: 'reflective' })),
+    fps: 30,
+    visualPolicy: { format: 'landscape', imageSource: 'stock' },
+    productionProfile: { contentType: 'meditation' },
+  });
+  const dissolves = shots.slice(1).filter((shot) => shot.enter.type === 'dissolve').length;
+  const dissolveShare = dissolves / (shots.length - 1);
+  assert.ok(dissolveShare >= 0.45, `Meditation with video shots must meet 45% dissolve floor, got ${(dissolveShare * 100).toFixed(1)}%`);
+  assert.ok(dissolveShare <= 0.90, `Meditation with video shots must not exceed 90% dissolve share, got ${(dissolveShare * 100).toFixed(1)}%`);
+});
+
+test('Shorts video format applies camera motion without forcing dissolves across unrelated beats', () => {
+  const visualPolicy = resolveVisualPolicy();
+  const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
+  const timing = [{ startFrame: 0, endFrame: 75, durationInFrames: 75, from: 0 }]; // 2.5s shot in shorts
+  const makeScene = (id, role = 'detail') => ({
+    id, kind: 'subject', purpose: 'detail', tone: 'neutral', intensity: 3, informationDensity: 3, visualIntent: 'explain',
+    storyboardShots: [{ id: `${id}_shot`, role, visualConcept: 'A vertical subject', mediaPreference: 'auto', assetIntent: 'concept', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }],
+  });
+
+  // 768x1344 is the native FLUX Schnell 9:16 Shorts resolution
+  const shortsShot = realizeSceneShots({
+    scene: makeScene('shorts1', 'detail'), spec,
+    sceneAssets: { primary: { src: 'flux_shorts.png', type: 'image', width: 768, height: 1344, focal: { x: .5, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'shorts', fps: 30,
+  })[0];
+
+  assert.notEqual(shortsShot.presentation.cameraMove, 'static', 'Shorts shot must not be downgraded to static');
+  assert.equal(shortsShot.presentation.cameraMove, 'subtlePush', 'Detail shot in shorts should subtlePush');
+  assert.deepEqual(shortsShot.move.scale, [1, 1.06], 'Shorts camera zoom should have 6% magnitude [1, 1.06]');
+
+  // Test transitions in Shorts
+  const makeShortsShot = (id) => ({
+    id, storyboardShotId: id, sceneId: 's', role: 'context', visualConcept: `concept ${id}`,
+    durationInFrames: 75, from: 0,
+    presentation: { cameraMove: 'subtlePush' },
+    asset: { type: 'image', src: `${id}.png`, width: 768, height: 1344, focal: { x: .5, y: .5 } },
+    enter: { type: 'cut', frames: 0 }, exit: { type: 'cut', frames: 0 },
+  });
+
+  const shots = [makeShortsShot('shot1'), makeShortsShot('shot2'), makeShortsShot('shot3')];
+  const clips = [{ id: 'c01', transitionPolicy: 'CUT', enter: { type: 'cut', frames: 0 }, shots }];
+  directSolvedShotTransitions({
+    clips,
+    scenes: [{ id: 's', tone: 'neutral' }],
+    fps: 30,
+    visualPolicy: { format: 'shorts', imageSource: 'ai' },
+  });
+
+  assert.ok(shots.slice(1).every((shot) => shot.enter.type === 'cut'), 'Neutral Shorts beats should use restrained clean cuts');
+});
+
+test('Landscape video format applies camera zoom in/out and smooth transitions across scenes and shots', () => {
+  const visualPolicy = resolveVisualPolicy();
+  const spec = { family: 'image', variant: 'full', treatment: 'cinematic', camera: { magnitude: .06, baseScale: 1 } };
+  const timing = [{ startFrame: 0, endFrame: 75, durationInFrames: 75, from: 0 }]; // 2.5s shot in landscape
+  const makeScene = (id, role = 'detail') => ({
+    id, kind: 'subject', purpose: 'detail', tone: 'neutral', intensity: 2, informationDensity: 3, visualIntent: 'explain',
+    storyboardShots: [{ id: `${id}_shot`, role, visualConcept: 'A landscape subject', mediaPreference: 'auto', assetIntent: 'concept', entities: [], evidenceRequirement: 'conceptual_allowed', presentation: { cameraMove: 'auto' } }],
+  });
+
+  // 1280x720 standard landscape AI/stock resolution
+  const landscapeShot = realizeSceneShots({
+    scene: makeScene('landscape1', 'detail'), spec,
+    sceneAssets: { primary: { src: 'flux_landscape.png', type: 'image', width: 1280, height: 720, focal: { x: .5, y: .5 } }, alternates: [] },
+    timings: timing, sectionId: 'section', memory: createPresentationMemory(), visualPolicy, format: 'landscape', fps: 30,
+  })[0];
+
+  assert.notEqual(landscapeShot.presentation.cameraMove, 'static', 'Landscape shot must not be downgraded to static');
+  assert.equal(landscapeShot.presentation.cameraMove, 'subtlePush', 'Detail shot in landscape should subtlePush');
+  assert.deepEqual(landscapeShot.move.scale, [1, 1.04], 'Landscape camera zoom should have 4% magnitude [1, 1.04]');
+
+  // Test transitions in Landscape for multi-scene video
+  const scenes = Array.from({ length: 6 }, (_, i) => ({
+    id: `scene_${i + 1}`,
+    purpose: i === 0 ? 'hook' : i === 5 ? 'payoff' : 'context',
+    tone: 'neutral',
+    intensity: 2,
+    storyboardShots: [{ id: `s_${i + 1}`, role: 'subject', visualConcept: `concept ${i + 1}`, durationInFrames: 90, from: i * 90 }],
+  }));
+
+  const transitions = chooseTransitions(
+    { scenes, format: 'landscape', imageSource: 'ai' },
+    scenes.map(() => ({ family: 'image' })),
+    { transitions: { perMinute: 3 } },
+    30, 540, resolveVisualPolicy(), { contentType: 'explainer' },
+  );
+
+  const sceneDissolves = transitions.filter((t) => t === 'dissolve');
+  assert.ok(sceneDissolves.length >= 1, 'Landscape video must include dissolve transitions between scenes');
 });

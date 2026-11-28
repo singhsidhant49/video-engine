@@ -1,0 +1,77 @@
+{
+  "id": "psychology_sunrise_reflection_bedroom_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Pensive sunrise reflection in a cozy bedroom",
+  "path": "images/psychology/psychology_sunrise_reflection_bedroom_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "reflection",
+    "morning thoughts",
+    "self-awareness",
+    "life direction",
+    "personal growth"
+  ],
+  "concepts": [
+    "self-reflection",
+    "life evaluation",
+    "future planning",
+    "quiet contemplation"
+  ],
+  "subjects": [
+    "adult man",
+    "bedroom",
+    "notebook",
+    "sunrise window"
+  ],
+  "actions": [
+    "sitting thoughtfully",
+    "reflecting",
+    "planning"
+  ],
+  "mood": [
+    "pensive",
+    "hopeful",
+    "calm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.32,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "self-reflection content",
+    "personal growth videos",
+    "life advice scenes",
+    "human behavior storytelling"
+  ],
+  "avoidFor": [
+    "panic scenes",
+    "group interaction",
+    "workplace stress"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

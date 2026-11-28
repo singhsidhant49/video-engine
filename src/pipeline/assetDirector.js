@@ -3,7 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { ffmpeg } from '../services/ffmpeg.js';
 import { materialiseImage, materialiseVideo, mapLimit, hamming, searchStats, resetSearchStats } from '../services/freeMediaService.js';
-import { recordImageInBank, searchImageBank } from '../services/imageBank.js';
+import { recordImageInBank, recordMediaInBank, searchImageBank } from '../services/imageBank.js';
 import { licenseAllowed } from '../shared/licensing.js';
 import { contrastiveRelevance, relevanceEnabled } from '../services/relevance.js';
 import { defaultAssetProviders, searchAssetProviderStage } from '../assets/providerRegistry.js';
@@ -13,6 +13,7 @@ import { VideoAssetMemory } from '../assets/videoAssetMemory.js';
 import { inspectVisualCandidate } from '../assets/visualInspectionService.js';
 import { judgeAssetCandidate } from '../assets/visualEditorialJudge.js';
 import { selectVideoWindow } from '../assets/videoWindowSelector.js';
+import { getContentVisualProfile } from '../config/contentVisualProfiles.js';
 
 async function computeFileSha256(filePath) {
   try {
@@ -44,6 +45,13 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
     retrievalScore: item.score,
     editorialMode: visibleNeed?.editorialMode,
   });
+  if (request.nativeMotionRequired && item.candidate.type !== 'video' && !item.candidate.isMotionFallback) {
+    judgment.accepted = false;
+    judgment.rejected = true;
+    judgment.finalEditorialScore = 0;
+    judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'native_motion_required'])];
+    judgment.selectionReason = 'Rejected: this content beat requires authentic native motion, not a still image';
+  }
   if (filePath && item.candidate.type === 'video') {
     item.videoWindowSelection = await selectVideoWindow({
       videoPath: filePath,
@@ -51,6 +59,13 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
       visibleNeed,
       videoMetadata: item.candidate,
     });
+    if (item.videoWindowSelection.isDarkOrBlank || (item.videoWindowSelection.hasBlackStart && item.videoWindowSelection.selectedStartTime === 0 && (item.videoWindowSelection.avgLuma < 15 || item.videoWindowSelection.windowScore < 0.25))) {
+      judgment.accepted = false;
+      judgment.rejected = true;
+      judgment.finalEditorialScore = 0;
+      judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'video_has_black_frames'])];
+      judgment.selectionReason = 'Rejected: video asset contains black/blank frames or pitch black darkness';
+    }
     const semanticMargin = item.videoWindowSelection.semanticEvidence?.margin;
     if (requirePixelInspection && (!item.videoWindowSelection.semanticEvidence?.available || semanticMargin <= 0)) {
       judgment.accepted = false;
@@ -59,7 +74,10 @@ async function evaluateAndJudgeCandidate(item, request, format, visualInspection
       judgment.rejectReasons = [...new Set([...(judgment.rejectReasons || []), 'video_window_semantic_evidence_failed'])];
     }
   }
-  if (requirePixelInspection && (!inspection.pixelInspected || !inspection.semanticPixelInspected)) {
+  const isVideoWithPixels = item.candidate.type === 'video' && inspection.pixelInspected;
+  const isSemanticallyInspected = inspection.semanticPixelInspected
+    || (isVideoWithPixels && (item.videoWindowSelection?.semanticEvidence?.available !== false || inspection.confidence >= 0.35));
+  if (requirePixelInspection && (!inspection.pixelInspected || !isSemanticallyInspected)) {
     judgment.accepted = false;
     judgment.rejected = true;
     judgment.finalEditorialScore = 0;
@@ -120,9 +138,6 @@ const acceptable = (item) => item.score.qualityRank >= 2 && item.score.resolutio
 
 async function gather(request, providers) {
   const context = analyzeAssetRequest(request);
-  if (request.preferredSource === 'procedural') {
-    return { request, context, candidates: [], providerCalls: [], resolutionStatus: 'procedural' };
-  }
   if (request.preferredSource === 'generated') {
     return { request, context, candidates: [], providerCalls: [], resolutionStatus: 'unresolved', failureReason: 'generated_provider_disabled' };
   }
@@ -139,11 +154,17 @@ async function gather(request, providers) {
       seen.add(key);
       candidates.push(candidate);
     }
+    const licensePolicy = request.contentType === 'documentary'
+      ? (process.env.DOCUMENTARY_LICENSE_POLICY || 'editorial')
+      : (process.env.LICENSE_POLICY || 'commercial');
     const scored = candidates
-      .filter((candidate) => licenseAllowed(candidate.license).ok)
+      .filter((candidate) => licenseAllowed(candidate.license, licensePolicy).ok)
       .map((candidate) => ({ candidate, score: scoreAssetCandidate(candidate, request, context) }));
     const threshold = context.specificity >= 0.65 ? 3 : 2;
-    if (hasReliableSearchResult(scored, threshold)) break;
+    const isVideoRequest = request.preferredSource === 'video' || request.preferredMediaType === 'video' || request.nativeMotionRequired;
+    if (!isVideoRequest && hasReliableSearchResult(scored, threshold)) break;
+    const strongVideos = scored.filter((item) => item.candidate.type === 'video' && item.score.qualityRank >= threshold && !item.score.gates.length);
+    if (isVideoRequest && strongVideos.length >= 8) break;
   }
   return { request, context, candidates, providerCalls };
 }
@@ -158,8 +179,11 @@ export function hasReliableSearchResult(scored, threshold) {
 }
 
 function scoredCandidates(pool, memory, usedIdentities) {
+  const licensePolicy = pool.request?.contentType === 'documentary'
+    ? (process.env.DOCUMENTARY_LICENSE_POLICY || 'editorial')
+    : (process.env.LICENSE_POLICY || 'commercial');
   return pool.candidates.map((candidate) => {
-    const verdict = licenseAllowed(candidate.license);
+    const verdict = licenseAllowed(candidate.license, licensePolicy);
     const score = scoreAssetCandidate(candidate, pool.request, pool.context, memory);
     const identity = candidate.sourceUrl || candidate.localPath || candidate.id;
     if (!verdict.ok) {
@@ -172,6 +196,11 @@ function scoredCandidates(pool, memory, usedIdentities) {
       score.qualityRank = 0;
       score.gates.push('exact_asset_reuse');
     }
+    if (pool.request.nativeMotionRequired && candidate.type !== 'video' && !candidate.isMotionFallback) {
+      score.resolutionStatus = 'unusable';
+      score.qualityRank = 0;
+      score.gates.push('native_motion_required');
+    }
     return { candidate, score };
   }).sort(compareCandidateScores);
 }
@@ -181,23 +210,65 @@ function scoredCandidates(pool, memory, usedIdentities) {
  * materialization budget. Search metadata can look excellent even when every
  * URL returned by one provider is hotlink-blocked or not an image.
  */
-export function buildMaterializationQueue(ranked, maxAttempts = 16) {
+export function buildMaterializationQueue(ranked, maxAttempts = 10) {
+  const parsedLimit = Number(maxAttempts);
+  const attemptLimit = Number.isFinite(parsedLimit)
+    ? Math.max(1, Math.min(50, Math.floor(parsedLimit)))
+    : 10;
   const viable = ranked.filter(acceptable);
-  const queue = viable.slice(0, 4);
+  const queue = viable.slice(0, Math.min(4, attemptLimit));
   const represented = new Set(queue.map((item) => item.candidate.providerId));
 
+  const hasVideo = queue.some((item) => item.candidate.type === 'video');
+  if (!hasVideo) {
+    const topVideo = viable.find((item) => item.candidate.type === 'video');
+    if (topVideo && !queue.includes(topVideo)) {
+      queue.splice(Math.min(1, queue.length), 0, topVideo);
+    }
+  }
+
   for (const item of viable) {
-    if (queue.length >= maxAttempts) break;
+    if (queue.length >= attemptLimit) break;
     if (!represented.has(item.candidate.providerId)) {
       queue.push(item);
       represented.add(item.candidate.providerId);
     }
   }
   for (const item of viable) {
-    if (queue.length >= maxAttempts) break;
+    if (queue.length >= attemptLimit) break;
     if (!queue.includes(item)) queue.push(item);
   }
   return queue;
+}
+
+function boundedAttemptCount(value, fallback, minimum, maximum) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(minimum, Math.min(maximum, Math.floor(parsed)));
+}
+
+export function resolveMaterializationAttemptLimits(env = process.env) {
+  return {
+    primary: boundedAttemptCount(env.ASSET_PRIMARY_MATERIALIZATION_ATTEMPTS, 6, 3, 12),
+    emergency: boundedAttemptCount(env.ASSET_EMERGENCY_MATERIALIZATION_ATTEMPTS, 3, 0, 6),
+  };
+}
+
+export function shouldPreferVideoForCoverage({
+  request,
+  currentVideoDuration = 0,
+  totalPlannedDuration = 1,
+  minVideoShare = 0,
+  consecutiveImageSelections = 0,
+  maxPhotoRun = 10,
+} = {}) {
+  const explicitImage = request?.preferredMediaType === 'image';
+  if (request?.nativeMotionRequired || request?.preferredMediaType === 'video') return true;
+  if (explicitImage) return false;
+  const videoShare = Number(currentVideoDuration) / Math.max(1, Number(totalPlannedDuration));
+  const videoShareDeficit = videoShare < (Number(minVideoShare) - 0.001);
+  const photoRunNeedsMotion = Number(consecutiveImageSelections) >= Math.max(1, Number(maxPhotoRun) || 10) - 1;
+  return videoShareDeficit || photoRunNeedsMotion;
 }
 
 async function materializeCandidate(item, request, dir, publicDir, sequence, usedHashes) {
@@ -331,7 +402,7 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
   let clichePenaltyCount = 0;
 
   const queryStageUsage = { EXACT: 0, SPECIFIC_VARIANT: 0, ENTITY_SUBJECT: 0, CONCEPTUAL_FALLBACK: 0 };
-  const mediaDistribution = { image: 0, video: 0, procedural: 0 };
+  const mediaDistribution = { image: 0, video: 0 };
   const providerDistribution = {};
   const providerCandidateCounts = {};
   let providerCalls = 0;
@@ -362,8 +433,6 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
       }
       mediaDistribution[sel.mediaType] = (mediaDistribution[sel.mediaType] || 0) + 1;
       providerDistribution[sel.provider] = (providerDistribution[sel.provider] || 0) + 1;
-    } else if (report.resolutionStatus === 'procedural') {
-      mediaDistribution.procedural++;
     }
 
     for (const rej of report.rejectedTopCandidates || []) {
@@ -411,20 +480,26 @@ function buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, me
   };
 }
 
-/** Reuse approved media instead of introducing a procedural composition. */
+/** Reuse approved media when a request cannot produce another acceptable asset. */
 export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequests, sceneIds = [], format = 'landscape' }) {
   const sceneIndex = new Map(sceneIds.map((id, index) => [id, index]));
   const requestByShot = new Map(assetRequests.map((request) => [request.storyboardShotId, request]));
   const approved = [];
+  const reuseCounts = new Map();
 
   for (const [sceneId, sceneAssets] of Object.entries(assets)) {
     for (const [shotId, asset] of Object.entries(sceneAssets.byShot || {})) {
       if (asset && !asset.unresolved && ['image', 'video'].includes(asset.type)) {
         approved.push({ sceneId, shotId, asset, index: sceneIndex.get(sceneId) ?? Number.MAX_SAFE_INTEGER });
+        reuseCounts.set(asset.src, (reuseCounts.get(asset.src) || 0) + 1);
       }
     }
   }
   if (!approved.length) return {};
+
+  // For YouTube production quality, strictly limit reuse to at most 2 occurrences
+  // (1 original + 1 reuse). Never allow a single asset to dominate an 8-minute video.
+  const maxReuseCount = 2;
 
   const fallbacks = {};
   for (const report of requestReports) {
@@ -433,7 +508,7 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
     const target = assets[report.sceneId];
     if (!request || !target) continue;
     const targetIndex = sceneIndex.get(report.sceneId) ?? Number.MAX_SAFE_INTEGER;
-    const evaluatedSources = approved.map((source) => {
+    const evaluatedSources = approved.filter((source) => (reuseCounts.get(source.asset.src) || 0) < maxReuseCount).map((source) => {
       const judgment = judgeAssetCandidate({
         candidate: {
           ...source.asset,
@@ -455,9 +530,20 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
         && (!directRequired || judgment.classification === 'DIRECT');
       return { source, judgment, valid };
     }).filter((item) => item.valid)
-      .sort((a, b) => (b.judgment.finalEditorialScore || 0) - (a.judgment.finalEditorialScore || 0)
-        || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex));
+      .sort((a, b) => {
+        const aCount = reuseCounts.get(a.source.asset.src) || 0;
+        const bCount = reuseCounts.get(b.source.asset.src) || 0;
+        if (aCount !== bCount) return aCount - bCount;
+        const aAdjacent = Math.abs(a.source.index - targetIndex) <= 1 ? 1 : 0;
+        const bAdjacent = Math.abs(b.source.index - targetIndex) <= 1 ? 1 : 0;
+        if (aAdjacent !== bAdjacent) return aAdjacent - bAdjacent;
+        return (b.judgment.finalEditorialScore || 0) - (a.judgment.finalEditorialScore || 0)
+          || Math.abs(a.source.index - targetIndex) - Math.abs(b.source.index - targetIndex);
+      });
     const evaluated = evaluatedSources[0];
+    // Never fill an unresolved production shot with the nearest unrelated
+    // asset. Missing coverage must remain unresolved so production fails with
+    // an actionable media error instead of publishing misleading imagery.
     if (!evaluated) continue;
     const { source, judgment } = evaluated;
 
@@ -477,7 +563,8 @@ export function applyMediaOnlyReuseFallbacks({ assets, requestReports, assetRequ
       } : undefined,
     };
     target.byShot[report.storyboardShotId] = reusedAsset;
-    if (!target.primary) target.primary = reusedAsset;
+    reuseCounts.set(reusedAsset.src, (reuseCounts.get(reusedAsset.src) || 0) + 1);
+    if (!target.primary || target.primary.unresolved) target.primary = reusedAsset;
     else if (!target.alternates.some((asset) => asset?.src === reusedAsset.src)) target.alternates.push(reusedAsset);
 
     report.resolutionStatus = 'media_reuse';
@@ -515,7 +602,15 @@ export async function directAssets(plan, specs, {
   unresolvedMediaMode = 'FAIL_PRODUCTION_RENDER',
   publishMode = 'PRODUCTION_RENDER',
   offline = false,
+  signal = null,
 }) {
+  const throwIfAborted = () => {
+    if (!signal?.aborted) return;
+    const reason = signal.reason instanceof Error ? signal.reason : new Error('Asset resolution cancelled');
+    if (!reason.name) reason.name = 'AbortError';
+    throw reason;
+  };
+  throwIfAborted();
   if (allowGenerated) throw new Error('Generated media providers are disabled for V1');
   if (!assetRequests?.length) throw new Error('directAssets requires canonical-shot AssetRequest objects');
   resetSearchStats();
@@ -525,6 +620,7 @@ export async function directAssets(plan, specs, {
     ? providers.filter((provider) => ['local-bank', 'local-assets'].includes(provider.id))
     : providers;
   const pools = await mapLimit(assetRequests, 3, (request) => gather(request, activeProviders));
+  throwIfAborted();
   const memory = new VideoAssetMemory();
   const usedIdentities = new Set();
   const usedHashes = [];
@@ -536,36 +632,46 @@ export async function directAssets(plan, specs, {
   const visualInspections = {};
   const videoWindowSelections = {};
   const formatFitnessEvaluations = {};
-  const representationFallbacks = {};
+
+  const totalPlannedDuration = assetRequests.reduce((sum, r) => sum + (Number(r.constraints?.durationHint) || 3.5), 0) || 45;
+  const targetContentType = assetRequests[0]?.contentType || 'explainer';
+  const targetProfile = getContentVisualProfile(targetContentType);
+  const minVideoShare = targetProfile?.minVideoShare || 0.10;
+  const maxPhotoRun = targetProfile?.maxPhotoRun || 10;
+  let consecutiveImageSelections = 0;
 
   for (const pool of pools) {
+    throwIfAborted();
     const { request, context } = pool;
-    if (pool.resolutionStatus === 'procedural') {
-      requestReports.push({
-        requestId: request.id,
-        storyboardShotId: request.storyboardShotId,
-        sceneId: request.sceneId,
-        concept: request.concept,
-        requestClass: context.requestClass,
-        specificity: context.specificity,
-        requestQualityWarnings: context.requestQualityWarnings,
-        resolutionStatus: 'procedural',
-        providerCalls: [],
-        selectedCandidate: null,
-        rejectedTopCandidates: [],
-      });
-      continue;
-    }
+    console.log(`   [Shot ${request.storyboardShotId}] resolving "${request.concept}" (${request.preferredMediaType || 'any'})...`);
     const fallbackAuditTraces = [];
     const ranked = scoredCandidates(pool, memory, usedIdentities);
 
+    const currentVideoDuration = assetRequests
+      .filter((r) => assets[r.sceneId]?.byShot[r.storyboardShotId]?.type === 'video')
+      .reduce((sum, r) => sum + (Number(r.constraints?.durationHint) || 3.5), 0);
+    const preferVideo = shouldPreferVideoForCoverage({
+      request,
+      currentVideoDuration,
+      totalPlannedDuration,
+      minVideoShare,
+      consecutiveImageSelections,
+      maxPhotoRun,
+    });
+
     // Search metadata ranks the download shortlist only. It is not semantic proof.
-    const viable = buildMaterializationQueue(ranked);
+    const {
+      primary: maxPrimaryAttempts,
+      emergency: maxEmergencyAttempts,
+    } = resolveMaterializationAttemptLimits();
+    const viable = buildMaterializationQueue(ranked, maxPrimaryAttempts);
     const materialized = [];
     const materializationRejects = [];
     for (let index = 0; index < viable.length; index++) {
+      throwIfAborted();
       const item = viable[index];
       const result = await materializeCandidate(item, request, dir, publicDir, index, usedHashes);
+      throwIfAborted();
       if (result.asset) {
         const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
         if (judgment.accepted && !judgment.rejected) materialized.push({ ...item, ...result });
@@ -574,14 +680,24 @@ export async function directAssets(plan, specs, {
           materializationRejects.push({ candidateId: item.candidate.id, reason: judgment.rejectReasons.join('; ') });
         }
       } else materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
-      if (materialized.length >= 4) break;
+      const hasApprovedVideo = materialized.some((m) => m.candidate.type === 'video');
+      if (materialized.length >= 2 && (!preferVideo || hasApprovedVideo)) break;
     }
 
-    if (!materialized.length) {
-      const emergencyCandidates = ranked.filter((item) => !viable.includes(item) && item.score.qualityRank >= 1);
+    const primaryHasApprovedVideo = materialized.some((item) => item.candidate.type === 'video');
+    if (!materialized.length || (preferVideo && !primaryHasApprovedVideo)) {
+      const emergencyCandidates = ranked
+        .filter((item) => !viable.includes(item) && item.score.qualityRank >= 1)
+        .sort((a, b) => {
+          if (!preferVideo) return 0;
+          return Number(b.candidate.type === 'video') - Number(a.candidate.type === 'video');
+        })
+        .slice(0, maxEmergencyAttempts);
       for (let index = 0; index < emergencyCandidates.length; index++) {
+        throwIfAborted();
         const item = emergencyCandidates[index];
         const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index, usedHashes);
+        throwIfAborted();
         if (result.asset) {
           const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
           if (judgment.rejected || !judgment.accepted) {
@@ -591,14 +707,16 @@ export async function directAssets(plan, specs, {
           }
           fallbackAuditTraces.push({
             fallbackType: 'emergency_candidate',
-            whyTriggered: 'Top viable candidates failed materialization',
+            whyTriggered: preferVideo && !primaryHasApprovedVideo
+              ? 'Primary candidates produced no approved motion asset before the photo-run limit'
+              : 'Top viable candidates failed materialization',
             candidateBefore: viable[0]?.candidate?.id || null,
             candidateAfter: item.candidate.id,
             semanticClassBefore: viable[0]?.editorialJudgment?.classification || null,
             semanticClassAfter: judgment.classification,
           });
           materialized.push({ ...item, ...result });
-          break;
+          if (!preferVideo || item.candidate.type === 'video') break;
         } else {
           materializationRejects.push({ candidateId: item.candidate.id, reason: result.rejected });
         }
@@ -607,36 +725,103 @@ export async function directAssets(plan, specs, {
 
     if (!materialized.length) {
       const fallbackQuery = context.targetSubject.join(' ') || request.concept;
-      const bankResults = await searchImageBank(fallbackQuery, { limit: 3 });
-      for (let index = 0; index < bankResults.length; index++) {
-        const candidate = {
-          ...bankResults[index],
-          providerId: 'local-bank',
-          tier: 'fallback',
-          query: fallbackQuery,
-          queryStage: 'CONCEPTUAL_FALLBACK',
-        };
-        const score = scoreAssetCandidate(candidate, request, context, memory);
-        const item = { candidate, score };
-        const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index + 10, usedHashes);
-        if (result.asset) {
-          const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
-          if (judgment.rejected || !judgment.accepted) {
-            await fs.rm(result.file, { force: true });
-            materializationRejects.push({ candidateId: candidate.id, reason: judgment.rejectReasons.join('; ') });
-            continue;
+
+      // Step 5a: If video candidates failed Gate 2, query simplified video queries first
+      const isVideoPreferred = request.preferredSource === 'video' || request.preferredMediaType === 'video' || request.nativeMotionRequired;
+      if (isVideoPreferred) {
+        const simplifiedVideoQueries = [
+          context.targetSubject.slice(0, 3).join(' '),
+          context.targetSubject.slice(0, 2).join(' '),
+        ].filter((q) => q && q.length > 3 && q !== request.concept);
+
+        for (const query of simplifiedVideoQueries) {
+          try {
+            const videoResults = await searchAssetProviderStage(
+              { ...request, activeQueries: [query], activeQueryStage: 'SIMPLIFIED_VIDEO_FALLBACK' },
+              context,
+              { id: 'SIMPLIFIED_VIDEO_FALLBACK', queries: [query] },
+              providers.filter((p) => p.id === 'pexels-video')
+            );
+            for (let i = 0; i < videoResults.candidates.length; i++) {
+              const candidate = videoResults.candidates[i];
+              const score = scoreAssetCandidate(candidate, request, context, memory);
+              if (score.qualityRank < 1) continue;
+              const item = { candidate, score };
+              const result = await materializeCandidate(item, request, dir, publicDir, viable.length + materialized.length + 20, usedHashes);
+              if (result.asset) {
+                const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+                if (judgment.accepted && !judgment.rejected) {
+                  result.asset.tier = 'fallback';
+                  fallbackAuditTraces.push({
+                    fallbackType: 'simplified_video',
+                    whyTriggered: 'Specific video query failed Gate 2; simplified video query succeeded',
+                    candidateBefore: ranked[0]?.candidate?.id || null,
+                    candidateAfter: candidate.id,
+                    semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+                    semanticClassAfter: judgment.classification,
+                  });
+                  materialized.push({ ...item, ...result });
+                  break;
+                } else {
+                  await fs.rm(result.file, { force: true });
+                }
+              }
+            }
+            if (materialized.length) break;
+          } catch {}
+        }
+      }
+
+      // Step 5b: If still no approved video found, fall back to high-resolution curated still images with motion
+      if (!materialized.length) {
+        const bankResults = await searchImageBank(fallbackQuery, { limit: 3 });
+        let onlineResults = [];
+        try {
+          const onlineBatch = await searchAssetProviderStage(
+            { ...request, activeQueries: [fallbackQuery], activeQueryStage: 'MOTION_IMAGE_FALLBACK', allowImageFallback: true, preferredSource: 'image' },
+            context,
+            { id: 'MOTION_IMAGE_FALLBACK', queries: [fallbackQuery] },
+            providers
+          );
+          onlineResults = onlineBatch.candidates || [];
+        } catch {}
+
+        const fallbackCandidates = [
+          ...bankResults.map((r) => ({ ...r, providerId: 'local-bank', tier: 'fallback' })),
+          ...onlineResults.slice(0, 4),
+        ];
+
+        for (let index = 0; index < fallbackCandidates.length; index++) {
+          const candidate = {
+            ...fallbackCandidates[index],
+            query: fallbackQuery,
+            queryStage: 'MOTION_IMAGE_FALLBACK',
+            isMotionFallback: true,
+          };
+          const score = scoreAssetCandidate(candidate, request, context, memory);
+          const item = { candidate, score };
+          const result = await materializeCandidate(item, request, dir, publicDir, viable.length + index + 30, usedHashes);
+          if (result.asset) {
+            const judgment = await evaluateAndJudgeCandidate(item, request, format, visualInspections, editorialAssetJudgments, formatFitnessEvaluations, editorialUsefulnessRecords, result.file, publishMode === 'PRODUCTION_RENDER');
+            if (judgment.rejected || !judgment.accepted) {
+              await fs.rm(result.file, { force: true });
+              materializationRejects.push({ candidateId: candidate.id, reason: judgment.rejectReasons.join('; ') });
+              continue;
+            }
+            result.asset.tier = 'fallback';
+            result.asset.isMotionFallback = true;
+            fallbackAuditTraces.push({
+              fallbackType: 'motion_image_fallback',
+              whyTriggered: 'No approved video footage available; fell back to curated still with cinematic camera motion',
+              candidateBefore: ranked[0]?.candidate?.id || null,
+              candidateAfter: candidate.id,
+              semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
+              semanticClassAfter: judgment.classification,
+            });
+            materialized.push({ ...item, ...result });
+            console.log(`   ℹ [Shot ${request.storyboardShotId}] No matching stock video found; falling back to approved still image with camera motion: ${result.asset.label || result.asset.src}`);
+            break;
           }
-          result.asset.tier = 'fallback';
-          fallbackAuditTraces.push({
-            fallbackType: 'local_bank',
-            whyTriggered: 'Search candidates failed Gate 2 or materialization',
-            candidateBefore: ranked[0]?.candidate?.id || null,
-            candidateAfter: candidate.id,
-            semanticClassBefore: ranked[0]?.editorialJudgment?.classification || null,
-            semanticClassAfter: judgment.classification,
-          });
-          materialized.push({ ...item, ...result });
-          break;
         }
       }
     }
@@ -648,9 +833,8 @@ export async function directAssets(plan, specs, {
         const isSameConcept = sel.concept?.toLowerCase() === request.concept?.toLowerCase();
         return (isSameEntity || isSameConcept) && sel.usageCount < 2;
       });
-      if (!matchingPrevious) {
-        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
-      }
+      // Cross-concept reuse is forbidden. Only the same entity/concept may be
+      // reframed, and the editorial judge still revalidates it for this shot.
       if (matchingPrevious && matchingPrevious.candidate) {
         const reusedCandidate = {
           ...matchingPrevious.candidate,
@@ -687,6 +871,10 @@ export async function directAssets(plan, specs, {
     // Enforce Gate 2: only select candidates that passed Gate 2!
     const validApproved = materialized.filter((item) => item.editorialJudgment && item.editorialJudgment.accepted && !item.editorialJudgment.rejected);
     let selected = validApproved[0] || null;
+    if (preferVideo && validApproved.length > 1) {
+      const videoCandidate = validApproved.find((item) => item.candidate.type === 'video');
+      if (videoCandidate) selected = videoCandidate;
+    }
 
     // Step 6 of Unresolved Media Repair Ladder: Deliberate asset reuse if search candidates were unapproved
     if (!selected && memory.selections?.length > 0) {
@@ -696,7 +884,8 @@ export async function directAssets(plan, specs, {
         return (isSameEntity || isSameConcept) && sel.usageCount < 2;
       });
       if (!matchingPrevious) {
-        matchingPrevious = memory.selections.find((sel) => sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
+        // Fallback reuse is strictly restricted to same-scene continuity (e.g. detail crop of wide establishing)
+        matchingPrevious = memory.selections.find((sel) => sel.lastUsedScene === request.sceneId && sel.usageCount < 2 && sel.candidate && !sel.candidate.unresolved);
       }
       if (matchingPrevious && matchingPrevious.candidate) {
         const prevAsset = assets[matchingPrevious.lastUsedScene]?.byShot[matchingPrevious.lastUsedShot] || assets[matchingPrevious.lastUsedScene]?.primary;
@@ -733,6 +922,9 @@ export async function directAssets(plan, specs, {
     for (const loser of materialized.filter((item) => item !== selected)) await fs.rm(loser.file, { force: true });
 
     if (selected) {
+      consecutiveImageSelections = selected.candidate.type === 'video'
+        ? 0
+        : consecutiveImageSelections + 1;
       const ext = selected.candidate.type === 'video' ? 'mp4' : 'jpg';
       const canonicalFile = path.join(dir, `${request.storyboardShotId}_a.${ext}`);
       if (selected.file !== canonicalFile) {
@@ -795,7 +987,7 @@ export async function directAssets(plan, specs, {
       if (!sceneAssets.primary) sceneAssets.primary = selected.asset;
       else sceneAssets.alternates.push(selected.asset);
       if (selected.asset.type === 'image') {
-        recordImageInBank({
+        await recordImageInBank({
           filePath: path.join(publicDir, selected.asset.src),
           description: selected.visualInspection?.sceneSummary || '',
           query: selected.candidate.query || request.concept,
@@ -805,9 +997,28 @@ export async function directAssets(plan, specs, {
           width: selected.asset.width || 1920,
           height: selected.asset.height || 1080,
           inspection: selected.visualInspection,
-        }).catch(() => {});
+          category: request.category || context?.niche,
+          candidate: selected.candidate,
+        });
+      } else {
+        await recordMediaInBank({
+          filePath: path.join(publicDir, selected.asset.src),
+          type: selected.asset.type,
+          description: selected.visualInspection?.sceneSummary || '',
+          query: selected.candidate.query || request.concept,
+          source: selected.asset.source,
+          label: selected.asset.label || '',
+          license: selected.asset.license,
+          width: selected.asset.width || 1920,
+          height: selected.asset.height || 1080,
+          inspection: selected.visualInspection,
+          category: request.category || context?.niche,
+          candidate: selected.candidate,
+        });
       }
+      console.log(`   ✓ [Shot ${request.storyboardShotId}] selected ${selected.asset.type}: ${selected.asset.label || selected.asset.src}`);
     } else if (publishMode !== 'PRODUCTION_RENDER' && unresolvedMediaMode === 'ALLOW_DEV_PLACEHOLDER') {
+      consecutiveImageSelections += 1;
       // Step 8: Unresolved media placeholder & audit tracking
       // Let publishability quality gates (timelineQc.js / mediaVisualQualityGate.js) enforce production policy
       const unresolvedFile = path.join(dir, `${request.storyboardShotId}_unresolved.jpg`);
@@ -845,29 +1056,15 @@ export async function directAssets(plan, specs, {
       const sceneAssets = assets[request.sceneId];
       sceneAssets.byShot[request.storyboardShotId] = unresolvedAsset;
       if (!sceneAssets.primary) sceneAssets.primary = unresolvedAsset;
+    } else {
+      // An unresolved request does not break the preceding photo run.
+      consecutiveImageSelections += 1;
+      console.log(`   ✗ [Shot ${request.storyboardShotId}] unresolved (0 approved candidates)`);
     }
 
-    if (!selected && publishMode === 'PRODUCTION_RENDER') {
-      const proceduralFallback = (request.representationDecision?.fallbackRepresentations || [])
-        .find((representation) => !['media', 'image', 'video'].includes(representation));
-      if (proceduralFallback) {
-        representationFallbacks[request.storyboardShotId] = {
-          from: request.representationDecision?.selectedRepresentation || 'media',
-          to: proceduralFallback,
-          reason: 'No licensed, pixel-inspected media candidate passed production semantic gates.',
-        };
-        fallbackAuditTraces.push({
-          fallbackType: 'representation_escalation',
-          whyTriggered: 'Media candidate set exhausted after materialization and semantic inspection',
-          candidateBefore: ranked[0]?.candidate?.id || null,
-          candidateAfter: null,
-          representationAfter: proceduralFallback,
-        });
-      }
-    }
     const top = ranked[0];
     const resolutionStatus = selected?.score.resolutionStatus
-      || (representationFallbacks[request.storyboardShotId] ? 'procedural_fallback' : (top?.score.qualityRank === 1 ? 'weak' : 'unresolved'));
+      || (top?.score.qualityRank === 1 ? 'weak' : 'unresolved');
 
     // Query Quality Feedback & Yield Tracking (Sections 32, 33)
     const poolJudgments = pool.candidates.map((c) => editorialAssetJudgments[`${request.storyboardShotId}:${c.id}`]).filter(Boolean);
@@ -917,6 +1114,7 @@ export async function directAssets(plan, specs, {
       },
       queryLadder: context.queryLadder,
       requestQualityWarnings: context.requestQualityWarnings,
+      status: selected ? 'resolved' : 'unresolved',
       resolutionStatus,
       queryEditorialYield,
       editorialRetryReason,
@@ -962,19 +1160,25 @@ export async function directAssets(plan, specs, {
   const diagnostics = buildAssetQualityDiagnostics({ assetRequests, requestReports, pools, memory });
 
   const report = plan.scenes.map((scene, index) => {
-    const sceneAssets = assets[scene.id];
-    const p = sceneAssets.primary;
+    const sceneAssets = assets[scene.id] || { byShot: {}, alternates: [] };
+    const p = sceneAssets.primary || Object.values(sceneAssets.byShot || {})[0];
     const requests = requestReports.filter((item) => item.sceneId === scene.id);
+    const rawLicense = p?.license;
+    const licenseName = rawLicense
+      ? (typeof rawLicense === 'string'
+        ? rawLicense
+        : rawLicense.name || rawLicense.license_name || rawLicense.type || rawLicense.source || (rawLicense.commercial_use ? `Commercial (${rawLicense.commercial_use})` : 'Curated / Owned'))
+      : null;
     return {
       sceneId: scene.id,
       role: specs[index].need.role,
-      tier: p?.tier || 'none',
+      tier: p?.tier || (Object.keys(sceneAssets.byShot || {}).length ? 'approved' : 'none'),
       type: p?.type || null,
       source: p?.source || null,
       label: p?.label || null,
-      license: p?.license?.name || null,
+      license: licenseName,
       relevance: p?.relevance ?? null,
-      count: Object.keys(sceneAssets.byShot).length,
+      count: Object.keys(sceneAssets.byShot || {}).length,
       requests,
       rejected: requests.flatMap((item) => item.materializationRejects || []).slice(0, 10),
     };
@@ -1013,7 +1217,6 @@ export async function directAssets(plan, specs, {
     visualInspections,
     videoWindowSelections,
     formatFitnessEvaluations,
-    representationFallbacks,
     mediaReuseFallbacks,
   };
 }

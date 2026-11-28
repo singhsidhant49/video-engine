@@ -1,0 +1,79 @@
+{
+  "id": "history_mughal_garden_scholar_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour Mughal garden scholar",
+  "path": "images/history/history_mughal_garden_scholar_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "mughal",
+    "india",
+    "scholar",
+    "garden",
+    "palace",
+    "court culture"
+  ],
+  "concepts": [
+    "courtly learning",
+    "south asian history",
+    "garden culture",
+    "imperial scholarship"
+  ],
+  "subjects": [
+    "scholar",
+    "garden pavilion",
+    "fountains",
+    "manuscript",
+    "palace architecture"
+  ],
+  "actions": [
+    "writing manuscript",
+    "studying quietly",
+    "reflecting in garden"
+  ],
+  "mood": [
+    "regal",
+    "peaceful",
+    "golden"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.23,
+      "y": 0.5
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "indian history videos",
+    "mughal empire content",
+    "court culture scenes",
+    "scholar visuals"
+  ],
+  "avoidFor": [
+    "industrial labor",
+    "modern India",
+    "battlefields"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

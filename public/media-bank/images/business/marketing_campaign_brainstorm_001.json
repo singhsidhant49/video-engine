@@ -1,0 +1,76 @@
+{
+  "id": "marketing_campaign_brainstorm_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Collaborative marketing campaign brainstorm",
+  "path": "images/business/marketing_campaign_brainstorm_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "marketing",
+    "campaign",
+    "brainstorm",
+    "creative team",
+    "planning"
+  ],
+  "concepts": [
+    "marketing planning",
+    "campaign strategy",
+    "creative collaboration",
+    "brand planning"
+  ],
+  "subjects": [
+    "marketing team",
+    "whiteboard",
+    "laptops",
+    "campaign materials"
+  ],
+  "actions": [
+    "brainstorming",
+    "planning campaign",
+    "reviewing content"
+  ],
+  "mood": [
+    "creative",
+    "collaborative",
+    "energetic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "marketing video",
+    "agency promo",
+    "team brainstorm",
+    "campaign planning"
+  ],
+  "avoidFor": [
+    "contract signing",
+    "retail checkout",
+    "solo finance review"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_7691607bfc3259d9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed photo of a Dunlin bird showcasing water droplet on its beak against a soft blue background.",
+  "path": "images/saved-from-web/saved-from-web_7691607bfc3259d9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "dunlin",
+    "bird",
+    "showcasing",
+    "water",
+    "droplet",
+    "it",
+    "beak",
+    "against",
+    "soft",
+    "blue",
+    "background",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "close",
+    "photo",
+    "its"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed photo of a Dunlin bird showcasing water droplet on its beak against a soft blue background."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "bird beak water droplet close up",
+    "savedAt": "2026-10-26T05:44:31.214Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Matt Liatkouski",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-dunlin-with-dewdrop-on-beak-38874542/"
+  }
+}

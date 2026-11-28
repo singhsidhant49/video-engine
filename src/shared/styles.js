@@ -36,7 +36,7 @@ export const STYLES = {
     layout: { textAlign: 'left' },
     variants: { image: { full: 4, editorial: 3, split: 2, annotated: 1 }, stat: { hero: 2, split: 2 }, list: { ledger: 4, stack: 1 }, compare: { columns: 3, versus: 1 }, statement: { kinetic: 3, highlight: 2, words: 2 }, chapter: { classic: 3, split: 1 }, stackWeight: 2 },
     chart: { stroke: 4, area: 0.22, grid: 'baseline', marker: 'dot' },
-    accents: { letterbox: true, burn: false, focusPull: true, iris: false },
+    accents: { letterbox: true, burn: false, focusPull: false, iris: false },
     assets: { video: 3, generatedMood: true, genericMood: false },
   },
   investigative: {
@@ -53,7 +53,7 @@ export const STYLES = {
     layout: { textAlign: 'left' },
     variants: { image: { full: 4, editorial: 3, annotated: 2, split: 2 }, stat: { hero: 2, split: 2 }, list: { ledger: 3, stack: 2 }, compare: { columns: 3, versus: 1 }, statement: { kinetic: 3, highlight: 2, words: 2 }, chapter: { classic: 3, split: 1 }, stackWeight: 2 },
     chart: { stroke: 5, area: 0, grid: 'full', marker: 'square' },
-    accents: { letterbox: true, burn: false, focusPull: true, iris: false },
+    accents: { letterbox: true, burn: false, focusPull: false, iris: false },
     assets: { video: 2, generatedMood: true, genericMood: false },
   },
   editorial_explainer: {
@@ -70,7 +70,7 @@ export const STYLES = {
     layout: { textAlign: 'left' },
     variants: { image: { full: 4, editorial: 3, split: 2, annotated: 1 }, stat: { hero: 2, split: 2 }, list: { ledger: 3, stack: 2 }, compare: { columns: 3, versus: 1 }, statement: { kinetic: 3, highlight: 3, words: 2 }, chapter: { classic: 3, split: 1 }, stackWeight: 1 },
     chart: { stroke: 5, area: 0.28, grid: 'thirds', marker: 'dot' },
-    accents: { letterbox: false, burn: false, focusPull: true, iris: false },
+    accents: { letterbox: false, burn: false, focusPull: false, iris: false },
     assets: { video: 2, generatedMood: true, genericMood: true },
   },
   data_driven: {
@@ -104,7 +104,7 @@ export const STYLES = {
     layout: { textAlign: 'left' },
     variants: { image: { full: 4, editorial: 3, split: 2, annotated: 1 }, stat: { hero: 2, split: 2 }, list: { ledger: 3, stack: 2 }, compare: { columns: 3, versus: 1 }, statement: { kinetic: 3, highlight: 2, words: 2 }, chapter: { split: 3, classic: 1 }, stackWeight: 0 },
     chart: { stroke: 5, area: 0.25, grid: 'full', marker: 'square' },
-    accents: { letterbox: false, burn: false, focusPull: true, iris: false },
+    accents: { letterbox: false, burn: false, focusPull: false, iris: false },
     assets: { video: 2, generatedMood: true, genericMood: true },
   },
   minimal_premium: {
@@ -121,7 +121,7 @@ export const STYLES = {
     layout: { textAlign: 'left' },
     variants: { image: { full: 4, editorial: 3, split: 1 }, stat: { hero: 3, split: 1 }, list: { ledger: 4 }, compare: { columns: 3 }, statement: { kinetic: 3, words: 2 }, chapter: { classic: 4 }, stackWeight: 1 },
     chart: { stroke: 2.5, area: 0, grid: 'none', marker: 'none' },
-    accents: { letterbox: true, burn: false, focusPull: true, iris: false },
+    accents: { letterbox: true, burn: false, focusPull: false, iris: false },
     assets: { video: 2, generatedMood: true, genericMood: false },
   },
   fast_educational: {

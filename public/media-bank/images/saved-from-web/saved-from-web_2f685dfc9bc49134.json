@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_2f685dfc9bc49134",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Elephant Island at sunset.jpg",
+  "path": "images/saved-from-web/saved-from-web_2f685dfc9bc49134.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1800,
+  "height": 1188,
+  "aspectRatio": 1.5152,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "elephant",
+    "island",
+    "sunset",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "elephant",
+    "island",
+    "sunset",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Elephant Island at sunset.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Elephant Island",
+    "savedAt": "2026-10-29T10:18:09.125Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": null,
+    "creator": null,
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T08:35:07.914Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Elephant_Island_at_sunset.jpg"
+  }
+}

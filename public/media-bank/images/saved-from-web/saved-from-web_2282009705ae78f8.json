@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_2282009705ae78f8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Breathtaking view of Dubai's iconic skyline featuring Burj Khalifa at twilight.",
+  "path": "images/saved-from-web/saved-from-web_2282009705ae78f8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "dubai",
+    "iconic",
+    "skyline",
+    "featuring",
+    "burj",
+    "khalifa",
+    "twilight",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "dubai",
+    "iconic",
+    "skyline",
+    "featuring",
+    "burj",
+    "khalifa",
+    "twilight",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Breathtaking view of Dubai's iconic skyline featuring Burj Khalifa at twilight."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai skyline aerial dusk Burj Khalifa",
+    "savedAt": "2026-10-29T06:25:39.783Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lloyd Alozie",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-aerial-view-of-dubai-skyline-at-dusk-33687833/"
+  }
+}

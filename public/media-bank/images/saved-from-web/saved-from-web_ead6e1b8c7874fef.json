@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_ead6e1b8c7874fef",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Vibrant closeup of a colorful molecular model illustrating abstract scientific concepts.",
+  "path": "images/saved-from-web/saved-from-web_ead6e1b8c7874fef.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "vibrant",
+    "closeup",
+    "colorful",
+    "molecular",
+    "model",
+    "illustrating",
+    "scientific",
+    "concept",
+    "concepts"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "vibrant",
+    "closeup",
+    "colorful",
+    "molecular",
+    "model",
+    "illustrating",
+    "scientific",
+    "concept",
+    "concepts"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "molecular animation oxygen",
+    "savedAt": "2026-10-26T15:25:40.612Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Steve A Johnson",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/closeup-of-little-atoms-under-a-microscope-13014236/"
+  }
+}

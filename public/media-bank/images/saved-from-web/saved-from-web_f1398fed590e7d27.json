@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_f1398fed590e7d27",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden hour light on El Jem Amphitheater ruins in Tunisia, capturing ancient Roman architecture.",
+  "path": "images/saved-from-web/saved-from-web_f1398fed590e7d27.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "golden",
+    "hour",
+    "light",
+    "jem",
+    "amphitheater",
+    "ruin",
+    "tunisia",
+    "capturing",
+    "ancient",
+    "roman",
+    "architecture",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "ruins",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "golden",
+    "hour",
+    "light",
+    "jem",
+    "amphitheater",
+    "ruin",
+    "tunisia",
+    "capturing",
+    "ancient",
+    "roman",
+    "architecture",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "ruins",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Golden hour light on El Jem Amphitheater ruins in Tunisia, capturing ancient Roman architecture."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman ruins golden hour",
+    "savedAt": "2026-10-26T13:23:32.481Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Memory Lane",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/el-jem-amphitheater-at-sunset-35718432/"
+  }
+}

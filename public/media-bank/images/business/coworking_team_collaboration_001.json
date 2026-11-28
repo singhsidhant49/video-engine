@@ -1,0 +1,76 @@
+{
+  "id": "coworking_team_collaboration_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Collaborative ideas in a modern coworking space",
+  "path": "images/business/coworking_team_collaboration_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "coworking",
+    "teamwork",
+    "collaboration",
+    "startup",
+    "creative team"
+  ],
+  "concepts": [
+    "team collaboration",
+    "coworking culture",
+    "startup teamwork",
+    "idea sharing"
+  ],
+  "subjects": [
+    "team",
+    "laptops",
+    "coworking table",
+    "office plants"
+  ],
+  "actions": [
+    "discussing",
+    "collaborating",
+    "brainstorming"
+  ],
+  "mood": [
+    "collaborative",
+    "friendly",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "top-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "team culture",
+    "startup content",
+    "coworking promo",
+    "office collaboration"
+  ],
+  "avoidFor": [
+    "solo consulting",
+    "retail checkout",
+    "contract signing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

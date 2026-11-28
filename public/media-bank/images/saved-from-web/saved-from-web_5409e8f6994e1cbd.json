@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_5409e8f6994e1cbd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Flame from the burner of a gas stove.jpg",
+  "path": "images/saved-from-web/saved-from-web_5409e8f6994e1cbd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1996,
+  "aspectRatio": 1.3026,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "flame",
+    "from",
+    "burner",
+    "ga",
+    "stove",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "gas",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "flame",
+    "from",
+    "burner",
+    "ga",
+    "stove",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "gas",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Flame from the burner of a gas stove.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "gas stove burner flame",
+    "savedAt": "2026-10-26T15:07:17.337Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "BogTar201213",
+    "creator": "BogTar201213",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T15:01:13.435Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Flame_from_the_burner_of_a_gas_stove.jpg"
+  }
+}

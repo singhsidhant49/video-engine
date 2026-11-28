@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_6a75759d5b481767",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning view of the Himalayan mountains and river in Uttarakhand, India.",
+  "path": "images/saved-from-web/saved-from-web_6a75759d5b481767.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "himalayan",
+    "mountain",
+    "river",
+    "uttarakhand",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "himalayan",
+    "mountain",
+    "river",
+    "uttarakhand",
+    "india",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning view of the Himalayan mountains and river in Uttarakhand, India."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "uttarakhand alpine meadow river",
+    "savedAt": "2026-10-27T06:27:56.713Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Soubhagya Maharana",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scenic-himalayan-landscape-in-uttarakhand-33329100/"
+  }
+}

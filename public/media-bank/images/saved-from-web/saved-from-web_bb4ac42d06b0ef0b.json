@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_bb4ac42d06b0ef0b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Moody black and white portrait of a man behind a rain-soaked window, exuding introspection.",
+  "path": "images/saved-from-web/saved-from-web_bb4ac42d06b0ef0b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "moody",
+    "black",
+    "white",
+    "portrait",
+    "man",
+    "behind",
+    "rain",
+    "soaked",
+    "window",
+    "exuding",
+    "introspection",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "rain-soaked"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "moody",
+    "black",
+    "white",
+    "portrait",
+    "man",
+    "behind",
+    "rain",
+    "soaked",
+    "window",
+    "exuding",
+    "introspection",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "rain-soaked"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Moody black and white portrait of a man behind a rain-soaked window, exuding introspection."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "athlete training heavy rain soaked determined",
+    "savedAt": "2026-10-29T13:45:51.816Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nahmad",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-standing-behind-the-window-with-drops-on-it-10260442/"
+  }
+}

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 import { SolvedSceneSchema } from './solvedScene.schema.js';
 import { MotionPlanSchema } from './motionPlan.schema.js';
 import { EditorialVisualBeatSchema } from './editorialVisualBeat.schema.js';
@@ -8,6 +8,11 @@ const FrameRangeSchema = z.object({
   from: z.number().int().nonnegative(),
   durationInFrames: z.number().int().positive(),
 }).passthrough();
+
+const ShotTransitionSchema = z.object({
+  type: z.enum(['cut', 'dissolve']),
+  frames: z.number().int().nonnegative(),
+}).strict();
 
 export const TimelineShotSchema = FrameRangeSchema.extend({
   id: z.string().min(1),
@@ -32,24 +37,26 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
     cameraMove: z.string().min(1),
     visualDensity: z.enum(['LOW', 'MEDIUM', 'HIGH']),
   }).passthrough(),
-  renderMode: z.enum(['legacy', 'solved']).default('legacy'),
+  renderMode: z.enum(['mediaFallback', 'solved']).default('mediaFallback'),
   solvedSceneId: z.string().nullable().default(null),
   motionPlanId: z.string().nullable().default(null),
   visualQualityReviewId: z.string().nullable().default(null),
   mediaSceneSpecId: z.string().nullable().default(null),
   compositionFallback: z.object({
     shotId: z.string().min(1),
-    representation: z.enum(['process', 'comparison', 'chart', 'media']),
+    representation: z.literal('media'),
     failureStage: z.string().min(1),
     constraint: z.string().min(1),
-    fallbackRenderer: z.enum(['ProcessShot', 'CompareShot', 'ChartShot', 'PhotoShot']),
+    fallbackRenderer: z.literal('PhotoShot'),
     reason: z.string().min(1),
   }).strict().nullable().default(null),
   unresolvedMedia: z.boolean().optional(),
   transitionReason: z.enum(['newIdea', 'newEvidence', 'newEntity', 'comparisonPivot', 'reveal', 'sectionChange', 'detailChange', 'continuation']),
-  transitionAnchor: z.object({ type: z.enum(['entity', 'concept']), value: z.string() }).strict().nullable(),
-  transitionPolicy: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL', 'PUSH', 'WIPE']),
-  imageBehavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'DETAIL_CROP', 'FOCAL_PAN', 'MATCH_CUT', 'MONTAGE']).nullable(),
+  transitionAnchor: z.object({ type: z.enum(['entity', 'concept', 'subject', 'detail', 'screen_region', 'location']), value: z.string() }).strict().nullable(),
+  transitionPolicy: z.enum(['CUT', 'SHORT_DISSOLVE']),
+  enter: ShotTransitionSchema.default({ type: 'cut', frames: 0 }),
+  exit: ShotTransitionSchema.default({ type: 'cut', frames: 0 }),
+  imageBehavior: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']).nullable(),
   captionPolicy: z.object({
     mode: z.enum(['NORMAL', 'COMPACT', 'INTEGRATED', 'HIDDEN']),
     style: z.enum(['CLEAN_TEXT', 'SOFT_SCRIM', 'COMPACT_CAPSULE', 'INTEGRATED']).optional(),
@@ -60,6 +67,15 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
   continuityCompatibility: z.object({
     score: z.number().min(0).max(1), compatible: z.boolean(), warnings: z.array(z.string()), comparisons: z.record(z.string(), z.unknown()),
   }).strict().nullable().default(null),
+  cameraContinuity: z.object({
+    stitchedFromShotId: z.string(),
+    assetSrc: z.string().optional(),
+  }).passthrough().optional(),
+  videoContinuity: z.object({
+    continuedFromShotId: z.string().min(1),
+    assetSrc: z.string().min(1),
+    startTime: z.number().nonnegative(),
+  }).strict().optional(),
   asset: z.unknown().nullable().optional(),
   assets: z.array(z.unknown()).default([]),
   move: z.unknown().optional(),
@@ -74,6 +90,14 @@ export const TimelineShotSchema = FrameRangeSchema.extend({
     approved: z.boolean(),
     selectionReason: z.string().optional(),
   }).passthrough().optional(),
+  manualOverride: z.object({
+    locked: z.boolean(),
+    crop: z.object({ x: z.number(), y: z.number(), width: z.number(), height: z.number() }).strict().nullable(),
+    motion: z.string().nullable(),
+    transition: z.string().nullable(),
+    durationSeconds: z.number().nullable(),
+    asset: z.object({ mediaBankPath: z.string() }).strict().nullable(),
+  }).strict().optional(),
 }).strict().superRefine((shot, ctx) => {
   if (shot.renderMode === 'solved' && (!shot.solvedSceneId || !shot.motionPlanId)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Solved shots require solvedSceneId and motionPlanId' });
@@ -99,10 +123,11 @@ export const TimelineSchema = z.object({
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   durationInFrames: z.number().int().positive(),
-  visualMode: z.enum(['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']).default('MEDIA_EDITORIAL'),
+  visualMode: z.literal('MEDIA_EDITORIAL').default('MEDIA_EDITORIAL'),
   visualPolicy: z.object({
-    visualMode: z.enum(['MEDIA_EDITORIAL', 'LEGACY_PROCEDURAL']), useMediaEditorial: z.boolean(), enableProceduralGraphics: z.boolean(),
-    enableLegacyVisualFamilies: z.boolean(), allowGeneratedMedia: z.literal(false), allowSplitLayout: z.boolean().default(false), defaultTransition: z.literal('CUT'), defaultCamera: z.literal('STATIC'),
+    visualMode: z.literal('MEDIA_EDITORIAL'), useMediaEditorial: z.literal(true), preferAuthenticMedia: z.literal(true),
+    allowGeneratedMedia: z.literal(false), allowSplitLayout: z.boolean().default(false), defaultTransition: z.literal('CUT'), defaultCamera: z.literal('STATIC'),
+    motionPreset: z.enum(['minimal', 'standard']).default('standard'),
   }).strict(),
   clips: z.array(TimelineClipSchema).min(1),
   realizedShots: z.array(TimelineShotSchema).min(1),

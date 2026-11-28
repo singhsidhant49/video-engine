@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_55a0d83069efd087",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A sleek and contemporary library interior, showcasing modern architectural design and ample natural lighting.",
+  "path": "images/saved-from-web/saved-from-web_55a0d83069efd087.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "sleek",
+    "contemporary",
+    "library",
+    "interior",
+    "showcasing",
+    "modern",
+    "architectural",
+    "design",
+    "ample",
+    "natural",
+    "lighting",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "sleek",
+    "contemporary",
+    "library",
+    "interior",
+    "showcasing",
+    "modern",
+    "architectural",
+    "design",
+    "ample",
+    "natural",
+    "lighting",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A sleek and contemporary library interior, showcasing modern architectural design and ample natural lighting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "modern library interior authentic real-world environment matching context",
+    "savedAt": "2026-10-28T08:16:20.082Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marcus Lenk",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/modern-library-interior-18587779/"
+  }
+}

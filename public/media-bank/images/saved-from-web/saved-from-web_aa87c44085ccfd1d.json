@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_aa87c44085ccfd1d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Emirates Airline 191.jpg",
+  "path": "images/saved-from-web/saved-from-web_aa87c44085ccfd1d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2304,
+  "height": 1728,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "emirate",
+    "airline",
+    "191",
+    "city",
+    "street",
+    "parking",
+    "lot",
+    "static",
+    "presentation",
+    "file",
+    "emirates",
+    "jpg",
+    "automobile sedan",
+    "car"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "emirate",
+    "airline",
+    "191",
+    "city",
+    "street",
+    "parking",
+    "lot",
+    "static",
+    "presentation",
+    "file",
+    "emirates",
+    "jpg",
+    "automobile sedan",
+    "car"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Emirates Airline 191.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "city street or parking lot"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Emirates (airline)",
+    "savedAt": "2026-10-26T10:45:09.224Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 3.0",
+    "license_name": "CC BY 3.0",
+    "url": "https://creativecommons.org/licenses/by/3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "author": "MoHasanie",
+    "creator": "MoHasanie",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:40.625Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Emirates_Airline_191.jpg"
+  }
+}

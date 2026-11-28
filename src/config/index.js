@@ -14,6 +14,15 @@ export const config = {
   publicDir: path.join(ROOT_DIR, 'public'),
   rendersDir: path.join(ROOT_DIR, 'renders'),
   tempDir: path.join(ROOT_DIR, 'temp'),
+  storageDir: process.env.VIDEO_STORAGE_DIR ? path.resolve(process.env.VIDEO_STORAGE_DIR) : path.join(ROOT_DIR, 'storage'),
+  channelsDir: process.env.CHANNEL_STORAGE_DIR
+    ? path.resolve(process.env.CHANNEL_STORAGE_DIR)
+    : path.join(process.env.VIDEO_STORAGE_DIR ? path.resolve(process.env.VIDEO_STORAGE_DIR) : path.join(ROOT_DIR, 'storage'), 'channels'),
+  mediaBankDir: process.env.MEDIA_BANK_DIR
+    ? path.resolve(process.env.MEDIA_BANK_DIR)
+    : (process.env.VIDEO_STORAGE_DIR
+      ? path.join(path.resolve(process.env.VIDEO_STORAGE_DIR), 'media-bank')
+      : path.join(ROOT_DIR, 'storage', 'media-bank')),
 
   get deepseek() {
     dotenv.config();
@@ -32,11 +41,31 @@ export const config = {
     };
   },
 
+  get ideogram() {
+    dotenv.config();
+    return {
+      apiKey: (process.env.IDEOGRAM_API_KEY || '').trim(),
+      apiUrl: process.env.IDEOGRAM_API_URL || '',
+      model: process.env.IDEOGRAM_MODEL || 'p-image-ideogram',
+      quality: (process.env.IDEOGRAM_QUALITY || 'medium').toLowerCase(),
+      resolution: (process.env.IDEOGRAM_RESOLUTION || '1k').toLowerCase(),
+      magicPrompt: process.env.IDEOGRAM_MAGIC_PROMPT || 'AUTO',
+    };
+  },
+
+  get replicate() {
+    dotenv.config();
+    return {
+      apiToken: (process.env.REPLICATE_API_TOKEN || process.env.FluxSchellKey || process.env.FLUX_API_KEY || '').trim(),
+      model: process.env.FLUX_MODEL || 'black-forest-labs/flux-schnell',
+    };
+  },
+
   kokoro: {
     url: process.env.KOKORO_TTS_URL || 'http://localhost:8880/v1/audio/speech',
     defaultVoice: process.env.KOKORO_VOICE || 'af_bella',
     speed: parseFloat(process.env.KOKORO_SPEED || '0.9'),
-    meditationSpeed: parseFloat(process.env.KOKORO_MEDITATION_SPEED || '0.72'),
+    meditationSpeed: parseFloat(process.env.KOKORO_MEDITATION_SPEED || '0.76'),
   },
 
   video: {
@@ -51,5 +80,23 @@ export const config = {
 
   server: {
     port: parseInt(process.env.PORT || '3000', 10),
+    apiKeys: (process.env.VIDEO_API_KEYS || '').split(',').map((key) => key.trim()).filter(Boolean),
+    adminEmail: process.env.ADMIN_EMAIL || '',
+    adminPassword: process.env.ADMIN_PASSWORD || '',
+    adminOwnerId: process.env.ADMIN_OWNER_ID || '',
+    jwtSecret: process.env.JWT_SECRET || '',
+    jwtTtlSeconds: Math.max(300, parseInt(process.env.JWT_TTL_SECONDS || '28800', 10)),
+    maxRequestBytes: process.env.VIDEO_API_MAX_REQUEST_BYTES || '1mb',
+    workerConcurrency: Math.max(1, parseInt(process.env.VIDEO_WORKER_CONCURRENCY || '1', 10)),
+    queueGlobalConcurrency: Math.max(1, parseInt(process.env.VIDEO_QUEUE_GLOBAL_CONCURRENCY || '1', 10)),
+    maxQueuedJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_QUEUED_JOBS || '25', 10)),
+    maxOwnerPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_OWNER_PENDING_JOBS || '5', 10)),
+    maxChannelPendingJobs: Math.max(1, parseInt(process.env.VIDEO_MAX_CHANNEL_PENDING_JOBS || '2', 10)),
+    estimatedJobMinutes: Math.max(1, parseInt(process.env.VIDEO_ESTIMATED_JOB_MINUTES || '20', 10)),
+    shutdownTimeoutMs: Math.max(1_000, parseInt(process.env.VIDEO_SHUTDOWN_TIMEOUT_MS || '30000', 10)),
+    jobStore: process.env.VIDEO_JOB_STORE || (process.env.DATABASE_URL ? 'postgres' : 'file'),
+    queueBackend: process.env.VIDEO_QUEUE_BACKEND || (process.env.REDIS_URL ? 'bullmq' : 'memory'),
+    youtubePublishingEnabled: String(process.env.YOUTUBE_PUBLISHING_ENABLED || '').toLowerCase() === 'true',
+    youtubeAnalyticsEnabled: String(process.env.YOUTUBE_ANALYTICS_ENABLED || 'true').toLowerCase() !== 'false',
   }
 };

@@ -4,7 +4,6 @@ import test from 'node:test';
 import {
   classifyInformationType,
   buildVisualCoveragePlan,
-  synthesizeProceduralData,
   INFORMATION_TYPES,
   REPRESENTATIONS,
 } from '../src/storyboard/visualCoveragePlan.js';
@@ -72,17 +71,7 @@ test('classifyInformationType categorizes explanatory beats deterministically', 
   );
 });
 
-test('database comparison synthesis is narration-grounded, never generic system filler', () => {
-  const data = synthesizeProceduralData({
-    narration: 'In a banking app, transferring money between accounts can deadlock if two transfers cross.',
-    data: {},
-  }, 'comparison');
-  assert.equal(data.title, 'CROSSED TRANSFERS');
-  assert.match(JSON.stringify(data), /Transfer A to B/);
-  assert.doesNotMatch(JSON.stringify(data), /SYSTEM CONTRAST|Established paradigm/);
-});
-
-test('buildVisualCoveragePlan maps scenes to non-statement fallback chains', () => {
+test('buildVisualCoveragePlan maps every scene to media coverage', () => {
   const storyboard = {
     scenes: [
       {
@@ -108,20 +97,19 @@ test('buildVisualCoveragePlan maps scenes to non-statement fallback chains', () 
 
   // Code beat
   assert.equal(plan[0].informationType, INFORMATION_TYPES.CODE);
-  assert.equal(plan[0].primaryRepresentation, REPRESENTATIONS.CODE);
-  assert.ok(plan[0].fallbackRepresentations.includes(REPRESENTATIONS.UI));
-  assert.ok(!plan[0].fallbackRepresentations.includes(REPRESENTATIONS.TYPOGRAPHY));
+  assert.equal(plan[0].primaryRepresentation, REPRESENTATIONS.MEDIA);
+  assert.deepEqual(plan[0].fallbackRepresentations, [REPRESENTATIONS.MEDIA]);
 
   // Location beat
   assert.equal(plan[1].informationType, INFORMATION_TYPES.LOCATION);
-  assert.equal(plan[1].primaryRepresentation, REPRESENTATIONS.MAP);
+  assert.equal(plan[1].primaryRepresentation, REPRESENTATIONS.MEDIA);
 
   // Data beat
   assert.equal(plan[2].informationType, INFORMATION_TYPES.DATA);
-  assert.equal(plan[2].primaryRepresentation, REPRESENTATIONS.CHART);
+  assert.equal(plan[2].primaryRepresentation, REPRESENTATIONS.MEDIA);
 });
 
-test('recast routes missing media to explanatory primitives rather than statement cards', () => {
+test('recast keeps missing media in the media family for approved reuse', () => {
   const codeScene = {
     id: 's01',
     narration: 'The agent reads the codebase and executes the tool call loop.',
@@ -136,8 +124,8 @@ test('recast routes missing media to explanatory primitives rather than statemen
   };
 
   const recasted = recast(spec, codeScene, { primary: null, alternates: [] }, 'landscape');
-  assert.equal(recasted.family, 'code');
-  assert.ok(recasted.recasts[0].includes('code & terminal visualizer'));
+  assert.equal(recasted.family, 'image');
+  assert.ok(recasted.recasts[0].includes('approved adjacent-media reuse'));
 
   // Location missing media -> Map
   const mapScene = {
@@ -153,29 +141,8 @@ test('recast routes missing media to explanatory primitives rather than statemen
     need: { role: 'subject' },
   };
   const mapRecasted = recast(mapSpec, mapScene, { primary: null, alternates: [] }, 'landscape');
-  assert.equal(mapRecasted.family, 'map');
-  assert.ok(mapRecasted.recasts[0].includes('geopolitical dependency map'));
-});
-
-test('synthesizeProceduralData produces topic-grounded, authentic data structures', () => {
-  const codeData = synthesizeProceduralData({ narration: 'The agent runs tests and fixes bugs.' }, REPRESENTATIONS.CODE);
-  assert.ok(codeData.code.includes('test'));
-  assert.ok(codeData.terminal.includes('FAIL') || codeData.terminal.includes('PASS'));
-
-  const diagramData = synthesizeProceduralData({ narration: 'Limbic urge triggers the prefrontal cortex.' }, REPRESENTATIONS.DIAGRAM);
-  assert.ok(diagramData.nodes.length >= 2);
-  assert.ok(diagramData.nodes.some((n) => n.label.includes('Limbic')));
-
-  const fallbackList = synthesizeProceduralData({
-    narration: 'The first fix is consolidation. The second is packaging.',
-    data: { title: 'Three Fixes', items: ['Consolidation', 'Packaging'] },
-    text: { headline: 'The Solutions' },
-  }, REPRESENTATIONS.DIAGRAM);
-  assert.equal(fallbackList.title, 'Three Fixes');
-
-  const mapData = synthesizeProceduralData({ narration: 'ASML ships to TSMC in Taiwan.' }, REPRESENTATIONS.MAP);
-  assert.ok(mapData.regions.length >= 2);
-  assert.ok(mapData.regions.some((r) => r.name.includes('Taiwan')));
+  assert.equal(mapRecasted.family, 'image');
+  assert.ok(mapRecasted.recasts[0].includes('approved adjacent-media reuse'));
 });
 
 test('buildVisualCoverageDiagnostics and timeline QC catch unresolved coverage and blank frames', () => {

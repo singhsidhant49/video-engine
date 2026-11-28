@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_rooftop_brunch_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Rooftop brunch toast above the city",
+  "path": "images/lifestyle/lifestyle_rooftop_brunch_001.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "brunch",
+    "friends",
+    "social life",
+    "rooftop",
+    "city view",
+    "weekend"
+  ],
+  "concepts": [
+    "social connection",
+    "urban lifestyle",
+    "weekend leisure",
+    "friendship"
+  ],
+  "subjects": [
+    "group of friends",
+    "brunch table",
+    "city skyline",
+    "juice glasses",
+    "food spread"
+  ],
+  "actions": [
+    "toasting drinks",
+    "laughing",
+    "sharing brunch"
+  ],
+  "mood": [
+    "vibrant",
+    "joyful",
+    "sunny"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-center",
+      "lower-center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "social lifestyle videos",
+    "friendship scenes",
+    "weekend content",
+    "urban living montages"
+  ],
+  "avoidFor": [
+    "solo introspection",
+    "serious educational topics",
+    "corporate training"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

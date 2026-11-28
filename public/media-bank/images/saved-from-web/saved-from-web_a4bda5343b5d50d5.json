@@ -1,0 +1,70 @@
+{
+  "id": "saved-from-web_a4bda5343b5d50d5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "African American woman with afro hairstyle working at a laptop in a modern office setting.",
+  "path": "images/saved-from-web/saved-from-web_a4bda5343b5d50d5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "african",
+    "american",
+    "woman",
+    "afro",
+    "hairstyle",
+    "working",
+    "laptop",
+    "modern",
+    "office",
+    "setting",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "person",
+    "deep",
+    "focu",
+    "meditation",
+    "calmly",
+    "desk",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "African American woman with afro hairstyle working at a laptop in a modern office setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person deep focus meditation working calmly at office desk",
+    "savedAt": "2026-10-23T07:22:29.588Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ron Lach",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-s-arm-on-table-while-in-deep-thought-9908654/"
+  }
+}

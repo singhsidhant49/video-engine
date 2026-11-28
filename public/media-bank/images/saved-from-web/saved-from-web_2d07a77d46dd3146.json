@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_2d07a77d46dd3146",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Robert Falcon Scott",
+  "path": "images/saved-from-web/saved-from-web_2d07a77d46dd3146.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 967,
+  "height": 1284,
+  "aspectRatio": 0.7531,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "robert",
+    "falcon",
+    "scott",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "robert",
+    "falcon",
+    "scott",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Robert Falcon Scott"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Robert Falcon Scott",
+    "savedAt": "2026-10-29T13:26:54.626Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Henry Maull (1829–1914) and John Fox (1832–1907)",
+    "creator": "Henry Maull (1829–1914) and John Fox (1832–1907)",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T13:23:34.759Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Scott_of_the_Antarctic_(bw)_(cropped).jpg"
+  }
+}

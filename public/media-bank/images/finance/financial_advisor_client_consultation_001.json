@@ -1,0 +1,75 @@
+{
+  "id": "financial_advisor_client_consultation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Financial advisor consulting a couple",
+  "path": "images/finance/financial_advisor_client_consultation_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "financial advisor",
+    "consultation",
+    "couple",
+    "planning",
+    "wealth management"
+  ],
+  "concepts": [
+    "financial planning",
+    "wealth management",
+    "retirement planning",
+    "personal finance advice"
+  ],
+  "subjects": [
+    "financial advisor",
+    "couple",
+    "laptop dashboard"
+  ],
+  "actions": [
+    "consulting",
+    "explaining finances",
+    "reviewing portfolio"
+  ],
+  "mood": [
+    "trustworthy",
+    "calm",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "financial planning",
+    "retirement content",
+    "wealth management",
+    "advisor explainer"
+  ],
+  "avoidFor": [
+    "trading floor",
+    "corporate earnings",
+    "small business operations"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

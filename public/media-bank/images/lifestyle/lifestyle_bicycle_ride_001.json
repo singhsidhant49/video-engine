@@ -1,0 +1,78 @@
+{
+  "id": "lifestyle_bicycle_ride_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden hour bicycle ride",
+  "path": "images/lifestyle/lifestyle_bicycle_ride_001.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "cycling",
+    "city life",
+    "sunset",
+    "mobility",
+    "fashion",
+    "outdoor"
+  ],
+  "concepts": [
+    "active lifestyle",
+    "urban freedom",
+    "casual elegance",
+    "golden hour living"
+  ],
+  "subjects": [
+    "woman on bicycle",
+    "cobblestone street",
+    "basket with flowers",
+    "cafe street"
+  ],
+  "actions": [
+    "riding bicycle",
+    "smiling outdoors",
+    "moving through city"
+  ],
+  "mood": [
+    "free",
+    "sunny",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "city lifestyle videos",
+    "summer montage scenes",
+    "active lifestyle content",
+    "travel-adjacent clips"
+  ],
+  "avoidFor": [
+    "indoor routines",
+    "serious office training",
+    "medical topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

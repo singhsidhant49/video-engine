@@ -1,0 +1,62 @@
+{
+  "id": "health_heart_health_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Heart health visualization",
+  "path": "images/health/health_heart_health_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "heart",
+    "cardiovascular",
+    "anatomy",
+    "medical illustration",
+    "ECG"
+  ],
+  "concepts": [
+    "cardiovascular health",
+    "heart anatomy",
+    "circulation"
+  ],
+  "subjects": [
+    "human heart",
+    "ECG line"
+  ],
+  "actions": [
+    "visualizing heartbeat",
+    "showing heart anatomy"
+  ],
+  "mood": [
+    "dramatic",
+    "scientific"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "heart health videos",
+    "cardiology explainers",
+    "medical education"
+  ],
+  "avoidFor": [
+    "sleep",
+    "food scene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

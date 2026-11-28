@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_d8e3895889a7f451",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A small bird perched on a tree branch, silhouetted against the sky at sunset.",
+  "path": "images/saved-from-web/saved-from-web_d8e3895889a7f451.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "small",
+    "bird",
+    "perched",
+    "branch",
+    "silhouetted",
+    "against",
+    "sunset",
+    "tiny",
+    "wide",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "tiny bird on branch wide shot",
+    "savedAt": "2026-10-26T05:47:17.826Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Leyla M",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/bird-on-branch-during-golden-hour-28772705/"
+  }
+}

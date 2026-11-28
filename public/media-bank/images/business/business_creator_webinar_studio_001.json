@@ -1,0 +1,77 @@
+{
+  "id": "business_creator_webinar_studio_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Business creator recording in modern studio",
+  "path": "images/business/business_creator_webinar_studio_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "webinar",
+    "creator",
+    "studio",
+    "personal brand",
+    "education",
+    "online business"
+  ],
+  "concepts": [
+    "thought leadership",
+    "webinar production",
+    "business education",
+    "creator business"
+  ],
+  "subjects": [
+    "speaker",
+    "camera",
+    "microphone",
+    "presentation screen"
+  ],
+  "actions": [
+    "recording webinar",
+    "presenting",
+    "teaching"
+  ],
+  "mood": [
+    "confident",
+    "polished",
+    "modern"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "webinar visuals",
+    "online course",
+    "digital products",
+    "business coaching"
+  ],
+  "avoidFor": [
+    "retail store",
+    "warehouse",
+    "boardroom presentation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "science_test_tube_analysis_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist examining a blue test tube in a modern lab",
+  "path": "images/science/science_test_tube_analysis_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "laboratory",
+    "scientist",
+    "test tube",
+    "chemistry",
+    "research",
+    "biotech"
+  ],
+  "concepts": [
+    "laboratory research",
+    "sample analysis",
+    "scientific observation",
+    "experimental science"
+  ],
+  "subjects": [
+    "scientist",
+    "test tube",
+    "laptop",
+    "microscope"
+  ],
+  "actions": [
+    "examining sample",
+    "observing liquid",
+    "conducting research"
+  ],
+  "mood": [
+    "clean",
+    "focused",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.62,
+      "y": 0.38
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "general science video",
+    "lab research",
+    "biotech explainer",
+    "scientific discovery"
+  ],
+  "avoidFor": [
+    "field ecology",
+    "space astronomy",
+    "industrial manufacturing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

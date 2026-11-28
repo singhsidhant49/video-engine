@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_rooftop_gathering_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour rooftop gathering",
+  "path": "images/lifestyle/lifestyle_rooftop_gathering_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "friends",
+    "rooftop",
+    "sunset",
+    "social life",
+    "city view",
+    "gathering"
+  ],
+  "concepts": [
+    "urban lifestyle",
+    "friendship",
+    "weekend socializing",
+    "city living"
+  ],
+  "subjects": [
+    "group of friends",
+    "drinks",
+    "rooftop seating",
+    "city skyline",
+    "candles"
+  ],
+  "actions": [
+    "chatting",
+    "laughing",
+    "relaxing together"
+  ],
+  "mood": [
+    "vibrant",
+    "social",
+    "golden"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-center",
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "friendship videos",
+    "urban lifestyle reels",
+    "weekend montage scenes",
+    "social content"
+  ],
+  "avoidFor": [
+    "quiet solo introspection",
+    "formal office topics",
+    "fitness demos"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

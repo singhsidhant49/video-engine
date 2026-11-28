@@ -1,7 +1,8 @@
 import { analyzeCropFitness } from '../services/assetScorer.js';
 import { terms } from './assetSearchContext.js';
 
-const PORTRAIT_PATTERN = /\b(portrait|headshot|ceo|chief executive|founder|executive|employee|staff|person|man|woman)\b/i;
+const PORTRAIT_PATTERN = /\b(portrait|headshot|ceo|chief executive|founder|executive|employee|staff|person|man|woman|explorer|captain|navigator|sailor|pioneer|adventurer|scientist|inventor|discoverer|historical figure)\b/i;
+const VEHICLE_FACILITY_PATTERN = /\b(pullman|railroad\s+car|railway\s+car|train\s+car|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|trolley|bus|tram|metro\s+station|subway\s+station|bedroom|dining\s+room|hotel|high\s+school|elementary\s+school|school\s+building|auditorium|crater|boulevard|avenue|highway)\b/i;
 const LOGO_PATTERN = /\b(logo|logotype|brand mark|brandmark|wordmark|symbol|trademark|icon)\b/i;
 const BUILDING_PATTERN = /\b(headquarters|headquarter|campus|office building|corporate building|facade|exterior of the building|corporate office|offices)\b/i;
 const WATERMARK_PATTERN = /\b(watermark|alamy|shutterstock|getty images|dreamstime|stock photo|preview watermark)\b/i;
@@ -9,6 +10,9 @@ const RUIN_OR_ABANDONED_PATTERN = /\b(abandoned|derelict|ruins?|damaged|chernoby
 const MOCKUP_OR_GREENSCREEN_PATTERN = /\b(green screen|chroma key|mockup|blank screen|empty screen|isolated on white|placeholder)\b/i;
 const DIAGRAM_IMAGE_PATTERN = /\b(mindmap|mind map|infographic|flowchart|flow chart|block diagram|architecture diagram|protocol diagram|screen time)\b/i;
 const IRRELEVANT_CHURCH_PATTERN = /\b(church|cathedral|altar|medieval|stained\s+glass|chapel|monastery)\b/i;
+const TECHNICAL_OBJECT_RULES = [
+  { requested: /\b(?:home\s+)?router\b/i, visible: /\b(router|modem|wi-?fi|wireless access point|network device|ethernet hub|ethernet switch)\b/i },
+];
 
 const CLICHES = [
   ['smiling_office_team', /smiling.*(?:office|team)|office team/i],
@@ -23,11 +27,16 @@ const CLICHES = [
   ['fake_celebration', /celebrating team|office celebration/i],
 ];
 
-const DOMAIN_SYNONYMS = {
+export const DOMAIN_SYNONYMS = {
   lithograph: ['scanner', 'stepper', 'twinscan', 'cleanroom', 'wafer', 'euv', 'photolithography', 'semiconductor', 'nanometer'],
   machine: ['scanner', 'stepper', 'system', 'equipment', 'tool', 'hardware', 'apparatus', 'device'],
   gpu: ['accelerator', 'graphics', 'processor', 'silicon', 'die', 'board', 'tensor', 'compute', 'cuda', 'card', 'sxm'],
   colosseum: ['amphitheatre', 'flavian', 'colosseo', 'arena', 'amphitheatrum'],
+  dubai: ['burj', 'khalifa', 'uae', 'emirates', 'skyline', 'marina', 'downtown', 'skyscraper'],
+  rome: ['roman', 'colosseum', 'colosseo', 'forum', 'amphitheatre', 'pantheon', 'ruins', 'italy', 'ancient'],
+  roman: ['rome', 'colosseum', 'colosseo', 'forum', 'amphitheatre', 'pantheon', 'ruins', 'ancient', 'empire'],
+  empire: ['roman', 'ancient', 'imperial', 'dynasty', 'monument', 'ruins', 'civilization'],
+  ancient: ['roman', 'ruins', 'classical', 'antiquity', 'forum', 'colosseum', 'monument', 'temple', 'artifact'],
   code: ['coding', 'programming', 'developer', 'software', 'ide', 'editor', 'syntax', 'react', 'javascript', 'python', 'script'],
   developer: ['programmer', 'coder', 'engineer', 'coding', 'programming', 'laptop', 'software'],
   fast: ['speed', 'performance', 'quick'],
@@ -52,7 +61,7 @@ const DOMAIN_SYNONYMS = {
   sql: ['database', 'query', 'code', 'script', 'terminal', 'editor', 'syntax', 'programming'],
   query: ['database', 'sql', 'search', 'terminal', 'code', 'editor', 'screen'],
   editor: ['ide', 'code', 'coding', 'syntax', 'terminal', 'screen', 'software', 'programming', 'developer'],
-  screen: ['monitor', 'display', 'computer', 'laptop', 'terminal', 'dark'],
+  screen: ['monitor', 'display', 'computer', 'laptop', 'terminal', 'dark', 'phone', 'smartphone', 'mobile'],
   terminal: ['console', 'screen', 'command', 'prompt', 'code', 'shell', 'monitor', 'dark'],
   deadlock: ['concurrency', 'mutex', 'lock', 'threads', 'thread', 'process', 'code', 'debugging', 'server'],
   transaction: ['database', 'sql', 'commit', 'rollback', 'acid', 'operation', 'code', 'server'],
@@ -65,14 +74,31 @@ const DOMAIN_SYNONYMS = {
   banking: ['bank', 'account', 'financial', 'finance', 'payment', 'transfer', 'money', 'app', 'cash', 'transaction'],
   transfer: ['transaction', 'payment', 'banking', 'send', 'money', 'exchange', 'app', 'account'],
   phone: ['smartphone', 'mobile', 'device', 'screen', 'app', 'hand'],
+  smartphone: ['phone', 'mobile', 'device', 'screen', 'app', 'hand'],
+  insomnia: ['awake', 'sleepless', 'sleep', 'bed', 'bedroom', 'night', 'tired', 'exhausted'],
+  sleepless: ['insomnia', 'awake', 'sleep', 'bed', 'bedroom', 'night', 'tired'],
+  bedroom: ['bed', 'room', 'sleep', 'sleeping', 'night', 'indoors'],
+  bed: ['bedroom', 'sleep', 'sleeping', 'resting', 'night'],
+  eye: ['eyes', 'face', 'gaze', 'vision', 'eyelid'],
+  eyes: ['eye', 'face', 'gaze', 'vision', 'eyelids'],
   app: ['application', 'software', 'screen', 'mobile', 'phone', 'interface'],
   shopper: ['shopping', 'buyer', 'customer', 'consumer', 'supermarket', 'store', 'grocery', 'aisle', 'cart', 'retail', 'buying', 'market', 'shelf', 'shelves', 'woman', 'man'],
+  nature: ['natural', 'outdoor', 'scenery', 'landscape', 'forest', 'garden', 'park', 'trees', 'plants', 'woods'],
+  natural: ['nature', 'outdoor', 'scenery', 'landscape', 'forest', 'garden', 'park', 'trees', 'plants'],
+  garden: ['park', 'yard', 'plants', 'nature', 'natural', 'greenery', 'foliage', 'trees', 'outdoor'],
+  forest: ['woods', 'woodland', 'trees', 'pine', 'nature', 'natural', 'park', 'outdoor', 'greenery'],
+  pond: ['lake', 'water', 'stream', 'river', 'ripples', 'pool', 'reflection'],
+  lake: ['pond', 'water', 'stream', 'river', 'ripples', 'shore', 'reflection'],
+  moonlight: ['moon', 'night', 'twilight', 'stars', 'nighttime', 'dusk', 'evening', 'dark'],
+  night: ['moon', 'moonlight', 'twilight', 'stars', 'nighttime', 'evening', 'dark'],
+  bamboo: ['plants', 'trees', 'garden', 'nature', 'greenery', 'foliage', 'stalks'],
+  shadows: ['shadow', 'silhouette', 'shade', 'contrast', 'darkness'],
   shopping: ['shopper', 'store', 'supermarket', 'aisle', 'grocery', 'cart', 'retail', 'market', 'shelf', 'shelves', 'buyer', 'buying', 'boutique'],
   aisle: ['supermarket', 'grocery', 'store', 'shelf', 'shelves', 'market', 'retail', 'boutique', 'shopper', 'shopping'],
   supermarket: ['grocery', 'store', 'market', 'aisle', 'shop', 'retail', 'shelves', 'produce', 'shopper', 'shopping'],
   grocery: ['supermarket', 'store', 'aisle', 'market', 'produce', 'shelves', 'shopper'],
-  shelves: ['shelf', 'aisle', 'store', 'supermarket', 'products', 'goods', 'stock'],
-  shelf: ['shelves', 'aisle', 'store', 'supermarket', 'products', 'goods', 'display'],
+  shelves: ['shelf', 'storage', 'cabinet', 'racks'],
+  shelf: ['shelves', 'storage', 'cabinet', 'rack'],
   overwhelmed: ['stressed', 'stress', 'frustrated', 'confused', 'browsing', 'looking', 'thinking', 'standing', 'staring', 'shopper', 'store', 'aisle', 'supermarket', 'buyer'],
   stressed: ['overwhelmed', 'frustrated', 'anxious', 'head', 'tired', 'exhausted', 'thinking', 'stress', 'fatigue', 'pensive'],
   stress: ['stressed', 'overwhelmed', 'anxiety', 'fatigue', 'tired', 'frustration', 'frustrated'],
@@ -117,6 +143,29 @@ const DOMAIN_SYNONYMS = {
   glow: ['screen', 'light', 'dark', 'night', 'illuminated', 'monitor', 'laptop', 'face'],
   lit: ['screen', 'light', 'dark', 'night', 'illuminated', 'glow'],
   tired: ['exhausted', 'fatigue', 'weary', 'sleepy', 'face', 'working', 'late', 'night', 'screen', 'laptop'],
+  bacteria: ['bacterial', 'bacterium', 'microbe', 'microbes', 'germs', 'culture', 'colonies', 'petri', 'cellular', 'microorganism', 'microorganisms', 'agar', 'dish', 'plate'],
+  bacterial: ['bacteria', 'bacterium', 'microbe', 'culture', 'colonies', 'petri', 'cellular', 'microorganism'],
+  mold: ['mould', 'fungus', 'fungal', 'spores', 'hyphae', 'penicillium', 'penicillin', 'culture', 'petri', 'growth', 'spore'],
+  fungus: ['mold', 'mould', 'fungal', 'spores', 'hyphae', 'penicillium', 'penicillin', 'culture', 'mycelium'],
+  microscope: ['microscopic', 'microscopy', 'magnified', 'cellular', 'cells', 'detail', 'magnification', 'laboratory', 'lab'],
+  microscopic: ['microscope', 'microscopy', 'magnified', 'cellular', 'cells', 'detail', 'magnification', 'close'],
+  filament: ['filaments', 'strand', 'strands', 'hyphae', 'fiber', 'growth', 'structure'],
+  inhibition: ['inhibit', 'inhibitor', 'halo', 'clear', 'sterile', 'petri', 'plate', 'agar', 'antibiotic', 'zone', 'boundary'],
+  zone: ['halo', 'ring', 'area', 'boundary', 'inhibition', 'clear', 'circle', 'petri', 'plate'],
+  petri: ['dish', 'dishes', 'plate', 'agar', 'culture', 'laboratory', 'lab'],
+  dish: ['petri', 'dishes', 'plate', 'agar', 'culture'],
+  penicillin: ['antibiotic', 'antibiotics', 'medicine', 'penicillium', 'mold', 'fungus', 'cure', 'drug'],
+  antibiotic: ['antibiotics', 'penicillin', 'medicine', 'drug', 'treatment', 'capsule', 'pill'],
+  culture: ['agar', 'petri', 'dish', 'bacteria', 'mold', 'growth', 'colony', 'colonies', 'specimen'],
+  colony: ['colonies', 'culture', 'bacteria', 'mold', 'growth', 'cluster', 'spots', 'dots'],
+  laboratory: ['lab', 'scientist', 'science', 'research', 'experiment', 'beaker', 'flask', 'pipette', 'microscope', 'test'],
+  lab: ['laboratory', 'scientist', 'science', 'research', 'experiment', 'microscope', 'test'],
+  medicine: ['medical', 'doctor', 'hospital', 'treatment', 'drug', 'antibiotic', 'cure', 'healthcare'],
+  medical: ['medicine', 'doctor', 'hospital', 'clinical', 'healthcare', 'treatment', 'patient'],
+  disease: ['illness', 'infection', 'pathogen', 'virus', 'bacteria', 'sickness', 'condition'],
+  infection: ['disease', 'pathogen', 'bacteria', 'bacterial', 'wound', 'illness', 'inflammation'],
+  discovery: ['invention', 'breakthrough', 'research', 'experiment', 'finding', 'laboratory'],
+  invention: ['discovery', 'innovation', 'breakthrough', 'patent', 'creation', 'development'],
 };
 
 const AUTHORITY = {
@@ -192,6 +241,7 @@ export const CONTEXT_INVALID_GATES = new Set([
   'diagram_image_rejected',
   'generic_office_cliche',
   'generic_stock_technical_mismatch',
+  'required_technical_object_missing',
   'subject_mismatch',
   'entity_mismatch',
   'building_false_match',
@@ -274,10 +324,17 @@ function calculateSubjectMatch(subjectTerms, metadataTerms, candidateText, conte
       matches++;
       continue;
     }
+    if (term.length >= 4 && metadataTerms.some((mt) => mt.length >= 4 && (mt.startsWith(term) || term.startsWith(mt)))) {
+      matches++;
+      continue;
+    }
   }
-  const tokenRatio = (subjectTerms.length >= 4 && matches >= 2)
-    ? Math.max(matches / subjectTerms.length, 0.5)
-    : matches / subjectTerms.length;
+  let tokenRatio = matches / subjectTerms.length;
+  if (subjectTerms.length >= 4 && matches >= 2) {
+    tokenRatio = Math.max(tokenRatio, 0.55);
+  } else if (subjectTerms.length >= 3 && matches >= 1) {
+    tokenRatio = Math.max(tokenRatio, 0.45);
+  }
   return Number(Math.min(1, Math.max(0, tokenRatio)).toFixed(3));
 }
 
@@ -289,10 +346,11 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
   const modifierTerms = context.modifiers || [];
 
   const textLower = text.toLowerCase();
-  const entityExact = (request.entities || []).some((ent) => textLower.includes(ent.toLowerCase()));
-  const entityMatch = entityExact ? 1.0 : ratio(entityTerms, metadataTerms);
+  const hasEntities = (request.entities || []).length > 0;
+  const entityExact = hasEntities && request.entities.some((ent) => textLower.includes(ent.toLowerCase()));
 
   const subjectMatch = calculateSubjectMatch(subjectTerms, metadataTerms, text, context, request);
+  const entityMatch = hasEntities ? (entityExact ? 1.0 : ratio(entityTerms, metadataTerms)) : subjectMatch;
   const modifierMatch = ratio(modifierTerms, metadataTerms);
   const contextMatch = ratio(terms(request.concept), metadataTerms);
   const intentWords = terms(request.assetIntent);
@@ -312,8 +370,8 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
     || /\b(machine|device|product|hardware|system|chip|gpu|equipment|scanner|stepper|vehicle|car|aircraft|computer)\b/i.test(conceptLower);
 
   const isPerson = (context.requestClass === 'ENTITY'
-    && (PORTRAIT_PATTERN.test(conceptLower) || /\b(founder|ceo|executive|president|leader|author|director|steve jobs|jensen huang)\b/i.test(conceptLower)))
-    || /\b(scientist|researcher|mathematician|physicist|chemist|professor|doctor|worker|character)\b/i.test(conceptLower);
+    && (PORTRAIT_PATTERN.test(conceptLower) || /\b(founder|ceo|executive|president|leader|author|director|steve jobs|jensen huang|amundsen|scott|shackleton)\b/i.test(conceptLower)))
+    || /\b(scientist|researcher|mathematician|physicist|chemist|professor|doctor|worker|character|explorer|captain|navigator|sailor|pioneer|adventurer|inventor|discoverer|amundsen|scott|shackleton)\b/i.test(conceptLower);
 
   const isLocation = ['LOCATION'].includes(context.requestClass)
     || /\b(headquarters|building|campus|office|tower|monument|colosseum|pyramid|stadium|arena)\b/i.test(conceptLower);
@@ -329,6 +387,15 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
   const buildingFalseMatch = (isProductOrMachine || isPerson)
     && BUILDING_PATTERN.test(text)
     && !/building|headquarters|office|campus|factory|headquarter/i.test(conceptLower);
+
+  const vehicleFacilityFalseMatch = isPerson
+    && VEHICLE_FACILITY_PATTERN.test(text)
+    && !VEHICLE_FACILITY_PATTERN.test(conceptLower);
+
+  const isPolar = /\b(antarctic|antarctica|south\s+pole|north\s+pole|arctic|polar|glacier|ice\s+shelf|blizzard)\b/i.test(conceptLower);
+  const polarGeographicMismatch = isPolar
+    && /\b(ladakh|india\b|indian\b|tibet|tibetan|himalayas?|nepal|nepalese|baghdad|iraq|iraqi|cairo|egypt|egyptian|sahara|desert|amazon|amazonian|brazil|brazilian|tropical|rainforest|amsterdam|canal)\b/i.test(text)
+    && !/\b(ladakh|india|tibet|himalaya|nepal|baghdad|iraq|cairo|egypt|sahara|amazon|brazil|amsterdam)\b/i.test(conceptLower);
 
   const cliche = contextualCliche(text, request, context);
 
@@ -400,7 +467,8 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
     globalInvalid.push('format_incompatible_crop');
   }
 
-  if (highSpecificity && subjectTerms.length > 0 && subjectMatch < 0.45) {
+  const hasSubjectMatch = subjectMatch >= (subjectTerms.length >= 3 ? 0.30 : 0.45);
+  if (highSpecificity && subjectTerms.length > 0 && !hasSubjectMatch) {
     gates.push('subject_mismatch');
     contextInvalid.push('subject_mismatch');
   }
@@ -424,8 +492,21 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
     gates.push('building_false_match');
     contextInvalid.push('building_false_match');
   }
+  if (vehicleFacilityFalseMatch) {
+    gates.push('named_vehicle_facility_false_match');
+    contextInvalid.push('named_vehicle_facility_false_match');
+  }
+  if (polarGeographicMismatch) {
+    gates.push('geographic_mismatch');
+    contextInvalid.push('geographic_mismatch');
+  }
 
   const isTechnicalTopic = /tech|server|datacenter|computer|software|browser|network|code|internet|data|dns|http|html|css|javascript|dom|gpu|connection|packet|traffic|hardware|developer|undersea|submarine|cable|ocean|optical|fiber/i.test(conceptLower);
+  const missingTechnicalObject = TECHNICAL_OBJECT_RULES.some((rule) => rule.requested.test(conceptLower) && !rule.visible.test(text));
+  if (missingTechnicalObject) {
+    gates.push('required_technical_object_missing');
+    contextInvalid.push('required_technical_object_missing');
+  }
   if (RUIN_OR_ABANDONED_PATTERN.test(text) && isTechnicalTopic) {
     gates.push('abandoned_mismatch');
     contextInvalid.push('abandoned_mismatch');
@@ -473,7 +554,7 @@ export function scoreAssetCandidate(candidate, request, context, memory = null) 
   }
 
   const reasons = [];
-  if (entityMatch >= 0.8) reasons.push('exact entity metadata match');
+  if (hasEntities && entityMatch >= 0.8) reasons.push('exact entity metadata match');
   if (subjectMatch >= 0.8) reasons.push('strong target-subject metadata match');
   if (modifierMatch >= 0.8 && modifierTerms.length) reasons.push('requested modifiers present');
   if (sourceAuthority >= 0.85) reasons.push('authoritative source metadata');

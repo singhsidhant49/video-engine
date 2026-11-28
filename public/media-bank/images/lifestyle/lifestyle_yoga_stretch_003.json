@@ -1,0 +1,78 @@
+{
+  "id": "lifestyle_yoga_stretch_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit serenity yoga stretch",
+  "path": "images/lifestyle/lifestyle_yoga_stretch_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "yoga",
+    "wellness",
+    "stretching",
+    "home workout",
+    "mindful movement"
+  ],
+  "concepts": [
+    "wellness routine",
+    "mind-body balance",
+    "healthy living",
+    "morning practice"
+  ],
+  "subjects": [
+    "woman",
+    "yoga mat",
+    "water bottle",
+    "plants",
+    "living room"
+  ],
+  "actions": [
+    "doing a side stretch",
+    "exercising at home",
+    "practicing mindfulness"
+  ],
+  "mood": [
+    "calm",
+    "healthy",
+    "bright"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "wellness videos",
+    "morning routine content",
+    "home workout scenes",
+    "mindful lifestyle clips"
+  ],
+  "avoidFor": [
+    "party scenes",
+    "heavy business themes",
+    "nightlife content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

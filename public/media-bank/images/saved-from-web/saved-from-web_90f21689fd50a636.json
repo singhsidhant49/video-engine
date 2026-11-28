@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_90f21689fd50a636",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A skyline with modern bridge and construction cranes at sunset over a city river.",
+  "path": "images/saved-from-web/saved-from-web_90f21689fd50a636.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "skyline",
+    "modern",
+    "bridge",
+    "construction",
+    "crane",
+    "sunset",
+    "over",
+    "city",
+    "river",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "cranes",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "skyline",
+    "modern",
+    "bridge",
+    "construction",
+    "crane",
+    "sunset",
+    "over",
+    "city",
+    "river",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "cranes",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A skyline with modern bridge and construction cranes at sunset over a city river."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "city skyline construction cranes dusk",
+    "savedAt": "2026-10-28T15:40:40.069Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mike Cho",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/tower-cranes-on-riverside-near-bridge-10084627/"
+  }
+}

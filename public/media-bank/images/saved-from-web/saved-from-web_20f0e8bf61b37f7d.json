@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_20f0e8bf61b37f7d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Hands interacting with a smartphone showcasing a vibrant green screen for multimedia use.",
+  "path": "images/saved-from-web/saved-from-web_20f0e8bf61b37f7d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "interacting",
+    "smartphone",
+    "showcasing",
+    "vibrant",
+    "green",
+    "screen",
+    "multimedia",
+    "use",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "hands"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "interacting",
+    "smartphone",
+    "showcasing",
+    "vibrant",
+    "green",
+    "screen",
+    "multimedia",
+    "use",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "hands"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Hands interacting with a smartphone showcasing a vibrant green screen for multimedia use."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hand swiping smartphone screen",
+    "savedAt": "2026-10-26T11:07:33.569Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "MART  PRODUCTION",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-blue-and-black-smartphone-9558258/"
+  }
+}

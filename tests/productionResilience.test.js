@@ -1,0 +1,106 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { buildPixelGroundingClasses } from '../src/assets/visualInspectionService.js';
+import { buildSameSceneContinuationPrompt, buildSemanticRecoveryPrompt, findApprovedSameSceneContinuation, recoverUnresolvedAiShotsFromSameScene, resolveAiAssetMasterSeed } from '../src/pipeline/aiAssetDirector.js';
+import { parseReplicateRateLimitInterval } from '../src/services/replicateService.js';
+import { isAutomaticallyRetryableFailure, resolveVideoJobTimeoutMs, resumeStageForFailure } from '../src/server/videoJobService.js';
+
+test('stick-figure validation never treats the selected visual style as a negative class', () => {
+  const result = buildPixelGroundingClasses({
+    viewerNeedsToSee: 'a stick figure choosing between three paths',
+    subject: 'stick figure at a fork in the path',
+    avoidVisuals: ['cartoon clipart or 3D stickman', 'corporate handshake in boardroom'],
+  }, { styleId: 'stickman' });
+  assert.ok(result.targets.some((target) => /stick figure/i.test(target)));
+  assert.ok(!result.confusers.some((target) => /stickman|stick figure|cartoon clipart/i.test(target)));
+  assert.ok(result.confusers.some((target) => /handshake/i.test(target)));
+});
+
+test('semantic recovery turns abstract replication language into a concrete visible action', () => {
+  const prompt = buildSemanticRecoveryPrompt({
+    narration: 'Before trusting a psychology experiment, ask who the participants were and whether it has been replicated.',
+    visibleNeed: { subject: 'checklist who replicated' },
+    styleLabel: 'Modern Editorial Stick Figures',
+    format: 'shorts',
+  });
+  assert.match(prompt, /two small teams of researchers repeat the same simple psychology task/i);
+  assert.match(prompt, /diverse participant groups/i);
+  assert.match(prompt, /matching check marks/i);
+  assert.match(prompt, /Vertical 9:16/i);
+});
+
+test('approved same-scene continuation never reuses a rejected visual', () => {
+  const continuation = findApprovedSameSceneContinuation({ byShot: {
+    shot_1: { src: 'assets/rejected.png' },
+    shot_2: { src: 'assets/approved.png' },
+  } }, {
+    shot_1: { accepted: false },
+    shot_2: { accepted: true },
+  });
+  assert.deepEqual(continuation, ['shot_2', { src: 'assets/approved.png' }]);
+});
+
+test('approved same-scene continuation always derives its prompt from scoped narration', () => {
+  assert.equal(
+    buildSameSceneContinuationPrompt(
+      { narration: 'Pause before reacting on autopilot.' },
+      { visibleNeed: { narrationText: 'fallback narration' } },
+    ),
+    'Approved same-scene visual continuation for narration: Pause before reacting on autopilot.',
+  );
+  assert.equal(
+    buildSameSceneContinuationPrompt({}, { visibleNeed: { narrationText: 'Use the visible-need narration.' } }),
+    'Approved same-scene visual continuation for narration: Use the visible-need narration.',
+  );
+});
+
+test('asset retries deterministically use a new candidate seed instead of a rejected cached image', () => {
+  const seedInput = { title: 'A failed loyalty program', shots: ['shot_1', 'shot_2'] };
+  const first = resolveAiAssetMasterSeed({ generationAttempt: 0, seedInput });
+  const retry = resolveAiAssetMasterSeed({ generationAttempt: 1, seedInput });
+  assert.notEqual(first, retry);
+  assert.equal(retry, resolveAiAssetMasterSeed({ generationAttempt: 1, seedInput }));
+  assert.equal(resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 0 }), 1234);
+  assert.notEqual(
+    resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 0 }),
+    resolveAiAssetMasterSeed({ baseSeed: 1234, generationAttempt: 1 }),
+  );
+});
+
+test('a failed first shot can recover from an approved later shot in the same narration scene', () => {
+  const donor = { src: 'assets/shot_2.png', storyboardShotId: 'shot_2', relevance: 0.91, assetIdentityChain: {} };
+  const assets = { scene_1: { primary: { src: 'assets/rejected.png', storyboardShotId: 'shot_1' }, byShot: { shot_1: { src: 'assets/rejected.png', storyboardShotId: 'shot_1' }, shot_2: donor } } };
+  const reports = [{ shotId: 'shot_1', sceneId: 'scene_1', status: 'unresolved', noUsableCandidate: true }, { shotId: 'shot_2', sceneId: 'scene_1', status: 'resolved', selected: donor }];
+  const judgments = { shot_1: { accepted: false }, shot_2: { accepted: true, classification: 'DIRECT' } };
+  const evaluations = { shot_1: [{ candidateId: 'bad', accepted: false }] };
+  assert.deepEqual(recoverUnresolvedAiShotsFromSameScene({ assets, requestReports: reports, judgments, candidateEvaluations: evaluations }), { shot_1: 'shot_2' });
+  assert.equal(reports[0].status, 'resolved');
+  assert.equal(assets.scene_1.byShot.shot_1.reusedFromShotId, 'shot_2');
+  assert.equal(judgments.shot_1.accepted, true);
+  assert.equal(evaluations.shot_1.at(-1).accepted, true);
+});
+
+test('Replicate low-credit rate-limit messages become a safe global request interval', () => {
+  assert.equal(parseReplicateRateLimitInterval('Your rate limit is reduced to 6 requests per minute while you have less than $5.0 in credit.'), 10_000);
+  assert.equal(parseReplicateRateLimitInterval('ordinary server error'), 0);
+});
+
+test('long-form jobs receive a duration-aware CPU render budget', () => {
+  const env = { VIDEO_JOB_TIMEOUT_MS: String(90 * 60_000), VIDEO_JOB_MAX_TIMEOUT_MS: String(12 * 60 * 60_000) };
+  const longForm = resolveVideoJobTimeoutMs({ request: { output: { durationSeconds: 485 } } }, env);
+  const short = resolveVideoJobTimeoutMs({ request: { output: { durationSeconds: 52 } } }, env);
+  assert.ok(longForm >= 250 * 60_000, `expected at least 250 minutes, got ${longForm / 60_000}`);
+  assert.ok(short < 120 * 60_000);
+});
+
+test('a render timeout is automatically resumable from the render checkpoint', () => {
+  const failure = { code: 'VIDEO_JOB_TIMEOUT', stage: 'Rendering video: 29%' };
+  assert.equal(isAutomaticallyRetryableFailure(failure), true);
+  assert.equal(resumeStageForFailure(failure), 'render');
+});
+
+test('a caption alignment QC failure is automatically retryable from alignment', () => {
+  const failure = { code: 'TIMELINE_QC_FAILED', resumeFrom: 'alignment', stage: 'Building the edit...' };
+  assert.equal(isAutomaticallyRetryableFailure(failure), true);
+  assert.equal(resumeStageForFailure(failure), 'alignment');
+});

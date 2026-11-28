@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_7607860219aa6c53",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Wachovia National Bank 1906 statement.jpg",
+  "path": "images/saved-from-web/saved-from-web_7607860219aa6c53.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1502,
+  "aspectRatio": 1.731,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "wachovia",
+    "national",
+    "bank",
+    "1906",
+    "statement",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "wachovia",
+    "national",
+    "bank",
+    "1906",
+    "statement",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Wachovia National Bank 1906 statement.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "bank financial statement",
+    "savedAt": "2026-10-28T16:29:22.279Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Wachovia National Bank, Winston, NC",
+    "creator": "Wachovia National Bank, Winston, NC",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-28T16:27:08.159Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Wachovia_National_Bank_1906_statement.jpg"
+  }
+}

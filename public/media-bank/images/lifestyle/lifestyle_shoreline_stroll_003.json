@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_shoreline_stroll_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunset stroll by the shoreline",
+  "path": "images/lifestyle/lifestyle_shoreline_stroll_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "beach",
+    "couple",
+    "sunset",
+    "romance",
+    "travel",
+    "vacation"
+  ],
+  "concepts": [
+    "romantic lifestyle",
+    "vacation mood",
+    "connection",
+    "golden hour"
+  ],
+  "subjects": [
+    "couple",
+    "beach",
+    "waves",
+    "sunset sky",
+    "shoreline"
+  ],
+  "actions": [
+    "walking hand in hand",
+    "strolling by the sea",
+    "sharing a sunset moment"
+  ],
+  "mood": [
+    "romantic",
+    "warm",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship videos",
+    "travel lifestyle content",
+    "romantic montages",
+    "vacation scenes"
+  ],
+  "avoidFor": [
+    "work topics",
+    "educational office content",
+    "fitness training"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

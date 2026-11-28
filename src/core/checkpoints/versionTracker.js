@@ -21,7 +21,7 @@ export function getGitCommitHash() {
   }
 }
 
-export const PIPELINE_VERSION = '1.0.0-m12';
+export const PIPELINE_VERSION = '1.1.0-production';
 export const SCHEMA_VERSION = 1;
 
 /**

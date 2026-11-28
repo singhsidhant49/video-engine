@@ -28,12 +28,12 @@ test('high-energy hook has greater shot demand than a low-energy explanation', (
   assert.ok(high > low);
 });
 
-test('hero statistic can intentionally remain a stable single shot', () => {
+test('long hero statistic receives a second evidence visual instead of a stale hold', () => {
   const demand = estimateShotDemand(demandScene({
     purpose: 'evidence', visualIntent: 'quantify', preferredPresentation: 'statistic',
     energy: 5, informationDensity: 5, importance: 5, durationHint: 10,
   }), strategy);
-  assert.equal(demand, 1);
+  assert.equal(demand, 2);
 });
 
 test('visual strategy responds to video content rather than niche alone', () => {

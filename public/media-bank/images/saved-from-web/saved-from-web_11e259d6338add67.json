@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_11e259d6338add67",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A quiet, empty street market with closed shops in İzmir, Türkiye, showcasing urban tranquility.",
+  "path": "images/saved-from-web/saved-from-web_11e259d6338add67.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "quiet",
+    "empty",
+    "street",
+    "market",
+    "closed",
+    "shop",
+    "zmir",
+    "rkiye",
+    "showcasing",
+    "urban",
+    "tranquility",
+    "municipal",
+    "city",
+    "dusk",
+    "static",
+    "presentation",
+    "shops",
+    "garbage truck",
+    "waste bins"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "quiet",
+    "empty",
+    "street",
+    "market",
+    "closed",
+    "shop",
+    "zmir",
+    "rkiye",
+    "showcasing",
+    "urban",
+    "tranquility",
+    "municipal",
+    "city",
+    "dusk",
+    "static",
+    "presentation",
+    "shops",
+    "garbage truck",
+    "waste bins"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A quiet, empty street market with closed shops in İzmir, Türkiye, showcasing urban tranquility."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "municipal city street at dusk"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "runner alone empty street sunrise breath visible",
+    "savedAt": "2026-10-29T13:45:35.753Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Doğan Alpaslan  Demir",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/closed-stores-at-bazaar-26831417/"
+  }
+}

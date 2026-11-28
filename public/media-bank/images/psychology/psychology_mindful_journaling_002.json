@@ -1,0 +1,77 @@
+{
+  "id": "psychology_mindful_journaling_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy mindful journaling at home",
+  "path": "images/psychology/psychology_mindful_journaling_002.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "journaling",
+    "mindfulness",
+    "self-reflection",
+    "self-help",
+    "habits",
+    "wellbeing"
+  ],
+  "concepts": [
+    "reflective writing",
+    "self-awareness",
+    "emotional processing",
+    "healthy habits"
+  ],
+  "subjects": [
+    "young woman",
+    "journal",
+    "smartphone",
+    "coffee mug"
+  ],
+  "actions": [
+    "writing",
+    "putting phone aside",
+    "reflecting"
+  ],
+  "mood": [
+    "cozy",
+    "intentional",
+    "calm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.42,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "self-help videos",
+    "journaling content",
+    "digital wellbeing",
+    "personal growth"
+  ],
+  "avoidFor": [
+    "therapy clinic",
+    "group support",
+    "high stress scene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "executive_contract_signing_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour contract signing",
+  "path": "images/business/executive_contract_signing_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "contract",
+    "signing",
+    "deal",
+    "agreement",
+    "executives"
+  ],
+  "concepts": [
+    "deal closing",
+    "contract signing",
+    "partnership agreement",
+    "executive business"
+  ],
+  "subjects": [
+    "two executives",
+    "documents",
+    "conference table",
+    "city skyline"
+  ],
+  "actions": [
+    "signing documents",
+    "closing deal"
+  ],
+  "mood": [
+    "premium",
+    "successful",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "deal closing",
+    "partnership content",
+    "corporate film",
+    "legal business scene"
+  ],
+  "avoidFor": [
+    "customer support",
+    "retail service",
+    "warehouse operations"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

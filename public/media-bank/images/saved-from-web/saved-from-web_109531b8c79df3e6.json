@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_109531b8c79df3e6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two men standing on a ship deck, enjoying a sunset over the ocean.",
+  "path": "images/saved-from-web/saved-from-web_109531b8c79df3e6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2083,
+  "aspectRatio": 1.2482,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "men",
+    "standing",
+    "ship",
+    "deck",
+    "enjoying",
+    "sunset",
+    "over",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "men",
+    "standing",
+    "ship",
+    "deck",
+    "enjoying",
+    "sunset",
+    "over",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two men standing on a ship deck, enjoying a sunset over the ocean."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "man on ship deck looking at sunset active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-29T09:58:31.455Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Burak Guven",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/two-men-enjoying-sunset-on-a-ship-deck-35283074/"
+  }
+}

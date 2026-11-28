@@ -1,9 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { normalizeVideoBrief, resolveProductionProfile } from '../src/config/videoBrief.js';
+import {
+  normalizeVideoBrief,
+  resolveProductionProfile,
+  ALLOWED_VOICES,
+  normalizeSelectedVoice,
+  defaultVoiceForContentType,
+  CANONICAL_CONTENT_TYPES,
+} from '../src/config/videoBrief.js';
 import { estimateShotDemand } from '../src/storyboard/shotPlanner.js';
 import { runTimelineQc } from '../src/qc/timelineQc.js';
+
+test('canonical production types include every supported niche without aliases', () => {
+  assert.deepEqual(CANONICAL_CONTENT_TYPES, [
+    'documentary', 'explainer', 'meditation', 'motivational', 'audiobook', 'story',
+    'business', 'finance', 'psychology', 'science', 'technology', 'mystery', 'horror',
+  ]);
+});
 
 test('structured briefs preserve prompt data and channel intent', () => {
   const brief = normalizeVideoBrief({
@@ -31,6 +45,21 @@ test('production profiles adapt pacing to different YouTube channel types', () =
   assert.ok(meditation.pacing.minimumShotSeconds > documentary.pacing.minimumShotSeconds);
   assert.ok(documentary.pacing.minimumShotSeconds > explainer.pacing.minimumShotSeconds);
   assert.ok(explainer.pacing.minimumShotSeconds > educationalShort.pacing.minimumShotSeconds);
+});
+
+test('sleep neuroscience explainer is not misclassified as guided meditation', () => {
+  const profile = resolveProductionProfile({
+    topic: `Why Your Brain Deletes Memories While You Sleep: explain synaptic pruning and memory consolidation.
+Target audience: psychology-curious self-improvement enthusiasts.
+SCRIPT CONTRACT:
+Never end with empty thanks or generic inspiration.`,
+    niche: 'Psychology & Human Behavior',
+    format: 'landscape',
+  });
+
+  assert.equal(profile.contentType, 'psychology');
+  assert.equal(profile.pacing.mode, 'balanced');
+  assert.equal(profile.voice, 'af_bella');
 });
 
 test('contemplative pacing authors fewer image changes than balanced pacing', () => {
@@ -71,5 +100,176 @@ test('production QC blocks an edit that violates its channel pacing profile', ()
   assert.equal(qc.checks.find((check) => check.id === 'pacing-profile-holds')?.severity, 'error');
   assert.equal(qc.checks.find((check) => check.id === 'pacing-rapid-cuts')?.ok, false);
   assert.equal(qc.ok, false);
+});
+
+test('production QC blocks still-image meditation and missing calm transitions', () => {
+  const fps = 30;
+  const shots = Array.from({ length: 4 }, (_, index) => ({
+    id: `calm${index + 1}`, storyboardShotId: `calm${index + 1}`, sceneId: 'calm-scene', sectionId: 'calm-section',
+    from: index * 240, durationInFrames: 240, family: 'image', asset: { type: 'image', src: `calm-${index}.jpg` },
+    enter: { type: 'cut', frames: 0 }, transitionPolicy: 'CUT', presentation: { layout: 'full' },
+  }));
+  const timeline = {
+    fps, durationInFrames: 960, style: 'minimal_premium', visualMode: 'HYBRID_EDITORIAL',
+    productionProfile: {
+      contentType: 'meditation',
+      pacing: { mode: 'contemplative', minimumShotSeconds: 7, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 8 },
+    },
+    clips: [{ id: 'calm-scene', sceneId: 'calm-scene', from: 0, durationInFrames: 960, shots }],
+    realizedShots: shots,
+  };
+  const qc = runTimelineQc(timeline, { publishMode: 'PRODUCTION_RENDER' });
+  assert.equal(qc.checks.find((check) => check.id === 'content-profile-video-share')?.ok, false);
+  assert.equal(qc.checks.find((check) => check.id === 'content-profile-transition-share')?.ok, false);
+  assert.equal(qc.ok, false);
+});
+
+test('documentary QC warns instead of failing on archival photo runs and quantized dissolve share', () => {
+  const fps = 30;
+  const shotFrames = 210;
+  const shots = Array.from({ length: 17 }, (_, index) => ({
+    id: `doc${index + 1}`,
+    storyboardShotId: `doc${index + 1}`,
+    sceneId: 'documentary-scene',
+    sectionId: 'documentary-section',
+    from: index * shotFrames,
+    durationInFrames: shotFrames,
+    family: 'image',
+    asset: { type: 'image', src: `archive-${index}.jpg` },
+    enter: { type: index > 0 && index <= 5 ? 'dissolve' : 'cut', frames: index > 0 && index <= 5 ? 12 : 0 },
+    transitionPolicy: index > 0 && index <= 5 ? 'SHORT_DISSOLVE' : 'CUT',
+    presentation: { layout: 'image:full' },
+  }));
+  const durationInFrames = shots.length * shotFrames;
+  const timeline = {
+    fps,
+    durationInFrames,
+    style: 'cinematic_documentary',
+    visualMode: 'MEDIA_EDITORIAL',
+    productionProfile: {
+      contentType: 'documentary',
+      pacing: { mode: 'cinematic', minimumShotSeconds: 5, maximumCutsPer10Seconds: 3, targetAverageShotSeconds: 6.5 },
+    },
+    clips: [{ id: 'documentary-scene', sceneId: 'documentary-scene', from: 0, durationInFrames, shots }],
+    realizedShots: shots,
+  };
+
+  const qc = runTimelineQc(timeline, { publishMode: 'PRODUCTION_RENDER' });
+  const photoRun = qc.checks.find((check) => check.id === 'content-profile-photo-run');
+  const transitions = qc.checks.find((check) => check.id === 'content-profile-transition-share');
+  assert.equal(photoRun.ok, false);
+  assert.equal(photoRun.severity, 'warn');
+  assert.equal(transitions.ok, true);
+  assert.equal(qc.checks.filter((check) => !check.ok && check.severity === 'error').length, 0);
+  assert.equal(qc.ok, true);
+});
+
+test('long-form reuse gate accepts broad diversity but rejects concentration on one asset', () => {
+  const fps = 30;
+  const makeTimeline = (concentrated) => {
+    const shots = Array.from({ length: 91 }, (_, index) => ({
+      id: `long${index + 1}`,
+      storyboardShotId: `long${index + 1}`,
+      sceneId: 'long-scene',
+      sectionId: 'long-section',
+      from: index * 120,
+      durationInFrames: 120,
+      family: 'media',
+      asset: {
+        type: 'video',
+        src: index < 65
+          ? `asset-${index}.mp4`
+          : concentrated ? 'asset-0.mp4' : `asset-${index - 65}.mp4`,
+      },
+      enter: { type: 'cut', frames: 0 },
+      transitionPolicy: 'CUT',
+      presentation: { layout: 'full' },
+    }));
+    return {
+      fps,
+      durationInFrames: shots.length * 120,
+      style: 'cinematic_documentary',
+      visualMode: 'MEDIA_EDITORIAL',
+      productionProfile: {
+        contentType: 'motivational',
+        pacing: { mode: 'energetic', minimumShotSeconds: 3.4, maximumCutsPer10Seconds: 5, targetAverageShotSeconds: 4.2 },
+      },
+      clips: [{ id: 'long-scene', sceneId: 'long-scene', from: 0, durationInFrames: shots.length * 120, shots }],
+      realizedShots: shots,
+    };
+  };
+
+  const diverse = runTimelineQc(makeTimeline(false), { publishMode: 'PRODUCTION_RENDER' });
+  const concentrated = runTimelineQc(makeTimeline(true), { publishMode: 'PRODUCTION_RENDER' });
+  assert.equal(diverse.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.ok, true);
+  assert.match(diverse.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.detail || '', /65 unique assets/);
+  assert.equal(concentrated.checks.find((check) => check.id === 'asset-reuse-hard-limit')?.ok, false);
+});
+
+test('voice curation: ALLOWED_VOICES is strictly heart, bella, puck, and nicole whisper', () => {
+  assert.deepEqual([...ALLOWED_VOICES].sort(), ['af_bella', 'af_heart', 'af_nicole', 'am_puck']);
+  assert.ok(!ALLOWED_VOICES.includes('bm_george'), 'george must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('af_sky'), 'sky must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('am_adam'), 'adam must be removed');
+  assert.ok(!ALLOWED_VOICES.includes('af_kore'), 'kore must be removed');
+});
+
+test('voice curation: defaultVoiceForContentType assigns warm heart to general meditation and puck to documentary', () => {
+  assert.equal(defaultVoiceForContentType('meditation'), 'af_heart');
+  assert.equal(defaultVoiceForContentType('documentary'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('investigative'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('motivational'), 'am_puck');
+  assert.equal(defaultVoiceForContentType('story'), 'af_heart');
+  assert.equal(defaultVoiceForContentType('audiobook'), 'af_heart');
+  assert.equal(defaultVoiceForContentType('explainer'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('educational'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('tutorial'), 'af_bella');
+  assert.equal(defaultVoiceForContentType('unknown'), 'af_bella');
+});
+
+test('voice curation: normalizeSelectedVoice handles aliases and safe legacy fallbacks', () => {
+  // Curated voices pass through
+  assert.equal(normalizeSelectedVoice('af_nicole', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('af_heart', 'explainer'), 'af_heart');
+  assert.equal(normalizeSelectedVoice('af_bella', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('am_puck', 'explainer'), 'am_puck');
+
+  // Friendly short aliases
+  assert.equal(normalizeSelectedVoice('nicole', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('whisper', 'explainer'), 'af_nicole');
+  assert.equal(normalizeSelectedVoice('heart', 'explainer'), 'af_heart');
+  assert.equal(normalizeSelectedVoice('bella', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('puck', 'explainer'), 'am_puck');
+
+  // Legacy removed voices map safely without throwing:
+  // Male removed voices map to am_puck
+  assert.equal(normalizeSelectedVoice('george', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('bm_george', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('adam', 'documentary'), 'am_puck');
+  assert.equal(normalizeSelectedVoice('am_adam', 'documentary'), 'am_puck');
+
+  // Female removed voices map to af_bella
+  assert.equal(normalizeSelectedVoice('sky', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('af_sky', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('kore', 'explainer'), 'af_bella');
+  assert.equal(normalizeSelectedVoice('af_kore', 'explainer'), 'af_bella');
+
+  // Auto / empty uses content type default
+  assert.equal(normalizeSelectedVoice('auto', 'meditation'), 'af_heart');
+  assert.equal(normalizeSelectedVoice('', 'documentary'), 'am_puck');
+});
+
+test('voice curation uses a sleep whisper only when the meditation actually targets sleep', () => {
+  const meditation = resolveProductionProfile({ topic: 'Deep sleep and relaxation meditation', format: 'landscape' });
+  assert.equal(meditation.contentType, 'meditation');
+  assert.equal(meditation.voice, 'af_nicole');
+
+  const daytime = resolveProductionProfile({ topic: 'Guided mindful breathing for calm focus', format: 'landscape' });
+  assert.equal(daytime.contentType, 'meditation');
+  assert.equal(daytime.voice, 'af_heart');
+
+  const documentary = resolveProductionProfile({ topic: 'The rise of the Roman Empire', format: 'landscape' });
+  assert.equal(documentary.contentType, 'documentary');
+  assert.equal(documentary.voice, 'am_puck');
 });
 

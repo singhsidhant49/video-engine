@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_0f594d092127666a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Athlete running on a red track in an outdoor stadium on a sunny day.",
+  "path": "images/saved-from-web/saved-from-web_0f594d092127666a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "athlete",
+    "running",
+    "red",
+    "track",
+    "outdoor",
+    "stadium",
+    "sunny",
+    "day",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "athlete",
+    "running",
+    "red",
+    "track",
+    "outdoor",
+    "stadium",
+    "sunny",
+    "day",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Athlete running on a red track in an outdoor stadium on a sunny day."
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "athlete runner training outdoor",
+    "savedAt": "2026-10-29T13:47:27.302Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Bohdan Hyrovych",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/runner-on-red-track-in-sunny-outdoor-stadium-37718409/"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_3b60c8ff05d333ef",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a balance sheet document on wooden surface with a magnifying glass held by a hand.",
+  "path": "images/saved-from-web/saved-from-web_3b60c8ff05d333ef.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "balance",
+    "sheet",
+    "document",
+    "wooden",
+    "surface",
+    "magnifying",
+    "glas",
+    "held",
+    "hand",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "glass",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "balance",
+    "sheet",
+    "document",
+    "wooden",
+    "surface",
+    "magnifying",
+    "glas",
+    "held",
+    "hand",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "close-up",
+    "glass",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a balance sheet document on wooden surface with a magnifying glass held by a hand."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "balance sheet financial document",
+    "savedAt": "2026-10-28T16:29:07.304Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-hand-holding-a-magnifying-glass-near-wooden-table-7821689/"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_6b346a97dc86e841",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A female astronaut operates a control panel under red lighting, evoking a sci-fi and futuristic atmosphere.",
+  "path": "images/saved-from-web/saved-from-web_6b346a97dc86e841.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "astronaut",
+    "operate",
+    "control",
+    "panel",
+    "under",
+    "red",
+    "lighting",
+    "evoking",
+    "sci",
+    "futuristic",
+    "atmosphere",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "operates",
+    "sci-fi"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "astronaut",
+    "operate",
+    "control",
+    "panel",
+    "under",
+    "red",
+    "lighting",
+    "evoking",
+    "sci",
+    "futuristic",
+    "atmosphere",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "operates",
+    "sci-fi"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A female astronaut operates a control panel under red lighting, evoking a sci-fi and futuristic atmosphere."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "astronaut hand touching control panel",
+    "savedAt": "2026-10-29T14:03:38.992Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-in-spacesuit-7660830/"
+  }
+}

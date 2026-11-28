@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_40375d2d7bc35c21",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up view of the historic Roman Aqueduct in Segovia, showcasing its stone arches and classic architecture.",
+  "path": "images/saved-from-web/saved-from-web_40375d2d7bc35c21.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "historic",
+    "roman",
+    "aqueduct",
+    "segovia",
+    "showcasing",
+    "it",
+    "stone",
+    "arche",
+    "classic",
+    "architecture",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up",
+    "view",
+    "its",
+    "arches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "historic",
+    "roman",
+    "aqueduct",
+    "segovia",
+    "showcasing",
+    "it",
+    "stone",
+    "arche",
+    "classic",
+    "architecture",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up",
+    "view",
+    "its",
+    "arches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up view of the historic Roman Aqueduct in Segovia, showcasing its stone arches and classic architecture."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman aqueduct",
+    "savedAt": "2026-10-26T13:20:18.894Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "José Manuel",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/ancient-roman-aqueduct-in-segovia-spain-36046530/"
+  }
+}

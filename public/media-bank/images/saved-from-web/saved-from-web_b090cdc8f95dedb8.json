@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_b090cdc8f95dedb8",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning visual of Saturn and its iconic rings against the backdrop of space.",
+  "path": "images/saved-from-web/saved-from-web_b090cdc8f95dedb8.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "saturn",
+    "it",
+    "iconic",
+    "ring",
+    "against",
+    "backdrop",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "visual",
+    "its",
+    "rings",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "saturn",
+    "it",
+    "iconic",
+    "ring",
+    "against",
+    "backdrop",
+    "space",
+    "deep",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "visual",
+    "its",
+    "rings",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning visual of Saturn and its iconic rings against the backdrop of space."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Saturn rings from space station viewport",
+    "savedAt": "2026-10-29T14:03:03.575Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Zelch Csaba",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/planet-with-rings-in-space-12491661/"
+  }
+}

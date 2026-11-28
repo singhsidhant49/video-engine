@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_1392636a1c3dae16",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/female-athlete-warming-up-on-a-running-track-8459963/",
+  "path": "video/saved-from-web/saved-from-web_1392636a1c3dae16.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "female",
+    "athlete",
+    "warming",
+    "running",
+    "track",
+    "8459963",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "https",
+    "pexels",
+    "video",
+    "female-athlete-warming-up-on-a-running-track-8459963"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "female",
+    "athlete",
+    "warming",
+    "running",
+    "track",
+    "8459963",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "https",
+    "pexels",
+    "video",
+    "female-athlete-warming-up-on-a-running-track-8459963"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/female-athlete-warming-up-on-a-running-track-8459963/"
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "athlete runner training outdoor",
+    "savedAt": "2026-10-29T13:47:02.554Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mikhail Nilov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/female-athlete-warming-up-on-a-running-track-8459963/"
+  }
+}

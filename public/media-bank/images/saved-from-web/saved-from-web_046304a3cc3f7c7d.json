@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_046304a3cc3f7c7d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Schuelperneuensiel bird flying over eider river towards kating 12.05.2011 20-10-50.JPG",
+  "path": "images/saved-from-web/saved-from-web_046304a3cc3f7c7d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1734,
+  "aspectRatio": 1.4994,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "schuelperneuensiel",
+    "bird",
+    "flying",
+    "over",
+    "eider",
+    "river",
+    "toward",
+    "kating",
+    "2011",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "dry",
+    "landscape",
+    "file",
+    "towards",
+    "20-10-50",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Schuelperneuensiel bird flying over eider river towards kating 12.05.2011 20-10-50.JPG"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "bird flying over dry landscape",
+    "savedAt": "2026-10-26T05:44:43.612Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 3.0",
+    "license_name": "CC BY 3.0",
+    "url": "https://creativecommons.org/licenses/by/3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "author": "Dirk Ingo Franke",
+    "creator": "Dirk Ingo Franke",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-23T08:31:04.931Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Schuelperneuensiel_bird_flying_over_eider_river_towards_kating_12.05.2011_20-10-50.JPG"
+  }
+}

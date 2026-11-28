@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_df1f603d592ab6a2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A mesmerizing blue bioluminescent jellyfish glowing against a black background underwater.",
+  "path": "images/saved-from-web/saved-from-web_df1f603d592ab6a2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "mesmerizing",
+    "blue",
+    "bioluminescent",
+    "jellyfish",
+    "against",
+    "black",
+    "background",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "mesmerizing",
+    "blue",
+    "bioluminescent",
+    "jellyfish",
+    "against",
+    "black",
+    "background",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "warm lamp glowing blue hour",
+    "savedAt": "2026-10-28T06:06:49.812Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "James Lee",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/blue-lamp-2017089/"
+  }
+}

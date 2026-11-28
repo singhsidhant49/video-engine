@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_f75fc48efebb99f6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Aerial shot of vintage sailing ships and a modern motorboat in a harbor area.",
+  "path": "images/saved-from-web/saved-from-web_f75fc48efebb99f6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1675,
+  "aspectRatio": 1.5522,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "aerial",
+    "vintage",
+    "sailing",
+    "ship",
+    "motorboat",
+    "harbor",
+    "area",
+    "shot",
+    "ships",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "aerial",
+    "vintage",
+    "sailing",
+    "ship",
+    "motorboat",
+    "harbor",
+    "area",
+    "shot",
+    "ships",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Endurance ship departing harbor 1914",
+    "savedAt": "2026-10-29T08:38:11.353Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mo Eid",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-a-modern-yacht-next-to-sailing-ships-24377411/"
+  }
+}

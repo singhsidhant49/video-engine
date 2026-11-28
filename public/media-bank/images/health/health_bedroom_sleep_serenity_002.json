@@ -1,0 +1,79 @@
+{
+  "id": "health_bedroom_sleep_serenity_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Moonlit bedroom serenity",
+  "path": "images/health/health_bedroom_sleep_serenity_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "sleep",
+    "sleep hygiene",
+    "bedroom",
+    "rest",
+    "recovery",
+    "night routine"
+  ],
+  "concepts": [
+    "restorative sleep",
+    "healthy night routine",
+    "sleep quality",
+    "recovery"
+  ],
+  "subjects": [
+    "adult woman sleeping",
+    "bed",
+    "lamps",
+    "moonlit window",
+    "cozy room"
+  ],
+  "actions": [
+    "sleeping peacefully",
+    "resting",
+    "recovering overnight"
+  ],
+  "mood": [
+    "cozy",
+    "restful",
+    "calm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.46,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "sleep videos",
+    "night routine content",
+    "wellness explainers",
+    "recovery scenes"
+  ],
+  "avoidFor": [
+    "workout scenes",
+    "doctor exams",
+    "nutrition content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

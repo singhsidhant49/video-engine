@@ -18,6 +18,7 @@ import crypto from 'node:crypto';
 import { config } from '../../config/index.js';
 
 const CACHE_ROOT = path.join(config.rootDir, '.cache');
+const sensitiveCacheAllowed = () => process.env.NODE_ENV !== 'production' || process.env.VIDEO_SHARED_SENSITIVE_CACHE === 'true';
 
 class CacheMetrics {
   constructor() {
@@ -85,6 +86,7 @@ export const ttsCache = {
   },
 
   async get(params) {
+    if (!sensitiveCacheAllowed()) { metrics.ttsMisses++; return { hit: false, wavPath: null }; }
     await ensureCacheDirs();
     const key = this.getKey(params);
     const wavPath = path.join(CACHE_ROOT, 'tts', `${key}.wav`);
@@ -103,6 +105,7 @@ export const ttsCache = {
   },
 
   async set(params, buffer) {
+    if (!sensitiveCacheAllowed()) return null;
     await ensureCacheDirs();
     const key = this.getKey(params);
     const wavPath = path.join(CACHE_ROOT, 'tts', `${key}.wav`);
@@ -120,6 +123,7 @@ export const alignmentCache = {
   },
 
   async get(params) {
+    if (!sensitiveCacheAllowed()) { metrics.alignmentMisses++; return { hit: false, data: null }; }
     await ensureCacheDirs();
     const key = this.getKey(params);
     const jsonPath = path.join(CACHE_ROOT, 'alignment', `${key}.json`);
@@ -135,6 +139,7 @@ export const alignmentCache = {
   },
 
   async set(params, data) {
+    if (!sensitiveCacheAllowed()) return null;
     await ensureCacheDirs();
     const key = this.getKey(params);
     const jsonPath = path.join(CACHE_ROOT, 'alignment', `${key}.json`);
@@ -253,6 +258,7 @@ export const searchCache = {
   },
 
   async get(params) {
+    if (!sensitiveCacheAllowed()) { metrics.assetSearchMisses++; return { hit: false, data: null }; }
     await ensureCacheDirs();
     const key = this.getKey(params);
     const jsonPath = path.join(CACHE_ROOT, 'searches', `${key}.json`);
@@ -268,6 +274,7 @@ export const searchCache = {
   },
 
   async set(params, data) {
+    if (!sensitiveCacheAllowed()) return null;
     await ensureCacheDirs();
     const key = this.getKey(params);
     const jsonPath = path.join(CACHE_ROOT, 'searches', `${key}.json`);

@@ -1,0 +1,86 @@
+{
+  "id": "technology_32a739b89b2a2b71",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Global satellite network orbiting Earth",
+  "path": "images/technology/technology_32a739b89b2a2b71.jpg",
+  "category": "technology",
+  "extension": ".jpg",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "technology",
+    "show",
+    "global",
+    "satellite",
+    "network",
+    "orbiting",
+    "earth",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "communications",
+    "orbit",
+    "global connectivity",
+    "telecom",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "intrinsicTags": [
+    "technology",
+    "show",
+    "global",
+    "satellite",
+    "network",
+    "orbiting",
+    "earth",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "communications",
+    "orbit",
+    "global connectivity",
+    "telecom",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "satellite communications",
+    "global network",
+    "space technology",
+    "orbital infrastructure"
+  ],
+  "subjects": [
+    "Global satellite network orbiting Earth"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "satellite constellation around earth",
+    "savedAt": "2026-10-29T14:29:05.968Z"
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

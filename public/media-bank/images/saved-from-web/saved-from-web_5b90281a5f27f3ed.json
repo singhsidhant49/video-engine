@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_5b90281a5f27f3ed",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Serene view of snow-capped mountains and misty valleys in Gulmarg, Kashmir.",
+  "path": "images/saved-from-web/saved-from-web_5b90281a5f27f3ed.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "snow",
+    "capped",
+    "mountain",
+    "misty",
+    "valley",
+    "gulmarg",
+    "kashmir",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "snow-capped",
+    "mountains",
+    "valleys"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "snow",
+    "capped",
+    "mountain",
+    "misty",
+    "valley",
+    "gulmarg",
+    "kashmir",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "snow-capped",
+    "mountains",
+    "valleys"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Serene view of snow-capped mountains and misty valleys in Gulmarg, Kashmir."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "snow mountains mist valley India",
+    "savedAt": "2026-10-27T06:43:41.526Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Fotografia de Zaman |•DXB",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/snowy-mountain-peaks-in-gulmarg-kashmir-29676598/"
+  }
+}

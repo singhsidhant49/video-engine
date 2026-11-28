@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_e7826c9c40c2fe90",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Silhouette of a person gazing at a misty landscape during sunrise.",
+  "path": "images/saved-from-web/saved-from-web_e7826c9c40c2fe90.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "person",
+    "gazing",
+    "misty",
+    "landscape",
+    "during",
+    "sunrise",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "person",
+    "gazing",
+    "misty",
+    "landscape",
+    "during",
+    "sunrise",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Silhouette of a person gazing at a misty landscape during sunrise."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sunrise silhouette hopeful future",
+    "savedAt": "2026-10-28T08:48:45.316Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Fernanda Leticia",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/silhouette-of-person-at-scenic-sunrise-view-32505700/"
+  }
+}

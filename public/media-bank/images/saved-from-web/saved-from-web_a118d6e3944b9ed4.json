@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_a118d6e3944b9ed4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of hand holding smartphone displaying coffee app menu inside car.",
+  "path": "images/saved-from-web/saved-from-web_a118d6e3944b9ed4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "holding",
+    "smartphone",
+    "displaying",
+    "coffee",
+    "app",
+    "menu",
+    "inside",
+    "car",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "holding",
+    "smartphone",
+    "displaying",
+    "coffee",
+    "app",
+    "menu",
+    "inside",
+    "car",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of hand holding smartphone displaying coffee app menu inside car."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "hands holding smartphone coffee shop",
+    "savedAt": "2026-10-26T11:06:31.603Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Erik Mclean",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/hand-holding-cellphone-in-car-16195428/"
+  }
+}

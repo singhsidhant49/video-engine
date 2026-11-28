@@ -1,0 +1,102 @@
+{
+  "id": "saved-from-web_1133a3c396e00317",
+  "type": "image",
+  "mediaType": "image",
+  "title": "City street view with people walking near a prominent clock tower on a sunny day.",
+  "path": "images/saved-from-web/saved-from-web_1133a3c396e00317.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2515,
+  "height": 1830,
+  "aspectRatio": 1.3743,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "city",
+    "street",
+    "walking",
+    "near",
+    "prominent",
+    "clock",
+    "tower",
+    "sunny",
+    "day",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "city",
+    "street",
+    "walking",
+    "near",
+    "prominent",
+    "clock",
+    "tower",
+    "sunny",
+    "day",
+    "view",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "people walking city",
+    "savedAt": "2026-10-26T15:09:36.865Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Beyza Eren",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/group-of-people-crossing-street-in-city-8135191/"
+  }
+}

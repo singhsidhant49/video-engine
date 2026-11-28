@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_93f0e2a2c9a42672",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A king penguin stands on the coast of South Georgia Island with seals in the background.",
+  "path": "images/saved-from-web/saved-from-web_93f0e2a2c9a42672.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "king",
+    "penguin",
+    "stand",
+    "coast",
+    "south",
+    "georgia",
+    "island",
+    "seal",
+    "background",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "stands",
+    "seals",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "king",
+    "penguin",
+    "stand",
+    "coast",
+    "south",
+    "georgia",
+    "island",
+    "seal",
+    "background",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "stands",
+    "seals",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A king penguin stands on the coast of South Georgia Island with seals in the background."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "South Georgia and the South Sandwich Islands",
+    "savedAt": "2026-10-29T11:58:24.920Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nancy Leach",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-yellow-neck-penguin-on-the-shore-near-sea-lions-4730093/"
+  }
+}

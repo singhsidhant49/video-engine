@@ -1,0 +1,77 @@
+{
+  "id": "science_pipetting_samples_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scientist pipetting colorful samples in a modern lab",
+  "path": "images/science/science_pipetting_samples_002.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "chemistry",
+    "pipette",
+    "laboratory",
+    "samples",
+    "experiment",
+    "research"
+  ],
+  "concepts": [
+    "chemical testing",
+    "sample preparation",
+    "laboratory procedure",
+    "experimental science"
+  ],
+  "subjects": [
+    "scientist",
+    "pipette",
+    "test tubes",
+    "colorful liquids"
+  ],
+  "actions": [
+    "pipetting",
+    "preparing samples",
+    "running experiment"
+  ],
+  "mood": [
+    "vibrant",
+    "precise",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.39
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "chemistry content",
+    "lab procedure",
+    "science education",
+    "experiment montage"
+  ],
+  "avoidFor": [
+    "astronomy",
+    "geology fieldwork",
+    "conference briefing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { VideoProjectSchema } from '../../models/videoProject.schema.js';
 import { CheckpointStore } from '../checkpoints/checkpointManifest.js';
 import { acquireRunLock, releaseRunLock } from '../locks/runLock.js';
+import { PIPELINE_VERSION } from '../checkpoints/versionTracker.js';
 
 export class JobContext {
   constructor({ project, runDir, publicDir, checkpoints, lock = null }) {
@@ -14,12 +16,12 @@ export class JobContext {
     this.activeStage = 'request';
   }
 
-  static async create({ id, topic, channelId = 'default', format, targetDuration = null, config = {}, runsDir }) {
+  static async create({ id, topic, channelId = 'default', format, targetDuration = null, config = {}, runsDir, force = false }) {
     const now = new Date().toISOString();
     const runDir = path.join(runsDir, id);
     const publicDir = path.join(runDir, 'public');
     await fs.mkdir(publicDir, { recursive: true });
-    const lock = await acquireRunLock(runDir);
+    const lock = await acquireRunLock(runDir, { force });
     const checkpoints = await CheckpointStore.create(runDir, id);
     const project = VideoProjectSchema.parse({
       version: 1,
@@ -41,10 +43,10 @@ export class JobContext {
     return context;
   }
 
-  static async load({ id, runsDir }) {
+  static async load({ id, runsDir, force = false }) {
     const runDir = path.join(runsDir, id);
     const publicDir = path.join(runDir, 'public');
-    const lock = await acquireRunLock(runDir);
+    const lock = await acquireRunLock(runDir, { force });
     const checkpoints = await CheckpointStore.load(runDir);
     const projectRaw = await fs.readFile(path.join(runDir, 'project.json'), 'utf8');
     const project = VideoProjectSchema.parse(JSON.parse(projectRaw));
@@ -60,7 +62,12 @@ export class JobContext {
   }
 
   async completeStage(stage, artifacts = [], metadata = {}) {
-    await this.checkpoints.complete(stage, artifacts, metadata);
+    const configHash = crypto.createHash('sha256').update(JSON.stringify(this.project.config || {})).digest('hex').slice(0, 16);
+    await this.checkpoints.complete(stage, artifacts, {
+      codeVersion: PIPELINE_VERSION,
+      configHash,
+      ...metadata,
+    });
     this.#recordArtifacts(stage, artifacts);
     await this.persistProject();
   }

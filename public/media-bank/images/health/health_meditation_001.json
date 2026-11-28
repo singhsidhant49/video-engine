@@ -1,0 +1,62 @@
+{
+  "id": "health_meditation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Meditation for stress relief",
+  "path": "images/health/health_meditation_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "meditation",
+    "mindfulness",
+    "stress relief",
+    "mental wellness"
+  ],
+  "concepts": [
+    "stress management",
+    "mind-body health",
+    "relaxation"
+  ],
+  "subjects": [
+    "adult person",
+    "meditation pose",
+    "natural setting"
+  ],
+  "actions": [
+    "meditating",
+    "breathing calmly"
+  ],
+  "mood": [
+    "peaceful",
+    "serene"
+  ],
+  "composition": {
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mindfulness videos",
+    "mental wellness",
+    "stress relief scenes"
+  ],
+  "avoidFor": [
+    "strength training",
+    "clinical care"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

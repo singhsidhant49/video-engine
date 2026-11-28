@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_4c777cf9ae4bc4a0",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Callimachus, Coma Berenices, papyrus.jpg",
+  "path": "images/saved-from-web/saved-from-web_4c777cf9ae4bc4a0.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1662,
+  "height": 2600,
+  "aspectRatio": 0.6392,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "callimachu",
+    "coma",
+    "berenice",
+    "papyru",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "callimachus",
+    "berenices",
+    "papyrus",
+    "jpg",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "callimachu",
+    "coma",
+    "berenice",
+    "papyru",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "callimachus",
+    "berenices",
+    "papyrus",
+    "jpg",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Callimachus, Coma Berenices, papyrus.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Callimachus",
+    "savedAt": "2026-10-28T08:15:21.957Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "Callimachus",
+    "creator": "Callimachus",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-28T08:12:18.453Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Callimachus,_Coma_Berenices,_papyrus.jpg"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_def2a11959a262a2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Silhouette of Dubai skyline featuring Burj Al Arab and Burj Khalifa at sunset.",
+  "path": "images/saved-from-web/saved-from-web_def2a11959a262a2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1737,
+  "aspectRatio": 1.4968,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "dubai",
+    "skyline",
+    "featuring",
+    "burj",
+    "arab",
+    "khalifa",
+    "sunset",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "silhouette",
+    "dubai",
+    "skyline",
+    "featuring",
+    "burj",
+    "arab",
+    "khalifa",
+    "sunset",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Silhouette of Dubai skyline featuring Burj Al Arab and Burj Khalifa at sunset."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai sunset skyline silhouette",
+    "savedAt": "2026-10-29T04:42:38.159Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Vitaly Gariev",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dubai-skyline-at-sunset-with-iconic-landmarks-36813120/"
+  }
+}

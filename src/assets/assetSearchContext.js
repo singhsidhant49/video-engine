@@ -15,6 +15,7 @@ const MODIFIERS = new Set([
   'perfect', 'spotlight', 'ideal', 'glowing', 'flawless', 'luxury', 'showcase', 'abstract', 'texture', 'background',
   'editorial', 'minimalist', 'dividing', 'lit', 'glow', 'tired', 'exhausted', 'fatigued', 'hovering', 'streaming', 'netflix',
   'loneliness', 'epidemic', 'discarded', 'pile', 'piles', 'scrap', 'waste', 'toxic', 'electronic', 'electronics',
+  'microscopic', 'macro', 'scientific', 'medical', 'biological', 'chemical', 'detailed', 'close-up',
 ]);
 
 const STEM_MAP = {
@@ -45,6 +46,32 @@ const STEM_MAP = {
   rendering: 'render',
   browsing: 'browser',
   routing: 'route',
+  bacterial: 'bacteria',
+  bacterium: 'bacteria',
+  microscopic: 'microscope',
+  microscopy: 'microscope',
+  microscopes: 'microscope',
+  fungal: 'fungus',
+  fungi: 'fungus',
+  mould: 'mold',
+  moulds: 'mold',
+  mouldy: 'mold',
+  moldy: 'mold',
+  dishes: 'dish',
+  petri: 'petri',
+  cellular: 'cell',
+  cells: 'cell',
+  colonies: 'colony',
+  filaments: 'filament',
+  laboratories: 'laboratory',
+  labs: 'lab',
+  scientific: 'science',
+  scientists: 'scientist',
+  antibiotics: 'antibiotic',
+  medicines: 'medicine',
+  medical: 'medicine',
+  diseases: 'disease',
+  infections: 'infection',
 };
 
 export const terms = (text) => String(text || '').toLowerCase()
@@ -53,7 +80,14 @@ export const terms = (text) => String(text || '').toLowerCase()
   .map((term) => {
     if (STEM_MAP[term]) return STEM_MAP[term];
     if (term.length > 3 && term.endsWith('ies')) return `${term.slice(0, -3)}y`;
-    if (term.length > 3 && term.endsWith('s') && !term.endsWith('ss') && !term.endsWith('ous') && !term.endsWith('is') && !term.endsWith('us')) return term.slice(0, -1);
+    if (term.length > 4 && term.endsWith('es') && (term.endsWith('shes') || term.endsWith('ches') || term.endsWith('xes') || term.endsWith('sses') || term.endsWith('zes'))) {
+      const stripped = term.slice(0, -2);
+      return STEM_MAP[stripped] || stripped;
+    }
+    if (term.length > 3 && term.endsWith('s') && !term.endsWith('ss') && !term.endsWith('ous') && !term.endsWith('is') && !term.endsWith('us')) {
+      const stripped = term.slice(0, -1);
+      return STEM_MAP[stripped] || stripped;
+    }
     return term;
   });
 
@@ -99,6 +133,16 @@ const KNOWN_VARIANTS = [
     test: /\breact\b.*\bcode\b|\bdeveloper\b.*\breact\b/i,
     aliases: ['developer coding React component', 'programmer writing React JSX code', 'frontend engineer typing code in editor'],
     values: ['software developer writing React code', 'programmer coding React application', 'developer typing JavaScript code in editor'],
+  },
+  {
+    test: /\bdubai\b/i,
+    aliases: ['Dubai Burj Khalifa skyline', 'Dubai Marina modern architecture aerial', 'Downtown Dubai skyline city view', 'Dubai UAE skyscrapers aerial'],
+    values: ['Dubai Burj Khalifa skyline', 'Dubai Marina aerial shot', 'Downtown Dubai skyline'],
+  },
+  {
+    test: /\b(roman\s+empire|ancient\s+rome|ancient\s+roman|roman\s+republic)\b/i,
+    aliases: ['Ancient Roman Colosseum ruins Rome', 'Roman Forum ancient ruins Rome', 'Ancient Roman architecture marble columns', 'Pantheon Rome ancient architecture'],
+    values: ['Ancient Rome Colosseum ruins', 'Roman Forum ancient ruins', 'Ancient Roman architecture'],
   },
 ];
 
@@ -150,6 +194,9 @@ function queryLadder(request, context) {
   ]).slice(0, 8);
 
   const subject = context.targetSubject.join(' ');
+  const discriminativeSubject = context.targetSubject
+    .filter((term) => !/^(?:18|19|20)\d{2}$/.test(term) && !MODIFIERS.has(term))
+    .join(' ');
   const entity = context.primaryEntity || '';
   const specificVariant = unique([
     ...exact.slice(1),
@@ -164,6 +211,7 @@ function queryLadder(request, context) {
   ]).slice(0, 8);
 
   const conceptual = unique([
+    discriminativeSubject,
     subject,
     context.modifiers.length && subject ? `${context.modifiers.join(' ')} ${subject}` : '',
   ]).slice(0, 5);

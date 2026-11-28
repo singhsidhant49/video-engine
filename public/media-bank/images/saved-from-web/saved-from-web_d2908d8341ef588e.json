@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_d2908d8341ef588e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tired man leaning on his desk in a modern office, looking at the computer screen.",
+  "path": "images/saved-from-web/saved-from-web_d2908d8341ef588e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "man",
+    "leaning",
+    "hi",
+    "desk",
+    "modern",
+    "office",
+    "looking",
+    "computer",
+    "screen",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "his",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "man",
+    "leaning",
+    "hi",
+    "desk",
+    "modern",
+    "office",
+    "looking",
+    "computer",
+    "screen",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "his",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tired man leaning on his desk in a modern office, looking at the computer screen."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "hiker looking at phone screen map",
+    "savedAt": "2026-10-29T14:29:41.707Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Andrea Piacquadio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-white-shirt-sitting-on-chair-3966781/"
+  }
+}

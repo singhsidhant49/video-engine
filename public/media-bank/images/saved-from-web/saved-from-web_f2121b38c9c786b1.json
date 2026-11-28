@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_f2121b38c9c786b1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vibrant blue bird perched on a branch amidst lush green leaves in a sunny forest setting.",
+  "path": "images/saved-from-web/saved-from-web_f2121b38c9c786b1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vibrant",
+    "blue",
+    "bird",
+    "perched",
+    "branch",
+    "amidst",
+    "lush",
+    "green",
+    "leave",
+    "sunny",
+    "forest",
+    "setting",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "small",
+    "sunlight",
+    "leaves"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vibrant blue bird perched on a branch amidst lush green leaves in a sunny forest setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "small blue bird perched on branch sunlight",
+    "savedAt": "2026-10-26T05:43:46.584Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Sharath G.",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/vivid-blue-bird-on-a-forest-branch-in-spring-30868275/"
+  }
+}

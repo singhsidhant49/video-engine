@@ -1,0 +1,77 @@
+{
+  "id": "psychology_relationship_distance_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Quiet emotional distance at dusk",
+  "path": "images/psychology/psychology_relationship_distance_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "relationship conflict",
+    "emotional distance",
+    "communication breakdown",
+    "couple",
+    "sadness"
+  ],
+  "concepts": [
+    "emotional withdrawal",
+    "relationship strain",
+    "disconnection",
+    "silent conflict"
+  ],
+  "subjects": [
+    "adult couple",
+    "sofa",
+    "living room",
+    "lamp"
+  ],
+  "actions": [
+    "sitting apart",
+    "looking away",
+    "withdrawing"
+  ],
+  "mood": [
+    "tense",
+    "sad",
+    "intimate"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "center-lower",
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "relationship psychology",
+    "communication videos",
+    "couples content",
+    "emotional storytelling"
+  ],
+  "avoidFor": [
+    "happy family scenes",
+    "mindfulness",
+    "child topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

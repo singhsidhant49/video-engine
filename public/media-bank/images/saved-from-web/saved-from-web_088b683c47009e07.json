@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_088b683c47009e07",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city lights.",
+  "path": "images/saved-from-web/saved-from-web_088b683c47009e07.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "burj",
+    "khalifa",
+    "night",
+    "showcasing",
+    "vibrant",
+    "city",
+    "light",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "dubai",
+    "skyline",
+    "burj",
+    "khalifa",
+    "night",
+    "showcasing",
+    "vibrant",
+    "city",
+    "light",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "lights",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning aerial view of Dubai's skyline with the Burj Khalifa at night, showcasing vibrant city lights."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Burj Khalifa skyline aerial active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-26T10:42:29.497Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Will Mu",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/dubai-skyline-illuminated-at-night-view-33338662/"
+  }
+}

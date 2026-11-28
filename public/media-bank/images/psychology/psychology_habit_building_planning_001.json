@@ -1,0 +1,77 @@
+{
+  "id": "psychology_habit_building_planning_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mindful planning in a sunlit home office",
+  "path": "images/psychology/psychology_habit_building_planning_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "habit building",
+    "planning",
+    "self-improvement",
+    "goal setting",
+    "productivity"
+  ],
+  "concepts": [
+    "habit formation",
+    "goal setting",
+    "behavior change",
+    "incremental progress"
+  ],
+  "subjects": [
+    "adult woman",
+    "sticky notes",
+    "desk",
+    "home office"
+  ],
+  "actions": [
+    "organizing goals",
+    "arranging steps",
+    "planning habits"
+  ],
+  "mood": [
+    "optimistic",
+    "organized",
+    "uplifting"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.38,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "habit formation videos",
+    "productivity psychology",
+    "goal setting content",
+    "self-improvement scenes"
+  ],
+  "avoidFor": [
+    "crisis scenes",
+    "therapy counseling",
+    "loneliness topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

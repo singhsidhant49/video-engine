@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_0054806ddb34ac8d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of Arctic ice sheets under a clear blue sky, showcasing nature's cold beauty.",
+  "path": "images/saved-from-web/saved-from-web_0054806ddb34ac8d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "arctic",
+    "ice",
+    "sheet",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "showcasing",
+    "nature",
+    "cold",
+    "beauty",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "view",
+    "sheets"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "arctic",
+    "ice",
+    "sheet",
+    "under",
+    "clear",
+    "blue",
+    "sky",
+    "showcasing",
+    "nature",
+    "cold",
+    "beauty",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "view",
+    "sheets"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking view of Arctic ice sheets under a clear blue sky, showcasing nature's cold beauty."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "South Pole flag snow",
+    "savedAt": "2026-10-29T13:28:24.337Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Francesco Ungaro",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-arctic-ice-landscape-with-blue-sky-30429891/"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "retirement_planning_consultation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Retirement planning consultation by the window",
+  "path": "images/finance/retirement_planning_consultation_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "retirement",
+    "advisor",
+    "planning",
+    "wealth management",
+    "seniors"
+  ],
+  "concepts": [
+    "retirement planning",
+    "wealth advisory",
+    "long-term savings",
+    "financial security"
+  ],
+  "subjects": [
+    "advisor",
+    "older couple",
+    "retirement plan dashboard"
+  ],
+  "actions": [
+    "explaining retirement plan",
+    "consulting clients"
+  ],
+  "mood": [
+    "trustworthy",
+    "calm",
+    "optimistic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "retirement planning",
+    "wealth management",
+    "advisor content",
+    "long-term finance"
+  ],
+  "avoidFor": [
+    "day trading",
+    "small business operations",
+    "budget app demo"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

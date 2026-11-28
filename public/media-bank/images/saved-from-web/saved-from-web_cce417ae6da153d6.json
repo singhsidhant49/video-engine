@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_cce417ae6da153d6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A stunning aerial view of frozen ice formations on a cold ocean surface during winter.",
+  "path": "images/saved-from-web/saved-from-web_cce417ae6da153d6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "frozen",
+    "ice",
+    "formation",
+    "cold",
+    "ocean",
+    "surface",
+    "during",
+    "winter",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "formations",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "aerial",
+    "frozen",
+    "ice",
+    "formation",
+    "cold",
+    "ocean",
+    "surface",
+    "during",
+    "winter",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "formations",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A stunning aerial view of frozen ice formations on a cold ocean surface during winter."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "aerial Antarctic ice field sunset",
+    "savedAt": "2026-10-29T10:55:09.845Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Maria Tsegelnik",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/aerial-view-of-cracked-ice-on-the-water-surface-11609967/"
+  }
+}

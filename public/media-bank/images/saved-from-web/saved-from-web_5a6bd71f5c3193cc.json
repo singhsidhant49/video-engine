@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_5a6bd71f5c3193cc",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Hippocampus and seahorse.JPG",
+  "path": "images/saved-from-web/saved-from-web_5a6bd71f5c3193cc.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2274,
+  "height": 1700,
+  "aspectRatio": 1.3376,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "hippocampu",
+    "seahorse",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "hippocampus",
+    "jpg",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "hippocampu",
+    "seahorse",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "file",
+    "hippocampus",
+    "jpg",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Hippocampus and seahorse.JPG"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Hippocampus in action",
+    "savedAt": "2026-10-26T15:47:32.492Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 1.0",
+    "license_name": "CC BY-SA 1.0",
+    "url": "https://creativecommons.org/licenses/by-sa/1.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/1.0",
+    "author": "Professor Laszlo Seress",
+    "creator": "Professor Laszlo Seress",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T15:45:41.128Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Hippocampus_and_seahorse.JPG"
+  }
+}

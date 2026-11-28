@@ -1,0 +1,108 @@
+{
+  "id": "saved-from-web_6200f5653e32fa85",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/sunlight-shining-through-tree-branches-10914354/",
+  "path": "video/saved-from-web/saved-from-web_6200f5653e32fa85.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "sunlight",
+    "shining",
+    "through",
+    "10914354",
+    "https",
+    "pexels",
+    "video",
+    "sunlight-shining-through-tree-branches-10914354",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "sunlight",
+    "shining",
+    "through",
+    "10914354",
+    "https",
+    "pexels",
+    "video",
+    "sunlight-shining-through-tree-branches-10914354",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "sunlight streaming through swaying tree branches slow natural breathing",
+    "savedAt": "2026-10-29T15:22:09.356Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nabil Naidu",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/sunlight-shining-through-tree-branches-10914354/"
+  }
+}

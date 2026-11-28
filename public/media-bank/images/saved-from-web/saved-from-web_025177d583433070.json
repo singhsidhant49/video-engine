@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_025177d583433070",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Panoramic view of Dubai Marina skyline with boats on the water at dusk.",
+  "path": "images/saved-from-web/saved-from-web_025177d583433070.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "panoramic",
+    "dubai",
+    "marina",
+    "skyline",
+    "boat",
+    "water",
+    "dusk",
+    "view",
+    "boats",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "panoramic",
+    "dubai",
+    "marina",
+    "skyline",
+    "boat",
+    "water",
+    "dusk",
+    "view",
+    "boats",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai Marina dusk",
+    "savedAt": "2026-10-26T10:45:32.059Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Abid  Ali",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/buildings-at-the-palm-jumeirah-10518326/"
+  }
+}

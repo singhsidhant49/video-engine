@@ -1,0 +1,78 @@
+{
+  "id": "health_immune_defense_shield_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Immune defense shield against viruses",
+  "path": "images/health/health_immune_defense_shield_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "immunity",
+    "immune system",
+    "virus",
+    "infection",
+    "medical illustration",
+    "protection"
+  ],
+  "concepts": [
+    "immune defense",
+    "infection prevention",
+    "body resilience",
+    "health protection"
+  ],
+  "subjects": [
+    "human figure",
+    "glowing shield",
+    "virus particles",
+    "lymphatic pathways"
+  ],
+  "actions": [
+    "blocking viruses",
+    "visualizing immune response",
+    "showing protection"
+  ],
+  "mood": [
+    "protective",
+    "dramatic",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.4,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "immune system videos",
+    "infection explainers",
+    "public health visuals",
+    "medical infographics"
+  ],
+  "avoidFor": [
+    "food content",
+    "sleep scenes",
+    "doctor consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

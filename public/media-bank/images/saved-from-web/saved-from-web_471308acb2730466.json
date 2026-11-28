@@ -1,0 +1,108 @@
+{
+  "id": "saved-from-web_471308acb2730466",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Four children playing outdoors in a scenic rural Kashmiri village with lush greenery and rustic architecture.",
+  "path": "images/saved-from-web/saved-from-web_471308acb2730466.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2029,
+  "aspectRatio": 1.2814,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "four",
+    "children",
+    "playing",
+    "outdoor",
+    "scenic",
+    "rural",
+    "kashmiri",
+    "village",
+    "lush",
+    "greenery",
+    "rustic",
+    "architecture",
+    "outdoors",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "four",
+    "children",
+    "playing",
+    "outdoor",
+    "scenic",
+    "rural",
+    "kashmiri",
+    "village",
+    "lush",
+    "greenery",
+    "rustic",
+    "architecture",
+    "outdoors",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Himachali children village",
+    "savedAt": "2026-10-27T06:47:12.789Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Innam Captures",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/children-playing-in-rural-kashmir-village-37731805/"
+  }
+}

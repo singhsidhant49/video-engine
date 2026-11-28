@@ -1,0 +1,78 @@
+{
+  "id": "psychology_self_reflection_journaling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Golden-hour self-reflection and journaling",
+  "path": "images/psychology/psychology_self_reflection_journaling_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "journaling",
+    "self-reflection",
+    "gratitude",
+    "mental wellness",
+    "self-help",
+    "habits"
+  ],
+  "concepts": [
+    "reflective writing",
+    "self-awareness",
+    "emotional processing",
+    "positive habits"
+  ],
+  "subjects": [
+    "young woman",
+    "journal",
+    "coffee mug",
+    "window view"
+  ],
+  "actions": [
+    "writing thoughts",
+    "reflecting",
+    "processing emotions"
+  ],
+  "mood": [
+    "cozy",
+    "hopeful",
+    "introspective"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.37,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "self-help videos",
+    "journaling content",
+    "personal growth scenes",
+    "wellness lifestyle"
+  ],
+  "avoidFor": [
+    "crisis scenes",
+    "group therapy",
+    "clinical testing"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

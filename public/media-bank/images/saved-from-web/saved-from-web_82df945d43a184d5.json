@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_82df945d43a184d5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Black and white photo of a person in a hoodie working on computer editing multiple screens.",
+  "path": "images/saved-from-web/saved-from-web_82df945d43a184d5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "person",
+    "hoodie",
+    "working",
+    "computer",
+    "editing",
+    "multiple",
+    "screen",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "photo",
+    "screens",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "person",
+    "hoodie",
+    "working",
+    "computer",
+    "editing",
+    "multiple",
+    "screen",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "photo",
+    "screens",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Black and white photo of a person in a hoodie working on computer editing multiple screens."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person sitting at desk staring at screen",
+    "savedAt": "2026-10-28T08:34:31.823Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Amar  Preciado",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/grayscale-photo-of-person-sitting-on-chair-in-front-of-computer-11063291/"
+  }
+}

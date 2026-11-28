@@ -1,0 +1,78 @@
+{
+  "id": "history_medieval_market_town_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Bustling medieval market beneath the castle",
+  "path": "images/history/history_medieval_market_town_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "medieval market",
+    "town life",
+    "castle",
+    "trade",
+    "marketplace",
+    "daily life"
+  ],
+  "concepts": [
+    "medieval economy",
+    "daily life in history",
+    "trade and commerce",
+    "urban history"
+  ],
+  "subjects": [
+    "market vendors",
+    "shoppers",
+    "castle",
+    "cobblestone street",
+    "stalls"
+  ],
+  "actions": [
+    "buying goods",
+    "selling textiles",
+    "moving through marketplace"
+  ],
+  "mood": [
+    "lively",
+    "colorful",
+    "historical"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "upper-center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "medieval life videos",
+    "daily life explainers",
+    "trade history",
+    "town scenes"
+  ],
+  "avoidFor": [
+    "industrial era",
+    "rome",
+    "renaissance workshop"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

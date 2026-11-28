@@ -1,0 +1,75 @@
+{
+  "id": "mortgage_consultation_happy_couple_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Home financing consultation with happy couple",
+  "path": "images/finance/mortgage_consultation_happy_couple_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "mortgage",
+    "home loan",
+    "consultation",
+    "couple",
+    "real estate finance"
+  ],
+  "concepts": [
+    "mortgage planning",
+    "home financing",
+    "loan consultation",
+    "home buying"
+  ],
+  "subjects": [
+    "advisor",
+    "couple",
+    "mortgage dashboard",
+    "house image"
+  ],
+  "actions": [
+    "explaining mortgage",
+    "consulting home buyers"
+  ],
+  "mood": [
+    "friendly",
+    "optimistic",
+    "trustworthy"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mortgage explainer",
+    "home loan content",
+    "real estate finance",
+    "personal finance"
+  ],
+  "avoidFor": [
+    "day trading",
+    "corporate boardroom",
+    "expense tracker app"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

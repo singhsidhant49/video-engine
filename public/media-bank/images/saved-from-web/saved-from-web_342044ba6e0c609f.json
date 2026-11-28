@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_342044ba6e0c609f",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Photograph of ancient Egyptian hieroglyphics and colorful art depicting figures on a historical wall.",
+  "path": "images/saved-from-web/saved-from-web_342044ba6e0c609f.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "photograph",
+    "ancient",
+    "egyptian",
+    "hieroglyphic",
+    "colorful",
+    "art",
+    "depicting",
+    "figure",
+    "historical",
+    "wall",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "hieroglyphics",
+    "figures",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "photograph",
+    "ancient",
+    "egyptian",
+    "hieroglyphic",
+    "colorful",
+    "art",
+    "depicting",
+    "figure",
+    "historical",
+    "wall",
+    "financial",
+    "macro",
+    "close",
+    "static",
+    "presentation",
+    "hieroglyphics",
+    "figures",
+    "banknote",
+    "currency denomination",
+    "paper money"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Photograph of ancient Egyptian hieroglyphics and colorful art depicting figures on a historical wall."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "financial macro close-up"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ancient Egyptian scholars",
+    "savedAt": "2026-10-28T08:14:43.988Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kevine Ornella KIAMPI TCHINO",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/ancient-egyptian-hieroglyphics-and-art-panel-31389747/"
+  }
+}

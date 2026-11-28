@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_e850c1bf1b3e888e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Duncan Branch Library Alexandria 2019a.jpg",
+  "path": "images/saved-from-web/saved-from-web_e850c1bf1b3e888e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "duncan",
+    "branch",
+    "library",
+    "alexandria",
+    "2019a",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "duncan",
+    "branch",
+    "library",
+    "alexandria",
+    "2019a",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Duncan Branch Library Alexandria 2019a.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Library of Alexandria",
+    "savedAt": "2026-10-28T08:12:48.768Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Antony-22",
+    "creator": "Antony-22",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T07:13:27.621Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Duncan_Branch_Library_Alexandria_2019a.jpg"
+  }
+}

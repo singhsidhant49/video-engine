@@ -17,7 +17,7 @@ const VIDEOS_TO_GENERATE = [
     topic: 'Why Senior Engineers Do Not Write Clean Code',
     niche: 'code-snippet',
     format: 'shorts',
-    voice: 'am_adam',
+    voice: 'am_puck',
   },
 ];
 

@@ -1,0 +1,73 @@
+{
+  "id": "saved-from-web_fac1847170c46396",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Revealing a filament from the cosmic web (potw2504a).jpg",
+  "path": "images/saved-from-web/saved-from-web_fac1847170c46396.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1945,
+  "height": 1915,
+  "aspectRatio": 1.0157,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "revealing",
+    "filament",
+    "from",
+    "web",
+    "potw2504a",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "cosmic web filaments",
+    "savedAt": "2026-10-24T09:27:40.992Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 4.0",
+    "license_name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "author": "ESO/D. Tornotti et al./Hubble: M. Revalski, P. Francis et al.",
+    "creator": "ESO/D. Tornotti et al./Hubble: M. Revalski, P. Francis et al.",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T09:25:49.485Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Revealing_a_filament_from_the_cosmic_web_(potw2504a).jpg"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "history_caravanserai_bazaar_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunset bazaar at the caravanserai",
+  "path": "images/history/history_caravanserai_bazaar_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "caravanserai",
+    "bazaar",
+    "trade",
+    "middle east",
+    "silk road",
+    "market"
+  ],
+  "concepts": [
+    "cross-cultural trade",
+    "merchant networks",
+    "urban commerce",
+    "historic marketplaces"
+  ],
+  "subjects": [
+    "camel caravan",
+    "traders",
+    "ceramics",
+    "textiles",
+    "market courtyard"
+  ],
+  "actions": [
+    "selling carpets",
+    "negotiating trade",
+    "arriving with goods"
+  ],
+  "mood": [
+    "golden",
+    "busy",
+    "vibrant"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.49,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "trade history videos",
+    "silk road content",
+    "marketplace scenes",
+    "civilization videos"
+  ],
+  "avoidFor": [
+    "naval battles",
+    "modern commerce",
+    "monastic study"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

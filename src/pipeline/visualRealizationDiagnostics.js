@@ -34,7 +34,7 @@ export function buildVisualRealizationDiagnostics(timeline) {
     return shot.asset?.type === 'video' ? base.replace(/^image/, 'video') : base;
   });
   const moves = shots.map((shot) => shot.presentation?.cameraMove || shot.move?.type || 'static');
-  const transitions = clips.map((clip) => clip.enter?.type || 'cut');
+  const transitions = shots.slice(1).map((shot) => shot.transitionPolicy || shot.enter?.type || 'CUT');
   const assetIds = shots.map((shot) => shot.asset?.src).filter(Boolean);
   const staticShots = shots.filter((shot) => shot.asset?.type !== 'video' && (shot.presentation?.cameraMove || shot.move?.type) === 'static');
   const staticSeconds = staticShots.map((shot) => {
@@ -44,7 +44,6 @@ export function buildVisualRealizationDiagnostics(timeline) {
     const lastReveal = revealFrames.length ? Math.min(shot.durationInFrames, Math.max(...revealFrames) + 12) : 0;
     return Math.max(0, shot.durationInFrames - lastReveal) / timeline.fps;
   });
-  const mediaTypes = shots.map((shot) => PHOTO.has(shot.family) || shot.asset ? 'media' : 'procedural');
   const densities = shots.map((shot) => shot.presentation?.visualDensity || 'MEDIUM');
   const movementStates = shots.map((shot) => shot.presentation?.movementState || ((shot.presentation?.cameraMove || shot.move?.type) === 'static' ? 'STATIC' : 'SUBTLE'));
 
@@ -85,8 +84,7 @@ export function buildVisualRealizationDiagnostics(timeline) {
     consecutiveMotionRuns: longestRun(moves, (move) => move !== 'static'),
     averageStaticHold: Number((staticSeconds.reduce((sum, seconds) => sum + seconds, 0) / Math.max(1, staticSeconds.length)).toFixed(2)),
     longestStaticHold: Number(Math.max(0, ...staticSeconds).toFixed(2)),
-    mediaVsProceduralDistribution: distribution(mediaTypes),
-    proceduralVsMediaRatio: mediaTypes.filter((m) => m === 'procedural').length / Math.max(1, mediaTypes.length),
+    mediaDistribution: distribution(shots.map((shot) => shot.asset?.type || 'unresolved')),
     visualDensityDistribution: distribution(densities),
     visualDensity: distribution(densities),
     movementStateDistribution: distribution(movementStates),

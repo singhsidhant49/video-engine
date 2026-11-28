@@ -1,0 +1,78 @@
+{
+  "id": "history_industrial_revolution_city_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Victorian steam and smoke cityscape",
+  "path": "images/history/history_industrial_revolution_city_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "industrial revolution",
+    "victorian",
+    "factory",
+    "steam train",
+    "urbanization",
+    "smoke"
+  ],
+  "concepts": [
+    "industrialization",
+    "urban growth",
+    "machine age",
+    "labor history"
+  ],
+  "subjects": [
+    "steam locomotive",
+    "factories",
+    "workers",
+    "coal wagons",
+    "city skyline"
+  ],
+  "actions": [
+    "transporting coal",
+    "walking to work",
+    "operating industrial rail"
+  ],
+  "mood": [
+    "gritty",
+    "dramatic",
+    "historic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "industrial revolution videos",
+    "economic history",
+    "technology history",
+    "urban change scenes"
+  ],
+  "avoidFor": [
+    "medieval market",
+    "ancient civilizations",
+    "quiet scholarship"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

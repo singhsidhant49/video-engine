@@ -1,0 +1,76 @@
+{
+  "id": "small_business_packing_studio_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Small business packing studio",
+  "path": "images/business/small_business_packing_studio_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "small business",
+    "packing",
+    "shipping",
+    "orders",
+    "ecommerce",
+    "fulfillment"
+  ],
+  "concepts": [
+    "small business logistics",
+    "order fulfillment",
+    "e-commerce operations",
+    "shipping workflow"
+  ],
+  "subjects": [
+    "entrepreneur",
+    "boxes",
+    "laptop",
+    "packing table"
+  ],
+  "actions": [
+    "packing orders",
+    "preparing shipments"
+  ],
+  "mood": [
+    "productive",
+    "warm",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.46,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "e-commerce video",
+    "small business operations",
+    "shipping process",
+    "fulfillment"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "trading desk",
+    "call center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

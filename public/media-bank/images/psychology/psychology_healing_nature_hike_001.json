@@ -1,0 +1,78 @@
+{
+  "id": "psychology_healing_nature_hike_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunrise ridge hike and emotional reset",
+  "path": "images/psychology/psychology_healing_nature_hike_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "healing",
+    "nature",
+    "self-discovery",
+    "resilience",
+    "outdoors",
+    "mental wellness"
+  ],
+  "concepts": [
+    "emotional recovery",
+    "nature therapy",
+    "self-renewal",
+    "resilience building"
+  ],
+  "subjects": [
+    "adult hiker",
+    "mountain trail",
+    "sunrise",
+    "valley"
+  ],
+  "actions": [
+    "walking forward",
+    "hiking alone",
+    "seeking clarity"
+  ],
+  "mood": [
+    "hopeful",
+    "expansive",
+    "uplifting"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.51
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "resilience content",
+    "mental wellness videos",
+    "self-growth story",
+    "healing journey"
+  ],
+  "avoidFor": [
+    "office burnout",
+    "group discussion",
+    "clinical assessment"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

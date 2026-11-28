@@ -1,0 +1,3623 @@
+[
+  {
+    "id": "history_18th_century_print_shop_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "18th-century print shop in action",
+    "path": "images/history/history_18th_century_print_shop_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "printing press",
+      "18th century",
+      "print shop",
+      "books",
+      "pamphlets",
+      "europe"
+    ],
+    "concepts": [
+      "print culture",
+      "spread of ideas",
+      "information networks",
+      "publishing history"
+    ],
+    "subjects": [
+      "printers",
+      "press",
+      "ink rollers",
+      "stacks of paper",
+      "workshop"
+    ],
+    "actions": [
+      "operating press",
+      "inking type",
+      "printing pages"
+    ],
+    "mood": [
+      "productive",
+      "historic",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "left-lower",
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "history of media videos",
+      "print revolution",
+      "enlightenment context",
+      "book history scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_18th_century_print_shop_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Eighteenth-century print shop in action",
+    "path": "images/history/history_18th_century_print_shop_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "printing press",
+      "18th century",
+      "print shop",
+      "pamphlets",
+      "publishing",
+      "information"
+    ],
+    "concepts": [
+      "print culture",
+      "spread of ideas",
+      "publishing networks",
+      "information revolution"
+    ],
+    "subjects": [
+      "printers",
+      "press machine",
+      "ink trays",
+      "printed sheets",
+      "workshop"
+    ],
+    "actions": [
+      "setting type",
+      "operating press",
+      "stacking pages"
+    ],
+    "mood": [
+      "productive",
+      "historic",
+      "earthy"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.49,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "history of media videos",
+      "enlightenment content",
+      "book history scenes",
+      "communication history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_age_of_exploration_chart_room_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Renaissance navigators charting the world",
+    "path": "images/history/history_age_of_exploration_chart_room_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "age of exploration",
+      "navigation",
+      "maps",
+      "globes",
+      "ships",
+      "renaissance"
+    ],
+    "concepts": [
+      "global exploration",
+      "mapmaking",
+      "navigation history",
+      "maritime expansion"
+    ],
+    "subjects": [
+      "navigators",
+      "map room",
+      "globes",
+      "charts",
+      "model ships"
+    ],
+    "actions": [
+      "studying maps",
+      "planning voyages",
+      "comparing charts"
+    ],
+    "mood": [
+      "strategic",
+      "grand",
+      "golden-hour"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.48,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "exploration history videos",
+      "map sequences",
+      "navigation explainers",
+      "empire content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_age_of_exploration_navigation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Navigators charting a harbor during the Age of Exploration",
+    "path": "images/history/history_age_of_exploration_navigation_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "age of exploration",
+      "navigation",
+      "sailing ships",
+      "maps",
+      "renaissance",
+      "seafaring"
+    ],
+    "concepts": [
+      "maritime exploration",
+      "global expansion",
+      "navigation history",
+      "imperial voyages"
+    ],
+    "subjects": [
+      "navigators",
+      "map table",
+      "globe",
+      "ships in harbor",
+      "instruments"
+    ],
+    "actions": [
+      "charting routes",
+      "discussing maps",
+      "preparing voyage"
+    ],
+    "mood": [
+      "adventurous",
+      "strategic",
+      "golden-hour"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.45,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "exploration history videos",
+      "maritime history",
+      "empire content",
+      "map-based intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_ancient_babylon_scribe_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scribe overlooking ancient Babylon at sunset",
+    "path": "images/history/history_ancient_babylon_scribe_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient babylon",
+      "mesopotamia",
+      "scribe",
+      "ziggurat",
+      "cityscape",
+      "river civilization"
+    ],
+    "concepts": [
+      "early civilization",
+      "written records",
+      "mesopotamian history",
+      "urban antiquity"
+    ],
+    "subjects": [
+      "scribe",
+      "clay tablets",
+      "ziggurat",
+      "city walls",
+      "river"
+    ],
+    "actions": [
+      "writing records",
+      "observing city",
+      "documenting knowledge"
+    ],
+    "mood": [
+      "golden",
+      "epic",
+      "scholarly"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.32,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "ancient history videos",
+      "mesopotamia explainers",
+      "civilization intros",
+      "history documentaries"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_andean_messenger_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Andean messenger among ancient terraces",
+    "path": "images/history/history_andean_messenger_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "inca",
+      "andes",
+      "messenger",
+      "terraces",
+      "mountains",
+      "south america"
+    ],
+    "concepts": [
+      "inca civilization",
+      "mountain networks",
+      "imperial communication",
+      "andean culture"
+    ],
+    "subjects": [
+      "messenger",
+      "terraces",
+      "rope bridge",
+      "mountain valley",
+      "stone path"
+    ],
+    "actions": [
+      "traveling along trail",
+      "carrying messages",
+      "crossing terrain"
+    ],
+    "mood": [
+      "epic",
+      "adventurous",
+      "highland"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "inca history videos",
+      "south american civilizations",
+      "empire communication scenes",
+      "travel and terrain"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_buddhist_temple_meditation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Buddhist temple and seated monk",
+    "path": "images/history/history_buddhist_temple_meditation_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 302,
+    "height": 506,
+    "aspectRatio": 0.5968,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "buddhism",
+      "temple",
+      "monk",
+      "asia",
+      "religious history"
+    ],
+    "concepts": [
+      "religious history",
+      "buddhist culture",
+      "sacred architecture"
+    ],
+    "subjects": [
+      "buddha statue",
+      "monk",
+      "temple courtyard"
+    ],
+    "actions": [
+      "meditating",
+      "studying sacred space"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "asian history videos",
+      "religious history",
+      "temple scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_caravanserai_bazaar_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunset bazaar at the caravanserai",
+    "path": "images/history/history_caravanserai_bazaar_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "caravanserai",
+      "bazaar",
+      "trade",
+      "middle east",
+      "silk road",
+      "market"
+    ],
+    "concepts": [
+      "cross-cultural trade",
+      "merchant networks",
+      "urban commerce",
+      "historic marketplaces"
+    ],
+    "subjects": [
+      "camel caravan",
+      "traders",
+      "ceramics",
+      "textiles",
+      "market courtyard"
+    ],
+    "actions": [
+      "selling carpets",
+      "negotiating trade",
+      "arriving with goods"
+    ],
+    "mood": [
+      "golden",
+      "busy",
+      "vibrant"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.49,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "trade history videos",
+      "silk road content",
+      "marketplace scenes",
+      "civilization videos"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_chinese_scholar_cartography_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Chinese scholar studying maps",
+    "path": "images/history/history_chinese_scholar_cartography_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "china",
+      "scholar",
+      "cartography",
+      "imperial china",
+      "maps"
+    ],
+    "concepts": [
+      "historical scholarship",
+      "cartography",
+      "imperial administration"
+    ],
+    "subjects": [
+      "scholar",
+      "map",
+      "writing desk"
+    ],
+    "actions": [
+      "studying map",
+      "writing notes"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "chinese history videos",
+      "scholar scenes",
+      "mapmaking history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_classical_greece_philosopher_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Philosopher teaching beneath the Acropolis",
+    "path": "images/history/history_classical_greece_philosopher_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient greece",
+      "philosophy",
+      "acropolis",
+      "athens",
+      "classical world",
+      "scholars"
+    ],
+    "concepts": [
+      "classical education",
+      "philosophical teaching",
+      "greek civilization",
+      "public discourse"
+    ],
+    "subjects": [
+      "philosopher",
+      "students",
+      "marble colonnade",
+      "acropolis"
+    ],
+    "actions": [
+      "teaching",
+      "discussing ideas",
+      "listening to a lesson"
+    ],
+    "mood": [
+      "sunlit",
+      "classical",
+      "intellectual"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.35,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "greek history videos",
+      "philosophy explainers",
+      "classical civilization content",
+      "scholar scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_edwardian_archive_research_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Edwardian archive research room",
+    "path": "images/history/history_edwardian_archive_research_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "edwardian",
+      "archive",
+      "research room",
+      "documents",
+      "library",
+      "historians"
+    ],
+    "concepts": [
+      "historical research",
+      "archival work",
+      "document preservation",
+      "early modern scholarship"
+    ],
+    "subjects": [
+      "researchers",
+      "archive tables",
+      "documents",
+      "card catalog",
+      "bookshelves"
+    ],
+    "actions": [
+      "reading records",
+      "sorting photos",
+      "working in archive"
+    ],
+    "mood": [
+      "quiet",
+      "scholarly",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "research scenes",
+      "modern history videos",
+      "archive intros",
+      "documentary visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_egyptian_temple_dawn_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden dawn at an Egyptian temple",
+    "path": "images/history/history_egyptian_temple_dawn_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient egypt",
+      "temple",
+      "hieroglyphs",
+      "pharaoh era",
+      "nile civilization",
+      "sunrise"
+    ],
+    "concepts": [
+      "religious architecture",
+      "ancient civilization",
+      "sacred space",
+      "egyptian culture"
+    ],
+    "subjects": [
+      "temple columns",
+      "statues",
+      "obelisks",
+      "priests",
+      "courtyard"
+    ],
+    "actions": [
+      "walking through temple",
+      "observing ritual space",
+      "exploring monumental architecture"
+    ],
+    "mood": [
+      "epic",
+      "golden",
+      "majestic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "ancient egypt videos",
+      "civilization intros",
+      "monument scenes",
+      "history documentaries"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_egypt_pyramid_excavation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Archaeological excavation beneath the pyramids",
+    "path": "images/history/history_egypt_pyramid_excavation_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient egypt",
+      "archaeology",
+      "pyramids",
+      "excavation",
+      "hieroglyphs",
+      "desert"
+    ],
+    "concepts": [
+      "ancient civilizations",
+      "archaeological discovery",
+      "historical research",
+      "egyptology"
+    ],
+    "subjects": [
+      "archaeologist",
+      "pyramids",
+      "ruins",
+      "sphinx fragment",
+      "hieroglyph wall"
+    ],
+    "actions": [
+      "documenting carvings",
+      "excavating ruins",
+      "studying ancient site"
+    ],
+    "mood": [
+      "epic",
+      "scholarly",
+      "golden-hour"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.33,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "ancient history videos",
+      "egypt videos",
+      "archaeology scenes",
+      "civilization explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_enlightenment_salon_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Enlightenment salon of scholars",
+    "path": "images/history/history_enlightenment_salon_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "enlightenment",
+      "scholars",
+      "salon",
+      "europe",
+      "ideas",
+      "philosophy"
+    ],
+    "concepts": [
+      "intellectual exchange",
+      "scientific revolution",
+      "political ideas",
+      "elite discussion"
+    ],
+    "subjects": [
+      "scholars",
+      "books",
+      "candles",
+      "globes",
+      "maps",
+      "salon room"
+    ],
+    "actions": [
+      "debating ideas",
+      "reading documents",
+      "presenting arguments"
+    ],
+    "mood": [
+      "intellectual",
+      "warm",
+      "elegant"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "enlightenment history videos",
+      "idea history",
+      "european intellectual life",
+      "discussion scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_imperial_chinese_scholar_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Imperial scholar in a palace study at golden hour",
+    "path": "images/history/history_imperial_chinese_scholar_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "imperial china",
+      "scholar",
+      "palace study",
+      "manuscripts",
+      "astronomy",
+      "bureaucracy"
+    ],
+    "concepts": [
+      "court scholarship",
+      "imperial administration",
+      "historical learning",
+      "knowledge and governance"
+    ],
+    "subjects": [
+      "scholar",
+      "bamboo scrolls",
+      "maps",
+      "astronomical instrument",
+      "palace balcony"
+    ],
+    "actions": [
+      "writing on scrolls",
+      "studying maps",
+      "recording knowledge"
+    ],
+    "mood": [
+      "golden",
+      "scholarly",
+      "grand"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "asian history videos",
+      "imperial history explainers",
+      "scholar scenes",
+      "civilization content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_independence_crowd_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Independence-era public gathering",
+    "path": "images/history/history_independence_crowd_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 302,
+    "height": 506,
+    "aspectRatio": 0.5968,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "independence",
+      "public movement",
+      "crowd",
+      "political history",
+      "india"
+    ],
+    "concepts": [
+      "mass politics",
+      "independence movement",
+      "public mobilization"
+    ],
+    "subjects": [
+      "crowd",
+      "flag",
+      "historic architecture"
+    ],
+    "actions": [
+      "gathering",
+      "demonstrating",
+      "raising flag"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "independence history videos",
+      "political movement scenes",
+      "20th century history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_industrial_revolution_city_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Victorian steam and smoke cityscape",
+    "path": "images/history/history_industrial_revolution_city_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "industrial revolution",
+      "victorian",
+      "factory",
+      "steam train",
+      "urbanization",
+      "smoke"
+    ],
+    "concepts": [
+      "industrialization",
+      "urban growth",
+      "machine age",
+      "labor history"
+    ],
+    "subjects": [
+      "steam locomotive",
+      "factories",
+      "workers",
+      "coal wagons",
+      "city skyline"
+    ],
+    "actions": [
+      "transporting coal",
+      "walking to work",
+      "operating industrial rail"
+    ],
+    "mood": [
+      "gritty",
+      "dramatic",
+      "historic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "industrial revolution videos",
+      "economic history",
+      "technology history",
+      "urban change scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_industrial_steam_train_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Industrial steam train and workers",
+    "path": "images/history/history_industrial_steam_train_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "industrial revolution",
+      "steam train",
+      "workers",
+      "factory",
+      "railway"
+    ],
+    "concepts": [
+      "industrialization",
+      "transport history",
+      "labor history"
+    ],
+    "subjects": [
+      "steam locomotive",
+      "rail workers",
+      "smoke"
+    ],
+    "actions": [
+      "working on railway",
+      "operating locomotive"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "industrial revolution videos",
+      "rail history",
+      "labor scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_japanese_castle_town_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunrise over a Japanese castle town",
+    "path": "images/history/history_japanese_castle_town_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "japan",
+      "castle town",
+      "edo period",
+      "samurai",
+      "market street",
+      "feudal japan"
+    ],
+    "concepts": [
+      "feudal society",
+      "urban life in early modern japan",
+      "samurai culture",
+      "town commerce"
+    ],
+    "subjects": [
+      "castle",
+      "samurai",
+      "townspeople",
+      "bridge",
+      "market street"
+    ],
+    "actions": [
+      "walking through town",
+      "guarding streets",
+      "selling goods"
+    ],
+    "mood": [
+      "serene",
+      "historic",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "japanese history videos",
+      "edo period scenes",
+      "daily life explainers",
+      "history intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_maritime_explorer_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Maritime explorer navigating at sea",
+    "path": "images/history/history_maritime_explorer_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "exploration",
+      "navigator",
+      "sailing ship",
+      "age of exploration",
+      "seafaring"
+    ],
+    "concepts": [
+      "maritime exploration",
+      "navigation history",
+      "global voyages"
+    ],
+    "subjects": [
+      "navigator",
+      "ship deck",
+      "sextant",
+      "sailing ships"
+    ],
+    "actions": [
+      "measuring position",
+      "surveying sea"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "exploration history videos",
+      "navigation scenes",
+      "maritime history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mayan_observatory_astronomy_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mayan observatory beneath the Milky Way",
+    "path": "images/history/history_mayan_observatory_astronomy_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "maya",
+      "astronomy",
+      "observatory",
+      "mesoamerica",
+      "night sky",
+      "temple"
+    ],
+    "concepts": [
+      "indigenous astronomy",
+      "sacred architecture",
+      "ancient science",
+      "mesoamerican civilization"
+    ],
+    "subjects": [
+      "mayan astronomer",
+      "temple observatory",
+      "jungle canopy",
+      "stars",
+      "milky way"
+    ],
+    "actions": [
+      "observing sky",
+      "recording celestial patterns",
+      "studying stars"
+    ],
+    "mood": [
+      "mystical",
+      "epic",
+      "nocturnal"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.31,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "mayan history videos",
+      "astronomy in history",
+      "civilization explainers",
+      "night sequences"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_medieval_blacksmith_forge_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Medieval blacksmith at work in a forge",
+    "path": "images/history/history_medieval_blacksmith_forge_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "medieval",
+      "blacksmith",
+      "forge",
+      "craftsmanship",
+      "armor",
+      "weapons"
+    ],
+    "concepts": [
+      "artisan labor",
+      "medieval craft",
+      "material culture",
+      "town industry"
+    ],
+    "subjects": [
+      "blacksmith",
+      "anvil",
+      "forge fire",
+      "armor",
+      "tools"
+    ],
+    "actions": [
+      "hammering metal",
+      "forging tools",
+      "working in workshop"
+    ],
+    "mood": [
+      "warm",
+      "energetic",
+      "craft-focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.45,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medieval life videos",
+      "craft history",
+      "town economy scenes",
+      "documentary visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_medieval_knight_castle_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Medieval knight before a castle",
+    "path": "images/history/history_medieval_knight_castle_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "medieval",
+      "knight",
+      "castle",
+      "crusader era",
+      "warrior"
+    ],
+    "concepts": [
+      "feudal society",
+      "medieval warfare",
+      "castle culture"
+    ],
+    "subjects": [
+      "mounted knight",
+      "castle",
+      "banner"
+    ],
+    "actions": [
+      "riding",
+      "guarding",
+      "traveling"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medieval history videos",
+      "knight scenes",
+      "feudalism explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_medieval_market_town_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Bustling medieval market beneath the castle",
+    "path": "images/history/history_medieval_market_town_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "medieval market",
+      "town life",
+      "castle",
+      "trade",
+      "marketplace",
+      "daily life"
+    ],
+    "concepts": [
+      "medieval economy",
+      "daily life in history",
+      "trade and commerce",
+      "urban history"
+    ],
+    "subjects": [
+      "market vendors",
+      "shoppers",
+      "castle",
+      "cobblestone street",
+      "stalls"
+    ],
+    "actions": [
+      "buying goods",
+      "selling textiles",
+      "moving through marketplace"
+    ],
+    "mood": [
+      "lively",
+      "colorful",
+      "historical"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medieval life videos",
+      "daily life explainers",
+      "trade history",
+      "town scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_medieval_monastery_scriptorium_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Candlelit medieval monastery scriptorium",
+    "path": "images/history/history_medieval_monastery_scriptorium_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "medieval",
+      "scriptorium",
+      "monastery",
+      "manuscripts",
+      "monks",
+      "candlelight"
+    ],
+    "concepts": [
+      "knowledge preservation",
+      "religious scholarship",
+      "manuscript culture",
+      "medieval learning"
+    ],
+    "subjects": [
+      "monks",
+      "illuminated manuscripts",
+      "desks",
+      "candles",
+      "stone hall"
+    ],
+    "actions": [
+      "copying texts",
+      "illuminating pages",
+      "studying manuscripts"
+    ],
+    "mood": [
+      "quiet",
+      "warm",
+      "scholarly"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.37,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medieval history videos",
+      "book history",
+      "church history scenes",
+      "scholarship visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_medieval_scriptorium_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Candlelit medieval scriptorium",
+    "path": "images/history/history_medieval_scriptorium_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "medieval",
+      "scriptorium",
+      "monk",
+      "manuscript",
+      "library",
+      "candlelight"
+    ],
+    "concepts": [
+      "medieval scholarship",
+      "book production",
+      "religious learning",
+      "knowledge preservation"
+    ],
+    "subjects": [
+      "monk",
+      "illuminated manuscript",
+      "wooden desks",
+      "candles",
+      "stone room"
+    ],
+    "actions": [
+      "copying manuscript",
+      "writing by candlelight",
+      "studying texts"
+    ],
+    "mood": [
+      "quiet",
+      "scholarly",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.3,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medieval history videos",
+      "church history",
+      "knowledge preservation scenes",
+      "documentary visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mediterranean_ruins_excavation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Archaeologists excavating ancient Mediterranean ruins",
+    "path": "images/history/history_mediterranean_ruins_excavation_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "archaeology",
+      "ancient ruins",
+      "mediterranean",
+      "excavation",
+      "artifacts",
+      "fieldwork"
+    ],
+    "concepts": [
+      "archaeological fieldwork",
+      "material culture",
+      "historical discovery",
+      "classical ruins"
+    ],
+    "subjects": [
+      "archaeologists",
+      "dig site",
+      "amphora",
+      "stone ruins",
+      "tools"
+    ],
+    "actions": [
+      "brushing artifacts",
+      "excavating trenches",
+      "cataloging finds"
+    ],
+    "mood": [
+      "focused",
+      "sunlit",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "archaeology videos",
+      "ancient world content",
+      "artifact discovery scenes",
+      "fieldwork visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mesoamerican_pyramid_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mesoamerican pyramid at sunset",
+    "path": "images/history/history_mesoamerican_pyramid_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "mesoamerica",
+      "pyramid",
+      "maya",
+      "aztec",
+      "temple"
+    ],
+    "concepts": [
+      "mesoamerican civilization",
+      "ritual architecture",
+      "ancient urbanism"
+    ],
+    "subjects": [
+      "step pyramid",
+      "stone carvings",
+      "sunset"
+    ],
+    "actions": [
+      "approaching temple",
+      "observing monument"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "maya history",
+      "aztec history",
+      "ancient america scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mesopotamian_city_gate_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mesopotamian city gate and urban life",
+    "path": "images/history/history_mesopotamian_city_gate_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "mesopotamia",
+      "ancient city",
+      "gate",
+      "babylon",
+      "urban history"
+    ],
+    "concepts": [
+      "early cities",
+      "mesopotamian civilization",
+      "urban antiquity"
+    ],
+    "subjects": [
+      "city gate",
+      "citizens",
+      "blue glazed architecture"
+    ],
+    "actions": [
+      "entering city",
+      "walking through gate"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "mesopotamia videos",
+      "ancient civilization scenes",
+      "city history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mughal_garden_scholar_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour Mughal garden scholar",
+    "path": "images/history/history_mughal_garden_scholar_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "mughal",
+      "india",
+      "scholar",
+      "garden",
+      "palace",
+      "court culture"
+    ],
+    "concepts": [
+      "courtly learning",
+      "south asian history",
+      "garden culture",
+      "imperial scholarship"
+    ],
+    "subjects": [
+      "scholar",
+      "garden pavilion",
+      "fountains",
+      "manuscript",
+      "palace architecture"
+    ],
+    "actions": [
+      "writing manuscript",
+      "studying quietly",
+      "reflecting in garden"
+    ],
+    "mood": [
+      "regal",
+      "peaceful",
+      "golden"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.23,
+        "y": 0.5
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "indian history videos",
+      "mughal empire content",
+      "court culture scenes",
+      "scholar visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_mughal_palace_scribe_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mughal palace scribe at sunset",
+    "path": "images/history/history_mughal_palace_scribe_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "mughal",
+      "india",
+      "scribe",
+      "palace",
+      "court culture",
+      "manuscripts"
+    ],
+    "concepts": [
+      "courtly culture",
+      "imperial record keeping",
+      "south asian history",
+      "artistic manuscript tradition"
+    ],
+    "subjects": [
+      "scribe",
+      "ornate books",
+      "courtyard",
+      "fountains",
+      "palace architecture"
+    ],
+    "actions": [
+      "writing manuscript",
+      "illustrating pages",
+      "documenting court life"
+    ],
+    "mood": [
+      "ornate",
+      "warm",
+      "regal"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "indian history videos",
+      "mughal empire content",
+      "court culture scenes",
+      "historical art segments"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_museum_ancient_wonders_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Grand hall of ancient wonders",
+    "path": "images/history/history_museum_ancient_wonders_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "museum",
+      "ancient artifacts",
+      "classical art",
+      "display hall",
+      "heritage",
+      "civilizations"
+    ],
+    "concepts": [
+      "public history",
+      "cultural heritage",
+      "museum curation",
+      "ancient world overview"
+    ],
+    "subjects": [
+      "museum hall",
+      "armor",
+      "statues",
+      "vases",
+      "maps",
+      "display cases"
+    ],
+    "actions": [
+      "displaying artifacts",
+      "curating history",
+      "walking through gallery"
+    ],
+    "mood": [
+      "grand",
+      "elegant",
+      "educational"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.55,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "history overview videos",
+      "museum content",
+      "civilization compilations",
+      "artifact explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_ottoman_cartographers_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Ottoman cartographers at work",
+    "path": "images/history/history_ottoman_cartographers_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ottoman empire",
+      "cartography",
+      "maps",
+      "scholars",
+      "istanbul",
+      "navigation"
+    ],
+    "concepts": [
+      "mapmaking history",
+      "imperial administration",
+      "geographic knowledge",
+      "maritime planning"
+    ],
+    "subjects": [
+      "cartographers",
+      "large world map",
+      "globes",
+      "harbor view",
+      "worktable"
+    ],
+    "actions": [
+      "drawing maps",
+      "measuring distances",
+      "studying geography"
+    ],
+    "mood": [
+      "intellectual",
+      "busy",
+      "golden-hour"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "ottoman history videos",
+      "cartography content",
+      "empire administration scenes",
+      "map explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_postwar_city_planning_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Postwar city planning studio",
+    "path": "images/history/history_postwar_city_planning_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "postwar",
+      "reconstruction",
+      "urban planning",
+      "20th century",
+      "city rebuilding",
+      "architecture"
+    ],
+    "concepts": [
+      "urban recovery",
+      "reconstruction planning",
+      "policy and design",
+      "modern rebuilding"
+    ],
+    "subjects": [
+      "planners",
+      "city maps",
+      "scale models",
+      "rebuilding skyline",
+      "office studio"
+    ],
+    "actions": [
+      "reviewing plans",
+      "drafting layouts",
+      "surveying reconstruction"
+    ],
+    "mood": [
+      "serious",
+      "strategic",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "20th century history videos",
+      "postwar recovery content",
+      "planning scenes",
+      "urban history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_postwar_reconstruction_planning_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Postwar reconstruction planning meeting",
+    "path": "images/history/history_postwar_reconstruction_planning_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "postwar",
+      "reconstruction",
+      "urban planning",
+      "1940s",
+      "city rebuilding",
+      "government"
+    ],
+    "concepts": [
+      "rebuilding after war",
+      "policy planning",
+      "modern reconstruction",
+      "urban recovery"
+    ],
+    "subjects": [
+      "officials",
+      "city map",
+      "ruined skyline",
+      "documents",
+      "planning room"
+    ],
+    "actions": [
+      "reviewing plans",
+      "discussing rebuilding",
+      "pointing at map"
+    ],
+    "mood": [
+      "serious",
+      "strategic",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "20th century history videos",
+      "postwar recovery content",
+      "planning scenes",
+      "modern history explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_prehistoric_cave_painter_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Prehistoric cave painter at work",
+    "path": "images/history/history_prehistoric_cave_painter_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "prehistory",
+      "cave art",
+      "stone age",
+      "human origins"
+    ],
+    "concepts": [
+      "prehistoric life",
+      "early human creativity",
+      "cave painting"
+    ],
+    "subjects": [
+      "cave painter",
+      "rock wall",
+      "firelight"
+    ],
+    "actions": [
+      "painting cave wall",
+      "creating symbols"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "prehistoric history videos",
+      "human origins",
+      "early art scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_railroad_expansion_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Forging rails through the mountain valley",
+    "path": "images/history/history_railroad_expansion_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "railroad",
+      "industrial expansion",
+      "workers",
+      "steam locomotive",
+      "19th century",
+      "infrastructure"
+    ],
+    "concepts": [
+      "industrial expansion",
+      "transport history",
+      "labor history",
+      "continental rail building"
+    ],
+    "subjects": [
+      "rail workers",
+      "steam train",
+      "tracks",
+      "bridge",
+      "mountain valley"
+    ],
+    "actions": [
+      "laying track",
+      "hammering spikes",
+      "moving freight"
+    ],
+    "mood": [
+      "gritty",
+      "expansive",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.43,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "industrial history videos",
+      "transport history",
+      "labor scenes",
+      "infrastructure explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_renaissance_inventor_workshop_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Renaissance inventor in a sunlit workshop",
+    "path": "images/history/history_renaissance_inventor_workshop_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "renaissance",
+      "inventor",
+      "workshop",
+      "da vinci style",
+      "art and science",
+      "florence"
+    ],
+    "concepts": [
+      "renaissance innovation",
+      "humanism",
+      "art and science",
+      "historical invention"
+    ],
+    "subjects": [
+      "inventor",
+      "drawings",
+      "flying machine model",
+      "maps",
+      "tools"
+    ],
+    "actions": [
+      "sketching designs",
+      "studying anatomy",
+      "planning inventions"
+    ],
+    "mood": [
+      "inspired",
+      "scholarly",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.42,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "renaissance videos",
+      "innovation history",
+      "art history intros",
+      "historical creativity"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_renaissance_inventor_workshop_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Renaissance inventor’s sunlit workshop",
+    "path": "images/history/history_renaissance_inventor_workshop_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "renaissance",
+      "inventor",
+      "workshop",
+      "engineering",
+      "florence",
+      "innovation"
+    ],
+    "concepts": [
+      "renaissance innovation",
+      "art and science",
+      "historical invention",
+      "humanist creativity"
+    ],
+    "subjects": [
+      "inventor",
+      "flying machine sketch",
+      "globe",
+      "models",
+      "tools"
+    ],
+    "actions": [
+      "drawing inventions",
+      "studying devices",
+      "working at desk"
+    ],
+    "mood": [
+      "inspired",
+      "scholarly",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.62,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "renaissance videos",
+      "innovation history",
+      "art and science content",
+      "inventor scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_renaissance_printing_press_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Renaissance printing workshop in sunlight",
+    "path": "images/history/history_renaissance_printing_press_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "renaissance",
+      "printing press",
+      "books",
+      "workshop",
+      "printing",
+      "europe"
+    ],
+    "concepts": [
+      "spread of knowledge",
+      "print revolution",
+      "early publishing",
+      "renaissance learning"
+    ],
+    "subjects": [
+      "printers",
+      "movable type",
+      "press",
+      "printed pages",
+      "workshop tables"
+    ],
+    "actions": [
+      "setting type",
+      "operating press",
+      "printing pages"
+    ],
+    "mood": [
+      "scholarly",
+      "productive",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.4,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "history of books",
+      "renaissance videos",
+      "knowledge revolution",
+      "printing technology scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_roman_forum_scholar_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scholar in the Roman Forum",
+    "path": "images/history/history_roman_forum_scholar_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient rome",
+      "roman forum",
+      "scholar",
+      "classical civilization",
+      "temple",
+      "rome"
+    ],
+    "concepts": [
+      "roman civilization",
+      "public life in antiquity",
+      "historical scholarship",
+      "classical world"
+    ],
+    "subjects": [
+      "roman scholar",
+      "forum",
+      "temple",
+      "crowd",
+      "statues"
+    ],
+    "actions": [
+      "studying scrolls",
+      "observing civic life",
+      "walking through forum"
+    ],
+    "mood": [
+      "grand",
+      "classical",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "roman history videos",
+      "empire explainers",
+      "classical antiquity content",
+      "history intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_roman_scholar_forum_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Roman scholar overlooking the golden forum",
+    "path": "images/history/history_roman_scholar_forum_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "ancient rome",
+      "roman forum",
+      "scholar",
+      "classical world",
+      "empire",
+      "marble architecture"
+    ],
+    "concepts": [
+      "roman public life",
+      "classical scholarship",
+      "imperial urbanism",
+      "historical learning"
+    ],
+    "subjects": [
+      "roman scholar",
+      "scrolls",
+      "forum",
+      "temples",
+      "statues"
+    ],
+    "actions": [
+      "reading scroll",
+      "surveying forum",
+      "studying civic life"
+    ],
+    "mood": [
+      "grand",
+      "classical",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.31,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "roman history videos",
+      "empire explainers",
+      "classical civilization",
+      "scholar scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_silk_road_caravan_city_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Silk Road caravan approaching a golden walled city",
+    "path": "images/history/history_silk_road_caravan_city_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "silk road",
+      "caravan",
+      "trade routes",
+      "desert city",
+      "camels",
+      "merchant history"
+    ],
+    "concepts": [
+      "long-distance trade",
+      "cross-cultural exchange",
+      "merchant travel",
+      "historic commerce"
+    ],
+    "subjects": [
+      "camel caravan",
+      "travelers",
+      "city walls",
+      "mountains",
+      "oasis river"
+    ],
+    "actions": [
+      "traveling",
+      "approaching city",
+      "transporting goods"
+    ],
+    "mood": [
+      "adventurous",
+      "golden",
+      "expansive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "trade history videos",
+      "silk road explainers",
+      "empire connections",
+      "travel and commerce scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_suffrage_workshop_capitol_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Suffrage workshop beneath the Capitol dome",
+    "path": "images/history/history_suffrage_workshop_capitol_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "womens suffrage",
+      "activism",
+      "votes for women",
+      "early 20th century",
+      "social movement",
+      "workshop"
+    ],
+    "concepts": [
+      "political organizing",
+      "women’s rights",
+      "movement building",
+      "social reform"
+    ],
+    "subjects": [
+      "activists",
+      "banners",
+      "papers",
+      "meeting room",
+      "capitol dome view"
+    ],
+    "actions": [
+      "painting banner",
+      "writing materials",
+      "organizing campaign"
+    ],
+    "mood": [
+      "determined",
+      "focused",
+      "historic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "social history videos",
+      "women rights content",
+      "activism history",
+      "movement scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_timbuktu_scholar_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Timbuktu scholar among ancient manuscripts",
+    "path": "images/history/history_timbuktu_scholar_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "timbuktu",
+      "west africa",
+      "scholar",
+      "manuscripts",
+      "library",
+      "sahel"
+    ],
+    "concepts": [
+      "african intellectual history",
+      "manuscript tradition",
+      "islamic scholarship",
+      "knowledge centers"
+    ],
+    "subjects": [
+      "scholar",
+      "bookshelves",
+      "manuscripts",
+      "mud-brick city",
+      "desk"
+    ],
+    "actions": [
+      "reading manuscripts",
+      "studying texts",
+      "turning pages"
+    ],
+    "mood": [
+      "quiet",
+      "scholarly",
+      "sunlit"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "african history videos",
+      "timbuktu explainers",
+      "scholar scenes",
+      "knowledge history"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_victorian_archive_study_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Victorian scholar studying in an archive at dusk",
+    "path": "images/history/history_victorian_archive_study_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "victorian",
+      "scholar",
+      "archive",
+      "study",
+      "maps",
+      "library"
+    ],
+    "concepts": [
+      "historical scholarship",
+      "archival research",
+      "intellectual history",
+      "empire era study"
+    ],
+    "subjects": [
+      "scholar",
+      "desk",
+      "oil lamp",
+      "maps",
+      "bookshelves"
+    ],
+    "actions": [
+      "writing notes",
+      "studying documents",
+      "researching history"
+    ],
+    "mood": [
+      "quiet",
+      "intellectual",
+      "moody"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.57,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "history research videos",
+      "scholar scenes",
+      "narrative transitions",
+      "educational intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_viking_harbor_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Viking harbor beneath snowy mountains",
+    "path": "images/history/history_viking_harbor_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "vikings",
+      "norse",
+      "harbor",
+      "longship",
+      "fjord",
+      "scandinavia"
+    ],
+    "concepts": [
+      "maritime culture",
+      "norse trade",
+      "viking daily life",
+      "seafaring communities"
+    ],
+    "subjects": [
+      "longships",
+      "harbor workers",
+      "wooden docks",
+      "mountains",
+      "village"
+    ],
+    "actions": [
+      "unloading cargo",
+      "trading goods",
+      "working at harbor"
+    ],
+    "mood": [
+      "rugged",
+      "historic",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.48,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "viking history videos",
+      "norse culture",
+      "maritime scenes",
+      "daily life explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_viking_harbor_fjords_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Viking harbor beneath snowy fjords",
+    "path": "images/history/history_viking_harbor_fjords_002.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "vikings",
+      "norse",
+      "harbor",
+      "longship",
+      "fjord",
+      "scandinavia",
+      "trade"
+    ],
+    "concepts": [
+      "maritime culture",
+      "norse commerce",
+      "seafaring life",
+      "harbor economy"
+    ],
+    "subjects": [
+      "longship",
+      "traders",
+      "dock",
+      "snowy mountains",
+      "market goods"
+    ],
+    "actions": [
+      "trading goods",
+      "loading ship",
+      "working at harbor"
+    ],
+    "mood": [
+      "rugged",
+      "cinematic",
+      "cold"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.67,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-center"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "viking history videos",
+      "norse culture content",
+      "maritime scenes",
+      "daily life explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_womens_suffrage_workshop_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Women’s suffrage workshop in purple, white, and green",
+    "path": "images/history/history_womens_suffrage_workshop_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "history",
+      "womens suffrage",
+      "activism",
+      "banners",
+      "votes for women",
+      "early 20th century",
+      "social movement"
+    ],
+    "concepts": [
+      "political organizing",
+      "women’s rights",
+      "movement building",
+      "social reform"
+    ],
+    "subjects": [
+      "activists",
+      "banners",
+      "papers",
+      "meeting room",
+      "sashes"
+    ],
+    "actions": [
+      "preparing banners",
+      "organizing materials",
+      "coordinating campaign"
+    ],
+    "mood": [
+      "determined",
+      "focused",
+      "historic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "social history videos",
+      "women rights content",
+      "activism history",
+      "political movement scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "history_world_war_two_ruins_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "World War II urban ruins",
+    "path": "images/history/history_world_war_two_ruins_001.png",
+    "category": "history",
+    "extension": ".png",
+    "width": 301,
+    "height": 506,
+    "aspectRatio": 0.5949,
+    "orientation": "portrait",
+    "tags": [
+      "history",
+      "world war ii",
+      "war ruins",
+      "soldiers",
+      "20th century",
+      "bombing"
+    ],
+    "concepts": [
+      "wartime destruction",
+      "urban warfare",
+      "modern conflict history"
+    ],
+    "subjects": [
+      "soldiers",
+      "ruined city",
+      "aircraft",
+      "smoke"
+    ],
+    "actions": [
+      "advancing through ruins",
+      "surveying destruction"
+    ],
+    "mood": [
+      "cinematic",
+      "historical",
+      "documentary"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "world war ii videos",
+      "war history",
+      "20th century conflict scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true,
+      "derivedFromComposite": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

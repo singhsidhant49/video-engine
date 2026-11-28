@@ -1,0 +1,72 @@
+{
+  "id": "history_chinese_scholar_cartography_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Chinese scholar studying maps",
+  "path": "images/history/history_chinese_scholar_cartography_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "china",
+    "scholar",
+    "cartography",
+    "imperial china",
+    "maps"
+  ],
+  "concepts": [
+    "historical scholarship",
+    "cartography",
+    "imperial administration"
+  ],
+  "subjects": [
+    "scholar",
+    "map",
+    "writing desk"
+  ],
+  "actions": [
+    "studying map",
+    "writing notes"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "chinese history videos",
+    "scholar scenes",
+    "mapmaking history"
+  ],
+  "avoidFor": [
+    "modern office",
+    "industrial labor"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

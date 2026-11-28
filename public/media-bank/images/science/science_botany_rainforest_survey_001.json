@@ -1,0 +1,77 @@
+{
+  "id": "science_botany_rainforest_survey_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Botanist studying rainforest plant life near a waterfall",
+  "path": "images/science/science_botany_rainforest_survey_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "botany",
+    "rainforest",
+    "plant research",
+    "field biology",
+    "biodiversity",
+    "waterfall"
+  ],
+  "concepts": [
+    "botanical field study",
+    "rainforest biodiversity",
+    "plant identification",
+    "ecosystem research"
+  ],
+  "subjects": [
+    "botanist",
+    "leaf sample",
+    "field guide",
+    "rainforest"
+  ],
+  "actions": [
+    "examining leaf",
+    "identifying species",
+    "recording observations"
+  ],
+  "mood": [
+    "lush",
+    "curious",
+    "natural"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "botany explainer",
+    "rainforest documentary",
+    "biodiversity content",
+    "field science"
+  ],
+  "avoidFor": [
+    "indoor lab",
+    "finance content",
+    "urban office"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

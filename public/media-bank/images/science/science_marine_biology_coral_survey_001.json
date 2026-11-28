@@ -1,0 +1,78 @@
+{
+  "id": "science_marine_biology_coral_survey_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Marine biologist surveying a coral reef underwater",
+  "path": "images/science/science_marine_biology_coral_survey_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "marine biology",
+    "coral reef",
+    "underwater",
+    "diver",
+    "ocean research",
+    "biodiversity"
+  ],
+  "concepts": [
+    "reef survey",
+    "marine ecosystem research",
+    "ocean biodiversity",
+    "underwater field science"
+  ],
+  "subjects": [
+    "scientist diver",
+    "camera",
+    "clipboard",
+    "coral reef",
+    "fish"
+  ],
+  "actions": [
+    "surveying reef",
+    "recording observations",
+    "underwater photography"
+  ],
+  "mood": [
+    "vibrant",
+    "exploratory",
+    "immersive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "marine science",
+    "ocean conservation",
+    "biodiversity explainer",
+    "reef documentary"
+  ],
+  "avoidFor": [
+    "indoor lab",
+    "astronomy",
+    "corporate setting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

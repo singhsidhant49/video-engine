@@ -1,0 +1,76 @@
+{
+  "id": "health_workday_hydration_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Healthy hydration at work",
+  "path": "images/health/health_workday_hydration_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "hydration",
+    "water",
+    "workplace wellness",
+    "healthy habit",
+    "office"
+  ],
+  "concepts": [
+    "daily hydration",
+    "workplace wellness",
+    "healthy routine"
+  ],
+  "subjects": [
+    "adult woman",
+    "glass of water",
+    "water bottle",
+    "laptop"
+  ],
+  "actions": [
+    "drinking water",
+    "taking hydration break",
+    "working at desk"
+  ],
+  "mood": [
+    "bright",
+    "healthy",
+    "productive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "hydration videos",
+    "workplace wellness",
+    "healthy habits content",
+    "daily routine scenes"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "saved-from-web_0a549f19abdaa875",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:NASA astronaut Jonny Kim removes research hardware from inside the Materials Science Laboratory (iss073e0222456).jpg",
+  "path": "images/saved-from-web/saved-from-web_0a549f19abdaa875.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "nasa",
+    "astronaut",
+    "jonny",
+    "kim",
+    "remove",
+    "research",
+    "hardware",
+    "from",
+    "inside",
+    "material",
+    "science",
+    "laboratory",
+    "iss073e0222456",
+    "scientific",
+    "static",
+    "presentation",
+    "file",
+    "removes",
+    "materials",
+    "jpg",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:NASA astronaut Jonny Kim removes research hardware from inside the Materials Science Laboratory (iss073e0222456).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "laboratory materials science",
+    "savedAt": "2026-10-24T07:26:37.627Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "NASA Johnson Space Center",
+    "creator": "NASA Johnson Space Center",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-24T07:23:39.055Z",
+    "page": "https://commons.wikimedia.org/wiki/File:NASA_astronaut_Jonny_Kim_removes_research_hardware_from_inside_the_Materials_Science_Laboratory_(iss073e0222456).jpg"
+  }
+}

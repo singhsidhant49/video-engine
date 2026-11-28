@@ -1,0 +1,65 @@
+{
+  "id": "saved-from-web_e72ab1f23293c38c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Ostia Antica",
+  "path": "images/saved-from-web/saved-from-web_e72ab1f23293c38c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2270,
+  "height": 900,
+  "aspectRatio": 2.5222,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "ostia",
+    "antica",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Ostia Antica"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Ostia Antica",
+    "savedAt": "2026-10-24T07:26:26.669Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "Jean-Pierre Dalbéra from Paris, France",
+    "creator": "Jean-Pierre Dalbéra from Paris, France",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T07:23:36.184Z",
+    "page": "https://commons.wikimedia.org/wiki/File:La_place_des_corporations_(Ostia_Antica)_(5900530118).jpg"
+  }
+}

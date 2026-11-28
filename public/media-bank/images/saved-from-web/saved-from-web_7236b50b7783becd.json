@@ -1,0 +1,106 @@
+{
+  "id": "saved-from-web_7236b50b7783becd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Crane at construction site - geograph.org.uk - 7593527.jpg",
+  "path": "images/saved-from-web/saved-from-web_7236b50b7783becd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "crane",
+    "construction",
+    "site",
+    "geograph",
+    "org",
+    "7593527",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "crane",
+    "construction",
+    "site",
+    "geograph",
+    "org",
+    "7593527",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "construction site cranes building",
+    "savedAt": "2026-10-28T14:24:41.684Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 2.0",
+    "license_name": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "author": "Kevin Waterhouse",
+    "creator": "Kevin Waterhouse",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T14:13:56.038Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Crane_at_construction_site_-_geograph.org.uk_-_7593527.jpg"
+  }
+}

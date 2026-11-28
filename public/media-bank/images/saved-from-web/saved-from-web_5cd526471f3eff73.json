@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_5cd526471f3eff73",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a leather-bound antique book on a wooden table, with scrolls in the background, Moscow.",
+  "path": "images/saved-from-web/saved-from-web_5cd526471f3eff73.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "leather",
+    "bound",
+    "antique",
+    "book",
+    "wooden",
+    "table",
+    "scroll",
+    "background",
+    "moscow",
+    "desk",
+    "study",
+    "static",
+    "presentation",
+    "close-up",
+    "leather-bound",
+    "scrolls",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "leather",
+    "bound",
+    "antique",
+    "book",
+    "wooden",
+    "table",
+    "scroll",
+    "background",
+    "moscow",
+    "desk",
+    "study",
+    "static",
+    "presentation",
+    "close-up",
+    "leather-bound",
+    "scrolls",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a leather-bound antique book on a wooden table, with scrolls in the background, Moscow."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "ancient scroll background",
+    "savedAt": "2026-10-28T07:20:21.319Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Max Mishin",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/brown-book-on-wooden-table-11882036/"
+  }
+}

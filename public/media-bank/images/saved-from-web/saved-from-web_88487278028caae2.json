@@ -1,0 +1,72 @@
+{
+  "id": "saved-from-web_88487278028caae2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Great Attractor and Norma Wall.jpg",
+  "path": "images/saved-from-web/saved-from-web_88487278028caae2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1807,
+  "aspectRatio": 1.4388,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "great",
+    "attractor",
+    "norma",
+    "wall",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Great Attractor",
+    "savedAt": "2026-10-24T09:28:01.968Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Melina Thévenot, using data by GLADE v2.3 (Dalya et al.) and similar to figure 1 in Woudt et al.",
+    "creator": "Melina Thévenot, using data by GLADE v2.3 (Dalya et al.) and similar to figure 1 in Woudt et al.",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T09:25:53.450Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Great_Attractor_and_Norma_Wall.jpg"
+  }
+}

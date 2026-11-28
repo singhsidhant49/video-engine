@@ -1,0 +1,287 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { config } from '../config/index.js';
+import { buildFluxPrompt } from '../config/imageStyles.js';
+
+export function resolveReplicateRetryDelay(error, attempt) {
+  const backoffMs = Math.max(1, Number(attempt) || 1) * 3000;
+  const providerMs = Math.max(0, Number(error?.retryAfterMs) || 0);
+  return Math.min(60_000, Math.max(backoffMs, providerMs));
+}
+
+export function parseReplicateRateLimitInterval(errorText = '') {
+  const text = String(errorText || '');
+  const perMinute = text.match(/(?:reduced to|limit(?:ed)? to)\s+(\d+(?:\.\d+)?)\s+requests? per minute/i);
+  if (!perMinute) return 0;
+  const requests = Number(perMinute[1]);
+  return requests > 0 ? Math.ceil(60_000 / requests) : 0;
+}
+
+let replicateMinimumIntervalMs = Math.max(0, Number(process.env.REPLICATE_MIN_REQUEST_INTERVAL_MS || 0));
+let replicateNextRequestAt = 0;
+
+async function reserveReplicateRequestSlot() {
+  const now = Date.now();
+  const waitMs = Math.max(0, replicateNextRequestAt - now);
+  if (waitMs > 0) await new Promise((resolve) => setTimeout(resolve, waitMs));
+  const reservedAt = Date.now();
+  replicateNextRequestAt = reservedAt + replicateMinimumIntervalMs;
+}
+
+function applyReplicateRateLimit(errorText, retryAfterMs = 0) {
+  replicateMinimumIntervalMs = Math.max(
+    replicateMinimumIntervalMs,
+    parseReplicateRateLimitInterval(errorText),
+    Math.max(0, Number(retryAfterMs) || 0),
+  );
+  replicateNextRequestAt = Math.max(replicateNextRequestAt, Date.now() + replicateMinimumIntervalMs);
+}
+import { downloadImageToFile } from './ideogramService.js';
+
+/**
+ * Maps video format to FLUX supported aspect_ratio string.
+ */
+export function resolveFluxAspectRatio(format = 'landscape') {
+  return format === 'shorts' ? '9:16' : '16:9';
+}
+
+/**
+ * Normalizes user-facing or CLI model aliases to canonical Replicate owner/model paths.
+ */
+export function normalizeFluxModel(model) {
+  if (!model || typeof model !== 'string') {
+    return (config.replicate?.model || 'black-forest-labs/flux-schnell').trim();
+  }
+  const trimmed = model.trim();
+  if (trimmed.includes('/')) {
+    return trimmed;
+  }
+  if (/dev/i.test(trimmed)) {
+    return 'black-forest-labs/flux-dev';
+  }
+  // All other flux variants default to fast flux-schnell
+  return 'black-forest-labs/flux-schnell';
+}
+
+/**
+ * Generates an image using FLUX Schnell via Replicate API.
+ * Includes local disk caching, fast fail-fast error checking, and retry handling.
+ */
+export async function generateFluxImage({
+  prompt,
+  styleId = 'anime',
+  customStylePrompt = '',
+  format = 'landscape',
+  seed = null,
+  cacheDir = null,
+  retries = 2,
+  timeoutMs = 90000,
+  offline = false,
+  model = null,
+  quality = 'high',
+  referenceImagePath = null,
+  referenceStrength = 0.72,
+}) {
+  if (offline) {
+    throw new Error('Offline mode requested — skipping external Replicate network calls');
+  }
+
+  const apiToken = (config.replicate?.apiToken || '').trim();
+  if (!apiToken) {
+    throw new Error(
+      'REPLICATE_API_TOKEN (or FluxSchellKey) is not configured in .env. A Replicate API token is required to use FLUX Schnell.'
+    );
+  }
+
+  const selectedModel = normalizeFluxModel(model);
+  const supportsImageReference = selectedModel === 'black-forest-labs/flux-dev';
+  let referenceImage = null;
+  let referenceHash = '';
+  if (referenceImagePath && supportsImageReference) {
+    const referenceBuffer = await fs.readFile(referenceImagePath);
+    referenceHash = crypto.createHash('sha256').update(referenceBuffer).digest('hex');
+    const extension = path.extname(referenceImagePath).toLowerCase();
+    const mime = extension === '.jpg' || extension === '.jpeg' ? 'image/jpeg' : extension === '.webp' ? 'image/webp' : 'image/png';
+    referenceImage = `data:${mime};base64,${referenceBuffer.toString('base64')}`;
+  }
+  const fullPrompt = buildFluxPrompt({ prompt, styleId, customStylePrompt, format });
+  const aspectRatio = resolveFluxAspectRatio(format);
+
+  // Check persistent disk cache
+  const content = `${fullPrompt}::${styleId}::${aspectRatio}::${seed || ''}::${selectedModel}::${quality}::${referenceHash}`;
+  const promptHash = crypto.createHash('sha256').update(content).digest('hex');
+  const effectiveCacheDir = cacheDir || (config.mediaBankDir ? path.join(config.mediaBankDir, 'ai') : path.join(config.publicDir, 'media-bank', 'ai'));
+  const cachedFilePath = path.join(effectiveCacheDir, `${promptHash}.png`);
+
+  try {
+    const stat = await fs.stat(cachedFilePath);
+    if (stat.isFile() && stat.size > 1000) {
+      const buffer = await fs.readFile(cachedFilePath);
+      const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
+      return {
+        url: null,
+        localPath: cachedFilePath,
+        sha256,
+        seed,
+        prompt: fullPrompt,
+        cached: true,
+        provider: 'replicate',
+        model: selectedModel,
+      };
+    }
+  } catch {
+    // Check legacy cache directory in public/media-bank/ai
+    const legacyCachedPath = path.join(config.publicDir, 'media-bank', 'ai', `${promptHash}.png`);
+    try {
+      const legacyStat = await fs.stat(legacyCachedPath);
+      if (legacyStat.isFile() && legacyStat.size > 1000) {
+        try {
+          await fs.mkdir(effectiveCacheDir, { recursive: true });
+          await fs.copyFile(legacyCachedPath, cachedFilePath);
+        } catch {}
+        const finalPath = await fs.stat(cachedFilePath).then(() => cachedFilePath).catch(() => legacyCachedPath);
+        const buffer = await fs.readFile(finalPath);
+        const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
+        return {
+          url: null,
+          localPath: finalPath,
+          sha256,
+          seed,
+          prompt: fullPrompt,
+          cached: true,
+          provider: 'replicate',
+          model: selectedModel,
+        };
+      }
+    } catch {}
+    // Cache miss, proceed to generate
+  }
+
+  const endpointUrl = `https://api.replicate.com/v1/models/${selectedModel}/predictions`;
+  const requestBody = {
+    input: {
+      prompt: fullPrompt,
+      aspect_ratio: aspectRatio,
+      output_format: 'png',
+      disable_safety_checker: true,
+      num_outputs: 1,
+      num_inference_steps: quality === 'low' ? 3 : 4,
+      go_fast: quality !== 'high',
+      megapixels: '1',
+      ...(seed != null ? { seed: Number(seed) } : {}),
+      ...(referenceImage ? { image: referenceImage, prompt_strength: Math.max(0.1, Math.min(1, Number(referenceStrength) || 0.72)) } : {}),
+    },
+  };
+
+  let lastError = null;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const ctl = new AbortController();
+      await reserveReplicateRequestSlot();
+      const timer = setTimeout(() => ctl.abort(), timeoutMs);
+      let res;
+      try {
+        res = await fetch(endpointUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiToken}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'wait',
+          },
+          body: JSON.stringify(requestBody),
+          signal: ctl.signal,
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        if (res.status === 402 || /insufficient_funds|credit balance ran out|payment required/i.test(errorText)) {
+          throw new Error('Replicate API credit balance ran out (HTTP 402): Add credits on replicate.com to resume generation.');
+        }
+        if (res.status === 401 || /unauthenticated|unauthorized|invalid token/i.test(errorText)) {
+          throw new Error('Replicate API authentication failed (HTTP 401): Check REPLICATE_API_TOKEN in .env.');
+        }
+        let bodyRetrySeconds = 0;
+        try { bodyRetrySeconds = Number(JSON.parse(errorText)?.retry_after || 0); } catch {}
+        const headerRetrySeconds = Number(res.headers?.get?.('retry-after') || 0);
+        if (res.status === 429) {
+          applyReplicateRateLimit(errorText, Math.ceil(Math.max(bodyRetrySeconds, headerRetrySeconds) * 1000));
+        }
+        throw Object.assign(
+          new Error(`Replicate API error ${res.status}: ${errorText.slice(0, 300)}`),
+          {
+            status: res.status,
+            retryAfterMs: Math.ceil(Math.max(bodyRetrySeconds, headerRetrySeconds) * 1000),
+          }
+        );
+      }
+
+      let data = await res.json();
+
+      // If status is not yet succeeded (polling fallback for asynchronous jobs)
+      if (data.status === 'starting' || data.status === 'processing') {
+        const pollUrl = data.urls?.get;
+        if (!pollUrl) {
+          throw new Error(`Replicate returned status ${data.status} without a polling URL.`);
+        }
+
+        const pollStart = Date.now();
+        while (data.status === 'starting' || data.status === 'processing') {
+          if (Date.now() - pollStart > timeoutMs) {
+            throw new Error(`Replicate generation timed out after ${timeoutMs / 1000}s`);
+          }
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          const pollRes = await fetch(pollUrl, {
+            headers: {
+              'Authorization': `Bearer ${apiToken}`,
+              'Accept': 'application/json',
+            },
+          });
+          if (pollRes.ok) {
+            data = await pollRes.json();
+          }
+        }
+      }
+
+      if (data.status === 'failed') {
+        throw new Error(`Replicate generation failed: ${data.error || 'Unknown error'}`);
+      }
+
+      const imageUrl = Array.isArray(data.output) ? data.output[0] : data.output;
+      if (!imageUrl || typeof imageUrl !== 'string') {
+        throw new Error('Replicate did not return a valid image URL in output');
+      }
+
+      // Download directly to persistent local cache
+      const downloadRes = await downloadImageToFile(imageUrl, cachedFilePath);
+
+      return {
+        url: imageUrl,
+        localPath: cachedFilePath,
+        sha256: downloadRes.sha256,
+        seed,
+        prompt: fullPrompt,
+        cached: false,
+        provider: 'replicate',
+        model: selectedModel,
+        referenceApplied: Boolean(referenceImage),
+      };
+    } catch (err) {
+      lastError = err;
+      if (/credit balance ran out|HTTP 402|authentication failed|HTTP 401/i.test(err.message)) {
+        throw err;
+      }
+      if (attempt < retries) {
+        const delay = resolveReplicateRetryDelay(err, attempt + 1);
+        console.warn(`   ⚠️ Replicate FLUX attempt ${attempt + 1} failed: ${err.message}. Retrying in ${delay / 1000}s...`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
+  }
+
+  throw new Error(`FLUX generation failed after ${retries + 1} attempts: ${lastError?.message}`);
+}
+

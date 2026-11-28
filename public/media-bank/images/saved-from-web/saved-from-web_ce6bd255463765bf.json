@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_ce6bd255463765bf",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Chamba, Himachal Pradesh",
+  "path": "images/saved-from-web/saved-from-web_ce6bd255463765bf.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1876,
+  "aspectRatio": 1.3859,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "chamba",
+    "himachal",
+    "pradesh",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "chamba",
+    "himachal",
+    "pradesh",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Chamba, Himachal Pradesh"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Himachal Pradesh village slate roof",
+    "savedAt": "2026-10-27T06:45:31.224Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC0",
+    "license_name": "CC0",
+    "url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Ms Sarah Welch",
+    "creator": "Ms Sarah Welch",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-27T06:43:02.071Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Chamba_city_and_river_Ravi,_Himachal_Pradesh_India.jpg"
+  }
+}

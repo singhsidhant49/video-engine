@@ -1,0 +1,66 @@
+{
+  "id": "saved-from-web_75d0bbadf85c822d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Parkes Observatory 5.jpg",
+  "path": "images/saved-from-web/saved-from-web_75d0bbadf85c822d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1920,
+  "height": 1082,
+  "aspectRatio": 1.7745,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "parke",
+    "observatory",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "file",
+    "parkes",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Parkes Observatory 5.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Parkes Observatory",
+    "savedAt": "2026-10-24T09:30:03.373Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "D0a5l0e6",
+    "creator": "D0a5l0e6",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T09:26:05.114Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Parkes_Observatory_5.jpg"
+  }
+}

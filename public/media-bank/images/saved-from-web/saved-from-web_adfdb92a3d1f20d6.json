@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_adfdb92a3d1f20d6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Port Jebel Ali on 1 May 2007 Pict 1.jpg",
+  "path": "images/saved-from-web/saved-from-web_adfdb92a3d1f20d6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1280,
+  "height": 766,
+  "aspectRatio": 1.671,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "port",
+    "jebel",
+    "ali",
+    "may",
+    "2007",
+    "pict",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "port",
+    "jebel",
+    "ali",
+    "may",
+    "2007",
+    "pict",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Port Jebel Ali on 1 May 2007 Pict 1.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Jebel Ali",
+    "savedAt": "2026-10-26T10:44:41.816Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "author": "Imre Solt",
+    "creator": "Imre Solt",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T10:41:37.671Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Port_Jebel_Ali_on_1_May_2007_Pict_1.jpg"
+  }
+}

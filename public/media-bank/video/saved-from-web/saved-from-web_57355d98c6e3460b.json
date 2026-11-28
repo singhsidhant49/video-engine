@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_57355d98c6e3460b",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/female-scientists-working-in-a-lab-8539785/",
+  "path": "video/saved-from-web/saved-from-web_57355d98c6e3460b.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1080,
+  "height": 2048,
+  "aspectRatio": 0.5273,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "working",
+    "lab",
+    "scientific",
+    "research",
+    "laboratory",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "8539785",
+    "scientists",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "working",
+    "lab",
+    "scientific",
+    "research",
+    "laboratory",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "8539785",
+    "scientists",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "female scientists working in a lab"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "scientist lab notebook penicillin",
+    "savedAt": "2026-11-02T10:14:24.904Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "https://kaboompics.com/",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/female-scientists-working-in-a-lab-8539785/"
+  }
+}

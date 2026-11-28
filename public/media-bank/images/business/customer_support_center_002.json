@@ -1,0 +1,75 @@
+{
+  "id": "customer_support_center_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Friendly call center team at work",
+  "path": "images/business/customer_support_center_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "customer support",
+    "call center",
+    "service",
+    "customer success",
+    "headsets"
+  ],
+  "concepts": [
+    "customer support",
+    "service operations",
+    "customer success",
+    "support center"
+  ],
+  "subjects": [
+    "support agents",
+    "monitors",
+    "headsets"
+  ],
+  "actions": [
+    "taking calls",
+    "helping customers",
+    "working at computers"
+  ],
+  "mood": [
+    "friendly",
+    "efficient",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.39,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "customer service",
+    "support team",
+    "customer success",
+    "service operations"
+  ],
+  "avoidFor": [
+    "retail boutique",
+    "executive speech",
+    "warehouse"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -28,11 +28,9 @@ export function selectVideoVisualStrategy({ topic = '', plan, format = 'landscap
   const quietStyle = /minimal|quiet|reflective/.test(styleText) ? 0.1 : 0;
 
   const rawReal = 0.48 + entityRatio * 0.3 + evidenceRatio * 0.16 + cinematicRatio * 0.08;
-  const rawProcedural = 0.3 + graphicRatio * 0.48 + (1 - entityRatio) * 0.08;
-  const weightTotal = rawReal + rawProcedural;
   const visualFlow = evidenceRatio >= 0.48
     ? 'evidence'
-    : graphicRatio >= 0.52 ? 'explanatory' : cinematicRatio >= 0.62 ? 'cinematic' : 'hybrid';
+    : graphicRatio >= 0.52 ? 'explanatory' : cinematicRatio >= 0.62 ? 'cinematic' : 'editorial';
   const continuityMode = entityRatio >= 0.55 ? 'topic' : entityRatio <= 0.15 && graphicRatio >= 0.4 ? 'concept' : 'mixed';
   const segmentEnergy = (segment, fallback) => segment.length
     ? segment.reduce((sum, scene) => sum + (Number(scene.intensity) || 3), 0) / segment.length / 5
@@ -44,8 +42,7 @@ export function selectVideoVisualStrategy({ topic = '', plan, format = 'landscap
     continuityMode,
     visualFlow,
     assetPreference: {
-      realMediaWeight: round(rawReal / weightTotal),
-      proceduralWeight: round(rawProcedural / weightTotal),
+      realMediaWeight: 1,
     },
     pacing: {
       introEnergy: round(segmentEnergy(scenes.slice(0, edge), avgEnergy) + fastStyle - quietStyle),
@@ -67,12 +64,7 @@ export function selectVideoVisualStrategy({ topic = '', plan, format = 'landscap
   };
   strategy = mergeStrategy(strategy, channelDefaults);
   strategy = mergeStrategy(strategy, overrides);
-  if (overrides?.useMediaEditorial || channelDefaults?.useMediaEditorial || overrides?.visualMode === 'MEDIA_EDITORIAL') {
-    strategy.assetPreference = {
-      realMediaWeight: 1.0,
-      proceduralWeight: 0.0,
-    };
-  }
+  strategy.assetPreference = { realMediaWeight: 1 };
   if (overrides && Object.keys(overrides).length) strategy.source = 'video-override';
   else if (channelDefaults && Object.keys(channelDefaults).length) strategy.source = 'channel-default';
   return VideoVisualStrategySchema.parse(strategy);

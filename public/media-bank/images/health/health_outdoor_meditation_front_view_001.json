@@ -1,0 +1,80 @@
+{
+  "id": "health_outdoor_meditation_front_view_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mindful meditation at golden sunrise",
+  "path": "images/health/health_outdoor_meditation_front_view_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "meditation",
+    "mindfulness",
+    "mental health",
+    "wellness",
+    "sunrise",
+    "stress relief",
+    "breathwork"
+  ],
+  "concepts": [
+    "mental wellbeing",
+    "mindfulness practice",
+    "relaxation",
+    "emotional regulation"
+  ],
+  "subjects": [
+    "adult woman",
+    "rocky overlook",
+    "mountains",
+    "sunrise",
+    "misty valley"
+  ],
+  "actions": [
+    "meditating",
+    "breathing calmly",
+    "relaxing outdoors"
+  ],
+  "mood": [
+    "calm",
+    "hopeful",
+    "balanced"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.52
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mental wellness videos",
+    "mindfulness content",
+    "stress management scenes",
+    "self-care videos"
+  ],
+  "avoidFor": [
+    "clinical care",
+    "nutrition content",
+    "sleep scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

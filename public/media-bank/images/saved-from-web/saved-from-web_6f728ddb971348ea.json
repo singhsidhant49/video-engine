@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_6f728ddb971348ea",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A robotic dog oversees an automated car assembly in a high-tech factory setting.",
+  "path": "images/saved-from-web/saved-from-web_6f728ddb971348ea.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1737,
+  "aspectRatio": 1.4968,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "robotic",
+    "dog",
+    "oversee",
+    "automated",
+    "car",
+    "assembly",
+    "high",
+    "tech",
+    "factory",
+    "setting",
+    "city",
+    "street",
+    "parking",
+    "lot",
+    "static",
+    "presentation",
+    "oversees",
+    "high-tech",
+    "automobile sedan"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "robotic",
+    "dog",
+    "oversee",
+    "automated",
+    "car",
+    "assembly",
+    "high",
+    "tech",
+    "factory",
+    "setting",
+    "city",
+    "street",
+    "parking",
+    "lot",
+    "static",
+    "presentation",
+    "oversees",
+    "high-tech",
+    "automobile sedan"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A robotic dog oversees an automated car assembly in a high-tech factory setting."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "city street or parking lot"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "robot factory assembly",
+    "savedAt": "2026-10-26T08:43:41.074Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Hyundai Motor Group",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/boston-dynamics-robot-in-a-car-factory-19319639/"
+  }
+}

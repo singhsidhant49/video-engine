@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_0fb6a88236433ddb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Breathtaking view of a snow-covered mountain valley in Iceland with a winding road below.",
+  "path": "images/saved-from-web/saved-from-web_0fb6a88236433ddb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snow",
+    "covered",
+    "mountain",
+    "valley",
+    "iceland",
+    "winding",
+    "road",
+    "below",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "view",
+    "snow-covered",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snow",
+    "covered",
+    "mountain",
+    "valley",
+    "iceland",
+    "winding",
+    "road",
+    "below",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "view",
+    "snow-covered",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Breathtaking view of a snow-covered mountain valley in Iceland with a winding road below."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "winding road himalayas clouds",
+    "savedAt": "2026-10-27T07:02:15.248Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Raul Ling",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/icelandic-snow-covered-mountain-valley-view-32251664/"
+  }
+}

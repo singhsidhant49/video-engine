@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_9d5f4e16088d9e1d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning view of an Antarctic ice shelf with a serene frozen landscape and clear blue sky.",
+  "path": "images/saved-from-web/saved-from-web_9d5f4e16088d9e1d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "antarctic",
+    "ice",
+    "shelf",
+    "serene",
+    "frozen",
+    "landscape",
+    "clear",
+    "blue",
+    "sky",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "stunning",
+    "antarctic",
+    "ice",
+    "shelf",
+    "serene",
+    "frozen",
+    "landscape",
+    "clear",
+    "blue",
+    "sky",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Stunning view of an Antarctic ice shelf with a serene frozen landscape and clear blue sky."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Antarctic ice sheet vast white landscape",
+    "savedAt": "2026-10-29T13:24:46.678Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Francesco Ungaro",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/majestic-antarctic-ice-shelf-panorama-30429897/"
+  }
+}

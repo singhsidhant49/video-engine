@@ -1,0 +1,78 @@
+{
+  "id": "psychology_public_speaking_anxiety_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Nervous speaker at a podium",
+  "path": "images/psychology/psychology_public_speaking_anxiety_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "anxiety",
+    "public speaking",
+    "social anxiety",
+    "confidence",
+    "presentation",
+    "stress"
+  ],
+  "concepts": [
+    "performance anxiety",
+    "social fear",
+    "stage fright",
+    "confidence building"
+  ],
+  "subjects": [
+    "young woman",
+    "podium",
+    "microphone",
+    "audience"
+  ],
+  "actions": [
+    "preparing to speak",
+    "managing nerves",
+    "addressing audience"
+  ],
+  "mood": [
+    "tense",
+    "vulnerable",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "anxiety explainer",
+    "confidence training",
+    "public speaking content",
+    "social anxiety scenes"
+  ],
+  "avoidFor": [
+    "relaxation content",
+    "sleep topic",
+    "family therapy"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

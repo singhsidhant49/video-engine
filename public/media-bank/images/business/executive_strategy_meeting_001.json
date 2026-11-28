@@ -1,0 +1,73 @@
+{
+  "id": "executive_strategy_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive strategy meeting at sunset",
+  "path": "images/business/executive_strategy_meeting_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "strategy meeting",
+    "executive",
+    "boardroom",
+    "presentation",
+    "sunset"
+  ],
+  "concepts": [
+    "executive planning",
+    "corporate strategy",
+    "leadership meeting",
+    "growth planning"
+  ],
+  "subjects": [
+    "presenter",
+    "team",
+    "screen"
+  ],
+  "actions": [
+    "presenting strategy",
+    "discussing growth"
+  ],
+  "mood": [
+    "premium",
+    "strategic",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.74,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "leadership content",
+    "strategy deck",
+    "corporate intro"
+  ],
+  "avoidFor": [
+    "warehouse",
+    "remote work",
+    "retail"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

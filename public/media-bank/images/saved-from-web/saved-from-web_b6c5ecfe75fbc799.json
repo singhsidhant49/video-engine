@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_b6c5ecfe75fbc799",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Road construction with traffic signs in Dubai, featuring 'No Left Turn' sign.",
+  "path": "images/saved-from-web/saved-from-web_b6c5ecfe75fbc799.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1724,
+  "aspectRatio": 1.5081,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "road",
+    "construction",
+    "traffic",
+    "sign",
+    "dubai",
+    "featuring",
+    "left",
+    "turn",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "signs",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "road",
+    "construction",
+    "traffic",
+    "sign",
+    "dubai",
+    "featuring",
+    "left",
+    "turn",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "signs",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Road construction with traffic signs in Dubai, featuring 'No Left Turn' sign."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai construction 1970s",
+    "savedAt": "2026-10-26T10:44:24.613Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Myka Vergara",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/street-signs-on-the-road-9275827/"
+  }
+}

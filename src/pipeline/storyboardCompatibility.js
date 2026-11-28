@@ -19,6 +19,7 @@ export function storyboardToExecutionPlan(contentPlan, storyboard) {
       purpose: scene.purpose,
       kind: source.kind || scene.preferredPresentation || 'subject',
       visual: scene.shots[0]?.visualConcept || source.visual || '',
+      imagePrompt: source.imagePrompt || scene.shots[0]?.visualConcept || source.visual || '',
       entity: source.entity || (entityName ? { name: entityName, wikipedia: entityName } : null),
       text: source.text || null,
       emphasis: source.emphasis || null,

@@ -1,0 +1,73 @@
+{
+  "id": "boutique_owner_store_management_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Boutique owner managing her store",
+  "path": "images/business/boutique_owner_store_management_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "retail",
+    "boutique",
+    "store owner",
+    "tablet",
+    "small business"
+  ],
+  "concepts": [
+    "small business management",
+    "retail operations",
+    "store ownership",
+    "inventory control"
+  ],
+  "subjects": [
+    "store owner",
+    "tablet",
+    "boutique shelves"
+  ],
+  "actions": [
+    "checking inventory",
+    "managing store"
+  ],
+  "mood": [
+    "warm",
+    "entrepreneurial",
+    "stylish"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "small business story",
+    "retail content",
+    "entrepreneurship"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "trading desk",
+    "customer service center"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

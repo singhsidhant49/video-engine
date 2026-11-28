@@ -1,0 +1,81 @@
+{
+  "id": "health_anatomical_torso_visualization_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Glowing anatomical torso visualization",
+  "path": "images/health/health_anatomical_torso_visualization_002.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "anatomy",
+    "human body",
+    "organs",
+    "physiology",
+    "medical illustration",
+    "body systems"
+  ],
+  "concepts": [
+    "body systems education",
+    "medical explainer",
+    "internal organs",
+    "human physiology"
+  ],
+  "subjects": [
+    "human torso",
+    "lungs",
+    "heart",
+    "liver",
+    "stomach",
+    "intestines"
+  ],
+  "actions": [
+    "showing anatomy",
+    "explaining organ systems",
+    "visualizing internal body"
+  ],
+  "mood": [
+    "clinical",
+    "educational",
+    "high-tech"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper",
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "health explainers",
+    "medical education",
+    "anatomy videos",
+    "body systems videos"
+  ],
+  "avoidFor": [
+    "nutrition scenes",
+    "mental wellness landscapes",
+    "doctor consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

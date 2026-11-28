@@ -1,0 +1,71 @@
+{
+  "id": "history_prehistoric_cave_painter_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Prehistoric cave painter at work",
+  "path": "images/history/history_prehistoric_cave_painter_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "prehistory",
+    "cave art",
+    "stone age",
+    "human origins"
+  ],
+  "concepts": [
+    "prehistoric life",
+    "early human creativity",
+    "cave painting"
+  ],
+  "subjects": [
+    "cave painter",
+    "rock wall",
+    "firelight"
+  ],
+  "actions": [
+    "painting cave wall",
+    "creating symbols"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "prehistoric history videos",
+    "human origins",
+    "early art scenes"
+  ],
+  "avoidFor": [
+    "modern history",
+    "industrial era"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

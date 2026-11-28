@@ -1,0 +1,76 @@
+{
+  "id": "psychology_support_group_circle_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm group support circle",
+  "path": "images/psychology/psychology_support_group_circle_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "support group",
+    "group therapy",
+    "community",
+    "healing",
+    "sharing",
+    "empathy"
+  ],
+  "concepts": [
+    "peer support",
+    "group healing",
+    "shared experience",
+    "community care"
+  ],
+  "subjects": [
+    "support group",
+    "diverse adults",
+    "chairs in circle"
+  ],
+  "actions": [
+    "sharing experiences",
+    "listening",
+    "offering support"
+  ],
+  "mood": [
+    "supportive",
+    "hopeful",
+    "human"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.57,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "group therapy scenes",
+    "recovery content",
+    "community support videos",
+    "mental health education"
+  ],
+  "avoidFor": [
+    "solo reflection",
+    "sleep issues",
+    "executive coaching"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

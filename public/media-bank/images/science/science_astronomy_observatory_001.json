@@ -1,0 +1,77 @@
+{
+  "id": "science_astronomy_observatory_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Astronomer working beneath the Milky Way",
+  "path": "images/science/science_astronomy_observatory_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "astronomy",
+    "observatory",
+    "milky way",
+    "space",
+    "research",
+    "telescope"
+  ],
+  "concepts": [
+    "astronomical observation",
+    "space research",
+    "observatory work",
+    "cosmos analysis"
+  ],
+  "subjects": [
+    "astronomer",
+    "computer monitors",
+    "telescope dome",
+    "night sky"
+  ],
+  "actions": [
+    "observing sky",
+    "analyzing celestial imagery",
+    "conducting space research"
+  ],
+  "mood": [
+    "epic",
+    "curious",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "space science",
+    "astronomy explainer",
+    "cosmos documentary",
+    "observatory content"
+  ],
+  "avoidFor": [
+    "chemistry experiment",
+    "biology microscopy",
+    "finance"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

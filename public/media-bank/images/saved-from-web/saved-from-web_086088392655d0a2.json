@@ -1,0 +1,80 @@
+{
+  "id": "saved-from-web_086088392655d0a2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Smiling woman with braided hair standing confidently in a modern gym environment.",
+  "path": "images/saved-from-web/saved-from-web_086088392655d0a2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "smiling",
+    "woman",
+    "braided",
+    "hair",
+    "standing",
+    "confidently",
+    "modern",
+    "gym",
+    "environment",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "smiling",
+    "woman",
+    "braided",
+    "hair",
+    "standing",
+    "confidently",
+    "modern",
+    "gym",
+    "environment",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Smiling woman with braided hair standing confidently in a modern gym environment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Endurance crew reunion smiling active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-29T11:58:53.176Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-in-blue-crew-neck-t-shirt-with-long-braided-hair-8611298/"
+  }
+}

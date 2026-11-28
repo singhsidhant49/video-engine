@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_3dd437e15eef3ffa",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Technician working on humanoid robot at a tech exhibition in Guimaraes, Portugal.",
+  "path": "images/saved-from-web/saved-from-web_3dd437e15eef3ffa.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "technician",
+    "working",
+    "humanoid",
+    "robot",
+    "tech",
+    "exhibition",
+    "guimarae",
+    "portugal",
+    "guimaraes",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "technician",
+    "working",
+    "humanoid",
+    "robot",
+    "tech",
+    "exhibition",
+    "guimarae",
+    "portugal",
+    "guimaraes",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "people working on task together",
+    "savedAt": "2026-10-28T08:37:27.100Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Rui Dias",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/men-fixing-the-robot-12499181/"
+  }
+}

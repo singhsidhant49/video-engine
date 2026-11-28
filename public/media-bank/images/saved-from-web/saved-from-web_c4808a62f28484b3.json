@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_c4808a62f28484b3",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene waterfall cascades into a clear turquoise pool, surrounded by natural rock formations.",
+  "path": "images/saved-from-web/saved-from-web_c4808a62f28484b3.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "waterfall",
+    "cascade",
+    "into",
+    "clear",
+    "turquoise",
+    "pool",
+    "surrounded",
+    "natural",
+    "rock",
+    "formation",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "cascades",
+    "formations"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "waterfall",
+    "cascade",
+    "into",
+    "clear",
+    "turquoise",
+    "pool",
+    "surrounded",
+    "natural",
+    "rock",
+    "formation",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "cascades",
+    "formations"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene waterfall cascades into a clear turquoise pool, surrounded by natural rock formations."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "waterfall cascading into pool",
+    "savedAt": "2026-10-26T16:26:57.699Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nrlh Semiz",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/tranquil-waterfall-flowing-into-turquoise-pool-39177036/"
+  }
+}

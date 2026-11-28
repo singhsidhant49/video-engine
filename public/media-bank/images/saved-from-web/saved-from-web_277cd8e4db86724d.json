@@ -1,0 +1,100 @@
+{
+  "id": "saved-from-web_277cd8e4db86724d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Empty shikara on Dal Lake, Srinagar, India 2013-08-23 (flickr 9967093983).jpg",
+  "path": "images/saved-from-web/saved-from-web_277cd8e4db86724d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1758,
+  "aspectRatio": 1.479,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "empty",
+    "shikara",
+    "dal",
+    "lake",
+    "srinagar",
+    "india",
+    "2013",
+    "flickr",
+    "9967093983",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "2013-08-23",
+    "jpg",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "empty",
+    "shikara",
+    "dal",
+    "lake",
+    "srinagar",
+    "india",
+    "2013",
+    "flickr",
+    "9967093983",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "2013-08-23",
+    "jpg",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Empty shikara on Dal Lake, Srinagar, India 2013-08-23 (flickr 9967093983).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Dal Lake",
+    "savedAt": "2026-10-27T06:27:38.984Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 2.0",
+    "license_name": "CC BY-SA 2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "author": "Fulvio Spada from Torino, Italy",
+    "creator": "Fulvio Spada from Torino, Italy",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-27T06:25:01.278Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Empty_shikara_on_Dal_Lake,_Srinagar,_India_2013-08-23_(flickr_9967093983).jpg"
+  }
+}

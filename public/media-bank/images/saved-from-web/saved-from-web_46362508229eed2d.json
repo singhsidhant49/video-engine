@@ -1,0 +1,70 @@
+{
+  "id": "saved-from-web_46362508229eed2d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:The Pantheon dome, Rome (Ank Kumar) 01.jpg",
+  "path": "images/saved-from-web/saved-from-web_46362508229eed2d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "pantheon",
+    "dome",
+    "rome",
+    "ank",
+    "kumar",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "file",
+    "jpg",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:The Pantheon dome, Rome (Ank Kumar) 01.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Pantheon dome interior Rome",
+    "savedAt": "2026-10-24T07:24:34.781Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Ank Kumar",
+    "creator": "Ank Kumar",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T07:23:29.506Z",
+    "page": "https://commons.wikimedia.org/wiki/File:The_Pantheon_dome,_Rome_(Ank_Kumar)_01.jpg"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "recruitment_team_candidate_review_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Corporate team reviewing candidates",
+  "path": "images/business/recruitment_team_candidate_review_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "recruitment",
+    "HR",
+    "candidate review",
+    "team meeting",
+    "talent"
+  ],
+  "concepts": [
+    "talent review",
+    "recruitment meeting",
+    "candidate evaluation",
+    "HR strategy"
+  ],
+  "subjects": [
+    "recruitment team",
+    "resumes",
+    "candidate dashboard"
+  ],
+  "actions": [
+    "reviewing candidates",
+    "discussing hiring"
+  ],
+  "mood": [
+    "focused",
+    "collaborative",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "HR content",
+    "recruitment operations",
+    "talent acquisition"
+  ],
+  "avoidFor": [
+    "trading",
+    "e-commerce packing",
+    "retail boutique"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

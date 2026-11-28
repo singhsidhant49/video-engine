@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_balcony_breakfast_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit balcony breakfast with city views",
+  "path": "images/lifestyle/lifestyle_balcony_breakfast_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "breakfast",
+    "balcony",
+    "city view",
+    "morning routine",
+    "coffee",
+    "slow living"
+  ],
+  "concepts": [
+    "morning ritual",
+    "urban lifestyle",
+    "slow living",
+    "self care"
+  ],
+  "subjects": [
+    "woman",
+    "coffee mug",
+    "croissant",
+    "berries",
+    "balcony table",
+    "city skyline"
+  ],
+  "actions": [
+    "drinking coffee",
+    "having breakfast",
+    "enjoying morning view"
+  ],
+  "mood": [
+    "calm",
+    "sunny",
+    "aspirational"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.36,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "morning routine videos",
+    "city lifestyle scenes",
+    "self-care content",
+    "slow living montages"
+  ],
+  "avoidFor": [
+    "party scenes",
+    "gym workouts",
+    "formal business"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_662cb0f4d4b69378",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Scenic view of Pangong Lake with clear blue water and the majestic Himalayan mountains.",
+  "path": "images/saved-from-web/saved-from-web_662cb0f4d4b69378.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "pangong",
+    "lake",
+    "clear",
+    "blue",
+    "water",
+    "majestic",
+    "himalayan",
+    "mountain",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scenic",
+    "pangong",
+    "lake",
+    "clear",
+    "blue",
+    "water",
+    "majestic",
+    "himalayan",
+    "mountain",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "view",
+    "mountains"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Scenic view of Pangong Lake with clear blue water and the majestic Himalayan mountains."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Pangong Lake Ladakh blue water mountains",
+    "savedAt": "2026-10-27T07:03:08.149Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Saakshi Yadav",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/serene-view-of-pangong-lake-against-himalayan-mountains-39850124/"
+  }
+}

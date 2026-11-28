@@ -1,6 +1,5 @@
 export const VISUAL_MODES = Object.freeze({
   MEDIA_EDITORIAL: 'MEDIA_EDITORIAL',
-  LEGACY_PROCEDURAL: 'LEGACY_PROCEDURAL',
 });
 
 const falseLike = new Set(['0', 'false', 'off', 'no']);
@@ -15,28 +14,27 @@ function envBoolean(value, fallback) {
 }
 
 export function normalizeVisualMode(value = process.env.VISUAL_MODE) {
-  const normalized = String(value || VISUAL_MODES.MEDIA_EDITORIAL).trim().toUpperCase();
-  if (normalized === VISUAL_MODES.LEGACY_PROCEDURAL) return VISUAL_MODES.LEGACY_PROCEDURAL;
+  const normalized = String(value || process.env.VISUAL_MODE || VISUAL_MODES.MEDIA_EDITORIAL).trim().toUpperCase();
+  if (normalized && normalized !== VISUAL_MODES.MEDIA_EDITORIAL) {
+    throw new Error(`Unsupported visual mode "${normalized}". Only MEDIA_EDITORIAL is available.`);
+  }
   return VISUAL_MODES.MEDIA_EDITORIAL;
 }
 
 /** The only authority for production visual routing. JSX never reads feature flags. */
 export function resolveVisualPolicy(overrides = {}) {
-  const requestedMode = overrides.visualMode || process.env.VISUAL_MODE;
-  const mode = normalizeVisualMode(requestedMode);
-  const mediaEditorial = mode === VISUAL_MODES.MEDIA_EDITORIAL
-    && envBoolean(overrides.useMediaEditorial ?? process.env.USE_MEDIA_EDITORIAL, true);
-  const proceduralEnabled = mode === VISUAL_MODES.LEGACY_PROCEDURAL
-    && envBoolean(overrides.enableProceduralGraphics ?? process.env.ENABLE_PROCEDURAL_GRAPHICS, true)
-    && envBoolean(overrides.enableLegacyVisualFamilies ?? process.env.ENABLE_LEGACY_VISUAL_FAMILIES, true);
+  normalizeVisualMode(overrides.visualMode || process.env.VISUAL_MODE);
   const allowSplitLayout = envBoolean(overrides.allowSplitLayout ?? process.env.ALLOW_SPLIT_LAYOUT, false);
+  const motionPreset = String(overrides.motionPreset ?? process.env.VIDEO_MOTION_PRESET ?? 'standard').trim().toLowerCase() === 'minimal'
+    ? 'minimal'
+    : 'standard';
   return Object.freeze({
-    visualMode: mediaEditorial ? VISUAL_MODES.MEDIA_EDITORIAL : VISUAL_MODES.LEGACY_PROCEDURAL,
-    useMediaEditorial: mediaEditorial,
-    enableProceduralGraphics: proceduralEnabled,
-    enableLegacyVisualFamilies: proceduralEnabled,
+    visualMode: VISUAL_MODES.MEDIA_EDITORIAL,
+    useMediaEditorial: true,
+    preferAuthenticMedia: true,
     allowGeneratedMedia: false,
     allowSplitLayout,
+    motionPreset,
     defaultTransition: 'CUT',
     defaultCamera: 'STATIC',
   });

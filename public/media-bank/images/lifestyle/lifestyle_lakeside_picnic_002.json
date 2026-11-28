@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_lakeside_picnic_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Lakeside picnic with strawberries and friends",
+  "path": "images/lifestyle/lifestyle_lakeside_picnic_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "picnic",
+    "friends",
+    "summer",
+    "park",
+    "food",
+    "social life"
+  ],
+  "concepts": [
+    "friendship",
+    "weekend leisure",
+    "outdoor lifestyle",
+    "social connection"
+  ],
+  "subjects": [
+    "two women",
+    "picnic blanket",
+    "strawberries",
+    "bread",
+    "flowers",
+    "lake"
+  ],
+  "actions": [
+    "laughing",
+    "eating fruit",
+    "relaxing outdoors"
+  ],
+  "mood": [
+    "joyful",
+    "bright",
+    "carefree"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "upper-center"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "friendship videos",
+    "summer lifestyle scenes",
+    "weekend montages",
+    "social content"
+  ],
+  "avoidFor": [
+    "serious office scenes",
+    "medical clips",
+    "night routines"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

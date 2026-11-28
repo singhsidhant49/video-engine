@@ -1,0 +1,96 @@
+{
+  "id": "saved-from-web_f0d5efee502281e5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A vintage red Ford Mustang radio with an open book on a wooden desk, indoors.",
+  "path": "images/saved-from-web/saved-from-web_f0d5efee502281e5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "red",
+    "ford",
+    "mustang",
+    "radio",
+    "open",
+    "book",
+    "wooden",
+    "desk",
+    "indoor",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "indoors",
+    "paperwork",
+    "documents",
+    "contract",
+    "office desk",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "red",
+    "ford",
+    "mustang",
+    "radio",
+    "open",
+    "book",
+    "wooden",
+    "desk",
+    "indoor",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "indoors",
+    "paperwork",
+    "documents",
+    "contract",
+    "office desk",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A vintage red Ford Mustang radio with an open book on a wooden desk, indoors."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "open book on library wooden desk",
+    "savedAt": "2026-10-29T14:09:36.106Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Betül  Güneş",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/vintage-red-radio-with-open-book-on-wooden-desk-35525951/"
+  }
+}

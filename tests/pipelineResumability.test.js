@@ -63,7 +63,7 @@ test('Invalidation Graph: audio/music change invalidates audio-mastering and ren
 });
 
 test('TTS Cache: deterministic key, cache hit, cache miss, and metrics', async () => {
-  const params = { text: 'The 2008 financial crisis was triggered by subprime lending.', voice: 'am_adam', speed: 0.9 };
+  const params = { text: 'The 2008 financial crisis was triggered by subprime lending.', voice: 'am_puck', speed: 0.9 };
   const dummyWav = Buffer.from('RIFF....WAVEfmt ....data' + '0'.repeat(1200));
 
   // Ensure fresh cache entry
@@ -246,6 +246,24 @@ test('Run Locking: prevents concurrent processes on same run directory', async (
       lockExists = false;
     }
     assert.equal(lockExists, false, 'Lock file must be deleted upon release');
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
+  }
+});
+
+test('Run Locking: treats a reused PID from another container host as stale', async () => {
+  const tmpDir = path.join(config.rootDir, '.cache', 'test-foreign-lock-' + Date.now());
+  await fs.mkdir(tmpDir, { recursive: true });
+  try {
+    await fs.writeFile(path.join(tmpDir, '.lock'), JSON.stringify({
+      pid: process.pid,
+      host: 'previous-container-host',
+      lockedAt: new Date().toISOString(),
+    }));
+    const lock = await acquireRunLock(tmpDir);
+    const saved = JSON.parse(await fs.readFile(lock.lockPath, 'utf8'));
+    assert.notEqual(saved.host, 'previous-container-host');
+    await lock.release();
   } finally {
     await fs.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
   }

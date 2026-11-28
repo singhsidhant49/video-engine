@@ -1,0 +1,76 @@
+{
+  "id": "health_pharmacy_prescription_handoff_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Friendly pharmacy prescription handoff",
+  "path": "images/health/health_pharmacy_prescription_handoff_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "pharmacy",
+    "prescription",
+    "medication",
+    "pharmacist",
+    "healthcare access"
+  ],
+  "concepts": [
+    "pharmacy care",
+    "prescription pickup",
+    "medication access"
+  ],
+  "subjects": [
+    "pharmacist",
+    "adult customer",
+    "pharmacy counter",
+    "medicine bag"
+  ],
+  "actions": [
+    "handing over prescription",
+    "collecting medication",
+    "pharmacy consultation"
+  ],
+  "mood": [
+    "friendly",
+    "professional",
+    "helpful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "pharmacy videos",
+    "medication access scenes",
+    "healthcare system content",
+    "patient journey"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

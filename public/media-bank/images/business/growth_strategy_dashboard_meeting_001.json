@@ -1,0 +1,75 @@
+{
+  "id": "growth_strategy_dashboard_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Corporate growth strategy meeting",
+  "path": "images/business/growth_strategy_dashboard_meeting_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "growth",
+    "strategy",
+    "analytics",
+    "boardroom",
+    "management"
+  ],
+  "concepts": [
+    "growth strategy",
+    "management reporting",
+    "business performance",
+    "market expansion"
+  ],
+  "subjects": [
+    "executive",
+    "team",
+    "large dashboard screen"
+  ],
+  "actions": [
+    "presenting results",
+    "reviewing growth",
+    "discussing expansion"
+  ],
+  "mood": [
+    "strategic",
+    "professional",
+    "data-driven"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "growth content",
+    "board meeting",
+    "corporate strategy",
+    "management reporting"
+  ],
+  "avoidFor": [
+    "retail point of sale",
+    "packing orders",
+    "casual remote work"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

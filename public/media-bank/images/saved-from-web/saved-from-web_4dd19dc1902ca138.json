@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_4dd19dc1902ca138",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A woman in bed using a smartphone at night, her face illuminated by the screen's light.",
+  "path": "images/saved-from-web/saved-from-web_4dd19dc1902ca138.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "bed",
+    "using",
+    "smartphone",
+    "night",
+    "her",
+    "face",
+    "illuminated",
+    "screen",
+    "light",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "bed",
+    "using",
+    "smartphone",
+    "night",
+    "her",
+    "face",
+    "illuminated",
+    "screen",
+    "light",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A woman in bed using a smartphone at night, her face illuminated by the screen's light."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "phone screen light in dark bedroom",
+    "savedAt": "2026-10-26T11:07:02.005Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "SHVETS production",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-lying-on-bed-while-using-a-cellphone-8036688/"
+  }
+}

@@ -15,6 +15,9 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
   const bg = concept.palette?.background || '#0B1020';
   const textColor = concept.palette?.text || '#FFFFFF';
   const accentColor = concept.palette?.accent || '#F5C542';
+  const heroImageSrc = /^(?:data:|https?:|blob:)/.test(String(concept.heroImage || ''))
+    ? concept.heroImage
+    : staticFile(String(concept.heroImage || '').replace(/^[/\\]+/, ''));
 
   const words = (concept.overlayText || 'REVOLUTIONARY TECH').split(/\s+/);
   const heroText = words.slice(0, 3).join(' ');
@@ -131,7 +134,7 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
           >
             {typeof concept.heroImage === 'string' && concept.heroImage.endsWith('.mp4') ? (
               <OffthreadVideo
-                src={staticFile(concept.heroImage)}
+                src={heroImageSrc}
                 muted
                 style={{
                   width: '100%',
@@ -141,7 +144,7 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
               />
             ) : (
               <Img
-                src={staticFile(concept.heroImage)}
+                src={heroImageSrc}
                 style={{
                   width: '100%',
                   height: '100%',

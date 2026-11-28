@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_b09ef6d74b96e1d1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of the Burj Khalifa towering over the stunning skyline of Dubai under dramatic clouds.",
+  "path": "images/saved-from-web/saved-from-web_b09ef6d74b96e1d1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "burj",
+    "khalifa",
+    "towering",
+    "over",
+    "stunning",
+    "skyline",
+    "dubai",
+    "under",
+    "dramatic",
+    "cloud",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "burj",
+    "khalifa",
+    "towering",
+    "over",
+    "stunning",
+    "skyline",
+    "dubai",
+    "under",
+    "dramatic",
+    "cloud",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "clouds",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A breathtaking view of the Burj Khalifa towering over the stunning skyline of Dubai under dramatic clouds."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Dubai Burj Khalifa modern skyline",
+    "savedAt": "2026-10-29T06:24:17.936Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Walid Ahmad",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/majestic-view-of-burj-khalifa-and-dubai-skyline-31566720/"
+  }
+}

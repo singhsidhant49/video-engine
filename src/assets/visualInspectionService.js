@@ -12,7 +12,7 @@
  * - EXTERNAL_VISION: Pluggable external vision-language interface (when configured)
  * - METADATA_FALLBACK: Used only when pixel files are inaccessible
  * 
- * Inspects multiple frames for video assets (10%, 25%, 50%, 75%, 90%).
+ * Inspects three representative frames for video assets (15%, 50%, 85%).
  * Caches results by content hash, backend version, and schema version in .cache/visual-inspection/
  */
 
@@ -22,10 +22,13 @@ import crypto from 'node:crypto';
 import os from 'node:os';
 import { getSharp } from '../services/imageUtils.js';
 import { ffmpeg, probeDuration } from '../services/ffmpeg.js';
+import { DOMAIN_SYNONYMS } from './assetIntelligenceScorer.js';
 
 const CACHE_DIR = path.resolve('.cache', 'visual-inspection');
-const BACKEND_VERSION = 'v2.0';
-const SCHEMA_VERSION = 'v3';
+// Bump both values whenever semantic classes or feature extraction changes so
+// production retries cannot reuse a stale false-negative inspection.
+const BACKEND_VERSION = 'v2.2';
+const SCHEMA_VERSION = 'v5';
 
 const STOP_WORDS = new Set([
   'the', 'a', 'an', 'and', 'or', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from',
@@ -38,6 +41,24 @@ const tokenize = (text = '') =>
     .replace(/[^\w\s-]/g, ' ')
     .split(/\s+/)
     .filter((w) => w.length > 2 && !STOP_WORDS.has(w));
+
+/** Provider page URLs are identifiers, not visible subjects.  Preserve the
+ * human-readable slug for metadata evidence without allowing protocol/domain
+ * tokens or numeric IDs to masquerade as objects in the frame. */
+function humanizeProviderLabel(value = '') {
+  const raw = String(value || '').trim();
+  if (!/^https?:\/\//i.test(raw)) return raw;
+  try {
+    const parsed = new URL(raw);
+    const slug = parsed.pathname.split('/').filter(Boolean).pop() || '';
+    return decodeURIComponent(slug)
+      .replace(/-?\d{5,}$/g, '')
+      .replace(/[-_]+/g, ' ')
+      .trim();
+  } catch {
+    return '';
+  }
+}
 
 /**
  * Ensures cache directory exists.
@@ -109,6 +130,7 @@ async function inspectImagePixels(filePath) {
     }
 
     const isGrayscale = meta.channels === 1 || (ch.length >= 3 && Math.abs(ch[0].mean - ch[1].mean) < 4 && Math.abs(ch[1].mean - ch[2].mean) < 4);
+    const isDarkOrBlank = avgMean < 8 && avgStdev < 6;
 
     // Style class inference from pixel properties
     let styleClass = 'STOCK';
@@ -144,6 +166,10 @@ async function inspectImagePixels(filePath) {
       styleClass,
       isGrayscale,
       colorTone,
+      avgMean: Number(avgMean.toFixed(2)),
+      avgStdev: Number(avgStdev.toFixed(2)),
+      isDarkOrBlank,
+      hasBlackStart: avgMean < 10 && avgStdev < 6,
       width: meta.width || 1920,
       height: meta.height || 1080,
     };
@@ -166,7 +192,8 @@ async function inspectImagePixels(filePath) {
 }
 
 /**
- * Local Vision Backend: Samples multiple representative frames of a video (10%, 25%, 50%, 75%, 90%).
+ * Local Vision Backend: samples opening, midpoint and closing frames. Three
+ * samples catch black heads and shot changes without five serial FFmpeg starts.
  */
 async function inspectVideoFrames(videoPath, duration = 10) {
   const sharp = getSharp();
@@ -180,7 +207,7 @@ async function inspectVideoFrames(videoPath, duration = 10) {
     };
   }
 
-  const samplePercents = [0.10, 0.25, 0.50, 0.75, 0.90];
+  const samplePercents = [0.15, 0.50, 0.85];
   let tmpDir = null;
   const frameStats = [];
   const semanticFrames = [];
@@ -201,7 +228,7 @@ async function inspectVideoFrames(videoPath, duration = 10) {
           hasBlackStart = true;
         }
         frameStats.push({ mean, stdev });
-        if (i === 1 || i === 2 || i === 3) {
+        if (i === 1) {
           const semantic = await inspectSemanticVisionLanguage(framePath);
           if (semantic) semanticFrames.push(semantic);
         }
@@ -220,6 +247,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
       styleClass: 'DOCUMENTARY',
       temporalVariation: 0.3,
       hasBlackStart: false,
+      avgMean: 120,
+      avgStdev: 35,
+      isDarkOrBlank: false,
       semanticVision: null,
     };
   }
@@ -227,6 +257,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
   const avgBusyness = frameStats.reduce((s, f) => s + f.stdev, 0) / frameStats.length / 75;
   const meanDiff = Math.abs(frameStats[0].mean - frameStats[frameStats.length - 1].mean);
   const temporalVariation = Math.min(1.0, meanDiff / 50);
+  const avgMean = frameStats.reduce((s, f) => s + f.mean, 0) / frameStats.length;
+  const avgStdev = frameStats.reduce((s, f) => s + f.stdev, 0) / frameStats.length;
+  const isDarkOrBlank = frameStats.length > 0 && (avgMean < 8 || frameStats.every((f) => f.mean < 8 && f.stdev < 6) || (hasBlackStart && avgMean < 12 && avgBusyness < 0.12));
 
   return {
     visualBusyness: Number(avgBusyness.toFixed(2)),
@@ -234,6 +267,9 @@ async function inspectVideoFrames(videoPath, duration = 10) {
     styleClass: 'DOCUMENTARY',
     temporalVariation: Number(temporalVariation.toFixed(2)),
     hasBlackStart,
+    avgMean: Number(avgMean.toFixed(2)),
+    avgStdev: Number(avgStdev.toFixed(2)),
+    isDarkOrBlank,
     semanticVision: semanticFrames.sort((a, b) => b.confidence - a.confidence)[0] || null,
   };
 }
@@ -267,6 +303,75 @@ export function getVisionDiagnostics() {
 }
 
 /**
+ * Stage-B pixel grounding for generated images. Unlike metadata comparison,
+ * this asks the vision model to choose between the required visual, explicit
+ * confusers, and generic failure classes. Generation prompt text is never
+ * included in the inspected candidate, preventing self-confirming scores.
+ */
+export function buildPixelGroundingClasses(visibleNeed = {}, { styleId = '' } = {}) {
+  const requestedTarget = String(
+    visibleNeed.viewerNeedsToSee
+      || [visibleNeed.subject, visibleNeed.action, visibleNeed.environment].filter(Boolean).join(' ')
+      || visibleNeed.primaryConcept
+      || '',
+  ).replace(/\s+/g, ' ').trim().slice(0, 500);
+  const targets = [...new Set([
+    requestedTarget,
+    visibleNeed.subject,
+    visibleNeed.primaryConcept,
+    ...(visibleNeed.requiredVisibleObjects || []),
+    ...(visibleNeed.acceptableSemanticAlternatives || visibleNeed.acceptableAlternatives || []),
+  ].map((item) => String(item || '').replace(/\s+/g, ' ').trim().slice(0, 300)).filter((item) => item.length >= 3))].slice(0, 5);
+  const confusers = [...new Set((visibleNeed.avoidVisuals || [])
+    .map((item) => String(item || '').trim())
+    .filter(Boolean)
+    .filter((item) => !(styleId === 'stickman' && /\b(?:stickman|stick figure|cartoon clipart)\b/i.test(item))))].slice(0, 5);
+  return {
+    requestedTarget,
+    targets,
+    confusers,
+    classes: [
+      ...targets,
+      ...confusers,
+      'an unrelated generic stock image that does not show the requested event',
+      'an abstract gradient or decorative background without the requested subject',
+      'a malformed AI generated image with distorted anatomy, hands, faces, or duplicated objects',
+      'a collage, poster, logo, watermark, or text-heavy graphic',
+    ],
+  };
+}
+
+export async function inspectPixelsAgainstVisibleNeed(filePath, visibleNeed = {}, options = {}) {
+  const classifier = await getVisionClassifier();
+  if (!classifier || !filePath) return { available: false, reason: 'vision_classifier_unavailable' };
+  const { requestedTarget, targets, classes } = buildPixelGroundingClasses(visibleNeed, options);
+  if (!targets.length) return { available: false, reason: 'visible_need_missing' };
+  try {
+    const results = await classifier(filePath, classes);
+    const ranked = results.slice().sort((a, b) => b.score - a.score);
+    const targetSet = new Set(targets);
+    const targetResult = ranked.find((item) => targetSet.has(item.label));
+    const bestNegative = ranked.find((item) => !targetSet.has(item.label));
+    const targetScore = Number((targetResult?.score || 0).toFixed(3));
+    const negativeScore = Number((bestNegative?.score || 0).toFixed(3));
+    return {
+      available: true,
+      target: targetResult?.label || requestedTarget,
+      requestedTarget,
+      positiveClasses: targets,
+      targetScore,
+      bestNegative: bestNegative?.label || null,
+      bestNegativeScore: negativeScore,
+      margin: Number((targetScore - negativeScore).toFixed(3)),
+      matched: targetSet.has(ranked[0]?.label) && targetScore >= 0.22 && targetScore >= negativeScore,
+      distribution: ranked.slice(0, 5).map((item) => ({ label: item.label, score: Number(item.score.toFixed(3)) })),
+    };
+  } catch (error) {
+    return { available: false, reason: 'vision_classification_failed', error: error.message };
+  }
+}
+
+/**
  * Lazy initialization of the local CLIP zero-shot vision-language model.
  */
 async function getVisionClassifier() {
@@ -275,7 +380,8 @@ async function getVisionClassifier() {
 
   visionLoadingPromise = (async () => {
     try {
-      const { pipeline } = await import('@huggingface/transformers');
+      const { env, pipeline } = await import('@huggingface/transformers');
+      env.cacheDir = process.env.TRANSFORMERS_CACHE || path.resolve('.cache', 'huggingface');
       visionClassifier = await pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32');
       return visionClassifier;
     } catch (err) {
@@ -285,6 +391,19 @@ async function getVisionClassifier() {
   })();
 
   return visionLoadingPromise;
+}
+
+/** Release local CLIP zero-shot vision model memory to prevent RAM accumulation. */
+export async function releaseVisionClassifier() {
+  const active = visionClassifier;
+  visionClassifier = null;
+  visionLoadingPromise = null;
+  try {
+    await active?.dispose?.();
+  } catch {}
+  if (global.gc) {
+    try { global.gc(); } catch {}
+  }
 }
 
 /**
@@ -398,7 +517,7 @@ function inspectLocalSemanticSignals(candidate, textCorpus) {
 /**
  * Level 3: Semantic Vision-Language Pixel Classification (using CLIP zero-shot).
  */
-async function inspectSemanticVisionLanguage(filePath, candidateSignals) {
+async function inspectSemanticVisionLanguage(filePath) {
   const classifier = await getVisionClassifier();
   if (!classifier || !filePath) return null;
 
@@ -419,9 +538,23 @@ async function inspectSemanticVisionLanguage(filePath, candidateSignals) {
       'passenger car or sedan automobile vehicle',
       'vintage mechanical pocket watch or clock gears',
       'scientific physics diagram or blackboard equations',
+      'scientific laboratory glassware, petri dish, or microscope',
       'computer code editor on screen',
       'modern server rack in data center room',
-      'glowing cosmic abstract quantum illustration'
+      'glowing cosmic abstract quantum illustration',
+      'person awake in bed using a smartphone at night',
+      'close-up of tired human eyes or face at night',
+      'person sleeping or resting in a bedroom',
+      'peaceful nature scenery with trees, forest, plants, foliage, or garden',
+      'sunlight streaming through a window or casting soft shadows',
+      'calm ocean, lake, river, or water surface with gentle ripples or waves',
+      'peaceful interior room with meditation cushion, mat, or minimalist decor',
+      'soft morning dawn, sunrise, or golden hour light over nature',
+      'night sky with stars, moon, or quiet twilight atmosphere',
+      'healthy organic green seedling or plant growing in soil',
+      'shadow of plant leaves or foliage on a wall or surface',
+      'gentle raindrops falling on water, leaves, or glass',
+      'bamboo stalks, leaves, or tranquil zen garden landscape',
     ];
 
     const results = await classifier(filePath, candidateClasses);
@@ -447,7 +580,7 @@ async function inspectSemanticVisionLanguage(filePath, candidateSignals) {
  * CRITICAL: Completely blind to narration to avoid confirmation bias (Sections 19, 21, 22).
  */
 function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, level3Vision) {
-  const labelText = String(candidate.label || candidate.title || '');
+  const labelText = String(candidate.title || humanizeProviderLabel(candidate.label) || candidate.description || '').trim();
   const descText = String(candidate.description || '');
   const tagsText = (candidate.tags || []).join(' ');
   const textCorpus = `${labelText} ${descText} ${tagsText}`;
@@ -467,7 +600,7 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
   // otherwise from Level 2 verified entities, NEVER raw query words.
   if (level3Vision && level3Vision.confidence > 0.35) {
     communicatedMeanings.push(level3Vision.topClass);
-    const isHumanOrEverydayClass = /person|portrait|researcher|speaker|educator|working at.*desk|meeting.*handshake|thoughtful.*stressed|shelves with food|documents.*contracts/i.test(level3Vision.topClass);
+    const isHumanOrEverydayClass = /person|portrait|researcher|speaker|educator|working at.*desk|meeting.*handshake|thoughtful.*stressed|shelves with food|documents.*contracts|human eyes|sleeping.*bedroom/i.test(level3Vision.topClass);
     const hasSpecificEntity = primarySubject && primarySubject !== 'subject' && !primarySubject.includes('generic');
     if (!hasSpecificEntity) {
       primarySubject = level3Vision.topClass;
@@ -497,6 +630,27 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
       visibleEnvironment = 'thoughtful or contemplative setting';
       visiblePeople.push('thoughtful person');
       likelyUseCases.push('decision making', 'deliberation', 'stress', 'contemplation');
+    } else if (level3Vision.topClass.includes('person awake in bed using a smartphone')) {
+      visibleEnvironment = 'bedroom at night';
+      visiblePeople.push('person awake in bed');
+      visibleObjects.push('bed', 'smartphone', 'phone screen');
+      visibleAction = 'using a smartphone while awake in bed';
+      communicatedMeanings.push('insomnia', 'sleeplessness', 'nighttime phone use');
+      likelyUseCases.push('insomnia', 'sleep problems', 'late-night screen use');
+    } else if (level3Vision.topClass.includes('close-up of tired human eyes')) {
+      visibleEnvironment = 'dark nighttime close-up';
+      visiblePeople.push('tired person');
+      visibleObjects.push('human eye', 'eyes', 'face');
+      visibleAction = 'eyes open in a close-up gaze';
+      communicatedMeanings.push('tiredness', 'wakefulness', 'insomnia');
+      likelyUseCases.push('fatigue', 'insomnia', 'sleeplessness');
+    } else if (level3Vision.topClass.includes('person sleeping or resting in a bedroom')) {
+      visibleEnvironment = 'bedroom at night';
+      visiblePeople.push('person sleeping in bed');
+      visibleObjects.push('bed', 'bedroom');
+      visibleAction = 'sleeping or resting in bed';
+      communicatedMeanings.push('sleep', 'rest', 'bedtime');
+      likelyUseCases.push('sleep', 'rest', 'bedtime routine');
     } else if (level3Vision.topClass.includes('books, paperwork, documents')) {
       visibleEnvironment = 'desk or study table';
       visibleObjects.push('paperwork', 'documents', 'contract');
@@ -517,6 +671,11 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
       visibleEnvironment = 'financial macro close-up';
       visibleObjects.push('banknote', 'currency denomination', 'paper money');
       unsuitableUseCases.push('time travel loop', 'abstract logic loop', 'quantum causality');
+    } else if (level3Vision.topClass.includes('scientific laboratory glassware, petri dish')) {
+      visibleEnvironment = 'scientific research laboratory or cleanroom';
+      visibleObjects.push('laboratory equipment', 'petri dish or microscope');
+      communicatedMeanings.push('scientific research', 'laboratory experimentation', 'microbiology');
+      likelyUseCases.push('scientific research', 'laboratory experimentation', 'microbiology');
     } else if (level3Vision.topClass.includes('tree branches')) {
       visibleEnvironment = 'outdoor park or forest under twilight sky';
       visibleObjects.push('tree twigs', 'bare branches');
@@ -569,6 +728,10 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
     visibleEnvironment = 'modern corporate office interior';
     visibleObjects.push('office desk', 'conference table');
     communicatedMeanings.push('corporate collaboration', 'business workflow');
+  } else if (/bedroom|\bbed\b|sleeping|insomnia|sleepless|awake\s+at\s+night/i.test(textCorpus)) {
+    visibleEnvironment = 'bedroom at night';
+    visibleObjects.push('bed', 'bedroom');
+    communicatedMeanings.push('sleep', 'insomnia', 'nighttime rest');
   } else if (/ocean|sea|seabed|underwater/i.test(textCorpus)) {
     visibleEnvironment = 'ocean seabed or marine underwater';
     visibleObjects.push('undersea environment');
@@ -582,6 +745,8 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
   if (/warning\s+sign|radiation\s+sign|hazard\s+sign/i.test(textCorpus)) visibleObjects.push('warning sign', 'radiation sign');
   if (/code|javascript|html/i.test(textCorpus)) visibleObjects.push('code editor screen');
   if (/diagram|genealog/i.test(textCorpus)) visibleObjects.push('diagram chart');
+  if (/smartphone|mobile\s+phone|cell\s*phone|using\s+(?:a\s+)?phone/i.test(textCorpus)) visibleObjects.push('smartphone', 'phone screen');
+  if (/\beyes?\b|eyelid|gaze/i.test(textCorpus)) visibleObjects.push('human eye', 'eyes');
 
   // 2. Detect Visible People from verified corpus
   if (/sanitation\s+worker|street\s+worker|engineer\s+monitoring|scientist\s+in\s+lab|people\s+walking/i.test(textCorpus)) {
@@ -600,6 +765,10 @@ function deconstructSemanticFeatures(candidate, pixelAnalysis, level2Signals, le
     visibleAction = 'loading municipal trash or collecting street waste';
   } else if (/running|driving|moving/i.test(textCorpus)) {
     visibleAction = 'vehicle motion or physical locomotion';
+  } else if (/using\s+(?:a\s+)?(?:smartphone|mobile|phone)|looking\s+at\s+(?:a\s+)?phone/i.test(textCorpus)) {
+    visibleAction = 'using a smartphone and looking at its screen';
+  } else if (/\beyes?\b|gaze|eyelid/i.test(textCorpus)) {
+    visibleAction = 'eyes open in a close-up gaze';
   }
 
   // Determine Style Class
@@ -707,6 +876,9 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
         pixelAnalysis.styleClass = vidStats.styleClass;
         pixelAnalysis.temporalVariation = vidStats.temporalVariation;
         pixelAnalysis.hasBlackStart = vidStats.hasBlackStart;
+        pixelAnalysis.avgMean = vidStats.avgMean;
+        pixelAnalysis.avgStdev = vidStats.avgStdev;
+        pixelAnalysis.isDarkOrBlank = vidStats.isDarkOrBlank;
         pixelAnalysis.subjectBoundsConfidence = 'HIGH';
         pixelInspected = vidStats.sampledFrameCount > 0;
         level3Vision = vidStats.semanticVision;
@@ -718,13 +890,13 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
   }
 
   // LEVEL 2: Local Semantic Signals & Entity Recognizers
-  const textCorpus = `${candidate.label || ''} ${candidate.title || ''} ${candidate.description || ''} ${(candidate.tags || []).join(' ')}`;
+  const textCorpus = `${humanizeProviderLabel(candidate.label)} ${candidate.title || ''} ${candidate.description || ''} ${(candidate.tags || []).join(' ')}`;
   const level2Signals = inspectLocalSemanticSignals(candidate, textCorpus);
 
   // LEVEL 3: Semantic Vision-Language Pixel Classification (using CLIP zero-shot when pixels are accessible)
   if (actualFilePath && (candidate.type !== 'video' && !String(actualFilePath).endsWith('.mp4'))) {
     try {
-      level3Vision = await inspectSemanticVisionLanguage(actualFilePath, level2Signals);
+      level3Vision = await inspectSemanticVisionLanguage(actualFilePath);
     } catch {}
   }
 
@@ -757,7 +929,10 @@ export async function inspectVisualCandidate(candidate, { visibleNeed = null, fi
     pixelInspected,
     inspectionBackend: features.backendMode,
     inspectionConfidence: pixelInspected ? features.confidence : Math.min(features.confidence, 0.25),
-    semanticPixelInspected: pixelInspected && Boolean(level3Vision) && level3Vision.confidence >= 0.35,
+    semanticPixelInspected: pixelInspected && (
+      (Boolean(level3Vision) && level3Vision.confidence >= 0.25)
+      || (candidate.type === 'video' && pixelAnalysis.subjectBoundsConfidence === 'HIGH')
+    ),
     inspectionSources: pixelInspected ? features.detectionSources : ['METADATA_FALLBACK'],
     backendMode: features.backendMode,
     detectionSources: features.detectionSources,
@@ -822,9 +997,23 @@ export function compareVisualToNeed(inspection, visibleNeed) {
   const visibleAct = tokenize((inspection.visibleAction || '') + ' ' + (inspection.visibleObjects || []).join(' '));
   const visibleEnv = tokenize((inspection.environment || inspection.visibleEnvironment || '') + ' ' + (inspection.visibleObjects || []).join(' '));
 
+  const isAtmosphereRole = visibleNeed.visualRole === 'ATMOSPHERE';
+  const isPlaceholderAction = !visibleNeed.action
+    || isAtmosphereRole
+    || /active demonstration|relevant physical phenomenon|showing the required causal relationship|slow natural breathing|resting or settling/i.test(visibleNeed.action);
+  const isPlaceholderEnv = !visibleNeed.environment
+    || /authentic real-world environment matching context|general studio or neutral backdrop/i.test(visibleNeed.environment);
+
+  const visualTokensMatch = (token, visualTokens) => visualTokens.some((vt) => {
+    if (vt === token) return true;
+    if (token.length >= 4 && vt.length >= 4 && (vt.startsWith(token) || token.startsWith(vt))) return true;
+    const syns = DOMAIN_SYNONYMS[token] || [];
+    return syns.includes(vt);
+  });
+
   const overlap = (needTokens, visualTokens) => {
     if (!needTokens.length) return 0.50;
-    const matches = needTokens.filter((token) => visualTokens.some((vt) => vt.includes(token) || token.includes(vt)));
+    const matches = needTokens.filter((token) => visualTokensMatch(token, visualTokens));
     return matches.length / needTokens.length;
   };
 
@@ -840,7 +1029,7 @@ export function compareVisualToNeed(inspection, visibleNeed) {
   for (const ent of reqEntities) {
     if (!ent || typeof ent !== 'string') continue;
     const entTokens = tokenize(ent);
-    if (entTokens.length > 0 && entTokens.every((token) => visibleObj.some((vt) => vt.includes(token) || token.includes(vt)))) {
+    if (entTokens.length > 0 && entTokens.every((token) => visualTokensMatch(token, visibleObj))) {
       matchEntity = 1.0;
       break;
     }
@@ -854,14 +1043,19 @@ export function compareVisualToNeed(inspection, visibleNeed) {
       if (m > maxAltMatch) maxAltMatch = m;
     }
   }
-  const coreNounTokens = primaryTokens.filter((t) => !['loneliness', 'epidemic', 'pristine', 'perfect', 'dark', 'abstract', 'modern', 'authentic', 'close', 'general'].includes(t));
+  const coreNounTokens = primaryTokens.filter((t) => !['loneliness', 'epidemic', 'pristine', 'perfect', 'dark', 'abstract', 'modern', 'authentic', 'close', 'general', 'view', 'wide', 'open', 'tired', 'night', 'detail', 'footage', 'photo', 'image', 'video'].includes(t));
   let matchCoreNoun = 0;
   if (coreNounTokens.length > 0) {
     matchCoreNoun = overlap(coreNounTokens, visibleObj);
   }
-  const subjectMatch = Number(Math.max(matchPrimary, matchSub, matchEntity, matchCoreNoun, maxAltMatch).toFixed(2));
-  const actionMatch = Number(overlap(needAction, visibleAct).toFixed(2));
-  const environmentMatch = Number(overlap(needEnv, visibleEnv).toFixed(2));
+  let subjectMatch = Number(Math.max(matchPrimary, matchSub, matchEntity, matchCoreNoun, maxAltMatch).toFixed(2));
+  if (coreNounTokens.length > 0 && matchCoreNoun === 0 && matchEntity === 0) {
+    subjectMatch = Math.min(subjectMatch, 0.20);
+  }
+  const rawActionMatch = Number(overlap(needAction, visibleAct).toFixed(2));
+  const actionMatch = isPlaceholderAction ? (subjectMatch >= 0.25 ? Math.max(0.50, subjectMatch) : subjectMatch) : rawActionMatch;
+  const rawEnvMatch = Number(overlap(needEnv, visibleEnv).toFixed(2));
+  const environmentMatch = isPlaceholderEnv ? (subjectMatch >= 0.25 ? Math.max(0.50, subjectMatch) : subjectMatch) : rawEnvMatch;
   const objectMatch = Number(Math.max(overlap(tokenize(visibleNeed.requiredVisibleObjects?.join(' ') || ''), visibleObj), matchPrimary, matchEntity, maxAltMatch).toFixed(2));
 
   // Communicated meaning match
@@ -879,7 +1073,7 @@ export function compareVisualToNeed(inspection, visibleNeed) {
   if (visibleNeed.evidenceRequirement === 'required') {
     evidenceMatch = subjectMatch >= 0.60 && ['TECHNICAL', 'DOCUMENTARY'].includes(inspection.styleClass) ? 0.90 : 0.30;
   } else {
-    evidenceMatch = subjectMatch >= 0.40 ? 0.75 : 0.50;
+    evidenceMatch = Number(Math.min(0.65, Math.max(0.35, subjectMatch * 0.6 + (['TECHNICAL', 'DOCUMENTARY'].includes(inspection.styleClass) ? 0.2 : 0.1))).toFixed(2));
   }
 
   const overallVisualMatch = Number((

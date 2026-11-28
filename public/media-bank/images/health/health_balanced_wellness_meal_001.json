@@ -1,0 +1,80 @@
+{
+  "id": "health_balanced_wellness_meal_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Balanced wellness meal with salmon and quinoa",
+  "path": "images/health/health_balanced_wellness_meal_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "nutrition",
+    "healthy food",
+    "salmon",
+    "quinoa",
+    "avocado",
+    "diet"
+  ],
+  "concepts": [
+    "balanced diet",
+    "whole foods",
+    "heart-healthy nutrition",
+    "clean eating"
+  ],
+  "subjects": [
+    "salmon fillet",
+    "quinoa",
+    "avocado",
+    "broccoli",
+    "nuts",
+    "olive oil"
+  ],
+  "actions": [
+    "serving healthy meal",
+    "showcasing nutrition",
+    "presenting balanced plate"
+  ],
+  "mood": [
+    "fresh",
+    "appetizing",
+    "natural"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.59,
+      "y": 0.56
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "nutrition videos",
+    "healthy eating scenes",
+    "meal planning content",
+    "diet explainers"
+  ],
+  "avoidFor": [
+    "clinical treatment",
+    "exercise demo",
+    "sleep content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

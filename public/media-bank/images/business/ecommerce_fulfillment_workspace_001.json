@@ -1,0 +1,77 @@
+{
+  "id": "ecommerce_fulfillment_workspace_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Organized e-commerce packing workspace",
+  "path": "images/business/ecommerce_fulfillment_workspace_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "e-commerce",
+    "fulfillment",
+    "packing",
+    "orders",
+    "small business",
+    "logistics"
+  ],
+  "concepts": [
+    "order fulfillment",
+    "small business logistics",
+    "shipping operations",
+    "e-commerce workflow"
+  ],
+  "subjects": [
+    "entrepreneur",
+    "boxes",
+    "tablet",
+    "packing table"
+  ],
+  "actions": [
+    "packing orders",
+    "checking labels",
+    "managing fulfillment"
+  ],
+  "mood": [
+    "productive",
+    "organized",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "e-commerce operations",
+    "small business marketing",
+    "fulfillment process",
+    "logistics"
+  ],
+  "avoidFor": [
+    "corporate boardroom",
+    "trading desk",
+    "customer support"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

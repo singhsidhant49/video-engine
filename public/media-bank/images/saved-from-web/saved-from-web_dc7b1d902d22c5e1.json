@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_dc7b1d902d22c5e1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Intricate MRI brain scan displayed on a computer screen for medical analysis and diagnosis.",
+  "path": "images/saved-from-web/saved-from-web_dc7b1d902d22c5e1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "intricate",
+    "mri",
+    "brain",
+    "scan",
+    "displayed",
+    "computer",
+    "screen",
+    "medical",
+    "analysi",
+    "diagnosi",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "analysis",
+    "diagnosis"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "intricate",
+    "mri",
+    "brain",
+    "scan",
+    "displayed",
+    "computer",
+    "screen",
+    "medical",
+    "analysi",
+    "diagnosi",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "analysis",
+    "diagnosis"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Intricate MRI brain scan displayed on a computer screen for medical analysis and diagnosis."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "calm brain blue mri scan",
+    "savedAt": "2026-10-28T08:37:18.382Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "MART  PRODUCTION",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/technology-computer-head-health-7089020/"
+  }
+}

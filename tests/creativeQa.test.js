@@ -57,7 +57,7 @@ test('Creative QA: detects and repairs representation fatigue (3+ consecutive id
   assert.ok(appliedRepairs.length >= 1);
   const repChange = appliedRepairs.find((r) => r.action === REPAIR_ACTIONS.CHANGE_REPRESENTATION && r.shotId === 'sh3');
   assert.ok(repChange, 'Repairs should change representation of sh3');
-  assert.equal(repairedTimeline.clips[2].shots[0].family, 'process');
+  assert.equal(repairedTimeline.clips[2].shots[0].family, 'image');
 });
 
 test('Creative QA: repairs domain semantic inappropriateness (developer UI in psychology topic)', () => {
@@ -83,7 +83,7 @@ test('Creative QA: repairs domain semantic inappropriateness (developer UI in ps
 
   const { timeline: repairedTimeline, appliedRepairs } = applyCreativeRepairs(timeline, qaReport.repairsNeeded);
   assert.equal(appliedRepairs[0].action, REPAIR_ACTIONS.CHANGE_REPRESENTATION);
-  assert.ok(['diagram', 'compare'].includes(repairedTimeline.clips[0].shots[0].family));
+  assert.equal(repairedTimeline.clips[0].shots[0].family, 'image');
 });
 
 test('Creative QA: repairs blank composition and nearly empty screen', () => {

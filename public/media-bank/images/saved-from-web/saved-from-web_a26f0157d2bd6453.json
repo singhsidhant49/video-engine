@@ -1,0 +1,63 @@
+{
+  "id": "saved-from-web_a26f0157d2bd6453",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Norma Cluster",
+  "path": "images/saved-from-web/saved-from-web_a26f0157d2bd6453.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2600,
+  "aspectRatio": 1,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "norma",
+    "cluster",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Norma Cluster"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Norma Cluster",
+    "savedAt": "2026-10-24T09:30:25.568Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 4.0",
+    "license_name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "author": "DECaPS / Legacy Surveys / D.Lang (Perimeter Institute) &Meli thev",
+    "creator": "DECaPS / Legacy Surveys / D.Lang (Perimeter Institute) &Meli thev",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-24T09:26:02.946Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Norma_Cluster_DECaPS_DR2.jpg"
+  }
+}

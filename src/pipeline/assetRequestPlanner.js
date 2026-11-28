@@ -3,8 +3,26 @@ import { buildVisibleNeed } from '../storyboard/visibleNeed.js';
 import { buildVisualProposition } from '../storyboard/visualProposition.js';
 import { routeRepresentation } from '../storyboard/representationRouter.js';
 import { isAbstractEventEntity } from '../storyboard/shotPlanner.js';
+import { normalizeContentType, requiresNativeMotion } from '../config/contentVisualProfiles.js';
 
 const unique = (items) => [...new Set(items.map((item) => String(item || '').replace(/\s+/g, ' ').trim()).filter(Boolean))];
+
+const QUERY_GENERIC_WORDS = new Set([
+  'authentic', 'real', 'modern', 'historical', 'history', 'image', 'video', 'photo',
+  'footage', 'scene', 'view', 'showing', 'shows', 'visual', 'today', 'city',
+]);
+
+function discriminativeQueryTokens(value = '') {
+  return String(value).toLowerCase().match(/[a-z][a-z-]{2,}/g)
+    ?.filter((token) => !QUERY_GENERIC_WORDS.has(token)) || [];
+}
+
+function preservesQuerySubject(query, concept) {
+  const core = discriminativeQueryTokens(concept);
+  if (!core.length) return true;
+  const candidate = new Set(discriminativeQueryTokens(query));
+  return core.some((token) => candidate.has(token));
+}
 
 function normalizeHistoricalEventShot(shot, scene) {
   const abstractEntities = (shot.entities || []).filter(isAbstractEventEntity);
@@ -23,17 +41,22 @@ function normalizeHistoricalEventShot(shot, scene) {
   };
 }
 
-function preferredSource(shot, mediaEditorial = false, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER') {
+function preferredSource(shot, representationDecision = null, editorialMode = 'TECHNICAL_EXPLAINER', contentType = 'explainer') {
   const motionFriendly = ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.assetIntent)
     || ['action', 'atmosphere', 'transition', 'establishing'].includes(shot.role);
-  // Meditation and motivational edits benefit from native environmental
-  // movement. "auto" searches both video and still providers, preserving a
-  // safe image fallback when suitable footage is unavailable.
-  if (mediaEditorial && editorialMode === 'MOTIVATIONAL' && motionFriendly) return 'auto';
-  if (representationDecision?.preferredSource) return representationDecision.preferredSource;
-  if (shot.mediaPreference === 'procedural' && !mediaEditorial) return 'procedural';
-  if (shot.mediaPreference === 'real') {
-    if (['action', 'atmosphere'].includes(shot.assetIntent) && shot.motionPreference === 'energetic') return 'video';
+  const isStaticEvidence = shot.motionPreference === 'stable'
+    || shot.assetIntent === 'document'
+    || (shot.assetIntent === 'historical' && (shot.entities || []).length > 0);
+
+  if (representationDecision?.preferredSource) {
+    if (representationDecision.preferredSource === 'image' && requiresNativeMotion({ contentType, shot })) return 'video';
+    if (representationDecision.preferredSource === 'image' && (motionFriendly || !isStaticEvidence)) return 'auto';
+    return representationDecision.preferredSource;
+  }
+  if (shot.mediaPreference === 'video') return 'video';
+  if (requiresNativeMotion({ contentType, shot })) return 'video';
+  if (motionFriendly) return 'auto';
+  if (isStaticEvidence) {
     return 'image';
   }
   return 'auto';
@@ -54,9 +77,9 @@ function semanticConcept(shot, mediaEditorial = false) {
 }
 
 function exclusionsFor(shot, concept, visibleNeed = null) {
-  const exclusions = ['watermark', 'collage', 'low resolution', 'diagram', 'mindmap', 'flowchart', 'infographic', 'green screen', 'mockup', 'abandoned', 'ruins'];
-  if (/deadlock|concurrency|database|software|transaction|thread/i.test(concept)) {
-    exclusions.push('padlock', 'chain', 'keys', 'key', 'handcuffs', 'handcuff', 'jail', 'prison', 'valet parking', 'dining table', 'credit card');
+  const exclusions = ['watermark', 'collage', 'low resolution', 'diagram', 'mindmap', 'flowchart', 'infographic', 'green screen', 'mockup'];
+  if (/\b(?:deadlock|concurrency|database|software|transaction|thread|tech|server|datacenter|cloud|computer|code|terminal|screen|app|ui)\b/i.test(concept)) {
+    exclusions.push('abandoned', 'ruins', 'padlock', 'chain', 'keys', 'key', 'handcuffs', 'handcuff', 'jail', 'prison', 'valet parking', 'dining table', 'credit card');
   }
   if (shot.entities.length || ['entity', 'product', 'evidence', 'document'].includes(shot.assetIntent)) {
     exclusions.push('generic office', 'unrelated employees', 'logo-only image');
@@ -115,8 +138,8 @@ export function mapActionToVisibleQueries(concept = '') {
     ];
   }
   // HTTP / Server / Datacenter / Network
-  if (/http|network\s+request|server|datacenter|data\s+center|backend|packet/i.test(lower)) {
-    if (/http|browser|network\s+tab/i.test(lower)) {
+  if (/\b(?:http|network\s+request|servers?|datacenter|data\s+center|backend|packets?)\b/i.test(lower)) {
+    if (/\b(?:http|browser|network\s+tab)\b/i.test(lower)) {
       return [
         'browser developer tools network tab',
         'modern datacenter server rack lights',
@@ -223,6 +246,24 @@ export function mapActionToVisibleQueries(concept = '') {
       'traders reacting stock exchange panic',
     ];
   }
+  // Dubai / Burj Khalifa / Dubai Marina
+  if (/\bdubai\b/i.test(lower)) {
+    return [
+      'Dubai Burj Khalifa modern skyline',
+      'Dubai Marina aerial view',
+      'Downtown Dubai skyscrapers cityscape',
+      'Dubai modern architecture drone shot',
+    ];
+  }
+  // Ancient Rome / Roman Empire / Colosseum / Roman Forum
+  if (/\b(roman\s+empire|ancient\s+rome|ancient\s+roman|colosseum|flavian\s+amphitheatre)\b/i.test(lower)) {
+    return [
+      'Roman Colosseum ancient ruins Rome',
+      'Roman Forum ancient marble architecture ruins',
+      'Ancient Roman architecture columns aerial',
+      'Ancient Roman statue and temple marble',
+    ];
+  }
   return [];
 }
 
@@ -230,7 +271,10 @@ function sanitizeEditorialQuery(q) {
   const mapped = mapActionToVisibleQueries(q);
   if (mapped.length) return mapped[0];
 
-  return String(q || '')
+  const lower = String(q || '').toLowerCase();
+  const isTechOrHardware = /\b(html|dom|http|database|sql|database\s+table|table\s+schema|schema|deadlock|concurrency|servers?|datacenter|duga|network\s+switch|terminal|query\s+planner|software)\b/i.test(lower);
+
+  let res = String(q || '')
     .replace(/\b(html\s+dom\s+tree\s+diagram|dom\s+tree\s+diagram|dom\s+tree)\b/gi, 'browser developer tools elements inspector')
     .replace(/\b(http\s+request\s+response\s+diagram|request\s+response\s+protocol\s+diagram)\b/gi, 'modern datacenter server rack lights')
     .replace(/\b(video\s+streaming\s+icons?|streaming\s+icons?|data\s+speed\s+infographic)\b/gi, 'high speed fiber optic network data')
@@ -242,10 +286,24 @@ function sanitizeEditorialQuery(q) {
     .replace(/\b(hand\s+holding\s+keys?|holding\s+keys?|physical\s+keys?|handcuffs?|prison\s+break|jail)\b/gi, 'computer screen code terminal dark mode')
     .replace(/\b(diagram|mindmap|mind map|infographic|flowchart|flow chart|icons?|symbols?|clipart)\b/gi, 'screen monitor')
     .replace(/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|clean\s+editorial\s+title\s+card|editorial\s+title\s+card|title\s+card|chapter\s+card|title\s+screen|clean\s+typography\s+on\s+a\s+neutral\s+background)\b/gi, 'thoughtful person reading book desk')
-    .replace(/\b(duga-1|abandoned|ruins)\b/gi, 'datacenter')
-    .replace(/\b(green screen|chroma key)\b/gi, 'screen')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\b(green screen|chroma key)\b/gi, 'screen');
+
+  if (isTechOrHardware && /\bduga-1\b/i.test(res)) {
+    res = res.replace(/\bduga-1\b/gi, 'datacenter');
+  }
+
+  return res.replace(/\s+/g, ' ').trim();
+}
+
+const SYNTHETIC_EDITORIAL_PHRASES = /\b(?:active demonstration|relevant physical phenomenon|installing or stretching infrastructure|executing instructions or compute|authentic real-world environment matching context|seismic ground movement and earthquake impact|coastline or populated area affected by tsunami|deep ocean seabed or underwater marine|peaceful natural garden at night|quiet forest or woodland at night|peaceful nighttime landscape|earthquake-affected streets, buildings, or documented disaster zone)\b/i;
+
+function cleanQueryFragment(text = '', maxWords = 4) {
+  if (!text || typeof text !== 'string') return '';
+  if (SYNTHETIC_EDITORIAL_PHRASES.test(text)) return '';
+  const trimmed = text.trim();
+  const words = trimmed.split(/\s+/);
+  if (words.length > maxWords) return '';
+  return trimmed;
 }
 
 /**
@@ -260,30 +318,56 @@ function stagedQueries(shot, concept, mediaEditorial = false, visibleNeed = null
   const cleanConcept = mediaEditorial ? sanitizeEditorialQuery(concept) : concept;
   const actionQueries = mediaEditorial ? mapActionToVisibleQueries(concept) : [];
   const entities = unique(shot.entities || []);
+  const archivalTerminology = [];
+  if (/\bseismograph(?:\s+record)?\b/i.test(cleanConcept)) {
+    archivalTerminology.push(cleanConcept.replace(/\bseismograph(?:\s+record)?\b/i, 'seismogram'));
+    if (/\b1960\b/i.test(cleanConcept) && /\bchile\b/i.test(cleanConcept)) {
+      archivalTerminology.push('1960 Valdivia earthquake seismogram');
+      archivalTerminology.push('1960 Chile earthquake seismic record');
+    }
+  }
+  if (/\bvaldivia\b/i.test(cleanConcept) && /\b(?:memorial|monument|commemorative|commemoration)\b/i.test(cleanConcept)) {
+    archivalTerminology.push('Memorial Terremoto de Valdivia en 1960 en Puerto Saavedra');
+    archivalTerminology.push('Valdivia earthquake monument');
+    archivalTerminology.push('memorial terremoto Valdivia 1960');
+  }
 
   const entityConcepts = entities.map((entity) => cleanConcept.toLowerCase().includes(entity.toLowerCase())
     ? cleanConcept
     : `${entity} ${cleanConcept}`);
 
+  const usableAction = cleanQueryFragment(visibleNeed?.action, 4);
+  const usableEnv = cleanQueryFragment(visibleNeed?.environment, 4);
+  const rawSubject = String(visibleNeed?.subject || '').trim();
+  const subjectClean = SYNTHETIC_EDITORIAL_PHRASES.test(rawSubject) ? '' : rawSubject;
+  const isSubjectConcise = subjectClean && subjectClean.split(/\s+/).length <= 5;
+
   // Level 1: Specific Visible Action
+  const relevantPositiveDescriptions = (visualProposition?.positiveDescriptions || [])
+    .filter((query) => preservesQuerySubject(query, cleanConcept));
+  const relevantSearchConcepts = (shot.searchConcepts || [])
+    .filter((query) => preservesQuerySubject(query, cleanConcept));
+
   const level1 = unique([
-    ...(visualProposition?.positiveDescriptions || []),
+    ...archivalTerminology,
+    ...relevantPositiveDescriptions,
     ...actionQueries,
     ...entityConcepts,
-    visibleNeed?.action ? `${visibleNeed.subject} ${visibleNeed.action}` : null,
+    (usableAction && isSubjectConcise) ? `${subjectClean} ${usableAction}` : null,
     cleanConcept,
   ].filter(Boolean));
 
   // Level 2: Specific Subject + Action
+  const isTechConcept = /\b(?:deadlock|concurrency|database|software|transaction|thread|tech|server|datacenter|cloud|computer|code|terminal|screen|app|ui|browser|javascript|html|css|gpu|cpu)\b/i.test(cleanConcept);
   const level2 = unique([
     ...entities.map((e) => `${e} in action`),
-    ...entities.map((e) => `${e} screen`),
-    ...(shot.searchConcepts || []),
+    ...(isTechConcept ? entities.map((e) => `${e} screen`) : entities.map((e) => `${e} footage`)),
+    ...relevantSearchConcepts,
   ]);
 
   // Level 3: Subject + Environment
   const level3 = unique([
-    visibleNeed?.environment ? `${visibleNeed.subject} ${visibleNeed.environment}` : null,
+    (usableEnv && isSubjectConcise) ? `${subjectClean} ${usableEnv}` : null,
     ...entities.map((e) => `${e} environment`),
   ].filter(Boolean));
 
@@ -321,6 +405,7 @@ function stagedQueries(shot, concept, mediaEditorial = false, visibleNeed = null
   return {
     specific,
     fallback,
+    searchConcepts: relevantSearchConcepts,
     ladder: {
       level1SpecificAction: level1.slice(0, 4),
       level2SubjectAction: level2.slice(0, 4),
@@ -337,8 +422,9 @@ function stagedQueries(shot, concept, mediaEditorial = false, visibleNeed = null
 }
 
 /** Compile one provider-independent request for every canonical storyboard shot. */
-export function planAssetRequests(storyboard, { format = storyboard.format, visualPolicy = null, coveragePlan = [], editorialMode = 'TECHNICAL_EXPLAINER' } = {}) {
+export function planAssetRequests(storyboard, { format = storyboard.format, visualPolicy = null, coveragePlan = [], editorialMode = 'TECHNICAL_EXPLAINER', contentType = 'explainer' } = {}) {
   const orientation = format === 'shorts' ? 'portrait' : 'landscape';
+  const normalizedContentType = normalizeContentType(contentType);
   const requests = [];
   const coverageByShot = new Map((coveragePlan || []).map((item) => [item.shotId, item]));
   for (const section of storyboard.sections) {
@@ -348,6 +434,9 @@ export function planAssetRequests(storyboard, { format = storyboard.format, visu
         // the asset stage without regenerating its script or narration.
         const requestShot = normalizeHistoricalEventShot(shot, scene);
         const concept = semanticConcept(requestShot, visualPolicy?.useMediaEditorial === true);
+        const effectiveAssetIntent = /\b(?:memorial|monument|commemorative|commemoration)\b/i.test(concept)
+          ? 'historical'
+          : requestShot.assetIntent;
         const coverage = coverageByShot.get(shot.id) || null;
         const videoTopic = storyboard.topic || storyboard.title || '';
         const visualProposition = buildVisualProposition({ shot: requestShot, scene, topic: videoTopic });
@@ -369,13 +458,21 @@ export function planAssetRequests(storyboard, { format = storyboard.format, visu
           videoTopic,
         });
         const queryResult = stagedQueries(requestShot, concept, visualPolicy?.useMediaEditorial === true, visibleNeed, visualProposition);
+        const motionFriendly = ['action', 'atmosphere', 'transition', 'establishing'].includes(requestShot.assetIntent)
+          || ['action', 'atmosphere', 'transition', 'establishing'].includes(requestShot.role);
+        const pref = preferredSource(requestShot, representationDecision, editorialMode, normalizedContentType);
+        const nativeMotionRequired = representationDecision.selectedRepresentation === 'media'
+          && requiresNativeMotion({ contentType: normalizedContentType, shot: requestShot });
         requests.push({
           id: `asset_${shot.id}`,
           storyboardShotId: shot.id,
           sceneId: scene.id,
           concept,
-          searchConcepts: unique(requestShot.searchConcepts || []),
-          preferredSource: preferredSource(requestShot, visualPolicy?.useMediaEditorial === true, representationDecision, editorialMode),
+          searchConcepts: unique(queryResult.searchConcepts || []),
+          preferredSource: pref,
+          preferredMediaType: nativeMotionRequired ? 'video' : (pref === 'video' ? 'video' : (pref === 'image' && !motionFriendly ? 'image' : 'either')),
+          nativeMotionRequired,
+          contentType: normalizedContentType,
           evidenceRequired: (requestShot.evidenceRequirement === 'required' || visibleNeed.evidenceRequirement === 'required')
             && requestShot.role === 'evidence'
             && requestShot.assetIntent !== 'concept'
@@ -398,8 +495,8 @@ export function planAssetRequests(storyboard, { format = storyboard.format, visu
             durationHint: requestShot.durationHint,
           },
           exclusions: unique([...exclusionsFor(requestShot, concept, visibleNeed), ...(visualProposition.negativeConfusers || [])]).slice(0, 20),
-          continuityKey: requestShot.entities?.[0] ? `entity:${requestShot.entities[0].toLowerCase()}` : `${section.id}:${requestShot.assetIntent}`,
-          assetIntent: requestShot.assetIntent,
+          continuityKey: requestShot.entities?.[0] ? `entity:${requestShot.entities[0].toLowerCase()}` : `${section.id}:${effectiveAssetIntent}`,
+          assetIntent: effectiveAssetIntent,
         });
       }
     }

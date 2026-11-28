@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_a6c6f3820d9d5492",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A child playing a memory matching game with colorful cards on a table.",
+  "path": "images/saved-from-web/saved-from-web_a6c6f3820d9d5492.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "child",
+    "playing",
+    "memory",
+    "matching",
+    "game",
+    "colorful",
+    "card",
+    "table",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "cards",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "child",
+    "playing",
+    "memory",
+    "matching",
+    "game",
+    "colorful",
+    "card",
+    "table",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "cards",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A child playing a memory matching game with colorful cards on a table."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "long term memory brain active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-26T15:48:30.966Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nicola Barts",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-kid-s-hand-holding-a-blue-card-7943490/"
+  }
+}

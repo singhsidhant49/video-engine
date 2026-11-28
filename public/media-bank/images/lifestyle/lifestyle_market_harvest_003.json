@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_market_harvest_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit market harvest",
+  "path": "images/lifestyle/lifestyle_market_harvest_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "farmers market",
+    "shopping",
+    "fresh produce",
+    "weekend",
+    "flowers",
+    "healthy living"
+  ],
+  "concepts": [
+    "local living",
+    "seasonal shopping",
+    "community market",
+    "healthy lifestyle"
+  ],
+  "subjects": [
+    "woman",
+    "market stalls",
+    "vegetables",
+    "flowers",
+    "straw bag"
+  ],
+  "actions": [
+    "choosing produce",
+    "shopping outdoors",
+    "browsing market"
+  ],
+  "mood": [
+    "fresh",
+    "sunlit",
+    "cheerful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "lower-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "weekend videos",
+    "healthy lifestyle content",
+    "market montages",
+    "seasonal reels"
+  ],
+  "avoidFor": [
+    "business meetings",
+    "sports scenes",
+    "nightlife"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

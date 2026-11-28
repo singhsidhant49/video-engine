@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_d7783d3c82d891d0",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of hands writing in a leather journal, showcasing creativity and planning.",
+  "path": "images/saved-from-web/saved-from-web_d7783d3c82d891d0.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "writing",
+    "leather",
+    "journal",
+    "showcasing",
+    "creativity",
+    "planning",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "close-up",
+    "hands",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "hand",
+    "writing",
+    "leather",
+    "journal",
+    "showcasing",
+    "creativity",
+    "planning",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "close-up",
+    "hands",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of hands writing in a leather journal, showcasing creativity and planning."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "hand writing quickly on paper",
+    "savedAt": "2026-10-28T10:37:27.029Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Luis Alberto Cardenas Otaya",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-holding-red-planner-3990443/"
+  }
+}

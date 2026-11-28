@@ -1,0 +1,77 @@
+{
+  "id": "psychology_office_counseling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Empathetic counseling conversation in a modern office",
+  "path": "images/psychology/psychology_office_counseling_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "therapy",
+    "counseling",
+    "mental health",
+    "therapist",
+    "client",
+    "talk therapy"
+  ],
+  "concepts": [
+    "psychotherapy",
+    "emotional support",
+    "therapeutic alliance",
+    "guided conversation"
+  ],
+  "subjects": [
+    "therapist",
+    "male client",
+    "notebook",
+    "office"
+  ],
+  "actions": [
+    "listening",
+    "sharing feelings",
+    "taking notes"
+  ],
+  "mood": [
+    "supportive",
+    "professional",
+    "safe"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.59,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "therapy explainer",
+    "mental health education",
+    "counseling videos",
+    "support scenes"
+  ],
+  "avoidFor": [
+    "group meditation",
+    "student stress",
+    "family scene"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

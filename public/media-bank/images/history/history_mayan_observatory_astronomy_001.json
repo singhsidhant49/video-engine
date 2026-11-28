@@ -1,0 +1,79 @@
+{
+  "id": "history_mayan_observatory_astronomy_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mayan observatory beneath the Milky Way",
+  "path": "images/history/history_mayan_observatory_astronomy_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "maya",
+    "astronomy",
+    "observatory",
+    "mesoamerica",
+    "night sky",
+    "temple"
+  ],
+  "concepts": [
+    "indigenous astronomy",
+    "sacred architecture",
+    "ancient science",
+    "mesoamerican civilization"
+  ],
+  "subjects": [
+    "mayan astronomer",
+    "temple observatory",
+    "jungle canopy",
+    "stars",
+    "milky way"
+  ],
+  "actions": [
+    "observing sky",
+    "recording celestial patterns",
+    "studying stars"
+  ],
+  "mood": [
+    "mystical",
+    "epic",
+    "nocturnal"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "mayan history videos",
+    "astronomy in history",
+    "civilization explainers",
+    "night sequences"
+  ],
+  "avoidFor": [
+    "industrial era",
+    "medieval europe",
+    "modern science labs"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

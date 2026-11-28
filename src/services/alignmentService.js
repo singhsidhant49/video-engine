@@ -57,7 +57,7 @@ export function normalizeToken(raw) {
   if (!s) return [];
   const out = [];
   for (let part of s.split(/[-–—/]+/)) {
-    part = part.replace(/^[^\p{L}\p{N}$£€]+|[^\p{L}\p{N}%]+$/gu, '');
+    part = part.replace(/^[^\p{L}\p{M}\p{N}$£€]+|[^\p{L}\p{M}\p{N}%]+$/gu, '');
     if (!part) continue;
     const currency = /^[$£€]/.test(part) ? { $: 'dollars', '£': 'pounds', '€': 'euros' }[part[0]] : null;
     if (currency) part = part.slice(1);
@@ -66,7 +66,7 @@ export function normalizeToken(raw) {
       out.push(...numberToWords(m[1]));
       if (m[2] && SUFFIX_WORDS[m[2]]) out.push(...SUFFIX_WORDS[m[2]]);
     } else {
-      const letters = part.replace(/'/g, '').replace(/[^\p{L}\p{N}]/gu, '');
+      const letters = part.replace(/'/g, '').replace(/[^\p{L}\p{M}\p{N}]/gu, '');
       if (letters) out.push(letters);
     }
     if (currency) out.push(currency);
@@ -79,8 +79,8 @@ export function tokenizeScript(text) {
   const words = [];
   let sentence = 0;
   for (const raw of String(text || '').split(/\s+/).filter(Boolean)) {
-    const trailing = (/[.,!?;:…—–]+["'”’)]*$/.exec(raw) || [''])[0];
-    const endsSentence = /[.!?…]/.test(trailing);
+    const trailing = (/[.,!?;:\u0964\u0965…—–]+["'”’)]*$/.exec(raw) || [''])[0];
+    const endsSentence = /[.!?\u0964\u0965…]/.test(trailing);
     const endsPhrase = endsSentence || /[,;:—–]/.test(trailing);
     words.push({ index: words.length, text: raw, norm: normalizeToken(raw), sentence, endsSentence, endsPhrase });
     if (endsSentence) sentence += 1;

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 const NormalizedPoint = z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1) }).strict();
 const NormalizedRect = z.object({ x: z.number().min(0).max(1), y: z.number().min(0).max(1), width: z.number().min(0).max(1), height: z.number().min(0).max(1) }).strict();
@@ -38,7 +38,7 @@ export const MontageSpecSchema = z.object({
   sequenceReason: z.enum(['spokenEntities', 'examples', 'beats', 'musicAccents', 'semanticListItems']),
   durationInFrames: z.number().int().positive(),
   perAssetRole: z.array(z.enum(['HERO', 'EVIDENCE', 'CONTEXT', 'DETAIL', 'ATMOSPHERE', 'COMPARISON', 'BACKGROUND'])),
-  transitionStyle: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE']),
+  transitionStyle: z.enum(['CUT', 'SHORT_DISSOLVE']),
   rhythm: z.enum(['STEADY', 'BUILD', 'DECELERATE']),
   cuts: z.array(z.object({ assetId: z.string(), startFrame: z.number().int().nonnegative(), endFrame: z.number().int().nonnegative(), reason: z.string().min(1) }).strict()),
 }).strict();
@@ -54,9 +54,10 @@ export const MediaSceneSpecSchema = z.object({
   evidenceIntent: z.string().min(1),
   textNeed: z.enum(['NONE', 'HEADLINE', 'STAT', 'LABEL', 'SOURCE']),
   annotationNeed: z.enum(['NONE', 'POINTER', 'LABEL', 'BRACKET', 'OUTLINE', 'HIGHLIGHT_REGION']),
-  cameraIntent: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'FOCAL_PAN', 'DETAIL_CROP', 'REFRAME', 'MATCH_MOVE']),
+  cameraIntent: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']),
+  cameraMagnitude: z.number().min(0).max(0.08).default(0.05),
   cameraReason: z.string().optional(),
-  transitionIntent: z.object({ entry: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL']), exit: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_MOVE', 'MASK_REVEAL']), anchor: z.object({ type: z.string(), value: z.string() }).strict().nullable() }).strict(),
+  transitionIntent: z.object({ entry: z.enum(['CUT', 'SHORT_DISSOLVE']), exit: z.enum(['CUT', 'SHORT_DISSOLVE']), anchor: z.object({ type: z.string(), value: z.string() }).strict().nullable() }).strict(),
   durationIntent: z.object({ durationInFrames: z.number().int().positive(), rationale: z.array(z.string()).min(1) }).strict(),
   imageChangeReason: z.enum(['newEntity', 'newEvidence', 'newLocation', 'newDetail', 'newIdea', 'emotionalShift', 'montageProgression']),
   strategy: z.enum(['FULL_BLEED', 'EDITORIAL_SPLIT', 'MEDIA_DOMINANT_SPLIT', 'DETAIL_FOCUS', 'IMAGE_PLUS_STAT', 'IMAGE_PLUS_CALLOUT', 'EVIDENCE_FRAME', 'TWO_MEDIA_COMPARE', 'LAYERED_MEDIA', 'BACKGROUND_MEDIA', 'MONTAGE']),

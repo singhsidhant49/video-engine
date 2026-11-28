@@ -1,0 +1,33 @@
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.filter-bar .field { min-width: 140px; flex: 1 1 140px; }
+.filter-bar p { margin: 0 0 10px auto; font-size: 12px; }
+.filter-group { display: flex; gap: 12px; align-items: end; flex: 1; }
+.filter-group .channel-select { flex: 1; }
+.badge-row.compact { margin: 0 0 8px; }
+.experiment-picker { display: grid; gap: 10px; margin: 12px 0; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-elevated); }
+.experiment-picker button { justify-self: start; padding: 8px 12px; border: 1px solid rgba(124, 92, 255, 0.45); border-radius: 8px; background: var(--accent-soft); color: var(--accent-2); font-weight: 700; cursor: pointer; }
+.production-insights { margin: 0 0 18px; }
+.actions select { width: auto; min-height: 32px; padding: 5px 8px; font-size: 11px; }
+.pill-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.pill-tabs button { padding: 7px 12px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer; }
+.pill-tabs button.active { background: var(--accent-soft); color: #fff; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .filter-bar, .filter-group { align-items: stretch; flex-direction: column; }
+  .filter-bar .field { width: 100%; min-width: 0; }
+  .filter-bar p { margin: 0; }
+  .production-insights { grid-template-columns: 1fr; }
+  .actions button, .actions select { min-height: 40px; }
+}

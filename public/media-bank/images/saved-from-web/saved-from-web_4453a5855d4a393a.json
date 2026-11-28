@@ -1,0 +1,63 @@
+{
+  "id": "saved-from-web_4453a5855d4a393a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A lively stadium scene during an athletic championship with a diverse crowd.",
+  "path": "images/saved-from-web/saved-from-web_4453a5855d4a393a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1739,
+  "aspectRatio": 1.4951,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "lively",
+    "stadium",
+    "scene",
+    "during",
+    "athletic",
+    "championship",
+    "diverse",
+    "crowd",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A lively stadium scene during an athletic championship with a diverse crowd."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "athletics championship crowd",
+    "savedAt": "2026-10-26T07:38:48.422Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Botond Dobozi",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/vibrant-stadium-hosting-athletic-championship-event-39982802/"
+  }
+}

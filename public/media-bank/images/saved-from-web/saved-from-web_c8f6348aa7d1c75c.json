@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_c8f6348aa7d1c75c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A female scientist carefully examines test tubes in a laboratory setting, showcasing scientific research and discovery.",
+  "path": "images/saved-from-web/saved-from-web_c8f6348aa7d1c75c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "carefully",
+    "examine",
+    "test",
+    "tube",
+    "laboratory",
+    "setting",
+    "showcasing",
+    "scientific",
+    "research",
+    "discovery",
+    "static",
+    "presentation",
+    "examines",
+    "tubes",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "female",
+    "scientist",
+    "carefully",
+    "examine",
+    "test",
+    "tube",
+    "laboratory",
+    "setting",
+    "showcasing",
+    "scientific",
+    "research",
+    "discovery",
+    "static",
+    "presentation",
+    "examines",
+    "tubes",
+    "office desk",
+    "computer or paperwork",
+    "laboratory equipment",
+    "scientific research facility"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A female scientist carefully examines test tubes in a laboratory setting, showcasing scientific research and discovery."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "scientist lab notebook penicillin",
+    "savedAt": "2026-11-02T09:39:35.625Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "olia danilevich",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/scientist-working-with-test-tubes-in-laboratory-8531356/"
+  }
+}

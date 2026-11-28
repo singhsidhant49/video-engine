@@ -1,0 +1,81 @@
+{
+  "id": "health_home_workout_mountain_climber_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Home workout mountain climber exercise",
+  "path": "images/health/health_home_workout_mountain_climber_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1536,
+  "height": 1024,
+  "aspectRatio": 1.5,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "fitness",
+    "home workout",
+    "exercise",
+    "mountain climber",
+    "strength",
+    "cardio",
+    "active lifestyle"
+  ],
+  "concepts": [
+    "home fitness",
+    "functional training",
+    "exercise routine",
+    "physical activity"
+  ],
+  "subjects": [
+    "adult man",
+    "exercise mat",
+    "laptop",
+    "dumbbells",
+    "water bottle",
+    "home gym"
+  ],
+  "actions": [
+    "performing mountain climbers",
+    "following workout",
+    "training at home"
+  ],
+  "mood": [
+    "focused",
+    "energetic",
+    "motivating"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "home workout scenes",
+    "exercise explainers",
+    "active lifestyle content"
+  ],
+  "avoidFor": [
+    "sleep content",
+    "medical diagnosis",
+    "nutrition close-up"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

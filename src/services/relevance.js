@@ -1,5 +1,6 @@
 import { getSharp } from './imageUtils.js';
-import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@huggingface/transformers';
+import path from 'node:path';
+import { env, AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextModelWithProjection, RawImage } from '@huggingface/transformers';
 
 /**
  * CLIP image↔text relevance.
@@ -15,6 +16,7 @@ import { AutoProcessor, CLIPVisionModelWithProjection, AutoTokenizer, CLIPTextMo
  */
 
 const MODEL = 'Xenova/clip-vit-base-patch32';
+env.cacheDir = process.env.TRANSFORMERS_CACHE || path.resolve('.cache', 'huggingface');
 let models = null;
 const textCache = new Map();
 
@@ -38,6 +40,20 @@ const normalise = (d) => {
 const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
 
 export const relevanceEnabled = () => process.env.RELEVANCE !== 'off';
+
+/** Release cached CLIP relevance models and text embeddings to free worker RAM before Remotion rendering. */
+export async function releaseRelevanceModels() {
+  const active = models;
+  models = null;
+  textCache.clear();
+  try {
+    await active?.vis?.dispose?.();
+    await active?.txt?.dispose?.();
+  } catch {}
+  if (global.gc) {
+    try { global.gc(); } catch {}
+  }
+}
 
 async function embedText(text) {
   if (!textCache.has(text)) {

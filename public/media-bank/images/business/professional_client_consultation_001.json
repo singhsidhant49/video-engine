@@ -1,0 +1,76 @@
+{
+  "id": "professional_client_consultation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Professional consultation in a bright office",
+  "path": "images/business/professional_client_consultation_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "consultation",
+    "client meeting",
+    "advisor",
+    "office",
+    "professional services"
+  ],
+  "concepts": [
+    "client consultation",
+    "business advisory",
+    "professional services",
+    "one-on-one meeting"
+  ],
+  "subjects": [
+    "advisor",
+    "client",
+    "desk",
+    "documents"
+  ],
+  "actions": [
+    "consulting",
+    "explaining",
+    "reviewing documents"
+  ],
+  "mood": [
+    "professional",
+    "trustworthy",
+    "friendly"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.44,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "consulting content",
+    "professional services",
+    "business intro",
+    "client relationship"
+  ],
+  "avoidFor": [
+    "factory",
+    "retail checkout",
+    "large team meeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "psychology_decision_balance_journaling_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Decision balance journaling in a caf\u00e9",
+  "path": "images/psychology/psychology_decision_balance_journaling_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "decision making",
+    "journaling",
+    "self-reflection",
+    "pros and cons",
+    "clarity"
+  ],
+  "concepts": [
+    "decision balance",
+    "cognitive clarity",
+    "structured reflection",
+    "problem solving"
+  ],
+  "subjects": [
+    "adult woman",
+    "notebook",
+    "coffee",
+    "caf\u00e9 window"
+  ],
+  "actions": [
+    "writing pros and cons",
+    "reflecting",
+    "evaluating options"
+  ],
+  "mood": [
+    "thoughtful",
+    "cozy",
+    "deliberate"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.34,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "decision making videos",
+    "self-help content",
+    "journaling scenes",
+    "behavior change explainers"
+  ],
+  "avoidFor": [
+    "crowded stress scene",
+    "therapy session",
+    "sleep topic"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

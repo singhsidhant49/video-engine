@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_f3aa941a3e384261",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Blurred unrecognizable pedestrians walking on paved street near aged tramway in motion in old city",
+  "path": "images/saved-from-web/saved-from-web_f3aa941a3e384261.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "blurred",
+    "unrecognizable",
+    "pedestrian",
+    "walking",
+    "paved",
+    "street",
+    "near",
+    "aged",
+    "tramway",
+    "motion",
+    "old",
+    "city",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "pedestrians",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "blurred",
+    "unrecognizable",
+    "pedestrian",
+    "walking",
+    "paved",
+    "street",
+    "near",
+    "aged",
+    "tramway",
+    "motion",
+    "old",
+    "city",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "pedestrians",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Blurred unrecognizable pedestrians walking on paved street near aged tramway in motion in old city"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "blurred commuters rushing city street motion",
+    "savedAt": "2026-10-29T13:44:02.239Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Erkam Hayta",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/anonymous-people-walking-on-city-street-near-public-transport-6460799/"
+  }
+}

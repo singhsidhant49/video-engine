@@ -1,0 +1,65 @@
+{
+  "id": "saved-from-web_2727bede33931ded",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a single yellow leaf on a forest floor, capturing the essence of fall.",
+  "path": "images/saved-from-web/saved-from-web_2727bede33931ded.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "single",
+    "yellow",
+    "leaf",
+    "forest",
+    "floor",
+    "capturing",
+    "essence",
+    "fall",
+    "outdoor",
+    "park",
+    "scenery",
+    "static",
+    "presentation",
+    "falling",
+    "close-up",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of a single yellow leaf on a forest floor, capturing the essence of fall."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "single falling leaf close up",
+    "savedAt": "2026-10-26T05:44:17.770Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Oliver Wagenblatt",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/golden-leaf-on-forest-floor-in-autumn-light-32857964/"
+  }
+}

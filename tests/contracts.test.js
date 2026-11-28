@@ -25,8 +25,8 @@ import {
 test('visual strategy defaults produce a complete bounded contract', () => {
   const strategy = createDefaultVisualStrategy();
   assert.equal(strategy.version, 1);
-  assert.equal(strategy.visualFlow, 'hybrid');
-  assert.ok(strategy.assetPreference.realMediaWeight > strategy.assetPreference.proceduralWeight);
+  assert.equal(strategy.visualFlow, 'editorial');
+  assert.deepEqual(strategy.assetPreference, { realMediaWeight: 1 });
   assert.deepEqual(VideoVisualStrategySchema.parse(strategy), strategy);
 });
 

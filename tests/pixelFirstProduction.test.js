@@ -5,20 +5,20 @@ import { routeRepresentation } from '../src/storyboard/representationRouter.js';
 import { inspectVisualCandidate } from '../src/assets/visualInspectionService.js';
 import { licenseAllowed } from '../src/shared/licensing.js';
 import { classifyVisualMatch, judgeAssetCandidate } from '../src/assets/visualEditorialJudge.js';
-import { buildVisualCoveragePlan, synthesizeProceduralData } from '../src/storyboard/visualCoveragePlan.js';
+import { buildVisualCoveragePlan } from '../src/storyboard/visualCoveragePlan.js';
 import { buildEditorialVisualPlan } from '../src/pipeline/editorialVisualPlanner.js';
 import { resolveVisualPolicy } from '../src/config/visualMode.js';
 import { applyMediaOnlyReuseFallbacks } from '../src/pipeline/assetDirector.js';
 
-test('structured causal concepts route to procedural timeline instead of stock search', () => {
+test('structured causal concepts route to relevant searchable media', () => {
   const scene = { id: 'scene', kind: 'process', purpose: 'explanation', narration: 'A retained reference prevents garbage collection, causing heap memory to grow.', evidenceRequirement: 'preferred' };
   const shot = { id: 'shot', role: 'graphic', visualConcept: 'memory leak mechanism', assetIntent: 'concept', entities: [], searchConcepts: [] };
   const proposition = buildVisualProposition({ shot, scene });
   const decision = routeRepresentation(proposition);
   assert.equal(proposition.conceptSense, 'SOFTWARE_MEMORY');
-  assert.equal(decision.selectedRepresentation, 'process');
-  assert.equal(decision.preferredSource, 'procedural');
-  assert.equal(decision.searchable, false);
+  assert.equal(decision.selectedRepresentation, 'media');
+  assert.equal(decision.preferredSource, 'image');
+  assert.equal(decision.searchable, true);
 });
 
 test('media production routing never falls back to a procedural template', () => {
@@ -39,7 +39,7 @@ test('media production routing never falls back to a procedural template', () =>
   assert.deepEqual(concreteMedia.fallbackRepresentations, []);
 });
 
-test('editorial planner honors an explicit production representation fallback', () => {
+test('editorial planner refuses a non-media representation fallback', () => {
   const shot = { id: 'shot', role: 'graphic', visualConcept: 'three-step causal list' };
   const scene = { id: 'scene', shots: [shot], informationDensity: 3, narration: 'First collect, then recycle, then reuse.' };
   const storyboard = { format: 'landscape', sections: [{ id: 'section', scenes: [scene] }] };
@@ -56,7 +56,7 @@ test('editorial planner honors an explicit production representation fallback', 
     visualPolicy: resolveVisualPolicy({ visualMode: 'MEDIA_EDITORIAL' }),
   });
 
-  assert.equal(planned.selectedRepresentation, 'diagram');
+  assert.equal(planned.selectedRepresentation, 'media');
   assert.equal(planned.assetBindings.length, 0);
 });
 
@@ -82,7 +82,7 @@ test('media-only production fallback reuses approved media without procedural ou
   assert.equal(fallbacks['shot-b'].fromShotId, 'shot-a');
 });
 
-test('database deadlocks route to a concurrency diagram and reject literal visual confusers', () => {
+test('database deadlocks route to authentic technical media and reject literal confusers', () => {
   const scene = {
     id: 'scene', kind: 'list', preferredPresentation: 'list', purpose: 'payoff',
     narration: 'Each thread holds what the other needs. Break circular wait to prevent the database deadlock.',
@@ -96,49 +96,9 @@ test('database deadlocks route to a concurrency diagram and reject literal visua
   const decision = routeRepresentation(proposition);
   assert.equal(proposition.conceptSense, 'CONCURRENCY_DEADLOCK');
   assert.equal(proposition.representationNeed, 'DIAGRAM');
-  assert.equal(decision.selectedRepresentation, 'diagram');
-  assert.equal(decision.searchable, false);
+  assert.equal(decision.selectedRepresentation, 'media');
+  assert.equal(decision.searchable, true);
   assert.ok(proposition.negativeConfusers.includes('fiber optic cables'));
-});
-
-test('an application freeze cannot trigger the financial credit-freeze diagram', () => {
-  const data = synthesizeProceduralData({
-    narration: 'Your app freezes. No crash, no error. Just silence.',
-    text: { headline: 'JUST SILENCE' },
-    data: {},
-  }, 'diagram');
-  assert.notEqual(data.title, 'CREDIT TRANSMISSION SHOCK');
-  assert.doesNotMatch(JSON.stringify(data), /interbank|credit transmission/i);
-});
-
-test('database retry code synthesis never falls back to the generic agent loop', () => {
-  const data = synthesizeProceduralData({ narration: 'This prevents permanent gridlock, but the victim must retry.', data: {} }, 'code');
-  assert.match(data.code, /DeadlockError/);
-  assert.match(data.code, /rollback/);
-  assert.doesNotMatch(data.code, /model\.reason|selectTool/);
-});
-
-test('database outage UI synthesis never renders a generic repository workspace', () => {
-  const data = synthesizeProceduralData({ narration: 'Two queries gridlock the database and crash the application.', data: {} }, 'ui');
-  assert.equal(data.title, 'Database Activity Monitor');
-  assert.match(JSON.stringify(data), /blocked queries|circular wait/i);
-  assert.doesNotMatch(JSON.stringify(data), /Repository Workspace|agent\.js/);
-});
-
-test('banking-app deadlock meaning outranks finance-crisis keyword routing', () => {
-  const narration = 'In a banking app, two transfers lock accounts in opposite order, then the database kills one transaction.';
-  const diagram = synthesizeProceduralData({ narration, data: {} }, 'diagram');
-  const process = synthesizeProceduralData({ narration, data: {} }, 'process');
-  assert.equal(diagram.title, 'DATABASE DEADLOCK CYCLE');
-  assert.match(JSON.stringify(diagram), /Transfer A|Victim Rollback/);
-  assert.doesNotMatch(JSON.stringify(diagram), /SUBPRIME|MORTGAGE|SECURITIZATION/);
-  assert.notEqual(process.title, 'CAUSAL PROCESS');
-  assert.match(process.title, /BANKING|TRANSFER/);
-});
-
-test('implicit deadlock hook uses a title grounded in the narrated words', () => {
-  const diagram = synthesizeProceduralData({ narration: 'Two transactions freeze forever, each waiting for the other to release a lock.', data: {} }, 'diagram');
-  assert.equal(diagram.title, 'TRANSACTIONS WAIT FOR LOCKS');
 });
 
 test('ambiguous lock-wait beat inherits database-deadlock topic and cannot search literal queue stock', () => {
@@ -153,8 +113,8 @@ test('ambiguous lock-wait beat inherits database-deadlock topic and cannot searc
   const [coverage] = buildVisualCoveragePlan(storyboard);
   assert.equal(coverage.visualProposition.conceptSense, 'CONCURRENCY_DEADLOCK');
   assert.equal(coverage.visualProposition.representationNeed, 'DIAGRAM');
-  assert.equal(coverage.representationDecision.selectedRepresentation, 'diagram');
-  assert.equal(coverage.representationDecision.searchable, false);
+  assert.equal(coverage.representationDecision.selectedRepresentation, 'media');
+  assert.equal(coverage.representationDecision.searchable, true);
 });
 
 test('pixel-inspected movie poster is rejected for a database lock-wait beat', () => {

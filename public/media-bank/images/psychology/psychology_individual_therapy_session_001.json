@@ -1,0 +1,77 @@
+{
+  "id": "psychology_individual_therapy_session_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm one-on-one counseling conversation",
+  "path": "images/psychology/psychology_individual_therapy_session_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "therapy",
+    "counseling",
+    "talk therapy",
+    "mental health",
+    "therapist",
+    "client"
+  ],
+  "concepts": [
+    "therapeutic conversation",
+    "emotional support",
+    "psychotherapy",
+    "healing relationship"
+  ],
+  "subjects": [
+    "therapist",
+    "male client",
+    "chairs",
+    "notebook"
+  ],
+  "actions": [
+    "listening",
+    "sharing feelings",
+    "taking notes"
+  ],
+  "mood": [
+    "safe",
+    "empathetic",
+    "supportive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "therapy videos",
+    "mental health education",
+    "counseling overview",
+    "support scenes"
+  ],
+  "avoidFor": [
+    "group support",
+    "child psychology",
+    "workplace burnout"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

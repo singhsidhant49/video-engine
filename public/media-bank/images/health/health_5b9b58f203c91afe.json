@@ -1,0 +1,67 @@
+{
+  "id": "health_5b9b58f203c91afe",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Male trail runner at sunrise",
+  "path": "images/health/health_5b9b58f203c91afe.jpg",
+  "category": "health",
+  "extension": ".jpg",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "show",
+    "male",
+    "trail",
+    "runner",
+    "sunrise",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "vehicle",
+    "motion",
+    "physical",
+    "locomotion",
+    "climbing",
+    "hill",
+    "running",
+    "trail running",
+    "cardio",
+    "outdoor fitness",
+    "endurance",
+    "active lifestyle"
+  ],
+  "concepts": [
+    "cardiovascular fitness",
+    "endurance training",
+    "outdoor exercise",
+    "healthy lifestyle"
+  ],
+  "subjects": [
+    "Male trail runner at sunrise"
+  ],
+  "actions": [
+    "vehicle motion or physical locomotion"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "runner climbing hill trail",
+    "savedAt": "2026-10-26T06:47:47.332Z"
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "psychology_performance_anxiety_backstage_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Reflective pause backstage before a performance",
+  "path": "images/psychology/psychology_performance_anxiety_backstage_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "performance anxiety",
+    "stage fright",
+    "anticipation",
+    "confidence",
+    "public performance"
+  ],
+  "concepts": [
+    "performance anxiety",
+    "anticipatory stress",
+    "self-doubt",
+    "composure before action"
+  ],
+  "subjects": [
+    "adult woman",
+    "backstage area",
+    "stage",
+    "audience"
+  ],
+  "actions": [
+    "waiting backstage",
+    "biting knuckle",
+    "managing nerves"
+  ],
+  "mood": [
+    "tense",
+    "anticipatory",
+    "introspective"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "anxiety videos",
+    "performance psychology",
+    "confidence building content",
+    "stress scenes"
+  ],
+  "avoidFor": [
+    "relaxation content",
+    "friendship support",
+    "sleep scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

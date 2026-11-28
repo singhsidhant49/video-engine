@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_aa570ad1ead03f1b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene mountain lake surrounded by misty peaks at sunrise, creating a tranquil landscape.",
+  "path": "images/saved-from-web/saved-from-web_aa570ad1ead03f1b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "mountain",
+    "lake",
+    "surrounded",
+    "misty",
+    "peak",
+    "sunrise",
+    "creating",
+    "tranquil",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "peaks"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "mountain",
+    "lake",
+    "surrounded",
+    "misty",
+    "peak",
+    "sunrise",
+    "creating",
+    "tranquil",
+    "landscape",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "peaks"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene mountain lake surrounded by misty peaks at sunrise, creating a tranquil landscape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "serene mountain lake surrounded by mountains mist active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-30T02:29:33.275Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Antoinette Hürlimann",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/edge-of-a-waterfall-15533537/"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_00c08f90e440ae2a",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/",
+  "path": "video/saved-from-web/saved-from-web_00c08f90e440ae2a.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "aerial",
+    "luxuriou",
+    "dubai",
+    "marina",
+    "30821553",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "aerial-view-of-luxurious-dubai-marina-30821553",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "aerial",
+    "luxuriou",
+    "dubai",
+    "marina",
+    "30821553",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "aerial-view-of-luxurious-dubai-marina-30821553",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "Dubai Marina modern architecture aerial",
+    "savedAt": "2026-10-29T06:23:12.637Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nelemson G",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/aerial-view-of-luxurious-dubai-marina-30821553/"
+  }
+}

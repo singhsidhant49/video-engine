@@ -1,0 +1,80 @@
+{
+  "id": "health_herbal_wellness_still_life_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit ginger and turmeric herbal still life",
+  "path": "images/health/health_herbal_wellness_still_life_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "herbal wellness",
+    "ginger",
+    "turmeric",
+    "mint",
+    "natural remedies",
+    "supplements"
+  ],
+  "concepts": [
+    "natural wellness",
+    "herbal ingredients",
+    "supplement lifestyle",
+    "traditional remedies"
+  ],
+  "subjects": [
+    "ginger root",
+    "turmeric root",
+    "powder",
+    "mint",
+    "capsules",
+    "mortar and pestle"
+  ],
+  "actions": [
+    "displaying herbal ingredients",
+    "presenting supplements",
+    "showcasing natural wellness"
+  ],
+  "mood": [
+    "earthy",
+    "fresh",
+    "natural"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.44,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": false,
+  "quality": "hero",
+  "usage": [
+    "natural health videos",
+    "supplement content",
+    "ingredient intros",
+    "wellness explainer"
+  ],
+  "avoidFor": [
+    "clinical examination",
+    "sleep scenes",
+    "anatomy graphics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

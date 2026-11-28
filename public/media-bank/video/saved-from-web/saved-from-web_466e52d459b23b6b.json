@@ -1,0 +1,112 @@
+{
+  "id": "saved-from-web_466e52d459b23b6b",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/time-lapse-of-a-construction-site-in-the-city-of-trento-11967293/",
+  "path": "video/saved-from-web/saved-from-web_466e52d459b23b6b.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "construction",
+    "site",
+    "city",
+    "trento",
+    "11967293",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-of-a-construction-site-in-the-city-of-trento-11967293",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "construction",
+    "site",
+    "city",
+    "trento",
+    "11967293",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-of-a-construction-site-in-the-city-of-trento-11967293",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "city construction time lapse",
+    "savedAt": "2026-10-28T15:41:44.381Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kmeel.com Videos",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/time-lapse-of-a-construction-site-in-the-city-of-trento-11967293/"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "history_maritime_explorer_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Maritime explorer navigating at sea",
+  "path": "images/history/history_maritime_explorer_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "exploration",
+    "navigator",
+    "sailing ship",
+    "age of exploration",
+    "seafaring"
+  ],
+  "concepts": [
+    "maritime exploration",
+    "navigation history",
+    "global voyages"
+  ],
+  "subjects": [
+    "navigator",
+    "ship deck",
+    "sextant",
+    "sailing ships"
+  ],
+  "actions": [
+    "measuring position",
+    "surveying sea"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "exploration history videos",
+    "navigation scenes",
+    "maritime history"
+  ],
+  "avoidFor": [
+    "land battle",
+    "modern aviation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

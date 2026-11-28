@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { config } from '../config/index.js';
+import { selectBackgroundMusic } from '../audio/musicTrackSelector.js';
 
 /**
  * High-Fidelity Acoustic SFX Generator for Remotion Sound Design.
@@ -89,13 +90,43 @@ const STYLE_BED = {
 };
 
 /**
- * Pick the music bed for a directing style. Resolution order:
- *   public/audio/bgm/<style>.(mp3|m4a|wav)  ← drop licensed music here
- *   public/audio/bgm/cinematic_ambient_<legacy>.wav
- *   a generated ambient pad (last resort)
- * @returns {Promise<{src: string, synthetic: boolean}>}
+ * Pick the music bed for a video or directing style. Resolution order:
+ *   1. Curated audiotrack catalog (public/audiotrack/<category>/)
+ *   2. public/audio/bgm/<style>.(mp3|m4a|wav)
+ *   3. public/audio/bgm/cinematic_ambient_<legacy>.wav
+ *   4. Generated ambient pad (last resort fallback)
+ * @param {string|Object} params - Style string or options object { style, contentType, topic, videoId, requestedTrack }
+ * @returns {Promise<{src: string, synthetic: boolean, title?: string, artist?: string, baseVolume?: number, duckedVolume?: number}>}
  */
-export async function ensureBackgroundMusic(style = 'editorial_explainer') {
+export async function ensureBackgroundMusic(params = 'editorial_explainer') {
+  const options = typeof params === 'string' ? { style: params } : (params || {});
+  const style = options.style || 'editorial_explainer';
+
+  // 1. First priority: Check curated audiotrack catalog
+  try {
+    const selected = selectBackgroundMusic(options);
+    if (selected?.src) {
+      const fullPath = path.join(config.publicDir, selected.src);
+      try {
+        await fs.access(fullPath);
+        return {
+          src: selected.src,
+          synthetic: false,
+          title: selected.title,
+          artist: selected.artist,
+          category: selected.category,
+          baseVolume: selected.baseVolume,
+          duckedVolume: selected.duckedVolume,
+        };
+      } catch {
+        /* proceed to fallback if file unreadable */
+      }
+    }
+  } catch (err) {
+    console.warn(`   ⚠️ Audiotrack catalog selection fallback: ${err.message}`);
+  }
+
+  // 2. Legacy fallback: public/audio/bgm/<style>.(mp3|m4a|wav)
   const bgmDir = path.join(config.publicDir, 'audio', 'bgm');
   await fs.mkdir(bgmDir, { recursive: true });
   for (const ext of ['mp3', 'm4a', 'wav']) {

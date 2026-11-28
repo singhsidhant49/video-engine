@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_3a03f47950ab4186",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Roald Amundsen Svalbard 1925.jpg",
+  "path": "images/saved-from-web/saved-from-web_3a03f47950ab4186.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1218,
+  "height": 794,
+  "aspectRatio": 1.534,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "roald",
+    "amundsen",
+    "svalbard",
+    "1925",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "roald",
+    "amundsen",
+    "svalbard",
+    "1925",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Roald Amundsen Svalbard 1925.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Roald Amundsen portrait",
+    "savedAt": "2026-10-29T13:24:59.993Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY 2.0",
+    "license_name": "CC BY 2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "author": "Preus Museum Anders Beer Wilse",
+    "creator": "Preus Museum Anders Beer Wilse",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T13:23:28.563Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Roald_Amundsen_Svalbard_1925.jpg"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_fbf1ab31293a68ba",
+  "type": "image",
+  "mediaType": "image",
+  "title": "The Arch of Constantine, an iconic Roman triumphal arch in Rome, Italy, showcasing ancient architecture.",
+  "path": "images/saved-from-web/saved-from-web_fbf1ab31293a68ba.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "arch",
+    "constantine",
+    "iconic",
+    "roman",
+    "triumphal",
+    "rome",
+    "italy",
+    "showcasing",
+    "ancient",
+    "architecture",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "arch",
+    "constantine",
+    "iconic",
+    "roman",
+    "triumphal",
+    "rome",
+    "italy",
+    "showcasing",
+    "ancient",
+    "architecture",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "The Arch of Constantine, an iconic Roman triumphal arch in Rome, Italy, showcasing ancient architecture."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman triumphal arch",
+    "savedAt": "2026-10-26T13:17:10.919Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "C1 Superstar",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/arch-of-constantine-in-rome-historical-landmark-29420529/"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "health_female_trail_running_sunset_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Female trail runner at golden hour",
+  "path": "images/health/health_female_trail_running_sunset_001.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "running",
+    "women fitness",
+    "trail running",
+    "cardio",
+    "outdoor exercise",
+    "sunset",
+    "wellness"
+  ],
+  "concepts": [
+    "cardiovascular fitness",
+    "active lifestyle",
+    "endurance",
+    "exercise outdoors"
+  ],
+  "subjects": [
+    "adult woman",
+    "mountain trail",
+    "sunset",
+    "river valley",
+    "athletic wear"
+  ],
+  "actions": [
+    "running on trail",
+    "training outdoors",
+    "maintaining fitness"
+  ],
+  "mood": [
+    "confident",
+    "energetic",
+    "inspiring"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.3,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fitness videos",
+    "running content",
+    "women health visuals",
+    "exercise motivation"
+  ],
+  "avoidFor": [
+    "medical checkup",
+    "anatomy graphics",
+    "sleep topics"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

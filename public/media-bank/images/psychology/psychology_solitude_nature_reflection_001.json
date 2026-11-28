@@ -1,0 +1,77 @@
+{
+  "id": "psychology_solitude_nature_reflection_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Quiet reflection overlooking a mountain valley at sunset",
+  "path": "images/psychology/psychology_solitude_nature_reflection_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "solitude",
+    "reflection",
+    "nature",
+    "personal growth",
+    "mindfulness",
+    "wellbeing"
+  ],
+  "concepts": [
+    "introspection",
+    "mental reset",
+    "nature therapy",
+    "self-reflection"
+  ],
+  "subjects": [
+    "hiker",
+    "mountain overlook",
+    "lake",
+    "sunset"
+  ],
+  "actions": [
+    "sitting quietly",
+    "reflecting",
+    "resting after hike"
+  ],
+  "mood": [
+    "serene",
+    "expansive",
+    "inspiring"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "personal growth",
+    "mindfulness intro",
+    "reflection scenes",
+    "wellness storytelling"
+  ],
+  "avoidFor": [
+    "therapy office",
+    "burnout close-up",
+    "family conflict"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

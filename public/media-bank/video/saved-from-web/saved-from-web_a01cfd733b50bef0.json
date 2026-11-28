@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_a01cfd733b50bef0",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/time-lapse-video-of-the-sky-in-the-city-4301929/",
+  "path": "video/saved-from-web/saved-from-web_a01cfd733b50bef0.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "sky",
+    "city",
+    "4301929",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-video-of-the-sky-in-the-city-4301929"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "time",
+    "lapse",
+    "sky",
+    "city",
+    "4301929",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "time-lapse-video-of-the-sky-in-the-city-4301929"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/time-lapse-video-of-the-sky-in-the-city-4301929/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "cafe table time lapse",
+    "savedAt": "2026-10-26T11:09:15.468Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Rommel Jankovsky",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/time-lapse-video-of-the-sky-in-the-city-4301929/"
+  }
+}

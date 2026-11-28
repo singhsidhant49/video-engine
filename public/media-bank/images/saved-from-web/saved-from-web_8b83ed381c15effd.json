@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_8b83ed381c15effd",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A serene view of a lighthouse surrounded by scaffolding on a rough sea in Alexandria, Egypt.",
+  "path": "images/saved-from-web/saved-from-web_8b83ed381c15effd.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1736,
+  "aspectRatio": 1.4977,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "lighthouse",
+    "surrounded",
+    "scaffolding",
+    "rough",
+    "sea",
+    "alexandria",
+    "egypt",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "garbage truck",
+    "waste bins",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "serene",
+    "lighthouse",
+    "surrounded",
+    "scaffolding",
+    "rough",
+    "sea",
+    "alexandria",
+    "egypt",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "view",
+    "garbage truck",
+    "waste bins",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A serene view of a lighthouse surrounded by scaffolding on a rough sea in Alexandria, Egypt."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "Southern Ocean rough seas active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-29T09:57:28.228Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ali Salah Photographie",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/lighthouse-on-pier-15501969/"
+  }
+}

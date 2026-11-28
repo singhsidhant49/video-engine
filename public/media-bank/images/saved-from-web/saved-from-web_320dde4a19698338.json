@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_320dde4a19698338",
+  "type": "image",
+  "mediaType": "image",
+  "title": "3D artwork featuring an abstract sculpture with intertwined loops against a starry background.",
+  "path": "images/saved-from-web/saved-from-web_320dde4a19698338.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "artwork",
+    "featuring",
+    "sculpture",
+    "intertwined",
+    "loop",
+    "against",
+    "starry",
+    "background",
+    "loops"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "artwork",
+    "featuring",
+    "sculpture",
+    "intertwined",
+    "loop",
+    "against",
+    "starry",
+    "background",
+    "loops"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "neural loop animation dark background",
+    "savedAt": "2026-10-28T10:34:37.462Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Steve A Johnson",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/intricate-abstract-3d-render-sculpture-28844046/"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "history_roman_scholar_forum_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Roman scholar overlooking the golden forum",
+  "path": "images/history/history_roman_scholar_forum_002.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "ancient rome",
+    "roman forum",
+    "scholar",
+    "classical world",
+    "empire",
+    "marble architecture"
+  ],
+  "concepts": [
+    "roman public life",
+    "classical scholarship",
+    "imperial urbanism",
+    "historical learning"
+  ],
+  "subjects": [
+    "roman scholar",
+    "scrolls",
+    "forum",
+    "temples",
+    "statues"
+  ],
+  "actions": [
+    "reading scroll",
+    "surveying forum",
+    "studying civic life"
+  ],
+  "mood": [
+    "grand",
+    "classical",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.31,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "roman history videos",
+    "empire explainers",
+    "classical civilization",
+    "scholar scenes"
+  ],
+  "avoidFor": [
+    "medieval history",
+    "industrial topics",
+    "modern scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

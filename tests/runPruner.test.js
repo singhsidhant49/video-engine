@@ -1,0 +1,78 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import test from 'node:test';
+
+import { pruneRuns } from '../src/server/runPruner.js';
+
+test('run pruner skips runs with active lock and prunes expired runs', async () => {
+  const tmpRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'run-pruner-test-'));
+  const testRunsDir = path.join(tmpRoot, 'runs');
+  await fs.mkdir(testRunsDir, { recursive: true });
+
+  const oldRun = path.join(testRunsDir, 'vid_old_01');
+  const activeRun = path.join(testRunsDir, 'vid_active_02');
+  const recentRun = path.join(testRunsDir, 'vid_recent_03');
+
+  await fs.mkdir(oldRun, { recursive: true });
+  await fs.mkdir(activeRun, { recursive: true });
+  await fs.mkdir(recentRun, { recursive: true });
+
+  // Create mock files
+  await fs.writeFile(path.join(oldRun, 'narration.wav'), 'dummy wav audio content');
+  await fs.writeFile(path.join(oldRun, 'output.mp4'), 'dummy video output content');
+  await fs.writeFile(path.join(oldRun, 'thumbnail.png'), 'durable thumbnail');
+  await fs.writeFile(path.join(oldRun, 'qc.json'), '{"render":{"ok":true}}');
+  await fs.writeFile(path.join(oldRun, 'project.json'), '{"id":"vid_old_01"}');
+  await fs.writeFile(path.join(oldRun, 'manifest.json'), '{"videoId":"vid_old_01","stages":{}}');
+  await fs.writeFile(path.join(activeRun, 'request.json'), '{}');
+  await fs.writeFile(path.join(activeRun, '.lock'), 'pid: 1234');
+  await fs.writeFile(path.join(recentRun, 'request.json'), '{}');
+
+  // Backdate oldRun mtime by 10 days
+  const tenDaysAgo = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
+  await fs.utimes(oldRun, tenDaysAgo, tenDaysAgo);
+
+  // Test dry run
+  const dryRes = await pruneRuns({ olderThanDays: 7, dryRun: true, runsDir: testRunsDir });
+  assert.equal(dryRes.scanned, 3);
+  assert.equal(dryRes.pruned, 1);
+  assert.equal(dryRes.dryRun, true);
+  // Directory should still exist after dry run
+  const oldRunExistsAfterDry = await fs.stat(oldRun).then(() => true).catch(() => false);
+  assert.equal(oldRunExistsAfterDry, true);
+
+  // Test active run with keepOutputs
+  const activeRes = await pruneRuns({ olderThanDays: 7, dryRun: false, keepOutputs: true, runsDir: testRunsDir });
+  assert.equal(activeRes.pruned, 1);
+
+  // Heavy intermediates are removed, but authenticated delivery/review
+  // artifacts remain available after retention compaction.
+  const oldRunExists = await fs.stat(oldRun).then(() => true).catch(() => false);
+  assert.equal(oldRunExists, true);
+  await fs.access(path.join(oldRun, 'thumbnail.png'));
+  await fs.access(path.join(oldRun, 'qc.json'));
+  await fs.access(path.join(oldRun, 'project.json'));
+  await fs.access(path.join(oldRun, 'manifest.json'));
+  await fs.access(path.join(oldRun, '.retention-compacted.json'));
+  await assert.rejects(fs.access(path.join(oldRun, 'narration.wav')), /ENOENT/);
+  await assert.rejects(fs.access(path.join(oldRun, 'output.mp4')), /ENOENT/);
+
+  const repeated = await pruneRuns({ olderThanDays: 7, dryRun: false, keepOutputs: true, runsDir: testRunsDir });
+  assert.equal(repeated.pruned, 0, 'already compacted runs are not processed repeatedly');
+
+  const destructive = await pruneRuns({ all: true, dryRun: false, keepOutputs: false, runsDir: testRunsDir });
+  assert.ok(destructive.pruned >= 1);
+  await assert.rejects(fs.access(oldRun), /ENOENT/, 'explicit destructive cleanup removes a compacted run');
+
+  // Active runs remain protected even during --all; the unlocked recent run
+  // is intentionally removed by the explicit destructive cleanup.
+  const activeExists = await fs.stat(activeRun).then(() => true).catch(() => false);
+  const recentExists = await fs.stat(recentRun).then(() => true).catch(() => false);
+  assert.equal(activeExists, true);
+  assert.equal(recentExists, false);
+
+  // Cleanup
+  await fs.rm(tmpRoot, { recursive: true, force: true }).catch(() => {});
+});

@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_7ba80475e96025b1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "High-angle aerial shot of cars and van on a busy intersection.",
+  "path": "images/saved-from-web/saved-from-web_7ba80475e96025b1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1625,
+  "aspectRatio": 1.6,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "aerial",
+    "car",
+    "van",
+    "busy",
+    "intersection",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "shot",
+    "cars",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "aerial",
+    "car",
+    "van",
+    "busy",
+    "intersection",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "shot",
+    "cars",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "High-angle aerial shot of cars and van on a busy intersection."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "autonomous car intersection",
+    "savedAt": "2026-10-26T08:44:32.276Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Daniel Liu",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/cars-on-the-road-15162890/"
+  }
+}

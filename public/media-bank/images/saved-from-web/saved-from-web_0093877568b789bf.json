@@ -1,0 +1,77 @@
+{
+  "id": "saved-from-web_0093877568b789bf",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed close-up of tree roots emerging from dark soil at night, showcasing nature's organic structure.",
+  "path": "images/saved-from-web/saved-from-web_0093877568b789bf.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "detailed",
+    "close",
+    "root",
+    "emerging",
+    "from",
+    "dark",
+    "soil",
+    "night",
+    "showcasing",
+    "organic",
+    "structure",
+    "macro",
+    "quiet",
+    "woodland",
+    "close-up",
+    "roots",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "tree roots soil macro quiet forest or woodland at night",
+    "savedAt": "2026-10-23T08:36:12.088Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Plato Terentev",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/brown-tree-trunk-on-brown-soil-9810199/"
+  }
+}

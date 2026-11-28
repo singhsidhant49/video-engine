@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_daa37fadf4895d5e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Hippocampus (brain).jpg",
+  "path": "images/saved-from-web/saved-from-web_daa37fadf4895d5e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1024,
+  "height": 881,
+  "aspectRatio": 1.1623,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "hippocampu",
+    "brain",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "hippocampus",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "hippocampu",
+    "brain",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "hippocampus",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Hippocampus (brain).jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "brain anatomy hippocampus",
+    "savedAt": "2026-10-26T15:47:49.435Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "author": "Fg, contact:frank.gaillard@gmail.com",
+    "creator": "Fg, contact:frank.gaillard@gmail.com",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-26T15:45:43.140Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Hippocampus_(brain).jpg"
+  }
+}

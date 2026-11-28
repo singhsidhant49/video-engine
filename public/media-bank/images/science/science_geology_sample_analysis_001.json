@@ -1,0 +1,77 @@
+{
+  "id": "science_geology_sample_analysis_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Geologist examining rock samples in a mountain research lab",
+  "path": "images/science/science_geology_sample_analysis_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1792,
+  "height": 1024,
+  "aspectRatio": 1.75,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "geology",
+    "rock samples",
+    "earth science",
+    "research",
+    "minerals"
+  ],
+  "concepts": [
+    "geological analysis",
+    "earth science research",
+    "mineral identification",
+    "sample study"
+  ],
+  "subjects": [
+    "scientist",
+    "rock samples",
+    "map",
+    "monitor",
+    "mountain view"
+  ],
+  "actions": [
+    "examining rock",
+    "comparing samples",
+    "studying geology"
+  ],
+  "mood": [
+    "methodical",
+    "natural",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.38,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "geology video",
+    "earth science",
+    "field lab explainer",
+    "research montage"
+  ],
+  "avoidFor": [
+    "microbiology",
+    "astronomy",
+    "financial charts"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

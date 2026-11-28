@@ -1,0 +1,75 @@
+{
+  "id": "modern_boardroom_presentation_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern boardroom strategy presentation",
+  "path": "images/business/modern_boardroom_presentation_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "boardroom",
+    "presentation",
+    "strategy",
+    "leadership",
+    "executive"
+  ],
+  "concepts": [
+    "corporate strategy",
+    "executive presentation",
+    "leadership communication",
+    "business planning"
+  ],
+  "subjects": [
+    "presenter",
+    "executives",
+    "meeting table"
+  ],
+  "actions": [
+    "presenting",
+    "explaining strategy",
+    "discussing"
+  ],
+  "mood": [
+    "professional",
+    "authoritative",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.4,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "leadership content",
+    "strategy deck",
+    "board meeting",
+    "corporate presentation"
+  ],
+  "avoidFor": [
+    "retail",
+    "warehouse",
+    "casual remote work"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

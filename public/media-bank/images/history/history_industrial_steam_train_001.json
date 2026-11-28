@@ -1,0 +1,72 @@
+{
+  "id": "history_industrial_steam_train_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Industrial steam train and workers",
+  "path": "images/history/history_industrial_steam_train_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "industrial revolution",
+    "steam train",
+    "workers",
+    "factory",
+    "railway"
+  ],
+  "concepts": [
+    "industrialization",
+    "transport history",
+    "labor history"
+  ],
+  "subjects": [
+    "steam locomotive",
+    "rail workers",
+    "smoke"
+  ],
+  "actions": [
+    "working on railway",
+    "operating locomotive"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "industrial revolution videos",
+    "rail history",
+    "labor scenes"
+  ],
+  "avoidFor": [
+    "ancient world",
+    "courtly history"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

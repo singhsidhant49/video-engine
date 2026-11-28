@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_11ff30f8c8a53083",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/side-view-of-man-jumping-into-the-swimming-pool-6629925/",
+  "path": "video/saved-from-web/saved-from-web_11ff30f8c8a53083.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "side",
+    "man",
+    "jumping",
+    "into",
+    "swimming",
+    "pool",
+    "6629925",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "side-view-of-man-jumping-into-the-swimming-pool-6629925"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "side",
+    "man",
+    "jumping",
+    "into",
+    "swimming",
+    "pool",
+    "6629925",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "https",
+    "pexels",
+    "video",
+    "side-view-of-man-jumping-into-the-swimming-pool-6629925"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/side-view-of-man-jumping-into-the-swimming-pool-6629925/"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "swimming pool edge jump",
+    "savedAt": "2026-10-28T08:47:42.628Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marc Espejo",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/side-view-of-man-jumping-into-the-swimming-pool-6629925/"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "health_home_blood_pressure_monitoring_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy home blood pressure check",
+  "path": "images/health/health_home_blood_pressure_monitoring_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "blood pressure",
+    "hypertension",
+    "home monitoring",
+    "cardiovascular health",
+    "self care"
+  ],
+  "concepts": [
+    "home health monitoring",
+    "preventive care",
+    "cardiovascular screening"
+  ],
+  "subjects": [
+    "adult man",
+    "blood pressure cuff",
+    "home monitor",
+    "table"
+  ],
+  "actions": [
+    "checking blood pressure",
+    "monitoring vitals",
+    "recording health"
+  ],
+  "mood": [
+    "calm",
+    "practical",
+    "home-based"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "blood pressure videos",
+    "heart health content",
+    "home care scenes",
+    "preventive health"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

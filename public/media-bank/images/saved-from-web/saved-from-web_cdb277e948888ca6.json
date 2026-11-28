@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_cdb277e948888ca6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Hand holding smartphone displaying a GPS map application with location data.",
+  "path": "images/saved-from-web/saved-from-web_cdb277e948888ca6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1719,
+  "aspectRatio": 1.5125,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "holding",
+    "smartphone",
+    "displaying",
+    "gp",
+    "map",
+    "application",
+    "location",
+    "data",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "gps"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "hand",
+    "holding",
+    "smartphone",
+    "displaying",
+    "gp",
+    "map",
+    "application",
+    "location",
+    "data",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "gps"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Hand holding smartphone displaying a GPS map application with location data."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "smartphone map blue location dot close up",
+    "savedAt": "2026-10-29T14:25:42.111Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "George Sultan",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-person-holding-black-smartphone-11877276/"
+  }
+}

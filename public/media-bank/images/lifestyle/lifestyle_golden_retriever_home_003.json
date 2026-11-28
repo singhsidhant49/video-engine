@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_golden_retriever_home_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy living room with golden retriever",
+  "path": "images/lifestyle/lifestyle_golden_retriever_home_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "pet",
+    "dog",
+    "home",
+    "cozy",
+    "companion",
+    "slow living"
+  ],
+  "concepts": [
+    "pet ownership",
+    "comfort",
+    "home life",
+    "companionship"
+  ],
+  "subjects": [
+    "woman",
+    "golden retriever",
+    "living room",
+    "rug",
+    "plants"
+  ],
+  "actions": [
+    "petting dog",
+    "sitting on floor",
+    "bonding with pet"
+  ],
+  "mood": [
+    "heartwarming",
+    "cozy",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "pet lifestyle videos",
+    "home life content",
+    "cozy montage scenes",
+    "companion animal content"
+  ],
+  "avoidFor": [
+    "formal business topics",
+    "adventure travel",
+    "sports scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

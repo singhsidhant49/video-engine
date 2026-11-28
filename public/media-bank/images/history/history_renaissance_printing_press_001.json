@@ -1,0 +1,78 @@
+{
+  "id": "history_renaissance_printing_press_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Renaissance printing workshop in sunlight",
+  "path": "images/history/history_renaissance_printing_press_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "renaissance",
+    "printing press",
+    "books",
+    "workshop",
+    "printing",
+    "europe"
+  ],
+  "concepts": [
+    "spread of knowledge",
+    "print revolution",
+    "early publishing",
+    "renaissance learning"
+  ],
+  "subjects": [
+    "printers",
+    "movable type",
+    "press",
+    "printed pages",
+    "workshop tables"
+  ],
+  "actions": [
+    "setting type",
+    "operating press",
+    "printing pages"
+  ],
+  "mood": [
+    "scholarly",
+    "productive",
+    "sunlit"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.4,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "history of books",
+    "renaissance videos",
+    "knowledge revolution",
+    "printing technology scenes"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "industrial smoke scenes",
+    "battle content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

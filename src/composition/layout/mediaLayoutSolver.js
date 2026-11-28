@@ -120,11 +120,24 @@ export function solveMediaLayout(composition, mediaSceneSpec, ctx) {
     const subjectSafeRegion = unionRects(protectedBounds.map((region) => projectRect(region, cropResult, target)));
     mediaGeometry[id] = { assetId: asset.assetId, src: asset.src, mediaType: asset.type, rect: target, crop: { x: cropResult.x, y: cropResult.y, width: cropResult.width, height: cropResult.height }, objectPosition: cropResult.objectPosition, scale: 1, transformOrigin: `${Math.round(cropResult.objectPosition.x * 100)}% ${Math.round(cropResult.objectPosition.y * 100)}%`, subjectSafeRegion,
       treatment: { scrim: mediaSceneSpec.textNeed !== 'NONE' ? 'subtle-gradient' : 'none', brightness: 1, contrast: 1, tintOpacity: 0, vignette: mediaSceneSpec.mediaRole === 'ATMOSPHERE' ? .12 : 0 }, sourceDimensions: asset.dimensions, nativeMotion: asset.type === 'video' && asset.motionPresent !== false, videoTrim: asset.videoTrim || null, activeRange: (() => { const cut = mediaSceneSpec.montage?.cuts.find((item) => item.assetId === asset.assetId); return cut ? { startFrame: cut.startFrame, endFrame: cut.endFrame } : null; })() };
-    const focus = asset.focalPoint || { x: .5, y: .5 };
+    const isDetailReframe = Boolean(asset.isDeliberateReuse || mediaSceneSpec.mediaRole === 'DETAIL' || asset.role === 'detail');
+    const focus = (isDetailReframe && asset.focusBox)
+      ? { x: clamp(asset.focusBox.x + asset.focusBox.width / 2, 0, 1), y: clamp(asset.focusBox.y + asset.focusBox.height / 2, 0, 1) }
+      : (asset.focalPoint || { x: .5, y: .5 });
     const behavior = asset.type === 'video' && asset.motionPresent !== false ? 'STATIC' : mediaSceneSpec.cameraIntent;
-    const scales = behavior === 'SUBTLE_PUSH' ? [1, 1.025] : behavior === 'SUBTLE_PULL' ? [1.025, 1] : behavior === 'DETAIL_CROP' ? [1, 1.12] : [1, 1];
-    const dx = behavior === 'FOCAL_PAN' ? .035 : 0;
-    cameraPaths[id] = { behavior, start: { scale: scales[0], focusX: clamp(focus.x - dx, 0, 1), focusY: focus.y }, end: { scale: scales[1], focusX: clamp(focus.x + dx, 0, 1), focusY: focus.y }, rationale: behavior === 'STATIC' ? (asset.type === 'video' ? 'Preserve native video motion.' : 'The frame communicates without synthetic movement.') : `Camera behavior supports ${mediaSceneSpec.mediaRole.toLowerCase()} intent.` };
+    const baseScale = isDetailReframe ? 1.25 : 1.0;
+    const isShorts = ctx.orientation === 'vertical' || ctx.format === 'shorts';
+    const zoomFactor = isShorts ? 1.06 : 1.04;
+    const scales = behavior === 'SUBTLE_PUSH' ? [baseScale, Number((baseScale * zoomFactor).toFixed(4))]
+      : behavior === 'SUBTLE_PULL' ? [Number((baseScale * zoomFactor).toFixed(4)), baseScale]
+        : ['PAN_LEFT', 'PAN_RIGHT'].includes(behavior) ? [Number((baseScale * zoomFactor).toFixed(4)), Number((baseScale * zoomFactor).toFixed(4))] : [baseScale, baseScale];
+    const travel = .04;
+    const startX = behavior === 'PAN_LEFT' ? focus.x + travel
+      : behavior === 'PAN_RIGHT' ? focus.x - travel : focus.x;
+    const endX = focus.x;
+    const startY = focus.y;
+    const endY = focus.y;
+    cameraPaths[id] = { behavior, start: { scale: scales[0], focusX: clamp(startX, 0, 1), focusY: clamp(startY, 0, 1) }, end: { scale: scales[1], focusX: clamp(endX, 0, 1), focusY: clamp(endY, 0, 1) }, rationale: behavior === 'STATIC' ? (asset.type === 'video' ? 'Preserve native video motion.' : 'The frame communicates without synthetic movement.') : `Camera behavior supports ${mediaSceneSpec.mediaRole.toLowerCase()} intent and converges on the inspected focal subject.` };
     solved.visualHierarchy = hierarchyFor(solved, target, ctx.viewport);
   });
   const primarySubject = mediaGeometry.media_primary.subjectSafeRegion;

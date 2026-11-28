@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_0ec7cc15683602b6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed close-up of a goose's head with water droplets, showcasing orange beak and keen eye.",
+  "path": "images/saved-from-web/saved-from-web_0ec7cc15683602b6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "goose",
+    "head",
+    "water",
+    "droplet",
+    "showcasing",
+    "orange",
+    "beak",
+    "keen",
+    "eye",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "bird",
+    "holding",
+    "close-up",
+    "droplets"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed close-up of a goose's head with water droplets, showcasing orange beak and keen eye."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "bird holding water droplet beak",
+    "savedAt": "2026-10-26T05:45:52.463Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Gustavo Denuncio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-a-goose-with-water-droplets-30273525/"
+  }
+}

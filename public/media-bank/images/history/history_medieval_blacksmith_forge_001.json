@@ -1,0 +1,79 @@
+{
+  "id": "history_medieval_blacksmith_forge_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Medieval blacksmith at work in a forge",
+  "path": "images/history/history_medieval_blacksmith_forge_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "medieval",
+    "blacksmith",
+    "forge",
+    "craftsmanship",
+    "armor",
+    "weapons"
+  ],
+  "concepts": [
+    "artisan labor",
+    "medieval craft",
+    "material culture",
+    "town industry"
+  ],
+  "subjects": [
+    "blacksmith",
+    "anvil",
+    "forge fire",
+    "armor",
+    "tools"
+  ],
+  "actions": [
+    "hammering metal",
+    "forging tools",
+    "working in workshop"
+  ],
+  "mood": [
+    "warm",
+    "energetic",
+    "craft-focused"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.45,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "medieval life videos",
+    "craft history",
+    "town economy scenes",
+    "documentary visuals"
+  ],
+  "avoidFor": [
+    "ancient temples",
+    "maritime travel",
+    "modern factories"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

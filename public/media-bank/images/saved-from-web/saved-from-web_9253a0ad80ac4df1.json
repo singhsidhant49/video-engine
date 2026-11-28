@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_9253a0ad80ac4df1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Calm ocean surface reflecting light under a dark night sky, creating a tranquil seascape.",
+  "path": "images/saved-from-web/saved-from-web_9253a0ad80ac4df1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1459,
+  "height": 2600,
+  "aspectRatio": 0.5612,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "calm",
+    "ocean",
+    "surface",
+    "reflecting",
+    "light",
+    "under",
+    "dark",
+    "night",
+    "sky",
+    "creating",
+    "tranquil",
+    "seascape",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "fading",
+    "black",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Calm ocean surface reflecting light under a dark night sky, creating a tranquil seascape."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "dark ocean fading to black",
+    "savedAt": "2026-10-24T05:18:32.270Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nothing Ahead",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/the-calm-sea-surface-at-night-10300988/"
+  }
+}

@@ -1,6 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import net from 'node:net';
+import { lookup } from 'node:dns/promises';
+import { fileURLToPath } from 'node:url';
 import { config } from '../config/index.js';
 import { runBinary, ffmpeg } from './ffmpeg.js';
 import { licenseFromExtmeta } from '../shared/licensing.js';
@@ -23,6 +26,50 @@ const UA = {
 };
 const CACHE_DIR = path.join(config.rootDir, '.cache', 'media');
 export const MIN_SHORT_SIDE = 640;
+const MAX_MEDIA_DOWNLOAD_BYTES = Math.max(1_000_000, Number(process.env.MAX_MEDIA_DOWNLOAD_BYTES || 150 * 1024 * 1024));
+
+function privateAddress(address) {
+  const normalized = String(address || '').toLowerCase().replace(/^\[|\]$/g, '');
+  if (net.isIPv4(normalized)) {
+    const [a, b] = normalized.split('.').map(Number);
+    return a === 0 || a === 10 || a === 127 || a >= 224
+      || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254)
+      || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168)
+      || (a === 198 && (b === 18 || b === 19));
+  }
+  if (net.isIPv6(normalized)) {
+    return normalized === '::' || normalized === '::1' || normalized.startsWith('fc') || normalized.startsWith('fd')
+      || /^fe[89ab]/.test(normalized) || normalized.startsWith('ff')
+      || normalized.startsWith('::ffff:127.') || normalized.startsWith('::ffff:10.') || normalized.startsWith('::ffff:192.168.');
+  }
+  return false;
+}
+
+async function assertSafeRemoteUrl(value) {
+  const parsed = new URL(value);
+  if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error(`Unsupported media URL protocol: ${parsed.protocol}`);
+  const host = parsed.hostname.toLowerCase();
+  if (host === 'localhost' || host.endsWith('.localhost') || privateAddress(host)) throw new Error(`Private media host is not allowed: ${host}`);
+  // Node's test runner uses reserved .invalid hosts with a mocked fetch. Keep
+  // this fixture path isolated from every deployed process.
+  if (process.env.NODE_TEST_CONTEXT && host.endsWith('.invalid')) return parsed;
+  const addresses = await lookup(host, { all: true, verbatim: true });
+  if (!addresses.length || addresses.some(({ address }) => privateAddress(address))) throw new Error(`Media host resolves to a private address: ${host}`);
+  return parsed;
+}
+
+async function safeFetchWithTimeout(url, opts = {}, ms = 5000) {
+  let current = String(url);
+  for (let redirects = 0; redirects <= 5; redirects++) {
+    await assertSafeRemoteUrl(current);
+    const response = await fetchWithTimeout(current, { ...opts, redirect: 'manual' }, ms);
+    if (![301, 302, 303, 307, 308].includes(response.status)) return response;
+    const location = response.headers.get('location');
+    if (!location) throw new Error('Media redirect omitted Location header');
+    current = new URL(location, current).toString();
+  }
+  throw new Error('Media download exceeded redirect limit');
+}
 
 async function fetchWithTimeout(url, opts = {}, ms = 5000) {
   const ctl = new AbortController();
@@ -39,8 +86,9 @@ const SEARCH_TTL_MS = 7 * 24 * 3600 * 1000;
 /** Search failures (rate limits, outages) this process — so reports can tell "unreachable" from "nothing found". */
 export const searchStats = { ok: 0, cached: 0, failed: 0, failures: [] };
 const providerState = new Map();
+const hostFailures = new Map();
 const HOST_INTERVAL_MS = {
-  'api.pexels.com': 350,
+  'api.pexels.com': 550,
   'en.wikipedia.org': 180,
   'commons.wikimedia.org': 220,
   'api.search.brave.com': 450,
@@ -92,7 +140,7 @@ async function getJson(url, opts, ms = 5000) {
   const host = new URL(url).host;
   if (!(await reserveProvider(host))) return null;
   let lastErr = null;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const res = await fetchWithTimeout(url, opts, ms);
       if (res.ok) {
@@ -113,8 +161,10 @@ async function getJson(url, opts, ms = 5000) {
       }
       if (res.status === 429) {
         const retryAfter = Number(res.headers.get('retry-after'));
-        state.blockedUntil = Date.now() + (Number.isFinite(retryAfter) ? Math.max(15, retryAfter) * 1000 : 45_000);
-        break;
+        const waitMs = Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 2500;
+        state.blockedUntil = Date.now() + waitMs;
+        await new Promise((r) => setTimeout(r, waitMs));
+        continue;
       }
       if (res.status < 500) break;
       await new Promise((r) => setTimeout(r, 600));
@@ -167,6 +217,8 @@ export async function wikipediaLeadImage(title) {
 }
 
 const COMMONS_JUNK = /\b(logo|icon|flag|map|coat of arms|seal|diagram|chart|graph|signature|svg|locator|symbol)\b/i;
+const COMMONS_NAMED_VEHICLE_FACILITY_JUNK = /\b(?:pullman|railroad\s+car|railway\s+car|train\s+car|locomotive|coach\s+car|sleeper\s+car|dining\s+car|boxcar|trolley|bus|tram|metro\s+station|subway\s+station|high\s+school|elementary\s+school|school\s+building|auditorium|crater|boulevard|avenue|highway)\b/i;
+const PERSON_OR_EXPEDITION_QUERY = /\b(?:amundsen|scott|shackleton|explorer|scientist|captain|leader|founder|portrait|people|person|crew|team|expedition)\b/i;
 
 /** Commons search, filtered for relevance. Hits whose title names `entityName` are tier "verified". */
 export async function commonsSearch(query, entityName) {
@@ -181,9 +233,17 @@ export async function commonsSearch(query, entityName) {
   // Capitalised runs are names ("Wall Street"): one must appear in the title as a contiguous phrase.
   const phrases = namedPhrases(query);
   const entityPhrase = entityName ? keywords(entityName).join(' ') : null;
+  const isPersonQuery = PERSON_OR_EXPEDITION_QUERY.test(query) || (entityName && PERSON_OR_EXPEDITION_QUERY.test(entityName));
+  const wantsVehicle = COMMONS_NAMED_VEHICLE_FACILITY_JUNK.test(query);
+
   return pages
     .map((p) => ({ title: p.title || '', info: p.imageinfo?.[0] }))
-    .filter(({ title, info }) => info && /image\/(jpeg|png|webp)/.test(info.mime) && (wantsJunk || !COMMONS_JUNK.test(title)))
+    .filter(({ title, info }) => {
+      if (!info || !/image\/(jpeg|png|webp)/.test(info.mime)) return false;
+      if (!wantsJunk && COMMONS_JUNK.test(title)) return false;
+      if (isPersonQuery && !wantsVehicle && COMMONS_NAMED_VEHICLE_FACILITY_JUNK.test(title)) return false;
+      return true;
+    })
     .filter(({ title }) => {
       const t = new Set(keywords(title));
       const namedOk = !phrases.length || phrases.some((p) => containsPhrase(title, p));
@@ -195,7 +255,7 @@ export async function commonsSearch(query, entityName) {
       width: info.thumbwidth || info.width,
       height: info.thumbheight || info.height,
       source: 'commons',
-      tier: entityPhrase && containsPhrase(title, entityPhrase) ? 'verified' : 'relevant',
+      tier: (entityPhrase && containsPhrase(title, entityPhrase) && !COMMONS_NAMED_VEHICLE_FACILITY_JUNK.test(title)) ? 'verified' : 'relevant',
       weight: 2.4 - rank * 0.12,
       label: title,
       license: licenseFromExtmeta(info.extmetadata, info.descriptionurl),
@@ -322,7 +382,7 @@ export async function pexelsVideoSearch(query, orientation, minSeconds = 4) {
   (data?.videos || []).forEach((v, rank) => {
     if (!v.duration || v.duration < Math.min(minSeconds, 8)) return;
     const files = (v.video_files || []).filter((f) => f.file_type === 'video/mp4' && f.width && f.height && Math.max(f.width, f.height) <= 2600);
-    files.sort((a, b) => Math.abs(Math.min(a.width, a.height) - 1080) - Math.abs(Math.min(b.width, b.height) - 1080));
+    files.sort((a, b) => Math.abs(Math.min(a.width, a.height) - 720) - Math.abs(Math.min(b.width, b.height) - 720));
     const f = files[0];
     if (!f || Math.min(f.width, f.height) < 720) return;
     out.push({ type: 'video', url: f.link, width: f.width, height: f.height, duration: v.duration, source: 'pexels-video', tier: 'relevant', weight: 2.7 - rank * 0.1, label: v.url,
@@ -337,19 +397,36 @@ export async function pexelsVideoSearch(query, orientation, minSeconds = 4) {
  * Circuit breaker per download host. Major CDNs (Pexels, Unsplash, Brave, Commons)
  * are exempt from aggressive tripping so individual slow images never block the entire source.
  */
-const hostFailures = new Map();
-const CDN_EXEMPT = new Set(['images.pexels.com', 'images.unsplash.com', 'api.search.brave.com', 'upload.wikimedia.org', 'commons.wikimedia.org']);
+const CDN_EXEMPT = new Set([
+  'images.pexels.com',
+  'video-files.pexels.com',
+  'vod-progressive.akamaized.net',
+  'player.vimeo.com',
+  'images.unsplash.com',
+  'api.search.brave.com',
+  'upload.wikimedia.org',
+  'commons.wikimedia.org'
+]);
 export const breakerOpen = (url) => {
   try {
     const host = new URL(url).host;
     if (CDN_EXEMPT.has(host)) return false;
-    return (hostFailures.get(host) || 0) >= 6;
+    const state = hostFailures.get(host);
+    if (!state || state.failures < 6) return false;
+    // Half-open after a short cooldown so a transient provider outage does not
+    // disable that host for the lifetime of a worker process.
+    if (Date.now() - state.lastFailureAt >= 60_000) {
+      hostFailures.delete(host);
+      return false;
+    }
+    return true;
   } catch {
     return false;
   }
 };
 
 async function downloadCached(url, timeout, retries = 0) {
+  await assertSafeRemoteUrl(url);
   const key = crypto.createHash('sha1').update(url).digest('hex');
   const file = path.join(CACHE_DIR, `${key}.bin`);
   try {
@@ -367,22 +444,51 @@ async function downloadCached(url, timeout, retries = 0) {
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetchWithTimeout(url, {}, timeout || 8000);
+      const res = await safeFetchWithTimeout(url, {}, timeout || 8000);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const buf = Buffer.from(await res.arrayBuffer());
+      await assertSafeRemoteUrl(res.url || url);
+      const declaredSize = Number(res.headers.get('content-length') || 0);
+      if (declaredSize > MAX_MEDIA_DOWNLOAD_BYTES) throw new Error(`media response too large (${declaredSize} bytes)`);
+      const contentType = String(res.headers.get('content-type') || '').toLowerCase();
+      if (contentType && !/^(image|video)\//.test(contentType) && !contentType.includes('octet-stream')) {
+        throw new Error(`unsupported media content type: ${contentType}`);
+      }
       await fs.mkdir(CACHE_DIR, { recursive: true });
-      await fs.writeFile(file, buf);
-      hostFailures.set(host, 0);
+      const temp = `${file}.tmp.${process.pid}.${Date.now()}`;
+      const handle = await fs.open(temp, 'wx');
+      const contentHasher = crypto.createHash('sha256');
+      let downloadedSize = 0;
+      try {
+        if (!res.body) throw new Error('media response has no body');
+        for await (const chunk of res.body) {
+          const bytes = Buffer.from(chunk);
+          downloadedSize += bytes.length;
+          if (downloadedSize > MAX_MEDIA_DOWNLOAD_BYTES) throw new Error(`media response exceeded ${MAX_MEDIA_DOWNLOAD_BYTES} bytes`);
+          contentHasher.update(bytes);
+          await handle.write(bytes);
+        }
+      } catch (error) {
+        await handle.close().catch(() => {});
+        await fs.rm(temp, { force: true }).catch(() => {});
+        throw error;
+      }
+      await handle.close();
+      if (downloadedSize === 0) {
+        await fs.rm(temp, { force: true }).catch(() => {});
+        throw new Error('empty media response');
+      }
+      await fs.rename(temp, file);
+      hostFailures.delete(host);
 
       // Write metadata sidecar preserving source and content hashes
-      const contentHash = crypto.createHash('sha256').update(buf).digest('hex');
+      const contentHash = contentHasher.digest('hex');
       const meta = {
         key,
         contentHash,
         sourceUrl: url,
         host,
         retrievedAt: new Date().toISOString(),
-        size: buf.length,
+        size: downloadedSize,
       };
       await fs.writeFile(path.join(CACHE_DIR, `${key}.json`), JSON.stringify(meta, null, 2)).catch(() => {});
 
@@ -390,7 +496,10 @@ async function downloadCached(url, timeout, retries = 0) {
     } catch (err) {
       lastErr = err;
       // 4xx is about this URL, not the host; timeouts and 5xx count against the host.
-      if (!/HTTP 4\d\d/.test(err.message)) hostFailures.set(host, (hostFailures.get(host) || 0) + 1);
+      if (!/HTTP 4\d\d/.test(err.message)) {
+        const state = hostFailures.get(host) || { failures: 0, lastFailureAt: 0 };
+        hostFailures.set(host, { failures: state.failures + 1, lastFailureAt: Date.now() });
+      }
       if (breakerOpen(url)) { console.warn(`   ⚡ ${host} failing — skipped for the rest of this run`); break; }
     }
   }
@@ -482,9 +591,19 @@ export async function materialiseImage(candidate, outFile) {
   for (let attempt = 0; attempt < (remote ? 2 : 1); attempt++) {
     let cachedPath;
     try {
-      if (candidate.localPath) cachedPath = candidate.localPath;
-      else if (candidate.url?.startsWith('file://')) cachedPath = candidate.url.replace(/^file:\/\//, '');
-      else cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+      if (candidate.localPath) {
+        cachedPath = candidate.localPath;
+      } else if (candidate.url?.startsWith('file://')) {
+        try {
+          cachedPath = fileURLToPath(candidate.url);
+        } catch {
+          let p = decodeURIComponent(candidate.url.replace(/^file:\/\//, ''));
+          if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+          cachedPath = p;
+        }
+      } else {
+        cachedPath = await downloadCached(candidate.url, candidate.timeout, candidate.retries);
+      }
       return await transcodeImage(cachedPath, outFile, minimumShortSide);
     } catch (error) {
       lastError = error;
@@ -500,7 +619,19 @@ export async function materialiseImage(candidate, outFile) {
 }
 
 export async function materialiseVideo(candidate, outFile) {
-  const cached = await downloadCached(candidate.url, 90000, 1);
+  let cached = candidate.localPath;
+  if (!cached && candidate.url?.startsWith('file://')) {
+    try {
+      cached = fileURLToPath(candidate.url);
+    } catch {
+      let p = decodeURIComponent(candidate.url.replace(/^file:\/\//, ''));
+      if (process.platform === 'win32' && /^\/[a-zA-Z]:/.test(p)) p = p.slice(1);
+      cached = p;
+    }
+  }
+  if (!cached) {
+    cached = await downloadCached(candidate.url, 90000, 1);
+  }
   const { stdout } = await runBinary('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', cached]);
   const info = JSON.parse(stdout);
   const width = info.streams?.[0]?.width, height = info.streams?.[0]?.height, duration = parseFloat(info.format?.duration);

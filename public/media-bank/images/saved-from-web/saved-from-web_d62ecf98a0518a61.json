@@ -1,0 +1,73 @@
+{
+  "id": "saved-from-web_d62ecf98a0518a61",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Picturesque scenery of architecture of ancient Roman Forum with ruined stone buildings and columns against cloudless blue sky in Rome",
+  "path": "images/saved-from-web/saved-from-web_d62ecf98a0518a61.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "picturesque",
+    "scenery",
+    "architecture",
+    "ancient",
+    "roman",
+    "forum",
+    "ruined",
+    "stone",
+    "building",
+    "column",
+    "against",
+    "cloudles",
+    "blue",
+    "sky",
+    "rome",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "ruin",
+    "sunset",
+    "buildings",
+    "columns",
+    "cloudless"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Picturesque scenery of architecture of ancient Roman Forum with ruined stone buildings and columns against cloudless blue sky in Rome"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Roman Forum ruins sunset",
+    "savedAt": "2026-10-24T07:24:50.186Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nikita Belokhonov",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/ruins-of-ancient-city-under-blue-sky-at-sunset-5977163/"
+  }
+}

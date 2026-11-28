@@ -1,0 +1,74 @@
+{
+  "id": "finance_executive_analytics_review_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Executive reviewing financial analytics overlooking the city",
+  "path": "images/finance/finance_executive_analytics_review_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "analytics",
+    "executive",
+    "laptop",
+    "financial reports",
+    "city office"
+  ],
+  "concepts": [
+    "financial analysis",
+    "investment review",
+    "business performance",
+    "executive decision making"
+  ],
+  "subjects": [
+    "executive",
+    "laptop dashboard",
+    "financial reports"
+  ],
+  "actions": [
+    "reviewing analytics",
+    "analyzing reports"
+  ],
+  "mood": [
+    "focused",
+    "premium",
+    "professional"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.46
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "finance analysis",
+    "investment content",
+    "corporate reporting",
+    "wealth explainer"
+  ],
+  "avoidFor": [
+    "customer service",
+    "retail operations",
+    "team brainstorming"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

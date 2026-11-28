@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_e1ee1e06b8ae56a5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of bacterial colonies in a petri dish held by a hand. Ideal for microbiology.",
+  "path": "images/saved-from-web/saved-from-web_e1ee1e06b8ae56a5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1729,
+  "height": 2600,
+  "aspectRatio": 0.665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "close",
+    "bacterial",
+    "colonie",
+    "held",
+    "hand",
+    "ideal",
+    "microbiology",
+    "close-up",
+    "colonies",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "scientific",
+    "laboratory",
+    "glassware",
+    "petri",
+    "dish",
+    "microscope",
+    "research",
+    "cleanroom",
+    "static",
+    "presentation",
+    "close",
+    "bacterial",
+    "colonie",
+    "held",
+    "hand",
+    "ideal",
+    "microbiology",
+    "close-up",
+    "colonies",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "scientific laboratory glassware, petri dish, or microscope"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory or cleanroom"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "penicillin inhibition zone bacteria",
+    "savedAt": "2026-11-02T09:39:32.192Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Katarzyna Modrzejewska",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-person-holding-a-petri-dish-6203349/"
+  }
+}

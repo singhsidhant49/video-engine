@@ -1,0 +1,75 @@
+{
+  "id": "dashboard_demo_client_meeting_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern office dashboard presentation",
+  "path": "images/business/dashboard_demo_client_meeting_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "dashboard",
+    "analytics",
+    "client meeting",
+    "software demo",
+    "presentation"
+  ],
+  "concepts": [
+    "data presentation",
+    "software demo",
+    "analytics review",
+    "client meeting"
+  ],
+  "subjects": [
+    "consultant",
+    "client",
+    "laptop",
+    "dashboard"
+  ],
+  "actions": [
+    "presenting data",
+    "reviewing analytics"
+  ],
+  "mood": [
+    "focused",
+    "professional",
+    "clean"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.54,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "top-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "analytics content",
+    "business software",
+    "reporting",
+    "client presentation"
+  ],
+  "avoidFor": [
+    "retail",
+    "event networking",
+    "factory"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

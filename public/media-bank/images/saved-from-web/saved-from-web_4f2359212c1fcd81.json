@@ -1,0 +1,66 @@
+{
+  "id": "saved-from-web_4f2359212c1fcd81",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Three baby birds in a nest, beaks open, surrounded by natural nesting materials.",
+  "path": "images/saved-from-web/saved-from-web_4f2359212c1fcd81.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1466,
+  "aspectRatio": 1.7735,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "three",
+    "baby",
+    "bird",
+    "nest",
+    "beak",
+    "open",
+    "surrounded",
+    "natural",
+    "nesting",
+    "material",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "laughing",
+    "birds",
+    "beaks",
+    "materials"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Three baby birds in a nest, beaks open, surrounded by natural nesting materials."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "birds laughing open beaks",
+    "savedAt": "2026-10-26T05:45:33.712Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Mujib Bugti",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/nestlings-in-nest-16224332/"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_ce469faebc578ee9",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Breathtaking view of a snow-covered mountain valley in Iceland with a winding road below.",
+  "path": "images/saved-from-web/saved-from-web_ce469faebc578ee9.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snow",
+    "covered",
+    "mountain",
+    "valley",
+    "iceland",
+    "winding",
+    "road",
+    "below",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "view",
+    "snow-covered",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "breathtaking",
+    "snow",
+    "covered",
+    "mountain",
+    "valley",
+    "iceland",
+    "winding",
+    "road",
+    "below",
+    "outdoor",
+    "park",
+    "forest",
+    "under",
+    "twilight",
+    "sky",
+    "static",
+    "presentation",
+    "view",
+    "snow-covered",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Breathtaking view of a snow-covered mountain valley in Iceland with a winding road below."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest under twilight sky"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "mist valley winding mountain road snow, silence, immense scale",
+    "savedAt": "2026-10-27T06:26:46.552Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Raul Ling",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/icelandic-snow-covered-mountain-valley-view-32251664/"
+  }
+}

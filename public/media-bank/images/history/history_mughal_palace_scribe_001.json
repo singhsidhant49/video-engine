@@ -1,0 +1,78 @@
+{
+  "id": "history_mughal_palace_scribe_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Mughal palace scribe at sunset",
+  "path": "images/history/history_mughal_palace_scribe_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "mughal",
+    "india",
+    "scribe",
+    "palace",
+    "court culture",
+    "manuscripts"
+  ],
+  "concepts": [
+    "courtly culture",
+    "imperial record keeping",
+    "south asian history",
+    "artistic manuscript tradition"
+  ],
+  "subjects": [
+    "scribe",
+    "ornate books",
+    "courtyard",
+    "fountains",
+    "palace architecture"
+  ],
+  "actions": [
+    "writing manuscript",
+    "illustrating pages",
+    "documenting court life"
+  ],
+  "mood": [
+    "ornate",
+    "warm",
+    "regal"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.39,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "indian history videos",
+    "mughal empire content",
+    "court culture scenes",
+    "historical art segments"
+  ],
+  "avoidFor": [
+    "modern India",
+    "industrial era",
+    "battlefront"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

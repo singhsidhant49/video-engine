@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_805a9f8a595811ae",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A professional examines financial graphs on a laptop, indicating market trends.",
+  "path": "images/saved-from-web/saved-from-web_805a9f8a595811ae.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "professional",
+    "examine",
+    "financial",
+    "graph",
+    "laptop",
+    "indicating",
+    "market",
+    "trend",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "examines",
+    "graphs",
+    "trends"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "professional",
+    "examine",
+    "financial",
+    "graph",
+    "laptop",
+    "indicating",
+    "market",
+    "trend",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "examines",
+    "graphs",
+    "trends"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A professional examines financial graphs on a laptop, indicating market trends."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "laptop screen financial ledger active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-28T15:41:21.482Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "AlphaTradeZone",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-pointing-at-chart-on-a-laptop-screen-5831666/"
+  }
+}

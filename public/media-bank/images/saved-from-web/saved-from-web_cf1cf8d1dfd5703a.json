@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_cf1cf8d1dfd5703a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Ford Trimotor \"Floyd Bennett\" of the Byrd Antarctic Expedition.jpg",
+  "path": "images/saved-from-web/saved-from-web_cf1cf8d1dfd5703a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2000,
+  "height": 1022,
+  "aspectRatio": 1.9569,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "ford",
+    "trimotor",
+    "floyd",
+    "bennett",
+    "byrd",
+    "antarctic",
+    "expedition",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "ford",
+    "trimotor",
+    "floyd",
+    "bennett",
+    "byrd",
+    "antarctic",
+    "expedition",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "file",
+    "jpg"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Ford Trimotor \"Floyd Bennett\" of the Byrd Antarctic Expedition.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Antarctic expedition historic photo",
+    "savedAt": "2026-10-29T09:58:47.179Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "No restrictions",
+    "license_name": "No restrictions",
+    "url": "https://www.flickr.com/commons/usage/",
+    "license_url": "https://www.flickr.com/commons/usage/",
+    "author": "SDASM Archives",
+    "creator": "SDASM Archives",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-29T09:51:52.497Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Ford_Trimotor_%22Floyd_Bennett%22_of_the_Byrd_Antarctic_Expedition.jpg"
+  }
+}

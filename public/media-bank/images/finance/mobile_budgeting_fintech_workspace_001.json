@@ -1,0 +1,75 @@
+{
+  "id": "mobile_budgeting_fintech_workspace_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Modern mobile budgeting workspace",
+  "path": "images/finance/mobile_budgeting_fintech_workspace_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "mobile app",
+    "budgeting",
+    "fintech",
+    "digital banking",
+    "spending tracker"
+  ],
+  "concepts": [
+    "digital budgeting",
+    "personal finance app",
+    "fintech dashboard",
+    "spending analysis"
+  ],
+  "subjects": [
+    "smartphone",
+    "laptop dashboard",
+    "budget charts"
+  ],
+  "actions": [
+    "tracking spending",
+    "checking balance",
+    "reviewing expenses"
+  ],
+  "mood": [
+    "clean",
+    "modern",
+    "accessible"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.42,
+      "y": 0.49
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "fintech video",
+    "budgeting app",
+    "personal finance",
+    "mobile banking"
+  ],
+  "avoidFor": [
+    "boardroom presentation",
+    "trading floor",
+    "retirement consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

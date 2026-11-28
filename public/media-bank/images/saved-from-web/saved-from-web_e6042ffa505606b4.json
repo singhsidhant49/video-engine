@@ -1,0 +1,68 @@
+{
+  "id": "saved-from-web_e6042ffa505606b4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Dark dramatic clouds gathering over urban buildings, hinting at an approaching storm.",
+  "path": "images/saved-from-web/saved-from-web_e6042ffa505606b4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dark",
+    "dramatic",
+    "cloud",
+    "gathering",
+    "over",
+    "urban",
+    "building",
+    "hinting",
+    "approaching",
+    "storm",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "sky",
+    "clouds",
+    "buildings",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Dark dramatic clouds gathering over urban buildings, hinting at an approaching storm."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "storm clouds gathering dramatic sky",
+    "savedAt": "2026-10-26T05:46:28.306Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lucas Pezeta",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/high-rise-buildings-under-cloudy-sky-4028941/"
+  }
+}

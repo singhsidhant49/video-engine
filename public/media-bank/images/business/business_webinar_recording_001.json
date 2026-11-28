@@ -1,0 +1,74 @@
+{
+  "id": "business_webinar_recording_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Professional webinar in a modern studio",
+  "path": "images/business/business_webinar_recording_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "webinar",
+    "content creator",
+    "thought leadership",
+    "camera",
+    "studio"
+  ],
+  "concepts": [
+    "business education",
+    "webinar production",
+    "thought leadership",
+    "online course"
+  ],
+  "subjects": [
+    "speaker",
+    "camera",
+    "microphone",
+    "presentation screen"
+  ],
+  "actions": [
+    "recording webinar",
+    "speaking to camera"
+  ],
+  "mood": [
+    "confident",
+    "educational",
+    "polished"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.55,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "business education",
+    "coaching content",
+    "digital products"
+  ],
+  "avoidFor": [
+    "retail operations",
+    "customer support",
+    "factory"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

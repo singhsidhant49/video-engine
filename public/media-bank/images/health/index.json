@@ -1,0 +1,3224 @@
+[
+  {
+    "id": "health_5b9b58f203c91afe",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Male trail runner at sunrise",
+    "path": "images/health/health_5b9b58f203c91afe.jpg",
+    "category": "health",
+    "extension": ".jpg",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "show",
+      "male",
+      "trail",
+      "runner",
+      "sunrise",
+      "general",
+      "studio",
+      "neutral",
+      "backdrop",
+      "vehicle",
+      "motion",
+      "physical",
+      "locomotion",
+      "climbing",
+      "hill",
+      "running",
+      "trail running",
+      "cardio",
+      "outdoor fitness",
+      "endurance",
+      "active lifestyle"
+    ],
+    "concepts": [
+      "cardiovascular fitness",
+      "endurance training",
+      "outdoor exercise",
+      "healthy lifestyle"
+    ],
+    "subjects": [
+      "Male trail runner at sunrise"
+    ],
+    "actions": [
+      "vehicle motion or physical locomotion"
+    ],
+    "mood": [
+      "general studio or neutral backdrop"
+    ],
+    "composition": {
+      "focalPoint": null,
+      "goodForFullBleed": true
+    },
+    "people": false,
+    "quality": "curated",
+    "usage": [],
+    "source": {
+      "provider": "local-bank",
+      "originalQuery": "runner climbing hill trail",
+      "savedAt": "2026-10-26T06:47:47.332Z"
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_anatomical_torso_visualization_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Glowing anatomical torso visualization",
+    "path": "images/health/health_anatomical_torso_visualization_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "anatomy",
+      "human body",
+      "organs",
+      "physiology",
+      "medical illustration",
+      "body systems"
+    ],
+    "concepts": [
+      "body systems education",
+      "medical explainer",
+      "internal organs",
+      "human physiology"
+    ],
+    "subjects": [
+      "human torso",
+      "lungs",
+      "heart",
+      "liver",
+      "stomach",
+      "intestines"
+    ],
+    "actions": [
+      "showing anatomy",
+      "explaining organ systems",
+      "visualizing internal body"
+    ],
+    "mood": [
+      "clinical",
+      "educational",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "health explainers",
+      "medical education",
+      "anatomy videos",
+      "body systems videos"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_balanced_meal_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Balanced healthy meal",
+    "path": "images/health/health_balanced_meal_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "nutrition",
+      "balanced meal",
+      "salmon",
+      "vegetables",
+      "avocado",
+      "whole foods"
+    ],
+    "concepts": [
+      "balanced diet",
+      "heart healthy eating",
+      "meal planning"
+    ],
+    "subjects": [
+      "salmon",
+      "vegetables",
+      "avocado",
+      "grains"
+    ],
+    "actions": [
+      "serving meal",
+      "showcasing nutrition"
+    ],
+    "mood": [
+      "fresh",
+      "appetizing"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "nutrition videos",
+      "diet explainers",
+      "healthy lifestyle"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_balanced_wellness_meal_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Balanced wellness meal with salmon and quinoa",
+    "path": "images/health/health_balanced_wellness_meal_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "nutrition",
+      "healthy food",
+      "salmon",
+      "quinoa",
+      "avocado",
+      "diet"
+    ],
+    "concepts": [
+      "balanced diet",
+      "whole foods",
+      "heart-healthy nutrition",
+      "clean eating"
+    ],
+    "subjects": [
+      "salmon fillet",
+      "quinoa",
+      "avocado",
+      "broccoli",
+      "nuts",
+      "olive oil"
+    ],
+    "actions": [
+      "serving healthy meal",
+      "showcasing nutrition",
+      "presenting balanced plate"
+    ],
+    "mood": [
+      "fresh",
+      "appetizing",
+      "natural"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.59,
+        "y": 0.56
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "nutrition videos",
+      "healthy eating scenes",
+      "meal planning content",
+      "diet explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_bedroom_sleep_serenity_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Moonlit bedroom serenity",
+    "path": "images/health/health_bedroom_sleep_serenity_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "sleep",
+      "sleep hygiene",
+      "bedroom",
+      "rest",
+      "recovery",
+      "night routine"
+    ],
+    "concepts": [
+      "restorative sleep",
+      "healthy night routine",
+      "sleep quality",
+      "recovery"
+    ],
+    "subjects": [
+      "adult woman sleeping",
+      "bed",
+      "lamps",
+      "moonlit window",
+      "cozy room"
+    ],
+    "actions": [
+      "sleeping peacefully",
+      "resting",
+      "recovering overnight"
+    ],
+    "mood": [
+      "cozy",
+      "restful",
+      "calm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "sleep videos",
+      "night routine content",
+      "wellness explainers",
+      "recovery scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_blood_pressure_check_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Calm blood pressure check",
+    "path": "images/health/health_blood_pressure_check_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "blood pressure",
+      "hypertension",
+      "doctor visit",
+      "screening",
+      "preventive care",
+      "checkup"
+    ],
+    "concepts": [
+      "preventive screening",
+      "cardiovascular health",
+      "routine care",
+      "patient monitoring"
+    ],
+    "subjects": [
+      "doctor",
+      "adult man",
+      "blood pressure cuff",
+      "stethoscope",
+      "clinic room"
+    ],
+    "actions": [
+      "measuring blood pressure",
+      "listening with stethoscope",
+      "routine examination"
+    ],
+    "mood": [
+      "reassuring",
+      "clean",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "doctor visit videos",
+      "heart health content",
+      "preventive care scenes",
+      "clinic explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_brain_health_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Brain health visualization",
+    "path": "images/health/health_brain_health_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "brain",
+      "neuroscience",
+      "mental health",
+      "medical illustration"
+    ],
+    "concepts": [
+      "brain health",
+      "cognition",
+      "nervous system"
+    ],
+    "subjects": [
+      "human head profile",
+      "brain",
+      "neural pathways"
+    ],
+    "actions": [
+      "visualizing brain activity"
+    ],
+    "mood": [
+      "futuristic",
+      "scientific"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "brain health videos",
+      "neuroscience explainers",
+      "mental health content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_brain_neural_visual_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Neon brain in profile",
+    "path": "images/health/health_brain_neural_visual_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "brain",
+      "neuroscience",
+      "nervous system",
+      "mental function",
+      "medical illustration",
+      "neurology"
+    ],
+    "concepts": [
+      "brain health",
+      "neural pathways",
+      "cognition",
+      "neurology education"
+    ],
+    "subjects": [
+      "human head profile",
+      "brain cross-section",
+      "neurons",
+      "neural glow"
+    ],
+    "actions": [
+      "visualizing brain activity",
+      "explaining nervous system",
+      "showing neural network"
+    ],
+    "mood": [
+      "futuristic",
+      "scientific",
+      "intense"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "brain health videos",
+      "neuroscience explainers",
+      "mental performance content",
+      "medical education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_clinic_blood_pressure_check_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Blood pressure check in clinic",
+    "path": "images/health/health_clinic_blood_pressure_check_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "blood pressure",
+      "hypertension",
+      "doctor visit",
+      "screening",
+      "preventive care",
+      "clinic"
+    ],
+    "concepts": [
+      "routine screening",
+      "cardiovascular health",
+      "patient care",
+      "medical checkup"
+    ],
+    "subjects": [
+      "doctor",
+      "adult man",
+      "blood pressure cuff",
+      "clinic exam room"
+    ],
+    "actions": [
+      "measuring blood pressure",
+      "checking vitals",
+      "routine examination"
+    ],
+    "mood": [
+      "professional",
+      "reassuring",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "doctor visit videos",
+      "heart health explainers",
+      "preventive care content",
+      "clinic scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_doctor_consultation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Doctor patient consultation",
+    "path": "images/health/health_doctor_consultation_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "doctor",
+      "consultation",
+      "medical care",
+      "checkup",
+      "patient"
+    ],
+    "concepts": [
+      "preventive care",
+      "medical consultation",
+      "health guidance"
+    ],
+    "subjects": [
+      "doctor",
+      "adult patient",
+      "clinic"
+    ],
+    "actions": [
+      "discussing health",
+      "reviewing information"
+    ],
+    "mood": [
+      "professional",
+      "reassuring"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "doctor visit videos",
+      "preventive care",
+      "healthcare scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_doctor_patient_consultation_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Warm doctor-patient consultation",
+    "path": "images/health/health_doctor_patient_consultation_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "doctor consultation",
+      "preventive care",
+      "health advice",
+      "clinic",
+      "patient education"
+    ],
+    "concepts": [
+      "medical consultation",
+      "preventive healthcare",
+      "doctor communication"
+    ],
+    "subjects": [
+      "doctor",
+      "adult patient",
+      "clinic desk"
+    ],
+    "actions": [
+      "discussing health",
+      "giving advice",
+      "reviewing care"
+    ],
+    "mood": [
+      "professional",
+      "reassuring",
+      "supportive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "doctor visit videos",
+      "preventive care content",
+      "patient education",
+      "health advice scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_female_trail_running_sunset_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Female trail runner at golden hour",
+    "path": "images/health/health_female_trail_running_sunset_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "running",
+      "women fitness",
+      "trail running",
+      "cardio",
+      "outdoor exercise",
+      "sunset",
+      "wellness"
+    ],
+    "concepts": [
+      "cardiovascular fitness",
+      "active lifestyle",
+      "endurance",
+      "exercise outdoors"
+    ],
+    "subjects": [
+      "adult woman",
+      "mountain trail",
+      "sunset",
+      "river valley",
+      "athletic wear"
+    ],
+    "actions": [
+      "running on trail",
+      "training outdoors",
+      "maintaining fitness"
+    ],
+    "mood": [
+      "confident",
+      "energetic",
+      "inspiring"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.3,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "running content",
+      "women health visuals",
+      "exercise motivation"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_green_smoothie_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Green smoothie and fresh ingredients",
+    "path": "images/health/health_green_smoothie_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "nutrition",
+      "smoothie",
+      "greens",
+      "healthy drink",
+      "whole foods"
+    ],
+    "concepts": [
+      "healthy nutrition",
+      "hydration",
+      "whole foods"
+    ],
+    "subjects": [
+      "green smoothie",
+      "spinach",
+      "lemon",
+      "ginger",
+      "cucumber"
+    ],
+    "actions": [
+      "preparing healthy drink",
+      "showcasing ingredients"
+    ],
+    "mood": [
+      "fresh",
+      "clean"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "nutrition videos",
+      "healthy eating",
+      "wellness intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_grilled_salmon_quinoa_bowl_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Rustic grilled salmon quinoa bowl",
+    "path": "images/health/health_grilled_salmon_quinoa_bowl_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "nutrition",
+      "healthy food",
+      "salmon",
+      "quinoa",
+      "avocado",
+      "whole foods"
+    ],
+    "concepts": [
+      "balanced diet",
+      "clean eating",
+      "meal planning",
+      "heart-healthy food"
+    ],
+    "subjects": [
+      "salmon fillet",
+      "quinoa",
+      "avocado",
+      "tomatoes",
+      "greens",
+      "nuts"
+    ],
+    "actions": [
+      "presenting healthy meal",
+      "showcasing balanced plate",
+      "illustrating nutrition"
+    ],
+    "mood": [
+      "fresh",
+      "natural",
+      "appetizing"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.59,
+        "y": 0.55
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "nutrition videos",
+      "healthy eating content",
+      "diet explainers",
+      "meal prep intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_healthy_meal_prep_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Fresh sunlit healthy kitchen prep",
+    "path": "images/health/health_healthy_meal_prep_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "healthy eating",
+      "meal prep",
+      "nutrition",
+      "vegetables",
+      "whole foods"
+    ],
+    "concepts": [
+      "balanced nutrition",
+      "healthy cooking",
+      "meal preparation"
+    ],
+    "subjects": [
+      "adult woman",
+      "vegetables",
+      "salad",
+      "kitchen counter"
+    ],
+    "actions": [
+      "chopping vegetables",
+      "preparing food",
+      "cooking healthy meal"
+    ],
+    "mood": [
+      "fresh",
+      "bright",
+      "positive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "nutrition videos",
+      "healthy eating scenes",
+      "meal prep content",
+      "lifestyle health"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_heart_health_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Heart health visualization",
+    "path": "images/health/health_heart_health_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "heart",
+      "cardiovascular",
+      "anatomy",
+      "medical illustration",
+      "ECG"
+    ],
+    "concepts": [
+      "cardiovascular health",
+      "heart anatomy",
+      "circulation"
+    ],
+    "subjects": [
+      "human heart",
+      "ECG line"
+    ],
+    "actions": [
+      "visualizing heartbeat",
+      "showing heart anatomy"
+    ],
+    "mood": [
+      "dramatic",
+      "scientific"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "heart health videos",
+      "cardiology explainers",
+      "medical education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_herbal_roots_remedies_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden roots and herbal remedies",
+    "path": "images/health/health_herbal_roots_remedies_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "herbal wellness",
+      "ginger",
+      "turmeric",
+      "mint",
+      "natural remedies",
+      "supplements"
+    ],
+    "concepts": [
+      "natural wellness",
+      "herbal ingredients",
+      "supplement lifestyle",
+      "traditional remedies"
+    ],
+    "subjects": [
+      "ginger root",
+      "turmeric root",
+      "capsules",
+      "mint leaves",
+      "mortar and pestle"
+    ],
+    "actions": [
+      "displaying herbal ingredients",
+      "showcasing remedies",
+      "presenting supplements"
+    ],
+    "mood": [
+      "earthy",
+      "fresh",
+      "natural"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.5
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "natural health videos",
+      "supplement content",
+      "wellness intros",
+      "ingredient explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_herbal_wellness_still_life_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit ginger and turmeric herbal still life",
+    "path": "images/health/health_herbal_wellness_still_life_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "herbal wellness",
+      "ginger",
+      "turmeric",
+      "mint",
+      "natural remedies",
+      "supplements"
+    ],
+    "concepts": [
+      "natural wellness",
+      "herbal ingredients",
+      "supplement lifestyle",
+      "traditional remedies"
+    ],
+    "subjects": [
+      "ginger root",
+      "turmeric root",
+      "powder",
+      "mint",
+      "capsules",
+      "mortar and pestle"
+    ],
+    "actions": [
+      "displaying herbal ingredients",
+      "presenting supplements",
+      "showcasing natural wellness"
+    ],
+    "mood": [
+      "earthy",
+      "fresh",
+      "natural"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.44,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "natural health videos",
+      "supplement content",
+      "ingredient intros",
+      "wellness explainer"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_blood_pressure_monitoring_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy home blood pressure check",
+    "path": "images/health/health_home_blood_pressure_monitoring_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "blood pressure",
+      "hypertension",
+      "home monitoring",
+      "cardiovascular health",
+      "self care"
+    ],
+    "concepts": [
+      "home health monitoring",
+      "preventive care",
+      "cardiovascular screening"
+    ],
+    "subjects": [
+      "adult man",
+      "blood pressure cuff",
+      "home monitor",
+      "table"
+    ],
+    "actions": [
+      "checking blood pressure",
+      "monitoring vitals",
+      "recording health"
+    ],
+    "mood": [
+      "calm",
+      "practical",
+      "home-based"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "blood pressure videos",
+      "heart health content",
+      "home care scenes",
+      "preventive health"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_blood_sugar_check_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Checking blood sugar at home",
+    "path": "images/health/health_home_blood_sugar_check_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "diabetes",
+      "blood sugar",
+      "glucose meter",
+      "home healthcare",
+      "chronic care",
+      "self monitoring"
+    ],
+    "concepts": [
+      "diabetes management",
+      "preventive care",
+      "daily routine",
+      "home monitoring"
+    ],
+    "subjects": [
+      "adult hands",
+      "glucose meter",
+      "test strip",
+      "lancet device",
+      "table"
+    ],
+    "actions": [
+      "checking glucose",
+      "finger prick test",
+      "monitoring blood sugar"
+    ],
+    "mood": [
+      "practical",
+      "clean",
+      "informative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.6,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "diabetes videos",
+      "home care content",
+      "chronic disease explainers",
+      "patient education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_glucose_check_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Home blood sugar check at the table",
+    "path": "images/health/health_home_glucose_check_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "diabetes",
+      "blood sugar",
+      "glucose meter",
+      "home monitoring",
+      "finger prick",
+      "chronic care"
+    ],
+    "concepts": [
+      "self-monitoring",
+      "diabetes management",
+      "preventive care",
+      "daily health routine"
+    ],
+    "subjects": [
+      "adult hands",
+      "glucose meter",
+      "test strip",
+      "blood drop",
+      "lancet pen"
+    ],
+    "actions": [
+      "checking blood sugar",
+      "testing finger",
+      "monitoring health at home"
+    ],
+    "mood": [
+      "practical",
+      "clean",
+      "informative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.64,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "diabetes videos",
+      "home healthcare content",
+      "chronic disease management",
+      "patient education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_workout_corner_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit Scandinavian home workout corner",
+    "path": "images/health/health_home_workout_corner_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "fitness",
+      "home workout",
+      "exercise",
+      "wellness",
+      "strength training",
+      "equipment"
+    ],
+    "concepts": [
+      "active lifestyle",
+      "home fitness",
+      "exercise habit",
+      "wellness routine"
+    ],
+    "subjects": [
+      "yoga mat",
+      "dumbbells",
+      "kettlebell",
+      "water bottle",
+      "towel"
+    ],
+    "actions": [
+      "preparing for workout",
+      "showing home gym setup",
+      "illustrating exercise routine"
+    ],
+    "mood": [
+      "bright",
+      "clean",
+      "motivating"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.6
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "exercise intros",
+      "active lifestyle content",
+      "wellness scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_workout_mountain_climber_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Home workout mountain climber exercise",
+    "path": "images/health/health_home_workout_mountain_climber_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1536,
+    "height": 1024,
+    "aspectRatio": 1.5,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "fitness",
+      "home workout",
+      "exercise",
+      "mountain climber",
+      "strength",
+      "cardio",
+      "active lifestyle"
+    ],
+    "concepts": [
+      "home fitness",
+      "functional training",
+      "exercise routine",
+      "physical activity"
+    ],
+    "subjects": [
+      "adult man",
+      "exercise mat",
+      "laptop",
+      "dumbbells",
+      "water bottle",
+      "home gym"
+    ],
+    "actions": [
+      "performing mountain climbers",
+      "following workout",
+      "training at home"
+    ],
+    "mood": [
+      "focused",
+      "energetic",
+      "motivating"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "home workout scenes",
+      "exercise explainers",
+      "active lifestyle content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_home_workout_setup_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit home workout corner",
+    "path": "images/health/health_home_workout_setup_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "fitness",
+      "home workout",
+      "exercise",
+      "wellness",
+      "dumbbells",
+      "kettlebell"
+    ],
+    "concepts": [
+      "exercise routine",
+      "home fitness",
+      "active lifestyle",
+      "strength training"
+    ],
+    "subjects": [
+      "yoga mat",
+      "dumbbells",
+      "kettlebell",
+      "water bottle",
+      "towel"
+    ],
+    "actions": [
+      "preparing for workout",
+      "setting up exercise space",
+      "showing home fitness"
+    ],
+    "mood": [
+      "bright",
+      "motivating",
+      "fresh"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.57,
+        "y": 0.6
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "workout intros",
+      "home exercise scenes",
+      "lifestyle wellness"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_human_anatomy_visualization_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Glowing human anatomy visualization",
+    "path": "images/health/health_human_anatomy_visualization_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "anatomy",
+      "human body",
+      "organs",
+      "medical illustration",
+      "physiology",
+      "education"
+    ],
+    "concepts": [
+      "body systems",
+      "internal organs",
+      "health education",
+      "medical science"
+    ],
+    "subjects": [
+      "human torso",
+      "heart",
+      "lungs",
+      "digestive organs",
+      "circulatory system"
+    ],
+    "actions": [
+      "displaying anatomy",
+      "explaining organ systems",
+      "visualizing internal body"
+    ],
+    "mood": [
+      "clinical",
+      "educational",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "right-upper",
+        "lower-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "anatomy videos",
+      "health explainers",
+      "medical education scenes",
+      "body systems content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_hydration_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Healthy hydration with water",
+    "path": "images/health/health_hydration_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "hydration",
+      "water",
+      "wellness",
+      "healthy habits"
+    ],
+    "concepts": [
+      "daily hydration",
+      "healthy routine",
+      "fluid intake"
+    ],
+    "subjects": [
+      "glass of water",
+      "water bottle",
+      "lemon",
+      "mint"
+    ],
+    "actions": [
+      "pouring water",
+      "drinking water"
+    ],
+    "mood": [
+      "refreshing",
+      "clean"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "hydration videos",
+      "wellness content",
+      "healthy habits"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_immune_defense_shield_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Immune defense shield against viruses",
+    "path": "images/health/health_immune_defense_shield_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "immunity",
+      "immune system",
+      "virus",
+      "infection",
+      "medical illustration",
+      "protection"
+    ],
+    "concepts": [
+      "immune defense",
+      "infection prevention",
+      "body resilience",
+      "health protection"
+    ],
+    "subjects": [
+      "human figure",
+      "glowing shield",
+      "virus particles",
+      "lymphatic pathways"
+    ],
+    "actions": [
+      "blocking viruses",
+      "visualizing immune response",
+      "showing protection"
+    ],
+    "mood": [
+      "protective",
+      "dramatic",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.4,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "immune system videos",
+      "infection explainers",
+      "public health visuals",
+      "medical infographics"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_immunity_shield_visual_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Holographic immunity shield against viruses",
+    "path": "images/health/health_immunity_shield_visual_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "immunity",
+      "immune system",
+      "virus",
+      "protection",
+      "medical illustration",
+      "infection"
+    ],
+    "concepts": [
+      "immune defense",
+      "infection prevention",
+      "protective response",
+      "body resilience"
+    ],
+    "subjects": [
+      "human body silhouette",
+      "protective shield",
+      "virus particles"
+    ],
+    "actions": [
+      "blocking viruses",
+      "visualizing immunity",
+      "showing defense mechanism"
+    ],
+    "mood": [
+      "protective",
+      "high-tech",
+      "dramatic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "immune system videos",
+      "infection explainers",
+      "public health content",
+      "medical visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_indoor_yoga_meditation_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Serene indoor yoga meditation corner",
+    "path": "images/health/health_indoor_yoga_meditation_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "yoga",
+      "meditation",
+      "mindfulness",
+      "wellness",
+      "stress relief",
+      "home"
+    ],
+    "concepts": [
+      "mind-body wellness",
+      "stress management",
+      "mindfulness practice"
+    ],
+    "subjects": [
+      "adult woman",
+      "yoga mat",
+      "water bottle",
+      "plants"
+    ],
+    "actions": [
+      "meditating",
+      "breathing calmly",
+      "practicing yoga"
+    ],
+    "mood": [
+      "serene",
+      "balanced",
+      "peaceful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wellness videos",
+      "mindfulness content",
+      "stress relief scenes",
+      "home wellness"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_lakeside_jogging_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunrise jog along the lakeside path",
+    "path": "images/health/health_lakeside_jogging_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "fitness",
+      "running",
+      "jogging",
+      "cardio",
+      "outdoor exercise",
+      "sunrise"
+    ],
+    "concepts": [
+      "cardiovascular fitness",
+      "active lifestyle",
+      "morning exercise"
+    ],
+    "subjects": [
+      "adult woman",
+      "running path",
+      "lake",
+      "city skyline"
+    ],
+    "actions": [
+      "jogging",
+      "exercising outdoors",
+      "morning workout"
+    ],
+    "mood": [
+      "energizing",
+      "uplifting",
+      "active"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "cardio scenes",
+      "active lifestyle content",
+      "morning routine videos"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_male_trail_running_sunrise_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Male trail runner at sunrise",
+    "path": "images/health/health_male_trail_running_sunrise_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "running",
+      "trail running",
+      "cardio",
+      "outdoor fitness",
+      "sunrise",
+      "endurance",
+      "active lifestyle"
+    ],
+    "concepts": [
+      "cardiovascular fitness",
+      "endurance training",
+      "outdoor exercise",
+      "healthy lifestyle"
+    ],
+    "subjects": [
+      "adult man",
+      "mountain trail",
+      "sunrise",
+      "valley",
+      "lake"
+    ],
+    "actions": [
+      "running uphill",
+      "training outdoors",
+      "moving through trail"
+    ],
+    "mood": [
+      "uplifting",
+      "energetic",
+      "adventurous"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "running videos",
+      "cardio scenes",
+      "fitness motivation",
+      "outdoor wellness content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_medication_management_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Organizing a weekly medication plan",
+    "path": "images/health/health_medication_management_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "medication",
+      "pill organizer",
+      "prescription",
+      "adherence",
+      "daily routine"
+    ],
+    "concepts": [
+      "medication adherence",
+      "chronic care routine",
+      "prescription management"
+    ],
+    "subjects": [
+      "adult hands",
+      "pill organizer",
+      "medicine bottles",
+      "water glass"
+    ],
+    "actions": [
+      "sorting pills",
+      "following medication plan",
+      "organizing prescriptions"
+    ],
+    "mood": [
+      "practical",
+      "calm",
+      "organized"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "medication videos",
+      "chronic care content",
+      "senior health",
+      "patient routine scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_meditation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Meditation for stress relief",
+    "path": "images/health/health_meditation_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "meditation",
+      "mindfulness",
+      "stress relief",
+      "mental wellness"
+    ],
+    "concepts": [
+      "stress management",
+      "mind-body health",
+      "relaxation"
+    ],
+    "subjects": [
+      "adult person",
+      "meditation pose",
+      "natural setting"
+    ],
+    "actions": [
+      "meditating",
+      "breathing calmly"
+    ],
+    "mood": [
+      "peaceful",
+      "serene"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "mindfulness videos",
+      "mental wellness",
+      "stress relief scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_meditation_misty_mountains_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunrise meditation over misty mountains",
+    "path": "images/health/health_meditation_misty_mountains_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "wellness",
+      "meditation",
+      "mindfulness",
+      "stress relief",
+      "mental health",
+      "sunrise"
+    ],
+    "concepts": [
+      "mind-body wellness",
+      "relaxation",
+      "stress management",
+      "daily mindfulness"
+    ],
+    "subjects": [
+      "adult woman",
+      "meditation pose",
+      "mountain view",
+      "misty valley",
+      "sunrise deck"
+    ],
+    "actions": [
+      "meditating",
+      "breathing calmly",
+      "practicing mindfulness"
+    ],
+    "mood": [
+      "serene",
+      "uplifting",
+      "peaceful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.55
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wellness videos",
+      "stress relief content",
+      "mindfulness intros",
+      "mental wellness scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_meditation_misty_valley_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Meditation above the misty sunrise valley",
+    "path": "images/health/health_meditation_misty_valley_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "meditation",
+      "mindfulness",
+      "stress relief",
+      "wellness",
+      "sunrise",
+      "breathwork"
+    ],
+    "concepts": [
+      "mind-body health",
+      "stress reduction",
+      "mental wellbeing",
+      "calm routine"
+    ],
+    "subjects": [
+      "adult woman",
+      "mountain overlook",
+      "sunrise",
+      "misty valley"
+    ],
+    "actions": [
+      "meditating",
+      "sitting still",
+      "practicing mindfulness"
+    ],
+    "mood": [
+      "peaceful",
+      "uplifting",
+      "serene"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.55
+      },
+      "safeTextAreas": [
+        "upper-right",
+        "lower-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wellness videos",
+      "mindfulness content",
+      "stress relief scenes",
+      "mental health intros"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_muscle_anatomy_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Muscle anatomy visualization",
+    "path": "images/health/health_muscle_anatomy_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "anatomy",
+      "muscle",
+      "fitness science",
+      "medical illustration"
+    ],
+    "concepts": [
+      "muscle health",
+      "human anatomy",
+      "exercise physiology"
+    ],
+    "subjects": [
+      "human back",
+      "muscular system"
+    ],
+    "actions": [
+      "flexing",
+      "showing muscle groups"
+    ],
+    "mood": [
+      "scientific",
+      "clinical"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "anatomy videos",
+      "fitness science",
+      "medical education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_neural_profile_visualization_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Neon neural profile visualization",
+    "path": "images/health/health_neural_profile_visualization_002.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "brain",
+      "neuroscience",
+      "nervous system",
+      "medical illustration",
+      "cognition",
+      "neurology"
+    ],
+    "concepts": [
+      "brain health",
+      "neural activity",
+      "cognitive science",
+      "nervous system education"
+    ],
+    "subjects": [
+      "human head profile",
+      "brain",
+      "neural pathways",
+      "spinal cord"
+    ],
+    "actions": [
+      "visualizing brain activity",
+      "showing nervous system",
+      "explaining neural networks"
+    ],
+    "mood": [
+      "futuristic",
+      "scientific",
+      "intense"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": false,
+    "quality": "hero",
+    "usage": [
+      "brain health videos",
+      "neuroscience explainers",
+      "mental performance content",
+      "medical education"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_outdoor_meditation_back_view_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Outdoor meditation overlooking a sunrise valley",
+    "path": "images/health/health_outdoor_meditation_back_view_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "meditation",
+      "mindfulness",
+      "mental wellness",
+      "stress relief",
+      "sunrise",
+      "outdoors",
+      "yoga"
+    ],
+    "concepts": [
+      "stress management",
+      "mind-body wellness",
+      "mindfulness practice",
+      "relaxation"
+    ],
+    "subjects": [
+      "adult woman",
+      "yoga mat",
+      "water bottle",
+      "mountain valley",
+      "sunrise"
+    ],
+    "actions": [
+      "meditating",
+      "sitting cross-legged",
+      "practicing breathwork"
+    ],
+    "mood": [
+      "serene",
+      "peaceful",
+      "restorative"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.52
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "mindfulness videos",
+      "stress relief scenes",
+      "mental wellness content",
+      "healthy routine videos"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_outdoor_meditation_front_view_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Mindful meditation at golden sunrise",
+    "path": "images/health/health_outdoor_meditation_front_view_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "meditation",
+      "mindfulness",
+      "mental health",
+      "wellness",
+      "sunrise",
+      "stress relief",
+      "breathwork"
+    ],
+    "concepts": [
+      "mental wellbeing",
+      "mindfulness practice",
+      "relaxation",
+      "emotional regulation"
+    ],
+    "subjects": [
+      "adult woman",
+      "rocky overlook",
+      "mountains",
+      "sunrise",
+      "misty valley"
+    ],
+    "actions": [
+      "meditating",
+      "breathing calmly",
+      "relaxing outdoors"
+    ],
+    "mood": [
+      "calm",
+      "hopeful",
+      "balanced"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.31,
+        "y": 0.52
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "mental wellness videos",
+      "mindfulness content",
+      "stress management scenes",
+      "self-care videos"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_pharmacy_prescription_handoff_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Friendly pharmacy prescription handoff",
+    "path": "images/health/health_pharmacy_prescription_handoff_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "pharmacy",
+      "prescription",
+      "medication",
+      "pharmacist",
+      "healthcare access"
+    ],
+    "concepts": [
+      "pharmacy care",
+      "prescription pickup",
+      "medication access"
+    ],
+    "subjects": [
+      "pharmacist",
+      "adult customer",
+      "pharmacy counter",
+      "medicine bag"
+    ],
+    "actions": [
+      "handing over prescription",
+      "collecting medication",
+      "pharmacy consultation"
+    ],
+    "mood": [
+      "friendly",
+      "professional",
+      "helpful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "pharmacy videos",
+      "medication access scenes",
+      "healthcare system content",
+      "patient journey"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_physical_therapy_rehab_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Guided leg stretch in modern rehab clinic",
+    "path": "images/health/health_physical_therapy_rehab_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "physical therapy",
+      "rehab",
+      "mobility",
+      "recovery",
+      "physiotherapy"
+    ],
+    "concepts": [
+      "rehabilitation",
+      "mobility recovery",
+      "injury recovery"
+    ],
+    "subjects": [
+      "physical therapist",
+      "adult man",
+      "therapy table",
+      "rehab clinic"
+    ],
+    "actions": [
+      "stretching leg",
+      "guiding rehabilitation",
+      "improving mobility"
+    ],
+    "mood": [
+      "supportive",
+      "clinical",
+      "active"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "rehab videos",
+      "injury recovery content",
+      "mobility scenes",
+      "physiotherapy explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_restful_sleep_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Restful healthy sleep",
+    "path": "images/health/health_restful_sleep_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "sleep",
+      "rest",
+      "recovery",
+      "sleep hygiene"
+    ],
+    "concepts": [
+      "restorative sleep",
+      "recovery",
+      "healthy night routine"
+    ],
+    "subjects": [
+      "adult sleeping",
+      "bedroom",
+      "bed"
+    ],
+    "actions": [
+      "sleeping",
+      "resting"
+    ],
+    "mood": [
+      "calm",
+      "restful"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "sleep videos",
+      "recovery scenes",
+      "night routine content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_sleep_hygiene_bedroom_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Peaceful nighttime bedroom retreat",
+    "path": "images/health/health_sleep_hygiene_bedroom_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "sleep",
+      "sleep hygiene",
+      "bedroom",
+      "rest",
+      "night routine",
+      "wellness"
+    ],
+    "concepts": [
+      "restorative sleep",
+      "healthy routine",
+      "sleep quality",
+      "recovery"
+    ],
+    "subjects": [
+      "adult woman",
+      "bedroom",
+      "alarm clock",
+      "lamp",
+      "bed"
+    ],
+    "actions": [
+      "sleeping peacefully",
+      "resting",
+      "maintaining healthy sleep"
+    ],
+    "mood": [
+      "cozy",
+      "restful",
+      "calm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper",
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "sleep videos",
+      "wellness content",
+      "night routine scenes",
+      "recovery topics"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_sleep_routine_reading_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy nighttime bedtime reading",
+    "path": "images/health/health_sleep_routine_reading_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "sleep",
+      "bedtime routine",
+      "sleep hygiene",
+      "reading",
+      "rest"
+    ],
+    "concepts": [
+      "healthy sleep habits",
+      "night routine",
+      "relaxation before sleep"
+    ],
+    "subjects": [
+      "adult woman",
+      "bed",
+      "book",
+      "bedside lamp"
+    ],
+    "actions": [
+      "reading before bed",
+      "winding down",
+      "preparing for sleep"
+    ],
+    "mood": [
+      "cozy",
+      "calm",
+      "restful"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "sleep videos",
+      "night routine content",
+      "wellness scenes",
+      "sleep hygiene explainers"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_trail_running_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Trail running at sunrise",
+    "path": "images/health/health_trail_running_001.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1280,
+    "height": 720,
+    "aspectRatio": 1.7778,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "fitness",
+      "running",
+      "outdoor exercise",
+      "cardio",
+      "active lifestyle"
+    ],
+    "concepts": [
+      "cardiovascular fitness",
+      "endurance",
+      "outdoor wellness"
+    ],
+    "subjects": [
+      "runner",
+      "mountain trail",
+      "sunrise"
+    ],
+    "actions": [
+      "running",
+      "exercising outdoors"
+    ],
+    "mood": [
+      "energetic",
+      "uplifting"
+    ],
+    "composition": {
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "fitness videos",
+      "cardio scenes",
+      "active lifestyle content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "health_workday_hydration_004",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Healthy hydration at work",
+    "path": "images/health/health_workday_hydration_004.png",
+    "category": "health",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "health",
+      "hydration",
+      "water",
+      "workplace wellness",
+      "healthy habit",
+      "office"
+    ],
+    "concepts": [
+      "daily hydration",
+      "workplace wellness",
+      "healthy routine"
+    ],
+    "subjects": [
+      "adult woman",
+      "glass of water",
+      "water bottle",
+      "laptop"
+    ],
+    "actions": [
+      "drinking water",
+      "taking hydration break",
+      "working at desk"
+    ],
+    "mood": [
+      "bright",
+      "healthy",
+      "productive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.47
+      },
+      "safeTextAreas": [
+        "upper-left",
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "hydration videos",
+      "workplace wellness",
+      "healthy habits content",
+      "daily routine scenes"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

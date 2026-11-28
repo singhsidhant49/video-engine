@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_0fcc6efea103f5e2",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two humpback whales gracefully swim underwater, showcasing their majestic beauty.",
+  "path": "images/saved-from-web/saved-from-web_0fcc6efea103f5e2.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1722,
+  "height": 2600,
+  "aspectRatio": 0.6623,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "humpback",
+    "whale",
+    "gracefully",
+    "swim",
+    "underwater",
+    "showcasing",
+    "their",
+    "majestic",
+    "beauty",
+    "ocean",
+    "seabed",
+    "marine",
+    "static",
+    "presentation",
+    "clicking",
+    "whales",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two humpback whales gracefully swim underwater, showcasing their majestic beauty."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "whale clicking underwater",
+    "savedAt": "2026-10-24T05:17:27.130Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Ben Phillips",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photograph-of-humpback-whales-swimming-4781964/"
+  }
+}

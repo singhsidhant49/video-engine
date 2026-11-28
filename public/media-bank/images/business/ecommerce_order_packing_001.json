@@ -1,0 +1,73 @@
+{
+  "id": "ecommerce_order_packing_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit e-commerce packing studio",
+  "path": "images/business/ecommerce_order_packing_001.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "e-commerce",
+    "packing orders",
+    "small business",
+    "shipping",
+    "online store"
+  ],
+  "concepts": [
+    "order fulfillment",
+    "e-commerce operations",
+    "product shipping",
+    "small business logistics"
+  ],
+  "subjects": [
+    "entrepreneur",
+    "shipping boxes",
+    "laptop dashboard"
+  ],
+  "actions": [
+    "packing orders",
+    "preparing shipments"
+  ],
+  "mood": [
+    "warm",
+    "productive",
+    "entrepreneurial"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.45,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "upper-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "e-commerce explainer",
+    "small business operations",
+    "online store content"
+  ],
+  "avoidFor": [
+    "corporate presentation",
+    "customer support center",
+    "finance trading"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

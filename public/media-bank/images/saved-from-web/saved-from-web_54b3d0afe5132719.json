@@ -1,0 +1,65 @@
+{
+  "id": "saved-from-web_54b3d0afe5132719",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Two musicians practicing indoors with electric guitar and bass in a studio environment.",
+  "path": "images/saved-from-web/saved-from-web_54b3d0afe5132719.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "two",
+    "musician",
+    "practicing",
+    "indoor",
+    "electric",
+    "guitar",
+    "bas",
+    "studio",
+    "environment",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "intensely",
+    "musicians",
+    "indoors",
+    "bass"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Two musicians practicing indoors with electric guitar and bass in a studio environment."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "musician practicing intensely",
+    "savedAt": "2026-10-23T07:21:55.465Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-playing-electric-guitar-8197338/"
+  }
+}

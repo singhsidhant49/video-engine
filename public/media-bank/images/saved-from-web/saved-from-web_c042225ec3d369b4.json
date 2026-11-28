@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_c042225ec3d369b4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A drone captures a team rowing a boat in the sea, highlighting teamwork and fitness.",
+  "path": "images/saved-from-web/saved-from-web_c042225ec3d369b4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "drone",
+    "capture",
+    "team",
+    "rowing",
+    "boat",
+    "sea",
+    "highlighting",
+    "teamwork",
+    "fitnes",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "captures",
+    "fitness",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "drone",
+    "capture",
+    "team",
+    "rowing",
+    "boat",
+    "sea",
+    "highlighting",
+    "teamwork",
+    "fitnes",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "captures",
+    "fitness",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A drone captures a team rowing a boat in the sea, highlighting teamwork and fitness."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "men rowing in stormy sea",
+    "savedAt": "2026-10-29T10:16:33.780Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jan van der Wolf",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/group-of-men-in-a-boat-rowing-on-the-sea-16789621/"
+  }
+}

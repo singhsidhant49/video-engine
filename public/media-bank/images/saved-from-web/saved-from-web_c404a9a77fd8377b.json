@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_c404a9a77fd8377b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Dramatic silhouette of a young woman with backlighting highlighting her profile.",
+  "path": "images/saved-from-web/saved-from-web_c404a9a77fd8377b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "silhouette",
+    "young",
+    "woman",
+    "backlighting",
+    "highlighting",
+    "her",
+    "profile",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dramatic",
+    "silhouette",
+    "young",
+    "woman",
+    "backlighting",
+    "highlighting",
+    "her",
+    "profile",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Dramatic silhouette of a young woman with backlighting highlighting her profile."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "close up determined face dramatic backlight",
+    "savedAt": "2026-10-28T10:38:03.531Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Andrea Musto",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/extreme-close-up-of-a-woman-26790963/"
+  }
+}

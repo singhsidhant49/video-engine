@@ -1,0 +1,67 @@
+{
+  "id": "saved-from-web_8b39661dff77c66b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Bright, colorful depiction of a magnetic field with cosmic elements and abstract design.",
+  "path": "images/saved-from-web/saved-from-web_8b39661dff77c66b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1463,
+  "aspectRatio": 1.7772,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "bright",
+    "colorful",
+    "depiction",
+    "magnetic",
+    "field",
+    "element",
+    "design",
+    "velocity",
+    "elements"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "cosmic velocity field",
+    "savedAt": "2026-10-24T09:29:34.687Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Nicola Narracci",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/vivid-artistic-representation-of-magnetic-field-in-space-38208848/"
+  }
+}

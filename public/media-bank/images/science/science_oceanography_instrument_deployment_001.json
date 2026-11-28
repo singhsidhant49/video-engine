@@ -1,0 +1,76 @@
+{
+  "id": "science_oceanography_instrument_deployment_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Oceanographer deploying instruments from a research vessel",
+  "path": "images/science/science_oceanography_instrument_deployment_001.png",
+  "category": "science",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "science",
+    "oceanography",
+    "research vessel",
+    "ocean instruments",
+    "marine science",
+    "sea"
+  ],
+  "concepts": [
+    "ocean data collection",
+    "marine fieldwork",
+    "instrument deployment",
+    "sea research"
+  ],
+  "subjects": [
+    "scientist",
+    "research ship",
+    "ocean instrument",
+    "waves"
+  ],
+  "actions": [
+    "deploying instrument",
+    "sampling ocean",
+    "collecting data"
+  ],
+  "mood": [
+    "adventurous",
+    "professional",
+    "cinematic"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.28,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "ocean science",
+    "marine research",
+    "environmental documentary",
+    "field expedition"
+  ],
+  "avoidFor": [
+    "indoor classroom",
+    "astronomy",
+    "finance"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

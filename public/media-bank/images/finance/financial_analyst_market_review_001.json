@@ -1,0 +1,75 @@
+{
+  "id": "financial_analyst_market_review_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Focused financial analyst reviewing market data",
+  "path": "images/finance/financial_analyst_market_review_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "analyst",
+    "market review",
+    "dashboard",
+    "stocks",
+    "data analysis"
+  ],
+  "concepts": [
+    "market analysis",
+    "financial modeling",
+    "investment research",
+    "data review"
+  ],
+  "subjects": [
+    "analyst",
+    "dual monitors",
+    "market charts"
+  ],
+  "actions": [
+    "analyzing data",
+    "reviewing charts",
+    "monitoring markets"
+  ],
+  "mood": [
+    "focused",
+    "professional",
+    "intense"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.7,
+      "y": 0.44
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "financial analysis",
+    "investment content",
+    "market explainer",
+    "research video"
+  ],
+  "avoidFor": [
+    "household budgeting",
+    "retail banking",
+    "mortgage consultation"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

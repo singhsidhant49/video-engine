@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 const BoxConstraintSchema = z.object({
   minWidth: z.number().nonnegative().optional(),

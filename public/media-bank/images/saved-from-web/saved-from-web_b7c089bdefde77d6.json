@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_b7c089bdefde77d6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "High-angle view of glass bottle production line in a factory with glowing bottles.",
+  "path": "images/saved-from-web/saved-from-web_b7c089bdefde77d6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "glas",
+    "bottle",
+    "production",
+    "line",
+    "factory",
+    "glowing",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "view",
+    "glass",
+    "bottles",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "high",
+    "angle",
+    "glas",
+    "bottle",
+    "production",
+    "line",
+    "factory",
+    "glowing",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "high-angle",
+    "view",
+    "glass",
+    "bottles",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "High-angle view of glass bottle production line in a factory with glowing bottles."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "World War II penicillin factory production line",
+    "savedAt": "2026-11-02T09:09:20.085Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Keegan Checks",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/industrial-glass-bottles-manufacturing-process-36423804/"
+  }
+}

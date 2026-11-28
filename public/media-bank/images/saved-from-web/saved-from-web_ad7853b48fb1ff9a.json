@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_ad7853b48fb1ff9a",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:Polyhedra-in-garden-and-reef-with-Sieve-of-Eratosthenes.png",
+  "path": "images/saved-from-web/saved-from-web_ad7853b48fb1ff9a.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1625,
+  "aspectRatio": 1.6,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "polyhedra",
+    "garden",
+    "reef",
+    "sieve",
+    "eratosthene",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "polyhedra-in-garden-and-reef-with-sieve-of-eratosthenes",
+    "png",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "polyhedra",
+    "garden",
+    "reef",
+    "sieve",
+    "eratosthene",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "polyhedra-in-garden-and-reef-with-sieve-of-eratosthenes",
+    "png",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:Polyhedra-in-garden-and-reef-with-Sieve-of-Eratosthenes.png"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Eratosthenes in action",
+    "savedAt": "2026-10-28T08:15:07.987Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 4.0",
+    "license_name": "CC BY-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Elizabeth Paley",
+    "creator": "Elizabeth Paley",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T08:12:15.655Z",
+    "page": "https://commons.wikimedia.org/wiki/File:Polyhedra-in-garden-and-reef-with-Sieve-of-Eratosthenes.png"
+  }
+}

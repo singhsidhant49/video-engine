@@ -1,0 +1,77 @@
+{
+  "id": "psychology_workplace_burnout_stress_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Overwhelmed at the evening desk",
+  "path": "images/psychology/psychology_workplace_burnout_stress_001.png",
+  "category": "psychology",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "psychology",
+    "burnout",
+    "stress",
+    "work overload",
+    "mental fatigue",
+    "anxiety",
+    "productivity"
+  ],
+  "concepts": [
+    "workplace stress",
+    "burnout",
+    "cognitive overload",
+    "emotional exhaustion"
+  ],
+  "subjects": [
+    "young woman",
+    "laptop",
+    "papers",
+    "desk lamp"
+  ],
+  "actions": [
+    "holding head",
+    "working late",
+    "feeling overwhelmed"
+  ],
+  "mood": [
+    "stressed",
+    "fatigued",
+    "pressured"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.42,
+      "y": 0.42
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "burnout explainers",
+    "work stress videos",
+    "productivity content",
+    "corporate wellbeing"
+  ],
+  "avoidFor": [
+    "calm meditation",
+    "child counseling",
+    "relationship therapy"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

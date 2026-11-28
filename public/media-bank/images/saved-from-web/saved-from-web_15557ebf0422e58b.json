@@ -1,0 +1,76 @@
+{
+  "id": "saved-from-web_15557ebf0422e58b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking view of the Milky Way galaxy showcasing its vibrant star formation and cosmic dust clouds.",
+  "path": "images/saved-from-web/saved-from-web_15557ebf0422e58b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "breathtaking",
+    "milky",
+    "way",
+    "galaxy",
+    "showcasing",
+    "it",
+    "vibrant",
+    "star",
+    "formation",
+    "dust",
+    "cloud",
+    "galactic",
+    "plane",
+    "view",
+    "its",
+    "clouds",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "galactic plane dust",
+    "savedAt": "2026-10-24T09:27:23.867Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jonh Medeiros",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-view-of-the-milky-way-galaxy-30938464/"
+  }
+}

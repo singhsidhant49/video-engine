@@ -1,0 +1,104 @@
+{
+  "id": "saved-from-web_fda8a090c78350e6",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Capture of a winter scene with a frozen river, icy rocks, and flowing waterfall showcasing nature's pure beauty.",
+  "path": "images/saved-from-web/saved-from-web_fda8a090c78350e6.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "capture",
+    "scene",
+    "frozen",
+    "river",
+    "icy",
+    "rock",
+    "flowing",
+    "waterfall",
+    "showcasing",
+    "pure",
+    "beauty",
+    "rocks",
+    "tree twigs",
+    "bare branches"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "bare",
+    "winter",
+    "tree",
+    "branche",
+    "twig",
+    "nature",
+    "outdoor",
+    "park",
+    "forest",
+    "scenery",
+    "static",
+    "presentation",
+    "capture",
+    "scene",
+    "frozen",
+    "river",
+    "icy",
+    "rock",
+    "flowing",
+    "waterfall",
+    "showcasing",
+    "pure",
+    "beauty",
+    "rocks",
+    "tree twigs",
+    "bare branches"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "bare winter tree branches and twigs in nature"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "outdoor park or forest scenery"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "frozen bodies snow",
+    "savedAt": "2026-10-29T13:27:25.946Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Павел  Хлыстунов",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/photo-of-a-frozen-body-of-water-10828659/"
+  }
+}

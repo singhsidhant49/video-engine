@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_rainy_reading_nook_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Rainy-day reading nook",
+  "path": "images/lifestyle/lifestyle_rainy_reading_nook_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "rainy day",
+    "reading",
+    "cozy home",
+    "dog",
+    "tea",
+    "relaxation"
+  ],
+  "concepts": [
+    "comfort",
+    "homebody lifestyle",
+    "rest day",
+    "slow living"
+  ],
+  "subjects": [
+    "woman",
+    "book",
+    "dog",
+    "blanket",
+    "tea mug",
+    "rainy window"
+  ],
+  "actions": [
+    "reading",
+    "drinking tea",
+    "relaxing with dog"
+  ],
+  "mood": [
+    "cozy",
+    "calm",
+    "intimate"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.43,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "cozy lifestyle videos",
+    "rainy day scenes",
+    "home routine content",
+    "relaxation montages"
+  ],
+  "avoidFor": [
+    "high energy fitness",
+    "business meetings",
+    "summer outdoor scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

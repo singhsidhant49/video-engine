@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_9625b8139044a5fb",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A tired man leaning on his desk in a modern office, looking at the computer screen.",
+  "path": "images/saved-from-web/saved-from-web_9625b8139044a5fb.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "man",
+    "leaning",
+    "hi",
+    "desk",
+    "modern",
+    "office",
+    "looking",
+    "computer",
+    "screen",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "his",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "tired",
+    "man",
+    "leaning",
+    "hi",
+    "desk",
+    "modern",
+    "office",
+    "looking",
+    "computer",
+    "screen",
+    "corporate",
+    "interior",
+    "static",
+    "presentation",
+    "his",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A tired man leaning on his desk in a modern office, looking at the computer screen."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person sitting at desk staring at screen We picture motivation as a spark before we move, but the order is reversed: the feeling follows the deed",
+    "savedAt": "2026-10-28T08:34:54.221Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Andrea Piacquadio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/man-in-white-shirt-sitting-on-chair-3966781/"
+  }
+}

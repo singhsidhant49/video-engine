@@ -43,6 +43,7 @@ export function compileSolvedMediaShot({ shot, editorialPlan, overlay, asset, su
   let solvedMotionPlan = motionPlan;
   if (!preflight.passed && preflight.hardFailures.some((f) => f.code === 'camera_resolution_insufficient')) {
     mediaSceneSpec.cameraIntent = 'STATIC';
+    Object.values(solvedScene.cameraPaths || {}).forEach((p) => { p.behavior = 'STATIC'; });
     solvedMotionPlan = choreographMediaMotion({ solvedScene, composition, mediaSceneSpec, durationInFrames: timing.durationInFrames });
     preflight = preflightSolvedScene({ solvedScene, motionPlan: solvedMotionPlan, composition, mediaSceneSpec });
   }

@@ -49,10 +49,17 @@ export function Captions({ captions }) {
   const geometry = policy?.geometry || captions.geometry;
   const position = geometry ? {
     left: geometry.x, top: geometry.y, width: geometry.width, height: geometry.height,
+  } : isVertical ? {
+    left: 0,
+    width: '100%',
+    bottom: safe.bottom + theme.u(16),
+    paddingLeft: `${Math.round(safe.left)}px`,
+    paddingRight: `${Math.round(Math.max(safe.right * 1.15, 140))}px`,
+    boxSizing: 'border-box',
   } : {
     left: safe.left,
-    right: isVertical ? Math.max(safe.right * 1.15, 140) : safe.right,
-    bottom: safe.bottom + (isVertical ? theme.u(16) : theme.u(8)),
+    right: safe.right,
+    bottom: safe.bottom + theme.u(8),
   };
 
   let containerStyle = {};

@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_3dfaa0c60363af8d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:NYC Lehman Brothers building.jpg",
+  "path": "images/saved-from-web/saved-from-web_3dfaa0c60363af8d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "nyc",
+    "lehman",
+    "brother",
+    "building",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "brothers",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "nyc",
+    "lehman",
+    "brother",
+    "building",
+    "corporate",
+    "office",
+    "campu",
+    "exterior",
+    "static",
+    "presentation",
+    "file",
+    "brothers",
+    "jpg",
+    "corporate monument sign",
+    "signage"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:NYC Lehman Brothers building.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "corporate office campus exterior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "Lehman Brothers",
+    "savedAt": "2026-10-28T15:43:03.496Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC BY-SA 3.0",
+    "license_name": "CC BY-SA 3.0",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Arnoldius",
+    "creator": "Arnoldius",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "editorial_only",
+    "verification_status": "editorial_only",
+    "retrieved_at": "2026-10-28T15:39:36.150Z",
+    "page": "https://commons.wikimedia.org/wiki/File:NYC_Lehman_Brothers_building.jpg"
+  }
+}

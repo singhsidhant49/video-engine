@@ -1,0 +1,76 @@
+{
+  "id": "personal_savings_goal_planning_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Cozy savings goal planning workspace",
+  "path": "images/finance/personal_savings_goal_planning_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "savings",
+    "goals",
+    "personal finance",
+    "emergency fund",
+    "planning"
+  ],
+  "concepts": [
+    "savings plan",
+    "financial goals",
+    "emergency fund",
+    "money discipline"
+  ],
+  "subjects": [
+    "woman",
+    "savings tracker",
+    "notebook",
+    "piggy bank"
+  ],
+  "actions": [
+    "setting goals",
+    "tracking savings",
+    "writing financial plan"
+  ],
+  "mood": [
+    "cozy",
+    "motivational",
+    "hopeful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.44,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "saving money",
+    "financial goals",
+    "personal finance",
+    "budget mindset"
+  ],
+  "avoidFor": [
+    "trading desk",
+    "corporate finance",
+    "mortgage boardroom"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

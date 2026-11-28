@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_29fe0488205365c0",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Warm sunlight creates artistic shadows on a textured wall, offering a minimalist, abstract feel.",
+  "path": "images/saved-from-web/saved-from-web_29fe0488205365c0.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "warm",
+    "sunlight",
+    "create",
+    "artistic",
+    "shadow",
+    "textured",
+    "wall",
+    "offering",
+    "minimalist",
+    "abstract",
+    "feel",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "creates",
+    "shadows"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "warm",
+    "sunlight",
+    "create",
+    "artistic",
+    "shadow",
+    "textured",
+    "wall",
+    "offering",
+    "minimalist",
+    "abstract",
+    "feel",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "creates",
+    "shadows"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Warm sunlight creates artistic shadows on a textured wall, offering a minimalist, abstract feel."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "warm fading sunlight on wall",
+    "savedAt": "2026-10-28T06:03:06.234Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Constant Ng",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/red-and-beige-painted-wall-3385829/"
+  }
+}

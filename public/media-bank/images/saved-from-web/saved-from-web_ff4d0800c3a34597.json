@@ -1,0 +1,64 @@
+{
+  "id": "saved-from-web_ff4d0800c3a34597",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Black and white photo of a male runner breaking the finish line tape in a marathon event.",
+  "path": "images/saved-from-web/saved-from-web_ff4d0800c3a34597.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "black",
+    "white",
+    "male",
+    "runner",
+    "breaking",
+    "finish",
+    "line",
+    "tape",
+    "marathon",
+    "event",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "victory",
+    "photo"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Black and white photo of a male runner breaking the finish line tape in a marathon event."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "runner breaking finish tape victory",
+    "savedAt": "2026-10-26T07:40:08.924Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RUN 4 FFWPU",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-in-black-tank-top-running-on-the-street-10098656/"
+  }
+}

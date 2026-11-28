@@ -25,7 +25,9 @@ export function resolveShotTiming({ scene, shots, alignedWords, sceneStart, scen
   const isMontage = shots.some((s) => s.role === 'montage' || s.durationHint < 1.5);
   const configuredMinimum = Number(scene.minimumShotSeconds);
   const profileMinimum = Number.isFinite(configuredMinimum) ? configuredMinimum : null;
-  const targetMinSec = isMontage ? 0.8 : (profileMinimum || (scene.energy >= 4 ? 1.5 : 1.8));
+  const policyMinimums = shots.map((shot) => Number(shot.durationPolicy?.min)).filter(Number.isFinite);
+  const authoredPolicyMinimum = policyMinimums.length ? Math.min(...policyMinimums) : null;
+  const targetMinSec = isMontage ? 0.8 : (profileMinimum || (authoredPolicyMinimum || (scene.energy >= 4 ? 1.5 : 1.8)));
   const minFrames = Math.max(12, Math.min(fps * targetMinSec, Math.floor(totalFrames / shots.length * 0.82)));
   const boundaries = [sceneStart];
   let cumulative = 0;

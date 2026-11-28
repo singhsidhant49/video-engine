@@ -36,21 +36,57 @@ export function calculateDurationBudget({
   const hardMaxDuration = Number((target * (1 + hardToleranceRatio)).toFixed(2));
 
   // Breathing room reserve: opening pause, closing tail hold, and inter-beat pauses
-  const openingHoldSec = format === 'shorts' ? 0.4 : 0.8;
-  const closingHoldSec = format === 'shorts' ? 1.4 : 2.2;
-  const pauseBudgetSec = Number(clamp(target * 0.03, 1.0, 3.5).toFixed(2));
+  // YouTube Shorts uses tighter holds to immediately capture attention and loop seamlessly
+  const isShorts = format === 'shorts';
+  const openingHoldSec = isShorts ? 0.2 : 0.8;
+  const closingHoldSec = isShorts ? 0.6 : 2.2;
+  const pauseBudgetSec = Number(clamp(target * (isShorts ? 0.02 : 0.03), isShorts ? 0.5 : 1.0, isShorts ? 2.0 : 3.5).toFixed(2));
   const totalReserveSec = Number((openingHoldSec + closingHoldSec + pauseBudgetSec).toFixed(2));
 
   const targetNarrationSec = Number(Math.max(10, target - totalReserveSec).toFixed(2));
   const targetWords = Math.round(targetNarrationSec * speechRateWps);
-  const minWords = Math.round(targetWords * 0.93);
-  const maxWords = Math.round(targetWords * 1.05); // Strict word ceiling
+  const minWords = isShorts
+    ? Math.max(10, Math.round(targetWords * 0.88))
+    : Math.round(targetWords * 0.93);
+  const maxWords = isShorts
+    ? Math.max(Math.round(targetWords * 1.15), targetWords + 10)
+    : Math.max(Math.round(targetWords * 1.05), targetWords + 8);
 
-  // Target scene count: each scene is an authored Content Beat (6–8s average hold)
-  const targetSceneCount = clamp(Math.round(target / 7.5), format === 'shorts' ? 5 : 7, 13);
+  // Target scene count: each scene is an authored Content Beat
+  // Shorts: faster visual changes every 3.5-5.5s (higher beat density)
+  // Landscape: 6–8s average hold for deep context and room to breathe
+  const targetSceneCount = isShorts
+    ? clamp(Math.round(target / 4.8), 5, 14)
+    : clamp(Math.round(target / 7.5), 7, 13);
 
   // Section time allocations (proportional to narrative arc)
-  const sectionBudgets = {
+  const sectionBudgets = isShorts ? {
+    hook: {
+      name: 'Immediate Hook (0-2s)',
+      targetSec: Number(clamp(target * 0.08, 1.5, 3.5).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.08, 1.5, 3.5) * speechRateWps),
+    },
+    why_it_matters: {
+      name: 'Stakes / Curiosity Gap',
+      targetSec: Number(clamp(target * 0.16, 3.5, 8.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.16, 3.5, 8.0) * speechRateWps),
+    },
+    core_explanation: {
+      name: 'Fast Escalation / Core Truth',
+      targetSec: Number(clamp(target * 0.42, 10.0, 25.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.42, 10.0, 25.0) * speechRateWps),
+    },
+    example_evidence: {
+      name: 'Proof / Contrast / Reversal',
+      targetSec: Number(clamp(target * 0.20, 5.0, 12.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.20, 5.0, 12.0) * speechRateWps),
+    },
+    payoff_conclusion: {
+      name: 'Loopable Payoff & Punchline',
+      targetSec: Number(clamp(target * 0.14, 3.0, 8.0).toFixed(1)),
+      targetWords: Math.round(clamp(target * 0.14, 3.0, 8.0) * speechRateWps),
+    },
+  } : {
     hook: {
       name: 'Hook',
       targetSec: Number(clamp(target * 0.10, 5, 9).toFixed(1)),
@@ -147,6 +183,92 @@ export function calculateNarrationRepairSpeed({
 }
 
 /**
+ * Plan a transparent final tempo correction for a narration that narrowly
+ * missed its accepted duration band after bounded script/TTS repair. This is
+ * intentionally limited to 3% so it cannot hide a materially wrong script.
+ */
+export function calculateNarrationTempoRepair({ actualDurationSec, budget, maxCorrectionRatio = 0.03 } = {}) {
+  const actual = Number(actualDurationSec);
+  const minimum = Number(budget?.allowedMinDuration);
+  const maximum = Number(budget?.allowedMaxDuration);
+  const targetDuration = Number(budget?.targetDurationSec || budget?.targetNarrationSec || 0);
+  if (![actual, minimum, maximum].every(Number.isFinite) || actual <= 0 || minimum <= 0 || maximum < minimum) return null;
+  if (actual >= minimum && actual <= maximum) return null;
+
+  const margin = Math.max(0.5, targetDuration * 0.0025);
+  const desired = actual < minimum
+    ? Math.min(maximum, minimum + margin)
+    : Math.max(minimum, maximum - margin);
+  const tempo = actual / desired;
+  const correctionRatio = Math.abs(1 - tempo);
+  if (!Number.isFinite(tempo) || tempo < 0.5 || tempo > 2 || correctionRatio > Math.max(0, Number(maxCorrectionRatio) || 0)) return null;
+  return {
+    tempo: Number(tempo.toFixed(6)),
+    expectedDurationSec: Number(desired.toFixed(3)),
+    correctionRatio: Number(correctionRatio.toFixed(6)),
+    reason: actual < minimum ? 'narrow_shortfall' : 'narrow_overrun',
+  };
+}
+
+/**
+ * Scale an overlong measured narration toward the requested final duration.
+ * The final timeline follows measured narration length, so using the smaller
+ * speech-only budget here can over-compress and make the next pass too short.
+ */
+export function calculateNarrationCompressionTargetWords({
+  currentWords,
+  actualDurationSec,
+  budget,
+} = {}) {
+  const words = Math.max(1, Number(currentWords) || 1);
+  const actual = Number(actualDurationSec);
+  const target = Number(budget?.targetDurationSec);
+  if (!Number.isFinite(actual) || actual <= 0 || !Number.isFinite(target) || target <= 0) {
+    return Math.max(10, Math.round(words));
+  }
+  return Math.max(10, Math.round(words * target / actual));
+}
+
+/**
+ * Build a strict word range for a measured-duration repair pass. The normal
+ * editor tolerance must never include the current word count or a retry can
+ * return the identical script and reuse the identical cached audio forever.
+ */
+export function calculateNarrationCompressionLimits({
+  currentWords,
+  actualDurationSec,
+  budget,
+} = {}) {
+  const words = Math.max(1, Math.round(Number(currentWords) || 1));
+  const targetWords = Math.min(
+    Math.max(10, words - 1),
+    calculateNarrationCompressionTargetWords({ currentWords: words, actualDurationSec, budget }),
+  );
+  const maxWords = Math.max(10, Math.min(words - 1, Math.ceil(targetWords * 1.02)));
+  return { targetWords, maxWords };
+}
+
+/** Increase cadence only when safe text compression cannot make progress. */
+export function calculateOverlongNarrationRepairSpeed({
+  currentSpeed,
+  actualDurationSec,
+  budget,
+  maximumSpeed = 1.15,
+} = {}) {
+  const speed = Number(currentSpeed);
+  const actual = Number(actualDurationSec);
+  if (!Number.isFinite(speed) || speed <= 0 || !Number.isFinite(actual) || actual <= 0) return speed;
+
+  const allowedMax = Number(budget?.allowedMaxDuration);
+  const requested = Number(budget?.targetDurationSec);
+  const safetyMarginSec = Math.max(0.25, requested * 0.005);
+  const repairTargetSec = Math.min(requested, allowedMax - safetyMarginSec);
+  if (!(repairTargetSec > 0) || actual <= allowedMax) return speed;
+
+  return Number(clamp(speed * actual / repairTargetSec, speed, maximumSpeed).toFixed(3));
+}
+
+/**
  * Formats a duration diagnostic summary payload for persistence.
  */
 export function buildDurationDiagnostics({
@@ -173,10 +295,11 @@ export function buildDurationDiagnostics({
   const durationVarianceSec = Number((finalVideoDuration - (budget?.targetDurationSec || 75)).toFixed(2));
   const durationVariancePercent = Number(((durationVarianceSec / (budget?.targetDurationSec || 75)) * 100).toFixed(2));
 
-  const isWithinTolerance = finalVideoDuration >= (budget?.allowedMinDuration || 0)
-    && finalVideoDuration <= (budget?.allowedMaxDuration || 9999);
-  const isWithinHardBounds = finalVideoDuration >= (budget?.hardMinDuration || 0)
-    && finalVideoDuration <= (budget?.hardMaxDuration || 9999);
+  const frameTolerance = 1 / fps + 0.01;
+  const isWithinTolerance = finalVideoDuration >= ((budget?.allowedMinDuration || 0) - frameTolerance)
+    && finalVideoDuration <= ((budget?.allowedMaxDuration || 9999) + frameTolerance);
+  const isWithinHardBounds = finalVideoDuration >= ((budget?.hardMinDuration || 0) - frameTolerance)
+    && finalVideoDuration <= ((budget?.hardMaxDuration || 9999) + frameTolerance);
 
   return {
     requestedDuration: budget?.targetDurationSec || 75,

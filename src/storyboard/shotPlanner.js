@@ -2,17 +2,40 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 /** Content-aware duration bands (in seconds) by shot/content type. */
 export const DURATION_BANDS = {
-  establishing: { min: 2.5, ideal: 3.8, max: 5.5 },
-  important_photo: { min: 3.0, ideal: 4.2, max: 6.5 },
-  detail: { min: 1.8, ideal: 2.6, max: 3.5 },
-  document_evidence: { min: 3.0, ideal: 4.5, max: 6.5 },
+  establishing: { min: 4.0, ideal: 5.5, max: 7.0 },
+  normal_story: { min: 4.0, ideal: 5.5, max: 7.0 },
+  important_photo: { min: 5.0, ideal: 7.0, max: 10.0 },
+  detail: { min: 2.5, ideal: 3.5, max: 4.5 },
+  document_evidence: { min: 5.0, ideal: 7.0, max: 10.0 },
   chart: { min: 4.0, ideal: 5.5, max: 8.0 },
   process: { min: 4.0, ideal: 5.5, max: 8.0 },
   hero_stat: { min: 2.5, ideal: 3.8, max: 5.5 },
   kinetic_headline: { min: 1.8, ideal: 2.5, max: 3.5 },
-  emotional_hold: { min: 3.0, ideal: 4.8, max: 7.0 },
+  emotional_hold: { min: 6.0, ideal: 7.5, max: 9.0 },
+  meditation_hold: { min: 10.0, ideal: 14.0, max: 18.0 },
   montage_cut: { min: 0.8, ideal: 1.4, max: 2.0 },
 };
+
+export function durationPolicyForShot({ role = 'context', scene = {}, strategy = {} } = {}) {
+  const isShorts = strategy?.format === 'shorts' || scene.format === 'shorts';
+  const meditation = /meditation|sleep|breath|relax/i.test(`${strategy?.contentType || ''} ${scene.preferredPresentation || ''}`)
+    && Number(scene.energy || 0) <= 2;
+  let policyName = 'normal_story';
+  if (meditation) policyName = 'meditation_hold';
+  else if (role === 'detail') policyName = 'detail';
+  else if (role === 'evidence') policyName = 'document_evidence';
+  else if (role === 'establishing') policyName = 'establishing';
+  else if (role === 'reaction' || ['reveal', 'payoff'].includes(scene.purpose)) policyName = 'emotional_hold';
+  const base = DURATION_BANDS[policyName];
+  if (!isShorts) return { name: policyName, ...base, advisory: true };
+  return {
+    name: `${policyName}_shorts`,
+    min: Math.max(1.5, Math.min(4, Number((base.min * 0.5).toFixed(2)))),
+    ideal: Math.max(1.8, Math.min(4, Number((base.ideal * 0.5).toFixed(2)))),
+    max: Math.max(2.2, Math.min(4, Number((base.max * 0.5).toFixed(2)))),
+    advisory: true,
+  };
+}
 
 const ACTION_VERBS = /\b(sends?|requests?|responds?|receives?|processes|parses?|builds?|calculates?|renders?|paints?|draws?|executes?|composites?|translates?|connects?|travels?|moves?|converts?|transforms?|scales?|concentrates?|records?|makes?|runs?|appears?)\b/i;
 const LOCATION_TERMS = /\b(server\s+rack|data\s+center|datacenter|browser|network|cloud|motherboard|screen|room|exchange|wall\s+street|globe|city|borders?|infrastructure)\b/i;
@@ -121,18 +144,8 @@ export function segmentVisualBeats(narration = '', entities = []) {
 
 /** Content-aware visual beat demand derived from narration semantics rather than duration thresholds alone. */
 export function estimateShotDemand(scene, strategy) {
-  const isMediaEditorial = Boolean(strategy?.useMediaEditorial || strategy?.mediaEditorial || scene.mediaEditorial);
   const primaryKind = scene.preferredPresentation;
   const isShorts = strategy?.format === 'shorts' || scene.format === 'shorts';
-
-  // Complex graphics and data kinds MUST hold stable for the whole explanation in procedural mode
-  if (!isMediaEditorial) {
-    if (['statistic', 'chart', 'process', 'timeline', 'comparison', 'quote', 'document', 'code', 'ui'].includes(primaryKind)) {
-      return 1;
-    }
-    if (scene.visualIntent === 'quantify' || scene.visualIntent === 'emphasize') return 1;
-    if (scene.visualChangeTolerance === 'low') return 1;
-  }
 
   const narration = scene.narration || scene.sourceScenes?.[0]?.narration || '';
   const beats = segmentVisualBeats(narration, scene.entities || []);
@@ -149,15 +162,17 @@ export function estimateShotDemand(scene, strategy) {
     repairOptions: ['new_semantic_asset', 'detail_crop', 'annotation', 'camera_adjustment', 'keep_static'],
   } : null;
 
-  if (isMediaEditorial) {
+  {
     const configuredMinHold = Number(strategy?.pacing?.minimumShotSeconds);
     const configuredMaxHold = Number(strategy?.pacing?.maximumStillSeconds);
     const profileMinHold = Number.isFinite(configuredMinHold) ? configuredMinHold : (isShorts ? 2.8 : 4.2);
     const profileMaxHold = Number.isFinite(configuredMaxHold) ? configuredMaxHold : (isShorts ? 6.0 : 7.0);
-    // Hooks may cut slightly faster, but never collapse into micro-shot pacing.
+    // Dynamic purpose-aware pacing: hooks cut slightly faster, conclusions/payoffs hold longer for dramatic impact.
     const minHoldSec = scene.purpose === 'hook' && scene.energy >= 4
       ? Math.max(isShorts ? 2.2 : 3.4, profileMinHold * 0.82)
-      : profileMinHold;
+      : (scene.purpose === 'conclusion' || scene.purpose === 'payoff')
+        ? Math.max(profileMinHold * 1.15, profileMinHold)
+        : profileMinHold;
 
     // A strong shot may hold through a short single thought, but landscape
     // stills should change only when the selected channel profile calls for it.
@@ -165,7 +180,7 @@ export function estimateShotDemand(scene, strategy) {
       // In Shorts, high-energy/density scenes split at >= 5.0s to avoid static hold on mobile
       const energeticSplitThreshold = Number.isFinite(configuredMinHold) ? Math.max(4.5, minHoldSec * 2) : 5.0;
       if (isShorts && duration >= energeticSplitThreshold && (scene.energy >= 4 || scene.informationDensity >= 4)) return 2;
-      if (duration >= profileMaxHold) return clamp(Math.ceil(duration / profileMaxHold), 2, 6);
+      if (duration >= profileMaxHold) return clamp(Math.ceil(duration / profileMaxHold), 2, isShorts ? 4 : 3);
       return 1;
     }
 
@@ -177,19 +192,9 @@ export function estimateShotDemand(scene, strategy) {
     // Filter beats to meaningful shifts
     const holdDrivenShots = Math.ceil(duration / profileMaxHold);
     const meaningfulShots = Math.min(Math.max(beats.length, holdDrivenShots), maxSemShots);
-    return clamp(meaningfulShots, 1, 6);
+    return clamp(meaningfulShots, 1, isShorts ? 4 : 3);
   }
 
-  // Legacy procedural path fallback
-  if (duration >= 4.8 && duration < 8.0) {
-    if ((scene.purpose === 'hook' || scene.purpose === 'contrast') && scene.energy >= 4) return 2;
-    if (scene.informationDensity >= 4 && strategy?.visualDensity >= 0.7) return 2;
-    return 1;
-  }
-  if (duration >= 8.0) {
-    return duration >= 11.0 ? 3 : 2;
-  }
-  return 1;
 }
 
 const ROLE_SEQUENCES = {
@@ -253,6 +258,7 @@ function sourceConcepts(scene, topic) {
   const narrationKey = normalized(scene.narration);
   const concepts = [];
   const isTechnicalTopic = /database|software|code|tech|computer|concurrency|deadlock|backend/i.test(topic || '');
+  const isFinancialTopic = /\b(?:bank|banking|money|finance|financial|debt|credit|mortgage|interest\s+rate|economy|economic|recession|stock\s+market|inflation|investing)\b/i.test(`${topic || ''} ${scene.narration || ''}`);
   const requiresEntityEvidence = scene.evidenceRequirement === 'required';
   for (const entity of scene.entities) {
     if (!isAbstractEventEntity(entity) && (requiresEntityEvidence || entityMentioned(scene.narration, entity))) concepts.push(entity);
@@ -274,6 +280,14 @@ function sourceConcepts(scene, topic) {
             .replace(/\s+/g, ' ')
             .trim();
         }
+        if (isFinancialTopic) {
+          cleaned = cleaned
+            .replace(/\b(?:hand\s+adjusting\s+dial|adjusting\s+dial|turning\s+dial|pulling\s+lever)\b/gi, 'central bank trading floor financial monitor')
+            .replace(/\b(?:empty\s+bank\s+vault\s+shelves|empty\s+vault\s+shelves)\b/gi, 'heavy steel bank vault door security')
+            .replace(/\b(?:coin\s+spinning\s+on\s+table|coin\s+spinning|spinning\s+coin)\b/gi, 'stack of currency banknotes and gold bullion')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
         if (/\b(minimal\s+title\s+card|dark\s+editorial\s+title\s+card|title\s+card|chapter\s+card|editorial\s+title\s+card|clean\s+typography|neutral\s+background|stark\s+black\s+frame|black\s+frame|chapter\s+title|kinetic\s+type|serif\s+type|sans-serif\s+type|clean\s+type|single\s+sentence\s+appears|large,\s+clean\s+type|words?\s+appear|sentence\s+appears)\b/i.test(cleaned)) {
           cleaned = scene.entities?.[0] ? `${scene.entities[0]} research desk` : 'open book on library wooden desk';
         }
@@ -291,6 +305,14 @@ function sourceConcepts(scene, topic) {
           .replace(/\b(circular\s+arrow\s+diagram|database\s+lock\s+cycle|cycle\s+diagram)\b/gi, 'computer screen code terminal dark mode')
           .replace(/\b(database\s+engine\s+diagram|graph\s+cycle\s+detection|server\s+algorithm\s+visualization)\b/gi, 'database server terminal screen')
           .replace(/\b(diagram|flowchart|flow\s+chart|infographic|icons?|symbols?)\b/gi, 'screen monitor')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+      if (isFinancialTopic) {
+        cleanedVis = cleanedVis
+          .replace(/\b(?:hand\s+adjusting\s+dial|adjusting\s+dial|turning\s+dial|pulling\s+lever)\b/gi, 'central bank trading floor financial monitor')
+          .replace(/\b(?:empty\s+bank\s+vault\s+shelves|empty\s+vault\s+shelves)\b/gi, 'heavy steel bank vault door security')
+          .replace(/\b(?:coin\s+spinning\s+on\s+table|coin\s+spinning|spinning\s+coin)\b/gi, 'stack of currency banknotes and gold bullion')
           .replace(/\s+/g, ' ')
           .trim();
       }
@@ -322,7 +344,6 @@ function durationWeights(count, scene) {
 }
 
 export function authorShots(scene, strategy, topic) {
-  const isMediaEditorial = Boolean(strategy?.useMediaEditorial || strategy?.mediaEditorial || scene.mediaEditorial);
   const count = estimateShotDemand(scene, strategy);
   const roles = ROLE_SEQUENCES[scene.visualIntent] || ROLE_SEQUENCES.establish;
   const concepts = sourceConcepts(scene, topic);
@@ -336,11 +357,8 @@ export function authorShots(scene, strategy, topic) {
     !isAbstractEventEntity(entity) && (scene.evidenceRequirement === 'required' || entityMentioned(narration, entity)));
   const hasAbstractHistoricalEntity = (scene.entities || []).some(isAbstractEventEntity);
   const beats = segmentVisualBeats(narration, searchableEntities);
-  const sceneOrdinal = Number(String(scene.id || '').match(/(\d+)(?!.*\d)/)?.[1] || 1);
-
   return Array.from({ length: count }, (_, index) => {
     const role = roles[index] || roles[roles.length - 1];
-    const procedural = !isMediaEditorial && (role === 'graphic' || ['statistic', 'comparison', 'list', 'process', 'timeline', 'chart', 'ui', 'code'].includes(primaryKind));
     const beat = beats[index];
     let visualConcept = concepts[Math.min(index, concepts.length - 1)];
 
@@ -377,7 +395,7 @@ export function authorShots(scene, strategy, topic) {
         TCP_HANDSHAKE: 'datacenter network equipment',
       };
       visualConcept = labelMap[beat.label] || concepts[Math.min(index, concepts.length - 1)];
-    } else if (isMediaEditorial && index > 0 && visualConcept === concepts[0]) {
+    } else if (index > 0 && visualConcept === concepts[0]) {
       if (role === 'detail') visualConcept = `${visualConcept} closeup detail`;
       else if (role === 'action' || role === 'reaction') visualConcept = `${visualConcept} screen interaction`;
       else visualConcept = `${visualConcept} detail`;
@@ -402,18 +420,23 @@ export function authorShots(scene, strategy, topic) {
     }
 
     // If scene has 1 shot: apply subtle camera move to maintain gentle visual vitality throughout the hold
-    const cameraMove = (count === 1)
-      ? (sceneOrdinal % 2 === 0 ? 'subtlePull' : 'subtlePush')
-      : (role === 'detail' ? 'detailCrop' : (index % 2 === 0 ? 'subtlePush' : 'static'));
+    // Media motion is selected only after the real asset, its focal point,
+    // orientation, duration, and neighbouring shots are known. Persisting a
+    // blind push/pull alternation here made unrelated shots move identically
+    // and prevented subject-aware pans. Imported timelines keep their
+    // deterministic hint for backwards compatibility.
+    const cameraMove = 'auto';
+    const durationPolicy = durationPolicyForShot({ role, scene, strategy });
 
     return {
       id: `${scene.id}_shot_${String(index + 1).padStart(2, '0')}`,
       role,
       durationHint: Number((scene.durationHint * weights[index]).toFixed(3)),
+      durationPolicy,
       visualConcept,
       assetIntent,
       changeReason,
-      mediaPreference: procedural ? 'procedural' : scene.evidenceRequirement === 'required' ? 'real' : 'auto',
+      mediaPreference: scene.evidenceRequirement === 'required' ? 'real' : 'auto',
       searchConcepts: [...new Set([visualConcept, ...shotEntities, ...concepts.slice(index, index + 2)])].slice(0, 6),
       entities: shotEntities,
       motionPreference: primaryKind === 'quote' || primaryKind === 'statistic' ? 'stable' : scene.energy >= 4 ? 'active' : 'slow',

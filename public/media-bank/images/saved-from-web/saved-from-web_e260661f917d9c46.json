@@ -1,0 +1,79 @@
+{
+  "id": "saved-from-web_e260661f917d9c46",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A breathtaking glimpse of the Milky Way galaxy under a clear night sky, showcasing countless stars.",
+  "path": "images/saved-from-web/saved-from-web_e260661f917d9c46.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1950,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "deep",
+    "space",
+    "astronomical",
+    "cosmo",
+    "static",
+    "presentation",
+    "breathtaking",
+    "glimpse",
+    "milky",
+    "way",
+    "galaxy",
+    "under",
+    "clear",
+    "night",
+    "sky",
+    "showcasing",
+    "countles",
+    "star",
+    "active",
+    "demonstration",
+    "relevant",
+    "physical",
+    "phenomenon",
+    "countless",
+    "stars",
+    "cosmic stars",
+    "astronomical phenomena"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "deep space astronomical cosmos"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Milky Way galaxy night sky active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-24T09:26:51.965Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Huzaifa Mustajab",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/stunning-view-of-the-milky-way-galaxy-at-night-38337913/"
+  }
+}

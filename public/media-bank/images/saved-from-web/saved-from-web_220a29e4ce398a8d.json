@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_220a29e4ce398a8d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Commuters waiting for a metro train at a station in Melbourne, capturing morning bustle.",
+  "path": "images/saved-from-web/saved-from-web_220a29e4ce398a8d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1735,
+  "aspectRatio": 1.4986,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "commuter",
+    "waiting",
+    "metro",
+    "train",
+    "station",
+    "melbourne",
+    "capturing",
+    "morning",
+    "bustle",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "commuters",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "commuter",
+    "waiting",
+    "metro",
+    "train",
+    "station",
+    "melbourne",
+    "capturing",
+    "morning",
+    "bustle",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "commuters",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Commuters waiting for a metro train at a station in Melbourne, capturing morning bustle."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "commuters train platform morning",
+    "savedAt": "2026-10-26T15:02:13.657Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Kevin Hy",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/commuters-at-melbourne-train-station-platform-33816597/"
+  }
+}

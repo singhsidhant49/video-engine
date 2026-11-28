@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_490ec9394cfee770",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Dubai",
+  "path": "images/saved-from-web/saved-from-web_490ec9394cfee770.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1798,
+  "aspectRatio": 1.4461,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "dubai",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Dubai"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "wikipedia",
+    "originalQuery": "Dubai Marina modern architecture aerial",
+    "savedAt": "2026-10-29T04:42:21.962Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "CC-BY-2.0",
+    "license_name": "CC-BY-2.0",
+    "url": "https://creativecommons.org/licenses/by/2.0/",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "author": "Francisco Anzola",
+    "creator": "Francisco Anzola",
+    "attributionRequired": true,
+    "attribution_required": true,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-29T04:20:44.557Z",
+    "page": "https://en.wikipedia.org/wiki/File:Burj_Khalifa_2021.jpg"
+  }
+}

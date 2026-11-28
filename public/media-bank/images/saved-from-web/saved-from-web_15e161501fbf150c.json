@@ -1,0 +1,82 @@
+{
+  "id": "saved-from-web_15e161501fbf150c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of an ancient Greek goddess sculpture, highlighting detailed carving.",
+  "path": "images/saved-from-web/saved-from-web_15e161501fbf150c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "ancient",
+    "greek",
+    "goddes",
+    "sculpture",
+    "highlighting",
+    "detailed",
+    "carving",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "close-up",
+    "goddess"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "close",
+    "ancient",
+    "greek",
+    "goddes",
+    "sculpture",
+    "highlighting",
+    "detailed",
+    "carving",
+    "thoughtful",
+    "contemplative",
+    "setting",
+    "static",
+    "presentation",
+    "close-up",
+    "goddess"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Close-up of an ancient Greek goddess sculpture, highlighting detailed carving."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "thoughtful or contemplative setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Ptolemy I Soter statue",
+    "savedAt": "2026-10-28T08:14:18.953Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Burak Hayıt",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/beautiful-artemis-21357966/"
+  }
+}

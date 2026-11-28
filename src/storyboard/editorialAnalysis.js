@@ -83,7 +83,7 @@ function shouldStartScene(group, next) {
   if (next.evidenceRequirement === 'required' || prev.evidenceRequirement === 'required') return true;
   if (next.entities.length && prev.entities.length && next.entities[0] !== prev.entities[0]) return true;
 
-  // Procedural structured graphic -> photo switch requires boundary
+  // A substantial visual-subject switch requires a boundary.
   const prevIsDense = DENSE_KINDS.has(prev.source?.kind);
   const nextIsDense = DENSE_KINDS.has(next.source?.kind);
   if (prevIsDense !== nextIsDense) return true;

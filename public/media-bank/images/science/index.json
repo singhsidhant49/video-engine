@@ -1,0 +1,2157 @@
+[
+  {
+    "id": "science_archaeology_ruins_excavation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Archaeologist excavating at ancient ruins",
+    "path": "images/science/science_archaeology_ruins_excavation_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "archaeology",
+      "excavation",
+      "ancient ruins",
+      "dig site",
+      "heritage research"
+    ],
+    "concepts": [
+      "archaeological fieldwork",
+      "ancient civilization study",
+      "artifact excavation",
+      "heritage science"
+    ],
+    "subjects": [
+      "archaeologist",
+      "ruins",
+      "excavation square",
+      "notebook"
+    ],
+    "actions": [
+      "excavating artifacts",
+      "brushing soil",
+      "recording finds"
+    ],
+    "mood": [
+      "historical",
+      "methodical",
+      "golden-hour"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "archaeology explainer",
+      "history documentary",
+      "fieldwork montage",
+      "ancient civilizations"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_astronomy_field_telescope_003",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Field astronomer operating a telescope under the Milky Way",
+    "path": "images/science/science_astronomy_field_telescope_003.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "astronomy",
+      "telescope",
+      "milky way",
+      "night sky",
+      "observatory",
+      "field science"
+    ],
+    "concepts": [
+      "astronomical observation",
+      "space research",
+      "field astronomy",
+      "cosmos exploration"
+    ],
+    "subjects": [
+      "astronomer",
+      "telescope",
+      "laptop",
+      "starry sky"
+    ],
+    "actions": [
+      "operating telescope",
+      "monitoring sky",
+      "capturing data"
+    ],
+    "mood": [
+      "epic",
+      "curious",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "astronomy explainer",
+      "space documentary",
+      "science intro",
+      "cosmos video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_astronomy_observatory_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Astronomer working beneath the Milky Way",
+    "path": "images/science/science_astronomy_observatory_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "astronomy",
+      "observatory",
+      "milky way",
+      "space",
+      "research",
+      "telescope"
+    ],
+    "concepts": [
+      "astronomical observation",
+      "space research",
+      "observatory work",
+      "cosmos analysis"
+    ],
+    "subjects": [
+      "astronomer",
+      "computer monitors",
+      "telescope dome",
+      "night sky"
+    ],
+    "actions": [
+      "observing sky",
+      "analyzing celestial imagery",
+      "conducting space research"
+    ],
+    "mood": [
+      "epic",
+      "curious",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "space science",
+      "astronomy explainer",
+      "cosmos documentary",
+      "observatory content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_botany_rainforest_survey_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Botanist studying rainforest plant life near a waterfall",
+    "path": "images/science/science_botany_rainforest_survey_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "botany",
+      "rainforest",
+      "plant research",
+      "field biology",
+      "biodiversity",
+      "waterfall"
+    ],
+    "concepts": [
+      "botanical field study",
+      "rainforest biodiversity",
+      "plant identification",
+      "ecosystem research"
+    ],
+    "subjects": [
+      "botanist",
+      "leaf sample",
+      "field guide",
+      "rainforest"
+    ],
+    "actions": [
+      "examining leaf",
+      "identifying species",
+      "recording observations"
+    ],
+    "mood": [
+      "lush",
+      "curious",
+      "natural"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.34,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "botany explainer",
+      "rainforest documentary",
+      "biodiversity content",
+      "field science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_chemistry_pipetting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist pipetting colorful laboratory solutions",
+    "path": "images/science/science_chemistry_pipetting_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "chemistry",
+      "pipette",
+      "laboratory",
+      "solutions",
+      "experiment"
+    ],
+    "concepts": [
+      "chemical experimentation",
+      "lab procedure",
+      "solution mixing",
+      "scientific testing"
+    ],
+    "subjects": [
+      "scientist",
+      "pipette",
+      "flasks",
+      "test tubes",
+      "microscope"
+    ],
+    "actions": [
+      "pipetting liquid",
+      "mixing samples",
+      "running experiment"
+    ],
+    "mood": [
+      "vibrant",
+      "precise",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "upper-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "chemistry video",
+      "lab procedure",
+      "science education",
+      "experiment montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_climate_data_briefing_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist presenting global climate data to a classroom",
+    "path": "images/science/science_climate_data_briefing_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "climate",
+      "data presentation",
+      "earth",
+      "weather",
+      "research briefing",
+      "education"
+    ],
+    "concepts": [
+      "climate communication",
+      "earth systems science",
+      "scientific presentation",
+      "global data analysis"
+    ],
+    "subjects": [
+      "presenter",
+      "classroom audience",
+      "large earth display",
+      "charts"
+    ],
+    "actions": [
+      "presenting findings",
+      "explaining climate data",
+      "teaching students"
+    ],
+    "mood": [
+      "educational",
+      "clear",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.69,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "climate explainer",
+      "science communication",
+      "earth science class",
+      "educational video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_environmental_field_research_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Environmental scientists conducting alpine lake field research",
+    "path": "images/science/science_environmental_field_research_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "field research",
+      "environmental science",
+      "lake",
+      "ecology",
+      "sampling"
+    ],
+    "concepts": [
+      "environmental monitoring",
+      "field science",
+      "water quality research",
+      "ecological study"
+    ],
+    "subjects": [
+      "scientists",
+      "lake",
+      "sampling equipment",
+      "mountains"
+    ],
+    "actions": [
+      "collecting samples",
+      "measuring water",
+      "recording observations"
+    ],
+    "mood": [
+      "natural",
+      "adventurous",
+      "observational"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.33,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "environmental science",
+      "fieldwork montage",
+      "ecology explainer",
+      "climate content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_genomics_analysis_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist analyzing genomics data in the lab",
+    "path": "images/science/science_genomics_analysis_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "genomics",
+      "DNA",
+      "bioinformatics",
+      "laboratory",
+      "data analysis"
+    ],
+    "concepts": [
+      "genomics research",
+      "DNA analysis",
+      "bioinformatics",
+      "precision medicine"
+    ],
+    "subjects": [
+      "scientist",
+      "DNA visualization",
+      "computer monitor",
+      "microscope"
+    ],
+    "actions": [
+      "analyzing genomic data",
+      "reviewing charts",
+      "conducting bioinformatics research"
+    ],
+    "mood": [
+      "high-tech",
+      "focused",
+      "advanced"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.72,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "genetics video",
+      "biotech explainer",
+      "medical research",
+      "DNA science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_geology_sample_analysis_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Geologist examining rock samples in a mountain research lab",
+    "path": "images/science/science_geology_sample_analysis_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "geology",
+      "rock samples",
+      "earth science",
+      "research",
+      "minerals"
+    ],
+    "concepts": [
+      "geological analysis",
+      "earth science research",
+      "mineral identification",
+      "sample study"
+    ],
+    "subjects": [
+      "scientist",
+      "rock samples",
+      "map",
+      "monitor",
+      "mountain view"
+    ],
+    "actions": [
+      "examining rock",
+      "comparing samples",
+      "studying geology"
+    ],
+    "mood": [
+      "methodical",
+      "natural",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.38,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "geology video",
+      "earth science",
+      "field lab explainer",
+      "research montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_glaciology_ice_core_sampling_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Glaciologist collecting an ice core on a glacier",
+    "path": "images/science/science_glaciology_ice_core_sampling_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "glaciology",
+      "ice core",
+      "glacier",
+      "climate research",
+      "polar science",
+      "fieldwork"
+    ],
+    "concepts": [
+      "ice core sampling",
+      "polar climate science",
+      "cryosphere research",
+      "glacier field study"
+    ],
+    "subjects": [
+      "scientist",
+      "ice corer",
+      "glacier",
+      "mountains",
+      "equipment"
+    ],
+    "actions": [
+      "drilling ice core",
+      "sampling glacier",
+      "collecting climate data"
+    ],
+    "mood": [
+      "crisp",
+      "extreme",
+      "scientific"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.37,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "climate science",
+      "glacier documentary",
+      "field research",
+      "environmental science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_global_data_presentation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist presenting global research data",
+    "path": "images/science/science_global_data_presentation_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "presentation",
+      "global data",
+      "earth",
+      "climate data",
+      "research briefing"
+    ],
+    "concepts": [
+      "scientific presentation",
+      "global research",
+      "data communication",
+      "earth systems science"
+    ],
+    "subjects": [
+      "scientist",
+      "large display",
+      "earth visualization",
+      "charts"
+    ],
+    "actions": [
+      "presenting findings",
+      "explaining data",
+      "teaching audience"
+    ],
+    "mood": [
+      "educational",
+      "professional",
+      "clear"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.67,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "science communication",
+      "research presentation",
+      "climate explainer",
+      "educational video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_lab_laptop_workflow_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist working on a laptop in a modern laboratory",
+    "path": "images/science/science_lab_laptop_workflow_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "laboratory",
+      "laptop",
+      "scientist",
+      "research workflow",
+      "microscope"
+    ],
+    "concepts": [
+      "digital lab workflow",
+      "scientific analysis",
+      "research documentation",
+      "lab computing"
+    ],
+    "subjects": [
+      "scientist",
+      "laptop",
+      "microscope",
+      "test tubes",
+      "lab bench"
+    ],
+    "actions": [
+      "typing notes",
+      "analyzing data",
+      "documenting research"
+    ],
+    "mood": [
+      "clean",
+      "focused",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.32,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "general science content",
+      "research workflow",
+      "lab operations",
+      "data analysis"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_laser_optics_experiment_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist conducting a laser optics experiment",
+    "path": "images/science/science_laser_optics_experiment_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "physics",
+      "laser",
+      "optics",
+      "photonics",
+      "experiment",
+      "laboratory"
+    ],
+    "concepts": [
+      "optics research",
+      "photonics experiment",
+      "laser science",
+      "physics instrumentation"
+    ],
+    "subjects": [
+      "scientist",
+      "laser bench",
+      "optical equipment",
+      "beams"
+    ],
+    "actions": [
+      "aligning equipment",
+      "running experiment",
+      "measuring results"
+    ],
+    "mood": [
+      "technical",
+      "high-tech",
+      "precise"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.68,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "physics explainer",
+      "advanced lab research",
+      "optics video",
+      "scientific technology"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_marine_biology_coral_survey_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Marine biologist surveying a coral reef underwater",
+    "path": "images/science/science_marine_biology_coral_survey_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "marine biology",
+      "coral reef",
+      "underwater",
+      "diver",
+      "ocean research",
+      "biodiversity"
+    ],
+    "concepts": [
+      "reef survey",
+      "marine ecosystem research",
+      "ocean biodiversity",
+      "underwater field science"
+    ],
+    "subjects": [
+      "scientist diver",
+      "camera",
+      "clipboard",
+      "coral reef",
+      "fish"
+    ],
+    "actions": [
+      "surveying reef",
+      "recording observations",
+      "underwater photography"
+    ],
+    "mood": [
+      "vibrant",
+      "exploratory",
+      "immersive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.31,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "marine science",
+      "ocean conservation",
+      "biodiversity explainer",
+      "reef documentary"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_microbiology_colony_analysis_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Microbiologist examining bacterial colonies in a petri dish",
+    "path": "images/science/science_microbiology_colony_analysis_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "microbiology",
+      "bacterial colonies",
+      "petri dish",
+      "laboratory",
+      "microbes"
+    ],
+    "concepts": [
+      "microbiology research",
+      "culture analysis",
+      "bacterial growth study",
+      "biological testing"
+    ],
+    "subjects": [
+      "scientist",
+      "petri dish",
+      "microscope",
+      "culture plates"
+    ],
+    "actions": [
+      "examining colonies",
+      "holding petri dish",
+      "studying growth"
+    ],
+    "mood": [
+      "clean",
+      "analytical",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.65,
+        "y": 0.36
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "microbiology explainer",
+      "medical lab",
+      "science education",
+      "research montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_microbiology_cultures_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist examining bacterial cultures",
+    "path": "images/science/science_microbiology_cultures_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "microbiology",
+      "bacterial cultures",
+      "petri dish",
+      "laboratory",
+      "microbes"
+    ],
+    "concepts": [
+      "microbiology research",
+      "culture analysis",
+      "cell growth study",
+      "biological testing"
+    ],
+    "subjects": [
+      "scientist",
+      "petri dish",
+      "microscope",
+      "culture plates"
+    ],
+    "actions": [
+      "examining cultures",
+      "holding petri dish",
+      "studying growth"
+    ],
+    "mood": [
+      "clean",
+      "analytical",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.32,
+        "y": 0.36
+      },
+      "safeTextAreas": [
+        "right-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "microbiology explainer",
+      "medical lab",
+      "science education",
+      "research montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_microscope_focus_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Focused scientist using a microscope in a bright laboratory",
+    "path": "images/science/science_microscope_focus_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "microscope",
+      "laboratory",
+      "scientist",
+      "biology",
+      "research",
+      "analysis"
+    ],
+    "concepts": [
+      "microscopy research",
+      "laboratory science",
+      "sample inspection",
+      "biological analysis"
+    ],
+    "subjects": [
+      "scientist",
+      "microscope",
+      "lab bench",
+      "test tubes"
+    ],
+    "actions": [
+      "observing sample",
+      "using microscope",
+      "conducting research"
+    ],
+    "mood": [
+      "clean",
+      "focused",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.32,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "general science video",
+      "biology explainer",
+      "lab research",
+      "medical science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_microscope_research_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist working with microscope in a modern laboratory",
+    "path": "images/science/science_microscope_research_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "microscope",
+      "laboratory",
+      "biology",
+      "research",
+      "petri dish"
+    ],
+    "concepts": [
+      "microscopy",
+      "biological research",
+      "lab experimentation",
+      "scientific analysis"
+    ],
+    "subjects": [
+      "scientist",
+      "microscope",
+      "petri dishes",
+      "lab bench"
+    ],
+    "actions": [
+      "using microscope",
+      "examining samples",
+      "recording notes"
+    ],
+    "mood": [
+      "focused",
+      "clean",
+      "methodical"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "biology content",
+      "lab research",
+      "medical science",
+      "scientific method"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_molecular_team_review_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientists analyzing molecular data on a large digital display",
+    "path": "images/science/science_molecular_team_review_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "team",
+      "molecular data",
+      "protein model",
+      "research",
+      "collaboration",
+      "laboratory"
+    ],
+    "concepts": [
+      "scientific collaboration",
+      "molecular analysis",
+      "research review",
+      "lab data interpretation"
+    ],
+    "subjects": [
+      "scientists",
+      "digital display",
+      "molecular visualization",
+      "laboratory"
+    ],
+    "actions": [
+      "reviewing data",
+      "presenting findings",
+      "team discussion"
+    ],
+    "mood": [
+      "advanced",
+      "collaborative",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.73,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "research teamwork",
+      "biotech explainer",
+      "science presentation",
+      "innovation video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_observatory_night_sky_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Astronomer working at an observatory beneath the Milky Way",
+    "path": "images/science/science_observatory_night_sky_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "astronomy",
+      "observatory",
+      "milky way",
+      "telescope",
+      "space",
+      "night sky"
+    ],
+    "concepts": [
+      "astronomical observation",
+      "space research",
+      "observatory science",
+      "cosmic imaging"
+    ],
+    "subjects": [
+      "astronomer",
+      "telescope",
+      "computer monitors",
+      "milky way"
+    ],
+    "actions": [
+      "observing sky",
+      "analyzing images",
+      "monitoring telescope"
+    ],
+    "mood": [
+      "epic",
+      "curious",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.27,
+        "y": 0.49
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "astronomy explainer",
+      "space documentary",
+      "observatory content",
+      "cosmos video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_oceanography_instrument_deployment_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Oceanographer deploying instruments from a research vessel",
+    "path": "images/science/science_oceanography_instrument_deployment_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "oceanography",
+      "research vessel",
+      "ocean instruments",
+      "marine science",
+      "sea"
+    ],
+    "concepts": [
+      "ocean data collection",
+      "marine fieldwork",
+      "instrument deployment",
+      "sea research"
+    ],
+    "subjects": [
+      "scientist",
+      "research ship",
+      "ocean instrument",
+      "waves"
+    ],
+    "actions": [
+      "deploying instrument",
+      "sampling ocean",
+      "collecting data"
+    ],
+    "mood": [
+      "adventurous",
+      "professional",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "ocean science",
+      "marine research",
+      "environmental documentary",
+      "field expedition"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_paleontology_fossil_excavation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Paleontologist carefully excavating a fossil skeleton in the desert",
+    "path": "images/science/science_paleontology_fossil_excavation_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "paleontology",
+      "fossil",
+      "excavation",
+      "desert",
+      "fieldwork",
+      "dig site"
+    ],
+    "concepts": [
+      "fossil excavation",
+      "paleontological fieldwork",
+      "ancient life research",
+      "desert science"
+    ],
+    "subjects": [
+      "scientist",
+      "fossil skeleton",
+      "tools",
+      "dig site"
+    ],
+    "actions": [
+      "brushing fossil",
+      "documenting find",
+      "excavating remains"
+    ],
+    "mood": [
+      "adventurous",
+      "methodical",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.41,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "paleontology explainer",
+      "prehistoric life",
+      "excavation montage",
+      "science documentary"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_photonics_laser_lab_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist working in a photonics and laser lab",
+    "path": "images/science/science_photonics_laser_lab_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "physics",
+      "laser",
+      "photonics",
+      "optics",
+      "laboratory",
+      "precision"
+    ],
+    "concepts": [
+      "optics research",
+      "photonics experiment",
+      "physics instrumentation",
+      "laser science"
+    ],
+    "subjects": [
+      "scientist",
+      "laser bench",
+      "optical equipment",
+      "monitors"
+    ],
+    "actions": [
+      "aligning instruments",
+      "running optics experiment",
+      "measuring results"
+    ],
+    "mood": [
+      "technical",
+      "precise",
+      "high-tech"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.4,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "physics video",
+      "advanced research",
+      "optics explainer",
+      "lab technology"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_pipetting_samples_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist pipetting colorful samples in a modern lab",
+    "path": "images/science/science_pipetting_samples_002.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "chemistry",
+      "pipette",
+      "laboratory",
+      "samples",
+      "experiment",
+      "research"
+    ],
+    "concepts": [
+      "chemical testing",
+      "sample preparation",
+      "laboratory procedure",
+      "experimental science"
+    ],
+    "subjects": [
+      "scientist",
+      "pipette",
+      "test tubes",
+      "colorful liquids"
+    ],
+    "actions": [
+      "pipetting",
+      "preparing samples",
+      "running experiment"
+    ],
+    "mood": [
+      "vibrant",
+      "precise",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.36,
+        "y": 0.39
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "chemistry content",
+      "lab procedure",
+      "science education",
+      "experiment montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_river_field_sampling_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Environmental scientist collecting river samples in the mountains",
+    "path": "images/science/science_river_field_sampling_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1792,
+    "height": 1024,
+    "aspectRatio": 1.75,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "field research",
+      "environmental science",
+      "river",
+      "sampling",
+      "mountains",
+      "ecology"
+    ],
+    "concepts": [
+      "environmental monitoring",
+      "water sampling",
+      "field science",
+      "ecosystem research"
+    ],
+    "subjects": [
+      "scientist",
+      "river",
+      "sample bottle",
+      "tablet",
+      "mountain landscape"
+    ],
+    "actions": [
+      "collecting water sample",
+      "recording data",
+      "field observation"
+    ],
+    "mood": [
+      "natural",
+      "observational",
+      "adventurous"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "environmental science",
+      "fieldwork montage",
+      "climate content",
+      "ecology explainer"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_team_digital_presentation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Research team reviewing digital science visuals",
+    "path": "images/science/science_team_digital_presentation_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "research team",
+      "presentation",
+      "protein model",
+      "lab",
+      "collaboration",
+      "data"
+    ],
+    "concepts": [
+      "scientific collaboration",
+      "research review",
+      "data interpretation",
+      "lab discussion"
+    ],
+    "subjects": [
+      "scientists",
+      "large display",
+      "molecular visualization",
+      "lab desk"
+    ],
+    "actions": [
+      "presenting data",
+      "reviewing visuals",
+      "team discussion"
+    ],
+    "mood": [
+      "collaborative",
+      "advanced",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.73,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "research collaboration",
+      "science presentation",
+      "lab teamwork",
+      "innovation video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_test_tube_analysis_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Scientist examining a blue test tube in a modern lab",
+    "path": "images/science/science_test_tube_analysis_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "laboratory",
+      "scientist",
+      "test tube",
+      "chemistry",
+      "research",
+      "biotech"
+    ],
+    "concepts": [
+      "laboratory research",
+      "sample analysis",
+      "scientific observation",
+      "experimental science"
+    ],
+    "subjects": [
+      "scientist",
+      "test tube",
+      "laptop",
+      "microscope"
+    ],
+    "actions": [
+      "examining sample",
+      "observing liquid",
+      "conducting research"
+    ],
+    "mood": [
+      "clean",
+      "focused",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.62,
+        "y": 0.38
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "general science video",
+      "lab research",
+      "biotech explainer",
+      "scientific discovery"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_volcanology_eruption_observation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Volcanologist documenting an active eruption at sunset",
+    "path": "images/science/science_volcanology_eruption_observation_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "volcanology",
+      "volcano",
+      "eruption",
+      "geology",
+      "lava",
+      "field research"
+    ],
+    "concepts": [
+      "volcano monitoring",
+      "eruption observation",
+      "geological hazard science",
+      "earth systems research"
+    ],
+    "subjects": [
+      "scientist",
+      "volcano",
+      "survey equipment",
+      "notebook"
+    ],
+    "actions": [
+      "observing eruption",
+      "taking notes",
+      "monitoring hazard"
+    ],
+    "mood": [
+      "dramatic",
+      "epic",
+      "high-stakes"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.28,
+        "y": 0.48
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "volcano explainer",
+      "geology documentary",
+      "natural hazards",
+      "earth science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_weather_balloon_launch_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Atmospheric scientist launching a weather balloon at sunrise",
+    "path": "images/science/science_weather_balloon_launch_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "meteorology",
+      "weather balloon",
+      "atmosphere",
+      "field science",
+      "climate",
+      "sunrise"
+    ],
+    "concepts": [
+      "atmospheric observation",
+      "weather monitoring",
+      "balloon launch",
+      "meteorological data collection"
+    ],
+    "subjects": [
+      "scientist",
+      "weather balloon",
+      "field equipment",
+      "landscape"
+    ],
+    "actions": [
+      "launching balloon",
+      "collecting weather data",
+      "preparing instruments"
+    ],
+    "mood": [
+      "hopeful",
+      "expansive",
+      "scientific"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.43,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "weather explainer",
+      "climate science",
+      "atmospheric research",
+      "environmental video"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "science_wildlife_camera_trap_research_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Wildlife biologist checking a forest camera trap",
+    "path": "images/science/science_wildlife_camera_trap_research_001.png",
+    "category": "science",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "science",
+      "wildlife biology",
+      "camera trap",
+      "forest",
+      "ecology",
+      "field research",
+      "conservation"
+    ],
+    "concepts": [
+      "wildlife monitoring",
+      "forest ecology",
+      "camera trap survey",
+      "conservation science"
+    ],
+    "subjects": [
+      "field researcher",
+      "camera trap",
+      "forest stream",
+      "backpack"
+    ],
+    "actions": [
+      "checking camera trap",
+      "reviewing wildlife image",
+      "field monitoring"
+    ],
+    "mood": [
+      "natural",
+      "observational",
+      "immersive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.33,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "wildlife documentary",
+      "ecology explainer",
+      "conservation video",
+      "field science"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

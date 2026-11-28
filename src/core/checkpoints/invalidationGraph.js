@@ -12,6 +12,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { PIPELINE_STAGES, STAGE_DEFINITIONS, canonicalStageName } from './stageRegistry.js';
+import { PIPELINE_VERSION } from './versionTracker.js';
 
 /**
  * Computes all transitive downstream dependents of a given stage.
@@ -138,7 +139,7 @@ export async function evaluateRunValidity({
   // Visual-mode changes preserve script/audio but invalidate media selection and every visual artifact.
   try {
     const oldReq = JSON.parse(await fs.readFile(path.join(runDir, 'request.json'), 'utf8'));
-    if (currentContext.visualMode && (oldReq.visualMode || 'LEGACY_PROCEDURAL') !== currentContext.visualMode) {
+    if (currentContext.visualMode && (oldReq.visualMode || 'MEDIA_EDITORIAL') !== currentContext.visualMode) {
       for (const stage of ['visualStrategy', 'storyboard', 'assets', 'timeline', 'package', 'preRenderQa', 'render', 'postRenderQa']) forcedInvalidation.add(stage);
     }
   } catch {
@@ -175,6 +176,19 @@ export async function evaluateRunValidity({
         reason: !manifestStage ? 'Stage never recorded' : `Stage status is ${manifestStage.status}`,
       });
       // Invalidate downstream of any incomplete stage
+      const downstream = getTransitiveDownstreamStages(stage);
+      for (const d of downstream) forcedInvalidation.add(d);
+      continue;
+    }
+
+    // Legacy manifests predate code-version tracking. Keep them resumable and
+    // start enforcing the version once a stage has been completed by a
+    // version-aware pipeline.
+    if (manifestStage.codeVersion && manifestStage.codeVersion !== PIPELINE_VERSION) {
+      invalidatedStages.push({
+        stage,
+        reason: `Pipeline version changed (${manifestStage.codeVersion || 'unversioned'} -> ${PIPELINE_VERSION})`,
+      });
       const downstream = getTransitiveDownstreamStages(stage);
       for (const d of downstream) forcedInvalidation.add(d);
       continue;

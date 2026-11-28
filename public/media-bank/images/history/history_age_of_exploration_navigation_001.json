@@ -1,0 +1,78 @@
+{
+  "id": "history_age_of_exploration_navigation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Navigators charting a harbor during the Age of Exploration",
+  "path": "images/history/history_age_of_exploration_navigation_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "history",
+    "age of exploration",
+    "navigation",
+    "sailing ships",
+    "maps",
+    "renaissance",
+    "seafaring"
+  ],
+  "concepts": [
+    "maritime exploration",
+    "global expansion",
+    "navigation history",
+    "imperial voyages"
+  ],
+  "subjects": [
+    "navigators",
+    "map table",
+    "globe",
+    "ships in harbor",
+    "instruments"
+  ],
+  "actions": [
+    "charting routes",
+    "discussing maps",
+    "preparing voyage"
+  ],
+  "mood": [
+    "adventurous",
+    "strategic",
+    "golden-hour"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.45,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "left-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "exploration history videos",
+    "maritime history",
+    "empire content",
+    "map-based intros"
+  ],
+  "avoidFor": [
+    "ancient egypt",
+    "industrial smoke scene",
+    "museum"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

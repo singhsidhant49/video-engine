@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_129af23396eac753",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Explore the majestic architecture of an ancient library with classic wooden arches and towering book-filled shelves.",
+  "path": "images/saved-from-web/saved-from-web_129af23396eac753.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1732,
+  "aspectRatio": 1.5012,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "majestic",
+    "architecture",
+    "ancient",
+    "library",
+    "classic",
+    "wooden",
+    "arche",
+    "towering",
+    "book",
+    "filled",
+    "shelve",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "arches",
+    "book-filled",
+    "shelves",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "explore",
+    "majestic",
+    "architecture",
+    "ancient",
+    "library",
+    "classic",
+    "wooden",
+    "arche",
+    "towering",
+    "book",
+    "filled",
+    "shelve",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "arches",
+    "book-filled",
+    "shelves",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Explore the majestic architecture of an ancient library with classic wooden arches and towering book-filled shelves."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "burning ancient library",
+    "savedAt": "2026-10-28T08:15:35.183Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "ClickerHappy",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/ancient-antique-architectural-design-architecture-442420/"
+  }
+}

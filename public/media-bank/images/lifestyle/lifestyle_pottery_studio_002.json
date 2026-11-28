@@ -1,0 +1,79 @@
+{
+  "id": "lifestyle_pottery_studio_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit pottery studio creation",
+  "path": "images/lifestyle/lifestyle_pottery_studio_002.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1448,
+  "height": 1086,
+  "aspectRatio": 1.3333,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "pottery",
+    "creative hobby",
+    "studio",
+    "craft",
+    "ceramics",
+    "artistic lifestyle"
+  ],
+  "concepts": [
+    "creative living",
+    "hands-on hobby",
+    "artisan lifestyle",
+    "mindful making"
+  ],
+  "subjects": [
+    "woman",
+    "pottery wheel",
+    "clay",
+    "ceramic bowls",
+    "studio shelves"
+  ],
+  "actions": [
+    "shaping clay",
+    "making pottery",
+    "working in studio"
+  ],
+  "mood": [
+    "focused",
+    "creative",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.53,
+      "y": 0.48
+    },
+    "safeTextAreas": [
+      "left-upper",
+      "right-upper"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "creative lifestyle videos",
+    "hobby scenes",
+    "slow living content",
+    "artisan stories"
+  ],
+  "avoidFor": [
+    "corporate scenes",
+    "sports",
+    "medical content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

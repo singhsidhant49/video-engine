@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyRenderedMotion, renderedMotionThreshold } from '../src/qc/renderQc.js';
+import { classifyEditBoundary, classifyRenderedMotion, pixelDifferenceExcludingRect, renderedMotionThreshold } from '../src/qc/renderQc.js';
+
+test('render QC identifies repeated-image camera resets at edit boundaries', () => {
+  const stable = { data: new Uint8Array(72 * 128).fill(100), mean: 100, stdev: 10 };
+  const reset = { data: new Uint8Array(72 * 128).fill(140), mean: 140, stdev: 10 };
+  assert.equal(classifyEditBoundary({ before: stable, after: reset, sameAsset: true }).repeatedAssetReset, true);
+  assert.equal(classifyEditBoundary({ before: stable, after: stable, sameAsset: true }).repeatedAssetReset, false);
+});
 import { classifyBenchmarkFailure, evaluateProductionBenchmark } from '../src/benchmark/productionBenchmark.js';
 import { resolvedCameraPresentation } from '../src/pipeline/timeline.js';
 
@@ -25,6 +32,17 @@ test('long contemplative camera moves use a sensitive but nonzero pixel threshol
   assert.equal(threshold, 0.08);
   assert.equal(classifyRenderedMotion({ differences: [0.136], expectedMotion: true, threshold }).frozen, false);
   assert.equal(classifyRenderedMotion({ differences: [0], expectedMotion: true, threshold }).frozen, true);
+});
+
+test('rendered motion measurement excludes subtitle pixel changes', () => {
+  const width = 72, height = 128;
+  const base = { data: new Uint8Array(width * height) };
+  const subtitleOnly = { data: new Uint8Array(width * height) };
+  for (let y = 96; y < height; y++) for (let x = 0; x < width; x++) subtitleOnly.data[y * width + x] = 255;
+  const subtitleMask = { x: 0, y: 96, right: width - 1, bottom: height - 1 };
+  assert.equal(pixelDifferenceExcludingRect(base, subtitleOnly, subtitleMask), 0);
+  subtitleOnly.data[10 * width + 10] = 255;
+  assert.ok(pixelDifferenceExcludingRect(base, subtitleOnly, subtitleMask) > 0);
 });
 
 test('renderer-facing camera metadata follows the solved path after a safe downgrade', () => {

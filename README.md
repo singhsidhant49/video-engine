@@ -84,6 +84,91 @@ Live preview and edit React video components in real-time:
 npm run remotion:studio
 ```
 
+### Autonomous channels and YouTube publishing
+
+The dashboard includes a **Channels & Automation** desk for persistent channel profiles, content pillars,
+retention-scored idea brainstorming, approval, scheduled production, and YouTube publishing. New channels
+default to manual approval with autopublishing disabled. Automatic uploads default to YouTube `private`.
+
+For YouTube OAuth and automatic performance feedback, enable YouTube Data API v3 and YouTube Analytics API in Google Cloud, create a Web application OAuth client, and
+register the exact callback URL below:
+
+```env
+YOUTUBE_CLIENT_ID=...
+YOUTUBE_CLIENT_SECRET=...
+YOUTUBE_REDIRECT_URI=https://video.example.com/oauth/youtube/callback
+YOUTUBE_OAUTH_STATE_SECRET=independent-random-secret-at-least-32-characters
+YOUTUBE_TOKEN_ENCRYPTION_KEY=different-random-secret-at-least-32-characters
+YOUTUBE_ANALYTICS_ENABLED=true
+YOUTUBE_PUBLISHING_ENABLED=false
+```
+
+Refresh tokens are encrypted at rest with AES-256-GCM. OAuth state is signed and expires after ten minutes.
+Analytics synchronization is independent of publishing, reads the most recent 90-day processed window, and leaves publishing disabled unless explicitly enabled.
+The dashboard never receives stored refresh tokens. Scheduled production uses five-field cron expressions and
+IANA timezones; for example, `0 12 * * 1,3,5` runs at noon every Monday, Wednesday, and Friday.
+See [Channel automation production handoff](docs/channel-automation-production-handoff-2026-11-05.md) before enabling unattended production.
+
+### Option D: Asynchronous Video API
+
+The application-facing API is prompt-first; channel/profile settings are optional. Configure at least one API key for production:
+
+```env
+NODE_ENV=production
+VIDEO_API_KEYS=replace-with-a-long-random-api-key
+VIDEO_WORKER_CONCURRENCY=1
+VIDEO_API_MAX_REQUEST_BYTES=1mb
+VIDEO_MAX_QUEUED_JOBS=25
+VIDEO_MAX_OWNER_PENDING_JOBS=5
+VIDEO_SHUTDOWN_TIMEOUT_MS=30000
+```
+
+For local development, start the API and its in-process worker:
+
+```bash
+npm start
+```
+
+Create a job (returns `202` immediately):
+
+```bash
+curl -X POST http://localhost:3000/v1/videos \
+  -H "Authorization: Bearer replace-with-a-long-random-api-key" \
+  -H "Idempotency-Key: customer-order-123" \
+  -H "Content-Type: application/json" \
+  -d '{"prompt":"Create a two-minute documentary about coffee","output":{"durationSeconds":120,"aspectRatio":"16:9"}}'
+```
+
+Use `GET /v1/videos/:id` for progress, `GET /v1/videos/:id/result` for the result, and authenticated `GET /v1/videos/:id/download` for the MP4. `POST /v1/videos/:id/cancel` cancels a job and `POST /v1/videos/:id/retry` resumes a failed or cancelled job under the same video ID, reusing valid pipeline checkpoints.
+
+`DELETE /v1/videos/:id` is the single permanent deletion operation. It cancels active work, deletes the final video and every per-run artifact, and removes the video job record. Poll the returned `GET /v1/operations/:operationId` URL until it is complete. Shared caches and user media-bank files are never deleted.
+
+In Docker production mode, PostgreSQL stores job and deletion state, Redis/BullMQ coordinates a separate worker process, and generated files persist in a named Docker volume. Outside Docker, the local development fallback still stores state under `renders/api/` and runs an in-process queue.
+
+Prompt text may contain up to 50,000 characters, allowing complete narrative, visual, editing, and quality-control briefs. The total JSON request limit is configured by `VIDEO_API_MAX_REQUEST_BYTES`.
+
+`GET /health` is a process liveness check. `GET /ready` verifies that the worker is accepting jobs and that its persistent store is readable and writable. Queue admission is bounded globally and per API account; overload returns HTTP `429`. `SIGTERM` and `SIGINT` stop admission, allow active work a grace period, and leave interrupted jobs queued for recovery on restart. The legacy synchronous `/api/generate` and unscoped `/api/renders` endpoints are disabled in production.
+
+### Production Docker stack
+
+Merge `.env.docker.example` into `.env`, replace all placeholder secrets, then run:
+
+```powershell
+docker compose up -d --build
+docker compose ps
+docker compose logs -f api worker
+```
+
+CPU-only speech alignment is resource-bounded by default. Captioned production
+requires measured Whisper timing; estimated word timing is allowed only for
+development previews because it can drift from speech. Local Whisper runs in
+non-overlapping windows inside an isolated process and is terminated after
+`WHISPER_TIMEOUT_MS`. On a 2-vCPU VPS, keep the 900-second/720000-ms defaults;
+set `WHISPER_MAX_AUDIO_SECONDS=0` only on hardware that can safely process
+unbounded local Whisper workloads.
+
+Open [http://localhost:3000](http://localhost:3000) for the authenticated production dashboard. The stack contains the API, a separate video worker, PostgreSQL, Redis/BullMQ, and Kokoro TTS. Videos and databases survive restarts in named Docker volumes. See [Docker production deployment](docs/docker-production.md) for health checks, backups, scaling, storage, and the future multi-user migration.
+
 ---
 
 ## 📁 Output & Render Files
@@ -131,9 +216,9 @@ mimages/
   documents/
   devices/
   objects/
-# Production visual mode
+# Production visual engine
 
-Production generation defaults to `MEDIA_EDITORIAL`: real image/video media is composition-solved before Remotion renders it, while procedural chart/process/diagram/statement families are disabled. Use `--visual-mode LEGACY_PROCEDURAL` only for regression, debugging, or compatibility.
+Production generation uses one `MEDIA_EDITORIAL` engine. Every visual is relevant, licensed image/video media selected through semantic and pixel-level quality gates; no alternate rendering runtime exists.
 
 Useful validation commands:
 
@@ -141,3 +226,10 @@ Useful validation commands:
 npm test
 npm run render:media-editorial
 ```
+
+
+
+
+
+
+The containerized system is ready for private, single-host production use across multiple YouTube channels. A public HeyGen-style multi-customer service still needs object storage/CDN delivery, full identity and billing, webhooks, observability, backups, retention automation, and load/security testing; the migration path is documented in [Docker production deployment](docs/docker-production.md).

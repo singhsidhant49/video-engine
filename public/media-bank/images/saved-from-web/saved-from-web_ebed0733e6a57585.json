@@ -1,0 +1,86 @@
+{
+  "id": "saved-from-web_ebed0733e6a57585",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Confident bank employee standing with arms crossed at BBVA reception area, smiling warmly.",
+  "path": "images/saved-from-web/saved-from-web_ebed0733e6a57585.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 2006,
+  "aspectRatio": 1.2961,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "confident",
+    "bank",
+    "employee",
+    "standing",
+    "arm",
+    "crossed",
+    "bbva",
+    "reception",
+    "area",
+    "smiling",
+    "warmly",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "arms"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "confident",
+    "bank",
+    "employee",
+    "standing",
+    "arm",
+    "crossed",
+    "bbva",
+    "reception",
+    "area",
+    "smiling",
+    "warmly",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "arms"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Confident bank employee standing with arms crossed at BBVA reception area, smiling warmly."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "bank teller smiling",
+    "savedAt": "2026-10-28T15:44:05.684Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "David  Toledo",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/smiling-bank-employee-at-bbva-reception-desk-30719169/"
+  }
+}

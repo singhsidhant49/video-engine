@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_cd10c66ffa9e3e1c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed close-up image of a human eye, showcasing an amber-colored iris with architectural reflection.",
+  "path": "images/saved-from-web/saved-from-web_cd10c66ffa9e3e1c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "human",
+    "eye",
+    "showcasing",
+    "amber",
+    "colored",
+    "iri",
+    "architectural",
+    "reflection",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up",
+    "image",
+    "amber-colored",
+    "iris"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "close",
+    "human",
+    "eye",
+    "showcasing",
+    "amber",
+    "colored",
+    "iri",
+    "architectural",
+    "reflection",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close-up",
+    "image",
+    "amber-colored",
+    "iris"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed close-up image of a human eye, showcasing an amber-colored iris with architectural reflection."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "human eye close-up reflection",
+    "savedAt": "2026-10-26T15:03:44.814Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "burak kostak",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/person-s-brown-eye-18809/"
+  }
+}

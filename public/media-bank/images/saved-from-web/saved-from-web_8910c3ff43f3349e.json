@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_8910c3ff43f3349e",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A woman with short hair works intently on a computer. A bottle sits on the desk nearby.",
+  "path": "images/saved-from-web/saved-from-web_8910c3ff43f3349e.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "short",
+    "hair",
+    "work",
+    "intently",
+    "computer",
+    "bottle",
+    "sit",
+    "desk",
+    "nearby",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "works",
+    "sits",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "woman",
+    "short",
+    "hair",
+    "work",
+    "intently",
+    "computer",
+    "bottle",
+    "sit",
+    "desk",
+    "nearby",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "works",
+    "sits",
+    "office desk",
+    "computer or paperwork",
+    "conference table"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A woman with short hair works intently on a computer. A bottle sits on the desk nearby."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "short term memory screen monitor active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-26T15:48:18.104Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "MART  PRODUCTION",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-in-pink-polo-shirt-sitting-at-pc-8885339/"
+  }
+}

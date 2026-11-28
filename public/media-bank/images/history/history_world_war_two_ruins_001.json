@@ -1,0 +1,73 @@
+{
+  "id": "history_world_war_two_ruins_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "World War II urban ruins",
+  "path": "images/history/history_world_war_two_ruins_001.png",
+  "category": "history",
+  "extension": ".png",
+  "width": 301,
+  "height": 506,
+  "aspectRatio": 0.5949,
+  "orientation": "portrait",
+  "tags": [
+    "history",
+    "world war ii",
+    "war ruins",
+    "soldiers",
+    "20th century",
+    "bombing"
+  ],
+  "concepts": [
+    "wartime destruction",
+    "urban warfare",
+    "modern conflict history"
+  ],
+  "subjects": [
+    "soldiers",
+    "ruined city",
+    "aircraft",
+    "smoke"
+  ],
+  "actions": [
+    "advancing through ruins",
+    "surveying destruction"
+  ],
+  "mood": [
+    "cinematic",
+    "historical",
+    "documentary"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "world war ii videos",
+    "war history",
+    "20th century conflict scenes"
+  ],
+  "avoidFor": [
+    "ancient history",
+    "peaceful cultural scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true,
+    "derivedFromComposite": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "lifestyle_workspace_riverside_003",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunlit cozy workspace by the river",
+  "path": "images/lifestyle/lifestyle_workspace_riverside_003.png",
+  "category": "lifestyle",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "lifestyle",
+    "remote work",
+    "home office",
+    "productivity",
+    "cozy",
+    "river view",
+    "work from home"
+  ],
+  "concepts": [
+    "balanced lifestyle",
+    "creative work",
+    "calm productivity",
+    "modern living"
+  ],
+  "subjects": [
+    "woman",
+    "laptop",
+    "desk",
+    "coffee mug",
+    "plants",
+    "river view"
+  ],
+  "actions": [
+    "working on laptop",
+    "writing notes",
+    "enjoying a quiet work session"
+  ],
+  "mood": [
+    "warm",
+    "focused",
+    "peaceful"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.47,
+      "y": 0.45
+    },
+    "safeTextAreas": [
+      "upper-right",
+      "lower-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "productivity videos",
+    "remote work content",
+    "lifestyle montages",
+    "creator scenes"
+  ],
+  "avoidFor": [
+    "sports scenes",
+    "medical topics",
+    "historical content"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

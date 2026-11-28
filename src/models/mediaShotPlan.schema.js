@@ -1,7 +1,7 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 const Reason = z.enum(['NEW_IDEA', 'NEW_ENTITY', 'NEW_EVIDENCE', 'NEW_LOCATION', 'NEW_EXAMPLE', 'NEW_ACTION', 'DETAIL_SHIFT', 'EMOTIONAL_SHIFT', 'CHAPTER_CHANGE', 'MONTAGE_PROGRESSION', 'CONTINUATION']);
-const Transition = z.object({ type: z.enum(['CUT', 'SHORT_DISSOLVE', 'MATCH_CUT', 'SIMPLE_PUSH', 'MASK_REVEAL']), durationInFrames: z.number().int().nonnegative(), reason: Reason, anchor: z.object({ type: z.string(), value: z.string() }).strict().nullable() }).strict();
+const Transition = z.object({ type: z.enum(['CUT', 'SHORT_DISSOLVE']), durationInFrames: z.number().int().nonnegative(), reason: Reason, anchor: z.object({ type: z.string(), value: z.string() }).strict().nullable() }).strict();
 
 export const MediaShotPlanSchema = z.object({
   version: z.literal(1),
@@ -15,7 +15,7 @@ export const MediaShotPlanSchema = z.object({
   durationInFrames: z.number().int().positive(),
   compositionStrategy: z.enum(['FULL_BLEED_MEDIA', 'FULL_BLEED_MEDIA_WITH_SUBTITLE', 'MEDIA_WITH_LABEL', 'MEDIA_WITH_STAT', 'MEDIA_WITH_CALLOUT', 'EDITORIAL_SPLIT', 'DETAIL_FOCUS', 'TWO_MEDIA_COMPARE', 'MONTAGE', 'CHAPTER_HEADING']),
   cropPlan: z.object({ crop: z.object({ x: z.number(), y: z.number(), width: z.number().positive(), height: z.number().positive() }).strict(), objectPosition: z.object({ x: z.number(), y: z.number() }).strict(), subjectSafeRegion: z.unknown().nullable() }).strict(),
-  cameraPlan: z.object({ mode: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'SLOW_PAN', 'FOCAL_PAN', 'DETAIL_CROP', 'REFRAME']), reason: z.enum(['increaseFocus', 'moveToDetail', 'followSubject', 'emotionalEmphasis', 'reframeForText', 'matchNextShot']).nullable(), start: z.object({ scale: z.number(), focusX: z.number(), focusY: z.number() }).strict(), end: z.object({ scale: z.number(), focusX: z.number(), focusY: z.number() }).strict() }).strict(),
+  cameraPlan: z.object({ mode: z.enum(['STATIC', 'SUBTLE_PUSH', 'SUBTLE_PULL', 'PAN_LEFT', 'PAN_RIGHT']), reason: z.enum(['increaseFocus', 'followSubject', 'emotionalEmphasis']).nullable(), start: z.object({ scale: z.number(), focusX: z.number(), focusY: z.number() }).strict(), end: z.object({ scale: z.number(), focusX: z.number(), focusY: z.number() }).strict() }).strict(),
   textOverlayPlan: z.unknown().nullable(),
   subtitlePlan: z.object({ position: z.string(), geometry: z.object({ x: z.number(), y: z.number(), width: z.number().positive(), height: z.number().nonnegative() }).strict(), animation: z.enum(['DIRECT_REPLACE', 'SHORT_FADE']), maximumLines: z.number().int().min(1).max(2) }).strict(),
   annotationPlan: z.unknown().nullable(),

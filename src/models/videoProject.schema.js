@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod-api';
 
 export const ProjectStageSchema = z.enum([
   'request', 'plan', 'audio', 'alignment', 'visualStrategy', 'storyboard',

@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_544234671c2f3ba5",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Powerful ocean waves crash under dark stormy clouds, capturing nature's raw force.",
+  "path": "images/saved-from-web/saved-from-web_544234671c2f3ba5.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "powerful",
+    "ocean",
+    "wave",
+    "crash",
+    "under",
+    "dark",
+    "stormy",
+    "cloud",
+    "capturing",
+    "nature",
+    "raw",
+    "force",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "clouds",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "powerful",
+    "ocean",
+    "wave",
+    "crash",
+    "under",
+    "dark",
+    "stormy",
+    "cloud",
+    "capturing",
+    "nature",
+    "raw",
+    "force",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "waves",
+    "clouds",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Powerful ocean waves crash under dark stormy clouds, capturing nature's raw force."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "Southern Ocean rough seas",
+    "savedAt": "2026-10-29T09:57:10.855Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Magda Ehlers",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/storm-clouds-above-sea-7762112/"
+  }
+}

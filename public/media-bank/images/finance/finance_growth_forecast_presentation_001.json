@@ -1,0 +1,75 @@
+{
+  "id": "finance_growth_forecast_presentation_001",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Growth forecast presentation at sunset",
+  "path": "images/finance/finance_growth_forecast_presentation_001.png",
+  "category": "finance",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "finance",
+    "forecast",
+    "growth",
+    "valuation",
+    "revenue",
+    "presentation",
+    "investors"
+  ],
+  "concepts": [
+    "financial forecasting",
+    "growth projection",
+    "valuation",
+    "investment planning"
+  ],
+  "subjects": [
+    "presenter",
+    "forecast screen",
+    "executive audience"
+  ],
+  "actions": [
+    "presenting forecast",
+    "explaining projections"
+  ],
+  "mood": [
+    "aspirational",
+    "strategic",
+    "premium"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.58,
+      "y": 0.4
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "investor presentation",
+    "growth forecast",
+    "valuation explainer",
+    "startup finance"
+  ],
+  "avoidFor": [
+    "personal banking",
+    "retail finance",
+    "household budgeting"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

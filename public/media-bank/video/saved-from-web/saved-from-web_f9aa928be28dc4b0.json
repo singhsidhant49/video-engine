@@ -1,0 +1,88 @@
+{
+  "id": "saved-from-web_f9aa928be28dc4b0",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/person-putting-a-bottle-with-medicine-on-the-counter-8666764/",
+  "path": "video/saved-from-web/saved-from-web_f9aa928be28dc4b0.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1080,
+  "height": 2048,
+  "aspectRatio": 0.5273,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "person",
+    "putting",
+    "bottle",
+    "medicine",
+    "counter",
+    "scientific",
+    "research",
+    "laboratory",
+    "cleanroom",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "8666764",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "person",
+    "putting",
+    "bottle",
+    "medicine",
+    "counter",
+    "scientific",
+    "research",
+    "laboratory",
+    "cleanroom",
+    "static",
+    "presentation",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "8666764",
+    "laboratory equipment",
+    "petri dish or microscope"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "person putting a bottle with medicine on the counter"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "scientific research laboratory or cleanroom"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "workers filling penicillin vials 1940s",
+    "savedAt": "2026-11-02T10:16:10.677Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/person-putting-a-bottle-with-medicine-on-the-counter-8666764/"
+  }
+}

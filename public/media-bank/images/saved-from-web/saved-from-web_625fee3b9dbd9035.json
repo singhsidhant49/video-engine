@@ -1,0 +1,98 @@
+{
+  "id": "saved-from-web_625fee3b9dbd9035",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed view of an antique clock face with ornate golden hands and Roman numerals.",
+  "path": "images/saved-from-web/saved-from-web_625fee3b9dbd9035.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1727,
+  "aspectRatio": 1.5055,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "mechanical",
+    "pocket",
+    "watch",
+    "clock",
+    "gear",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "detailed",
+    "antique",
+    "face",
+    "ornate",
+    "golden",
+    "hand",
+    "roman",
+    "numeral",
+    "view",
+    "hands",
+    "numerals"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "vintage",
+    "mechanical",
+    "pocket",
+    "watch",
+    "clock",
+    "gear",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "detailed",
+    "antique",
+    "face",
+    "ornate",
+    "golden",
+    "hand",
+    "roman",
+    "numeral",
+    "view",
+    "hands",
+    "numerals"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "vintage mechanical pocket watch or clock gears"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "antique clock face hands backward",
+    "savedAt": "2026-10-29T14:45:00.688Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Luca Photo",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-an-antique-clock-face-with-roman-numerals-33002031/"
+  }
+}

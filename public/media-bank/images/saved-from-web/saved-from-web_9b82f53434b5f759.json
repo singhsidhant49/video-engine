@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_9b82f53434b5f759",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of a smartphone displaying a bank alert notification on a wooden table.",
+  "path": "images/saved-from-web/saved-from-web_9b82f53434b5f759.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close",
+    "smartphone",
+    "displaying",
+    "bank",
+    "alert",
+    "notification",
+    "wooden",
+    "table",
+    "close-up"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close",
+    "smartphone",
+    "displaying",
+    "bank",
+    "alert",
+    "notification",
+    "wooden",
+    "table",
+    "close-up"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "computer code editor on screen"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "phone notification burst messages",
+    "savedAt": "2026-10-26T11:07:12.508Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/an-alert-message-on-a-cellphone-7821762/"
+  }
+}

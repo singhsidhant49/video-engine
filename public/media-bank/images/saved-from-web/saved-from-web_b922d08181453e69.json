@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_b922d08181453e69",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Detailed view of control levers and compass on a ship's bridge, showcasing navigational technology.",
+  "path": "images/saved-from-web/saved-from-web_b922d08181453e69.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "control",
+    "lever",
+    "compas",
+    "ship",
+    "bridge",
+    "showcasing",
+    "navigational",
+    "technology",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "levers",
+    "compass",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "detailed",
+    "control",
+    "lever",
+    "compas",
+    "ship",
+    "bridge",
+    "showcasing",
+    "navigational",
+    "technology",
+    "electronic",
+    "hardware",
+    "interior",
+    "static",
+    "presentation",
+    "view",
+    "levers",
+    "compass",
+    "circuit board",
+    "semiconductor components",
+    "GPU"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Detailed view of control levers and compass on a ship's bridge, showcasing navigational technology."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "electronics hardware interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "spaceship bridge helm control",
+    "savedAt": "2026-10-29T14:09:31.657Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jules Clark",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/levers-and-compass-on-dashboard-18681300/"
+  }
+}

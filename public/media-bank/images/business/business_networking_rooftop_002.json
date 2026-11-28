@@ -1,0 +1,76 @@
+{
+  "id": "business_networking_rooftop_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Sunset rooftop networking mixer",
+  "path": "images/business/business_networking_rooftop_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "networking",
+    "event",
+    "rooftop",
+    "business cards",
+    "professionals",
+    "community"
+  ],
+  "concepts": [
+    "professional networking",
+    "business development",
+    "relationship building",
+    "corporate event"
+  ],
+  "subjects": [
+    "professionals",
+    "business cards",
+    "rooftop venue"
+  ],
+  "actions": [
+    "networking",
+    "exchanging cards",
+    "socializing"
+  ],
+  "mood": [
+    "premium",
+    "social",
+    "warm"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.51,
+      "y": 0.43
+    },
+    "safeTextAreas": [
+      "upper-left"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "networking scene",
+    "business event",
+    "community",
+    "business development"
+  ],
+  "avoidFor": [
+    "customer support",
+    "warehouse",
+    "solo analysis"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "saved-from-web_f914099e537176f4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A small fishing boat navigates through vibrant blue ocean waves on a sunny day.",
+  "path": "images/saved-from-web/saved-from-web_f914099e537176f4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1952,
+  "aspectRatio": 1.332,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "small",
+    "fishing",
+    "boat",
+    "navigate",
+    "through",
+    "vibrant",
+    "blue",
+    "ocean",
+    "wave",
+    "sunny",
+    "day",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "navigates",
+    "waves",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "small",
+    "fishing",
+    "boat",
+    "navigate",
+    "through",
+    "vibrant",
+    "blue",
+    "ocean",
+    "wave",
+    "sunny",
+    "day",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "navigates",
+    "waves",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A small fishing boat navigates through vibrant blue ocean waves on a sunny day."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "huge wave crashing over small boat",
+    "savedAt": "2026-10-29T10:17:17.809Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "drB drB",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/small-fishing-boat-traversing-the-ocean-waves-30654607/"
+  }
+}

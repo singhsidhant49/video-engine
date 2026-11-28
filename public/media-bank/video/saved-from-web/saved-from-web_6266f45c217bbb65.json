@@ -1,0 +1,102 @@
+{
+  "id": "saved-from-web_6266f45c217bbb65",
+  "type": "video",
+  "mediaType": "video",
+  "title": "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/",
+  "path": "video/saved-from-web/saved-from-web_6266f45c217bbb65.mp4",
+  "category": "saved-from-web",
+  "extension": ".mp4",
+  "width": 1920,
+  "height": 1080,
+  "aspectRatio": 1.7778,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "woman",
+    "typing",
+    "bank",
+    "card",
+    "information",
+    "6607112",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "operating",
+    "computer",
+    "keyboard",
+    "workstation",
+    "https",
+    "pexels",
+    "video",
+    "woman-typing-bank-card-information-6607112",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "http",
+    "www",
+    "pexel",
+    "com",
+    "woman",
+    "typing",
+    "bank",
+    "card",
+    "information",
+    "6607112",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "operating",
+    "computer",
+    "keyboard",
+    "workstation",
+    "https",
+    "pexels",
+    "video",
+    "woman-typing-bank-card-information-6607112",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/"
+  ],
+  "actions": [
+    "operating computer keyboard or workstation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-video",
+    "originalQuery": "bank clerk typing keyboard",
+    "savedAt": "2026-10-28T14:15:22.312Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "ArtHouse Studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/video/woman-typing-bank-card-information-6607112/"
+  }
+}

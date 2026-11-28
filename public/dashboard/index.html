@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FrameForge — Video Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dashboard/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">F</span><span>FrameForge</span></a>
+    <nav class="desk-switch" aria-label="Studio desk"><button id="productionTab" class="active">Production</button><button id="channelsTab">Channels &amp; Automation</button></nav>
+    <div class="system"><span id="healthDot" class="dot"></span><span id="healthText">Connecting</span></div>
+    <button id="settingsButton" class="icon-button" aria-label="API settings">API</button>
+  </header>
+
+  <main>
+    <section class="hero production-view">
+      <div>
+        <p class="eyebrow">LOCAL PRODUCTION STUDIO</p>
+        <h1>Turn an idea into<br><em>a finished film.</em></h1>
+        <p class="lede">Direct, generate, review, and manage documentary videos from one production desk.</p>
+      </div>
+      <div class="stats" aria-label="Video statistics">
+        <div><strong id="totalCount">0</strong><span>Total</span></div>
+        <div><strong id="activeCount">0</strong><span>In production</span></div>
+        <div><strong id="completedCount">0</strong><span>Completed</span></div>
+      </div>
+    </section>
+
+    <section class="workspace production-view">
+      <form id="createForm" class="composer">
+        <div class="section-label"><span>01</span> Creative brief</div>
+        <label for="prompt">What should we create?</label>
+        <textarea id="prompt" minlength="3" maxlength="50000" required placeholder="Create a cinematic documentary about how undersea cables carry the internet..."></textarea>
+        <div class="field-grid">
+          <label>Content Type
+            <select id="contentType">
+              <option value="explainer" selected>Explainer &amp; Deep Dive</option>
+              <option value="documentary">Documentary &amp; History</option>
+              <option value="meditation">Guided Meditation &amp; Sleep</option>
+              <option value="motivational">Motivational &amp; Mindset</option>
+              <option value="audiobook">Audiobook &amp; Literature</option>
+              <option value="story">Narrative Storytelling</option>
+              <option value="business">Business</option>
+              <option value="finance">Finance</option>
+              <option value="psychology">Psychology</option>
+              <option value="science">Science</option>
+              <option value="technology">Technology</option>
+              <option value="mystery">Mystery</option>
+              <option value="horror">Horror</option>
+            </select>
+          </label>
+          <label>Voice
+            <select id="voice">
+              <option value="auto" selected>✨ Auto (Matches Content Type)</option>
+              <option value="af_heart">Heart (Female - Warm, Smooth · Grade A)</option>
+              <option value="af_bella">Bella (Female - Crisp, Modern · Grade A-)</option>
+              <option value="af_nicole">Nicole (Female - Soft Whisper · Sleep/Mindfulness · Grade B-)</option>
+              <option value="am_puck">Puck (Male - Agile &amp; Resonant)</option>
+            </select>
+          </label>
+          <label>Background Music
+            <select id="music">
+              <option value="auto" selected>✨ Auto (Smart Content Match)</option>
+            </select>
+          </label>
+          <label>Format
+            <select id="aspect">
+              <option value="16:9" selected>Landscape 16:9</option>
+              <option value="9:16">Shorts 9:16</option>
+            </select>
+          </label>
+          <label>Duration
+            <select id="duration">
+              <option value="30">30 seconds (Quick Short)</option>
+              <option value="45">45 seconds (Standard Short)</option>
+              <option value="60">1 minute</option>
+              <option value="75">75 seconds (Standard Explainer)</option>
+              <option value="90">90 seconds (In-depth Explainer)</option>
+              <option value="120" selected>2 minutes (Documentary)</option>
+              <option value="180">3 minutes (Deep Dive)</option>
+              <option value="300">5 minutes</option>
+              <option value="600">10 minutes</option>
+            </select>
+          </label>
+          <label>Channel Profile
+            <select id="channel">
+              <option value="default" selected>✨ Standalone / Default Studio</option>
+            </select>
+          </label>
+          <label>Visual Media
+            <select id="imageSource">
+              <option value="stock" selected>🌐 Stock Media (Pexels, Wikipedia &amp; Web)</option>
+              <option value="ai">🎨 AI Generated (Ideogram &amp; FLUX)</option>
+            </select>
+          </label>
+          <label id="styleField">Art Style
+            <select id="imageStyle">
+              <option value="cinematic_documentary" selected>Cinematic Documentary (35mm Photography)</option>
+              <option value="dark_noir">Dark Investigative Noir (Chiaroscuro &amp; Suspense)</option>
+              <option value="editorial_vector">Modern Editorial Vector (Clean 2D Graphics)</option>
+              <option value="stickman">Modern Stickman Storytelling (Minimalist &amp; Conceptual)</option>
+              <option value="3d_render">Stylized 3D Animation (Warm &amp; Expressive)</option>
+              <option value="anime">Cinematic Anime (Atmospheric Lighting)</option>
+              <option value="custom">Custom Brand Style (Prompt-Driven)</option>
+            </select>
+          </label>
+          <label id="modelField" style="display: none;">AI Image Model
+            <select id="imageModel">
+              <option value="p-image-ideogram" selected>⚡ P-Image-Ideogram (1 credit / $0.01 - Ultra Fast)</option>
+              <option value="flux-schnell">⚡ FLUX.1 Schnell (via Replicate - Ultra Fast)</option>
+              <option value="ideogram-4-5">✨ Ideogram 4.5 (3-10 credits / $0.03-$0.10 - High Precision)</option>
+              <option value="ideogram-4">📐 Ideogram 4.0 (6 credits / $0.06 - Design &amp; Layout)</option>
+              <option value="V_2_TURBO">🚀 Ideogram V2 Turbo (5 credits / $0.05)</option>
+              <option value="V_2">🏛️ Ideogram V2 (8 credits / $0.08)</option>
+            </select>
+          </label>
+          <label id="providerField" style="display: none;">AI Provider
+            <select id="imageProvider">
+              <option value="auto" selected>✨ Auto (Inferred from Model)</option>
+              <option value="ideogram">Ideogram API</option>
+              <option value="flux">FLUX / Replicate API</option>
+            </select>
+          </label>
+          <label id="qualityField" style="display: none;">Quality Tier
+            <select id="imageQuality">
+              <option value="medium" selected>Medium (Balanced - 1 credit on P-Image)</option>
+              <option value="low">Low (Fastest &amp; Lowest Cost)</option>
+              <option value="high">High (Maximum Detail)</option>
+            </select>
+          </label>
+          <label id="customStyleField" style="display: none; grid-column: 1 / -1;">Custom Art Style Prompt
+            <input id="customStylePrompt" placeholder="e.g., retro 1950s Soviet propaganda poster art with bold constructivist typography" maxlength="500">
+          </label>
+          <label>Tone <input id="tone" value="cinematic, intriguing, accessible, and authoritative" maxlength="120"></label>
+        </div>
+        <button class="primary" type="submit"><span>Generate video</span><span aria-hidden="true">→</span></button>
+        <p id="formMessage" class="message" role="status"></p>
+      </form>
+
+      <section class="library">
+        <div class="library-head">
+          <div><div class="section-label"><span>02</span> Production queue</div><h2>Your videos</h2></div>
+          <button id="refreshButton" class="secondary">Refresh</button>
+        </div>
+        <div id="videoGrid" class="video-grid"><div class="empty">No videos yet. Your first production will appear here.</div></div>
+      </section>
+    </section>
+
+    <section id="channelsView" class="channels-view" hidden>
+      <div class="channel-heading">
+        <div><p class="eyebrow">AUTONOMOUS NETWORK</p><h1>Channels that<br><em>keep creating.</em></h1><p class="lede">Plan ideas, approve production, and safely schedule publishing from one control room.</p></div>
+        <button id="newChannelButton" class="primary compact">+ New channel</button>
+      </div>
+      <div class="channel-layout">
+        <aside><div id="channelGrid" class="channel-grid"><div class="empty">Create your first channel.</div></div></aside>
+        <section class="ideas-panel">
+          <div class="library-head"><div><div class="section-label"><span>03</span> Content ideas</div><h2 id="ideasTitle">Select a channel</h2></div><button id="brainstormButton" class="secondary" disabled>Brainstorm ideas</button></div>
+          <p id="channelMessage" class="message" role="status"></p>
+          <div id="ideaGrid" class="idea-grid"><div class="empty">Choose a channel to view its idea pipeline.</div></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card">
+      <div><p class="eyebrow">CONNECTION</p><h2>API access</h2></div>
+      <label>API key <input id="apiKey" type="password" autocomplete="off" placeholder="Your VIDEO_API_KEYS value"></label>
+      <p id="settingsError" style="color: #ef4444; font-size: 13px; margin: 6px 0 0; min-height: 18px;"></p>
+      <p>The key stays in this browser session and is never written to the dashboard files.</p>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Cancel</button><button id="saveKey" value="default" class="primary small">Save key</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="reviewDialog" class="review-dialog">
+    <div class="review-card"><button id="closeReview" class="close" aria-label="Close">×</button><h2 id="reviewTitle">Video review</h2><video id="reviewVideo" controls playsinline></video></div>
+  </dialog>
+  <dialog id="channelDialog">
+    <form id="channelForm" class="dialog-card wide">
+      <button id="closeChannel" type="button" class="close" aria-label="Close dialog">×</button>
+      <div><p class="eyebrow">CHANNEL PROFILE</p><h2>Create an autonomous channel</h2></div>
+
+      <div class="field-grid">
+        <div class="form-section-title">01 · Channel Identity &amp; Strategy</div>
+        <label>Name <input id="channelName" required maxlength="120" placeholder="Future Systems"></label>
+        <label>Handle <input id="channelHandle" maxlength="100" placeholder="@futuresystems"></label>
+        <label>Niche <input id="channelNiche" required maxlength="200" placeholder="AI and emerging technology"></label>
+        <label>Target audience <input id="channelAudience" required maxlength="500" placeholder="Curious professionals and builders"></label>
+        <label class="full">Content pillars (comma-separated) <input id="channelPillars" required placeholder="AI tools, future of work, technology history"></label>
+
+        <div class="form-section-title">02 · Content Types &amp; Formats</div>
+        <label>Primary Content Type
+          <select id="channelContentType">
+            <option value="explainer" selected>Explainer &amp; Deep Dive</option>
+            <option value="documentary">Documentary &amp; History</option>
+            <option value="meditation">Guided Meditation &amp; Sleep</option>
+            <option value="motivational">Motivational &amp; Mindset</option>
+            <option value="audiobook">Audiobook &amp; Literature</option>
+            <option value="story">Narrative Storytelling</option>
+            <option value="business">Business</option>
+            <option value="finance">Finance</option>
+            <option value="psychology">Psychology</option>
+            <option value="science">Science</option>
+            <option value="technology">Technology</option>
+            <option value="mystery">Mystery</option>
+            <option value="horror">Horror</option>
+            <option value="auto">✨ Auto (Contextual)</option>
+          </select>
+        </label>
+        <fieldset class="content-types-group full">
+          <legend>Allowed Content Formats (AI Director can brainstorm across these)</legend>
+          <div class="checkbox-grid" id="channelSupportedTypes">
+            <label class="checkbox-item"><input type="checkbox" value="explainer" checked> Explainer</label>
+            <label class="checkbox-item"><input type="checkbox" value="documentary" checked> Documentary</label>
+            <label class="checkbox-item"><input type="checkbox" value="story"> Storytelling</label>
+            <label class="checkbox-item"><input type="checkbox" value="motivational"> Motivational</label>
+            <label class="checkbox-item"><input type="checkbox" value="meditation"> Meditation</label>
+            <label class="checkbox-item"><input type="checkbox" value="audiobook"> Audiobook</label>
+            <label class="checkbox-item"><input type="checkbox" value="business"> Business</label>
+            <label class="checkbox-item"><input type="checkbox" value="finance"> Finance</label>
+            <label class="checkbox-item"><input type="checkbox" value="psychology"> Psychology</label>
+            <label class="checkbox-item"><input type="checkbox" value="science"> Science</label>
+            <label class="checkbox-item"><input type="checkbox" value="technology"> Technology</label>
+            <label class="checkbox-item"><input type="checkbox" value="mystery"> Mystery</label>
+            <label class="checkbox-item"><input type="checkbox" value="horror"> Horror</label>
+          </div>
+        </fieldset>
+
+        <div class="form-section-title">03 · Visual Media &amp; Art Style</div>
+        <label>Visual Media
+          <select id="channelImageSource">
+            <option value="stock">🌐 Curated Stock (Pexels, Wikipedia &amp; Web)</option>
+            <option value="ai" selected>🎨 AI Generated Images</option>
+          </select>
+        </label>
+        <label id="channelStyleField">Art Style
+          <select id="channelImageStyle">
+            <option value="cinematic_documentary">Cinematic Documentary (35mm Photography)</option>
+            <option value="dark_noir">Dark Investigative Noir (Chiaroscuro &amp; Suspense)</option>
+            <option value="editorial_vector">Modern Editorial Vector (Clean 2D Graphics)</option>
+            <option value="stickman" selected>Modern Stickman Storytelling (Minimalist &amp; Conceptual)</option>
+            <option value="3d_render">Stylized 3D Animation (Warm &amp; Expressive)</option>
+            <option value="anime">Cinematic Anime (Atmospheric Lighting)</option>
+            <option value="custom">Custom Brand Style (Prompt-Driven)</option>
+          </select>
+        </label>
+        <label id="channelModelField">AI Image Model
+          <select id="channelImageModel">
+            <option value="p-image-ideogram" selected>⚡ P-Image-Ideogram (1 credit / $0.01 - Ultra Fast)</option>
+            <option value="flux-schnell">⚡ FLUX.1 Schnell (via Replicate - Ultra Fast)</option>
+            <option value="ideogram-4-5">✨ Ideogram 4.5 (3-10 credits / $0.03-$0.10 - High Precision)</option>
+            <option value="ideogram-4">📐 Ideogram 4.0 (6 credits / $0.06 - Design &amp; Layout)</option>
+            <option value="V_2_TURBO">🚀 Ideogram V2 Turbo (5 credits / $0.05)</option>
+            <option value="V_2">🏛️ Ideogram V2 (8 credits / $0.08)</option>
+          </select>
+        </label>
+        <label id="channelProviderField">AI Provider
+          <select id="channelImageProvider">
+            <option value="auto" selected>✨ Auto (Inferred from Model)</option>
+            <option value="ideogram">Ideogram API</option>
+            <option value="flux">FLUX / Replicate API</option>
+          </select>
+        </label>
+        <label id="channelQualityField">Quality Tier
+          <select id="channelImageQuality">
+            <option value="medium" selected>Medium (Balanced - 1 credit on P-Image)</option>
+            <option value="low">Low (Fastest &amp; Lowest Cost)</option>
+            <option value="high">High (Maximum Detail)</option>
+          </select>
+        </label>
+        <label id="channelCustomStyleField" style="display: none; grid-column: 1 / -1;">Custom Art Style Prompt
+          <input id="channelCustomStylePrompt" placeholder="e.g. moody cyberpunk noir with neon rain reflections" maxlength="500">
+        </label>
+
+        <div class="form-section-title">04 · Production &amp; Audio Defaults</div>
+        <label>Format
+          <select id="channelAspect">
+            <option value="16:9" selected>Landscape 16:9</option>
+            <option value="9:16">Shorts 9:16</option>
+          </select>
+        </label>
+        <label>Duration (seconds)
+          <input id="channelDuration" type="number" min="10" max="7200" value="120">
+        </label>
+        <label>Voice
+          <select id="channelVoice">
+            <option value="auto" selected>✨ Auto (Matches Content Type)</option>
+            <option value="af_heart">Heart (Female - Warm, Smooth · Grade A)</option>
+            <option value="af_bella">Bella (Female - Crisp, Modern · Grade A-)</option>
+            <option value="af_nicole">Nicole (Female - Soft Whisper · Sleep/Mindfulness)</option>
+            <option value="am_puck">Puck (Male - Agile &amp; Resonant)</option>
+          </select>
+        </label>
+        <label>Background Music
+          <select id="channelMusic">
+            <option value="auto" selected>✨ Auto (Smart Content Match)</option>
+          </select>
+        </label>
+        <label class="full">Tone
+          <input id="channelTone" value="clear, compelling, and authoritative" maxlength="200">
+        </label>
+
+        <div class="form-section-title">05 · Autonomous Scheduling &amp; Publishing</div>
+        <label>Schedule (Cron)
+          <input id="channelCron" value="0 12 * * *" placeholder="0 12 * * *">
+        </label>
+        <label>Timezone
+          <input id="channelTimezone" value="Asia/Calcutta" placeholder="Asia/Calcutta">
+        </label>
+        <label>Approval Mode
+          <select id="channelApproval">
+            <option value="manual_approval" selected>Manual approval (Review ideas first)</option>
+            <option value="automatic">Automatic production (Generate on schedule)</option>
+          </select>
+        </label>
+        <label class="check">
+          <input id="channelAutomation" type="checkbox"> Enable automated schedule
+        </label>
+      </div>
+
+      <p class="safety-note">YouTube autopublishing stays off until OAuth is connected and explicitly enabled. New uploads default to private.</p>
+      <p id="channelError" class="dialog-error"></p>
+      <div class="dialog-actions">
+        <button id="cancelChannel" type="button" class="secondary">Cancel</button>
+        <button type="submit" class="primary small">Create channel</button>
+      </div>
+    </form>
+  </dialog>
+  <script type="module" src="/dashboard/app.js"></script>
+</body>
+</html>

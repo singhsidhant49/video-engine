@@ -1,0 +1,77 @@
+{
+  "id": "business_growth_strategy_meeting_002",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Business growth strategy meeting",
+  "path": "images/business/business_growth_strategy_meeting_002.png",
+  "category": "business",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "business",
+    "growth",
+    "strategy",
+    "presentation",
+    "analytics",
+    "boardroom",
+    "leadership"
+  ],
+  "concepts": [
+    "business growth",
+    "growth strategy",
+    "executive planning",
+    "performance review"
+  ],
+  "subjects": [
+    "presenter",
+    "team",
+    "growth dashboard",
+    "conference room"
+  ],
+  "actions": [
+    "presenting growth",
+    "reviewing metrics",
+    "discussing strategy"
+  ],
+  "mood": [
+    "professional",
+    "strategic",
+    "confident"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.56,
+      "y": 0.41
+    },
+    "safeTextAreas": [
+      "left-lower"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "business growth",
+    "strategy video",
+    "management content",
+    "executive presentation"
+  ],
+  "avoidFor": [
+    "retail checkout",
+    "warehouse",
+    "casual lifestyle"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

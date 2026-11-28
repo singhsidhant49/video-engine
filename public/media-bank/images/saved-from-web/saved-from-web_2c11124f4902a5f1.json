@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_2c11124f4902a5f1",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Close-up of audio waveforms on screen, showcasing music production software in use.",
+  "path": "images/saved-from-web/saved-from-web_2c11124f4902a5f1.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close",
+    "audio",
+    "waveform",
+    "showcasing",
+    "music",
+    "production",
+    "software",
+    "use",
+    "close-up",
+    "waveforms"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "computer",
+    "code",
+    "editor",
+    "screen",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "close",
+    "audio",
+    "waveform",
+    "showcasing",
+    "music",
+    "production",
+    "software",
+    "use",
+    "close-up",
+    "waveforms"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "computer code editor on screen"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "audio waveform screen space station",
+    "savedAt": "2026-10-29T14:03:51.116Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Jerson Vargas",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/close-up-of-sound-waves-on-a-computer-screen-4765390/"
+  }
+}

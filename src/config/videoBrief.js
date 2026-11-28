@@ -1,10 +1,34 @@
-import { z } from 'zod';
-import { isMeditationNarration } from '../audio/narrationProfile.js';
+import { z } from 'zod-api';
+import { isMeditationNarration, resolveMeditationSubprofile } from '../audio/narrationProfile.js';
+
+// Canonical Production Content Types (+ auto)
+export const CANONICAL_CONTENT_TYPES = Object.freeze([
+  'documentary',
+  'explainer',
+  'meditation',
+  'motivational',
+  'audiobook',
+  'story',
+  'business',
+  'finance',
+  'psychology',
+  'science',
+  'technology',
+  'mystery',
+  'horror',
+]);
 
 export const ContentTypeSchema = z.enum([
-  'auto', 'documentary', 'investigative', 'explainer', 'educational',
-  'tutorial', 'meditation', 'audiobook', 'motivational', 'story',
-]);
+  'auto', 'documentary', 'explainer', 'meditation', 'audiobook', 'motivational', 'story',
+  'business', 'finance', 'psychology', 'science', 'technology', 'tech', 'mystery', 'horror',
+  // Backward-compatible aliases normalized on ingress:
+  'investigative', 'educational', 'tutorial',
+]).transform((val) => {
+  if (val === 'investigative') return 'documentary';
+  if (val === 'educational' || val === 'tutorial') return 'explainer';
+  if (val === 'tech') return 'technology';
+  return val;
+});
 
 export const PacingModeSchema = z.enum([
   'auto', 'contemplative', 'cinematic', 'balanced', 'energetic', 'rapid',
@@ -14,13 +38,22 @@ export const ChannelProfileSchema = z.object({
   id: z.string().min(1).default('default'),
   contentType: ContentTypeSchema.default('auto'),
   pacingMode: PacingModeSchema.default('auto'),
-  audience: z.string().max(200).default('general audience'),
-  tone: z.string().max(120).default('clear and engaging'),
-  language: z.literal('en').default('en'),
+  audience: z.string().max(500).default('general audience'),
+  tone: z.string().max(200).default('clear and engaging'),
+  language: z.string().trim().min(2).max(20).default('en'),
   style: z.string().optional(),
   voice: z.string().optional(),
-  captions: z.literal('subtitles').default('subtitles'),
+  music: z.string().optional(),
+  bgm: z.string().optional(),
+  captions: z.enum(['subtitles', 'none']).default('subtitles'),
 }).passthrough();
+
+const DurationRangeSchema = z.object({
+  min: z.number().int().min(10).max(7_200),
+  max: z.number().int().min(10).max(7_200),
+}).strict().refine((value) => value.min <= value.max, {
+  message: 'durationRange.min must be less than or equal to durationRange.max', path: ['max'],
+});
 
 export const VideoBriefSchema = z.object({
   version: z.literal(1).default(1),
@@ -29,13 +62,17 @@ export const VideoBriefSchema = z.object({
   niche: z.string().default(''),
   format: z.enum(['shorts', 'landscape']).default('landscape'),
   durationSec: z.number().positive().optional(),
+  durationMode: z.enum(['auto', 'exact']).optional(),
+  durationRange: DurationRangeSchema.optional(),
   style: z.string().optional(),
   voice: z.string().optional(),
+  music: z.string().optional(),
+  bgm: z.string().optional(),
   channel: ChannelProfileSchema.default({}),
 }).passthrough();
 
 const BASE_PACING = Object.freeze({
-  contemplative: { minimumShotSeconds: 7.0, maximumStillSeconds: 11.0, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 8.0 },
+  contemplative: { minimumShotSeconds: 8.5, maximumStillSeconds: 18.0, maximumCutsPer10Seconds: 2, targetAverageShotSeconds: 11.0 },
   cinematic: { minimumShotSeconds: 5.5, maximumStillSeconds: 9.0, maximumCutsPer10Seconds: 3, targetAverageShotSeconds: 6.5 },
   balanced: { minimumShotSeconds: 4.8, maximumStillSeconds: 8.0, maximumCutsPer10Seconds: 4, targetAverageShotSeconds: 5.7 },
   energetic: { minimumShotSeconds: 3.4, maximumStillSeconds: 6.0, maximumCutsPer10Seconds: 5, targetAverageShotSeconds: 4.2 },
@@ -43,29 +80,168 @@ const BASE_PACING = Object.freeze({
 });
 
 function inferContentType(topic = '', niche = '') {
-  const text = `${niche} ${topic}`.toLowerCase();
+  // Channel-generated prompts append production instructions which may mention
+  // other genres in a negative rule (for example "never end with generic
+  // inspiration"). Classify the actual creative brief, not that instruction
+  // appendix.
+  const creativeBrief = String(topic || '').split(/\n\s*SCRIPT CONTRACT\s*:/i)[0];
+  const text = `${niche} ${creativeBrief}`.toLowerCase();
+  // "Sleep" is also a common subject in neuroscience, health, and psychology
+  // explainers. Only meditation-shaped language should select the meditation
+  // production profile; a subject word alone must not change pacing, voice, or
+  // transition requirements.
   if (isMeditationNarration({ topic, niche })) return 'meditation';
-  if (/\b(?:audiobook|narrated book|book summary|bedtime story)\b/.test(text)) return 'audiobook';
-  if (/\b(?:crime|fraud|scam|mystery|investigat|scandal|unsolved)\b/.test(text)) return 'investigative';
-  if (/\b(?:history|historical|documentary|ancient|empire|war|biography)\b/.test(text)) return 'documentary';
-  if (/\b(?:tutorial|how to|walkthrough|step by step)\b/.test(text)) return 'tutorial';
-  if (/\b(?:facts|tips|quiz|learn|educational|listicle)\b/.test(text)) return 'educational';
-  if (/\b(?:motivation|self improvement|discipline|mindset|inspiration)\b/.test(text)) return 'motivational';
-  if (/\b(?:story|tale|narrative)\b/.test(text)) return 'story';
-  return 'explainer';
+  const scores = {
+    documentary: 0, explainer: 0, motivational: 0, story: 0, audiobook: 0,
+    business: 0, finance: 0, psychology: 0, science: 0, technology: 0, mystery: 0, horror: 0,
+  };
+  const add = (type, regex, weight) => { if (regex.test(text)) scores[type] += weight; };
+  add('audiobook', /\b(?:audiobook|narrated book|read aloud|book reading)\b/, 6);
+  add('documentary', /\b(?:documentary|investigative documentary|true crime|historical account)\b/, 6);
+  add('documentary', /\b(?:history|historical|ancient|empire|war|biography|crime|fraud|scam|mystery|investigat\w*|scandal|unsolved|archive|archival)\b/, 2);
+  add('motivational', /\b(?:motivational|motivation|self improvement|discipline|mindset|inspiration|overcome|resilience)\b/, 4);
+  add('story', /\b(?:fiction|short story|dramatic story|tale|character arc|narrative fiction)\b/, 4);
+  add('finance', /\b(?:finance|investing|investment|stock market|personal finance|banking|wealth|money management)\b/, 6);
+  add('business', /\b(?:business|entrepreneur|startup|company strategy|marketing|management|sales)\b/, 5);
+  add('psychology', /\b(?:psychology|psychological|human behavior|attachment|emotion(?:al)?|cognitive bias|mental model)\b/, 8);
+  add('science', /\b(?:science|scientific|physics|chemistry|biology|astronomy|space|experiment)\b/, 5);
+  add('technology', /\b(?:technology|artificial intelligence|software|computer|cybersecurity|internet|robotics|tech)\b/, 5);
+  add('horror', /\b(?:horror|haunted|terrifying|nightmare|paranormal|ghost story)\b/, 6);
+  add('mystery', /\b(?:mystery|unsolved|enigma|disappearance|unknown identity)\b/, 5);
+  add('explainer', /\b(?:science|scientist|scientific|psychology|neuroscience|brain|mechanism|explain|explanation)\b/, 4);
+  add('explainer', /\b(?:explain|explainer|how .{0,30} works?|why .{0,30}|tutorial|lesson|breakdown|mechanism|science of)\b/, 3);
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  return ranked[0][1] > 0 ? ranked[0][0] : 'explainer';
 }
 
 function defaultPacingMode(contentType, format) {
   if (contentType === 'meditation' || contentType === 'audiobook') return 'contemplative';
-  if (['documentary', 'investigative', 'story'].includes(contentType)) return 'cinematic';
-  if (['educational', 'tutorial', 'motivational'].includes(contentType)) return format === 'shorts' ? 'rapid' : 'energetic';
-  return format === 'shorts' ? 'energetic' : 'balanced';
+  if (['documentary', 'story', 'mystery', 'horror'].includes(contentType)) return 'cinematic';
+  if (contentType === 'motivational') return format === 'shorts' ? 'rapid' : 'energetic';
+  if (['business', 'finance', 'science', 'technology'].includes(contentType)) return format === 'shorts' ? 'rapid' : 'balanced';
+  return format === 'shorts' ? 'rapid' : 'balanced';
+}
+
+export function normalizeLanguageCode(language = 'en') {
+  const clean = String(language || 'en').trim().toLowerCase();
+  if (clean === 'hi' || clean === 'hindi' || clean.startsWith('hi-') || clean.startsWith('hi_') || clean === 'hin') return 'hi';
+  return clean || 'en';
+}
+
+export const ALLOWED_VOICES = Object.freeze([
+  'af_heart',  // Heart (Female - Warm, Calm, Smooth · Grade A)
+  'af_bella',  // Bella (Female - Crisp, Polished, Modern · Grade A-)
+  'am_puck',   // Puck (Male - Agile, Resonant, Confident · Grade C+/B)
+  'af_nicole', // Nicole (Female - Soft Whisper, Sleep & Bedtime · Grade B-)
+]);
+
+export const HINDI_ALLOWED_VOICES = Object.freeze([
+  'hf_alpha',  // Hindi Female (Warm & Natural)
+  'hf_beta',   // Hindi Female (Clear & Crisp)
+  'hm_omega',  // Hindi Male (Confident & Deep)
+  'hm_psi',    // Hindi Male (Measured Storytelling)
+]);
+
+const HINDI_VOICE_ALIAS_MAP = Object.freeze({
+  alpha: 'hf_alpha',
+  hf_alpha: 'hf_alpha',
+  beta: 'hf_beta',
+  hf_beta: 'hf_beta',
+  omega: 'hm_omega',
+  hm_omega: 'hm_omega',
+  psi: 'hm_psi',
+  hm_psi: 'hm_psi',
+});
+
+const VOICE_ALIAS_MAP = Object.freeze({
+  heart: 'af_heart',
+  bella: 'af_bella',
+  puck: 'am_puck',
+  puch: 'am_puck',
+  nicole: 'af_nicole',
+  whisper: 'af_nicole',
+  // Backward-compatibility aliases for legacy / pruned voices
+  george: 'am_puck',
+  bm_george: 'am_puck',
+  adam: 'am_puck',
+  am_adam: 'am_puck',
+  sky: 'af_bella',
+  af_sky: 'af_bella',
+  kore: 'af_bella',
+  af_kore: 'af_bella',
+});
+
+export function normalizeSelectedVoice(voice = '', contentType = 'auto', { language = 'en' } = {}) {
+  const lang = normalizeLanguageCode(language);
+  const clean = String(voice || '').trim().toLowerCase();
+  if (lang === 'hi') {
+    if (!clean || clean === 'auto') return defaultVoiceForContentType(contentType, { language: 'hi' });
+    if (HINDI_ALLOWED_VOICES.includes(clean)) return clean;
+    if (HINDI_VOICE_ALIAS_MAP[clean]) return HINDI_VOICE_ALIAS_MAP[clean];
+    return defaultVoiceForContentType(contentType, { language: 'hi' });
+  }
+  if (!clean || clean === 'auto') return defaultVoiceForContentType(contentType);
+  if (ALLOWED_VOICES.includes(clean)) return clean;
+  if (VOICE_ALIAS_MAP[clean]) return VOICE_ALIAS_MAP[clean];
+  // Unsupported voice: enforce fallback to user's curated default for this content type
+  return defaultVoiceForContentType(contentType);
+}
+
+export function defaultVoiceForContentType(contentType = 'auto', { topic = '', niche = '', language = 'en' } = {}) {
+  if (normalizeLanguageCode(language) === 'hi') {
+    switch (contentType) {
+      case 'meditation':
+      case 'story':
+      case 'audiobook':
+        return 'hf_alpha';
+      case 'documentary':
+      case 'investigative':
+      case 'mystery':
+      case 'horror':
+      case 'motivational':
+        return 'hm_omega';
+      default:
+        return 'hf_beta';
+    }
+  }
+  switch (contentType) {
+    case 'meditation': {
+      // Nicole's whisper is effective for sleep, but sounds breathy and less
+      // articulate in daytime guided practices. Heart is the stronger general
+      // meditation narrator and remains warm at slow Kokoro speeds.
+      const subprofile = resolveMeditationSubprofile({ topic, niche });
+      return subprofile === 'sleep' ? 'af_nicole' : 'af_heart';
+    }
+    case 'documentary':
+    case 'investigative':
+    case 'mystery':
+    case 'horror':
+    case 'motivational':
+      return 'am_puck';
+    case 'story':
+    case 'audiobook':
+      return 'af_heart';
+    case 'business':
+    case 'finance':
+    case 'psychology':
+    case 'science':
+    case 'technology':
+    case 'tutorial':
+    case 'educational':
+    case 'explainer':
+    default:
+      return 'af_bella';
+  }
 }
 
 export function resolveProductionProfile({ topic = '', niche = '', format = 'landscape', channelProfile = {} } = {}) {
   const channel = ChannelProfileSchema.parse(channelProfile || {});
+  const language = normalizeLanguageCode(channel.language);
   const contentType = channel.contentType === 'auto' ? inferContentType(topic, niche) : channel.contentType;
   const pacingMode = channel.pacingMode === 'auto' ? defaultPacingMode(contentType, format) : channel.pacingMode;
+  const voice = channel.voice && channel.voice !== 'auto'
+    ? normalizeSelectedVoice(channel.voice, contentType, { language })
+    : defaultVoiceForContentType(contentType, { topic, niche, language });
   const base = BASE_PACING[pacingMode];
   const verticalScale = format === 'shorts' && !['contemplative', 'cinematic'].includes(pacingMode) ? 0.82 : 1;
   const pacing = {
@@ -81,7 +257,8 @@ export function resolveProductionProfile({ topic = '', niche = '', format = 'lan
     contentType,
     audience: channel.audience,
     tone: channel.tone,
-    language: channel.language,
+    language,
+    voice,
     captions: channel.captions,
     pacing,
   };

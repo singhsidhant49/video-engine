@@ -1,0 +1,106 @@
+{
+  "id": "saved-from-web_e22141191308d527",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Buddhist monks in vibrant robes gather in a colorful monastery courtyard during the day.",
+  "path": "images/saved-from-web/saved-from-web_e22141191308d527.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "buddhist",
+    "monk",
+    "vibrant",
+    "robe",
+    "gather",
+    "colorful",
+    "monastery",
+    "courtyard",
+    "during",
+    "day",
+    "monks",
+    "robes",
+    "handshake",
+    "business meeting"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "modern",
+    "corporate",
+    "office",
+    "interior",
+    "static",
+    "presentation",
+    "buddhist",
+    "monk",
+    "vibrant",
+    "robe",
+    "gather",
+    "colorful",
+    "monastery",
+    "courtyard",
+    "during",
+    "day",
+    "monks",
+    "robes",
+    "handshake",
+    "business meeting"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern corporate office interior"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "monks chanting monastery courtyard dusk",
+    "savedAt": "2026-10-27T07:04:57.959Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Lan Yao",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/monks-wearing-red-robe-in-a-monastery-9868508/"
+  }
+}

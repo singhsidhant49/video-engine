@@ -1,0 +1,84 @@
+{
+  "id": "saved-from-web_6217c283be1db86b",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning.",
+  "path": "images/saved-from-web/saved-from-web_6217c283be1db86b.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1733,
+  "height": 2600,
+  "aspectRatio": 0.6665,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "nurse",
+    "attend",
+    "patient",
+    "hospital",
+    "room",
+    "ensuring",
+    "medical",
+    "equipment",
+    "functioning",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "attends"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "nurse",
+    "attend",
+    "patient",
+    "hospital",
+    "room",
+    "ensuring",
+    "medical",
+    "equipment",
+    "functioning",
+    "general",
+    "studio",
+    "neutral",
+    "backdrop",
+    "static",
+    "presentation",
+    "attends"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A nurse attends to a patient in a hospital room, ensuring medical equipment is functioning."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "general studio or neutral backdrop"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "local-bank",
+    "originalQuery": "historical hospital ward infection patients",
+    "savedAt": "2026-11-02T09:23:16.227Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RDNE Stock project",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/nurse-checking-the-dextrose-of-a-patient-6129677/"
+  }
+}

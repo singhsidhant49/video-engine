@@ -1,0 +1,76 @@
+{
+  "id": "health_healthy_meal_prep_004",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Fresh sunlit healthy kitchen prep",
+  "path": "images/health/health_healthy_meal_prep_004.png",
+  "category": "health",
+  "extension": ".png",
+  "width": 1672,
+  "height": 941,
+  "aspectRatio": 1.7768,
+  "orientation": "landscape",
+  "tags": [
+    "health",
+    "healthy eating",
+    "meal prep",
+    "nutrition",
+    "vegetables",
+    "whole foods"
+  ],
+  "concepts": [
+    "balanced nutrition",
+    "healthy cooking",
+    "meal preparation"
+  ],
+  "subjects": [
+    "adult woman",
+    "vegetables",
+    "salad",
+    "kitchen counter"
+  ],
+  "actions": [
+    "chopping vegetables",
+    "preparing food",
+    "cooking healthy meal"
+  ],
+  "mood": [
+    "fresh",
+    "bright",
+    "positive"
+  ],
+  "composition": {
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.47
+    },
+    "safeTextAreas": [
+      "upper-left",
+      "upper-right"
+    ],
+    "goodForFullBleed": true,
+    "goodForSplit": true
+  },
+  "people": true,
+  "quality": "hero",
+  "usage": [
+    "nutrition videos",
+    "healthy eating scenes",
+    "meal prep content",
+    "lifestyle health"
+  ],
+  "avoidFor": [
+    "unrelated niches",
+    "historical content",
+    "technology-only scenes"
+  ],
+  "source": {
+    "provider": "OpenAI image generation",
+    "generated": true
+  },
+  "license": {
+    "type": "generated-owned",
+    "source": "openai-generated",
+    "attributionRequired": false
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "id": "saved-from-web_62e6bad17a5294e4",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Stunning close-up of a vibrant squid glowing in dark ocean waters.",
+  "path": "images/saved-from-web/saved-from-web_62e6bad17a5294e4.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1730,
+  "aspectRatio": 1.5029,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "stunning",
+    "close",
+    "vibrant",
+    "squid",
+    "dark",
+    "water",
+    "close-up",
+    "waters",
+    "undersea environment"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "glowing",
+    "cosmic",
+    "abstract",
+    "quantum",
+    "illustration",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "stunning",
+    "close",
+    "vibrant",
+    "squid",
+    "dark",
+    "water",
+    "close-up",
+    "waters",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "glowing cosmic abstract quantum illustration"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "deep sea bioluminescence macro",
+    "savedAt": "2026-10-26T09:46:44.064Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Marissa Farrow",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-myopsida-in-water-15559902/"
+  }
+}

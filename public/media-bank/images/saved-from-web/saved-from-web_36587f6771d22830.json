@@ -1,0 +1,94 @@
+{
+  "id": "saved-from-web_36587f6771d22830",
+  "type": "image",
+  "mediaType": "image",
+  "title": "Flexible woman performing acro yoga handstand on a chair indoors, showcasing balance and strength.",
+  "path": "images/saved-from-web/saved-from-web_36587f6771d22830.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "flexible",
+    "woman",
+    "performing",
+    "acro",
+    "yoga",
+    "handstand",
+    "chair",
+    "indoor",
+    "showcasing",
+    "balance",
+    "strength",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "intrinsicTags": [
+    "saved-from-web",
+    "show",
+    "flexible",
+    "woman",
+    "performing",
+    "acro",
+    "yoga",
+    "handstand",
+    "chair",
+    "indoor",
+    "showcasing",
+    "balance",
+    "strength",
+    "modern",
+    "office",
+    "interior",
+    "home",
+    "workspace",
+    "static",
+    "presentation",
+    "indoors",
+    "office desk",
+    "computer or paperwork"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "Flexible woman performing acro yoga handstand on a chair indoors, showcasing balance and strength."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "modern office interior or home workspace"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "verificationStatus": "verified",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "person getting up from chair quickly active demonstration or relevant physical phenomenon",
+    "savedAt": "2026-10-28T10:35:29.428Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "cottonbro studio",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-woman-in-beige-sportswear-5747935/"
+  }
+}

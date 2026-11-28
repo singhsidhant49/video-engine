@@ -1,0 +1,78 @@
+{
+  "id": "saved-from-web_44e1592414839a9c",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A diver swims alongside a whale shark in the deep blue ocean of Indonesia, capturing a serene underwater moment.",
+  "path": "images/saved-from-web/saved-from-web_44e1592414839a9c.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1437,
+  "height": 2600,
+  "aspectRatio": 0.5527,
+  "orientation": "portrait",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "people",
+    "meeting",
+    "talking",
+    "shaking",
+    "hand",
+    "busines",
+    "setting",
+    "ocean",
+    "seabed",
+    "marine",
+    "underwater",
+    "static",
+    "presentation",
+    "diver",
+    "swim",
+    "alongside",
+    "whale",
+    "shark",
+    "deep",
+    "blue",
+    "indonesia",
+    "capturing",
+    "serene",
+    "moment",
+    "sperm",
+    "silhouette",
+    "water",
+    "swims",
+    "handshake",
+    "business meeting",
+    "undersea environment"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "people meeting, talking, or shaking hands in a business setting"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "ocean seabed or marine underwater"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "sperm whale silhouette deep water",
+    "savedAt": "2026-10-24T05:16:36.591Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "Elianne Dipp",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/woman-and-animal-under-water-7905795/"
+  }
+}

@@ -1,0 +1,2788 @@
+[
+  {
+    "id": "after_hours_market_analysis_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "After-hours holographic market analysis",
+    "path": "images/business/after_hours_market_analysis_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "market analysis",
+      "analytics",
+      "finance",
+      "night office",
+      "data"
+    ],
+    "concepts": [
+      "market research",
+      "financial analytics",
+      "late-night strategy",
+      "investment analysis"
+    ],
+    "subjects": [
+      "analyst",
+      "laptop",
+      "floating charts"
+    ],
+    "actions": [
+      "analyzing data",
+      "reviewing trends"
+    ],
+    "mood": [
+      "focused",
+      "high-tech",
+      "dramatic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.68,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "finance video",
+      "analytics theme",
+      "business intelligence"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "blue_hour_trading_desk_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Blue-hour skyline trading desk",
+    "path": "images/business/blue_hour_trading_desk_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "trading",
+      "finance",
+      "markets",
+      "trader",
+      "monitors"
+    ],
+    "concepts": [
+      "market trading",
+      "financial monitoring",
+      "investment desk",
+      "capital markets"
+    ],
+    "subjects": [
+      "trader",
+      "monitors",
+      "stock charts"
+    ],
+    "actions": [
+      "monitoring markets",
+      "analyzing charts"
+    ],
+    "mood": [
+      "intense",
+      "professional",
+      "focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.66,
+        "y": 0.46
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "finance explainer",
+      "markets content",
+      "investment theme"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "boutique_inventory_management_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Boutique manager checking inventory on tablet",
+    "path": "images/business/boutique_inventory_management_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "retail",
+      "inventory",
+      "tablet",
+      "boutique",
+      "manager"
+    ],
+    "concepts": [
+      "inventory management",
+      "retail technology",
+      "small business operations",
+      "store management"
+    ],
+    "subjects": [
+      "manager",
+      "tablet",
+      "store shelves"
+    ],
+    "actions": [
+      "checking stock",
+      "managing inventory"
+    ],
+    "mood": [
+      "clean",
+      "stylish",
+      "entrepreneurial"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "retail operations",
+      "small business marketing",
+      "inventory system"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "boutique_owner_store_management_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Boutique owner managing her store",
+    "path": "images/business/boutique_owner_store_management_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "retail",
+      "boutique",
+      "store owner",
+      "tablet",
+      "small business"
+    ],
+    "concepts": [
+      "small business management",
+      "retail operations",
+      "store ownership",
+      "inventory control"
+    ],
+    "subjects": [
+      "store owner",
+      "tablet",
+      "boutique shelves"
+    ],
+    "actions": [
+      "checking inventory",
+      "managing store"
+    ],
+    "mood": [
+      "warm",
+      "entrepreneurial",
+      "stylish"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.48,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "small business story",
+      "retail content",
+      "entrepreneurship"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "boutique_owner_tablet_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Boutique owner using tablet",
+    "path": "images/business/boutique_owner_tablet_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "boutique",
+      "small business",
+      "retail",
+      "tablet",
+      "store owner",
+      "inventory"
+    ],
+    "concepts": [
+      "small business management",
+      "retail operations",
+      "inventory management",
+      "entrepreneurship"
+    ],
+    "subjects": [
+      "store owner",
+      "tablet",
+      "boutique interior"
+    ],
+    "actions": [
+      "checking inventory",
+      "managing store"
+    ],
+    "mood": [
+      "warm",
+      "entrepreneurial",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "small business video",
+      "retail content",
+      "entrepreneur story",
+      "store management"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "bright_office_teamwork_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Collaborative teamwork in a bright office",
+    "path": "images/business/bright_office_teamwork_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "teamwork",
+      "collaboration",
+      "office",
+      "startup",
+      "team meeting"
+    ],
+    "concepts": [
+      "team collaboration",
+      "office culture",
+      "startup teamwork",
+      "idea sharing"
+    ],
+    "subjects": [
+      "team",
+      "laptops",
+      "meeting table"
+    ],
+    "actions": [
+      "collaborating",
+      "discussing",
+      "planning"
+    ],
+    "mood": [
+      "friendly",
+      "collaborative",
+      "energetic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "teamwork",
+      "startup content",
+      "office culture",
+      "collaboration scene"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_analytics_consultation_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Business analytics office consultation",
+    "path": "images/business/business_analytics_consultation_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "analytics",
+      "consultation",
+      "dashboard",
+      "advisor",
+      "client meeting"
+    ],
+    "concepts": [
+      "business analytics",
+      "client advisory",
+      "performance review",
+      "data-driven decisions"
+    ],
+    "subjects": [
+      "consultant",
+      "client",
+      "laptop dashboard"
+    ],
+    "actions": [
+      "reviewing dashboard",
+      "consulting",
+      "explaining metrics"
+    ],
+    "mood": [
+      "professional",
+      "trustworthy",
+      "focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "analytics explainer",
+      "business consulting",
+      "client meeting",
+      "performance review"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_creator_strategy_studio_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Business creator teaching strategy in studio",
+    "path": "images/business/business_creator_strategy_studio_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "creator",
+      "strategy",
+      "leadership",
+      "webinar",
+      "online business",
+      "personal brand"
+    ],
+    "concepts": [
+      "business education",
+      "thought leadership",
+      "online business",
+      "creator economy"
+    ],
+    "subjects": [
+      "speaker",
+      "camera",
+      "microphone",
+      "strategy screen"
+    ],
+    "actions": [
+      "teaching",
+      "recording",
+      "presenting"
+    ],
+    "mood": [
+      "confident",
+      "modern",
+      "inspiring"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.43,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "business education",
+      "webinar",
+      "coaching",
+      "online course"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_creator_webinar_studio_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Business creator recording in modern studio",
+    "path": "images/business/business_creator_webinar_studio_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "webinar",
+      "creator",
+      "studio",
+      "personal brand",
+      "education",
+      "online business"
+    ],
+    "concepts": [
+      "thought leadership",
+      "webinar production",
+      "business education",
+      "creator business"
+    ],
+    "subjects": [
+      "speaker",
+      "camera",
+      "microphone",
+      "presentation screen"
+    ],
+    "actions": [
+      "recording webinar",
+      "presenting",
+      "teaching"
+    ],
+    "mood": [
+      "confident",
+      "polished",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.47,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "webinar visuals",
+      "online course",
+      "digital products",
+      "business coaching"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_growth_strategy_meeting_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Business growth strategy meeting",
+    "path": "images/business/business_growth_strategy_meeting_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "growth",
+      "strategy",
+      "presentation",
+      "analytics",
+      "boardroom",
+      "leadership"
+    ],
+    "concepts": [
+      "business growth",
+      "growth strategy",
+      "executive planning",
+      "performance review"
+    ],
+    "subjects": [
+      "presenter",
+      "team",
+      "growth dashboard",
+      "conference room"
+    ],
+    "actions": [
+      "presenting growth",
+      "reviewing metrics",
+      "discussing strategy"
+    ],
+    "mood": [
+      "professional",
+      "strategic",
+      "confident"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "business growth",
+      "strategy video",
+      "management content",
+      "executive presentation"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_networking_reception_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunset skyline networking reception",
+    "path": "images/business/business_networking_reception_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "networking",
+      "event",
+      "reception",
+      "cocktail",
+      "business cards"
+    ],
+    "concepts": [
+      "professional networking",
+      "relationship building",
+      "corporate event",
+      "business development"
+    ],
+    "subjects": [
+      "professionals",
+      "business card exchange",
+      "reception venue"
+    ],
+    "actions": [
+      "networking",
+      "exchanging cards",
+      "socializing"
+    ],
+    "mood": [
+      "social",
+      "premium",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "upper-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "event promo",
+      "networking theme",
+      "business community"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_networking_rooftop_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunset rooftop networking mixer",
+    "path": "images/business/business_networking_rooftop_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "networking",
+      "event",
+      "rooftop",
+      "business cards",
+      "professionals",
+      "community"
+    ],
+    "concepts": [
+      "professional networking",
+      "business development",
+      "relationship building",
+      "corporate event"
+    ],
+    "subjects": [
+      "professionals",
+      "business cards",
+      "rooftop venue"
+    ],
+    "actions": [
+      "networking",
+      "exchanging cards",
+      "socializing"
+    ],
+    "mood": [
+      "premium",
+      "social",
+      "warm"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.51,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "upper-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "networking scene",
+      "business event",
+      "community",
+      "business development"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "business_webinar_recording_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Professional webinar in a modern studio",
+    "path": "images/business/business_webinar_recording_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "webinar",
+      "content creator",
+      "thought leadership",
+      "camera",
+      "studio"
+    ],
+    "concepts": [
+      "business education",
+      "webinar production",
+      "thought leadership",
+      "online course"
+    ],
+    "subjects": [
+      "speaker",
+      "camera",
+      "microphone",
+      "presentation screen"
+    ],
+    "actions": [
+      "recording webinar",
+      "speaking to camera"
+    ],
+    "mood": [
+      "confident",
+      "educational",
+      "polished"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.55,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "business education",
+      "coaching content",
+      "digital products"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "cafe_point_of_sale_service_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Warm café counter service",
+    "path": "images/business/cafe_point_of_sale_service_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "café",
+      "small business",
+      "point of sale",
+      "service",
+      "hospitality",
+      "retail"
+    ],
+    "concepts": [
+      "small business service",
+      "hospitality operations",
+      "point of sale",
+      "customer service"
+    ],
+    "subjects": [
+      "barista",
+      "customer",
+      "POS terminal",
+      "pastry counter"
+    ],
+    "actions": [
+      "processing payment",
+      "serving customer"
+    ],
+    "mood": [
+      "warm",
+      "welcoming",
+      "entrepreneurial"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.55,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "small business story",
+      "retail service",
+      "hospitality marketing",
+      "customer experience"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "corporate_data_presentation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Modern corporate data presentation",
+    "path": "images/business/corporate_data_presentation_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "presentation",
+      "analytics",
+      "meeting",
+      "growth",
+      "dashboard",
+      "boardroom"
+    ],
+    "concepts": [
+      "corporate reporting",
+      "business analytics",
+      "strategy presentation",
+      "performance review"
+    ],
+    "subjects": [
+      "presenter",
+      "screen",
+      "charts",
+      "meeting participants"
+    ],
+    "actions": [
+      "presenting",
+      "explaining results"
+    ],
+    "mood": [
+      "professional",
+      "focused",
+      "polished"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.66,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "business analytics",
+      "presentation opener",
+      "management content",
+      "board meeting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "coworking_team_collaboration_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Collaborative ideas in a modern coworking space",
+    "path": "images/business/coworking_team_collaboration_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "coworking",
+      "teamwork",
+      "collaboration",
+      "startup",
+      "creative team"
+    ],
+    "concepts": [
+      "team collaboration",
+      "coworking culture",
+      "startup teamwork",
+      "idea sharing"
+    ],
+    "subjects": [
+      "team",
+      "laptops",
+      "coworking table",
+      "office plants"
+    ],
+    "actions": [
+      "discussing",
+      "collaborating",
+      "brainstorming"
+    ],
+    "mood": [
+      "collaborative",
+      "friendly",
+      "modern"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "team culture",
+      "startup content",
+      "coworking promo",
+      "office collaboration"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "customer_support_center_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Friendly call center team at work",
+    "path": "images/business/customer_support_center_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "customer support",
+      "call center",
+      "service",
+      "customer success",
+      "headsets"
+    ],
+    "concepts": [
+      "customer support",
+      "service operations",
+      "customer success",
+      "support center"
+    ],
+    "subjects": [
+      "support agents",
+      "monitors",
+      "headsets"
+    ],
+    "actions": [
+      "taking calls",
+      "helping customers",
+      "working at computers"
+    ],
+    "mood": [
+      "friendly",
+      "efficient",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.39,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "customer service",
+      "support team",
+      "customer success",
+      "service operations"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "customer_support_team_office_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Smiling customer support team in modern office",
+    "path": "images/business/customer_support_team_office_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "customer support",
+      "call center",
+      "service team",
+      "headsets",
+      "customer success"
+    ],
+    "concepts": [
+      "customer support",
+      "service operations",
+      "support center",
+      "client communication"
+    ],
+    "subjects": [
+      "support agents",
+      "monitors",
+      "service dashboard"
+    ],
+    "actions": [
+      "taking calls",
+      "helping customers"
+    ],
+    "mood": [
+      "friendly",
+      "efficient",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "customer success",
+      "service explainer",
+      "support team intro"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "dashboard_demo_client_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Modern office dashboard presentation",
+    "path": "images/business/dashboard_demo_client_meeting_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "dashboard",
+      "analytics",
+      "client meeting",
+      "software demo",
+      "presentation"
+    ],
+    "concepts": [
+      "data presentation",
+      "software demo",
+      "analytics review",
+      "client meeting"
+    ],
+    "subjects": [
+      "consultant",
+      "client",
+      "laptop",
+      "dashboard"
+    ],
+    "actions": [
+      "presenting data",
+      "reviewing analytics"
+    ],
+    "mood": [
+      "focused",
+      "professional",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.54,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "analytics content",
+      "business software",
+      "reporting",
+      "client presentation"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "ecommerce_fulfillment_workspace_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Organized e-commerce packing workspace",
+    "path": "images/business/ecommerce_fulfillment_workspace_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "e-commerce",
+      "fulfillment",
+      "packing",
+      "orders",
+      "small business",
+      "logistics"
+    ],
+    "concepts": [
+      "order fulfillment",
+      "small business logistics",
+      "shipping operations",
+      "e-commerce workflow"
+    ],
+    "subjects": [
+      "entrepreneur",
+      "boxes",
+      "tablet",
+      "packing table"
+    ],
+    "actions": [
+      "packing orders",
+      "checking labels",
+      "managing fulfillment"
+    ],
+    "mood": [
+      "productive",
+      "organized",
+      "entrepreneurial"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "e-commerce operations",
+      "small business marketing",
+      "fulfillment process",
+      "logistics"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "ecommerce_order_packing_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Sunlit e-commerce packing studio",
+    "path": "images/business/ecommerce_order_packing_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "e-commerce",
+      "packing orders",
+      "small business",
+      "shipping",
+      "online store"
+    ],
+    "concepts": [
+      "order fulfillment",
+      "e-commerce operations",
+      "product shipping",
+      "small business logistics"
+    ],
+    "subjects": [
+      "entrepreneur",
+      "shipping boxes",
+      "laptop dashboard"
+    ],
+    "actions": [
+      "packing orders",
+      "preparing shipments"
+    ],
+    "mood": [
+      "warm",
+      "productive",
+      "entrepreneurial"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.45,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "upper-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "e-commerce explainer",
+      "small business operations",
+      "online store content"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_city_outlook_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Executive overlooking city at sunrise",
+    "path": "images/business/executive_city_outlook_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "executive",
+      "leadership",
+      "city skyline",
+      "vision",
+      "strategy"
+    ],
+    "concepts": [
+      "executive leadership",
+      "business vision",
+      "strategic thinking",
+      "success mindset"
+    ],
+    "subjects": [
+      "executive",
+      "office",
+      "city skyline"
+    ],
+    "actions": [
+      "looking over city",
+      "reflecting"
+    ],
+    "mood": [
+      "aspirational",
+      "cinematic",
+      "premium"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.45,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "leadership theme",
+      "vision statement",
+      "executive story",
+      "success montage"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_contract_signing_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour contract signing",
+    "path": "images/business/executive_contract_signing_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "contract",
+      "signing",
+      "deal",
+      "agreement",
+      "executives"
+    ],
+    "concepts": [
+      "deal closing",
+      "contract signing",
+      "partnership agreement",
+      "executive business"
+    ],
+    "subjects": [
+      "two executives",
+      "documents",
+      "conference table",
+      "city skyline"
+    ],
+    "actions": [
+      "signing documents",
+      "closing deal"
+    ],
+    "mood": [
+      "premium",
+      "successful",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "deal closing",
+      "partnership content",
+      "corporate film",
+      "legal business scene"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_financial_analysis_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Executive financial analysis at sunset",
+    "path": "images/business/executive_financial_analysis_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "financial analysis",
+      "executive",
+      "reports",
+      "office",
+      "accounting"
+    ],
+    "concepts": [
+      "financial review",
+      "executive analysis",
+      "business reporting",
+      "performance analysis"
+    ],
+    "subjects": [
+      "executive",
+      "reports",
+      "laptop",
+      "calculator"
+    ],
+    "actions": [
+      "reviewing reports",
+      "analyzing numbers"
+    ],
+    "mood": [
+      "focused",
+      "premium",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.38,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "finance operations",
+      "accounting content",
+      "business reporting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_handshake_office_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Professional handshake in a sunlit office",
+    "path": "images/business/executive_handshake_office_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "handshake",
+      "deal",
+      "partnership",
+      "agreement",
+      "office",
+      "executive"
+    ],
+    "concepts": [
+      "business partnership",
+      "deal closing",
+      "professional trust",
+      "corporate agreement"
+    ],
+    "subjects": [
+      "two executives",
+      "handshake",
+      "office"
+    ],
+    "actions": [
+      "shaking hands",
+      "closing a deal"
+    ],
+    "mood": [
+      "professional",
+      "optimistic",
+      "confident"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.52
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "business intro",
+      "partnership explainer",
+      "sales content",
+      "corporate storytelling"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_job_interview_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Executive interview in a glass office",
+    "path": "images/business/executive_job_interview_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "interview",
+      "recruitment",
+      "office",
+      "HR",
+      "candidate"
+    ],
+    "concepts": [
+      "hiring process",
+      "executive interview",
+      "talent acquisition",
+      "professional conversation"
+    ],
+    "subjects": [
+      "interviewer",
+      "candidate",
+      "resume"
+    ],
+    "actions": [
+      "interviewing",
+      "discussing experience"
+    ],
+    "mood": [
+      "professional",
+      "welcoming",
+      "focused"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.53,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "recruitment content",
+      "HR materials",
+      "career explainer"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "executive_strategy_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Executive strategy meeting at sunset",
+    "path": "images/business/executive_strategy_meeting_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "strategy meeting",
+      "executive",
+      "boardroom",
+      "presentation",
+      "sunset"
+    ],
+    "concepts": [
+      "executive planning",
+      "corporate strategy",
+      "leadership meeting",
+      "growth planning"
+    ],
+    "subjects": [
+      "presenter",
+      "team",
+      "screen"
+    ],
+    "actions": [
+      "presenting strategy",
+      "discussing growth"
+    ],
+    "mood": [
+      "premium",
+      "strategic",
+      "cinematic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.74,
+        "y": 0.41
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "leadership content",
+      "strategy deck",
+      "corporate intro"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "golden_hour_business_handshake_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour executive handshake",
+    "path": "images/business/golden_hour_business_handshake_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "handshake",
+      "agreement",
+      "partnership",
+      "executives",
+      "contract"
+    ],
+    "concepts": [
+      "deal success",
+      "business agreement",
+      "executive partnership",
+      "client closing"
+    ],
+    "subjects": [
+      "executive man",
+      "executive woman",
+      "handshake"
+    ],
+    "actions": [
+      "shaking hands",
+      "closing agreement"
+    ],
+    "mood": [
+      "warm",
+      "successful",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.5
+      },
+      "safeTextAreas": [
+        "upper-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "sales close",
+      "partnership story",
+      "corporate brand film"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "growth_strategy_dashboard_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Corporate growth strategy meeting",
+    "path": "images/business/growth_strategy_dashboard_meeting_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "growth",
+      "strategy",
+      "analytics",
+      "boardroom",
+      "management"
+    ],
+    "concepts": [
+      "growth strategy",
+      "management reporting",
+      "business performance",
+      "market expansion"
+    ],
+    "subjects": [
+      "executive",
+      "team",
+      "large dashboard screen"
+    ],
+    "actions": [
+      "presenting results",
+      "reviewing growth",
+      "discussing expansion"
+    ],
+    "mood": [
+      "strategic",
+      "professional",
+      "data-driven"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "growth content",
+      "board meeting",
+      "corporate strategy",
+      "management reporting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "investor_pitch_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Golden-hour investor pitch",
+    "path": "images/business/investor_pitch_meeting_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "investor pitch",
+      "startup",
+      "presentation",
+      "fundraising",
+      "boardroom"
+    ],
+    "concepts": [
+      "startup fundraising",
+      "investor presentation",
+      "pitch meeting",
+      "business growth"
+    ],
+    "subjects": [
+      "founder",
+      "investors",
+      "presentation screen"
+    ],
+    "actions": [
+      "pitching",
+      "presenting to investors"
+    ],
+    "mood": [
+      "aspirational",
+      "premium",
+      "confident"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.75,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "startup story",
+      "fundraising content",
+      "pitch deck visuals"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "marketing_campaign_brainstorm_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Collaborative marketing campaign brainstorm",
+    "path": "images/business/marketing_campaign_brainstorm_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "marketing",
+      "campaign",
+      "brainstorm",
+      "creative team",
+      "planning"
+    ],
+    "concepts": [
+      "marketing planning",
+      "campaign strategy",
+      "creative collaboration",
+      "brand planning"
+    ],
+    "subjects": [
+      "marketing team",
+      "whiteboard",
+      "laptops",
+      "campaign materials"
+    ],
+    "actions": [
+      "brainstorming",
+      "planning campaign",
+      "reviewing content"
+    ],
+    "mood": [
+      "creative",
+      "collaborative",
+      "energetic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "marketing video",
+      "agency promo",
+      "team brainstorm",
+      "campaign planning"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "modern_boardroom_presentation_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Modern boardroom strategy presentation",
+    "path": "images/business/modern_boardroom_presentation_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "boardroom",
+      "presentation",
+      "strategy",
+      "leadership",
+      "executive"
+    ],
+    "concepts": [
+      "corporate strategy",
+      "executive presentation",
+      "leadership communication",
+      "business planning"
+    ],
+    "subjects": [
+      "presenter",
+      "executives",
+      "meeting table"
+    ],
+    "actions": [
+      "presenting",
+      "explaining strategy",
+      "discussing"
+    ],
+    "mood": [
+      "professional",
+      "authoritative",
+      "clean"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.4,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "leadership content",
+      "strategy deck",
+      "board meeting",
+      "corporate presentation"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "modern_team_meeting_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Collaborative team meeting in a modern office",
+    "path": "images/business/modern_team_meeting_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "team meeting",
+      "office",
+      "collaboration",
+      "reports",
+      "planning"
+    ],
+    "concepts": [
+      "teamwork",
+      "project planning",
+      "office collaboration",
+      "business discussion"
+    ],
+    "subjects": [
+      "team",
+      "laptops",
+      "documents"
+    ],
+    "actions": [
+      "discussing",
+      "reviewing reports"
+    ],
+    "mood": [
+      "professional",
+      "collaborative",
+      "positive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.5,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "top-right"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "team intro",
+      "business process",
+      "office culture"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "professional_client_consultation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Professional consultation in a bright office",
+    "path": "images/business/professional_client_consultation_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "consultation",
+      "client meeting",
+      "advisor",
+      "office",
+      "professional services"
+    ],
+    "concepts": [
+      "client consultation",
+      "business advisory",
+      "professional services",
+      "one-on-one meeting"
+    ],
+    "subjects": [
+      "advisor",
+      "client",
+      "desk",
+      "documents"
+    ],
+    "actions": [
+      "consulting",
+      "explaining",
+      "reviewing documents"
+    ],
+    "mood": [
+      "professional",
+      "trustworthy",
+      "friendly"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.44,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "left-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "consulting content",
+      "professional services",
+      "business intro",
+      "client relationship"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "recruitment_team_candidate_review_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Corporate team reviewing candidates",
+    "path": "images/business/recruitment_team_candidate_review_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "recruitment",
+      "HR",
+      "candidate review",
+      "team meeting",
+      "talent"
+    ],
+    "concepts": [
+      "talent review",
+      "recruitment meeting",
+      "candidate evaluation",
+      "HR strategy"
+    ],
+    "subjects": [
+      "recruitment team",
+      "resumes",
+      "candidate dashboard"
+    ],
+    "actions": [
+      "reviewing candidates",
+      "discussing hiring"
+    ],
+    "mood": [
+      "focused",
+      "collaborative",
+      "professional"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.52,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "top-left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "HR content",
+      "recruitment operations",
+      "talent acquisition"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "remote_business_video_conference_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Warm home office video conference",
+    "path": "images/business/remote_business_video_conference_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "remote work",
+      "video conference",
+      "home office",
+      "virtual team",
+      "hybrid work"
+    ],
+    "concepts": [
+      "remote collaboration",
+      "distributed teams",
+      "virtual meetings",
+      "hybrid business"
+    ],
+    "subjects": [
+      "professional",
+      "laptop",
+      "video call",
+      "home office"
+    ],
+    "actions": [
+      "video calling",
+      "discussing",
+      "meeting remotely"
+    ],
+    "mood": [
+      "warm",
+      "friendly",
+      "productive"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.57,
+        "y": 0.44
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "remote work",
+      "team collaboration",
+      "future of work",
+      "virtual meeting"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "remote_video_meeting_home_office_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Cozy home office video meeting",
+    "path": "images/business/remote_video_meeting_home_office_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "remote work",
+      "video meeting",
+      "home office",
+      "virtual team",
+      "hybrid work"
+    ],
+    "concepts": [
+      "remote collaboration",
+      "distributed work",
+      "virtual meetings",
+      "hybrid business"
+    ],
+    "subjects": [
+      "woman",
+      "laptop",
+      "video call"
+    ],
+    "actions": [
+      "taking notes",
+      "video calling"
+    ],
+    "mood": [
+      "warm",
+      "productive",
+      "friendly"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.56,
+        "y": 0.45
+      },
+      "safeTextAreas": [
+        "left"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "remote work content",
+      "team collaboration",
+      "future of work"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "small_business_packing_studio_002",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Small business packing studio",
+    "path": "images/business/small_business_packing_studio_002.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "small business",
+      "packing",
+      "shipping",
+      "orders",
+      "ecommerce",
+      "fulfillment"
+    ],
+    "concepts": [
+      "small business logistics",
+      "order fulfillment",
+      "e-commerce operations",
+      "shipping workflow"
+    ],
+    "subjects": [
+      "entrepreneur",
+      "boxes",
+      "laptop",
+      "packing table"
+    ],
+    "actions": [
+      "packing orders",
+      "preparing shipments"
+    ],
+    "mood": [
+      "productive",
+      "warm",
+      "entrepreneurial"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.46,
+        "y": 0.42
+      },
+      "safeTextAreas": [
+        "right-upper"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "e-commerce video",
+      "small business operations",
+      "shipping process",
+      "fulfillment"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "team_brainstorming_whiteboard_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Collaborative brainstorming at the whiteboard",
+    "path": "images/business/team_brainstorming_whiteboard_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "brainstorming",
+      "whiteboard",
+      "team",
+      "planning",
+      "startup",
+      "ideas"
+    ],
+    "concepts": [
+      "team ideation",
+      "strategy workshop",
+      "collaborative planning",
+      "creative business thinking"
+    ],
+    "subjects": [
+      "team",
+      "whiteboard",
+      "sticky notes"
+    ],
+    "actions": [
+      "brainstorming",
+      "planning"
+    ],
+    "mood": [
+      "collaborative",
+      "creative",
+      "energetic"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.61,
+        "y": 0.4
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "teamwork",
+      "startup content",
+      "planning workshop"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  },
+  {
+    "id": "team_strategy_presentation_001",
+    "type": "image",
+    "mediaType": "image",
+    "title": "Modern office presentation with team",
+    "path": "images/business/team_strategy_presentation_001.png",
+    "category": "business",
+    "extension": ".png",
+    "width": 1672,
+    "height": 941,
+    "aspectRatio": 1.7768,
+    "orientation": "landscape",
+    "tags": [
+      "business",
+      "presentation",
+      "team meeting",
+      "strategy",
+      "office",
+      "leadership"
+    ],
+    "concepts": [
+      "strategy presentation",
+      "team alignment",
+      "leadership communication",
+      "business planning"
+    ],
+    "subjects": [
+      "presenter",
+      "team",
+      "whiteboard",
+      "conference table"
+    ],
+    "actions": [
+      "presenting",
+      "explaining strategy",
+      "taking notes"
+    ],
+    "mood": [
+      "professional",
+      "optimistic",
+      "engaged"
+    ],
+    "composition": {
+      "focalPoint": {
+        "x": 0.7,
+        "y": 0.38
+      },
+      "safeTextAreas": [
+        "left-lower"
+      ],
+      "goodForFullBleed": true,
+      "goodForSplit": true
+    },
+    "people": true,
+    "quality": "hero",
+    "usage": [
+      "leadership content",
+      "strategy meeting",
+      "corporate communications",
+      "business planning"
+    ],
+    "source": {
+      "provider": "OpenAI image generation",
+      "generated": true
+    },
+    "license": {
+      "type": "generated-owned",
+      "source": "openai-generated",
+      "attributionRequired": false
+    }
+  }
+]

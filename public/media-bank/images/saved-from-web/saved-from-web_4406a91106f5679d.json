@@ -1,0 +1,63 @@
+{
+  "id": "saved-from-web_4406a91106f5679d",
+  "type": "image",
+  "mediaType": "image",
+  "title": "A young male runner crossing the finish line on a track, demonstrating determination and effort.",
+  "path": "images/saved-from-web/saved-from-web_4406a91106f5679d.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 2600,
+  "height": 1733,
+  "aspectRatio": 1.5003,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "young",
+    "male",
+    "runner",
+    "crossing",
+    "finish",
+    "line",
+    "track",
+    "demonstrating",
+    "determination",
+    "effort",
+    "portrait",
+    "educational",
+    "presentation",
+    "setting",
+    "static",
+    "exhausted"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "A young male runner crossing the finish line on a track, demonstrating determination and effort."
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "portrait or educational presentation setting"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "pexels-image",
+    "originalQuery": "young runner exhausted finish line",
+    "savedAt": "2026-10-26T07:36:04.564Z"
+  },
+  "license": {
+    "name": "Pexels License",
+    "url": "https://www.pexels.com/license/",
+    "author": "RUN 4 FFWPU",
+    "attributionRequired": false,
+    "nonFree": false,
+    "page": "https://www.pexels.com/photo/a-man-in-red-tank-top-running-with-his-eyes-closed-12683172/"
+  }
+}

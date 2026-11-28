@@ -1,0 +1,73 @@
+{
+  "id": "saved-from-web_f2bdfa3f346a3d43",
+  "type": "image",
+  "mediaType": "image",
+  "title": "File:1921 - Savings Account Passbook - Allentown National Bank - Allentown PA.jpg",
+  "path": "images/saved-from-web/saved-from-web_f2bdfa3f346a3d43.jpg",
+  "category": "saved-from-web",
+  "extension": ".jpg",
+  "width": 1552,
+  "height": 1147,
+  "aspectRatio": 1.3531,
+  "orientation": "landscape",
+  "tags": [
+    "saved-from-web",
+    "show",
+    "1921",
+    "saving",
+    "account",
+    "passbook",
+    "allentown",
+    "national",
+    "bank",
+    "desk",
+    "study",
+    "table",
+    "static",
+    "presentation",
+    "file",
+    "savings",
+    "jpg",
+    "paperwork",
+    "documents",
+    "contract"
+  ],
+  "concepts": [
+    "saved-from-web"
+  ],
+  "subjects": [
+    "File:1921 - Savings Account Passbook - Allentown National Bank - Allentown PA.jpg"
+  ],
+  "actions": [
+    "static presentation"
+  ],
+  "mood": [
+    "desk or study table"
+  ],
+  "composition": {
+    "focalPoint": null,
+    "goodForFullBleed": true
+  },
+  "quality": "curated",
+  "source": {
+    "provider": "commons",
+    "originalQuery": "savings account passbook",
+    "savedAt": "2026-10-23T09:03:48.063Z"
+  },
+  "license": {
+    "provider": "wikipedia",
+    "name": "Public domain",
+    "license_name": "Public domain",
+    "url": null,
+    "license_url": null,
+    "author": "undetermined post card manufacturer",
+    "creator": "undetermined post card manufacturer",
+    "attributionRequired": false,
+    "attribution_required": false,
+    "nonFree": false,
+    "commercial_use": "allowed",
+    "verification_status": "verified",
+    "retrieved_at": "2026-10-23T09:02:37.706Z",
+    "page": "https://commons.wikimedia.org/wiki/File:1921_-_Savings_Account_Passbook_-_Allentown_National_Bank_-_Allentown_PA.jpg"
+  }
+}
