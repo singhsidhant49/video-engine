@@ -19,7 +19,7 @@ const positiveNumber = (value, fallback, minimum = 0) => {
   return Number.isFinite(parsed) && parsed >= minimum ? parsed : fallback;
 };
 
-export function resolveWhisperPolicy(durationInSeconds, source = process.env) {
+export function resolveWhisperPolicy(durationInSeconds, source = process.env, { language = 'en' } = {}) {
   const enabled = String(source.WHISPER_ENABLED || 'auto').trim().toLowerCase();
   const maxAudioSeconds = positiveNumber(source.WHISPER_MAX_AUDIO_SECONDS, 900, 0);
   // A too-small environment override previously killed base.en after 60s on
@@ -30,6 +30,16 @@ export function resolveWhisperPolicy(durationInSeconds, source = process.env) {
   const timeoutMs = Math.max(safeTimeoutFloor, positiveNumber(source.WHISPER_TIMEOUT_MS, safeTimeoutFloor, 5_000));
   if (['false', '0', 'off', 'disabled'].includes(enabled)) {
     return { useWhisper: false, reason: 'disabled by WHISPER_ENABLED', maxAudioSeconds, timeoutMs };
+  }
+  const cleanLang = String(language || 'en').trim().toLowerCase();
+  const effectiveModel = String(source.WHISPER_MULTILINGUAL_MODEL || source.WHISPER_MODEL || WHISPER_MODEL);
+  if (cleanLang !== 'en' && !cleanLang.startsWith('en-') && /\.en$/i.test(effectiveModel)) {
+    return {
+      useWhisper: false,
+      reason: `non-English narration (${cleanLang}) skipped because ${effectiveModel} is English-only`,
+      maxAudioSeconds,
+      timeoutMs,
+    };
   }
   if (maxAudioSeconds > 0 && durationInSeconds > maxAudioSeconds) {
     return {
@@ -86,7 +96,7 @@ export function sanitizeTranscriptTimeline(transcript = []) {
     const text = String(item?.text || '').trim();
     const start = Number(item?.start);
     const rawEnd = Number(item?.end);
-    if (!text || !/[\p{L}\p{N}]/u.test(text) || !Number.isFinite(start)) continue;
+    if (!text || !/[\p{L}\p{M}\p{N}]/u.test(text) || !Number.isFinite(start)) continue;
     const end = Number.isFinite(rawEnd) ? Math.max(start + 0.01, rawEnd) : start + 0.3;
 
     if (catchUpAt != null) {
@@ -101,8 +111,8 @@ export function sanitizeTranscriptTimeline(transcript = []) {
       catchUpAt = null;
     }
 
-    const normalized = text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
-    const previousNormalized = String(previous?.text || '').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+    const normalized = text.toLowerCase().replace(/[^\p{L}\p{M}\p{N}]/gu, '');
+    const previousNormalized = String(previous?.text || '').toLowerCase().replace(/[^\p{L}\p{M}\p{N}]/gu, '');
     if (previous && normalized && normalized === previousNormalized && start < previous.end + 0.15) continue;
 
     output.push({ ...item, text, start, end });
@@ -242,7 +252,7 @@ import crypto from 'node:crypto';
  * The script supplies the text (captions are always spelled as written);
  * the transcript supplies timing via sequence alignment.
  */
-export async function analyzeNarration(audioPath, scriptText, fps, { signal } = {}) {
+export async function analyzeNarration(audioPath, scriptText, fps, { signal, language = 'en' } = {}) {
   const durationInSeconds = await probeDuration(audioPath);
   const scriptWords = tokenizeScript(scriptText);
 
@@ -266,7 +276,7 @@ export async function analyzeNarration(audioPath, scriptText, fps, { signal } = 
     console.log(`⚡ Reused cached Whisper word alignment (${transcript.length} words)`);
   } else {
     try {
-      const policy = resolveWhisperPolicy(durationInSeconds);
+      const policy = resolveWhisperPolicy(durationInSeconds, process.env, { language });
       if (!policy.useWhisper) throw new Error(`Whisper skipped: ${policy.reason}`);
       transcript = sanitizeTranscriptTimeline(await transcribeWords(audioPath, { timeoutMs: policy.timeoutMs, signal }));
       if (transcript.length < Math.max(3, scriptWords.length * 0.3)) throw new Error(`only ${transcript.length} transcript words`);

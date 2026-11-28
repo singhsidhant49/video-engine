@@ -193,7 +193,10 @@ export async function createFacelessVideo({
       durationSec: durationSec ?? brief?.durationSec,
       style: style || brief?.style,
       voice: voice || brief?.voice,
-      channel: channelProfile || brief?.channel || brief?.channelProfile || {},
+      channel: {
+        ...(channelProfile || brief?.channel || brief?.channelProfile || {}),
+        ...(brief?.creative?.language || brief?.language ? { language: brief?.creative?.language || brief?.language } : {}),
+      },
     });
     topic = normalizedBrief.prompt;
     niche = normalizedBrief.niche;
@@ -234,7 +237,7 @@ export async function createFacelessVideo({
   const reusedStagesSet = new Set();
   let productionProfile = resolveProductionProfile({ topic, niche, format: format || 'landscape', channelProfile });
   voice = explicitVoiceRequested
-    ? normalizeSelectedVoice(voice, productionProfile.contentType)
+    ? normalizeSelectedVoice(voice, productionProfile.contentType, { language: productionProfile.language })
     : productionProfile.voice;
   let narrationProfile = resolveNarrationProfile({
     topic,
@@ -536,7 +539,7 @@ export async function createFacelessVideo({
             }
           } else {
             const ttsText = (plan.scenes || []).map((s) => s.narration?.trim()).filter(Boolean).join('\n\n') || plan.script;
-            await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, format, signal });
+            await generateSpeech({ text: ttsText, outputFile: narrationFile, voice, speed: synthesisSpeed, format, language: productionProfile.language, signal });
           }
         }
 
@@ -553,7 +556,7 @@ export async function createFacelessVideo({
         await job.startStage('alignment');
         throwIfCancelled();
         onProgress({ step: 3, message: 'Aligning script to narration...' });
-        narration = await analyzeNarration(narrationFile, plan.script, fps, { signal });
+        narration = await analyzeNarration(narrationFile, plan.script, fps, { signal, language: productionProfile.language });
         await save('words.json', {
           source: narration.source,
           matchRate: narration.matchRate,

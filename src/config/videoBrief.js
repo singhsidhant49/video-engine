@@ -122,12 +122,36 @@ function defaultPacingMode(contentType, format) {
   return format === 'shorts' ? 'rapid' : 'balanced';
 }
 
+export function normalizeLanguageCode(language = 'en') {
+  const clean = String(language || 'en').trim().toLowerCase();
+  if (clean === 'hi' || clean === 'hindi' || clean.startsWith('hi-') || clean.startsWith('hi_') || clean === 'hin') return 'hi';
+  return clean || 'en';
+}
+
 export const ALLOWED_VOICES = Object.freeze([
   'af_heart',  // Heart (Female - Warm, Calm, Smooth · Grade A)
   'af_bella',  // Bella (Female - Crisp, Polished, Modern · Grade A-)
   'am_puck',   // Puck (Male - Agile, Resonant, Confident · Grade C+/B)
   'af_nicole', // Nicole (Female - Soft Whisper, Sleep & Bedtime · Grade B-)
 ]);
+
+export const HINDI_ALLOWED_VOICES = Object.freeze([
+  'hf_alpha',  // Hindi Female (Warm & Natural)
+  'hf_beta',   // Hindi Female (Clear & Crisp)
+  'hm_omega',  // Hindi Male (Confident & Deep)
+  'hm_psi',    // Hindi Male (Measured Storytelling)
+]);
+
+const HINDI_VOICE_ALIAS_MAP = Object.freeze({
+  alpha: 'hf_alpha',
+  hf_alpha: 'hf_alpha',
+  beta: 'hf_beta',
+  hf_beta: 'hf_beta',
+  omega: 'hm_omega',
+  hm_omega: 'hm_omega',
+  psi: 'hm_psi',
+  hm_psi: 'hm_psi',
+});
 
 const VOICE_ALIAS_MAP = Object.freeze({
   heart: 'af_heart',
@@ -147,16 +171,39 @@ const VOICE_ALIAS_MAP = Object.freeze({
   af_kore: 'af_bella',
 });
 
-export function normalizeSelectedVoice(voice = '', contentType = 'auto') {
-  if (!voice || voice === 'auto') return defaultVoiceForContentType(contentType);
-  const clean = String(voice).trim().toLowerCase();
+export function normalizeSelectedVoice(voice = '', contentType = 'auto', { language = 'en' } = {}) {
+  const lang = normalizeLanguageCode(language);
+  const clean = String(voice || '').trim().toLowerCase();
+  if (lang === 'hi') {
+    if (!clean || clean === 'auto') return defaultVoiceForContentType(contentType, { language: 'hi' });
+    if (HINDI_ALLOWED_VOICES.includes(clean)) return clean;
+    if (HINDI_VOICE_ALIAS_MAP[clean]) return HINDI_VOICE_ALIAS_MAP[clean];
+    return defaultVoiceForContentType(contentType, { language: 'hi' });
+  }
+  if (!clean || clean === 'auto') return defaultVoiceForContentType(contentType);
   if (ALLOWED_VOICES.includes(clean)) return clean;
   if (VOICE_ALIAS_MAP[clean]) return VOICE_ALIAS_MAP[clean];
   // Unsupported voice: enforce fallback to user's curated default for this content type
   return defaultVoiceForContentType(contentType);
 }
 
-export function defaultVoiceForContentType(contentType = 'auto', { topic = '', niche = '' } = {}) {
+export function defaultVoiceForContentType(contentType = 'auto', { topic = '', niche = '', language = 'en' } = {}) {
+  if (normalizeLanguageCode(language) === 'hi') {
+    switch (contentType) {
+      case 'meditation':
+      case 'story':
+      case 'audiobook':
+        return 'hf_alpha';
+      case 'documentary':
+      case 'investigative':
+      case 'mystery':
+      case 'horror':
+      case 'motivational':
+        return 'hm_omega';
+      default:
+        return 'hf_beta';
+    }
+  }
   switch (contentType) {
     case 'meditation': {
       // Nicole's whisper is effective for sleep, but sounds breathy and less
@@ -189,11 +236,12 @@ export function defaultVoiceForContentType(contentType = 'auto', { topic = '', n
 
 export function resolveProductionProfile({ topic = '', niche = '', format = 'landscape', channelProfile = {} } = {}) {
   const channel = ChannelProfileSchema.parse(channelProfile || {});
+  const language = normalizeLanguageCode(channel.language);
   const contentType = channel.contentType === 'auto' ? inferContentType(topic, niche) : channel.contentType;
   const pacingMode = channel.pacingMode === 'auto' ? defaultPacingMode(contentType, format) : channel.pacingMode;
   const voice = channel.voice && channel.voice !== 'auto'
-    ? normalizeSelectedVoice(channel.voice, contentType)
-    : defaultVoiceForContentType(contentType, { topic, niche });
+    ? normalizeSelectedVoice(channel.voice, contentType, { language })
+    : defaultVoiceForContentType(contentType, { topic, niche, language });
   const base = BASE_PACING[pacingMode];
   const verticalScale = format === 'shorts' && !['contemplative', 'cinematic'].includes(pacingMode) ? 0.82 : 1;
   const pacing = {
@@ -209,7 +257,7 @@ export function resolveProductionProfile({ topic = '', niche = '', format = 'lan
     contentType,
     audience: channel.audience,
     tone: channel.tone,
-    language: channel.language,
+    language,
     voice,
     captions: channel.captions,
     pacing,

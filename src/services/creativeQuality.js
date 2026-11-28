@@ -6,7 +6,7 @@ const OPEN_LOOP = /\?|\b(?:why|how|what if|the reason|one detail|what happened|u
 const CONCRETE = /\b(?:\d+(?:\.\d+)?%?|seconds?|minutes?|days?|years?|brain|phone|bank|market|sleep|memory|company|city|machine|system|people|person|scientist|worker|child|house|car|computer|screen|camera)\b/i;
 
 const words = (value) => String(value || '').trim().split(/\s+/).filter(Boolean);
-const tokens = (value) => new Set(String(value || '').toLowerCase().match(/[a-z0-9]+/g)?.filter((token) => token.length > 3) || []);
+const tokens = (value) => new Set(String(value || '').toLowerCase().match(/[\p{L}\p{M}\p{N}]+/gu)?.filter((token) => token.length > 2) || []);
 
 const THUMBNAIL_STOP_WORDS = new Set([
   'a', 'an', 'and', 'about', 'after', 'are', 'before', 'for', 'from', 'get', 'gets',
@@ -50,7 +50,7 @@ export function conciseThumbnailText(value, { maxWords = 4, maxCharacters = 28 }
   const cleanedWords = words(String(value || '')
     .normalize('NFKC')
     .replace(/[\u2010-\u2015]/g, ' ')
-    .replace(/[^\p{L}\p{N}%$\s'-]/gu, ' '))
+    .replace(/[^\p{L}\p{M}\p{N}%$\s'-]/gu, ' '))
     .map((word) => word.replace(/^[-']+|[-']+$/g, ''))
     .filter(Boolean);
   const meaningful = cleanedWords.filter((word) => !THUMBNAIL_STOP_WORDS.has(word.toLowerCase()));

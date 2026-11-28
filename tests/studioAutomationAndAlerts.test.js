@@ -21,6 +21,14 @@ import { releaseRunBundle } from '../src/tools/preview.js';
 import { runRenderQc } from '../src/qc/renderQc.js';
 import { StudioSettingsStore } from '../src/server/studioSettingsStore.js';
 import { generateThumbnailHeroImage } from '../src/services/thumbnailImageService.js';
+import { normalizeSelectedVoice, resolveProductionProfile } from '../src/config/videoBrief.js';
+import { normalizeTextForTts, splitTtsText } from '../src/services/ttsService.js';
+import { normalizeToken, tokenizeScript } from '../src/services/alignmentService.js';
+import { resolveWhisperPolicy } from '../src/services/audioAnalysisService.js';
+import { narrationCompletenessIssues, normalizePlan } from '../src/services/aiDirectorService.js';
+import { conciseThumbnailText } from '../src/services/creativeQuality.js';
+import { buildVideoHashtags } from '../src/services/thumbnailGenerator.js';
+import { brainstormGrowthIdeas } from '../src/services/youtubeGrowthService.js';
 
 const makeChannel = (overrides = {}) => ChannelProfileSchema.parse({
   id: 'auto-lab',
@@ -346,4 +354,51 @@ test('thumbnail settings persist per owner and Ideogram falls back to FLUX when 
   }
   assert.equal(passedThumbSettings?.model, 'ideogram-4-5');
   assert.equal(passedThumbSettings?.fallbackToFlux, true);
+});
+
+test('Hindi pipeline support preserves Devanagari scripts, voices, alignment, and English visuals cleanly', async () => {
+  assert.equal(normalizeSelectedVoice('auto', 'documentary', { language: 'hi' }), 'hm_omega');
+  assert.equal(normalizeSelectedVoice('hf_alpha', 'explainer', { language: 'hi' }), 'hf_alpha');
+  assert.equal(normalizeSelectedVoice('af_bella', 'explainer', { language: 'hi' }), 'hf_beta');
+  assert.equal(normalizeSelectedVoice('af_bella', 'explainer', { language: 'en' }), 'af_bella');
+
+  const hiProfile = resolveProductionProfile({
+    topic: 'नींद क्यों खराब होती है',
+    channelProfile: { language: 'hi', contentType: 'psychology', voice: 'auto' },
+  });
+  assert.equal(hiProfile.language, 'hi');
+  assert.equal(hiProfile.voice, 'hf_beta');
+
+  assert.equal(normalizeTextForTts('यह 25% बदलाव $10 में हुआ।', { language: 'hi' }), 'यह 25 प्रतिशत बदलाव 10 डॉलर में हुआ।');
+  assert.deepEqual(splitTtsText('पहला वाक्य यहाँ खत्म होता है। दूसरा वाक्य यहाँ शुरू होता है।', 40), [
+    'पहला वाक्य यहाँ खत्म होता है।',
+    'दूसरा वाक्य यहाँ शुरू होता है।',
+  ]);
+
+  assert.deepEqual(normalizeToken('हिन्दी।'), ['हिन्दी']);
+  const tokens = tokenizeScript('दिमाग ऐसे काम करता है। ध्यान से समझें।');
+  assert.equal(tokens[4].endsSentence, true);
+  assert.equal(tokens.at(-1).endsSentence, true);
+
+  const whisperPolicy = resolveWhisperPolicy(30, { WHISPER_ENABLED: 'auto', WHISPER_MODEL: 'Xenova/whisper-base.en' }, { language: 'hi' });
+  assert.equal(whisperPolicy.useWhisper, false);
+
+  const issues = narrationCompletenessIssues([{ narration: 'असली कारण आपके सामने है।' }]);
+  assert.equal(issues.length, 0);
+  const normalizedPlan = normalizePlan({
+    title: 'सफलता का असली सच',
+    style: 'minimal_premium',
+    scenes: [{ kind: 'subject', narration: 'यह आदत चुपचाप समय बर्बाद करती है।', visual: 'Close up clock in dim studio' }],
+  });
+  assert.equal(normalizedPlan.scenes[0].narration, 'यह आदत चुपचाप समय बर्बाद करती है।');
+
+  assert.equal(conciseThumbnailText('असली सच जानिए'), 'असली सच जानिए');
+  const tags = buildVideoHashtags({ title: 'दिमाग का रहस्य', primaryKeyword: 'मनोविज्ञान' });
+  assert.ok(tags.some((t) => /मनोविज्ञान|दिमाग/.test(t)));
+
+  const hiChannel = makeChannel({ language: 'hi', niche: 'मनोविज्ञान', contentPillars: ['आदतें', 'नींद'] });
+  const hiIdeas = await brainstormGrowthIdeas(hiChannel, { count: 2, useAi: false });
+  assert.equal(hiIdeas.length, 2);
+  assert.match(hiIdeas[0].title, /[\u0900-\u097F]/);
+  assert.match(hiIdeas[0].thumbnailConcept, /[a-zA-Z]/);
 });

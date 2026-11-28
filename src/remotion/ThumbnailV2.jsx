@@ -24,7 +24,7 @@ export const ThumbnailComposition = ({ packageData, conceptIndex = 0 }) => {
   const isVideo = typeof heroImage === 'string' && /\.mp4(?:$|\?)/i.test(heroImage);
 
   return (
-    <AbsoluteFill style={{ background, fontFamily: "'Outfit', 'Inter', sans-serif", overflow: 'hidden' }}>
+    <AbsoluteFill style={{ background, fontFamily: "'Outfit', 'Inter', 'Noto Sans Devanagari', 'Kohinoor Devanagari', sans-serif", overflow: 'hidden' }}>
       {heroSrc ? (
         isVideo ? (
           <OffthreadVideo src={heroSrc} muted style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: concept.focalPosition || 'center' }} />

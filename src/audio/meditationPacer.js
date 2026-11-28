@@ -134,7 +134,7 @@ export function segmentMeditationText(text = '', subprofile = 'guided') {
 
   // Split on sentence boundaries, colons, em-dashes, or linebreaks
   const rawParts = clean
-    .split(/(?<=[.!?\n])\s+|—|–/g)
+    .split(/(?<=[.!?।\n])\s+|—|–/g)
     .map((p) => p.trim())
     .filter(Boolean);
 

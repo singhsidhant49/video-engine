@@ -121,7 +121,7 @@ export function splitTtsText(text, maxChars = TTS_CHUNK_CHARS) {
   const clean = String(text || '').replace(/\r\n/g, '\n').trim();
   if (!clean || clean.length <= maxChars) return clean ? [clean] : [];
   // Use lookbehind & lookahead so decimal numbers (e.g. 7.5) are never split across units
-  const units = clean.match(/(?:[^.!?\n]|(?<=\d)\.(?=\d))+([.!?]+|\n+|$)/g)?.map((part) => part.trim()).filter(Boolean) || [clean];
+  const units = clean.match(/(?:[^.!?\u0964\n]|(?<=\d)\.(?=\d))+([.!?।\u0964]+|\n+|$)/g)?.map((part) => part.trim()).filter(Boolean) || [clean];
   const chunks = [];
   let current = '';
   for (const unit of units) {
@@ -226,6 +226,7 @@ export async function generateSpeech({
   voice = config.kokoro.defaultVoice,
   speed = config.kokoro.speed,
   format = 'landscape',
+  language = 'en',
   silenceMs = null,
   gapMs = null,
   signal,
@@ -233,7 +234,7 @@ export async function generateSpeech({
   if (signal?.aborted) throw Object.assign(new Error('TTS generation cancelled'), { name: 'AbortError' });
   const effectiveSilenceMs = silenceMs != null ? silenceMs : (format === 'shorts' ? 220 : 500);
   const effectiveGapMs = gapMs != null ? gapMs : (format === 'shorts' ? 50 : 120);
-  const spokenText = normalizeTextForTts(text);
+  const spokenText = normalizeTextForTts(text, { language });
 
   // Ensure target directory exists
   const dir = path.dirname(outputFile);
@@ -257,7 +258,7 @@ export async function generateSpeech({
     try {
       for (let index = 0; index < chunks.length; index++) {
         const chunkFile = path.join(dir, `.tts-chunk-${String(index + 1).padStart(4, '0')}.mp3`);
-        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed, format, silenceMs: 0, signal });
+        const generated = await generateSpeech({ text: chunks[index], outputFile: chunkFile, voice, speed, format, language, silenceMs: 0, signal });
         chunkFiles.push(chunkFile, generated.wavPath);
         chunkWavFiles.push(generated.wavPath);
       }

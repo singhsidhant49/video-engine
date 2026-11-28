@@ -24,7 +24,7 @@ export function buildVideoHashtags({ title = '', topic = '', niche = '', primary
   const phrases = [primaryKeyword, niche, topic, title];
   const tags = [];
   for (const phrase of phrases) {
-    const words = String(phrase).toLowerCase().match(/[a-z0-9]+/g)
+    const words = String(phrase).toLowerCase().match(/[\p{L}\p{M}\p{N}]+/gu)
       ?.filter((word) => word.length > 2 && !HASHTAG_STOP_WORDS.has(word)) || [];
     if (!words.length) continue;
     const candidate = `#${words.slice(0, 3).map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join('')}`;

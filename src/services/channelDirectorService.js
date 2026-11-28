@@ -1,4 +1,5 @@
 import { brainstormGrowthIdeas, isMeditationChannel, selectOptimalPackaging, summarizeChannelPerformance } from './youtubeGrowthService.js';
+import { normalizeLanguageCode } from '../config/videoBrief.js';
 import { CreateVideoRequestSchema } from '../server/videoApiSchemas.js';
 
 const now = () => new Date().toISOString();
@@ -55,7 +56,9 @@ SCRIPT CONTRACT:
 8. Never fabricate facts, demand, trends, quotations, statistics, or sources. Qualify uncertainty and omit unsupported specifics.
 9. Use the primary keyword naturally near the beginning without keyword stuffing.
 10. Meet the duration because the topic warrants it; never repeat or pad to fill time.`;
+    const isHindi = normalizeLanguageCode(channel.language) === 'hi';
     const prompt = `Create a complete, publishable ${idea.format === 'shorts' ? 'YouTube Short' : 'landscape YouTube video'} titled "${idea.title}" using a retention-engineered Claude-YouTube structure.
+Channel language: ${isHindi ? 'Hindi (hi) — write spoken narration, title, and on-screen text in natural Devanagari Hindi while keeping visual search queries in English.' : channel.language || 'en'}
 Primary keyword: ${idea.primaryKeyword}
 Traffic strategy: ${idea.trafficStrategy}
 Opening spoken line (use verbatim in the first 5 seconds): "${idea.spokenHook}"

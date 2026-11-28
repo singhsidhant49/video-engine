@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { config } from '../config/index.js';
+import { normalizeLanguageCode } from '../config/videoBrief.js';
 
 export const HOOK_FORMULAS = Object.freeze([
   { id: 'present_moment_invitation', mechanism: 'relief', template: (x) => `Let your shoulders soften. For the next few moments, I will guide you through ${x}.` },
@@ -33,11 +34,12 @@ const MEDITATION_HOOK_FORMULAS = HOOK_FORMULAS.filter((formula) => MEDITATION_HO
 const GENERAL_HOOK_FORMULAS = HOOK_FORMULAS.filter((formula) => !MEDITATION_HOOK_IDS.has(formula.id));
 
 const POWER = /\b(why|hidden|secret|mistake|truth|blueprint|paradox|impossible|trap|silent|warning|nobody|exact)\b/gi;
+const POWER_HINDI = /(?:क्यों|कैसे|सच|रहस्य|गलती|खतरनाक|असली|कभी|सबसे|बड़ा|फायदा|नुकसान|तरीका)/g;
 const WEAK = /^(an overview of|video about|introduction to|understanding|a guide to)\b/i;
-const TITLE_STOP_WORDS = new Set(['the', 'a', 'an', 'about', 'why', 'how', 'what', 'this', 'that', 'your', 'hidden', 'truth', 'mistake']);
+const TITLE_STOP_WORDS = new Set(['the', 'a', 'an', 'about', 'why', 'how', 'what', 'this', 'that', 'your', 'hidden', 'truth', 'mistake', 'और', 'के', 'की', 'का', 'में', 'है', 'हैं', 'से', 'को', 'पर']);
 const researchCache = new Map();
 const RESEARCH_CACHE_MS = 6 * 60 * 60 * 1_000;
-const MEDITATION_CHANNEL_RE = /\b(?:meditat(?:e|ion|ive)?|mindful(?:ness)?|breathwork|body scan|sleep sounds?|guided relaxation|calm(?:ing)?|bedtime)\b/i;
+const MEDITATION_CHANNEL_RE = /\b(?:meditat(?:e|ion|ive)?|mindful(?:ness)?|breathwork|body scan|sleep sounds?|guided relaxation|calm(?:ing)?|bedtime)\b|ध्यान|मेडिटेशन|नींद|शांति|प्राणायाम/i;
 const MEDITATION_CLICKBAIT_RE = /\b(?:hidden truth|mistake|wrong|trap|warning|nobody|shocking|scandal|myth|before you try|changes everything)\b/i;
 
 export function isMeditationChannel(channel = {}) {
@@ -52,7 +54,7 @@ export function isMeditationChannel(channel = {}) {
 }
 
 function titleSimilarity(left, right) {
-  const tokens = (value) => new Set(String(value).toLowerCase().match(/[a-z0-9]+/g)?.filter((token) => token.length > 2 && !TITLE_STOP_WORDS.has(token)) || []);
+  const tokens = (value) => new Set(String(value).toLowerCase().match(/[\p{L}\p{M}\p{N}]+/gu)?.filter((token) => token.length > 2 && !TITLE_STOP_WORDS.has(token)) || []);
   const a = tokens(left); const b = tokens(right);
   if (!a.size || !b.size) return 0;
   const intersection = [...a].filter((token) => b.has(token)).length;
@@ -65,7 +67,7 @@ export function scoreTitle(title) {
   if (value.length >= 28 && value.length <= 50) score += 24;
   else if (value.length <= 60) score += 13;
   else if (value.length > 70) score -= 18;
-  score += Math.min(18, (value.match(POWER) || []).length * 7);
+  score += Math.min(18, ((value.match(POWER) || []).length + (value.match(POWER_HINDI) || []).length) * 7);
   if (/\d/.test(value)) score += 5;
   if (/[:?!]/.test(value)) score += 4;
   if (WEAK.test(value)) score -= 28;
@@ -423,7 +425,7 @@ export function summarizeChannelPerformance(snapshots = [], ideas = []) {
 }
 
 function cleanMeditationPhrase(value, fallback) {
-  const phrase = String(value || fallback || '').replace(/[^a-z0-9' -]/gi, ' ').replace(/\s+/g, ' ').trim();
+  const phrase = String(value || fallback || '').replace(/[^\p{L}\p{M}\p{N}' -]/gu, ' ').replace(/\s+/g, ' ').trim();
   return phrase.split(/\s+/).slice(0, 7).join(' ') || fallback;
 }
 
@@ -507,13 +509,23 @@ function meditationHeuristicIdeas(channel, count, history, performance) {
 
 function heuristicIdeas(channel, count, history, performance) {
   if (isMeditationChannel(channel)) return meditationHeuristicIdeas(channel, count, history, performance);
+  const isHindi = normalizeLanguageCode(channel.language) === 'hi';
   const used = new Set(history.map((idea) => idea.title.toLowerCase()));
   const seed = crypto.createHash('sha256').update(`${channel.id}:${new Date().toISOString().slice(0, 10)}:${history.length}`).digest();
   const results = [];
   for (let index = 0; results.length < count && index < count * 8; index++) {
     const pillar = channel.contentPillars[(seed[index % seed.length] + index) % channel.contentPillars.length];
     const formula = GENERAL_HOOK_FORMULAS[(seed[(index + 7) % seed.length] + index) % GENERAL_HOOK_FORMULAS.length];
-    const patterns = [
+    const patterns = isHindi ? [
+      `${pillar} का वह सच जो कोई नहीं बताता`,
+      `ज्यादातर लोग ${pillar} में यह बड़ी गलती क्यों करते हैं`,
+      `${pillar}: वह तरीका जो सच में काम करता है`,
+      `${pillar} शुरू करने से पहले यह जरूर जान लें`,
+      `जब ${pillar} बदलता है तो असली असर क्या होता है?`,
+      `${pillar} की असली कहानी और अनदेखा नुकसान`,
+      `${pillar} को आसान शब्दों में कैसे समझें`,
+      `${pillar} से जुड़े सबसे बड़े भ्रम और असली तथ्य`,
+    ] : [
       `The Hidden Truth About ${pillar}`,
       `Why Most People Get ${pillar} Wrong`,
       `${pillar}: The Blueprint Nobody Shows You`,
@@ -559,8 +571,10 @@ function heuristicIdeas(channel, count, history, performance) {
     results.push({
       title,
       hookFormula: formula.id,
-      spokenHook: formula.template(pillar),
-      narrativeArc: `Open with a concrete contradiction about ${pillar}; reveal the overlooked mechanism with a specific example; resolve the opening promise with an actionable conclusion for ${channel.targetAudience}.`,
+      spokenHook: isHindi ? `${pillar} के बारे में एक जरूरी बात जो ज्यादातर लोग नजरअंदाज कर देते हैं।` : formula.template(pillar),
+      narrativeArc: isHindi
+        ? `${pillar} से जुड़े एक अनदेखे पहलू से शुरुआत करें; असली कारण और उदाहरण दिखाएं; और ${channel.targetAudience} के लिए साफ निष्कर्ष पर समाप्त करें।`
+        : `Open with a concrete contradiction about ${pillar}; reveal the overlooked mechanism with a specific example; resolve the opening promise with an actionable conclusion for ${channel.targetAudience}.`,
       contentPillar: pillar,
       titleScore,
       retentionScore: Math.min(96, Math.max(55, titleScore + 7)),
@@ -703,7 +717,14 @@ MEDITATION CHANNEL RULES:
 - Build the narrativeArc as a safe guided progression: arrival, settling, coherent practice, intentional silence, and gentle close. Account for silence in the chosen duration.
 - Thumbnail concepts must feel calm and trustworthy: one focal subject or environment, natural relaxed posture, negative space, and at most three simple overlay words. Never use shock faces or danger styling.
 ` : '';
+    const isHindiChannel = normalizeLanguageCode(channel.language) === 'hi';
+    const hindiRules = isHindiChannel ? `
+HINDI CHANNEL LANGUAGE RULES:
+- Write title, titleCandidates[].text, spokenHook, narrativeArc, primaryKeyword, whyThisIdea, and thumbnailCandidates[].overlayText (1-3 punchy Hindi words) in natural everyday Hindi (Devanagari script).
+- Keep thumbnailConcept and thumbnailCandidates[].concept in concise ENGLISH visual scene descriptions (subjects, objects, facial emotion, lighting) so image generation models render accurate scenes.
+` : '';
     const prompt = `Create ${bounded} distinct YouTube video ideas as a JSON array using the Claude-YouTube ideation framework.
+Channel language: ${channel.language || 'en'}
 Channel niche: ${channel.niche}
 Channel archetype: ${channel.archetype}
 Channel size tier: ${channel.sizeTier}
@@ -723,7 +744,7 @@ Avoid prior titles: ${history.slice(0, 50).map((idea) => idea.title).join(' | ')
 First-party performance evidence (JSON; empty means no evidence): ${JSON.stringify(performanceSummary)}
 Recent YouTube market evidence (JSON; search discovery is directional, not proof of demand): ${JSON.stringify(marketResearch)}
 Allowed hookFormula values: ${formulas}
-${meditationRules}
+${meditationRules}${hindiRules}
 
 IDEATION RULES:
 - Mix search-first and browse-first opportunities. Label an idea trending only when the supplied recent market evidence directly supports it, and cite the supporting URL in evidenceSource.

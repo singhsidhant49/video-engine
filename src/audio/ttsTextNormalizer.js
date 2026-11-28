@@ -53,9 +53,21 @@ const CURRENCY_SCALES = {
  * @param {string} text Raw script text
  * @returns {string} Normalized text ready for Kokoro TTS
  */
-export function normalizeTextForTts(text) {
+export function normalizeTextForTts(text, { language = 'en' } = {}) {
   let s = String(text || '').trim();
   if (!s) return '';
+
+  const lang = String(language || 'en').trim().toLowerCase();
+  if (lang === 'hi' || lang === 'hindi' || lang.startsWith('hi-')) {
+    s = s.replace(/(?<=\b\d+),(?=\d+\b)/g, '');
+    s = s.replace(/₹(\d+(?:\.\d+)?)\b/g, '$1 रुपये');
+    s = s.replace(/\$(\d+(?:\.\d+)?)\b/g, '$1 डॉलर');
+    s = s.replace(/£(\d+(?:\.\d+)?)\b/g, '$1 पाउंड');
+    s = s.replace(/€(\d+(?:\.\d+)?)\b/g, '$1 यूरो');
+    s = s.replace(/(\d+(?:\.\d+)?)\s*%/g, '$1 प्रतिशत');
+    s = s.replace(/\s+/g, ' ').trim();
+    return s;
+  }
 
   // 1. Expand common period-bearing abbreviations first so subsequent logic doesn't mistake them for sentences
   for (const [regex, replacement] of ABBREVIATIONS) {

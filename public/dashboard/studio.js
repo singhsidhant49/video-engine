@@ -727,7 +727,7 @@ async function createVideo(event) {
   try {
     const selectedChannel = state.channels.find((channel) => channel.id === $('profileId').value);
     const defaults = selectedChannel?.productionDefaults || {};
-    const creative = { contentType: $('contentType').value, tone: $('tone').value, audience: selectedChannel?.targetAudience || 'general YouTube audience', language: selectedChannel?.language || 'en', pacing: 'auto', imageSource: $('imageSource').value };
+    const creative = { contentType: $('contentType').value, tone: $('tone').value, audience: selectedChannel?.targetAudience || 'general YouTube audience', language: $('language')?.value || selectedChannel?.language || 'en', pacing: 'auto', imageSource: $('imageSource').value };
     if (creative.imageSource === 'ai') Object.assign(creative, { imageProvider: defaults.imageProvider || undefined, imageModel: defaults.imageModel || undefined, imageQuality: defaults.imageQuality || undefined, imageStyle: defaults.imageStyle || undefined, customStylePrompt: defaults.customStylePrompt || undefined });
     const durationMode = $('durationMode').value;
     const output = { durationMode, aspectRatio: $('aspect').value, resolution: '1080p' };
@@ -757,6 +757,7 @@ function applySelectedChannelDefaults() {
   if (!channel) { syncDurationFields(); return; }
   const defaults = channel.productionDefaults;
   $('contentType').value = [...$('contentType').options].some((option) => option.value === defaults.contentType) ? defaults.contentType : 'auto';
+  if ($('language')) $('language').value = channel.language?.toLowerCase().startsWith('hi') ? 'hi' : 'en';
   $('tone').value = defaults.tone;
   $('imageSource').value = defaults.imageSource;
   $('voice').value = defaults.voice || 'auto';
@@ -881,6 +882,7 @@ function openChannelDialog(channel = null) {
     $('channelImageQuality').value = defaults.imageQuality || 'medium';
     $('channelCustomStylePrompt').value = defaults.customStylePrompt || '';
     $('channelContentType').value = defaults.contentType || 'auto';
+    if ($('channelLanguage')) $('channelLanguage').value = channel.language?.toLowerCase().startsWith('hi') ? 'hi' : 'en';
     $('channelVoice').value = defaults.voice || 'auto';
     $('channelTone').value = defaults.tone || 'clear, compelling, and authoritative';
     $('channelSubtitles').checked = defaults.subtitles !== false;
@@ -917,6 +919,7 @@ function openChannelDialog(channel = null) {
     $('channelImageQuality').value = 'medium';
     $('channelCustomStylePrompt').value = '';
     $('channelContentType').value = 'auto';
+    if ($('channelLanguage')) $('channelLanguage').value = 'en';
     $('channelVoice').value = 'auto';
     $('channelSubtitles').checked = true;
     syncChannelVisualFields();
@@ -969,6 +972,7 @@ async function createChannel(event) {
     targetAudience: $('channelAudience').value,
     audiencePainPoints: $('channelPainPoints').value.split(',').map((x) => x.trim()).filter(Boolean),
     contentPillars: $('channelPillars').value.split(',').map((x) => x.trim()).filter(Boolean),
+    language: $('channelLanguage')?.value || 'en',
     productionDefaults: {
       formats, durationMode: 'llm',
       durationRanges: {
