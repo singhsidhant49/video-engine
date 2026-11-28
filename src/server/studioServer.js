@@ -17,6 +17,7 @@ import { inspectProductionPreflight } from './productionPreflight.js';
 import { AdminAuthService, AdminUserStore } from './adminAuthService.js';
 import { createAdminAuthRouter } from './adminAuthRouter.js';
 import { buildOwnerAlerts } from './alertsService.js';
+import { StudioSettingsStore, THUMBNAIL_PROVIDER_CATALOG } from './studioSettingsStore.js';
 
 const { Pool } = pg;
 const app = express();
@@ -43,7 +44,9 @@ const sharedPool = process.env.DATABASE_URL
   : null;
 const channelStore = new ChannelStore({ rootDir: config.channelsDir, pool: sharedPool });
 await channelStore.init();
-const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all', pool: sharedPool });
+const studioSettingsStore = new StudioSettingsStore({ pool: sharedPool, connectionString: null });
+await studioSettingsStore.init();
+const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all', pool: sharedPool, settingsStore: studioSettingsStore });
 videoJobService.onVideoDeleted = (job) => channelStore.unlinkDeletedVideo(job.ownerId, job.id);
 await videoJobService.init();
 const channelDirector = new ChannelDirectorService({ store: channelStore, videoService: videoJobService });
@@ -109,6 +112,24 @@ app.get('/v1/alerts', apiAuth, apiRateLimit, async (req, res, next) => {
       readiness,
       preflight,
     }));
+  } catch (error) { next(error); }
+});
+const thumbnailSettingsPayload = (settings) => ({
+  settings,
+  thumbnailCatalog: THUMBNAIL_PROVIDER_CATALOG,
+  configuredProviders: {
+    ideogram: Boolean((config.ideogram?.apiKey || '').trim()),
+    replicate: Boolean((config.replicate?.apiToken || '').trim()),
+  },
+});
+app.get('/v1/settings', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    res.json(thumbnailSettingsPayload(await studioSettingsStore.get(req.ownerId)));
+  } catch (error) { next(error); }
+});
+app.patch('/v1/settings', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    res.json(thumbnailSettingsPayload(await studioSettingsStore.update(req.ownerId, req.body)));
   } catch (error) { next(error); }
 });
 app.use('/v1', apiAuth, apiRateLimit,

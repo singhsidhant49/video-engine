@@ -263,6 +263,7 @@ export class VideoJobService {
     taskQueue = null,
     thumbnailGenerator = extractThumbnailFromVideo,
     onVideoDeleted = null,
+    settingsStore = null,
   } = {}) {
     this.store = store;
     this.generator = generator;
@@ -274,6 +275,7 @@ export class VideoJobService {
     this.taskQueue = taskQueue;
     this.thumbnailGenerator = thumbnailGenerator;
     this.onVideoDeleted = onVideoDeleted;
+    this.settingsStore = settingsStore;
     this.thumbnailGeneration = new Map();
     this.queue = [];
     this.active = new Map();
@@ -286,6 +288,9 @@ export class VideoJobService {
 
   async init() {
     await this.store.init();
+    if (this.settingsStore && typeof this.settingsStore.init === 'function') {
+      await this.settingsStore.init();
+    }
     const jobs = await this.store.listJobs();
     for (const job of jobs) {
       if (['queued', 'preparing', 'processing'].includes(job.status)) {
@@ -388,6 +393,7 @@ export class VideoJobService {
     }
     if (this.taskQueue) await this.taskQueue.close();
     if (typeof this.store.close === 'function') await this.store.close();
+    if (this.settingsStore && typeof this.settingsStore.close === 'function') await this.settingsStore.close();
   }
 
   create(ownerId, request, idempotencyKey) {
@@ -862,12 +868,16 @@ export class VideoJobService {
       }).catch(() => {});
     }, 1_000) : null;
     try {
+      const studioSettings = this.settingsStore && typeof this.settingsStore.get === 'function'
+        ? await this.settingsStore.get(job.ownerId).catch(() => null)
+        : null;
       const result = await this.generator({
         // Resume checkpoints, but never force-break a live run-directory lock.
         // Stale locks are detected by PID/host/heartbeat in the lock manager.
         videoId: id, resume: job.resumeExisting ? id : null, from: job.resumeFrom || null, force: false, brief: job.pipelineBrief, signal: controller.signal,
         generationAttempt: job.retryCount || 0,
         renderScale: job.request.output.resolution === '720p' ? 2 / 3 : 1,
+        thumbnailSettings: studioSettings?.thumbnail || null,
         onProgress: (event) => {
           const step = Math.max(0, Number(event.step) || 0);
           const renderFraction = event.progress == null ? 0 : Math.max(0, Math.min(100, Number(event.progress))) / 100;

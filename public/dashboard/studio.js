@@ -17,6 +17,9 @@ const state = {
   calendarMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
   alertsData: { counts: { total: 0, critical: 0, error: 0, warning: 0 }, alerts: [] },
   alertFilter: 'all',
+  thumbnailSettings: null,
+  thumbnailCatalog: null,
+  configuredProviders: { ideogram: false, replicate: false },
   performance: [],
   performanceSummary: null,
   selectedChannelId: query.get('channelId'),
@@ -711,6 +714,7 @@ async function refreshAll() {
     singleRequest('channels', loadChannels),
     singleRequest('calendar', loadCalendar),
     singleRequest('alerts', loadAlerts),
+    singleRequest('settings', loadThumbnailSettings),
   ]);
   if (state.selectedChannelId) await Promise.all([singleRequest('ideas', loadIdeas), singleRequest('performance', loadPerformance)]);
 }
@@ -1219,6 +1223,104 @@ async function ideaAction(button) {
   }
 }
 
+function syncThumbnailModelOptions(preferredModel = null) {
+  const provider = $('thumbnailProvider')?.value || 'ideogram';
+  const catalog = state.thumbnailCatalog || {
+    ideogram: {
+      models: [
+        { id: 'p-image-ideogram', label: 'P-Image Ideogram (Fast · Great Quality)' },
+        { id: 'ideogram-4-5', label: 'Ideogram 4.5 (Highest Detail)' },
+        { id: 'ideogram-4', label: 'Ideogram 4.0' },
+        { id: 'ideogram-3', label: 'Ideogram 3.0' },
+        { id: 'V_2_TURBO', label: 'Ideogram v2 Turbo' },
+        { id: 'V_2', label: 'Ideogram v2' },
+      ],
+    },
+    replicate: {
+      models: [
+        { id: 'black-forest-labs/flux-schnell', label: 'FLUX.1 Schnell (Fast · Low Cost)' },
+        { id: 'black-forest-labs/flux-dev', label: 'FLUX.1 Dev (Higher Detail)' },
+      ],
+    },
+  };
+  const models = catalog[provider]?.models || catalog.ideogram.models;
+  const select = $('thumbnailModel');
+  if (!select) return;
+  select.innerHTML = models.map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.label)}</option>`).join('');
+  if (preferredModel && models.some((item) => item.id === preferredModel)) {
+    select.value = preferredModel;
+  }
+  const isIdeogram = provider === 'ideogram';
+  if ($('thumbnailFallbackToFlux')) $('thumbnailFallbackToFlux').disabled = !isIdeogram;
+  if ($('thumbnailFallbackModel')) $('thumbnailFallbackModel').disabled = !isIdeogram || !$('thumbnailFallbackToFlux')?.checked;
+}
+
+function renderThumbnailSettings() {
+  const s = state.thumbnailSettings;
+  if (!s || !$('thumbnailProvider')) return;
+  $('thumbnailProvider').value = s.provider || 'ideogram';
+  syncThumbnailModelOptions(s.model);
+  if ($('thumbnailQuality')) $('thumbnailQuality').value = s.quality || 'medium';
+  if ($('thumbnailFallbackToFlux')) $('thumbnailFallbackToFlux').checked = s.fallbackToFlux !== false;
+  if ($('thumbnailFallbackModel')) $('thumbnailFallbackModel').value = s.fallbackModel || 'black-forest-labs/flux-schnell';
+  if ($('thumbnailEnabled')) $('thumbnailEnabled').checked = s.enabled !== false;
+  syncThumbnailModelOptions(s.model);
+  if ($('thumbnailIdeogramStatus')) {
+    const ok = state.configuredProviders?.ideogram;
+    $('thumbnailIdeogramStatus').className = `badge ${ok ? 'green' : 'amber'}`;
+    $('thumbnailIdeogramStatus').textContent = `Ideogram key: ${ok ? 'Configured' : 'Missing IDEOGRAM_API_KEY'}`;
+  }
+  if ($('thumbnailReplicateStatus')) {
+    const ok = state.configuredProviders?.replicate;
+    $('thumbnailReplicateStatus').className = `badge ${ok ? 'green' : 'amber'}`;
+    $('thumbnailReplicateStatus').textContent = `Replicate token: ${ok ? 'Configured' : 'Missing REPLICATE_API_TOKEN'}`;
+  }
+}
+
+async function loadThumbnailSettings() {
+  if (!state.authenticated || !$('thumbnailSettingsForm')) return;
+  try {
+    const res = await api('/v1/settings');
+    state.thumbnailSettings = res.settings?.thumbnail || null;
+    state.thumbnailCatalog = res.thumbnailCatalog || null;
+    state.configuredProviders = res.configuredProviders || { ideogram: false, replicate: false };
+    renderThumbnailSettings();
+  } catch (error) {
+    if (error.status !== 401 && $('thumbnailSettingsMessage')) $('thumbnailSettingsMessage').textContent = error.message;
+  }
+}
+
+async function saveThumbnailSettings(event) {
+  event.preventDefault();
+  const btn = $('saveThumbnailSettings');
+  btn.disabled = true;
+  $('thumbnailSettingsMessage').textContent = 'Saving thumbnail settings…';
+  try {
+    const body = {
+      thumbnail: {
+        enabled: $('thumbnailEnabled').checked,
+        provider: $('thumbnailProvider').value,
+        model: $('thumbnailModel').value,
+        quality: $('thumbnailQuality').value,
+        fallbackToFlux: $('thumbnailFallbackToFlux').checked,
+        fallbackModel: $('thumbnailFallbackModel').value,
+      },
+    };
+    const res = await api('/v1/settings', { method: 'PATCH', body: JSON.stringify(body) });
+    state.thumbnailSettings = res.settings?.thumbnail || body.thumbnail;
+    state.thumbnailCatalog = res.thumbnailCatalog || state.thumbnailCatalog;
+    state.configuredProviders = res.configuredProviders || state.configuredProviders;
+    renderThumbnailSettings();
+    $('thumbnailSettingsMessage').textContent = 'Saved. New productions will use this model for YouTube thumbnails.';
+    toast('Thumbnail settings saved');
+  } catch (error) {
+    $('thumbnailSettingsMessage').textContent = error.message;
+    handleApiError(error);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function renderAdminUsers(users = []) {
   $('adminUserList').innerHTML = `<p class="eyebrow">ACTIVE ADMINS</p><h2>${users.length} account${users.length === 1 ? '' : 's'}</h2>` + users.map((user) => `<div class="admin-row"><div><strong>${escapeHtml(user.email)}</strong><small>${escapeHtml(user.role)} · ${dateLabel(user.createdAt)}</small></div>${user.email !== state.user?.email ? `<button class="button danger ghost sm" data-admin-delete="${encodeURIComponent(user.email)}">Remove</button>` : '<span class="badge accent">Current</span>'}</div>`).join('');
 }
@@ -1357,6 +1459,9 @@ $('loginForm').addEventListener('submit', login);
 $('loginDialog').addEventListener('cancel', (event) => { if (!state.authenticated) event.preventDefault(); });
 $('logoutButton').addEventListener('click', logout);
 $('adminUserForm').addEventListener('submit', saveAdminUser);
+$('thumbnailSettingsForm')?.addEventListener('submit', saveThumbnailSettings);
+$('thumbnailProvider')?.addEventListener('change', () => syncThumbnailModelOptions());
+$('thumbnailFallbackToFlux')?.addEventListener('change', () => syncThumbnailModelOptions($('thumbnailModel')?.value));
 $('closeReview').addEventListener('click', () => $('reviewDialog').close());
 $('reviewDialog').addEventListener('close', () => { $('reviewVideo').pause(); $('reviewVideo').removeAttribute('src'); $('reviewVideo').load(); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden && state.authenticated) void refreshAll(); });

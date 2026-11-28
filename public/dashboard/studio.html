@@ -269,6 +269,52 @@
             </dl>
           </article>
         </div>
+        <div class="section-head"><div><p class="eyebrow">YOUTUBE THUMBNAILS</p><h2>AI thumbnail provider &amp; model</h2></div></div>
+        <form id="thumbnailSettingsForm" class="panel">
+          <p class="muted">Generate clickable AI YouTube thumbnails with Ideogram by default, and automatically fall back to FLUX (Replicate) if Ideogram credits run out.</p>
+          <div class="form-grid" style="margin-top:12px">
+            <label class="field">
+              <span>Primary provider</span>
+              <select id="thumbnailProvider">
+                <option value="ideogram">Ideogram (Recommended for quality &amp; hooks)</option>
+                <option value="replicate">FLUX (Replicate)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Primary model</span>
+              <select id="thumbnailModel"></select>
+            </label>
+            <label class="field">
+              <span>Quality</span>
+              <select id="thumbnailQuality">
+                <option value="low">Low (Fastest / Lowest cost)</option>
+                <option value="medium" selected>Medium (Balanced)</option>
+                <option value="high">High (Best detail)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Fallback FLUX model (Replicate)</span>
+              <select id="thumbnailFallbackModel">
+                <option value="black-forest-labs/flux-schnell">FLUX.1 Schnell (Fast)</option>
+                <option value="black-forest-labs/flux-dev">FLUX.1 Dev (Higher detail)</option>
+              </select>
+            </label>
+            <label class="check-card wide">
+              <input id="thumbnailFallbackToFlux" type="checkbox" checked>
+              <span><strong>Fallback to FLUX when Ideogram credits run out</strong><small>Automatically switches to Replicate FLUX on HTTP 402 / quota errors instead of leaving thumbnails ungenerated.</small></span>
+            </label>
+            <label class="check-card wide">
+              <input id="thumbnailEnabled" type="checkbox" checked>
+              <span><strong>Enable AI thumbnail generation</strong><small>Turn off only if you want raw video frame stills instead of AI thumbnails.</small></span>
+            </label>
+          </div>
+          <div class="badge-row" style="margin-top:12px">
+            <span class="badge" id="thumbnailIdeogramStatus">Ideogram key: Checking</span>
+            <span class="badge" id="thumbnailReplicateStatus">Replicate token: Checking</span>
+          </div>
+          <p id="thumbnailSettingsMessage" class="muted"></p>
+          <div class="submit-row"><span></span><button class="button primary" id="saveThumbnailSettings" type="submit">Save thumbnail settings</button></div>
+        </form>
         <div class="section-head"><div><p class="eyebrow">ADMINISTRATION</p><h2>Administrator accounts</h2></div></div>
         <div class="settings-grid">
           <form id="adminUserForm" class="panel">

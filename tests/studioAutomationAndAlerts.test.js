@@ -19,6 +19,8 @@ import { YouTubePublisherService } from '../src/services/youtubePublisherService
 import { releaseRelevanceModels } from '../src/services/relevance.js';
 import { releaseRunBundle } from '../src/tools/preview.js';
 import { runRenderQc } from '../src/qc/renderQc.js';
+import { StudioSettingsStore } from '../src/server/studioSettingsStore.js';
+import { generateThumbnailHeroImage } from '../src/services/thumbnailImageService.js';
 
 const makeChannel = (overrides = {}) => ChannelProfileSchema.parse({
   id: 'auto-lab',
@@ -276,4 +278,72 @@ test('alerts service and calendar router expose aggregated diagnostics and YouTu
     }],
   }).catch(() => null);
   assert.equal(missingRenderQc, null);
+});
+
+test('thumbnail settings persist per owner and Ideogram falls back to FLUX when credits run out', async (t) => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vf-thumb-settings-'));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+
+  const settingsStore = new StudioSettingsStore({ file: path.join(root, 'studio_settings.json'), connectionString: null });
+  await settingsStore.init();
+  const initial = await settingsStore.get('acct-a');
+  assert.equal(initial.thumbnail.provider, 'ideogram');
+  assert.equal(initial.thumbnail.model, 'p-image-ideogram');
+  assert.equal(initial.thumbnail.fallbackToFlux, true);
+
+  const updated = await settingsStore.update('acct-a', {
+    thumbnail: { provider: 'ideogram', model: 'ideogram-4-5', quality: 'high', fallbackToFlux: true, fallbackModel: 'black-forest-labs/flux-dev' },
+  });
+  assert.equal(updated.thumbnail.model, 'ideogram-4-5');
+  assert.equal((await settingsStore.get('acct-a')).thumbnail.fallbackModel, 'black-forest-labs/flux-dev');
+
+  const sourcePng = path.join(root, 'mock-flux.png');
+  await fs.writeFile(sourcePng, Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]));
+  const runDir = path.join(root, 'run');
+  await fs.mkdir(runDir, { recursive: true });
+
+  let fluxCalledModel = null;
+  const result = await generateThumbnailHeroImage({
+    concept: { overlayText: 'STOP THIS TRAP', mainSubject: 'Person staring at chess clock', layout: 'text_left_subject_right', strategicBrief: 'Dramatic chess clock moment' },
+    title: 'Why You Sabotage Good Things',
+    topic: 'self sabotage psychology',
+    niche: 'psychology',
+    runDir,
+    thumbnailSettings: updated.thumbnail,
+    generateIdeogram: async () => {
+      throw new Error('Ideogram API credit balance ran out (HTTP 402): Add credits at https://ideogram.ai/manage-api to resume generation.');
+    },
+    generateFlux: async ({ model }) => {
+      fluxCalledModel = model;
+      return { localPath: sourcePng, model, provider: 'replicate' };
+    },
+  });
+
+  assert.equal(fluxCalledModel, 'black-forest-labs/flux-dev');
+  assert.equal(result.provider, 'replicate');
+  assert.equal(result.fallbackUsed, true);
+  assert.ok(result.dataUrl.startsWith('data:image/png;base64,'));
+
+  let passedThumbSettings = null;
+  const service = new VideoJobService({
+    store: new FileJobStore(path.join(root, 'jobs')),
+    rendersDir: path.join(root, 'renders'),
+    settingsStore,
+    generator: async ({ thumbnailSettings }) => {
+      passedThumbSettings = thumbnailSettings;
+      return { outputPath: sourcePng, outputFilename: 'out.mp4', durationSeconds: 30, title: 'T', runDir };
+    },
+  });
+  await service.init();
+  const created = await service.create('acct-a', CreateVideoRequestSchema.parse({
+    prompt: 'Test thumbnail settings forwarding cleanly',
+    output: { aspectRatio: '16:9', resolution: '1080p', durationSeconds: 30 },
+  }));
+  for (let i = 0; i < 40; i++) {
+    const job = await service.get('acct-a', created.job.id);
+    if (job.status === 'completed') break;
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+  assert.equal(passedThumbSettings?.model, 'ideogram-4-5');
+  assert.equal(passedThumbSettings?.fallbackToFlux, true);
 });

@@ -23,6 +23,7 @@ import { buildStoryboard } from './visualStoryboardDirector.js';
 import { evaluateContinuity, buildPacingDiagnostics } from './continuityDirector.js';
 import { reviewVisualPlan, applySceneRepairs, reviewRenderedFrames } from '../services/visualCriticService.js';
 import { generateVideoPackage } from '../services/thumbnailGenerator.js';
+import { generateThumbnailHeroImage } from '../services/thumbnailImageService.js';
 import { buildTimeline, rngFrom, sceneWordRanges } from './timeline.js';
 import { synthesizeWithSay } from '../services/devTts.js';
 import { formatCredits } from '../shared/licensing.js';
@@ -155,6 +156,7 @@ export async function createFacelessVideo({
   imageProvider = null,
   imageModel = null,
   imageQuality = null,
+  thumbnailSettings = null,
   generationAttempt = 0,
 }) {
   if (global.gc) { try { global.gc(); } catch { } }
@@ -1528,7 +1530,32 @@ export async function createFacelessVideo({
           const storyMomentRatios = [0.08, 0.34, 0.78];
           const heroFramePaths = [];
           const heroImages = [];
-          for (let index = 0; index < Math.min(3, videoPackage.thumbnails.length); index++) {
+          let aiThumbnailMeta = null;
+          if (!offline && thumbnailSettings?.enabled !== false && (config.ideogram?.apiKey || config.replicate?.apiToken) && videoPackage.thumbnails[0]) {
+            try {
+              const generatedHero = await generateThumbnailHeroImage({
+                concept: videoPackage.thumbnails[0],
+                index: 0,
+                title: videoPackage.title || executionPlan.title || topic,
+                topic: executionPlan.topic || topic,
+                niche,
+                styleId: effectiveImageStyle,
+                customStylePrompt: effectiveCustomStylePrompt,
+                runDir,
+                seed: generationAttempt,
+                thumbnailSettings,
+              });
+              if (generatedHero?.dataUrl) {
+                heroFramePaths.push(generatedHero.path);
+                heroImages.push(generatedHero.dataUrl);
+                aiThumbnailMeta = { provider: generatedHero.provider, model: generatedHero.model, fallbackUsed: generatedHero.fallbackUsed };
+                console.log(`   🎨 Thumbnail AI hero generated via ${generatedHero.provider} (${generatedHero.model}${generatedHero.fallbackUsed ? ', FLUX fallback' : ''})`);
+              }
+            } catch (aiThumbErr) {
+              console.warn(`   ⚠️ AI thumbnail hero generation failed (${aiThumbErr.message}); falling back to video keyframes.`);
+            }
+          }
+          for (let index = heroImages.length; index < Math.min(3, videoPackage.thumbnails.length); index++) {
             const heroFramePath = path.join(runDir, `thumbnail-hero-${index + 1}.jpg`);
             const timeSec = Math.min(Math.max(0.5, videoDuration * storyMomentRatios[index]), Math.max(0.5, videoDuration - 0.25));
             await ffmpeg(['-ss', timeSec.toFixed(3), '-i', outputPath, '-frames:v', '1', '-q:v', '2', '-y', heroFramePath]);
@@ -1537,6 +1564,7 @@ export async function createFacelessVideo({
           }
           const thumbnailPackage = {
             ...videoPackage,
+            ...(aiThumbnailMeta ? { aiHeroGeneration: aiThumbnailMeta } : {}),
             thumbnails: videoPackage.thumbnails.map((concept, index) => ({
               ...concept,
               heroImage: heroImages[Math.min(index, heroImages.length - 1)],
