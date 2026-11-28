@@ -9,27 +9,56 @@ import { classifyRenderedMotion, renderedMotionThreshold } from '../qc/renderQc.
 export const isBlankRenderedFrame = ({ mean, deviation }) => mean < 3 && deviation < 1.5;
 
 const runBundles = new Map();
+const MAX_CACHED_BUNDLES = 2;
+
+async function removeBundleDirectory(bundlePromiseOrPath) {
+  try {
+    const dir = await bundlePromiseOrPath;
+    if (dir) await fs.rm(dir, { recursive: true, force: true });
+  } catch {}
+}
 
 /** Reuse one immutable Remotion bundle across previews and the final render. */
 export function getRunBundle(runDir) {
   const key = path.resolve(runDir);
   if (!runBundles.has(key)) {
-    const pending = bundle({
-      entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
-      publicDir: path.join(runDir, 'public'),
-      ignoreRegisterRootWarning: true,
-      webpackOverride: (webpackConfig) => ({
-        ...webpackConfig,
-        cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
-      }),
-    }).catch((error) => {
-      runBundles.delete(key);
-      throw error;
-    });
+    const outDir = path.join(key, 'remotion-bundle');
+    const pending = fs.rm(outDir, { recursive: true, force: true })
+      .catch(() => {})
+      .then(() => bundle({
+        entryPoint: path.join(config.rootDir, 'src/remotion/index.jsx'),
+        publicDir: path.join(runDir, 'public'),
+        outDir,
+        ignoreRegisterRootWarning: true,
+        webpackOverride: (webpackConfig) => ({
+          ...webpackConfig,
+          cache: { type: 'filesystem', cacheDirectory: path.join(config.rootDir, '.cache', 'webpack') },
+        }),
+      }))
+      .catch((error) => {
+        runBundles.delete(key);
+        void fs.rm(outDir, { recursive: true, force: true }).catch(() => {});
+        throw error;
+      });
     runBundles.set(key, pending);
-    if (runBundles.size > 8) runBundles.delete(runBundles.keys().next().value);
+    while (runBundles.size > MAX_CACHED_BUNDLES) {
+      const oldestKey = runBundles.keys().next().value;
+      const oldestBundle = runBundles.get(oldestKey);
+      runBundles.delete(oldestKey);
+      void removeBundleDirectory(oldestBundle);
+    }
   }
   return runBundles.get(key);
+}
+
+/** Delete a run's temporary Remotion bundle once rendering and QC complete. */
+export async function releaseRunBundle(runDir) {
+  if (!runDir) return;
+  const key = path.resolve(runDir);
+  const entry = runBundles.get(key);
+  runBundles.delete(key);
+  if (entry) await removeBundleDirectory(entry);
+  await fs.rm(path.join(key, 'remotion-bundle'), { recursive: true, force: true }).catch(() => {});
 }
 
 /**

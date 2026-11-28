@@ -77,6 +77,17 @@ function apiError(status, code, message) {
   return Object.assign(new Error(message), { status, code });
 }
 
+function identifyProvider(message = '') {
+  if (/replicate/i.test(message)) return 'Replicate';
+  if (/ideogram/i.test(message)) return 'Ideogram';
+  if (/deepseek/i.test(message)) return 'DeepSeek';
+  if (/openai/i.test(message)) return 'OpenAI';
+  if (/pexels/i.test(message)) return 'Pexels';
+  if (/pixabay/i.test(message)) return 'Pixabay';
+  if (/kokoro/i.test(message)) return 'Kokoro TTS';
+  return 'External provider';
+}
+
 function safeGenerationFailure(error) {
   const message = String(error?.message || '');
   const known = [
@@ -115,22 +126,61 @@ function safeGenerationFailure(error) {
       unresolvedShots: unresolvedShots.slice(0, 100),
     }
     : null;
-  return match
-    ? { code: error?.code || match[1], message: match[2], ...(safeDetails ? { details: safeDetails } : {}) }
-    : { code: error?.code || 'GENERATION_FAILED', message: 'Video generation failed' };
+  if (match) {
+    return { code: error?.code || match[1], message: match[2], ...(safeDetails ? { details: safeDetails } : {}) };
+  }
+  const provider = identifyProvider(message);
+  if (/credit balance ran out|insufficient[_ ]funds|payment required|http\s*402|\(402\)|status\s*402/i.test(message)) {
+    return {
+      code: 'PROVIDER_CREDITS_EXHAUSTED',
+      message: `${provider} credits exhausted (HTTP 402). Top up your ${provider} balance or switch channel visual source, then retry.`,
+    };
+  }
+  if (/authentication failed|unauthorized|invalid api key|invalid token|not configured|http\s*401|\(401\)|status\s*401/i.test(message)) {
+    return {
+      code: 'PROVIDER_AUTH_FAILED',
+      message: `${provider} authentication failed. Verify the configured API key/token before retrying.`,
+    };
+  }
+  if (/rate limit|too many requests|http\s*429|\(429\)|status\s*429/i.test(message)) {
+    return {
+      code: 'PROVIDER_RATE_LIMITED',
+      message: `${provider} rate limit reached; retry will resume shortly.`,
+    };
+  }
+  if (/ffmpeg closed its remotion|shared-memory ack pipe|enos?pc|no space left on device/i.test(message)) {
+    return {
+      code: 'RENDER_ENCODER_FAILED',
+      message: 'Video encoder interrupted during rendering; retry resumes from completed segments.',
+    };
+  }
+  return { code: error?.code || 'GENERATION_FAILED', message: 'Video generation failed' };
 }
+
+const NON_RETRYABLE_CODES = new Set([
+  'PROVIDER_CREDITS_EXHAUSTED',
+  'PROVIDER_AUTH_FAILED',
+  'NARRATION_QC_FAILED',
+  'SCRIPT_DURATION_BUDGET_FAILED',
+  'CREATIVE_QC_FAILED',
+  'PUBLISHABILITY_FAILED',
+  'RENDER_MAPPING_FAILED',
+]);
 
 const AUTOMATIC_RETRY_CODES = new Set([
   'GENERATION_FAILED',
+  'RENDER_ENCODER_FAILED',
   'TTS_UNAVAILABLE',
   'VIDEO_JOB_TIMEOUT',
   'RENDER_STALLED_OR_CRASHED',
   'UNRESOLVED_PRODUCTION_MEDIA',
+  'PROVIDER_RATE_LIMITED',
 ]);
 
 export function isAutomaticallyRetryableFailure(failure, originalError = null) {
+  if (NON_RETRYABLE_CODES.has(failure?.code)) return false;
   const message = String(originalError?.message || failure?.message || '');
-  if (/authentication failed|unauthorized|invalid api key|invalid token|credit balance ran out|insufficient[_ ]funds|payment required|not configured/i.test(message)) return false;
+  if (/authentication failed|unauthorized|invalid api key|invalid token|credit balance ran out|credits exhausted|insufficient[_ ]funds|payment required|not configured/i.test(message)) return false;
   if (failure?.code === 'TIMELINE_QC_FAILED') return failure?.resumeFrom === 'alignment';
   return AUTOMATIC_RETRY_CODES.has(failure?.code);
 }
@@ -212,6 +262,7 @@ export class VideoJobService {
     maxChannelPendingJobs = config.server.maxChannelPendingJobs,
     taskQueue = null,
     thumbnailGenerator = extractThumbnailFromVideo,
+    onVideoDeleted = null,
   } = {}) {
     this.store = store;
     this.generator = generator;
@@ -222,6 +273,7 @@ export class VideoJobService {
     this.maxChannelPendingJobs = Math.max(1, maxChannelPendingJobs);
     this.taskQueue = taskQueue;
     this.thumbnailGenerator = thumbnailGenerator;
+    this.onVideoDeleted = onVideoDeleted;
     this.thumbnailGeneration = new Map();
     this.queue = [];
     this.active = new Map();
@@ -489,6 +541,21 @@ export class VideoJobService {
     const pending = this.#requestDeletion(ownerId, id).finally(() => this.deletionRequests.delete(key));
     this.deletionRequests.set(key, pending);
     return pending;
+  }
+
+  async requestBulkDeletion(ownerId, ids = []) {
+    const unique = [...new Set(ids.map((item) => String(item || '').trim()).filter(Boolean))].slice(0, 50);
+    const operations = [];
+    const errors = [];
+    for (const id of unique) {
+      try {
+        const operation = await this.requestDeletion(ownerId, id);
+        operations.push(operation);
+      } catch (error) {
+        errors.push({ id, code: error?.code || 'DELETE_FAILED', message: error?.message || 'Could not delete video' });
+      }
+    }
+    return { requested: unique.length, operations, errors };
   }
 
   async #requestDeletion(ownerId, id) {
@@ -905,6 +972,7 @@ export class VideoJobService {
       await this.#waitForRunRelease(job.id);
       await this.#purgeVideoFiles(job);
       await this.store.deleteJob(job.id);
+      if (typeof this.onVideoDeleted === 'function') await this.onVideoDeleted(job).catch(() => {});
       operation.status = 'completed'; operation.completedAt = now(); operation.updatedAt = operation.completedAt;
       await this.store.putOperation(operation);
     } catch (error) {

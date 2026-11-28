@@ -2,11 +2,12 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
-import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames, getRunBundle } from '../tools/preview.js';
+import { renderContactSheet, generateContactSheetDiagnostics, verifyRenderedContactFrames, getRunBundle, releaseRunBundle } from '../tools/preview.js';
 import { makeCancelSignal, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
 import { config } from '../config/index.js';
 import { generateDirectorPlan, normalizePlan, compressPlanScript, expandPlanScript, validateContentQuality, repairIncompleteNarration, repairUnverifiedClaims, selectTargetDuration } from '../services/aiDirectorService.js';
 import { generateSpeech } from '../services/ttsService.js';
+import { releaseRelevanceModels } from '../services/relevance.js';
 import { generateMeditationSpeech } from '../audio/meditationPacer.js';
 import { analyzeNarration, releaseWhisper } from '../services/audioAnalysisService.js';
 import { ensureSoundEffects, ensureBackgroundMusic } from '../services/sfxGeneratorService.js';
@@ -1024,6 +1025,7 @@ export async function createFacelessVideo({
         'credits.txt',
       ]);
       await releaseVisionClassifier();
+      await releaseRelevanceModels();
       if (global.gc) { try { global.gc(); } catch { } }
     }
 
@@ -1615,5 +1617,7 @@ export async function createFacelessVideo({
   } catch (error) {
     await job.fail(error);
     throw error;
+  } finally {
+    await releaseRunBundle(runDir);
   }
 }

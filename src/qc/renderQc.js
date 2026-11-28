@@ -24,12 +24,14 @@ async function grabFrame(file, seconds, tmpDir, i) {
       const mean = sum / data.length;
       let sq = 0;
       for (const v of data) sq += (v - mean) ** 2;
-      return { data, mean, stdev: Math.sqrt(sq / data.length) };
+      return { data, mean, stdev: Math.sqrt(sq / data.length), grabFailed: false };
     }
   } catch (e) {
-    // Graceful fallback
+    return { data: null, mean: 0, stdev: 0, grabFailed: true, error: e?.message || String(e) };
+  } finally {
+    await fs.rm(out, { force: true }).catch(() => {});
   }
-  return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30 };
+  return { data: new Uint8Array(W * H).fill(128), mean: 128, stdev: 30, grabFailed: false };
 }
 
 export function pixelDifferenceExcludingRect(a, b, ignoreRect = null) {
@@ -141,7 +143,7 @@ export async function runRenderQc(videoFile, timeline) {
     add('audio-duration', Boolean(audioStream) && Number.isFinite(audioDuration) && Math.abs(audioDuration - duration) <= 0.25,
       'error', Number.isFinite(audioDuration) ? `${audioDuration.toFixed(2)}s audio vs ${duration.toFixed(2)}s video` : 'audio duration unavailable');
 
-    const blank = [], frozen = [], lumas = [], motionSamples = [], boundarySamples = [], repeatedAssetResets = [], harshDissolves = [], unsafeLoops = [];
+    const blank = [], frozen = [], lumas = [], motionSamples = [], boundarySamples = [], repeatedAssetResets = [], harshDissolves = [], unsafeLoops = [], grabFailures = [];
     let k = 0;
     let previousShot = null;
     for (const c of timeline.clips) {
@@ -152,6 +154,12 @@ export async function runRenderQc(videoFile, timeline) {
         const frames = [];
         for (const at of [0.15, 0.5, 0.85]) {
           frames.push(await grabFrame(videoFile, (start + (end - start) * at) / fps, tmpDir, k++));
+        }
+        const failedFrame = frames.find((frame) => frame.grabFailed);
+        if (failedFrame) {
+          grabFailures.push(`${shot.id}: ${failedFrame.error || 'ffmpeg frame extract failed'}`);
+          previousShot = shot;
+          continue;
         }
         if (shot.asset) lumas.push(...frames.map((frame) => frame.mean));
         for (const frame of frames) if (frame.mean < 8 && frame.stdev < 4) blank.push(shot.id);
@@ -174,16 +182,20 @@ export async function runRenderQc(videoFile, timeline) {
         if (previousShot && start >= 2) {
           const boundaryBefore = await grabFrame(videoFile, Math.max(0, start - 2) / fps, tmpDir, k++);
           const boundaryAfter = await grabFrame(videoFile, Math.min(timeline.durationInFrames - 1, start + 2) / fps, tmpDir, k++);
-          const boundary = classifyEditBoundary({
-            before: boundaryBefore,
-            after: boundaryAfter,
-            sameAsset: Boolean(previousShot.asset?.src && previousShot.asset.src === shot.asset?.src),
-            transitionType: shot.enter?.type || 'cut',
-          });
-          boundarySamples.push({ fromShotId: previousShot.id, toShotId: shot.id, ...boundary });
-          if (boundary.blank) blank.push(`boundary:${previousShot.id}->${shot.id}`);
-          if (boundary.repeatedAssetReset) repeatedAssetResets.push(`${previousShot.id}->${shot.id}`);
-          if (boundary.harshDissolve) harshDissolves.push(`${previousShot.id}->${shot.id}`);
+          if (boundaryBefore.grabFailed || boundaryAfter.grabFailed) {
+            grabFailures.push(`boundary:${previousShot.id}->${shot.id}: ${boundaryBefore.error || boundaryAfter.error || 'ffmpeg frame extract failed'}`);
+          } else {
+            const boundary = classifyEditBoundary({
+              before: boundaryBefore,
+              after: boundaryAfter,
+              sameAsset: Boolean(previousShot.asset?.src && previousShot.asset.src === shot.asset?.src),
+              transitionType: shot.enter?.type || 'cut',
+            });
+            boundarySamples.push({ fromShotId: previousShot.id, toShotId: shot.id, ...boundary });
+            if (boundary.blank) blank.push(`boundary:${previousShot.id}->${shot.id}`);
+            if (boundary.repeatedAssetReset) repeatedAssetResets.push(`${previousShot.id}->${shot.id}`);
+            if (boundary.harshDissolve) harshDissolves.push(`${previousShot.id}->${shot.id}`);
+          }
         }
         if (shot.asset?.type === 'video') {
           const startTime = Number(shot.asset?.videoTrim?.startTime || 0);
@@ -196,8 +208,13 @@ export async function runRenderQc(videoFile, timeline) {
     }
     // Tail: the last half-second before the fade-out.
     const tail = await grabFrame(videoFile, Math.max(0, duration - 1.2), tmpDir, k++);
-    if (tail.mean < 8 && tail.stdev < 4) blank.push('tail');
+    if (tail.grabFailed) {
+      grabFailures.push(`tail: ${tail.error || 'ffmpeg frame extract failed'}`);
+    } else if (tail.mean < 8 && tail.stdev < 4) {
+      blank.push('tail');
+    }
 
+    add('frame-extraction', grabFailures.length === 0, 'error', grabFailures.length ? `could not inspect ${grabFailures.length} shot(s) (${grabFailures[0]})` : 'all sampled frames decoded cleanly');
     add('blank-frames', blank.length === 0, 'error', blank.length ? `blank frames in ${[...new Set(blank)].join(', ')}` : 'none');
     add('frozen-motion', frozen.length === 0, 'error', frozen.length ? `planned/native motion is not visible in ${frozen.join(', ')}` : 'all planned/native motion is visible');
     add('edit-boundary-continuity', repeatedAssetResets.length === 0, isAiWorkflow ? 'warn' : 'error', repeatedAssetResets.length ? `repeated media resets at ${repeatedAssetResets.join(', ')}` : `${boundarySamples.length} edit boundaries inspected`);

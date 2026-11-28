@@ -5,9 +5,9 @@ import { FileJobStore } from './fileJobStore.js';
 import { PostgresJobStore } from './postgresJobStore.js';
 import { VideoJobService } from './videoJobService.js';
 
-export function createConfiguredVideoJobService({ role = process.env.VIDEO_PROCESS_ROLE || 'all' } = {}) {
+export function createConfiguredVideoJobService({ role = process.env.VIDEO_PROCESS_ROLE || 'all', pool = null } = {}) {
   const store = config.server.jobStore === 'postgres'
-    ? new PostgresJobStore()
+    ? new PostgresJobStore({ pool })
     : new FileJobStore(path.join(config.rendersDir, 'api'));
   const taskQueue = config.server.queueBackend === 'bullmq'
     ? new BullVideoQueue({

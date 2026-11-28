@@ -80,7 +80,7 @@ export class YouTubePublisherService {
     if (!await this.store.getChannel(ownerId, channelId)) throw serviceError(404, 'CHANNEL_NOT_FOUND', 'Channel not found');
     const state = this.#signState({ ownerId, channelId, exp: Date.now() + 10 * 60_000, nonce: crypto.randomUUID() }, cfg.stateSecret);
     const url = new URL(GOOGLE_AUTH);
-    url.search = new URLSearchParams({ client_id: cfg.clientId, redirect_uri: cfg.redirectUri, response_type: 'code', access_type: 'offline', prompt: 'consent', scope: SCOPES.join(' '), state }).toString();
+    url.search = new URLSearchParams({ client_id: cfg.clientId, redirect_uri: cfg.redirectUri, response_type: 'code', access_type: 'offline', prompt: 'consent select_account', scope: SCOPES.join(' '), state }).toString();
     return url.toString();
   }
 

@@ -21,10 +21,66 @@ function validateProduction(production) {
   }
 }
 
-export function createChannelApiRouter({ store, director, publisher = null, publishingEnabled = Boolean(publisher) }) {
+export function createChannelApiRouter({ store, director, videoService = null, publisher = null, publishingEnabled = Boolean(publisher) }) {
   const router = express.Router();
   router.get('/channels', async (req, res, next) => {
-    try { res.json({ channels: (await store.listChannels(req.ownerId)).map(publicChannel) }); } catch (error) { next(error); }
+    try { res.json({ channels: (await store.listChannels(req.ownerId)).map(publicChannel), publishingEnabled }); } catch (error) { next(error); }
+  });
+
+  router.get('/calendar', async (req, res, next) => {
+    try {
+      const channelFilter = req.query.channelId ? String(req.query.channelId).trim() : null;
+      const fromMs = req.query.from ? Date.parse(String(req.query.from)) : null;
+      const toMs = req.query.to ? Date.parse(String(req.query.to)) : null;
+      const channels = (await store.listChannels(req.ownerId)).filter((ch) => !channelFilter || ch.id === channelFilter);
+      const ideasLists = await Promise.all(channels.map((channel) => store.listIdeas(req.ownerId, channel.id)));
+      const videoCache = new Map();
+      const getVideo = async (videoId) => {
+        if (!videoId || !videoService || typeof videoService.get !== 'function') return null;
+        if (videoCache.has(videoId)) return videoCache.get(videoId);
+        const video = await videoService.get(req.ownerId, videoId).catch(() => null);
+        videoCache.set(videoId, video);
+        return video;
+      };
+      const items = [];
+      for (let i = 0; i < channels.length; i++) {
+        const channel = channels[i];
+        for (const idea of ideasLists[i] || []) {
+          if (idea.status === 'rejected') continue;
+          const slotIso = idea.publishAt || null;
+          if ((fromMs || toMs) && slotIso) {
+            const slotMs = Date.parse(slotIso);
+            if (Number.isFinite(fromMs) && slotMs < fromMs) continue;
+            if (Number.isFinite(toMs) && slotMs > toMs) continue;
+          }
+          const video = await getVideo(idea.videoId);
+          items.push({
+            ...publicIdea(idea),
+            channelName: channel.name,
+            channelNiche: channel.niche,
+            timezone: channel.automation?.timezone || 'UTC',
+            youtubeConnected: Boolean(channel.youtube?.connected),
+            youtubeChannelTitle: channel.youtube?.channelTitle || null,
+            autoPublish: Boolean(channel.automation?.autoPublish),
+            publishPrivacy: channel.automation?.publishPrivacy || 'private',
+            video: video ? {
+              id: video.id,
+              status: video.status,
+              stage: video.stage,
+              progress: video.progress,
+              error: video.error || null,
+              durationSeconds: video.result?.durationSeconds || null,
+            } : null,
+          });
+        }
+      }
+      items.sort((a, b) => {
+        const aTime = a.publishAt ? Date.parse(a.publishAt) : Number.MAX_SAFE_INTEGER;
+        const bTime = b.publishAt ? Date.parse(b.publishAt) : Number.MAX_SAFE_INTEGER;
+        return aTime - bTime || String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''));
+      });
+      res.json({ items, publishingEnabled });
+    } catch (error) { next(error); }
   });
   router.post('/channels', async (req, res, next) => {
     try {
@@ -148,13 +204,20 @@ export function createChannelApiRouter({ store, director, publisher = null, publ
       const patch = IdeaPatchSchema.parse(req.body);
       const selectedTitle = patch.selectedTitle;
       const selectedThumbnailConcept = patch.selectedThumbnailConcept;
-      if ((selectedTitle || selectedThumbnailConcept) && !['draft', 'approved', 'failed'].includes(idea.status)) throw errorWith(409, 'EXPERIMENT_ALREADY_IN_PRODUCTION', 'Packaging selection cannot change after production has started');
+      const editsPackaging = Boolean(selectedTitle || selectedThumbnailConcept || patch.title || patch.spokenHook || patch.narrativeArc || patch.thumbnailConcept);
+      if (editsPackaging && !['draft', 'approved', 'failed'].includes(idea.status)) {
+        throw errorWith(409, 'EXPERIMENT_ALREADY_IN_PRODUCTION', 'Packaging and script details cannot change after production has started');
+      }
+      if (patch.status && !['draft', 'approved', 'rejected', 'failed'].includes(idea.status)) {
+        throw errorWith(409, 'IDEA_STATUS_LOCKED', `Cannot change status while idea is ${idea.status}`);
+      }
       const titleCandidate = selectedTitle && idea.titleCandidates.find((item) => item.text === selectedTitle);
       const thumbnailCandidate = selectedThumbnailConcept && idea.thumbnailCandidates.find((item) => item.concept === selectedThumbnailConcept);
       if (selectedTitle && !titleCandidate) throw errorWith(400, 'INVALID_EXPERIMENT_SELECTION', 'Selected title must be one of the stored title candidates');
       if (selectedThumbnailConcept && !thumbnailCandidate) throw errorWith(400, 'INVALID_EXPERIMENT_SELECTION', 'Selected thumbnail must be one of the stored thumbnail candidates');
       const updated = {
         ...idea, ...patch,
+        ...(editsPackaging ? { packagingEdited: true } : {}),
         ...(selectedTitle ? { title: selectedTitle, titleScore: titleCandidate.score, titleCandidates: idea.titleCandidates.map((item) => ({ ...item, selected: item.text === selectedTitle })), packagingExperiment: { ...idea.packagingExperiment, titleAngle: titleCandidate.angle } } : {}),
         ...(selectedThumbnailConcept ? { thumbnailConcept: selectedThumbnailConcept, thumbnailCandidates: idea.thumbnailCandidates.map((item) => ({ ...item, selected: item.concept === selectedThumbnailConcept })), packagingExperiment: { ...idea.packagingExperiment, ...(selectedTitle ? { titleAngle: titleCandidate.angle } : {}), thumbnailVariant: thumbnailCandidate.variant } } : {}),
         updatedAt: new Date().toISOString(),
@@ -162,6 +225,17 @@ export function createChannelApiRouter({ store, director, publisher = null, publ
       delete updated.selectedTitle; delete updated.selectedThumbnailConcept;
       await store.putIdea(req.ownerId, updated);
       res.json(publicIdea(updated));
+    } catch (error) { next(error); }
+  });
+  router.delete('/channels/:channelId/ideas/:ideaId', async (req, res, next) => {
+    try {
+      const idea = await store.getIdea(req.ownerId, req.params.ideaId);
+      if (!idea || idea.channelId !== req.params.channelId) throw errorWith(404, 'IDEA_NOT_FOUND', 'Idea not found');
+      if (['queued', 'producing', 'publishing'].includes(idea.status)) {
+        throw errorWith(409, 'IDEA_ACTIVE', `Cannot delete idea while status is ${idea.status}`);
+      }
+      if (typeof store.deleteIdea === 'function') await store.deleteIdea(req.ownerId, idea.id);
+      res.status(204).end();
     } catch (error) { next(error); }
   });
   router.post('/channels/:channelId/ideas/:ideaId/produce', async (req, res, next) => {

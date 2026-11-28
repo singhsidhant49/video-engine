@@ -1,4 +1,4 @@
-import { brainstormGrowthIdeas, isMeditationChannel } from './youtubeGrowthService.js';
+import { brainstormGrowthIdeas, isMeditationChannel, selectOptimalPackaging, summarizeChannelPerformance } from './youtubeGrowthService.js';
 import { CreateVideoRequestSchema } from '../server/videoApiSchemas.js';
 
 const now = () => new Date().toISOString();
@@ -103,9 +103,22 @@ ${scriptContract}`;
   }
 
   async produce(ownerId, channelId, ideaId) {
-    const [channel, idea] = await Promise.all([this.store.getChannel(ownerId, channelId), this.store.getIdea(ownerId, ideaId)]);
+    const [channel, loadedIdea] = await Promise.all([this.store.getChannel(ownerId, channelId), this.store.getIdea(ownerId, ideaId)]);
+    let idea = loadedIdea;
     if (!channel || !idea || idea.channelId !== channelId) throw Object.assign(new Error('Idea not found'), { status: 404, code: 'IDEA_NOT_FOUND' });
     if (!['draft', 'approved', 'failed'].includes(idea.status)) throw Object.assign(new Error(`Idea cannot be produced while ${idea.status}`), { status: 409, code: 'IDEA_NOT_PRODUCIBLE' });
+    if (!idea.packagingEdited && (idea.titleCandidates?.length || idea.thumbnailCandidates?.length)) {
+      const [history, performance] = await Promise.all([
+        typeof this.store.listIdeas === 'function' ? this.store.listIdeas(ownerId, channelId) : [],
+        typeof this.store.listPerformance === 'function' ? this.store.listPerformance(ownerId, channelId, { limit: 100 }) : [],
+      ]);
+      const performanceSummary = summarizeChannelPerformance(performance, history);
+      idea = selectOptimalPackaging(idea, {
+        performanceSummary,
+        recentIdeas: history.filter((item) => item.id !== idea.id),
+        isMeditation: isMeditationChannel(channel),
+      });
+    }
     let created;
     if (idea.status === 'failed' && idea.videoId && typeof this.videoService.retry === 'function') {
       created = await this.videoService.retry(ownerId, idea.videoId);

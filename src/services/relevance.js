@@ -41,6 +41,20 @@ const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
 
 export const relevanceEnabled = () => process.env.RELEVANCE !== 'off';
 
+/** Release cached CLIP relevance models and text embeddings to free worker RAM before Remotion rendering. */
+export async function releaseRelevanceModels() {
+  const active = models;
+  models = null;
+  textCache.clear();
+  try {
+    await active?.vis?.dispose?.();
+    await active?.txt?.dispose?.();
+  } catch {}
+  if (global.gc) {
+    try { global.gc(); } catch {}
+  }
+}
+
 async function embedText(text) {
   if (!textCache.has(text)) {
     const { tok, txt } = await load();

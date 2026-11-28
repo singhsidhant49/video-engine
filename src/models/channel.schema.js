@@ -41,11 +41,15 @@ export const ProductionDefaultsSchema = z.object({
 export const AutomationSettingsSchema = z.object({
   enabled: z.boolean().default(false),
   scheduleCron: z.string().trim().min(9).max(100).default('0 12 * * *'),
+  publishScheduleCron: z.string().trim().min(9).max(100).nullable().default(null),
   timezone: z.string().trim().min(1).max(100).default('UTC'),
   approvalMode: z.enum(['manual_approval', 'automatic']).default('manual_approval'),
   queuePriority: z.enum(['high', 'normal', 'low']).default('normal'),
   maxPendingJobs: z.number().int().min(1).max(10).default(2),
   autoPublish: z.boolean().default(false),
+  autoScheduleCalendar: z.boolean().default(true),
+  autoReplenishIdeas: z.boolean().default(true),
+  minLeadMinutes: z.number().int().min(5).max(10_080).default(60),
   publishPrivacy: z.enum(['private', 'unlisted', 'public']).default('private'),
   lastScheduledAt: z.string().datetime().nullable().default(null),
   lastError: z.string().max(1_000).nullable().default(null),
@@ -142,11 +146,15 @@ export const ChannelPatchSchema = z.object({
   automation: z.object({
     enabled: z.boolean().optional(),
     scheduleCron: z.string().trim().min(9).max(100).optional(),
+    publishScheduleCron: z.string().trim().min(9).max(100).nullable().optional(),
     timezone: z.string().trim().min(1).max(100).optional(),
     approvalMode: z.enum(['manual_approval', 'automatic']).optional(),
     queuePriority: z.enum(['high', 'normal', 'low']).optional(),
     maxPendingJobs: z.number().int().min(1).max(10).optional(),
     autoPublish: z.boolean().optional(),
+    autoScheduleCalendar: z.boolean().optional(),
+    autoReplenishIdeas: z.boolean().optional(),
+    minLeadMinutes: z.number().int().min(5).max(10_080).optional(),
     publishPrivacy: z.enum(['private', 'unlisted', 'public']).optional(),
   }).strict().optional(),
 }).strict().refine((value) => Object.keys(value).length > 0, { message: 'At least one channel field is required' });
@@ -215,6 +223,7 @@ export const ChannelVideoIdeaSchema = z.object({
     measuredDemand: z.literal(false).default(false),
   }).strict().default({}),
   status: z.enum(['draft', 'approved', 'queued', 'producing', 'ready', 'publishing', 'publish_failed', 'published', 'rejected', 'failed']).default('draft'),
+  packagingEdited: z.boolean().default(false),
   videoId: z.string().max(120).nullable().default(null),
   youtubeVideoId: z.string().max(120).nullable().default(null),
   publishAt: z.string().datetime().nullable().default(null),
@@ -224,8 +233,12 @@ export const ChannelVideoIdeaSchema = z.object({
 }).strict();
 
 export const IdeaPatchSchema = z.object({
-  status: z.enum(['approved', 'rejected']).optional(),
+  status: z.enum(['draft', 'approved', 'rejected']).optional(),
   publishAt: ChannelVideoIdeaSchema.shape.publishAt.optional(),
+  title: z.string().trim().min(5).max(100).optional(),
+  spokenHook: z.string().trim().min(5).max(300).optional(),
+  narrativeArc: z.string().trim().min(10).max(2_000).optional(),
+  thumbnailConcept: z.string().trim().min(5).max(500).optional(),
   selectedTitle: z.string().trim().min(5).max(100).optional(),
   selectedThumbnailConcept: z.string().trim().min(5).max(500).optional(),
 }).strict();

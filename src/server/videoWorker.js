@@ -1,3 +1,6 @@
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import { config } from '../config/index.js';
 import { createConfiguredVideoJobService } from './serviceFactory.js';
 
@@ -5,6 +8,25 @@ import { loadMediaBankCatalog } from '../services/mediaBank.js';
 import { pruneRuns } from './runPruner.js';
 import { cleanCache } from '../core/cache/cacheManager.js';
 
+/** Remove leftover Remotion / QC temporary directories left in /tmp after a crash. */
+async function cleanupOrphanedTmp() {
+  try {
+    const tmpRoot = os.tmpdir();
+    const entries = await fs.readdir(tmpRoot);
+    let removed = 0;
+    for (const name of entries) {
+      if (name.startsWith('remotion-webpack-bundle-') || name.startsWith('rqc-') || name.startsWith('remotion-v4-')) {
+        await fs.rm(path.join(tmpRoot, name), { recursive: true, force: true }).catch(() => {});
+        removed += 1;
+      }
+    }
+    if (removed > 0) console.log(`🧹 [Worker Startup] Removed ${removed} orphaned temp director${removed === 1 ? 'y' : 'ies'} from ${tmpRoot}.`);
+  } catch (err) {
+    console.warn('[Worker Startup] Temp cleanup warning:', err?.message);
+  }
+}
+
+await cleanupOrphanedTmp();
 const service = createConfiguredVideoJobService({ role: 'worker' });
 await service.init();
 await loadMediaBankCatalog().catch(() => {});

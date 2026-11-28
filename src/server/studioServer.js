@@ -2,6 +2,7 @@ import express from 'express';
 import crypto from 'node:crypto';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import pg from 'pg';
 import { config } from '../config/index.js';
 import { createFacelessVideo } from '../pipeline/videoGeneratorPipeline.js';
 import { createConfiguredVideoJobService } from './serviceFactory.js';
@@ -15,9 +16,12 @@ import { YouTubePublisherService } from '../services/youtubePublisherService.js'
 import { inspectProductionPreflight } from './productionPreflight.js';
 import { AdminAuthService, AdminUserStore } from './adminAuthService.js';
 import { createAdminAuthRouter } from './adminAuthRouter.js';
+import { buildOwnerAlerts } from './alertsService.js';
 
+const { Pool } = pg;
 const app = express();
 app.disable('x-powered-by');
+app.set('trust proxy', process.env.TRUST_PROXY ? (Number(process.env.TRUST_PROXY) || process.env.TRUST_PROXY) : 1);
 app.use((req, res, next) => {
   const requestId = String(req.get('x-request-id') || crypto.randomUUID()).slice(0, 128);
   req.requestId = requestId;
@@ -34,10 +38,14 @@ app.use((req, res, next) => {
 });
 app.use(express.json({ limit: config.server.maxRequestBytes }));
 
-const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all' });
-await videoJobService.init();
-const channelStore = new ChannelStore({ rootDir: config.channelsDir });
+const sharedPool = process.env.DATABASE_URL
+  ? new Pool({ connectionString: process.env.DATABASE_URL, max: Number(process.env.POSTGRES_POOL_SIZE || 10) })
+  : null;
+const channelStore = new ChannelStore({ rootDir: config.channelsDir, pool: sharedPool });
 await channelStore.init();
+const videoJobService = createConfiguredVideoJobService({ role: process.env.VIDEO_PROCESS_ROLE || 'all', pool: sharedPool });
+videoJobService.onVideoDeleted = (job) => channelStore.unlinkDeletedVideo(job.ownerId, job.id);
+await videoJobService.init();
 const channelDirector = new ChannelDirectorService({ store: channelStore, videoService: videoJobService });
 const youtubePublisher = (config.server.youtubePublishingEnabled || config.server.youtubeAnalyticsEnabled)
   ? new YouTubePublisherService({ store: channelStore, videoService: videoJobService })
@@ -49,7 +57,7 @@ const namedApiAccount = config.server.apiKeys.map((entry) => {
   return separator > 0 ? value.slice(0, separator) : '';
 }).find((name) => /^[a-zA-Z0-9_-]{3,64}$/.test(name));
 const adminOwnerId = config.server.adminOwnerId || (namedApiAccount ? `acct_${namedApiAccount}` : 'acct_admin');
-const adminStore = new AdminUserStore({ file: path.join(config.rendersDir, 'admin_users.json'), defaultOwnerId: adminOwnerId });
+const adminStore = new AdminUserStore({ file: path.join(config.rendersDir, 'admin_users.json'), pool: sharedPool, defaultOwnerId: adminOwnerId });
 await adminStore.init();
 const adminAuth = new AdminAuthService({ store: adminStore, jwtSecret: config.server.jwtSecret, ttlSeconds: config.server.jwtTtlSeconds, production });
 await adminAuth.bootstrap({ email: config.server.adminEmail, password: config.server.adminPassword, ownerId: adminOwnerId });
@@ -88,8 +96,23 @@ if (youtubePublisher) app.get('/oauth/youtube/callback', async (req, res) => {
     res.status(error.status || 500).type('html').send(`<!doctype html><meta charset="utf-8"><title>Connection failed</title><body style="font-family:system-ui;padding:3rem"><h1>Connection failed</h1><p>${String(error.message || 'Unknown error').replace(/[&<>"']/g, '')}</p>`);
   }
 });
+app.get('/v1/alerts', apiAuth, apiRateLimit, async (req, res, next) => {
+  try {
+    const [readiness, preflight] = await Promise.all([
+      videoJobService.readiness().catch(() => null),
+      inspectProductionPreflight().catch(() => null),
+    ]);
+    res.json(await buildOwnerAlerts({
+      ownerId: req.ownerId,
+      videoService: videoJobService,
+      channelStore,
+      readiness,
+      preflight,
+    }));
+  } catch (error) { next(error); }
+});
 app.use('/v1', apiAuth, apiRateLimit,
-  createChannelApiRouter({ store: channelStore, director: channelDirector, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled }),
+  createChannelApiRouter({ store: channelStore, director: channelDirector, videoService: videoJobService, publisher: youtubePublisher, publishingEnabled: config.server.youtubePublishingEnabled }),
   createVideoApiRouter({ service: videoJobService }));
 
 // Serve static assets (audio, videos, media, public files)
@@ -172,7 +195,7 @@ app.get('/api/renders', process.env.NODE_ENV === 'production' ? apiAuth : (req, 
 
 // Serve the route-based Studio dashboard. Keeping these as real URLs makes
 // navigation, refreshes and browser history work without a client router.
-const studioPages = ['/', '/dashboard', '/dashboard/overview', '/dashboard/production', '/dashboard/channels', '/dashboard/ideas', '/dashboard/analytics', '/dashboard/settings'];
+const studioPages = ['/', '/dashboard', '/dashboard/overview', '/dashboard/calendar', '/dashboard/production', '/dashboard/channels', '/dashboard/ideas', '/dashboard/alerts', '/dashboard/analytics', '/dashboard/settings'];
 app.get(studioPages, (req, res) => {
   res.sendFile(path.join(config.publicDir, 'dashboard', 'studio.html'));
 });
@@ -208,6 +231,7 @@ async function shutdown(signal) {
   await videoJobService.shutdown({ timeoutMs: config.server.shutdownTimeoutMs });
   await channelStore.close();
   await adminStore.close();
+  if (sharedPool) await sharedPool.end().catch(() => {});
   await closeServer;
   console.log('Video API shutdown complete.');
 }

@@ -202,6 +202,60 @@ export class ChannelStore {
     });
   }
 
+  async deleteIdea(ownerId, id) {
+    if (this.pool) {
+      const result = await this.pool.query('DELETE FROM channel_ideas WHERE owner_id=$1 AND id=$2', [ownerId, id]);
+      return result.rowCount > 0;
+    }
+    return this.#write(async () => {
+      const rows = await this.#read(this.ideasFile);
+      const next = rows.filter((row) => !(row.ownerId === ownerId && row.id === id));
+      if (next.length === rows.length) return false;
+      await this.#atomicWrite(this.ideasFile, next);
+      return true;
+    });
+  }
+
+  /** Clear orphaned references when a generated video is permanently deleted. */
+  async unlinkDeletedVideo(ownerId, videoId) {
+    if (!videoId) return 0;
+    const nowIso = new Date().toISOString();
+    const cleanIdea = (idea) => {
+      const parsed = ChannelVideoIdeaSchema.parse(idea);
+      const resetStatus = ['queued', 'producing', 'ready', 'failed', 'publish_failed'].includes(parsed.status)
+        ? 'draft'
+        : parsed.status;
+      return ChannelVideoIdeaSchema.parse({
+        ...parsed,
+        videoId: null,
+        error: null,
+        status: resetStatus,
+        updatedAt: nowIso,
+      });
+    };
+    if (this.pool) {
+      const { rows } = await this.pool.query(
+        "SELECT data FROM channel_ideas WHERE owner_id=$1 AND data->>'videoId'=$2",
+        [ownerId, videoId],
+      );
+      for (const row of rows) await this.putIdea(ownerId, cleanIdea(row.data));
+      return rows.length;
+    }
+    return this.#write(async () => {
+      const rows = await this.#read(this.ideasFile);
+      let updatedCount = 0;
+      const next = rows.map((row) => {
+        if (row.ownerId === ownerId && row.data?.videoId === videoId) {
+          updatedCount += 1;
+          return { ...row, data: clone(cleanIdea(row.data)) };
+        }
+        return row;
+      });
+      if (updatedCount > 0) await this.#atomicWrite(this.ideasFile, next);
+      return updatedCount;
+    });
+  }
+
   async listPerformance(ownerId, channelId, { limit = 100 } = {}) {
     const bounded = Math.max(1, Math.min(500, Number(limit) || 100));
     if (this.pool) {

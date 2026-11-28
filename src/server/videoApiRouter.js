@@ -1,8 +1,12 @@
 import crypto from 'node:crypto';
 import express from 'express';
-import { ZodError } from 'zod-api';
+import { z, ZodError } from 'zod-api';
 import { CreateVideoRequestSchema, VisualOverridesSchema } from './videoApiSchemas.js';
 import { getAudioCatalog } from '../audio/musicCatalog.js';
+
+const BulkDeleteSchema = z.object({
+  ids: z.array(z.string().regex(/^vid_[a-zA-Z0-9_-]{3,160}$/)).min(1).max(50),
+}).strict();
 
 function ownerForKey(key) {
   return `acct_${crypto.createHash('sha256').update(key).digest('hex').slice(0, 24)}`;
@@ -161,8 +165,11 @@ export function createVideoApiRouter({ service }) {
   });
 
   router.get('/videos/:id/download', async (req, res, next) => {
-    try { res.download(await service.download(req.ownerId, req.params.id)); }
-    catch (error) { next(error); }
+    try {
+      const filePath = await service.download(req.ownerId, req.params.id);
+      if (String(req.query.inline || '') === '1') return res.sendFile(filePath);
+      return res.download(filePath);
+    } catch (error) { next(error); }
   });
 
   router.get('/videos/:id/thumbnail', async (req, res, next) => {
@@ -213,6 +220,18 @@ export function createVideoApiRouter({ service }) {
       const operation = await service.requestDeletion(req.ownerId, req.params.id);
       res.status(operation.status === 'completed' ? 200 : 202).json({
         ...operationView(operation), statusUrl: `/v1/operations/${operation.id}`,
+      });
+    } catch (error) { next(error); }
+  });
+
+  router.post('/videos/bulk-delete', async (req, res, next) => {
+    try {
+      const { ids } = BulkDeleteSchema.parse(req.body || {});
+      const result = await service.requestBulkDeletion(req.ownerId, ids);
+      res.status(202).json({
+        requested: result.requested,
+        operations: result.operations.map((op) => ({ ...operationView(op), statusUrl: `/v1/operations/${op.id}` })),
+        errors: result.errors,
       });
     } catch (error) { next(error); }
   });

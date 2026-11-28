@@ -46,14 +46,14 @@ x-app-environment: &app-environment
   KOKORO_TTS_URL: http://kokoro:8880/v1/audio/speech
   KOKORO_VOICE: ${KOKORO_VOICE:-af_bella}
   KOKORO_SPEED: ${KOKORO_SPEED:-0.9}
-  KOKORO_MEDITATION_SPEED: ${KOKORO_MEDITATION_SPEED:-0.58}
+  KOKORO_MEDITATION_SPEED: ${KOKORO_MEDITATION_SPEED:-0.72}
   KOKORO_RETRY_ATTEMPTS: ${KOKORO_RETRY_ATTEMPTS:-5}
   KOKORO_RETRY_BASE_DELAY_MS: ${KOKORO_RETRY_BASE_DELAY_MS:-1000}
   # Local Whisper is optional. Long narration uses deterministic timing so a
   # small CPU-only VPS cannot be pinned indefinitely during alignment.
   WHISPER_ENABLED: ${WHISPER_ENABLED:-auto}
-  WHISPER_MAX_AUDIO_SECONDS: ${WHISPER_MAX_AUDIO_SECONDS:-900}
-  WHISPER_TIMEOUT_MS: ${WHISPER_TIMEOUT_MS:-720000}
+  WHISPER_MAX_AUDIO_SECONDS: ${WHISPER_MAX_AUDIO_SECONDS:-90}
+  WHISPER_TIMEOUT_MS: ${WHISPER_TIMEOUT_MS:-60000}
   WHISPER_MODEL: ${WHISPER_MODEL:-Xenova/whisper-base.en}
   ALLOW_ESTIMATED_ALIGNMENT: ${ALLOW_ESTIMATED_ALIGNMENT:-true}
   ALLOW_UNVERIFIED_CLAIMS: ${ALLOW_UNVERIFIED_CLAIMS:-true}
@@ -91,6 +91,7 @@ services:
   postgres:
     image: postgres:16-alpine
     restart: unless-stopped
+    mem_limit: ${POSTGRES_MEMORY_LIMIT:-512m}
     environment:
       POSTGRES_DB: videogenerator
       POSTGRES_USER: video
@@ -108,6 +109,7 @@ services:
   redis:
     image: redis:7.4-alpine
     restart: unless-stopped
+    mem_limit: ${REDIS_MEMORY_LIMIT:-256m}
     command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
     volumes:
       - redis_data:/data
@@ -122,6 +124,7 @@ services:
   kokoro:
     image: ${KOKORO_IMAGE:?KOKORO_IMAGE must be pinned to an approved immutable digest}
     restart: unless-stopped
+    mem_limit: ${KOKORO_MEMORY_LIMIT:-2560m}
     ports:
       # Keep localhost as the safe default. Set KOKORO_BIND_IP to a trusted LAN
       # address only when another machine must call the provider directly.
@@ -211,7 +214,7 @@ services:
       - /tmp:size=2g,mode=1777
     cap_drop: ["ALL"]
     security_opt: ["no-new-privileges:true"]
-    mem_limit: ${VIDEO_WORKER_MEMORY_LIMIT:-6g}
+    mem_limit: ${VIDEO_WORKER_MEMORY_LIMIT:-4g}
     cpus: ${VIDEO_WORKER_CPU_LIMIT:-4.0}
     depends_on:
       postgres: { condition: service_healthy }

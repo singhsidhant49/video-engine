@@ -8,6 +8,11 @@ function loginRateLimit({ windowMs = 15 * 60_000, max = 10 } = {}) {
     const current = attempts.get(key);
     const bucket = !current || now - current.startedAt >= windowMs ? { startedAt: now, count: 1 } : { ...current, count: current.count + 1 };
     attempts.set(key, bucket);
+    if (attempts.size > 5_000) {
+      for (const [entryKey, entry] of attempts) {
+        if (now - entry.startedAt >= windowMs) attempts.delete(entryKey);
+      }
+    }
     if (bucket.count > max) {
       res.set('retry-after', String(Math.ceil((windowMs - (now - bucket.startedAt)) / 1000)));
       return res.status(429).json({ error: { code: 'LOGIN_RATE_LIMITED', message: 'Too many login attempts. Try again later.' } });

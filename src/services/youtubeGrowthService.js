@@ -595,6 +595,94 @@ function durationLabel(seconds) {
   return seconds >= 60 ? `${Math.round(seconds / 60)} minutes` : `${seconds} seconds`;
 }
 
+function scorePackagingTitleCandidate(candidate, { performanceSummary, recentIdeas = [], isMeditation = false } = {}) {
+  const text = String(candidate?.text || '').trim();
+  let score = scoreTitle(text);
+  const angle = String(candidate?.angle || '').trim();
+  const winner = performanceSummary?.guidance?.reliableComparisons?.titleAngles;
+  if (winner && angle === winner) score += 12;
+  const recentUses = recentIdeas.slice(0, 10).filter((item) => item?.packagingExperiment?.titleAngle === angle).length;
+  if (recentUses >= 3 && winner !== angle) score -= 8;
+  if (isMeditation && MEDITATION_CLICKBAIT_RE.test(text)) score -= 100;
+  return score;
+}
+
+function scorePackagingThumbnailCandidate(candidate, { performanceSummary, recentIdeas = [], isMeditation = false } = {}) {
+  const variant = String(candidate?.variant || '').trim();
+  const overlay = String(candidate?.overlayText || '').trim();
+  const words = overlay ? overlay.split(/\s+/).filter(Boolean).length : 0;
+  let score = 50;
+  if (isMeditation) {
+    if (/calm|guided|sleep|gentle/i.test(variant)) score += 14;
+    if (words === 0) score += 8;
+    else if (words <= 3 && !/WHY\?|BEFORE \/ AFTER/i.test(overlay)) score += 6;
+    else score -= 18;
+  } else {
+    if (words >= 1 && words <= 3) score += 10;
+    else if (words === 0) score += 2;
+    else score -= 10;
+    if (/expressive|before_after|object_closeup|scale_contrast/i.test(variant)) score += 6;
+  }
+  const winner = performanceSummary?.guidance?.reliableComparisons?.thumbnailVariants;
+  if (winner && variant === winner) score += 12;
+  const recentUses = recentIdeas.slice(0, 10).filter((item) => item?.packagingExperiment?.thumbnailVariant === variant).length;
+  if (recentUses >= 3 && winner !== variant) score -= 8;
+  return score;
+}
+
+/** Pick the highest-scoring non-fatigued title & thumbnail candidate automatically. */
+export function selectOptimalPackaging(idea = {}, { performanceSummary = null, recentIdeas = [], isMeditation = false, excludedTitles = [] } = {}) {
+  let updated = { ...idea };
+  const titleCandidates = Array.isArray(idea.titleCandidates) ? idea.titleCandidates : [];
+  if (titleCandidates.length) {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+    const isExcluded = (text) => excludedTitles.some((other) => {
+      const a = String(other || '').trim().toLowerCase();
+      const b = String(text || '').trim().toLowerCase();
+      return a && b && (a === b || titleSimilarity(a, b) >= 0.75);
+    });
+    const scored = titleCandidates.map((candidate, index) => {
+      const baseScore = scoreTitle(candidate.text);
+      const rankScore = scorePackagingTitleCandidate(candidate, { performanceSummary, recentIdeas, isMeditation })
+        - (isExcluded(candidate.text) ? 1_000 : 0);
+      if (rankScore > bestScore) { bestScore = rankScore; bestIndex = index; }
+      return { ...candidate, score: baseScore };
+    });
+    const winner = scored[bestIndex];
+    updated = {
+      ...updated,
+      title: winner.text,
+      titleScore: winner.score,
+      titleCandidates: scored.map((candidate, index) => ({ ...candidate, selected: index === bestIndex })),
+      packagingExperiment: {
+        ...(updated.packagingExperiment || {}),
+        titleAngle: winner.angle || updated.packagingExperiment?.titleAngle || 'unclassified',
+      },
+    };
+  }
+  const thumbnailCandidates = Array.isArray(idea.thumbnailCandidates) ? idea.thumbnailCandidates : [];
+  if (thumbnailCandidates.length) {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+    thumbnailCandidates.forEach((candidate, index) => {
+      const rankScore = scorePackagingThumbnailCandidate(candidate, { performanceSummary, recentIdeas, isMeditation });
+      if (rankScore > bestScore) { bestScore = rankScore; bestIndex = index; }
+    });
+    const winner = thumbnailCandidates[bestIndex];
+    updated = {
+      ...updated,
+      thumbnailConcept: winner.concept,
+      thumbnailCandidates: thumbnailCandidates.map((candidate, index) => ({ ...candidate, selected: index === bestIndex })),
+      packagingExperiment: {
+        ...(updated.packagingExperiment || {}),
+        thumbnailVariant: winner.variant || updated.packagingExperiment?.thumbnailVariant || 'unclassified',
+      },
+    };
+  }
+  return updated;
+}
+
 export async function brainstormGrowthIdeas(channel, { count = 5, history = [], performance = [], useAi = true } = {}) {
   const bounded = Math.max(1, Math.min(20, Number(count) || 5));
   const meditationChannel = isMeditationChannel(channel);
@@ -664,6 +752,7 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
   const allowedTrafficStrategies = marketResearch.length ? ['search_first', 'browse_first', 'trending'] : ['search_first', 'browse_first'];
   const recentExperiments = history.slice(0, 10);
   const usageCount = (field, value) => recentExperiments.filter((idea) => idea.packagingExperiment?.[field] === value).length;
+  const chosenBatchTitles = history.map((item) => item.title).filter(Boolean);
   const candidates = Array.isArray(raw) ? [...raw, ...fallback] : fallback;
   const normalized = candidates.map((item, index) => {
     const base = fallback[index % Math.max(1, fallback.length)] || heuristicIdeas(channel, 1, [], performanceSummary)[0];
@@ -715,7 +804,7 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
     if (meditationChannel && !/\b(?:guide|practice|breath|settle|silence|pause|body|close|return|rest)\b/i.test(narrativeArc)) {
       narrativeArc = base.narrativeArc;
     }
-    return {
+    const baseIdea = {
       title, hookFormula,
       spokenHook,
       narrativeArc,
@@ -749,21 +838,29 @@ Each item must contain: title, titleCandidates, hookFormula, spokenHook, narrati
       evidenceSource,
       marketEvidence: marketSignalsForIdea({ title, primaryKeyword, contentPillar }, marketResearch),
     };
+    const selected = selectOptimalPackaging(baseIdea, {
+      performanceSummary, recentIdeas: history, isMeditation: meditationChannel, excludedTitles: chosenBatchTitles,
+    });
+    chosenBatchTitles.push(selected.title);
+    return selected;
   }).filter((item, index, all) => item.title.length >= 5
     && !prior.has(item.title.toLowerCase())
     && !history.some((priorIdea) => titleSimilarity(priorIdea.title, item.title) >= 0.6)
     && all.findIndex((candidate) => titleSimilarity(candidate.title, item.title) >= 0.85) === index);
   const ranked = rankGrowthIdeas(normalized);
   if (ranked.length) return ranked.slice(0, bounded);
+  const fallbackTitles = history.map((item) => item.title).filter(Boolean);
   return rankGrowthIdeas(fallback.map((idea) => {
     const scoreBreakdown = calculateOpportunityScore({ idea, titleScore: idea.titleScore, retentionScore: idea.retentionScore, channel });
     const performanceEvidence = calculatePerformanceEvidence(idea, performanceSummary);
-    return {
+    const selected = selectOptimalPackaging({
       ...idea, compositeScore: scoreBreakdown.total, scoreBreakdown,
       performanceEvidenceScore: performanceEvidence.score, performanceEvidenceReason: performanceEvidence.reason,
       titleCandidates: buildTitleCandidates(idea, idea.title, idea.packagingExperiment.titleAngle),
       thumbnailCandidates: buildThumbnailCandidates(idea, idea.thumbnailConcept, idea.packagingExperiment.thumbnailVariant),
       marketEvidence: marketSignalsForIdea(idea, marketResearch),
-    };
+    }, { performanceSummary, recentIdeas: history, isMeditation: meditationChannel, excludedTitles: fallbackTitles });
+    fallbackTitles.push(selected.title);
+    return selected;
   })).slice(0, bounded);
 }

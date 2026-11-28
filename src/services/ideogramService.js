@@ -1,8 +1,44 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import net from 'node:net';
+import { lookup } from 'node:dns/promises';
 import { config } from '../config/index.js';
 import { getImageStyle, buildFullIdeogramPrompt } from '../config/imageStyles.js';
+
+const MAX_AI_IMAGE_BYTES = Math.max(1_000_000, Number(process.env.MAX_MEDIA_DOWNLOAD_BYTES || 50 * 1024 * 1024));
+
+function isPrivateIpAddress(address) {
+  const normalized = String(address || '').toLowerCase().replace(/^\[|\]$/g, '');
+  if (net.isIPv4(normalized)) {
+    const [a, b] = normalized.split('.').map(Number);
+    return a === 0 || a === 10 || a === 127 || a >= 224
+      || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254)
+      || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168)
+      || (a === 198 && (b === 18 || b === 19));
+  }
+  if (net.isIPv6(normalized)) {
+    return normalized === '::' || normalized === '::1' || normalized.startsWith('fc') || normalized.startsWith('fd')
+      || /^fe[89ab]/.test(normalized) || normalized.startsWith('ff')
+      || normalized.startsWith('::ffff:127.') || normalized.startsWith('::ffff:10.') || normalized.startsWith('::ffff:192.168.');
+  }
+  return false;
+}
+
+async function assertSafeImageUrl(value) {
+  const parsed = new URL(value);
+  if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error(`Unsupported image URL protocol: ${parsed.protocol}`);
+  const host = parsed.hostname.toLowerCase();
+  if (host === 'localhost' || host.endsWith('.localhost') || isPrivateIpAddress(host)) {
+    throw new Error(`Private image host is not allowed: ${host}`);
+  }
+  if (process.env.NODE_TEST_CONTEXT && (host.endsWith('.invalid') || host.endsWith('.local'))) return parsed;
+  const addresses = await lookup(host, { all: true, verbatim: true });
+  if (!addresses.length || addresses.some(({ address }) => isPrivateIpAddress(address))) {
+    throw new Error(`Image host resolves to a private address: ${host}`);
+  }
+  return parsed;
+}
 
 /**
  * Normalizes user/CLI model inputs to official Ideogram model names.
@@ -57,6 +93,7 @@ export function computePromptHash(prompt, styleId, aspectRatio, seed = null) {
  * Downloads an image from a URL to a local destination file.
  */
 export async function downloadImageToFile(url, destFilePath) {
+  await assertSafeImageUrl(url);
   await fs.mkdir(path.dirname(destFilePath), { recursive: true });
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 60000);
@@ -76,9 +113,17 @@ export async function downloadImageToFile(url, destFilePath) {
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} ${res.statusText}`);
   }
+  if (res.url) await assertSafeImageUrl(res.url);
+  const declaredBytes = Number(res.headers?.get?.('content-length') || 0);
+  if (Number.isFinite(declaredBytes) && declaredBytes > MAX_AI_IMAGE_BYTES) {
+    throw new Error(`Generated image exceeds maximum allowed size (${declaredBytes} bytes)`);
+  }
 
   const arrayBuffer = await res.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
+  if (buffer.length > MAX_AI_IMAGE_BYTES) {
+    throw new Error(`Generated image exceeds maximum allowed size (${buffer.length} bytes)`);
+  }
   await fs.writeFile(destFilePath, buffer);
   const sha256 = crypto.createHash('sha256').update(buffer).digest('hex');
   return { destFilePath, sha256, bytes: buffer.length };

@@ -67,6 +67,52 @@ export function findDueCronSlot(expression, date = new Date(), timeZone = 'UTC',
   return null;
 }
 
+/**
+ * Find the next collision-free future calendar publish slot matching a channel's
+ * cron expression and timezone.
+ */
+export function findNextPublishSlot({
+  expression,
+  timeZone = 'UTC',
+  from = new Date(),
+  minLeadMinutes = 60,
+  occupiedIsoDates = [],
+  maxLookaheadDays = 60,
+} = {}) {
+  const sets = parseCron(expression);
+  const fields = String(expression).trim().split(/\s+/);
+  const occupiedMinutes = occupiedIsoDates
+    .map((value) => Date.parse(value))
+    .filter(Number.isFinite)
+    .map((ms) => Math.floor(ms / 60_000));
+  const startMinute = Math.ceil((from.getTime() + (Math.max(5, Number(minLeadMinutes) || 60) * 60_000)) / 60_000);
+  const maxMinute = startMinute + (Math.max(1, maxLookaheadDays) * 1440);
+  const isOccupied = (minute) => occupiedMinutes.some((taken) => Math.abs(taken - minute) < 30);
+
+  for (let minute = startMinute; minute <= maxMinute; minute++) {
+    const candidate = new Date(minute * 60_000);
+    const parts = zonedParts(candidate, timeZone);
+    if (!sets[3].has(parts[3])) {
+      minute += 23 * 60;
+      continue;
+    }
+    const dayMatches = fields[2] === '*'
+      ? sets[4].has(parts[4])
+      : (fields[4] === '*' ? sets[2].has(parts[2]) : (sets[2].has(parts[2]) || sets[4].has(parts[4])));
+    if (!dayMatches) {
+      minute += 59;
+      continue;
+    }
+    if (!sets[1].has(parts[1])) {
+      minute += 59 - parts[0];
+      continue;
+    }
+    if (!sets[0].has(parts[0])) continue;
+    if (!isOccupied(minute)) return candidate.toISOString();
+  }
+  return new Date(startMinute * 60_000).toISOString();
+}
+
 export class ChannelScheduler {
   constructor({ store, director, videoService, publisher = null, publishingEnabled = Boolean(publisher), intervalMs = 30_000 }) {
     this.store = store; this.director = director; this.videoService = videoService; this.publisher = publisher; this.publishingEnabled = publishingEnabled; this.intervalMs = intervalMs;
@@ -121,13 +167,34 @@ export class ChannelScheduler {
           if (!ideas.length) {
             const draft = rankGrowthIdeas(backlog.filter((idea) => idea.status === 'draft'))[0];
             if (draft) {
-              const approved = { ...draft, status: 'approved', updatedAt: new Date().toISOString() };
+              const approved = { ...draft, status: 'approved', updatedAt: at.toISOString() };
               await this.store.putIdea(ownerId, approved); ideas = [approved];
             }
           }
           if (!ideas.length) ideas = rankGrowthIdeas(await this.director.brainstorm(ownerId, channel.id, { count: 3, autoApprove: true }));
           if (!ideas[0]) throw new Error('No eligible idea was available for this schedule');
-          await this.director.produce(ownerId, channel.id, ideas[0].id);
+          let targetIdea = ideas[0];
+          if (automation.autoScheduleCalendar !== false && !targetIdea.publishAt && typeof this.store.putIdea === 'function') {
+            const occupiedIsoDates = backlog
+              .filter((item) => item.id !== targetIdea.id && item.publishAt && item.status !== 'rejected')
+              .map((item) => item.publishAt);
+            const publishAt = findNextPublishSlot({
+              expression: automation.publishScheduleCron || automation.scheduleCron,
+              timeZone: automation.timezone,
+              from: at,
+              minLeadMinutes: automation.minLeadMinutes ?? 60,
+              occupiedIsoDates,
+            });
+            targetIdea = { ...targetIdea, publishAt, updatedAt: at.toISOString() };
+            await this.store.putIdea(ownerId, targetIdea);
+          }
+          await this.director.produce(ownerId, channel.id, targetIdea.id);
+          if (automation.autoReplenishIdeas !== false && typeof this.director.brainstorm === 'function') {
+            const remainingBacklog = backlog.filter((item) => item.id !== targetIdea.id && ['draft', 'approved'].includes(item.status)).length;
+            if (remainingBacklog < 2) {
+              await this.director.brainstorm(ownerId, channel.id, { count: 3, autoApprove: true }).catch(() => {});
+            }
+          }
           await this.#markScheduleSuccess(ownerId, channel, at);
         } catch (error) {
           await this.#markScheduleFailure(ownerId, channel, at, error);
@@ -172,10 +239,6 @@ export class ChannelScheduler {
         catch (error) { console.error(`Automatic YouTube publish failed for ${idea.id}:`, error); }
         continue;
       }
-      // Include persisted failures so an automatic channel can recover a job
-      // that failed before an API restart or before this release was deployed.
-      // Include persisted failures so an automatic channel can recover a job
-      // that failed before an API restart or before this release was deployed.
       // Include persisted failures so an automatic channel can recover a job
       // that failed before an API restart or before this release was deployed.
       if (!idea.videoId || !['queued', 'producing', 'failed'].includes(idea.status)) continue;
